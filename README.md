@@ -18,11 +18,11 @@ This repo was created for students to submit their homeworks for review.
   ![File structure example](img/file-structure.png)
 
 - make pull-request to this repository following these steps:
-  - `git checkout master` and then create new branch, name it according to task performed (aka feature branch): `git checkout -b dom-api-task`. In this example feature branch is called `dom-api-task`
+  - `git checkout main` and then create new branch, name it according to task performed (aka feature branch): `git checkout -b dom-api-task`. In this example feature branch is called `dom-api-task`
   - commit your changes to newly created feature branch
-  - checkout `master` branch: `git checkout master`
-  - pull latest changes from upstream `master` branch: `git pull upstream master`
-  - merge `master` branch into your feature branch: `git checkout dom-api-task && git merge master`
+  - checkout `main` branch: `git checkout main`
+  - pull latest changes from upstream `main` branch: `git pull upstream main`
+  - merge `main` branch into your feature branch: `git checkout dom-api-task && git merge main`
   - resolve any merge conflicts if there are any
   - push feature branch to your remote repository: `git push --set-upstream origin dom-api-task`
   - make pull-request from your repository to this repository via GitHub web-interface
