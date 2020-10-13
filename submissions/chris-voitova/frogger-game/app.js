@@ -1,19 +1,22 @@
-const field = {
-  width: 505,
-  height: 606,
-  edges: {
-    x: 400,
-    y: 450,
-  },
-  waterPosition: 50,
-};
+//field
+const fieldWidth = 505;
+const borderCoordX = 400;
+const borderCoordY = 450;
+const waterCoord = 50;
+//enemies
+const enemyWidth = 101;
+const enemyHeight = 61;
+//player
+const playerWidth = 101;
+const playerHeight = 101;
+const playerFieldStep = 50;
 
 // Enemies our player must avoid
-const Enemy = function (x, y, speed, width = 101, height = 61) {
+const Enemy = function (positionX, positionY, speed, width, height) {
   // Variables applied to each of our instances go here,
   // we've provided one for you to get started
-  this.x = x;
-  this.y = y;
+  this.positionX = positionX;
+  this.positionY = positionY;
   this.speed = speed;
   this.width = width;
   this.height = height;
@@ -29,41 +32,41 @@ Enemy.prototype.update = function (dt) {
   // You should multiply any movement by the dt parameter
   // which will ensure the game runs at the same speed for
   // all computers.
-  this.x += this.speed * dt;
-  if (this.x > field.width) {
-    this.x = 0;
+  this.positionX += this.speed * dt;
+  if (this.positionX > fieldWidth) {
+    this.positionX = 0;
   }
 };
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function () {
-  ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+  ctx.drawImage(Resources.get(this.sprite), this.positionX, this.positionY);
 };
 
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
 
-const Player = function (x, y, step = 50, width = 101, height = 101) {
+const Player = function (positionX, positionY, width, height, stepOnField) {
   this.sprite = "images/char-boy.png";
-  this.x = x;
-  this.y = y;
+  this.positionX = positionX;
+  this.positionY = positionY;
   this.width = width;
   this.height = height;
   this.initPosition = {
-    x: x,
-    y: y,
+    positionX: positionX,
+    positionY: positionY,
   };
-  this.step = step;
+  this.stepOnField = stepOnField;
 };
 
 Player.prototype.checkCollisions = function (enemies) {
   enemies.forEach((enemy) => {
     if (
-      enemy.x < this.x + this.width &&
-      enemy.x + enemy.width > this.x &&
-      enemy.y < this.y + this.height &&
-      enemy.y + enemy.height > this.y
+      enemy.positionX < this.positionX + this.width &&
+      enemy.positionX + enemy.width > this.positionX &&
+      enemy.positionY < this.positionY + this.height &&
+      enemy.positionY + enemy.height > this.positionY
     ) {
       alert("you are lose!");
       this.goToInitPosition();
@@ -72,57 +75,59 @@ Player.prototype.checkCollisions = function (enemies) {
 };
 
 Player.prototype.goToInitPosition = function () {
-  this.x = this.initPosition.x;
-  this.y = this.initPosition.y;
+  this.positionX = this.initPosition.positionX;
+  this.positionY = this.initPosition.positionY;
 };
 
 Player.prototype.update = function () {
   this.checkCollisions(allEnemies);
-  if (this.y <= field.waterPosition) {
+  if (this.positionY <= waterCoord) {
     alert("you are win!");
     this.goToInitPosition();
   }
 };
 
 Player.prototype.render = function () {
-  ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+  ctx.drawImage(Resources.get(this.sprite), this.positionX, this.positionY);
 };
 
 Player.prototype.handleInput = function (key) {
-  if (key === "up") {
-    this.y -= this.step;
-  }
-  if (key === "down") {
-    this.y += this.step;
-    if (this.y > field.edges.y) {
-      this.y = field.edges.y;
-    }
-  }
-  if (key === "left") {
-    this.x -= this.step;
-    if (this.x < 0) {
-      this.x = 0;
-    }
-  }
-  if (key === "right") {
-    this.x += this.step;
-    if (this.x > field.edges.x) {
-      this.x = field.edges.x;
-    }
+  switch (key) {
+    case "up":
+      this.positionY -= this.stepOnField;
+      break;
+    case "down":
+      this.positionY += this.stepOnField;
+      if (this.positionY > borderCoordY) {
+        this.positionY = borderCoordY;
+      }
+      break;
+    case "left":
+      this.positionX -= this.stepOnField;
+      if (this.positionX < 0) {
+        this.positionX = 0;
+      }
+      break;
+    case "right":
+      this.positionX += this.stepOnField;
+      if (this.positionX > borderCoordX) {
+        this.positionX = borderCoordX;
+      }
+      break;
   }
 };
 
 // Now instantiate your objects.
 
-const enemy1 = new Enemy(0, 280, 60);
-const enemy2 = new Enemy(0, 200, 100);
-const enemy3 = new Enemy(30, 130, 80);
+const enemy1 = new Enemy(0, 280, 60, enemyWidth, enemyHeight);
+const enemy2 = new Enemy(0, 200, 100, enemyWidth, enemyHeight);
+const enemy3 = new Enemy(30, 130, 80, enemyWidth, enemyHeight);
 
 // Place all enemy objects in an array called allEnemies
 const allEnemies = [enemy1, enemy2, enemy3];
 // Place the player object in a variable called player
 
-const player = new Player(200, 450);
+const player = new Player(200, 450, playerWidth, playerHeight, playerFieldStep);
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
