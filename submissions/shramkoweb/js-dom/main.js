@@ -89,11 +89,17 @@ const init = () => {
 
     const handleListItemClick = (evt) => {
         const { target } = evt;
-        if (target.tagName !== 'BUTTON') {
+        const currentID = parseInt(target.id, 10);
+        const isNeedRerender = currentID !== state.activePageID;
+
+        if (
+            target.tagName !== 'BUTTON' ||
+            !isNeedRerender
+        ) {
             return;
         }
 
-        state.activePageID = parseInt(target.id, 10);
+        state.activePageID = currentID;
         render(state);
     }
     frameworksListElement.addEventListener('click', handleListItemClick);
