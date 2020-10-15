@@ -54,7 +54,7 @@ body {
   height: 100%;
   position: absolute;
   opacity: 0;
-  top: 0;
+  bottom: 0;
   left: 0;
   margin: 0;
   z-index: 3;
@@ -78,6 +78,7 @@ body {
 }
 
 .wraper {
+  position: relative;
   overflow: auto;
   max-height: 500px;
   transition: height 0.3s;
@@ -127,7 +128,14 @@ body {
 }
 
 
-input.more-items {
+#menu input.more-items {
+  position: absolute;
+  opacity: 0;
+  bottom: 0;
+  left: 0;
+  margin: 0;
+  z-index: 3;
+  cursor: pointer;
   height: 48px;
 }
 
@@ -157,9 +165,6 @@ input.more-items:checked ~ #popup2{
   box-shadow: 1px 1px 43px inset rgba(75, 75, 75, 0.2);
 }
 
-.add-more a:active {
-  display: none;
-}
 
 #popup2 {
   border-top: 1px solid rgb(240, 240, 240);
