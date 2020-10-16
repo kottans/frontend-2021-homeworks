@@ -56,7 +56,6 @@ Enemy.prototype.update = function (dt) {
         this.speed = this.getRandomSpeed();
     } else {
         this.x += this.speed * dt;
-        this.isCollision();
     }
 };
 
@@ -66,10 +65,18 @@ const Player = function (x, y) {
 
 Player.prototype = Object.create(Character.prototype);
 Player.prototype.update = function () {
-    if (this.y < 0) {
-        this.x = PLAYER_CONF.START_X;
-        this.y = PLAYER_CONF.START_Y;
-        alert('You win!')
+    // temp unused
+};
+
+Player.prototype.checkWin = function () {
+    if (player.y <= 0) {
+        window.requestAnimationFrame(() => {
+            const needRestart = confirm('You win!');
+            if (needRestart) {
+                this.x = PLAYER_CONF.START_X;
+                this.y = PLAYER_CONF.START_Y;
+            }
+        })
     }
 };
 
