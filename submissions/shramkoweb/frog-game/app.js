@@ -64,9 +64,6 @@ const Player = function (x, y) {
 };
 
 Player.prototype = Object.create(Character.prototype);
-Player.prototype.update = function () {
-    // temp unused
-};
 
 Player.prototype.checkWin = function () {
     if (player.y <= 0) {
