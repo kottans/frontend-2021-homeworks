@@ -6,16 +6,19 @@
 body {
   font-family: 'Courier New', Courier, monospace;
   text-align: center;
+  /*
   background-image: url(img/bg_image.jpg);
   background-size:     cover;
   background-repeat:   no-repeat;
   background-position: center center; 
+  */
   width: 100vw;  
   height: 100vh;
 }
 
 label.button {
   background-color:lightgray;
+  color:black;
 }
 
 label.button:hover {
@@ -23,16 +26,22 @@ label.button:hover {
   color: darkblue;
 }
 
+label#show-items {
+  display: inline-block;
+  height: 20px;
+}
+
 div#main-popup {
-  background-color: lightsalmon;
-  width: 30%;
-  height: 90vh;
+  width: 330px;
+  height: 80vh;
   margin: auto;
   margin-top: 0px;
   overflow-y: auto;
+  background-color: white;
 }
 
 nav {
+  padding: 4px;
   z-index: 6;
 }
 
@@ -67,27 +76,35 @@ label#button-close {
 label#more-button {
   background-color: lightgray;
   display: inline-block;
-  height: 10%;
+  height: 5%;
   width: 100%;
+  cursor: pointer;
+}
+
+div#main-popup {
+  border: black solid thin;
+  border-radius: 5px;
+}
+
+div#main-items {
+  display: flex;
+  background-color: white;
+  height: 95%;
 }
 
 label#less-button {
   background-color: lightgray;
   align-self: flex-end;
-  height: 10%;
+  height: 5%;
   width: 100%;
-}
-
-div#main-items {
-  display: flex;
-  background-color: hotpink;
-  height: 90%;
+  cursor: pointer;
 }
 
 div#more-items {
+  border-top: gray solid thin;
   position: relative;
-  top: -10%;
-  background-color: khaki;
+  top: -5%;
+  background-color: white;
   height: 100%;
   display: none;
 }
