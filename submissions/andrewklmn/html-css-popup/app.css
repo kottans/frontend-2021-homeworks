@@ -1,0 +1,38 @@
+body {
+  font-family: 'Courier New', Courier, monospace;
+  padding: 20px;
+  color: black;
+  background-color: darkgrey;
+  text-align: center;
+}
+
+a {
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.button {
+  padding:12px;
+  border: solid thin darkblue;
+  color:white;
+  background-color: #000077;
+  border-radius: 10px;
+}
+.button:hover {
+  color:cyan;
+}
+
+
+.container {
+  margin-top: 20px;
+  width: 30%;
+  height: 50vh;
+  margin-left: auto;
+  margin-right: auto;
+  visibility: hidden;
+  padding: 20px;
+}
+.container:target {
+  visibility: visible;
+  background-color: white;
+}
