@@ -1,6 +1,3 @@
-/* 
-    Global style START 
-*/
 * {
     margin: 0;
     padding: 0;
@@ -10,15 +7,7 @@
     outline: none;
     color: #000;
 }
-/*
-    Global style END
-*/
 
-
-
-/* 
-    Main menu style START
-*/
 .nav {
     margin: 1rem;
 }
@@ -127,15 +116,7 @@
 .menu__link-user:hover {
     box-shadow: 0 1px 0 rgba(0,0,0,.15);
 }
-/* 
-    Main menu style END
-*/
 
-
-
-/* 
-    Submenu of main menu style START
-*/
 .menu__submenu {
     z-index: 5;
     width: 320px;
@@ -185,7 +166,6 @@
     display: none;
 }
 
-/* scrollbar style start*/
 .menu__submenu::-webkit-scrollbar {
     width: .15rem;
 }
@@ -198,7 +178,6 @@
     background-color: rgb(182, 180, 180);
     border: 1px solid rgb(58, 64, 70);
 }
-/* scrollbar style end*/
 
 .submenu__item-label {
     position: absolute;
@@ -210,14 +189,7 @@
     padding: .4rem 0;
     text-align: center;
 }
-/* 
-    Submenu of main menu style END
-*/
 
-
-/*
-    Extra menu of submenu style START
-*/
 .submenu__extramenu {
     display: none;
     flex-wrap: wrap;
@@ -286,6 +258,3 @@
     text-decoration: underline;
     opacity: .75;
 }
-/* 
-    Extra menu of submenu of main menu style END
-*/
