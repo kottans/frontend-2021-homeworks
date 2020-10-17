@@ -1,3 +1,104 @@
+* {
+  padding: 0px;
+  margin: 0px;
+}
+
+body {
+  font-family: 'Courier New', Courier, monospace;
+  text-align: center;
+  background-image: url(img/bg_image.jpg);
+  background-size:     cover;
+  background-repeat:   no-repeat;
+  background-position: center center; 
+  width: 100vw;  
+  height: 100vh;
+}
+
+label.button {
+  background-color:lightgray;
+}
+
+label.button:hover {
+  background-color: cyan;
+  color: darkblue;
+}
+
+div#main-popup {
+  background-color: lightsalmon;
+  width: 30%;
+  height: 90vh;
+  margin: auto;
+  margin-top: 0px;
+  overflow-y: auto;
+}
+
+nav {
+  z-index: 6;
+}
+
+div#container {
+  position: relative;
+  z-index: 5;
+}
+
+input.popup, div.content {
+  display: none;
+}
+input.popup:checked + div.content {
+  display: block;
+}
+
+
+input#more-control:checked + div.content {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+label#button-close {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: -1;
+  cursor: pointer;
+}
+
+label#more-button {
+  background-color: lightgray;
+  display: inline-block;
+  height: 10%;
+  width: 100%;
+}
+
+label#less-button {
+  background-color: lightgray;
+  align-self: flex-end;
+  height: 10%;
+  width: 100%;
+}
+
+div#main-items {
+  display: flex;
+  background-color: hotpink;
+  height: 90%;
+}
+
+div#more-items {
+  position: relative;
+  top: -10%;
+  background-color: khaki;
+  height: 100%;
+  display: none;
+}
+
+
+/* 
+ *
+ * My first way of search decision! Not pretty good.
+ * This code uses a:target for popup and can't be used for closing popup 
+ * by the same button. So, let's try another way....
+ *
 body {
   font-family: 'Courier New', Courier, monospace;
   padding: 20px;
@@ -36,3 +137,4 @@ a {
   visibility: visible;
   background-color: white;
 }
+*/

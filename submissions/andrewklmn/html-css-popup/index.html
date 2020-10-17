@@ -7,8 +7,37 @@
   <title>html-css-popup-task</title>
 </head>
 <body>
-  <a class="button" href="#pop-up">Pop me up</a>
+  <nav>
+    <label class="button" for="popup-control">Pop me up</label>
+  </nav>
 
+  <div id="container">
+    <input type="checkbox" class="popup" id="popup-control">
+    <div id="main-popup" class="content">
+      
+      <label id="button-close" for="popup-control"></label>
+      
+      <div id="main-items" class="content">Few items to display...</div>
+
+      <label id="more-button" class="button" for="more-control">More</label>   
+      <input type="checkbox" class="popup" id="more-control">
+
+      <div id="more-items" class="content">
+        Addicional items to display...
+        <label id="less-button" class="button" for="more-control">Less</label>   
+      </div>
+      
+    </div>
+  </div>
+  
+  <!--
+    *
+    * My first way of search decision! Not pretty good.
+    * This code uses a:target for popup and can't be used for closing popup 
+    * by the same button. So, let's try another way....
+    *
+  
+  <a id="popup-button" class="button" href="#pop-up">Pop me up</a>
   <div id="pop-up" class="container">
       <p>
         It will be icons here later.
@@ -16,5 +45,6 @@
       <a class="button" href="#">More</a> 
       <a class="button" href="#">Close</a>
   </div>
+  -->
 </body>
 </html>
