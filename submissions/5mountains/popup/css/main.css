@@ -253,16 +253,21 @@
 .extramenu__item-link {
     text-align: center;
     width: 100%;
+    padding-top: 1rem;
 }
 
 .extramenu__extralink {
-    width: 100%;
-    padding-top: 1.5rem;
-    display: block;
+    display: inline-block;
     text-decoration: none;
+    border: 1px solid transparent;
+    padding: .5rem;
 }
 
 .extramenu__extralink:hover {
     text-decoration: underline;
     opacity: .75;
+}
+
+.extramenu__extralink:focus {
+    border: 1px solid #00f;
 }
