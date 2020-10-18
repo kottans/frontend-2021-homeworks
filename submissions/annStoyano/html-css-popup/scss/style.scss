@@ -7,11 +7,17 @@
 
 .navigation {
     float: right;
+    width: 310px;
+}
+
+.nav-items{
+    position: relative;
+    width: 100%;
+    padding: 15px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 310px;
-    padding: 15px 20px;
+
 }
 
 .link {
@@ -35,22 +41,20 @@
 
 .bell {
     position: relative;
-    z-index: 2;
-    padding: 6px;
 
     &:hover,
     &:focus {
         outline-style: none;
 
-        &::before {
+        .bell-icon::before {
             content: '';
             position: absolute;
-            width: 110%;
-            height: 110%;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             background-color: rgba(218, 218, 218, 0.3);
-            top: -1px;
-            left: -2px;
+            top: -4px;
+            left: -4px;
             z-index: -1;
         }
     }
@@ -58,6 +62,7 @@
     &-icon {
         width: 22px;
         height: 22px;
+        z-index: 5;
 
         img {
             width: 100%;
@@ -69,12 +74,10 @@
 
 .user {
     position: relative;
-    z-index: 2;
 
     &:hover,
     &:focus {
         outline-style: none;
-
         &::before {
             content: '';
             position: absolute;
@@ -84,7 +87,7 @@
             background-color: rgba(218, 218, 218, 0.3);
             top: -5px;
             left: -5px;
-            z-index: -1;
+            z-index: -5;
         }
     }
 
