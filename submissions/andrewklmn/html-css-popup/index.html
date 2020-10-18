@@ -8,47 +8,120 @@
 </head>
 <body>
   <nav>
-    Mail
-    Images 
-    <label id="show-items" class="button" for="popup-control">
-      <img src="img/main-button.png"/>
-    </label>
+    <div class="topnav-right">
+      <a href="#">Mail</a>
+      <a href="#">Images</a>
+      <label id="show-items" class="button" for="popup-control">
+        <img class="icon" src="img/bento_icon.png"/>
+      </label>
+      <a href="#">
+        <img class="icon" src="img/icon_bell.png"/>
+      </a>
+      <a href="#">
+        <img class="icon" src="img/user_icon.png"/>
+      </a>
+    </div>
   </nav>
-
   <div id="container">
     <input type="checkbox" class="popup" id="popup-control">
     <div id="main-popup" class="content">
-      
+      <div id="square"></div>
       <label id="button-close" for="popup-control"></label>
-      
-      <div id="main-items" class="content">Few items to display...</div>
+      <div id="scroll-area">
+        <div id="main-items" class="content flex-items">
+          <a class="item" href="#">
+            <img src="img/popup-icons/calendar.png" alt="mail"/>
+              Calendar
+          </a>
+          <a class="item" href="#">
+              <img src="img/popup-icons/mail.png" alt="mail"/>
+              Mail
+          </a>
+          <a class="item" href="#">
+            <img src="img/popup-icons/news.png" alt="mail"/>
+             News
+          </a>
 
-      <label id="more-button" class="button" for="more-control">More</label>   
-      <input type="checkbox" class="popup" id="more-control">
+          <a class="item" href="#">
+            <img src="img/popup-icons/maps.png" alt="mail"/>
+              Map
+          </a>
+          <a class="item" href="#">
+              <img src="img/popup-icons/files.png" alt="mail"/>
+              Files
+          </a>
+          <a class="item" href="#">
+            <img src="img/popup-icons/contacts.png" alt="mail"/>
+             Contacts
+          </a>
+          <a class="item" href="#">
+            <img src="img/popup-icons/tanslation.png" alt="mail"/>
+            Translate
+          </a>
+          <a class="item" href="#">
+            <img src="img/popup-icons/videos.png" alt="mail"/>
+            Videos
+          </a>
 
-      <div id="more-items" class="content">
-        Addicional items to display...
-        <label id="less-button" class="button" for="more-control">Less</label>  
+          <a class="item" href="#">
+          <img src="img/popup-icons/search.png" alt="mail"/>
+            Search
+          </a>
+          <a class="item" href="#">
+            <img src="img/popup-icons/photos.png" alt="mail"/>
+              Photo
+          </a>
+          <a class="item" href="#">
+              <img src="img/popup-icons/apps.png" alt="mail"/>
+              Apps
+          </a>
+          <a class="item" href="#">
+            <img src="img/popup-icons/documents.png" alt="mail"/>
+             Document
+          </a>
+
+        </div>
+        <label id="more-button" class="button" for="more-control">More</label>   
+        <input type="checkbox" class="popup" id="more-control">
+  
+        <div id="more-items" class="content flex-items">
+          
+          <a class="item" href="#">
+            <img src="img/popup-icons/chat.png" alt="mail"/>
+              Chat
+          </a>
+          <a class="item" href="#">
+              <img src="img/popup-icons/classroom.png" alt="mail"/>
+              Classroom
+          </a>
+          <a class="item" href="#">
+            <img src="img/popup-icons/collection.png" alt="mail"/>
+             Collection
+          </a>
+          <a class="item" href="#">
+            <img src="img/popup-icons/mars.png" alt="mail"/>
+              Mars
+          </a>
+          <a class="item" href="#">
+              <img src="img/popup-icons/blogs.png" alt="mail"/>
+              Blogs
+          </a>
+          <a class="item" href="#">
+            <img src="img/popup-icons/promo.png" alt="mail"/>
+             Promos
+          </a>
+          <a id="kottans" href="https://kottans.org/">Even more from Kottans</a>
+          <!-- <label id="less-button" class="button" for="more-control">Less</label>  -->
+        </div>  
       </div>
-      
     </div>
   </div>
-  
-  <!--
-    *
-    * My first way of search decision! Not pretty good.
-    * This code uses a:target for popup and can't be used for closing popup 
-    * by the same button. So, let's try another way....
-    *
-  
-  <a id="popup-button" class="button" href="#pop-up">Pop me up</a>
-  <div id="pop-up" class="container">
-      <p>
-        It will be icons here later.
-      </p>
-      <a class="button" href="#">More</a> 
-      <a class="button" href="#">Close</a>
+  <div id="mock-content">
+    <div id="company-logo">
+      <img src="img/boooble_logo.png" alt="Company logo"/>
+      <br/>
+      <input type="text" placeholder="Search something"/>
+    </div>
   </div>
-  -->
 </body>
 </html>
