@@ -24,6 +24,11 @@ nav > ul > li > a {
   text-decoration: none;
   font-size: 14px;
   color: black;
+  outline: none;
+}
+
+nav > ul > li > a:focus {
+  border-bottom: solid blue 1px;
 }
 
 nav > ul > li > a:hover {
@@ -137,11 +142,8 @@ nav > ul > li {
   display: block;
 }
 
-.more-control {
-  display: none;
-}
 
-.more-control:checked + div.content {
+#more-items:target {
   display: flex;
   flex-wrap: wrap;
 }
@@ -171,8 +173,14 @@ nav > ul > li {
 
   background-color: lightgray;
   border: none;
-
+  outline: none;
+  
   cursor: pointer;
+  box-sizing: border-box;
+}
+
+.btn-more:focus {
+  border: solid thin blue;
 }
 
 .main-items-container {
@@ -277,14 +285,20 @@ nav > ul > li {
   width: 90%;
   padding-top:20px;
   
+  border-bottom: solid none 1px;
   font-size: 12px;
   text-decoration: none;
   color: gray;
 
   cursor: pointer;
+  outline: none;
 }
 
 .href-kottans:hover {
   text-decoration: underline;
   color: blue;
+}
+
+.href-kottans:focus {
+  border-bottom: solid blue 1px;
 }
