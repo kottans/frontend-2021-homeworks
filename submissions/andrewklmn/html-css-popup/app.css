@@ -107,7 +107,7 @@ nav a:hover {
   display: block;
 }
 
-input#more-control:checked + div.content {
+.more-control:checked + div.content {
   display: flex;
   flex-wrap: wrap;
 }
