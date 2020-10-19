@@ -8,6 +8,49 @@ body {
   text-align: center;
 }
 
+
+nav {
+  z-index: 6;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+nav > ul > li > a {
+  border-bottom: solid white  1px;
+
+  text-align: center;
+  text-decoration: none;
+  font-size: 14px;
+  color: black;
+}
+
+nav > ul > li > a:hover {
+  text-align: center;
+  color: black;
+
+  border-bottom: solid black 1px;
+}
+
+nav > ul > li {
+  list-style: none;
+}
+
+.li-bento {
+  width: 42px;
+}
+
+.topnav-right {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 270px;
+  height: 48px;
+  padding-right: 50px;
+}
+
 .btn {
   color:black;
   border: white solid thin;
@@ -18,21 +61,51 @@ body {
 
 .btn:hover {
   color: darkblue;
-  border: gray solid thin;
 }
 
 .show-items {
+  position: absolute;
+  top: 22px;
+  right: 163px;
+  z-index: 7;
+
   display: inline-block;
-  height: 36px;
+  width: 41px;
+  height: 38px;
+  background-color: white;
+
+}
+
+.popup-checkbox {
+  position: absolute;
+  top: 22px;
+  right: 163px;
+  z-index: 6;
+
+  width: 41px;
+  height: 38px;
+  margin: 0px;
+  padding: 0px;
+
+  -moz-appearance:none;
+  -webkit-appearance:none;
+  -o-appearance:none;
+}
+
+.btn-more:hover,
+.popup-checkbox:focus,
+.popup-checkbox:hover {
+  color: blue;
 }
 
 .main-popup {
   position: absolute;
-  top: 10px;
-  right: 23px;
+  top: 75px;
+  right: 26px;
+  z-index: 5;
 
   width: 320px;
-  height: 500px;
+  height: 480px;
   margin-right: 30px;
   
   background-color: white;
@@ -43,52 +116,9 @@ body {
   box-shadow: 5px 5px 10px 0 gray;
 }
 
-nav {
-  z-index: 6;
-
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-}
-
-nav a {
-  border-bottom: solid white  1px;
-
-  text-align: center;
-  text-decoration: none;
-  font-size: 12px;
-  color: black;
-}
-
-nav a:hover {
-  border-bottom: solid black 1px;
-
-  text-align: center;
-  color: black;
-}
-
-
-
-
-.topnav-right {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  width: 250px;
-  height: 48px;
-  padding-right: 50px;
-}
-
 .icon {
   width: 36px;
   height: 36px;
-}
-
-
-.container {
-  position: relative;
-  z-index: 5;
 }
 
 .auto-scrolled-area {
@@ -96,15 +126,19 @@ nav a:hover {
 
   overflow-x: hidden;
   overflow-y: auto;
+  background-color: white;
 }
 
-.popup-checkbox, 
 .content {
   display: none;
 }
 
 .popup-checkbox:checked + div.content {
   display: block;
+}
+
+.more-control {
+  display: none;
 }
 
 .more-control:checked + div.content {
