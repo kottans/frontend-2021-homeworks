@@ -40,9 +40,10 @@ body {
   border-radius: 5px;
   background-color: rgb(122, 138, 153);
   text-align: center;
+  color: #fdfdfd;
 }
 .menu__list a:focus {
-  border: solid thin rgb(122, 138, 153);
+  border: solid 1px rgb(122, 138, 153);
 }
 .menu__item-img {
   width: 35px;
@@ -53,4 +54,109 @@ body {
   width: 35px;
   height: 35px;
   border-radius: 50%;
+  object-fit: cover;
+}
+.menu__item-photo:hover {
+  border: 2px solid #fdfdfd;
+}
+input.popup-btn,
+div.content {
+  display: none;
+}
+input.popup-btn:checked + div.content {
+  display: block;
+}
+.popup {
+  position: relative;
+  z-index: 1;
+}
+.popup-base {
+  position: absolute;
+  top: 20px;
+  right: 8px;
+  width: 300px;
+  height: 500px;
+  background-color: #fdfdfd;
+  border: 1px solid #d3d3d3;
+  box-shadow: 5px 5px 10px 0px grey;
+}
+.square {
+  position: absolute;
+  top: -10px;
+  right: 117px;
+  height: 18px;
+  width: 18px;
+  border-color: #d3d3d3;
+  border-style: solid;
+  border-width: 1px 0px 0px 1px;
+  transform: rotate(45deg);
+  background-color: white;
+}
+.close-btn {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: -1;
+  opacity: 0.3;
+  background-color: #d3d3d3;
+  cursor: pointer;
+}
+.popup-base__scroll {
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.scroll__items,
+.more__items {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  text-align: center;
+  padding-top: 20px;
+  padding-left: 27px;
+  height: calc(100% - 24px);
+}
+.more__items {
+  max-height: 50%;
+}
+.popup-base__scroll span {
+  display: block;
+}
+.scroll__item,
+.more__item {
+  width: 80px;
+  height: 80px;
+  font-size: 12px;
+  color: gray;
+  border: solid thin white;
+}
+.scroll__item-text,
+.more__item-text {
+  padding-top: 15px;
+}
+.scroll__item-img,
+.more__item-img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  margin: 0 auto;
+}
+.more-btn {
+  padding: 5px;
+  width: 100%;
+  background-color: #d3d3d3;
+  text-align: center;
+  cursor: pointer;
+}
+.kottans {
+  width: 100%;
+  padding-top: 20px;
+  font-size: 12px;
+  color: gray;
+  cursor: pointer;
+}
+.kottans:hover {
+  color: blue;
 }

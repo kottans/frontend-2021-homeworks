@@ -21,6 +21,7 @@ html,body{
 	line-height: 1;
 	font-size: 14px;
 }
+label {display: inline-block;}
 input,button,textarea{font-family:inherit;}
 button{cursor: pointer;}
 a, a:visited{display: inline-block; text-decoration: none;}
