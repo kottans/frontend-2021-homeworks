@@ -20,7 +20,7 @@ body {
   margin-top: 30px;
 }
 .menu li + li {
-  padding-left: 15px;
+  padding-left: 10px;
 }
 .menu__item {
   width: 60px;
@@ -46,8 +46,8 @@ body {
   border: solid 1px rgb(122, 138, 153);
 }
 .menu__item-img {
-  width: 35px;
-  height: 35px;
+  width: 20px;
+  height: 20px;
 }
 .menu__item-photo {
   border: 2px solid lightslategray;
