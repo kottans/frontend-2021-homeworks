@@ -1,20 +1,22 @@
 body {
+  width: 100vw;  
+  height: 100vh;  
+  margin: 0;
+  padding: 0;
+
   font-family: Arial, Helvetica, sans-serif;
   text-align: center;
-  width: 100vw;  
-  height: 100vh;
-  padding: 0;
-  margin: 0;
 }
 
-.button {
+.btn {
   color:black;
-  cursor: pointer;
   border: white solid thin;
+
   box-sizing: border-box;
+  cursor: pointer;
 }
 
-.button:hover {
+.btn:hover {
   color: darkblue;
   border: gray solid thin;
 }
@@ -25,56 +27,62 @@ body {
 }
 
 .main-popup {
-  margin-right: 30px;
-  width:  320px;
-  height: 500px;
-  top: 10px;
-  right:23px;
-  background-color: white;
   position: absolute;
+  top: 10px;
+  right: 23px;
+
+  width: 320px;
+  height: 500px;
+  margin-right: 30px;
+  
+  background-color: white;
   border: lightgray solid thin;
-  -webkit-box-shadow: 3px 3px 10px 0px gray;
-  -moz-box-shadow: 3px 3px 10px 0px gray;
-  box-shadow: 5px 5px 10px 0px gray;
+  
+  -webkit-box-shadow: 3px 3px 10px 0 gray;
+  -moz-box-shadow: 3px 3px 10px 0 gray;
+  box-shadow: 5px 5px 10px 0 gray;
 }
 
 nav {
+  z-index: 6;
+
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
-  z-index: 6;
 }
 
 nav a {
-  color:black;
+  border-bottom: solid white  1px;
+
   text-align: center;
   text-decoration: none;
   font-size: 12px;
-  border-bottom: solid white  1px;
+  color: black;
 }
 
 nav a:hover {
-  color: black;
-  text-align: center;
   border-bottom: solid black 1px;
+
+  text-align: center;
+  color: black;
 }
 
 
 
 
 .topnav-right {
-  width: 250px;
-  height: 48px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  width: 250px;
+  height: 48px;
   padding-right: 50px;
 }
 
 .icon {
-  width:36px;
-  height:36px;
+  width: 36px;
+  height: 36px;
 }
 
 
@@ -84,14 +92,17 @@ nav a:hover {
 }
 
 .auto-scrolled-area {
-  height:100%;
+  height: 100%;
+
   overflow-x: hidden;
   overflow-y: auto;
 }
 
-.popup-checkbox, .content {
+.popup-checkbox, 
+.content {
   display: none;
 }
+
 .popup-checkbox:checked + div.content {
   display: block;
 }
@@ -108,27 +119,33 @@ input#more-control:checked + div.content {
   right: 0;
   left: 0;
   z-index: -1;
-  opacity: 0.3;
+
   background-color: lightgray;
+  opacity: 0.3;
+
   cursor: pointer;
 }
 
-.button-more {
-  background-color: lightgray;
+.btn-more {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 7%;
   width: 100%;
-  cursor: pointer;
-  border: none;
+
   font-size: 12px;
+
+  background-color: lightgray;
+  border: none;
+
+  cursor: pointer;
 }
 
 .main-items-container {
-  background-color: white;
-  height: 93%;
   z-index: 10;
+  height: 93%;
+
+  background-color: white;
   box-sizing: border-box;
 }
 
@@ -147,9 +164,11 @@ input#more-control:checked + div.content {
   width: 70px;
   height: 70px;
   padding: 7px;
+  
   font-size: 12px;
   text-decoration: none;
   color: gray;
+
   border: solid thin white;
   outline: none;
 }
@@ -163,18 +182,21 @@ input#more-control:checked + div.content {
 }
 
 .item > img{
-  max-width:50px;
-  max-height:45px;
+  max-width: 50px;
+  max-height: 45px;
   margin: auto;
 }
 
 .more-items-container {
-  border-top: lightgray solid thin;
   position: relative;
   top: -7%;
-  background-color: white;
-  height: 50%;
+  
   display: none;
+  height: 50%;
+  
+  background-color: white;
+  border-top: lightgray solid thin;
+
   box-sizing: border-box;
 }
 
@@ -182,20 +204,24 @@ input#more-control:checked + div.content {
   position: absolute;
   top: -10px;
   right: 117px;
+
   height: 18px;
   width: 18px;
+
+  background-color: white;
   border-color: lightgray;
   border-style: solid;
-  border-width: thin 0px 0px thin;
+  border-width: thin 0 0 thin;
+
   transform: rotate(45deg);
-  background-color: white;
 }
 
 .mock-content-container {
   position: absolute;
   top: 48px;
-  left: 0px;
-  right: 0px;
+  left: 0;
+  right: 0;
+
   height: auto;
 }
 
@@ -204,8 +230,8 @@ input#more-control:checked + div.content {
 }
 
 .company-logo {
-  height: 500px;
   width: 50%;
+  height: 500px;
   margin: auto;
 }
 
@@ -214,11 +240,13 @@ input#more-control:checked + div.content {
 }
 
 .href-kottans {
-  text-decoration: none;
-  width:90%;
+  width: 90%;
   padding-top:20px;
+  
   font-size: 12px;
+  text-decoration: none;
   color: gray;
+
   cursor: pointer;
 }
 
