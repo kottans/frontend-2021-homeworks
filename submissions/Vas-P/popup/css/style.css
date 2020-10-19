@@ -1,0 +1,199 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+
+ul{
+	display: flex;
+	align-items: center;
+}
+
+li{
+	list-style: none;
+	cursor: pointer;
+}
+
+a{
+	display: block;
+	border: 1px solid white;
+	text-decoration: none;
+	color: #989898;
+}
+
+a:focus {
+	border: 1px solid #989898;
+}
+
+nav{
+	display: flex;
+	flex-direction: row-reverse;
+	padding-right: 40px;
+}
+
+.no:hover{
+	text-decoration: underline;
+}
+
+.toggle{
+	position: absolute;
+	cursor: pointer;
+	opacity: 0;
+}
+
+.images:hover{
+	text-decoration: underline;
+}
+
+.nav .bell{
+	margin: 10px;
+}
+
+.bell > a > img{
+	width: 20px;
+	height: 20px;
+}
+
+.popup-button{
+	cursor: pointer;
+}
+
+.popup-button::before{
+	opacity: 0;
+	content: '';
+	position: absolute;
+	z-index: 2;
+	width: 10px;
+	height: 10px;
+	background: white;
+	transform: rotate(45deg);
+	top: 42px;
+	right: 138px;
+	border-top: 1px solid #989898;
+	border-left: 1px solid #989898;
+}
+
+.nav > li{
+	margin: 6px;
+}
+
+.nav > li > input:checked ~ .hidden{
+	display: block;
+}
+
+.nav > li > input:checked + .popup-button::before{
+	opacity: 1;
+	cursor: auto;
+}
+
+.hidden{
+	display: none;
+	position: absolute;
+	right: 20px;
+	width: 340px;
+	height: 512px;
+	margin-top: 10px;
+	border: 1px solid #989898;
+	cursor: auto;
+	box-shadow: 2px 2px 14px rgba(0, 0, 0, .3);
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+.hidden::-webkit-scrollbar{
+	width: 2px;
+}
+
+.hidden::-webkit-scrollbar-track{
+	background: #f1f1f1;
+}
+
+.hidden::-webkit-scrollbar-thumb{
+	background: #888;
+}
+
+.hidden::-webkit-scrollbar-thumb:hover{
+	background: #555;
+}
+
+.hidden-items, .more-items{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+
+.hidden-items > li, .more-items > li{
+	margin-top: 10px;
+	width: 90px;
+	text-align: center;
+}
+
+.hidden-items > li > a:hover, .more-items > li > a:hover{
+	border: 1px solid #989898;
+}
+
+.hidden-items > li > a > img, .more-items > li > a > img{
+	width: 70px;
+	height: 70px;
+	padding: 12px 10px 0 10px;
+}
+
+.kottans-link > img{
+	width: 30px;
+	height: 30px;
+}
+
+.more-input{
+	position: absolute;
+	opacity: 0;
+}
+
+.more-button{
+	padding: 5px;
+	background: #c5c5c5;
+	position: absolute;
+	width: 100%;
+	text-align: center;
+	margin-top: 20px;
+	cursor: pointer;
+}
+
+.more-items{
+	margin-bottom: 15px;
+}
+
+.more-hidden{
+	display: none;
+	margin-top: 20px;
+}
+
+.more-hidden::before{
+	content: '';
+	width: 100%;
+	position: absolute;
+	border-bottom: 1px solid #989898;
+}
+
+.hidden > input:checked ~ .more-hidden{
+	display: block;
+}
+
+.hidden > input:checked ~ .more-button{
+	display: none;
+}
+
+.more-input:checked .hidden{
+	overflow-y: scroll;
+}
+
+.more-link{
+	text-align: center;
+	margin-bottom: 10px;
+	padding-top: 10px;
+}
+.more-link:focus{
+	border: none;
+}
+
+.more-link:hover{
+	text-decoration: underline;
+}
