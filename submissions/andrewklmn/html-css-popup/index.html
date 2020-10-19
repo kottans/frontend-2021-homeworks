@@ -11,7 +11,7 @@
     <div class="topnav-right">
       <a href="#">Mail</a>
       <a href="#">Images</a>
-      <label id="show-items" class="button" for="popup-control">
+      <label class="button show-items" for="popup-control">
         <img class="icon" src="img/bento_icon.png"/>
       </label>
       <a href="#">
@@ -22,13 +22,13 @@
       </a>
     </div>
   </nav>
-  <div id="container">
-    <input type="checkbox" class="popup" id="popup-control">
-    <div id="main-popup" class="content">
-      <div id="square"></div>
-      <label id="button-close" for="popup-control"></label>
-      <div id="scroll-area">
-        <div id="main-items" class="content flex-items">
+  <div class="container">
+    <input type="checkbox" class="popup-checkbox" id="popup-control">
+    <div class="main-popup content">
+      <div class="menu-deco-square"></div>
+      <label class="fading-area-for-menu-closing" for="popup-control"></label>
+      <div class="auto-scrolled-area">
+        <div class="main-items-container content flex-items">
           <a class="item" href="#">
             <img src="img/popup-icons/calendar.png" alt="mail"/>
               Calendar
@@ -81,10 +81,10 @@
           </a>
 
         </div>
-        <label id="more-button" class="button" for="more-control">More</label>   
-        <input type="checkbox" class="popup" id="more-control">
+        <label class="button-more" for="more-control">More</label>   
+        <input type="checkbox" class="popup-checkbox" id="more-control">
   
-        <div id="more-items" class="content flex-items">
+        <div class="more-items-container content flex-items">
           
           <a class="item" href="#">
             <img src="img/popup-icons/chat.png" alt="mail"/>
@@ -110,13 +110,13 @@
             <img src="img/popup-icons/promo.png" alt="mail"/>
              Promos
           </a>
-          <a id="kottans" href="https://kottans.org/">Even more from Kottans</a>
+          <a class="href-kottans" href="https://kottans.org/">Even more from Kottans</a>
         </div>  
       </div>
     </div>
   </div>
-  <div id="mock-content">
-    <div id="company-logo">
+  <div class="mock-content-container">
+    <div class="company-logo">
       <img src="img/boooble_logo.png" alt="Company logo"/>
       <br/>
       <input type="text" placeholder="Search something"/>
