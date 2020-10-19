@@ -1,12 +1,6 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
   text-align: center;
-  /*
-  background-image: url(img/bg_image.jpg);
-  background-size:     cover;
-  background-repeat:   no-repeat;
-  background-position: center center; 
-  */
   width: 100vw;  
   height: 100vh;
   padding: 0;
@@ -178,15 +172,6 @@ a.item > img{
   margin: auto;
 }
 
-/*
-label#less-button {
-  align-self: flex-end;
-  height: 10%;
-  width: 100%;
-  cursor: pointer;
-}
-*/
-
 div#more-items {
   border-top: lightgray solid thin;
   position: relative;
@@ -245,6 +230,3 @@ a#kottans:hover {
   text-decoration: underline;
   color: blue;
 }
-
-
-
