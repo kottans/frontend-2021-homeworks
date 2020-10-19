@@ -1,0 +1,144 @@
+a {
+  text-decoration: none;
+  color: black;
+}
+a:focus {
+  color: gray;
+  border: 1px solid gray;
+}
+a:hover {
+  color: gray;
+  border: 1px solid gray;
+}
+.right_navigation__mail,
+.right_navigation__images {
+  align-self: center;
+}
+.popup_btn-icon:focus,
+.show-more:focus {
+  color: gray;
+  border: 1px solid gray;
+}
+.popup_btn-icon:hover,
+.show-more:hover {
+  color: gray;
+  border: 1px solid gray;
+}
+.containers {
+  width: 1000px;
+}
+label:focus {
+  outline-style: none;
+  color: gray;
+  border: 1px solid gray;
+}
+.right_navigation {
+  width: 250px;
+  float: right;
+  display: flex;
+  justify-content: space-between;
+}
+.right_navigation img {
+  width: 25px;
+}
+
+.right_navigation__avatar img {
+  border-radius: 50%;
+}
+.popup_btn,
+.show-more_btn {
+  display: none;
+}
+
+.popup_btn:checked ~ .popup {
+  display: block;
+}
+
+.popup_btn-icon {
+  background: url("./img/popup-button.png") center no-repeat;
+  width: 30px;
+}
+
+.popup {
+  display: none;
+  position: absolute;
+  border: 1px solid #d3d1d1;
+  width: 310px;
+  height: 450px;
+  right: 22px;
+  top: 45px;
+  -webkit-box-shadow: 10px 9px 5px -4px rgba(214, 207, 214, 1);
+  -moz-box-shadow: 10px 9px 5px -4px rgba(214, 207, 214, 1);
+  box-shadow: 10px 9px 5px -4px rgba(214, 207, 214, 1);
+}
+.popup::before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 16px solid transparent;
+  border-right: 16px solid transparent;
+  border-bottom: 16px solid #d3d1d1;
+  z-index: -1;
+  top: -16px;
+  left: 198px;
+}
+.popup::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-bottom: 15px solid white;
+  top: -15px;
+  left: 199px;
+  z-index: 5;
+}
+
+.popup img {
+  width: 30px;
+}
+.main-menu {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 20px 20px 5px 20px;
+}
+.more-menu {
+  display: none;
+
+  justify-content: space-between;
+  align-content: space-between;
+  flex-wrap: wrap;
+  padding: 20px 20px 5px 20px;
+}
+.popup-content {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+.show-more {
+  display: block;
+  height: 30px;
+  text-align: center;
+  background-color: #c5c5c547;
+  padding-top: 10px;
+}
+.show-more_btn:checked ~ .more-menu {
+  display: flex;
+}
+.popup-item {
+  width: 75px;
+  height: 90px;
+  padding: 3px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: flex-end;
+  box-sizing: border-box;
+}
+
+.kottans {
+  margin: 0px auto;
+}
