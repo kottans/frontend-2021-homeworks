@@ -157,3 +157,7 @@ a:hover {
 .popup-checkbox {
   border: 1px solid white;
 }
+
+.popup_btn:focus + .popup_btn-icon {
+  border: 1px solid grey;
+}
