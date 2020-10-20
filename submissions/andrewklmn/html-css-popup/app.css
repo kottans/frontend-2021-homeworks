@@ -17,7 +17,7 @@ nav {
   justify-content: flex-end;
 }
 
-nav > ul > li > a {
+.menu-item {
   border-bottom: solid white  1px;
 
   text-align: center;
@@ -27,22 +27,22 @@ nav > ul > li > a {
   outline: none;
 }
 
-nav > ul > li > a:focus {
+.menu-item:focus {
   border-bottom: solid blue 1px;
 }
 
-nav > ul > li > a:hover {
+.menu-item:hover {
   text-align: center;
   color: black;
 
   border-bottom: solid black 1px;
 }
 
-nav > ul > li > a:active {
+.menu-item:active {
   border-bottom: solid red 1px;
 }
 
-nav > ul > li {
+li {
   list-style: none;
 }
 
