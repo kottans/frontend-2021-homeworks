@@ -10,20 +10,18 @@
 </head>
 
 <body>
-
-  <nav>
-    <ul>
-      <li>
+  <nav class="main-nav">
+    <ul class="nav-menu">
+      <li class="menu-item">
         <a href="https://mail.google.com/" class="direct-link">Meowil</a>
       </li>
-
-      <li>
+      <li class="menu-item">
         <a href="https://www.google.com/search?q=cat+photos" class="direct-link">CatPics</a>
       </li>
-      <li>
+      <li class="menu-item">
         <div class="menu">
           <input type="checkbox" id="btn-app" />
-          <label class="menu-btn-app" for="btn-app"><img src="./img/apps-grid.svg" /></label>
+          <label class="menu-btn-app" for="btn-app"><img src="./img/apps-grid.svg" alt="app-button" /></label>
           <div class="triangle hidden"></div>
           <div class="menu-popup hidden">
             <a href="#" class="menu-popup-item location"><img src="./img/app-location.svg" alt="MeoMap">
@@ -58,16 +56,14 @@
           </div>
         </div>
       </li>
-
-      <li>
+      <li class="menu-item">
         <a href="https://github.com/usides/kottans-frontend" class="user-logo"><img src="./img/cat_profile.png"
-            alt=""></a>
+            alt="Cat-profile"></a>
       </li>
     </ul>
   </nav>
-
   <main>
-    <form action="">
+    <form action="./index.html">
       <h1>Meoowler</h1>
       <div class="search-panel">
         <input type="text" class="input-field" placeholder="Meow Meow Meow" />
@@ -75,10 +71,9 @@
       </div>
     </form>
   </main>
+  <footer>
+    <p class="credits">Created by Usides for kottans</p>
+  </footer>
 </body>
-
-<footer>
-  <p class="credits">Created by Usides for kottans</p>
-</footer>
 
 </html>
