@@ -176,7 +176,7 @@ li {
   flex-wrap: wrap;
 }
 
-.fading-area-for-menu-closing {
+.fader {
   position: fixed;
   top: 0;
   bottom: 0;
