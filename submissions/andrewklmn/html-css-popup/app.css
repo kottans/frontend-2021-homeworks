@@ -1,0 +1,302 @@
+body {
+  width: 100vw;  
+  height: 100vh;  
+  margin: 0;
+  padding: 0;
+
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+}
+
+
+nav {
+  z-index: 6;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.menu-item {
+  border-bottom: solid white  1px;
+
+  text-align: center;
+  text-decoration: none;
+  font-size: 14px;
+  color: black;
+  outline: none;
+}
+
+.menu-item:focus {
+  border-bottom: solid blue 1px;
+}
+
+.menu-item:hover {
+  text-align: center;
+  color: black;
+
+  border-bottom: solid black 1px;
+}
+
+.menu-item:active {
+  border-bottom: solid red 1px;
+}
+
+li {
+  list-style: none;
+}
+
+.li-bento {
+  width: 42px;
+}
+
+.topnav-right {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 270px;
+  height: 48px;
+  padding-right: 50px;
+}
+
+.btn {
+  color:black;
+  border: white solid thin;
+
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.btn:hover {
+  color: darkblue;
+}
+
+.show-items {
+  position: absolute;
+  top: 22px;
+  right: 163px;
+  z-index: 7;
+
+  display: inline-block;
+  width: 41px;
+  height: 38px;
+  background-color: white;
+}
+
+.show-items:hover {
+  border-bottom: solid black 1px;
+}
+
+.show-items:active {
+  border-bottom: solid red 1px;
+}
+
+.popup-checkbox {
+  position: absolute;
+  top: 22px;
+  right: 163px;
+  z-index: 6;
+
+  width: 41px;
+  height: 38px;
+  margin: 0px;
+  padding: 0px;
+
+  -moz-appearance:none;
+  -webkit-appearance:none;
+  -o-appearance:none;
+}
+
+.btn-more:hover,
+.popup-checkbox:focus,
+.popup-checkbox:hover {
+  color: blue;
+}
+
+.main-popup {
+  position: absolute;
+  top: 75px;
+  right: 26px;
+  z-index: 5;
+
+  width: 320px;
+  height: 480px;
+  margin-right: 30px;
+  
+  background-color: white;
+  border: lightgray solid thin;
+  
+  -webkit-box-shadow: 3px 3px 10px 0 gray;
+  -moz-box-shadow: 3px 3px 10px 0 gray;
+  box-shadow: 5px 5px 10px 0 gray;
+}
+
+.icon {
+  width: 36px;
+  height: 36px;
+}
+
+.auto-scrolled-area {
+  height: 100%;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-color: white;
+}
+
+.auto-scrolled-area::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  right: 117px;
+
+  height: 18px;
+  width: 18px;
+
+  background-color: white;
+  border-color: lightgray;
+  border-style: solid;
+  border-width: thin 0 0 thin;
+
+  transform: rotate(45deg);
+}
+
+.content {
+  display: none;
+}
+
+.popup-checkbox:checked + div.content {
+  display: block;
+}
+
+
+#more-items:target {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.btn-more {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 7%;
+  width: 100%;
+
+  font-size: 12px;
+
+  background-color: lightgray;
+  border: none;
+  outline: none;
+  
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.btn-more:focus {
+  border: solid thin blue;
+}
+
+.main-items-container {
+  z-index: 10;
+  height: 93%;
+
+  background-color: white;
+  box-sizing: border-box;
+}
+
+.flex-items {
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 30px;
+  padding-top: 20px;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-content: center;
+  width: 70px;
+  height: 70px;
+  padding: 7px;
+  
+  font-size: 12px;
+  text-decoration: none;
+  color: gray;
+
+  border: solid thin white;
+  outline: none;
+}
+
+.item:focus {
+  border: solid thin blue;
+}
+
+.item:hover {
+  border: solid thin gray;
+}
+
+.item > img{
+  max-width: 50px;
+  max-height: 45px;
+  margin: auto;
+}
+
+.more-items-container {
+  position: relative;
+  top: -7%;
+  
+  display: none;
+  height: 50%;
+  
+  background-color: white;
+  border-top: lightgray solid thin;
+
+  box-sizing: border-box;
+}
+
+.mock-content-container {
+  position: absolute;
+  top: 48px;
+  left: 0;
+  right: 0;
+
+  height: auto;
+}
+
+.mock-content-container > input {
+  width: 258px;
+}
+
+.company-logo {
+  width: 50%;
+  height: 500px;
+  margin: auto;
+}
+
+.company-logo img {
+  margin-top: 90px;
+}
+
+.href-kottans {
+  width: 90%;
+  padding-top:20px;
+  
+  border-bottom: solid none 1px;
+  font-size: 12px;
+  text-decoration: none;
+  color: gray;
+
+  cursor: pointer;
+  outline: none;
+}
+
+.href-kottans:hover {
+  text-decoration: underline;
+  color: blue;
+}
+
+.href-kottans:focus {
+  border-bottom: solid blue 1px;
+}
