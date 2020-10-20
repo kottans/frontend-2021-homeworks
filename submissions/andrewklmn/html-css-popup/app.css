@@ -145,6 +145,23 @@ li {
   background-color: white;
 }
 
+.auto-scrolled-area::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  right: 117px;
+
+  height: 18px;
+  width: 18px;
+
+  background-color: white;
+  border-color: lightgray;
+  border-style: solid;
+  border-width: thin 0 0 thin;
+
+  transform: rotate(45deg);
+}
+
 .content {
   display: none;
 }
@@ -251,22 +268,6 @@ li {
   border-top: lightgray solid thin;
 
   box-sizing: border-box;
-}
-
-.menu-deco-square {
-  position: absolute;
-  top: -10px;
-  right: 117px;
-
-  height: 18px;
-  width: 18px;
-
-  background-color: white;
-  border-color: lightgray;
-  border-style: solid;
-  border-width: thin 0 0 thin;
-
-  transform: rotate(45deg);
 }
 
 .mock-content-container {
