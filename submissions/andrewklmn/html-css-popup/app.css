@@ -166,7 +166,7 @@ nav > ul > li {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 7%;
+  min-height: 7%;
   width: 100%;
 
   font-size: 12px;
