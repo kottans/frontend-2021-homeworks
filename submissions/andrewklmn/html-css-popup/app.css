@@ -38,6 +38,10 @@ nav > ul > li > a:hover {
   border-bottom: solid black 1px;
 }
 
+nav > ul > li > a:active {
+  border-bottom: solid red 1px;
+}
+
 nav > ul > li {
   list-style: none;
 }
@@ -78,7 +82,14 @@ nav > ul > li {
   width: 41px;
   height: 38px;
   background-color: white;
+}
 
+.show-items:hover {
+  border-bottom: solid black 1px;
+}
+
+.show-items:active {
+  border-bottom: solid red 1px;
 }
 
 .popup-checkbox {
