@@ -1,0 +1,376 @@
+@import url("https://fonts.googleapis.com/css2?family=Rajdhani&family=Red+Hat+Display&family=Russo+One&display=swap");
+button,
+a,
+input,
+li {
+  outline: none;
+  border: transparent;
+  background-color: rgba(255, 255, 255, 0);
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+body {
+  background-image: url(../img/cat_bg.jpg);
+  background-position: 22% 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+nav ul {
+  margin: 0;
+  list-style-type: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0.5rem;
+  padding-right: 1.5rem;
+}
+
+nav ul li > a {
+  margin: 0.3rem;
+}
+
+nav ul .direct-link {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.2rem;
+  text-decoration: none;
+  font-weight: bold;
+  color: #fff;
+  padding: 0 0.2rem;
+  min-height: 1.7rem;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+nav ul .direct-link:focus {
+  border-bottom: 3px solid #423e3e;
+}
+
+nav ul .menu {
+  position: relative;
+  margin: 0 0.3rem;
+}
+
+nav ul .menu input#btn-app {
+  position: absolute;
+  opacity: 0;
+}
+
+nav ul .menu input#btn-app:checked ~ div.hidden {
+  visibility: visible;
+}
+
+nav ul .menu input#btn-app:focus ~ .menu-btn-app {
+  background-color: #423e3e;
+}
+
+nav ul .menu .menu-btn-app {
+  display: block;
+  max-width: 2.5rem;
+  padding: 0.2rem 0;
+  padding: 0.4rem;
+  border-radius: 0.2rem;
+  outline: none;
+  cursor: pointer;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+nav ul .menu .triangle {
+  visibility: hidden;
+  position: absolute;
+  top: 96%;
+  left: 43%;
+  margin-left: -5px;
+  border-width: 8px;
+  border-style: solid;
+  border-color: transparent transparent #0000004d transparent;
+}
+
+nav ul .menu .menu-popup {
+  visibility: hidden;
+  position: absolute;
+  max-height: 11.2rem;
+  min-width: 15rem;
+  width: 14rem;
+  background-color: #0000004d;
+  right: -110%;
+  top: 135%;
+  border-radius: 0.4rem;
+  padding: 0.5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  overflow-y: scroll;
+  z-index: 1;
+}
+
+nav ul .menu .menu-popup::-webkit-scrollbar {
+  width: 3px;
+}
+
+nav ul .menu .menu-popup::-webkit-scrollbar-thumb {
+  background: #fff;
+  border-radius: 0px;
+}
+
+nav ul .menu .menu-popup input#btn-more {
+  position: absolute;
+  opacity: 0;
+}
+
+nav ul .menu .menu-popup input#btn-more:checked ~ .hidden {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+nav ul .menu .menu-popup input#btn-more:checked ~ label {
+  display: none;
+}
+
+nav ul .menu .menu-popup input#btn-more:focus ~ label {
+  background-color: #ffffff33;
+}
+
+nav ul .menu .menu-popup .menu-popup-more-btn {
+  width: 80%;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  font-family: 'Rajdhani', sans-serif;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  -webkit-transition: background-color 0.3s;
+  transition: background-color 0.3s;
+}
+
+nav ul .menu .menu-popup .menu-popup-item {
+  width: 4rem;
+  height: 4rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 0.3rem;
+  -webkit-box-flex: 0;
+      -ms-flex-positive: 0;
+          flex-grow: 0;
+  text-decoration: none;
+  padding: 0.2rem 0.9rem;
+  font-size: 0.9rem;
+  border-radius: 0.4rem;
+  -webkit-transition: background-color 0.3s;
+  transition: background-color 0.3s;
+}
+
+nav ul .menu .menu-popup .menu-popup-item:focus {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+nav ul .menu .menu-popup .menu-popup-item p {
+  color: #fff;
+  font-family: 'Rajdhani', sans-serif;
+}
+
+nav ul .menu .menu-popup .menu-popup-item img {
+  margin-bottom: 0.4rem;
+}
+
+nav ul .menu .menu-popup .hidden {
+  display: none;
+}
+
+nav ul .menu .menu-popup .location img,
+nav ul .menu .menu-popup .video img {
+  width: 90%;
+}
+
+nav ul .menu .menu-popup .calendar img,
+nav ul .menu .menu-popup .audio img {
+  width: 75%;
+}
+
+nav ul .menu .menu-popup .human img,
+nav ul .menu .menu-popup .cat img {
+  width: 80%;
+}
+
+nav ul .user-logo {
+  display: block;
+  max-width: 2.5rem;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+nav ul .user-logo:focus {
+  border: 3px solid #423e3e;
+}
+
+main {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+main form h1 {
+  font-family: 'Russo One', sans-serif;
+  color: #423e3e;
+  -webkit-text-stroke: 0.25rem #fff;
+  font-size: 3.7rem;
+  letter-spacing: 0.1rem;
+}
+
+main form .search-panel .input-field {
+  min-width: 15rem;
+  min-height: 2.7rem;
+  border-radius: 2rem;
+  background-color: #0000005b;
+  border: 0.2rem solid #fff;
+  font-family: 'Red Hat Display', sans-serif;
+  font-size: 1.5rem;
+  color: #fff;
+  -webkit-transition: all 300ms;
+  transition: all 300ms;
+  text-align: center;
+}
+
+main form .search-panel .input-field:focus {
+  min-width: 35rem;
+  text-align: left;
+  text-indent: 1.5rem;
+}
+
+main form .search-panel .input-field::-webkit-input-placeholder {
+  color: #fff;
+}
+
+main form .search-panel .input-field:-ms-input-placeholder {
+  color: #fff;
+}
+
+main form .search-panel .input-field::-ms-input-placeholder {
+  color: #fff;
+}
+
+main form .search-panel .input-field::placeholder {
+  color: #fff;
+}
+
+main form .search-panel .submit-button {
+  display: block;
+  margin-top: 1rem;
+  min-width: 5rem;
+  min-height: 5rem;
+  background-image: url(../img/paw.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: 1rem auto 0;
+  cursor: pointer;
+  padding: 0;
+}
+
+main form .search-panel .submit-button:focus {
+  background-color: #ffffff91;
+  border-radius: 50%;
+}
+
+footer {
+  position: absolute;
+  bottom: 0%;
+  width: 100%;
+}
+
+footer p {
+  text-align: center;
+  padding: 1rem;
+  font-family: 'Rajdhani', sans-serif;
+  color: #fff;
+  text-transform: lowercase;
+  font-weight: bold;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .direct-link:hover {
+    border-bottom: 3px solid #423e3e;
+  }
+  .menu-btn-app:hover {
+    background-color: #0000004d;
+  }
+  .user-logo:hover {
+    border: 3px solid #423e3e;
+  }
+  input.submit-button:hover {
+    background-color: #ffffff91;
+    border-radius: 50%;
+  }
+  .menu-popup-item:hover {
+    background-color: #ffffff33;
+  }
+  .menu .menu-popup .menu-popup-more-btn:hover {
+    background-color: #ffffff33;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  body {
+    -webkit-background-size: 380% auto;
+    background-position: 22% 0;
+  }
+  nav {
+    background-color: #0000004d;
+  }
+  nav ul .menu .triangle {
+    top: 110%;
+    border-color: transparent transparent #000000d0 transparent;
+  }
+  nav ul .menu .menu-popup {
+    background-color: #000000d0;
+    min-height: 12rem;
+    top: 150%;
+  }
+  main form h1 {
+    font-size: 2rem;
+    -webkit-text-stroke: 0.1rem #fff;
+  }
+  main form .search-panel .input-field {
+    min-width: 10rem;
+    min-height: 1.7rem;
+    font-size: 1rem;
+  }
+  main form .search-panel .input-field:focus {
+    min-width: 18rem;
+  }
+}
