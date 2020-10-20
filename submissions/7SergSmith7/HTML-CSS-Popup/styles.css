@@ -15,16 +15,7 @@ a:hover {
 .right_navigation__images {
   align-self: center;
 }
-.popup_btn-icon:focus,
-.show-more:focus {
-  color: gray;
-  border: 1px solid gray;
-}
-.popup_btn-icon:hover,
-.show-more:hover {
-  color: gray;
-  border: 1px solid gray;
-}
+
 .right_navigation__list {
   list-style: none;
   margin: 0;
@@ -37,11 +28,7 @@ a:hover {
 .containers {
   width: 1000px;
 }
-label:focus {
-  outline-style: none;
-  color: gray;
-  border: 1px solid gray;
-}
+
 .right_navigation__item {
   display: flex;
 }
@@ -51,10 +38,6 @@ label:focus {
 
 .right_navigation__avatar img {
   border-radius: 50%;
-}
-.popup_btn,
-.show-more_btn {
-  display: none;
 }
 
 .popup_btn:checked ~ .popup {
@@ -154,4 +137,23 @@ label:focus {
 
 .kottans {
   margin: 0px auto;
+}
+
+.popup_btn,
+.show-more_btn {
+  position: absolute;
+  opacity: 0;
+  z-index: -1;
+  cursor: pointer;
+}
+.popup-checkbox:focus {
+  color: gray;
+  border: 1px solid gray;
+}
+.popup-checkbox:hover {
+  color: gray;
+  border: 1px solid gray;
+}
+.popup-checkbox {
+  border: 1px solid white;
 }
