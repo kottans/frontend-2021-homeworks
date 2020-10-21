@@ -59,7 +59,6 @@ const flipCard = (card) => {
 };
 
 const isGameWin = () => {
-    console.log(state);
     if (state.cardsLeft <= 0) {
         resultElement.textContent = 'You win!';
     }
