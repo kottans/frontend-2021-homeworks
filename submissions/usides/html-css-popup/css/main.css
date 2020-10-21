@@ -9,16 +9,24 @@ li {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
+html,
+body {
+  height: 100%;
+}
+
 body {
   background-image: url(../img/cat_bg.jpg);
   background-position: 22% 0;
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
-  min-height: 100vh;
 }
 
-nav.main-nav ul.nav-menu {
+.content {
+  height: 100%;
+}
+
+.nav-menu {
   margin: 0;
   list-style-type: none;
   display: -webkit-box;
@@ -34,11 +42,11 @@ nav.main-nav ul.nav-menu {
   padding-right: 1.5rem;
 }
 
-nav.main-nav ul.nav-menu li > a {
+.nav-menu li > a {
   margin: 0.3rem;
 }
 
-nav.main-nav ul.nav-menu .direct-link {
+.direct-link {
   font-family: 'Rajdhani', sans-serif;
   font-size: 1.2rem;
   text-decoration: none;
@@ -50,29 +58,29 @@ nav.main-nav ul.nav-menu .direct-link {
   transition: all 0.2s;
 }
 
-nav.main-nav ul.nav-menu .direct-link:focus {
+.direct-link:focus {
   border-bottom: 3px solid #423e3e;
 }
 
-nav.main-nav ul.nav-menu .menu {
+.menu {
   position: relative;
   margin: 0 0.3rem;
 }
 
-nav.main-nav ul.nav-menu .menu input#btn-app {
+#btn-app {
   position: absolute;
   opacity: 0;
 }
 
-nav.main-nav ul.nav-menu .menu input#btn-app:checked ~ div.hidden {
+#btn-app:checked ~ div.hidden {
   visibility: visible;
 }
 
-nav.main-nav ul.nav-menu .menu input#btn-app:focus ~ .menu-btn-app {
+#btn-app:focus ~ .menu-btn-app {
   background-color: #423e3e;
 }
 
-nav.main-nav ul.nav-menu .menu .menu-btn-app {
+.menu-btn-app {
   display: block;
   max-width: 2.5rem;
   padding: 0.2rem 0;
@@ -84,7 +92,7 @@ nav.main-nav ul.nav-menu .menu .menu-btn-app {
   transition: all 0.2s;
 }
 
-nav.main-nav ul.nav-menu .menu .triangle {
+.triangle {
   visibility: hidden;
   position: absolute;
   top: 96%;
@@ -95,7 +103,7 @@ nav.main-nav ul.nav-menu .menu .triangle {
   border-color: transparent transparent #0000004d transparent;
 }
 
-nav.main-nav ul.nav-menu .menu .menu-popup {
+.menu-popup {
   visibility: hidden;
   position: absolute;
   max-height: 11.2rem;
@@ -121,35 +129,16 @@ nav.main-nav ul.nav-menu .menu .menu-popup {
   z-index: 1;
 }
 
-nav.main-nav ul.nav-menu .menu .menu-popup::-webkit-scrollbar {
+.menu-popup::-webkit-scrollbar {
   width: 3px;
 }
 
-nav.main-nav ul.nav-menu .menu .menu-popup::-webkit-scrollbar-thumb {
+.menu-popup::-webkit-scrollbar-thumb {
   background: #fff;
   border-radius: 0px;
 }
 
-nav.main-nav ul.nav-menu .menu .menu-popup input#btn-more {
-  position: absolute;
-  opacity: 0;
-}
-
-nav.main-nav ul.nav-menu .menu .menu-popup input#btn-more:checked ~ .hidden {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-nav.main-nav ul.nav-menu .menu .menu-popup input#btn-more:checked ~ label {
-  display: none;
-}
-
-nav.main-nav ul.nav-menu .menu .menu-popup input#btn-more:focus ~ label {
-  background-color: #ffffff33;
-}
-
-nav.main-nav ul.nav-menu .menu .menu-popup .menu-popup-more-btn {
+.menu-popup .menu-popup-more-btn {
   width: 80%;
   background-color: rgba(0, 0, 0, 0.6);
   color: #fff;
@@ -163,7 +152,45 @@ nav.main-nav ul.nav-menu .menu .menu-popup .menu-popup-more-btn {
   transition: background-color 0.3s;
 }
 
-nav.main-nav ul.nav-menu .menu .menu-popup .menu-popup-item {
+.menu-popup .hidden {
+  display: none;
+}
+
+.menu-popup .location img,
+.menu-popup .video img {
+  width: 90%;
+}
+
+.menu-popup .calendar img,
+.menu-popup .audio img {
+  width: 75%;
+}
+
+.menu-popup .human img,
+.menu-popup .cat img {
+  width: 80%;
+}
+
+#btn-more {
+  position: absolute;
+  opacity: 0;
+}
+
+#btn-more:checked ~ .hidden {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+#btn-more:checked ~ label {
+  display: none;
+}
+
+#btn-more:focus ~ label {
+  background-color: #ffffff33;
+}
+
+.menu-popup-item {
   width: 4rem;
   height: 4rem;
   display: -webkit-box;
@@ -191,39 +218,20 @@ nav.main-nav ul.nav-menu .menu .menu-popup .menu-popup-item {
   transition: background-color 0.3s;
 }
 
-nav.main-nav ul.nav-menu .menu .menu-popup .menu-popup-item:focus {
+.menu-popup-item:focus {
   background-color: rgba(255, 255, 255, 0.2);
 }
 
-nav.main-nav ul.nav-menu .menu .menu-popup .menu-popup-item p {
+.menu-popup-item p {
   color: #fff;
   font-family: 'Rajdhani', sans-serif;
 }
 
-nav.main-nav ul.nav-menu .menu .menu-popup .menu-popup-item img {
+.menu-popup-item img {
   margin-bottom: 0.4rem;
 }
 
-nav.main-nav ul.nav-menu .menu .menu-popup .hidden {
-  display: none;
-}
-
-nav.main-nav ul.nav-menu .menu .menu-popup .location img,
-nav.main-nav ul.nav-menu .menu .menu-popup .video img {
-  width: 90%;
-}
-
-nav.main-nav ul.nav-menu .menu .menu-popup .calendar img,
-nav.main-nav ul.nav-menu .menu .menu-popup .audio img {
-  width: 75%;
-}
-
-nav.main-nav ul.nav-menu .menu .menu-popup .human img,
-nav.main-nav ul.nav-menu .menu .menu-popup .cat img {
-  width: 80%;
-}
-
-nav.main-nav ul.nav-menu .user-logo {
+.user-logo {
   display: block;
   max-width: 2.5rem;
   border-radius: 50%;
@@ -232,11 +240,11 @@ nav.main-nav ul.nav-menu .user-logo {
   transition: all 0.2s;
 }
 
-nav.main-nav ul.nav-menu .user-logo:focus {
+.user-logo:focus {
   border: 3px solid #423e3e;
 }
 
-main {
+.search-form {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -245,7 +253,7 @@ main {
   text-align: center;
 }
 
-main form h1 {
+.search-form h1 {
   font-family: 'Russo One', sans-serif;
   color: #423e3e;
   -webkit-text-stroke: 0.25rem #fff;
@@ -253,7 +261,7 @@ main form h1 {
   letter-spacing: 0.1rem;
 }
 
-main form .search-panel .input-field {
+.input-field {
   min-width: 15rem;
   min-height: 2.7rem;
   border-radius: 2rem;
@@ -267,29 +275,29 @@ main form .search-panel .input-field {
   text-align: center;
 }
 
-main form .search-panel .input-field:focus {
+.input-field:focus {
   min-width: 35rem;
   text-align: left;
   text-indent: 1.5rem;
 }
 
-main form .search-panel .input-field::-webkit-input-placeholder {
+.input-field::-webkit-input-placeholder {
   color: #fff;
 }
 
-main form .search-panel .input-field:-ms-input-placeholder {
+.input-field:-ms-input-placeholder {
   color: #fff;
 }
 
-main form .search-panel .input-field::-ms-input-placeholder {
+.input-field::-ms-input-placeholder {
   color: #fff;
 }
 
-main form .search-panel .input-field::placeholder {
+.input-field::placeholder {
   color: #fff;
 }
 
-main form .search-panel .submit-button {
+.submit-button {
   display: block;
   margin-top: 1rem;
   min-width: 5rem;
@@ -302,24 +310,27 @@ main form .search-panel .submit-button {
   padding: 0;
 }
 
-main form .search-panel .submit-button:focus {
+.submit-button:focus {
   background-color: #ffffff91;
   border-radius: 50%;
 }
 
 footer {
-  position: absolute;
-  bottom: 0%;
-  width: 100%;
+  margin-top: -53px;
 }
 
-footer p {
+.credits {
   text-align: center;
   padding: 1rem;
   font-family: 'Rajdhani', sans-serif;
   color: #fff;
   text-transform: lowercase;
   font-weight: bold;
+}
+
+.credits a {
+  text-decoration: none;
+  color: inherit;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -339,8 +350,11 @@ footer p {
   .menu-popup-item:hover {
     background-color: #ffffff33;
   }
-  .menu .menu-popup .menu-popup-more-btn:hover {
+  .menu-popup-more-btn:hover {
     background-color: #ffffff33;
+  }
+  .credits a:hover {
+    color: #423e3e;
   }
 }
 
@@ -352,25 +366,25 @@ footer p {
   nav {
     background-color: #0000004d;
   }
-  nav ul .menu .triangle {
+  .triangle {
     top: 110%;
     border-color: transparent transparent #000000d0 transparent;
   }
-  nav ul .menu .menu-popup {
+  .menu-popup {
     background-color: #000000d0;
     min-height: 12rem;
     top: 150%;
   }
-  main form h1 {
+  .search-form h1 {
     font-size: 2rem;
     -webkit-text-stroke: 0.1rem #fff;
   }
-  main form .search-panel .input-field {
+  .input-field {
     min-width: 10rem;
     min-height: 1.7rem;
     font-size: 1rem;
   }
-  main form .search-panel .input-field:focus {
+  .input-field:focus {
     min-width: 18rem;
   }
 }

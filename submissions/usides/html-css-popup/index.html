@@ -10,69 +10,72 @@
 </head>
 
 <body>
-  <nav class="main-nav">
-    <ul class="nav-menu">
-      <li class="menu-item">
-        <a href="https://mail.google.com/" class="direct-link">Meowil</a>
-      </li>
-      <li class="menu-item">
-        <a href="https://www.google.com/search?q=cat+photos" class="direct-link">CatPics</a>
-      </li>
-      <li class="menu-item">
-        <div class="menu">
-          <input type="checkbox" id="btn-app" />
-          <label class="menu-btn-app" for="btn-app"><img src="./img/apps-grid.svg" alt="app-button" /></label>
-          <div class="triangle hidden"></div>
-          <div class="menu-popup hidden">
-            <a href="#" class="menu-popup-item location"><img src="./img/app-location.svg" alt="MeoMap">
-              <p>MeoMap</p>
-            </a>
-            <a href="#" class="menu-popup-item calendar"><img src="./img/app-calendar.svg" alt="Catlendar">
-              <p>CaTlendar</p>
-            </a>
-            <a href="#" class="menu-popup-item mail"><img src="./img/app-mail.svg" alt="Meowil">
-              <p>Meowil</p>
-            </a>
-            <a href="#" class="menu-popup-item cat"><img src="./img/app-cat.svg" alt="Kittys">
-              <p>Kittys</p>
-            </a>
-            <a href="#" class="menu-popup-item meat"><img src="./img/app-meat.svg" alt="MeoMeat">
-              <p>MeoMeat</p>
-            </a>
-            <a href="#" class="menu-popup-item audio"><img src="./img/app-audio.svg" alt="Mouser">
-              <p>Mouser</p>
-            </a>
-            <input type="checkbox" id="btn-more" />
-            <label class="menu-popup-more-btn" for="btn-more">more</label>
-            <a href="#" class="menu-popup-item video hidden"><img src="./img/app-video.svg" alt="KitVid">
-              <p>KitVid</p>
-            </a>
-            <a href="#" class="menu-popup-item fish hidden"><img src="./img/app-fish.svg" alt="Fishdex">
-              <p>Fishdex</p>
-            </a>
-            <a href="#" class="menu-popup-item human hidden"><img src="./img/app-human.svg" alt="Mouser">
-              <p>PatBud</p>
-            </a>
+  <div class="content">
+    <nav class="main-nav">
+      <ul class="nav-menu">
+        <li class="menu-item">
+          <a href="https://mail.google.com/" class="direct-link">Meowil</a>
+        </li>
+        <li class="menu-item">
+          <a href="https://www.google.com/search?q=cat+photos" class="direct-link">CatPics</a>
+        </li>
+        <li class="menu-item">
+          <div class="menu">
+            <input type="checkbox" id="btn-app" />
+            <label class="menu-btn-app" for="btn-app"><img src="./img/apps-grid.svg" alt="app-button" /></label>
+            <div class="triangle hidden"></div>
+            <div class="menu-popup hidden">
+              <a href="#" class="menu-popup-item location"><img src="./img/app-location.svg" alt="MeoMap">
+                <p>MeoMap</p>
+              </a>
+              <a href="#" class="menu-popup-item calendar"><img src="./img/app-calendar.svg" alt="Catlendar">
+                <p>CaTlendar</p>
+              </a>
+              <a href="#" class="menu-popup-item mail"><img src="./img/app-mail.svg" alt="Meowil">
+                <p>Meowil</p>
+              </a>
+              <a href="#" class="menu-popup-item cat"><img src="./img/app-cat.svg" alt="Kittys">
+                <p>Kittys</p>
+              </a>
+              <a href="#" class="menu-popup-item meat"><img src="./img/app-meat.svg" alt="MeoMeat">
+                <p>MeoMeat</p>
+              </a>
+              <a href="#" class="menu-popup-item audio"><img src="./img/app-audio.svg" alt="Mouser">
+                <p>Mouser</p>
+              </a>
+              <input type="checkbox" id="btn-more" />
+              <label class="menu-popup-more-btn" for="btn-more">more</label>
+              <a href="#" class="menu-popup-item video hidden"><img src="./img/app-video.svg" alt="KitVid">
+                <p>KitVid</p>
+              </a>
+              <a href="#" class="menu-popup-item fish hidden"><img src="./img/app-fish.svg" alt="Fishdex">
+                <p>Fishdex</p>
+              </a>
+              <a href="#" class="menu-popup-item human hidden"><img src="./img/app-human.svg" alt="Mouser">
+                <p>PatBud</p>
+              </a>
+            </div>
           </div>
+        </li>
+        <li class="menu-item">
+          <a href="https://github.com/usides/kottans-frontend" class="user-logo"><img src="./img/cat_profile.png"
+              alt="Cat-profile"></a>
+        </li>
+      </ul>
+    </nav>
+    <main>
+      <form class="search-form" action="./index.html">
+        <h1>Meoowler</h1>
+        <div class="search-panel">
+          <input type="text" class="input-field" placeholder="Meow Meow Meow" />
+          <input type="submit" class="submit-button" value="" />
         </div>
-      </li>
-      <li class="menu-item">
-        <a href="https://github.com/usides/kottans-frontend" class="user-logo"><img src="./img/cat_profile.png"
-            alt="Cat-profile"></a>
-      </li>
-    </ul>
-  </nav>
-  <main>
-    <form action="./index.html">
-      <h1>Meoowler</h1>
-      <div class="search-panel">
-        <input type="text" class="input-field" placeholder="Meow Meow Meow" />
-        <input type="submit" class="submit-button" value="" />
-      </div>
-    </form>
-  </main>
+      </form>
+    </main>
+  </div>
   <footer>
-    <p class="credits">Created by Usides for kottans</p>
+    <p class="credits">Created by <a href="https://github.com/usides/kottans-frontend">Usides</a> for <a
+        href="https://kottans.org/">kottans</a></p>
   </footer>
 </body>
 
