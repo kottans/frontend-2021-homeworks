@@ -4,9 +4,11 @@
     margin: 0;
     border: 0;
 }
+
 *, *:before, *:after {
     box-sizing: border-box;
 }
+
 html, body {
     height: 100%;
     width: 100%;
@@ -14,32 +16,41 @@ html, body {
     font-size: 14px;
     overflow: hidden;
 }
+
 input, button, textarea {
     font-family: inherit;
 }
+
 input::-ms-clear {
     display: none;
 }
+
 button {
     cursor: pointer;
 }
+
 button::-moz-focus-inner {
     padding: 0;
     border: 0;
 }
+
 a, a:visited {
     text-decoration: none;
 }
+
 a:hover {
     text-decoration: none;
 }
+
 ul {
     list-style: none;
 }
+
 img {
     vertical-align: top;
     max-width: 100%;
 }
+
 .header {
     position: absolute;
     width: 100vw;
@@ -47,28 +58,34 @@ img {
     font-family: "Titillium Web", sans-serif;
     background: #94dbf745;
 }
+
 .navigation {
     max-width: 1100px;
     margin: 25px auto 0;
 }
+
 .navigation__list {
     display: flex;
     justify-content: flex-end;
 }
+
 .navigation__item {
     flex: 0 0 30px;
     margin: 0 30px 0 0;
     width: 30px;
     height: 30px;
 }
+
 .navigation__item img {
     object-fit: contain;
     width: 100%;
     height: 100%;
 }
+
 .menu {
     position: relative;
 }
+
 .menu__input {
     position: absolute;
     width: 30px;
@@ -76,10 +93,12 @@ img {
     cursor: pointer;
     opacity: 0;
 }
+
 .menu__label {
     position: relative;
     cursor: pointer;
 }
+
 .menu__label::before {
     content: "";
     position: absolute;
@@ -93,6 +112,7 @@ img {
     border-color: transparent transparent #000000 transparent;
     display: none;
 }
+
 .menu-popup {
     position: absolute;
     top: 180%;
@@ -108,18 +128,23 @@ img {
     border: 5px solid black;
     border-radius: 4px;
 }
+
 .menu-popup::-webkit-scrollbar {
     width: 5px;
 }
+
 .menu-popup::-webkit-scrollbar-track {
     background: #94dbf7;
 }
+
 .menu-popup::-webkit-scrollbar-thumb {
     background: #ffa4ec;
 }
+
 .menu-popup::-webkit-scrollbar-thumb:hover {
     background: black;
 }
+
 .menu-popup__link {
     width: 50px;
     margin: 8px;
@@ -132,19 +157,23 @@ img {
     box-sizing: content-box;
     border-radius: 4px;
 }
+
 .menu-popup__link:hover {
     border: 5px solid black;
     padding: 10px;
 }
+
 .menu-popup__link img {
     object-fit: contain;
     width: 70%;
     height: 70%;
 }
+
 .menu-popup__link p {
     margin: 10px 0 0;
     color: black;
 }
+
 .menu-popup__input {
     position: absolute;
     width: 20px;
@@ -153,6 +182,7 @@ img {
     opacity: 0;
     top: 70%;
 }
+
 .menu-popup__label {
     position: relative;
     cursor: pointer;
@@ -163,29 +193,37 @@ img {
     padding: 3px 0;
     margin: 40px 0;
 }
+
 .menu-popup__label:hover {
     background-color: #ffa4ec;
 }
+
 .menu-popup__label:before {
     content: "More";
 }
+
 .invisible {
     visibility: hidden;
 }
+
 .nondisplay {
     display: none;
 }
+
 .bg__img {
     object-fit: cover;
     width: 100%;
     height: 100%;
 }
+
 input.menu__input:checked ~ div.invisible {
     visibility: visible;
 }
+
 input:checked ~ .nondisplay {
     display: flex;
 }
+
 input:focus ~ label {
     outline-offset: 1px;
     outline: -webkit-focus-ring-color auto 1px;
@@ -193,9 +231,11 @@ input:focus ~ label {
     outline-style: auto;
     outline-width: 1px;
 }
+
 .menu-popup__input:checked ~ .menu-popup__label::before {
-    content: "Less";
-}
+    content: "Less"; 
+} 
+
 .menu__input:checked ~ .menu__label::before {
     display: block;
 }
