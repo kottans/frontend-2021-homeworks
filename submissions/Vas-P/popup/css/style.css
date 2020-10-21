@@ -151,7 +151,7 @@ nav{
 	border-radius: 2px;
 }
 
-.hidden_items > li > a > img, .more_items > li > a > img{
+.hidden_item, .more_item{
 	width: 69px;
 	height: 70px;
 	padding: 12px 10px 0 10px;
