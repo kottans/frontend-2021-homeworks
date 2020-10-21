@@ -1,19 +1,15 @@
-/*reset*/
 @import url("https://fonts.googleapis.com/css2?family=Titillium+Web:wght@700&display=swap");
 * {
   padding: 0;
   margin: 0;
   border: 0;
 }
-
 *, *:before, *:after {
   box-sizing: border-box;
 }
-
 nav, footer, header, aside {
   display: block;
 }
-
 html, body {
   height: 100%;
   width: 100%;
@@ -25,49 +21,36 @@ html, body {
   -webkit-text-size-adjust: 100%;
   overflow: hidden;
 }
-
 input, button, textarea {
   font-family: inherit;
 }
-
 input::-ms-clear {
   display: none;
 }
-
 button {
   cursor: pointer;
 }
-
 button::-moz-focus-inner {
   padding: 0;
   border: 0;
 }
-
 a, a:visited {
   text-decoration: none;
 }
-
 a:hover {
   text-decoration: none;
 }
-
 ul li {
   list-style: none;
 }
-
 img {
   vertical-align: top;
   max-width: 100%;
 }
-
 h1, h2, h3, h4, h5, h6 {
   font-size: inherit;
   font-weight: inherit;
 }
-
-/*--------------------*/
-/*fonts*/
-/*--------------------*/
 .header {
   position: absolute;
   width: 100vw;
@@ -75,7 +58,6 @@ h1, h2, h3, h4, h5, h6 {
   font-family: "Titillium Web", sans-serif;
   background: #94dbf745;
 }
-
 .navigation {
   max-width: 1100px;
   margin: 25px auto 0;
@@ -95,7 +77,6 @@ h1, h2, h3, h4, h5, h6 {
   width: 100%;
   height: 100%;
 }
-
 .menu {
   position: relative;
 }
@@ -123,7 +104,6 @@ h1, h2, h3, h4, h5, h6 {
   border-color: transparent transparent #000000 transparent;
   display: none;
 }
-
 .menu-popup {
   position: absolute;
   top: 180%;
@@ -200,29 +180,23 @@ h1, h2, h3, h4, h5, h6 {
 .menu-popup__label:before {
   content: "More";
 }
-
 .invisible {
   visibility: hidden;
 }
-
 .nondisplay {
   display: none;
 }
-
 .bg__img {
   object-fit: cover;
   width: 100%;
   height: 100%;
 }
-
 input.menu__input:checked ~ div.invisible {
   visibility: visible;
 }
-
 input:checked ~ .nondisplay {
   display: flex;
 }
-
 input:focus ~ label {
   outline-offset: 1px;
   outline: -webkit-focus-ring-color auto 1px;
@@ -230,11 +204,9 @@ input:focus ~ label {
   outline-style: auto;
   outline-width: 1px;
 }
-
 .menu-popup__input:checked ~ .menu-popup__label::before {
   content: "Less";
 }
-
 .menu__input:checked ~ .menu__label::before {
   display: block;
 }
