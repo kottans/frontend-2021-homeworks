@@ -15,13 +15,15 @@ li{
 
 a{
 	display: block;
-	border: 1px solid white;
+	border: 1px solid #e4dccf;
 	text-decoration: none;
-	color: #989898;
+	color: #757575;
 }
 
 a:focus {
 	border: 1px solid #989898;
+	border-radius: 2px;
+	outline-style: none;
 }
 
 nav{
@@ -30,17 +32,23 @@ nav{
 	padding-right: 40px;
 }
 
-.no:hover{
-	text-decoration: underline;
+.nav > li > a{
+	border: 1px solid white;
 }
 
-.toggle{
+.nav > li > a:focus{
+	border: 1px solid #989898;
+}
+
+.nav_input{
 	position: absolute;
 	cursor: pointer;
 	opacity: 0;
 }
 
-.images:hover{
+.youtube_link:hover,
+.images:hover,
+.more_link:hover{
 	text-decoration: underline;
 }
 
@@ -53,23 +61,29 @@ nav{
 	height: 20px;
 }
 
-.popup-button{
+.popup_button{
 	cursor: pointer;
+	display: flex;
+	border: 1px solid white;
+	background: url(../img/popup-button.png) center no-repeat;
+	width: 30px;
+	height: 30px;
 }
 
-.popup-button::before{
-	opacity: 0;
+.nav_input:focus+.popup_button{
+	border: 1px solid #989898;
+	border-radius: 2px;
+}
+
+.nav_arrow{
+	opacity: 0; 
 	content: '';
 	position: absolute;
-	z-index: 2;
-	width: 10px;
-	height: 10px;
-	background: white;
-	transform: rotate(45deg);
-	top: 42px;
-	right: 138px;
-	border-top: 1px solid #989898;
-	border-left: 1px solid #989898;
+	top: 33px;
+	right: 142px;
+	border-color: transparent transparent #e4dccf transparent;
+	border-style: solid;
+	border-width: 8px;
 }
 
 .nav > li{
@@ -80,7 +94,12 @@ nav{
 	display: block;
 }
 
-.nav > li > input:checked + .popup-button::before{
+.nav > li > input:checked + .popup-button{
+	border: 1px solid black;
+	display: flex;
+}
+
+.nav > li > input:checked ~ .nav_arrow{
 	opacity: 1;
 	cursor: auto;
 }
@@ -92,11 +111,10 @@ nav{
 	width: 340px;
 	height: 512px;
 	margin-top: 10px;
-	border: 1px solid #989898;
 	cursor: auto;
-	box-shadow: 2px 2px 14px rgba(0, 0, 0, .3);
 	overflow-x: hidden;
 	overflow-y: auto;
+	background-color: #e4dccf;
 }
 
 .hidden::-webkit-scrollbar{
@@ -115,39 +133,42 @@ nav{
 	background: #555;
 }
 
-.hidden-items, .more-items{
+.hidden_items, .more_items{
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-around;
 }
 
-.hidden-items > li, .more-items > li{
+.hidden_items > li, .more_items > li{
 	margin-top: 10px;
 	width: 90px;
 	text-align: center;
 }
 
-.hidden-items > li > a:hover, .more-items > li > a:hover{
+.hidden_items > li > a:hover,
+.more_items > li > a:hover{
 	border: 1px solid #989898;
+	border-radius: 2px;
 }
 
-.hidden-items > li > a > img, .more-items > li > a > img{
-	width: 70px;
+.hidden_items > li > a > img, .more_items > li > a > img{
+	width: 69px;
 	height: 70px;
 	padding: 12px 10px 0 10px;
 }
 
-.kottans-link > img{
-	width: 30px;
-	height: 30px;
+.kottans_link{
+	background: url(../img/kottans.png) center no-repeat;
+	width: 32px;
+	height: 32px;
 }
 
-.more-input{
+.more_input{
 	position: absolute;
 	opacity: 0;
 }
 
-.more-button{
+.more_button{
 	padding: 5px;
 	background: #c5c5c5;
 	position: absolute;
@@ -157,43 +178,41 @@ nav{
 	cursor: pointer;
 }
 
-.more-items{
+.more_items{
 	margin-bottom: 15px;
 }
 
-.more-hidden{
+.more_hidden{
 	display: none;
 	margin-top: 20px;
 }
 
-.more-hidden::before{
+.more_hidden::before{
 	content: '';
 	width: 100%;
 	position: absolute;
 	border-bottom: 1px solid #989898;
 }
 
-.hidden > input:checked ~ .more-hidden{
+.hidden > input:checked ~ .more_hidden{
 	display: block;
 }
 
-.hidden > input:checked ~ .more-button{
+.hidden > input:checked ~ .more_button{
 	display: none;
 }
 
-.more-input:checked .hidden{
+.more_input:checked .hidden{
 	overflow-y: scroll;
 }
 
-.more-link{
-	text-align: center;
-	margin-bottom: 10px;
-	padding-top: 10px;
-}
-.more-link:focus{
-	border: none;
+.more_input:focus+.more_button{
+	border: 1px solid #989898;
+	border-radius: 2px;
 }
 
-.more-link:hover{
-	text-decoration: underline;
+.more_link{
+	text-align: center;
+	margin-bottom: 10px;
+	margin-top: 20px;
 }
