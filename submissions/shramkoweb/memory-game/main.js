@@ -27,7 +27,7 @@ const hideAllCards = () => {
     });
 };
 
-const getFlexOrder = (cardsCount) => String(Math.floor(Math.random() * cardsCount));
+const getOrder = (cardsCount) => String(Math.floor(Math.random() * cardsCount));
 
 const temporaryShowAllCards = () => {
     state.isBoardBlocked = true;
@@ -43,7 +43,8 @@ const flipCard = (card) => {
 
     if (
         state.isBoardBlocked ||
-        isClickOnEqualCard
+        isClickOnEqualCard ||
+        !card
     ) {
         return;
     }
@@ -57,15 +58,21 @@ const flipCard = (card) => {
     }
 };
 
+const isGameWin = () => {
+    console.log(state);
+    if (state.cardsLeft <= 0) {
+        resultElement.textContent = 'You win!';
+    }
+};
+
 const hideMatchCards = () => {
+    state.cardsLeft -= CARDS_COUNT_PER_FLIP;
+
     setTimeout(() => {
         state.firstCard.classList.add('closed');
         state.secondCard.classList.add('closed');
-        state.cardsLeft -= CARDS_COUNT_PER_FLIP;
-        if (state.cardsLeft <= 0) {
-            resultElement.textContent = 'You win!';
-        }
         resetBoardState();
+        isGameWin();
     }, HIDE_TIMEOUT);
 };
 
@@ -88,7 +95,7 @@ const checkIsCardsMatch = () => {
     blockBoard();
 };
 
-contentElement.addEventListener('click', function ({target}) {
+const handleCardClick = ({target}) => {
     // get parent if click on cell__symbol
     const targetCell = target.closest('.cell');
     if (state.firstCard && state.secondCard) {
@@ -96,14 +103,16 @@ contentElement.addEventListener('click', function ({target}) {
     }
 
     flipCard(targetCell);
-});
+};
 
 const init = () => {
     cellElements.forEach(item => {
-        item.style.order = getFlexOrder(state.cardsLeft);
+        item.style.order = getOrder(state.cardsLeft);
     });
 
     temporaryShowAllCards();
+
+    contentElement.addEventListener('click', handleCardClick);
 };
 
 window.requestAnimationFrame(init);
