@@ -18,13 +18,13 @@ const resetBoardState = () => {
     state.secondCard = null;
     state.firstCard = null;
     state.isBoardBlocked = false;
-}
+};
 
 const hideAllCards = () => {
     state.isBoardBlocked = false;
     cellElements.forEach(card => {
         card.classList.remove('opened');
-    })
+    });
 };
 
 const getFlexOrder = (cardsCount) => String(Math.floor(Math.random() * cardsCount));
@@ -33,7 +33,7 @@ const temporaryShowAllCards = () => {
     state.isBoardBlocked = true;
     cellElements.forEach(card => {
         card.classList.add('opened');
-    })
+    });
 
     setTimeout(hideAllCards, SHOW_ALL_CARDS_TIMEOUT);
 };
@@ -63,7 +63,7 @@ const hideMatchCards = () => {
         state.secondCard.classList.add('closed');
         state.cardsLeft -= CARDS_COUNT_PER_FLIP;
         if (state.cardsLeft <= 0) {
-            resultElement.textContent = 'You win!'
+            resultElement.textContent = 'You win!';
         }
         resetBoardState();
     }, HIDE_TIMEOUT);
@@ -78,7 +78,7 @@ const blockBoard = () => {
 
         resetBoardState();
     }, RESET_TIMEOUT);
-}
+};
 
 const checkIsCardsMatch = () => {
     if (state.firstCard.innerText === state.secondCard.innerText) {
@@ -86,16 +86,15 @@ const checkIsCardsMatch = () => {
     }
 
     blockBoard();
-}
+};
 
-contentElement.addEventListener('click', function ({ target }) {
+contentElement.addEventListener('click', function ({target}) {
     // get parent if click on cell__symbol
     const targetCell = target.closest('.cell');
     if (state.firstCard && state.secondCard) {
         return;
     }
 
-    console.log(state)
     flipCard(targetCell);
 });
 
