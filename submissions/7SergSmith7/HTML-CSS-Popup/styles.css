@@ -161,3 +161,6 @@ a:hover {
 .popup_btn:focus + .popup_btn-icon {
   border: 1px solid grey;
 }
+.show-more_btn:focus + .show-more {
+  border: 1px solid grey;
+}
