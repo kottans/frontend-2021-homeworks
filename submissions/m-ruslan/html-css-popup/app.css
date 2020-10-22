@@ -1,0 +1,244 @@
+body {
+  background-color: #f0eee8;
+  font-family: sans-serif;
+  margin: 0;
+}
+
+nav {
+  width: 550px;
+  float: right;
+  background-color: white;
+  height: 35px;
+  margin: 20px;
+  border-radius: 5px;
+}
+
+.nav-container {
+  float: right;
+  width: 300px;
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.nav-el {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 31px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  border: 2px solid white;
+  padding: 0px 2px;
+}
+
+.nav-el:hover {
+  border: 2px solid rgb(119, 173, 223);
+  cursor: pointer;
+}
+
+#nal-el-menu {
+  padding: 0px;
+}
+
+#menu-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#menu-label img {
+  width: 27px;
+  height: 27px;
+  border-radius: 3px;
+}
+
+input[type="checkbox"] {
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+}
+
+label:hover {
+  cursor: pointer;
+}
+
+.nav-el:focus {
+  background-color: rgb(150, 229, 243);
+}
+
+input:focus + .nav-el {
+  border: 2px solid black;
+  background-color: rgb(150, 229, 243);
+}
+
+#button-1:checked ~ #apps-window {
+  display: block;
+}
+
+#button-1:checked ~ #more {
+  display: block;
+}
+
+#apps-window {
+  width: 330px;
+  height: 516px;
+  position: absolute;
+  top: 67px;
+  right: 82px;
+  border: 1px solid rgb(200, 218, 235);
+  background-color: white;
+  font-size: 14px;
+  line-height: 0px;
+  padding: 0px;
+  box-shadow: 0px 0px 5px 5px rgba(214, 214, 214, 0.5);
+  display: none;
+}
+
+#top-triangle,
+#top-triangle-border {
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: -10px;
+  left: 250px;
+  border-style: solid;
+  border-width: 0 10px 15px 10px;
+  border-color: transparent transparent #ffffff transparent;
+}
+
+#top-triangle-border {
+  z-index: -2;
+  top: -12px;
+  border-color: transparent transparent rgb(200, 218, 235) transparent;
+}
+
+#apps-cont {
+  width: 100%;
+  height: 100%;
+}
+
+#apps-block1,
+#apps-block2 {
+  width: 300px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  margin: 0px 15px;
+  padding: 30px 0px;
+}
+
+.app-cont {
+  height: 90px;
+  width: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  margin: 10px;
+  padding: 0px;
+  border-radius: 5%;
+  border: 2px solid white;
+}
+
+.img-cont {
+  height: 66px;
+  width: 66px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.img-cont img {
+  max-width: 58px;
+  max-height: 58px;
+}
+
+.app-cont:hover {
+  background-color: rgb(231, 231, 231);
+  cursor: pointer;
+}
+
+.app-cont:focus {
+  background-color: rgb(150, 229, 243);
+}
+
+input:focus + #more {
+  border: 2px solid black;
+  border-radius: 5%;
+  background-color: rgb(150, 229, 243);
+}
+
+#button-2:checked ~ #apps-cont > #apps-window2 {
+  display: block;
+}
+
+#button-2:checked ~ #more {
+  display: none;
+}
+
+#button-2:checked {
+  display: none;
+}
+
+#button-2:checked ~ #apps-cont {
+  overflow-y: scroll;
+}
+
+#apps-window2 {
+  position: relative;
+  display: none;
+  width: 100%;
+  border-top: 1px solid rgb(200, 218, 235);
+  background-color: white;
+  font-size: 12px;
+  line-height: 0px;
+  padding: 0px;
+  right: 1px;
+}
+
+#more {
+  width: 330px;
+  height: 30px;
+  position: absolute;
+  top: 486px;
+  box-sizing: border-box;
+  background-color: rgb(245, 238, 238);
+  border: 2px solid rgb(245, 238, 238);
+}
+
+#more-label-div {
+  width: 100%;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: black;
+}
+
+#more-label-div:hover {
+  background-color: rgb(221, 237, 240);
+  cursor: pointer;
+}
+
+#even-more {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  margin: 0px 15px;
+  padding-bottom: 10px;
+}
+
+#profile-photo {
+  border-radius: 50%;
+  height: 27px;
+}
+
+#bell-icon {
+  height: 24px;
+}
