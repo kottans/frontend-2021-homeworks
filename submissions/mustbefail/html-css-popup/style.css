@@ -85,21 +85,22 @@ a:focus {
 
 .menu-content {
   margin: 0;
-  padding: 25px 0;
+  padding: 25px 0 0 0;
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-around;
+  
 }
 
 .menu-content li{
   list-style: none;
   width: 80px;
   height: 80px;
-  margin-bottom: 20px;
+  margin: 0 0 20px 20px;
+  
 }
 
 .menu-content li a {
-  box-sizing: border-box;
+  /* box-sizing: border-box; */
   display: block;
   padding: 5px;
   text-align: center;
