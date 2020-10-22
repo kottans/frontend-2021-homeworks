@@ -29,7 +29,7 @@ const hideAllCards = () => {
 
 const getOrder = (cardsCount) => String(Math.floor(Math.random() * cardsCount));
 
-const temporaryShowAllCards = () => {
+const showCards = () => {
     state.isBoardBlocked = true;
     cellElements.forEach(card => {
         card.classList.add('opened');
@@ -95,11 +95,12 @@ const checkIsCardsMatch = () => {
 };
 
 const handleCardClick = ({target}) => {
-    // get parent if click on cell__symbol
-    const targetCell = target.closest('.cell');
     if (state.firstCard && state.secondCard) {
         return;
     }
+
+    // get parent if click on cell__symbol
+    const targetCell = target.closest('.cell');
 
     flipCard(targetCell);
 };
@@ -109,7 +110,7 @@ const init = () => {
         item.style.order = getOrder(state.cardsLeft);
     });
 
-    temporaryShowAllCards();
+    showCards();
 
     contentElement.addEventListener('click', handleCardClick);
 };
