@@ -28,72 +28,88 @@
    print('human; <strong>John</strong>; male; 2; 2; <em>Hello world!</em>; Rex, Tom, Jenny', 'div');
    */
 
-class Inhabitant {
-  constructor(name, gender, friends = "", legs = 4, species = "unknown") {
-    this.name = name;
-    this.gender = gender;
-    this.legs = legs;
-    this.species = species;
-    this.friends = friends;
-  }
-  saying() {
-    return "Hi!";
-  }
-}
-
-class Cat extends Inhabitant {
-  constructor(name, gender, friends) {
-    super(name, gender, friends);
-    this.species = "cat";
-  }
-  saying() {
-    return "meow!";
-  }
-}
-class Dog extends Inhabitant {
-  constructor(name, gender, friends) {
-    super(name, gender, friends);
-    this.species = "dog";
-  }
-  saying() {
-    return "woof-woof!";
-  }
-}
-class Human extends Inhabitant {
-  constructor(name, gender, friends) {
-    super(name, gender, friends);
-    this.species = "human";
-    this.legs = 2;
-    this.hands = 2;
-  }
-}
-class CatWoman extends Cat {
-  constructor(name, gender, friends) {
-    super(name, gender, friends);
-    this.species = "human";
-    this.legs = 2;
-    this.hands = 2;
-  }
-}
-
-const cat = new Cat("Expert", "male");
-const dog = new Dog("Joker", "male", [cat.name]);
-const man = new Human("Mark", "male");
-const woman = new Human("Alice", "female", [cat.name, dog.name, man.name]);
-const catWoman = new CatWoman("Wonder Alice", "female");
-
-function preparePrint({ species, name, gender, legs, hands, saying, friends }) {
-  const hasFriends = friends && friends.length > 0;
-  return `
-   <strong>${species}</strong>;
-   name: <strong>${name}</strong>;
-   gender: ${gender};
-   legs: ${legs};
-   saying: ${saying()};
-   ${hands ? `hands: ${hands}` : ""}
-	${hasFriends ? `friends: ${friends}` : ""}`;
-}
-
-[cat, dog, man, woman, catWoman].forEach((item) =>
-  print(preparePrint(item), "div")
-);
+  class Inhabitant {
+	constructor({ name, greating }) {
+	  this.name = name;
+	  this.greating = greating;
+	}
+	saying() {
+	  return this.greating;
+	}
+	toString() {
+	  let props = Array.from(Object.entries(this));
+	  props = props.map(([key, value]) => {
+		 if (value && key !== "greating") {
+			return `${key}: ${value}`;
+		 }
+		 return null;
+	  });
+	  return `${props.filter((item) => item).join("; ")}; ${this.saying()}`;
+	}
+ }
+ class Animal extends Inhabitant {
+	constructor({ name, gender, legs = 4, greating, friends }) {
+	  super({ name, greating });
+	  this.species = "animal";
+	  this.gender = gender;
+	  this.legs = legs;
+	  this.friends = friends;
+	}
+ }
+ 
+ class Human extends Inhabitant {
+	constructor({ name, gender, legs = 2, hands = 2, greating, friends }) {
+	  super({ name, greating });
+	  this.species = "human";
+	  this.legs = legs;
+	  this.hands = hands;
+	  this.gender = gender;
+	  this.friends = friends;
+	}
+ }
+ 
+ class Cat extends Animal {
+	constructor({ name, gender, greating, friends }) {
+	  super({ name, gender, greating, friends });
+	  this.species = "cat";
+	}
+ }
+ class Dog extends Animal {
+	constructor({ name, gender, greating, friends }) {
+	  super({ name, gender, greating, friends });
+	  this.species = "dog";
+	}
+ }
+ class CatWoman extends Cat {
+	constructor({ name, gender, greating, friends }) {
+	  super({ name, gender, greating, friends });
+	  this.species = "human";
+	  this.legs = 2;
+	  this.hands = 2;
+	}
+ }
+ 
+ const cat = new Cat({ name: "Expert", gender: "male", greating: "meow!" }),
+	dog = new Dog({
+	  name: "Joker",
+	  gender: "male",
+	  greating: "woof-woof!",
+	  friends: [cat.name],
+	}),
+	man = new Human({ name: "Mark", gender: "male", greating: "Hi!" }),
+	woman = new Human({
+	  name: "Alice",
+	  gender: "female",
+	  greating: "Hello!",
+	  friends: [cat.name, dog.name, man.name],
+	}),
+	catWoman = new CatWoman({
+	  name: "Wonder Alice",
+	  gender: "female",
+	  greating: "A am superhero!",
+	});
+ 
+ [cat, dog, man, woman, catWoman].forEach((inhabitant) =>
+	print(inhabitant, "div")
+ );
+ 
