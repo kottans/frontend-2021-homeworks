@@ -34,7 +34,7 @@ label:hover {
     cursor: pointer;
 }
 
-.navigation-sub-menu .checkbox {
+.navigation-container__sub-menu .checkbox {
   position: absolute;
   top: 0px;
   left: 0px;
@@ -69,7 +69,7 @@ label:hover {
     outline: 2px solid rgb(77, 77, 77);
 }
 
-.navigation-list > li > a:focus {
+.navigation-container__list-of-items > li > a:focus {
     outline: 2px solid rgb(77, 77, 77);
 }
 
@@ -81,7 +81,7 @@ label:hover {
     justify-content: flex-end;
 }
 
-.navigation-list-container {
+.navigation-container__body {
     width: 320px;
     height: 100%;
 }
@@ -108,7 +108,7 @@ ul {
     display: flex;
     justify-content: space-around;
     margin: 0;
-    padding-inline-start: 0;
+    padding-inline-start: 0px;
 }
 
 ul li {
@@ -116,7 +116,7 @@ ul li {
     text-align: left;
 }
 
-.navigation-list > li {
+.navigation-container__list-of-items > li {
     width: 20%; 
     display: flex;
     justify-content: center;
@@ -136,7 +136,7 @@ ul li {
     z-index: 1;
 }
 
-.navigation-list a , .toggle-pop-up-label {
+.navigation-container__list-of-items a , .toggle-pop-up-label {
     color: black;
     line-height: 50px;
 }
@@ -233,6 +233,7 @@ ul li {
 
 .link-to-kottans a {
     display: block;
+    text-align: center;
     width: 100%;
     height: 100%;
 }
