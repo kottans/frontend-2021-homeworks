@@ -1,40 +1,26 @@
 * {
+    margin: 0px;
     font-family: monospace, Helvetica, sans-serif, Arial;
     font-size: 17px;
     font-weight: 500;
-    margin: 0px;
+    color: black;
 }
 
-body {
+a {
+    text-decoration: none;
+}
+
+.body {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
 }
 
-a {
-    text-decoration: none;
-    outline: none;
-}
-
-img {
-    width: 75%;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-span {
-    text-align: center;
-}
-
-label {
-    width: 100%;
-}
-
-label:hover {
+.label:hover {
     cursor: pointer;
 }
 
-.navigation-container__sub-menu .checkbox {
+.checkbox {
   position: absolute;
   top: 0px;
   left: 0px;
@@ -46,34 +32,15 @@ label:hover {
     cursor: pointer;
 }
 
-.navigation-list-icons {
-    background-size: 35px 35px;
-    background-repeat: no-repeat;
-    background-position: center;
-    width: 100%;
+.ul {
+    
+    display: flex;
+    justify-content: space-around;
+    margin: 0;
+    padding-inline-start: 0px;
 }
 
-.toggle-pop-up-label {
-    background-image: url(./icons/menu.png);
-}
-
-.navigation-notification {
-    background-image: url(./icons/notification.png);
-}
-
-.navigation-profile {
-    background-image: url(./icons/profile.jpg);
-}
-
-.toggle-pop-up:focus + label {
-    outline: 2px solid rgb(77, 77, 77);
-}
-
-.navigation-container__list-of-items > li > a:focus {
-    outline: 2px solid rgb(77, 77, 77);
-}
-
-.navigation-container { 
+.nav-container { 
     display: flex;
     width: 100%;
     height: 50px;
@@ -81,48 +48,41 @@ label:hover {
     justify-content: flex-end;
 }
 
-.navigation-container__body {
+.nav-container__body {
+    /* width: 320px;
+    height: 100%; */
+}
+
+.nav-container__li {
+    display: flex;
+    width: 20%; 
+}
+
+.nav-container__ul {
     width: 320px;
     height: 100%;
 }
 
-.pop-up-container {
-    display: none;
-    text-align: center;
-    height: 420px;
-    width: 270px;
-    border: solid 1px lightgrey;
-    border-radius: 5px;
-    box-shadow: 0px 0px 5px 0px rgba(0,0,0,1);
+.nav-container__ul-link {
+    line-height: 50px;
 }
 
-.pop-up-icons-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-content: center;
-    height: 94%;
+.nav-list-icons {
+    background-size: 35px 35px;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
 }
 
-ul {
-    display: flex;
-    justify-content: space-around;
-    margin: 0;
-    padding-inline-start: 0px;
+.toggle-pop-up__label {
+    background-image: url(./icons/menu.png);
 }
 
-ul li {
-    list-style-type: none;
-    text-align: left;
+.toggle-pop-up:focus + .label {
+    outline: 2px solid rgb(77, 77, 77);
 }
 
-.navigation-container__list-of-items > li {
-    width: 20%; 
-    display: flex;
-    justify-content: center;
-}
-
-.toggle-pop-up:checked ~ .toggle-pop-up-label::before {
+.toggle-pop-up:checked ~ .toggle-pop-up__label:before {
     position: absolute;
     content: "";
     right: 153px;
@@ -136,33 +96,6 @@ ul li {
     z-index: 1;
 }
 
-.navigation-container__list-of-items a , .toggle-pop-up-label {
-    color: black;
-    line-height: 50px;
-}
-
-.toggle-additional-icons {
-    position: absolute;
-    bottom: 0px;
-    left: 0px;
-    opacity: 0;
-}
-
-.toggle-additional-icons:focus + label, .link-to-kottans:focus {
-    background-color: rgba(0, 197, 0, 0.5);
-}
-
-
-.toggle-additional-icons-label {
-    width: 100%;
-    height: 6%;
-    text-align: center;
-    font-size: 20px;
-    font-weight: 100;
-    background-color: rgba(197, 197, 197, 0.4);
-}
-
-
 .toggle-pop-up:checked ~ .pop-up-container {
     display: flex;
     flex-wrap: wrap;
@@ -174,7 +107,37 @@ ul li {
     overflow: auto;
 }
 
-.item {
+.nav-notification {
+    background-image: url(./icons/notification.png);
+}
+
+.nav-profile {
+    background-image: url(./icons/profile.jpg);
+}
+
+.nav-container__ul-link:focus {
+    outline: 2px solid rgb(77, 77, 77);
+}
+
+.pop-up-container {
+    display: none;
+    text-align: center;
+    height: 420px;
+    width: 270px;
+    border: solid 1px lightgrey;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,1);
+}
+
+.pop-up-container__ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    padding: 30px 0px;
+}
+
+.pop-up-container-item {
     width: 80px;
     height: 80px;
     margin: 2px 2px;
@@ -185,19 +148,57 @@ ul li {
     z-index: 2;
 }
 
-.item:hover {
-    background-color: rgba(0, 197, 0, 0.5);
+.pop-up-container-item__link {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    outline: none;
+}
+
+.pop-up-container-item__image {
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.pop-up-container-item__span {
+    height: 25%;
+    line-height: 20px;
+}
+
+.pop-up-container-item__link:hover,
+.pop-up-container-item__link:focus {
+    box-shadow: 0 0 1pt pt rgb(0, 163, 0);
+    background-color: rgba(88, 218, 88, 0.8);
     border-radius: 5px;
 }
 
-.item:focus {
-    outline: 2px solid lightgreen;
-    box-shadow: 0 0 3pt 2pt green;
+.toggle-additional-icons {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    opacity: 0;
+}
+
+.toggle-additional-icons:focus + .label, 
+.go-to-kottans:focus {
+    background-color: rgba(0, 197, 0, 0.5);
+}
+
+.toggle-additional-icons-label {
+    width: 100%;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 100;
+    background-color: rgba(197, 197, 197, 0.4);
+    padding-top: 1px;
 }
 
 .pop-up-icons-container-additional {
     display: none;
-    flex-wrap: wrap;
     justify-content: center;
     margin-top: 40px;
 }
@@ -221,25 +222,23 @@ ul li {
     border-bottom: 1px solid black;
 }
 
-.link-to-kottans {
+.go-to-kottans {
     margin-top: 20px ;
     width: 100%;
     background-color: rgba(197, 197, 197, 0.4);
 }
 
-.link-to-kottans a {
-    line-height: 30px;
-}
-
-.link-to-kottans a {
+.go-to-kottans__link {
     display: block;
     text-align: center;
     width: 100%;
     height: 100%;
+    line-height: 30px;
 }
 
-.link-to-kottans:hover,
+.go-to-kottans:hover,
 .toggle-additional-icons-label:hover,
-.link-to-kottans a:focus-within {
+.go-to-kottans__link:focus-within {
     background-color: rgba(0, 197, 0, 0.5);
+    outline: none;
 }
