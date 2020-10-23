@@ -1,13 +1,33 @@
-const createElement = (template) => {
-    const newElement = document.createElement(`div`);
-    newElement.innerHTML = template;
-    return newElement.firstElementChild;
-};
+const USERS_AMOUNT = 20;
+const RANDOM_USER_URL = `https://randomuser.me/api/?results=${USERS_AMOUNT}`;
 
 const SortType = {
     ASCENDING: 'ascending',
     DESCENDING: 'descending',
-}
+};
+
+const Gender = {
+    ALL: 'all',
+    FEMALE: 'female',
+    MALE: 'male',
+};
+
+const state = {
+    users: [],
+    search: '',
+    age: null,
+    name: null,
+    gender: Gender.ALL,
+};
+
+const listElement = document.querySelector('.friends__list');
+const formElement = document.querySelector('.form');
+
+const createElement = (template) => {
+    const newElement = document.createElement('div');
+    newElement.innerHTML = template;
+    return newElement.firstElementChild;
+};
 
 const filterByGender = (users, gender) => {
     if (gender === Gender.ALL) {
@@ -22,8 +42,6 @@ const filterByQuery = (users, query) => {
         return users;
     }
 
-    console.log(users)
-
     return users.filter(
         user => user.name.first
             .toLowerCase()
@@ -32,40 +50,39 @@ const filterByQuery = (users, query) => {
 };
 
 const sortByName = (users, sortType) => {
-
     switch (sortType) {
         case 'a':
             return users.sort((a, b) => {
-                var nameA = a.name.first.toUpperCase(); // ignore upper and lowercase
-                var nameB = b.name.first.toUpperCase(); // ignore upper and lowercase
-                if (nameA < nameB) {
+                const firstNAme = a.name.first.toUpperCase();
+                const secondName = b.name.first.toUpperCase();
+
+                if (firstNAme < secondName) {
                     return -1;
                 }
-                if (nameA > nameB) {
+                if (firstNAme > secondName) {
                     return 1;
                 }
 
-                // names must be equal
                 return 0;
             });
         case 'z':
             return users.sort((a, b) => {
-                var nameA = a.name.first.toUpperCase(); // ignore upper and lowercase
-                var nameB = b.name.first.toUpperCase(); // ignore upper and lowercase
-                if (nameA < nameB) {
+                const firstNAme = a.name.first.toUpperCase();
+                const secondName = b.name.first.toUpperCase();
+
+                if (firstNAme < secondName) {
                     return 1;
                 }
-                if (nameA > nameB) {
+                if (firstNAme > secondName) {
                     return -1;
                 }
 
-                // names must be equal
                 return 0;
             });
         default:
             return users;
     }
-}
+};
 
 const sortBy = (users, sortType) => {
     switch (sortType) {
@@ -76,23 +93,6 @@ const sortBy = (users, sortType) => {
         default:
             return users;
     }
-}
-
-const listElement = document.querySelector('.friends__list');
-const formElement = document.querySelector('.form');
-
-const Gender = {
-    ALL: 'all',
-    FEMALE: 'female',
-    MALE: 'male'
-}
-
-const state = {
-    users: [],
-    search: '',
-    age: null,
-    name: null,
-    gender: Gender.ALL
 };
 
 const renderCard = (data) => {
@@ -127,26 +127,30 @@ const render = (state) => {
     const sorted = sortBy(sortByName(state.users, state.name), state.age);
     const filteredByQuery = filterByQuery(sorted, state.search);
     const filteredUsers = filterByGender(filteredByQuery, state.gender);
-    renderCards(filteredUsers, listElement)
+    renderCards(filteredUsers, listElement);
 };
 
-
-const init = () => {
-    fetch('https://randomuser.me/api/?results=20')
+const loadUsers = (url) => {
+    fetch(url)
         .then(res => res.json())
         .then(data => {
             state.users = data.results;
             render(state);
-        })
+        }).catch((error) => {
+        console.log(error);
+    });
+};
 
+const handleFormInput = (evt) => {
+    state[evt.target.name] = evt.target.value;
 
-    formElement.addEventListener('input', (evt) => {
-        state[evt.target.name] = evt.target.value;
+    render(state);
+};
 
-        console.log(state);
-        render(state);
-    })
+const init = () => {
+    loadUsers(RANDOM_USER_URL);
+
+    formElement.addEventListener('input', handleFormInput);
 };
 
 init();
-
