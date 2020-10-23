@@ -34,7 +34,9 @@ button::-moz-focus-inner {
     border: 0;
 }
 
-a, a:visited {
+a, a:visited, a:hover {
+   text-decoration: none;
+}
     text-decoration: none;
 }
 
