@@ -1,19 +1,22 @@
 const field = {
-  width: 505,
   borderX: 400,
   borderY: 450,
-  waterCoord: 0,
+  waterCoord: 50,
 };
 
 const enemyProps = {
   width: 98,
   height: 56,
+  sprite: "images/enemy-bug.png",
 };
 
 const playerProps = {
   width: 70,
   height: 86,
   step: 50,
+  initPositionX: 215,
+  initPositionY: 450,
+  sprite: "images/char-boy.png",
 };
 
 class Character {
@@ -41,7 +44,7 @@ class Enemy extends Character {
     this.speed = speed;
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
-    this.sprite = "images/enemy-bug.png";
+    this.sprite = enemyProps.sprite;
   }
   // Update the enemy's position, required method for game
   // Parameter: dt, a time delta between ticks
@@ -50,8 +53,8 @@ class Enemy extends Character {
     // which will ensure the game runs at the same speed for
     // all computers.
     this.positionX += this.speed * dt;
-    if (this.positionX > field.width) {
-      this.positionX = 0;
+    if (this.positionX > ctx.canvas.width) {
+      this.positionX = -enemyProps.width;
     }
   }
   // Draw the enemy on the screen, required method for game
@@ -74,11 +77,7 @@ class Player extends Character {
   ) {
     super(positionX, positionY, width, height);
 
-    this.sprite = "images/char-boy.png";
-    this.initPosition = {
-      positionX: positionX,
-      positionY: positionY,
-    };
+    this.sprite = playerProps.sprite;
     this.stepOnField = stepOnField;
   }
   checkCollisions(enemy) {
@@ -88,19 +87,23 @@ class Player extends Character {
       enemy.positionY < this.positionY + this.height &&
       enemy.positionY + enemy.height > this.positionY
     ) {
-      alert("you are lose!");
-      this.goToInitPosition();
+      setTimeout(() => {
+        alert("you are lose!");
+        this.goToInitPosition();
+      }, 0);
+    }
+  }
+  checkWin() {
+    if (this.positionY <= field.waterCoord) {
+      setTimeout(() => {
+        alert("you are win!");
+        this.goToInitPosition();
+      }, 0);
     }
   }
   goToInitPosition() {
-    this.positionX = this.initPosition.positionX;
-    this.positionY = this.initPosition.positionY;
-  }
-  update() {
-    if (this.positionY <= field.waterCoord) {
-      alert("you are win!");
-      this.goToInitPosition();
-    }
+    this.positionX = playerProps.initPositionX;
+    this.positionY = playerProps.initPositionY;
   }
   render() {
     ctx.drawImage(Resources.get(this.sprite), this.positionX, this.positionY);
@@ -135,21 +138,29 @@ class Player extends Character {
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 const enemiesValues = [
-  [0, 280, 60],
-  [0, 200, 100],
-  [30, 130, 80],
+  {
+    positionX: -enemyProps.width,
+    positionY: 280,
+    speed: 60,
+  },
+  {
+    positionX: -150,
+    positionY: 200,
+    speed: 100,
+  },
+  {
+    positionX: -enemyProps.width,
+    positionY: 130,
+    speed: 80,
+  },
 ];
-const allEnemies = enemiesValues.map((value) => new Enemy(...value));
+const allEnemies = enemiesValues.map(
+  ({ positionX, positionY, speed }) => new Enemy(positionX, positionY, speed)
+);
 
 // Place the player object in a variable called player
 
-const player = new Player(215, 450);
-
-function checkCollisions() {
-  allEnemies.forEach((enemy) => {
-    player.checkCollisions(enemy);
-  });
-}
+const player = new Player(playerProps.initPositionX, playerProps.initPositionY);
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
