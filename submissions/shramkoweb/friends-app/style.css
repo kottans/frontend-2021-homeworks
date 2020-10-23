@@ -1,0 +1,159 @@
+html {
+    box-sizing: border-box;
+    font-size: 10px;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+body {
+    min-width: 425px;
+    padding: 0;
+    margin: 0 auto;
+    font-size: 1.5rem;
+    line-height: 20px;
+    font-family: "Open Sans", "Arial", sans-serif;
+    background: linear-gradient(to bottom right, #f5f2fd, #bfcbda);
+}
+
+img {
+    max-width: 100%;
+    display: block;
+    height: auto;
+}
+
+.visually-hidden {
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+}
+
+.aside {
+    background: linear-gradient(to bottom right, #f8a3a4, #e2587c);
+    border-top-left-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+}
+
+.main {
+    max-width: 1200px;
+    padding: 2rem 0;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.friends {
+    flex-grow: 1;
+    background: linear-gradient(to bottom right, #f9fafb, #dfe4eb);
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+}
+
+.friends__content {
+    width: 90%;
+    margin: 20px auto;
+}
+
+.friends__list {
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    list-style: none;
+}
+
+.form {
+    padding: 10px;
+}
+
+.form__legend {
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    letter-spacing: 0.1rem;
+    font-weight: 700;
+}
+
+.form__fieldset {
+    border: none;
+    margin: 0 0 15px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.form__label {
+    margin: 10px 0;
+}
+
+.form__label--search {
+    width: 100%;
+}
+
+.form__input--search {
+    width: 100%;
+    border: 0;
+    padding: 5px 10px   ;
+    min-height: 2.5rem;
+    border-radius: 4px;
+}
+
+
+.friend-card {
+    padding: 2.5rem;
+    border-radius: 0.5rem;
+    background-color: #fff;
+    color: #4a4a4a;
+}
+
+.friend-card__title {
+    color: #f17a8e;
+}
+
+.friends__title {
+    text-align: center;
+}
+
+.friend-card__image-wrapper {
+    display: flex;
+}
+
+.friend-card__image {
+    max-width: 50px;
+    border-radius: 50%;
+}
+
+.friend-card__mail,
+.friend-card__tell {
+    overflow: hidden;
+    display: block;
+    color: inherit;
+    text-overflow: ellipsis;
+}
+
+.form__reset {
+    width: 100%;
+    color: #fff;
+    user-select: none;
+    min-height: 32px;
+    padding: 4px 15px;
+    background: 0 0;
+    border-radius: 2px;
+    border: 1px solid #fff;
+    box-shadow: 0 2px 0 rgba(0,0,0,.015);
+    cursor: pointer;
+    transition: all .3s cubic-bezier(.645,.045,.355,1);
+}
+
+.form__reset:hover {
+    color: #40a9ff;
+    border-color: #40a9ff;
+}

@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Friends-app</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <main class="main">
+      <h1 class="main__title visually-hidden">Friends app - Search friends and enjoy</h1>
+
+      <aside class="aside">
+        <form class="form">
+          <fieldset class="form__fieldset">
+            <legend class="form__legend">Search by name</legend>
+
+            <label class="form__label form__label--search">
+              <input class="form__input form__input--search" type="search" name="search" placeholder="First name">
+            </label>
+          </fieldset>
+
+          <fieldset class="form__fieldset">
+            <legend class="form__legend">Sorting by age</legend>
+
+            <label class="form__label" for="sort-ascending">Ascending</label>
+            <input class="form__input" id="sort-ascending" type="radio" name="age" value="ascending">
+
+            <label class="form__label" for="sort-descending">Descending</label>
+            <input class="form__input" id="sort-descending" type="radio" name="age" value="descending">
+          </fieldset>
+
+          <fieldset class="form__fieldset">
+            <legend class="form__legend">Sorting by name</legend>
+
+            <label class="form__label" for="sort-az">A to Z</label>
+            <input class="form__input" id="sort-az" type="radio" name="name" value="a">
+
+            <label class="form__label" for="sort-za">Z to A</label>
+            <input class="form__input" id="sort-za" type="radio" name="name" value="z">
+          </fieldset>
+
+          <fieldset class="form__fieldset">
+            <legend class="form__legend">Filter by sex</legend>
+
+            <label class="form__label" for="sex-male">Male</label>
+            <input class="form__input" id="sex-male" type="radio" name="gender" value="male">
+
+            <label class="form__label" for="sex-female">Female</label>
+            <input class="form__input" id="sex-female" type="radio" name="gender" value="female">
+
+            <label class="form__label" for="sex-all">All</label>
+            <input class="form__input" id="sex-all" type="radio" name="gender" value="all" checked>
+          </fieldset>
+
+          <button class="form__reset" type="reset">Reset form</button>
+        </form>
+      </aside>
+
+      <section class="friends">
+        <h2 class="friends__title">All my friends</h2>
+
+        <div class="friends__content">
+          <ul class="friends__list">
+
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
