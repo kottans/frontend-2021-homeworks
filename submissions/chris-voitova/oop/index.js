@@ -37,14 +37,11 @@
 	  return this.greating;
 	}
 	toString() {
-	  let props = Array.from(Object.entries(this));
+	  let props = Object.entries(this);
 	  props = props.map(([key, value]) => {
-		 if (value && key !== "greating") {
-			return `${key}: ${value}`;
-		 }
-		 return null;
+		 return value && key !== "greating" ? `${key}: ${value}` : null;
 	  });
-	  return `${props.filter((item) => item).join("; ")}; ${this.saying()}`;
+	  return `${props.join(" ")} ${this.saying()}`;
 	}
  }
  class Animal extends Inhabitant {
@@ -90,24 +87,24 @@
  }
  
  const cat = new Cat({ name: "Expert", gender: "male", greating: "meow!" }),
-	dog = new Dog({
-	  name: "Joker",
-	  gender: "male",
-	  greating: "woof-woof!",
-	  friends: [cat.name],
-	}),
-	man = new Human({ name: "Mark", gender: "male", greating: "Hi!" }),
-	woman = new Human({
-	  name: "Alice",
-	  gender: "female",
-	  greating: "Hello!",
-	  friends: [cat.name, dog.name, man.name],
-	}),
-	catWoman = new CatWoman({
-	  name: "Wonder Alice",
-	  gender: "female",
-	  greating: "A am superhero!",
-	});
+		 dog = new Dog({
+			name: "Joker",
+			gender: "male",
+			greating: "woof-woof!",
+			friends: [cat.name],
+		 }),
+		 man = new Human({ name: "Mark", gender: "male", greating: "Hi!" }),
+		 woman = new Human({
+			name: "Alice",
+			gender: "female",
+			greating: "Hello!",
+			friends: [cat.name, dog.name, man.name],
+		 }),
+		 catWoman = new CatWoman({
+			name: "Wonder Alice",
+			gender: "female",
+			greating: "A am superhero!",
+		 });
  
  [cat, dog, man, woman, catWoman].forEach((inhabitant) =>
 	print(inhabitant, "div")
