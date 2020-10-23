@@ -43,7 +43,7 @@ body {
   color: #fdfdfd;
 }
 .menu__list a:focus {
-  border: solid 1px rgb(122, 138, 153);
+  outline: rgb(122, 138, 153) solid 1px;
 }
 .menu__item-img {
   width: 20px;
@@ -66,6 +66,7 @@ div.content {
 input.popup-btn:checked + div.content {
   display: block;
 }
+
 .popup {
   position: relative;
   z-index: 1;
@@ -73,7 +74,7 @@ input.popup-btn:checked + div.content {
 .popup-base {
   position: absolute;
   top: 20px;
-  right: 8px;
+  right: 12px;
   width: 300px;
   height: 500px;
   background-color: #fdfdfd;
@@ -108,7 +109,7 @@ input.popup-btn:checked + div.content {
   overflow-x: hidden;
   overflow-y: auto;
 }
-.scroll__items,
+.submenu__items,
 .more__items {
   display: flex;
   flex-wrap: wrap;
@@ -116,15 +117,18 @@ input.popup-btn:checked + div.content {
   text-align: center;
   padding-top: 20px;
   padding-left: 27px;
-  height: calc(100% - 24px);
+  height: 472px;
+}
+.more {
+  width: 300px;
 }
 .more__items {
-  max-height: 50%;
+  height: 50%;
 }
-.popup-base__scroll span {
+.popup-base__submenu span {
   display: block;
 }
-.scroll__item,
+.submenu__item,
 .more__item {
   width: 80px;
   height: 80px;
@@ -132,11 +136,11 @@ input.popup-btn:checked + div.content {
   color: gray;
   border: solid thin white;
 }
-.scroll__item-text,
+.submenu__item-text,
 .more__item-text {
   padding-top: 15px;
 }
-.scroll__item-img,
+.submenu__item-img,
 .more__item-img {
   width: 60px;
   height: 60px;
@@ -150,6 +154,7 @@ input.popup-btn:checked + div.content {
   text-align: center;
   cursor: pointer;
 }
+
 .kottans {
   width: 100%;
   padding-top: 20px;
