@@ -47,16 +47,22 @@ img {
     max-width: 100%;
 }
 
-.navigation {
-    position: absolute;
+body{
+    background: url(../assets/bg.png) 0 0/100% auto no-repeat;
+    height: 100vh;
+    font-family: "Titillium Web", sans-serif;
+}
+
+header{
     width: 100vw;
     height: 80px;
     background: #94dbf745;
-    top: 0;
-    left: 50%;
-    transform: translate(-50%, 0);
+}
+
+.navigation {
+    max-width: 90vw;
+    margin: auto;
     padding: 25px 0 0;
-    font-family: "Titillium Web", sans-serif;
 }
 
 .navigation__list {
@@ -225,9 +231,4 @@ input:focus ~ label {
 
 .menu__input:checked ~ .menu-popup::before {
     display: block;
-}
-
-.main{
-    background: url(../assets/bg.png) 0 0/100% auto no-repeat;
-    height: 100vh;
 }
