@@ -94,8 +94,6 @@ a {
     border-top: 2px solid grey;
     border-left: 2px solid grey;
     z-index: 1;
-    
-    
 }
 
 .toggle-pop-up:checked ~ .pop-up-container {
