@@ -1,0 +1,227 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+
+ul{
+	display: flex;
+	align-items: center;
+}
+
+li{
+	list-style: none;
+	cursor: pointer;
+}
+
+a{
+	display: block;
+	border: 1px solid #e4dccf;
+	text-decoration: none;
+	color: #757575;
+}
+
+a:focus {
+	border: 1px solid #989898;
+	border-radius: 2px;
+	outline-style: none;
+}
+
+nav{
+	display: flex;
+	flex-direction: row-reverse;
+	padding-right: 40px;
+}
+
+.nav > li > a{
+	border: 1px solid white;
+}
+
+.nav > li > a:focus{
+	border: 1px solid #989898;
+}
+
+.nav_input{
+	position: absolute;
+	cursor: pointer;
+	opacity: 0;
+}
+
+.youtube_link:hover,
+.images:hover,
+.more_link:hover{
+	text-decoration: underline;
+}
+
+.nav .bell{
+	margin: 10px;
+}
+
+.bell > a > img{
+	width: 20px;
+	height: 20px;
+}
+
+.popup_button{
+	cursor: pointer;
+	display: flex;
+	border: 1px solid white;
+	background: url(../img/popup-button.png) center no-repeat;
+	width: 30px;
+	height: 30px;
+}
+
+.nav_input:focus+.popup_button{
+	border: 1px solid #989898;
+	border-radius: 2px;
+}
+
+.hidden::before{
+	content: "";
+	position: absolute;
+}
+
+.hidden::after{
+	content: "";
+	position: absolute;
+	display: block;
+	background: 0 0;
+	width: 0;
+	height: 0;
+	border-style: solid;
+	top: -8px;
+	left: 59%;
+	border-color: #e4dccf transparent;
+	border-width: 0px 8px 8px;
+}
+
+.hidden_menu{
+	overflow-x: hidden;
+	overflow-y: auto;
+	height: 100%;
+}
+
+.nav > li{
+	margin: 6px;
+}
+
+.nav > li > input:checked ~ .hidden{
+	display: block;
+}
+
+.nav > li > input:checked + .popup-button{
+	border: 1px solid black;
+	display: flex;
+}
+
+.hidden{
+	display: none;
+	position: absolute;
+	right: 20px;
+	width: 340px;
+	height: 512px;
+	margin-top: 10px;
+	cursor: auto;
+	background-color: #e4dccf;
+	z-index: 2;
+}
+
+.hidden_menu::-webkit-scrollbar{
+	width: 2px;
+}
+
+.hidden_menu::-webkit-scrollbar-track{
+	background: #f1f1f1;
+}
+
+.hidden_menu::-webkit-scrollbar-thumb{
+	background: #888;
+}
+
+.hidden_menu::-webkit-scrollbar-thumb:hover{
+	background: #555;
+}
+
+.hidden_items, .more_items{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+
+.hidden_items > li, .more_items > li{
+	margin-top: 10px;
+	width: 90px;
+	text-align: center;
+}
+
+.hidden_items > li > a:hover,
+.more_items > li > a:hover{
+	border: 1px solid #989898;
+	border-radius: 2px;
+}
+
+.hidden_item, .more_item{
+	width: 69px;
+	height: 70px;
+	padding: 12px 10px 0 10px;
+}
+
+.kottans_link{
+	background: url(../img/kottans.png) center no-repeat;
+	width: 32px;
+	height: 32px;
+}
+
+.more_input{
+	position: absolute;
+	opacity: 0;
+}
+
+.more_button{
+	padding: 5px;
+	background: #c5c5c5;
+	position: absolute;
+	width: 97%;
+	text-align: center;
+	cursor: pointer;
+	margin-top: 20px;
+}
+
+.more_items{
+	margin-bottom: 15px;
+}
+
+.more_hidden{
+	display: none;
+	margin-top: 20px;
+	position: relative;
+}
+
+.more_hidden::before{
+	content: '';
+	width: 100%;
+	position: absolute;
+	border-bottom: 1px solid #989898;
+}
+
+.hidden_menu > input:checked ~ .more_hidden{
+	display: block;
+}
+
+.hidden_menu > input:checked ~ .more_button{
+	display: none;
+}
+
+.more_input:checked .hidden_menu{
+	overflow-y: scroll;
+}
+
+.more_input:focus+.more_button{
+	border: 1px solid #989898;
+	border-radius: 2px;
+}
+
+.more_link{
+	text-align: center;
+	margin-bottom: 10px;
+	margin-top: 20px;
+}
