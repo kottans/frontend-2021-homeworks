@@ -1,0 +1,144 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+  background-color: white;
+}
+body a {
+  text-decoration: none;
+  color: unset;
+}
+body a:focus {
+  outline-style: solid;
+  outline-offset: 4px;
+  outline-color: #6098f3;
+  outline-width: 2px;
+}
+body input[type=checkbox] {
+  position: absolute;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+header {
+  text-align: right;
+}
+header .user_menu {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-around;
+  font-size: 0;
+}
+header .user_menu .user_menu__element {
+  margin: 10px;
+  cursor: pointer;
+}
+header .user_menu .user_menu__element:hover {
+  outline-style: solid;
+  outline-offset: 4px;
+  outline-color: #6098f3;
+  outline-width: 2px;
+}
+header .user_menu .user_menu__element-text {
+  font-size: 14px;
+}
+header .user_menu .apps_menu__checkbox:focus + .more_apps__label {
+  outline-style: solid;
+  outline-offset: 4px;
+  outline-color: #6098f3;
+  outline-width: 2px;
+}
+header .user_menu .user_menu__user_photo {
+  border-radius: 50%;
+}
+header .user_menu .apps_menu__checkbox:checked ~ .apps_menu {
+  display: block;
+}
+header .user_menu .apps_menu {
+  display: none;
+  position: absolute;
+  top: 56px;
+  right: 40px;
+  width: 320px;
+  height: 480px;
+  border: solid 1px #6098f3;
+  box-shadow: 0px 5px 10px #6098f3;
+  text-align: center;
+  font-size: 12px;
+}
+header .user_menu .apps_menu .apps_menu__content {
+  height: 480px;
+  overflow-y: auto;
+}
+header .user_menu .apps_menu .first_page {
+  height: 448px;
+}
+header .user_menu .apps_menu .more_apps__checkbox:focus + .more_apps__label {
+  background-color: #1f6ff1;
+}
+header .user_menu .apps_menu .more_apps__label {
+  display: block;
+  width: 100%;
+  height: 32px;
+  line-height: 32px;
+  background-color: #94b8f1;
+  cursor: pointer;
+}
+header .user_menu .apps_menu .more_apps__label:hover {
+  background-color: #1f6ff1;
+}
+header .user_menu .apps_menu .more_apps__checkbox:checked + .more_apps__label {
+  display: none;
+}
+header .user_menu .apps_menu .more_apps__checkbox:checked ~ .second_page {
+  display: block;
+}
+header .user_menu .apps_menu .second_page {
+  display: none;
+  border-top: solid 1px #6098f3;
+}
+header .user_menu .apps_menu .second_page .second_page__footer {
+  padding: 20px;
+}
+header .user_menu .apps_menu::after {
+  content: "";
+  position: absolute;
+  top: -11px;
+  right: 60px;
+  width: 20px;
+  height: 20px;
+  border: none;
+  background-color: white;
+  border-top: solid 1px #6098f3;
+  border-right: solid 1px #6098f3;
+  transform: rotate(-45deg);
+  z-index: 2;
+  clip-path: polygon(-1px 0px, 21px 0px, 21px 22px);
+}
+header .user_menu .apps_menu .icon_card {
+  display: inline-flex;
+  flex-direction: column;
+  width: 80px;
+  height: 90px;
+  margin: 7px;
+  align-items: center;
+  justify-content: space-around;
+  border: solid 1px transparent;
+  cursor: pointer;
+}
+header .user_menu .apps_menu .icon_card img {
+  max-width: 48px;
+  min-height: 48px;
+  object-fit: contain;
+}
+header .user_menu .apps_menu .icon_card:hover {
+  border: solid 1px gray;
+  border-radius: 2px;
+}
+header .user_menu .apps_menu .icon_card:focus {
+  margin: 6px;
+  outline: none;
+  border: solid 2px #6098f3;
+  border-radius: 3px;
+}
