@@ -3,116 +3,120 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="build\style.css">
+  <link rel="stylesheet" href="build/style.css">
   <title>Popup window</title>
 </head>
 <body>
   <header>
-    <div class="user_menu">
-      <div class="user_menu__element user_menu__element-text" >
-        <a href="#">Mail</a>
-      </div>
-      <div class="user_menu__element user_menu__element-text">
-        <a href="#">Images</a>
-      </div>
-      <input type="checkbox" class="apps_menu__checkbox" id="apps_checkbox">
-      <label for="apps_checkbox" class="more_apps__label user_menu__element user_menu__element-anchor">
-        <img src="build/icons/apps_grid.png" alt="apps">
-      </label>
-      <div class="user_menu__element">
-        <a href="#"><img src="build/icons/bell.png" alt="bell"></a>
-      </div>
-      <div class="user_menu__element">
-        <a href="#"><img class="user_menu__user_photo" src="build/icons/user_photo.jpg" alt="user_photo"></a>
-      </div>
-      <div class="apps_menu">
-        <div class="apps_menu__content">   
-          <div class="first_page">
-            <div class="icon_card" tabindex="0">
-              <img src="build/icons/calendar.png" alt="Calendar">
-              Calendar
-            </div>
-            <div class="icon_card" tabindex="0">
-              <img src="build/icons/mail.png" alt="Mail">
-              Mail
-            </div>
-            <div class="icon_card" tabindex="0">
-              <img src="build/icons/news.png" alt="News">
-              News
-            </div>
-            <div class="icon_card" tabindex="0">
-              <img src="build/icons/maps.png" alt="Map">
-              Map
-            </div>
-            <div class="icon_card" tabindex="0">
-              <img src="build/icons/files.png" alt="Files">
-              Files
-            </div>
-            <div class="icon_card" tabindex="0">
-              <img src="build/icons/contacts.png" alt="Contacts">
-              Contacts
-            </div>
-            <div class="icon_card" tabindex="0">
-              <img src="build/icons/tanslation.png" alt="Translate">
-              Translate
-            </div>
-            <div class="icon_card" tabindex="0">
-              <img src="build/icons/videos.png" alt="Videos">
-              Videos
-            </div>
-            <div class="icon_card" tabindex="0">
-              <img src="build/icons/search.png" alt="Search">
-              Search
-            </div>
-            <div class="icon_card" tabindex="0">
-              <img src="build/icons/photos.png" alt="Photo">
-              Photo
-            </div>
-            <div class="icon_card" tabindex="0">
-              <img src="build/icons/apps.png" alt="Apps">
-              Apps
-            </div>
-            <div class="icon_card" tabindex="0">
-              <img src="build/icons/documents.png" alt="Document">
-              Document
-            </div>
-          </div>
-          <div class="first_page__footer">
-            <input type="checkbox" class="more_apps__checkbox" id="m_a_checkbox">
-            <label class="more_apps__label" for="m_a_checkbox">More</label>
-            <div class="second_page">
-              <div class="icon_card" tabindex="0">
-                <img src="build/icons/chat.png" alt="Chat">
-                Chat
+    <nav>
+      <ul class="user_menu">
+        <li class="user_menu__element user_menu__element-text" >
+          <a href="#">Mail</a>
+        </li>
+        <li class="user_menu__element user_menu__element-text">
+          <a href="#">Images</a>
+        </li>
+        <li>
+          <input type="checkbox" class="apps_menu__checkbox" id="apps_checkbox">
+          <label for="apps_checkbox" class="user_menu__element user_menu__element-anchor">
+            <img src="build/icons/apps_grid.png" alt="apps">
+          </label>
+          <div class="apps_menu">
+            <div class="apps_menu__content">
+              <div class="first_page">
+                <div class="icon_card" tabindex="0">
+                  <img src="build/icons/calendar.png" alt="Calendar">
+                  Calendar
+                </div>
+                <div class="icon_card" tabindex="0">
+                  <img src="build/icons/mail.png" alt="Mail">
+                  Mail
+                </div>
+                <div class="icon_card" tabindex="0">
+                  <img src="build/icons/news.png" alt="News">
+                  News
+                </div>
+                <div class="icon_card" tabindex="0">
+                  <img src="build/icons/maps.png" alt="Map">
+                  Map
+                </div>
+                <div class="icon_card" tabindex="0">
+                  <img src="build/icons/files.png" alt="Files">
+                  Files
+                </div>
+                <div class="icon_card" tabindex="0">
+                  <img src="build/icons/contacts.png" alt="Contacts">
+                  Contacts
+                </div>
+                <div class="icon_card" tabindex="0">
+                  <img src="build/icons/tanslation.png" alt="Translate">
+                  Translate
+                </div>
+                <div class="icon_card" tabindex="0">
+                  <img src="build/icons/videos.png" alt="Videos">
+                  Videos
+                </div>
+                <div class="icon_card" tabindex="0">
+                  <img src="build/icons/search.png" alt="Search">
+                  Search
+                </div>
+                <div class="icon_card" tabindex="0">
+                  <img src="build/icons/photos.png" alt="Photo">
+                  Photo
+                </div>
+                <div class="icon_card" tabindex="0">
+                  <img src="build/icons/apps.png" alt="Apps">
+                  Apps
+                </div>
+                <div class="icon_card" tabindex="0">
+                  <img src="build/icons/documents.png" alt="Document">
+                  Document
+                </div>
               </div>
-              <div class="icon_card" tabindex="0">
-                <img src="build/icons/classroom.png" alt="Classroom">
-                Classroom
-              </div>
-              <div class="icon_card" tabindex="0">
-                <img src="build/icons/collection.png" alt="Collection">
-                Collection
-              </div>
-              <div class="icon_card" tabindex="0">
-                <img src="build/icons/mars.png" alt="Mars">
-                Mars
-              </div>
-              <div class="icon_card" tabindex="0">
-                <img src="build/icons/blogs.png" alt="Blogs">
-                Blogs
-              </div>
-              <div class="icon_card" tabindex="0">
-                <img src="build/icons/horn.png" alt="Ads">
-                Ads
-              </div>
-              <div class="second_page__footer">
-                <a href="#">Even more from Kottans</a>
+              <div class="first_page__footer">
+                <input type="checkbox" class="more_apps__checkbox" id="m_a_checkbox">
+                <label class="more_apps__label" for="m_a_checkbox">More</label>
+                <div class="second_page">
+                  <div class="icon_card" tabindex="0">
+                    <img src="build/icons/chat.png" alt="Chat">
+                    Chat
+                  </div>
+                  <div class="icon_card" tabindex="0">
+                    <img src="build/icons/classroom.png" alt="Classroom">
+                    Classroom
+                  </div>
+                  <div class="icon_card" tabindex="0">
+                    <img src="build/icons/collection.png" alt="Collection">
+                    Collection
+                  </div>
+                  <div class="icon_card" tabindex="0">
+                    <img src="build/icons/mars.png" alt="Mars">
+                    Mars
+                  </div>
+                  <div class="icon_card" tabindex="0">
+                    <img src="build/icons/blogs.png" alt="Blogs">
+                    Blogs
+                  </div>
+                  <div class="icon_card" tabindex="0">
+                    <img src="build/icons/horn.png" alt="Ads">
+                    Ads
+                  </div>
+                  <div class="second_page__footer">
+                    <a href="#">Even more from Kottans</a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
+        </li>
+        <li class="user_menu__element">
+          <a href="#"><img src="build/icons/bell.png" alt="bell"></a>
+        </li>
+        <li class="user_menu__element">
+          <a href="#"><img class="user_menu__user_photo" src="build/icons/user_photo.jpg" alt="user_photo"></a>
+        </li>
+      </ul>
+    </nav>
   </header>
 </body>
 </html>

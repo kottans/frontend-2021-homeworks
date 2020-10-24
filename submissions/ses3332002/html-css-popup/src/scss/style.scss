@@ -9,10 +9,11 @@ body {
 a {
   text-decoration: none;
   color: unset;
-}
-a:focus {
-  outline: 2px solid #6098f3;
-  outline-offset: 4px;
+
+  &:focus {
+    outline: 2px solid #6098f3;
+    outline-offset: 4px;
+  }
 }
 
 input[type=checkbox] {
@@ -40,34 +41,36 @@ header {
   right: 40px;
   width: 320px;
   height: 480px;
-  border: solid 1px #6098f3;
-  box-shadow: 0px 5px 10px #6098f3;
+  border: solid 1px rgb(96, 152, 243);
+  box-shadow: 0px 5px 10px rgb(96, 152, 243);
   text-align: center;
   font-size: 12px;
-}
-.apps_menu::after {
-  content: "";
-  position: absolute;
-  top: -11px;
-  right: 60px;
-  width: 20px;
-  height: 20px;
-  border: none;
-  background-color: white;
-  border-top: solid 1px #6098f3;
-  border-right: solid 1px #6098f3;
-  transform: rotate(-45deg);
-  z-index: 2;
-  clip-path: polygon(-1px 0px, 21px 0px, 21px 22px);
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: -11px;
+    right: 60px;
+    width: 20px;
+    height: 20px;
+    border: none;
+    background-color: white;
+    border-top: solid 1px rgb(96, 152, 243);
+    border-right: solid 1px rgb(96, 152, 243);
+    transform: rotate(-45deg);
+    z-index: 2;
+    clip-path: polygon(-1px 0px, 21px 0px, 21px 22px);
+  }
 }
 
 .user_menu__element {
   margin: 10px;
   cursor: pointer;
-}
-.user_menu__element:hover {
-  outline: 2px solid #6098f3;
-  outline-offset: 4px;
+  
+  &:hover {
+    outline: 2px solid #6098f3;
+    outline-offset: 4px;
+  }
 }
 
 .user_menu__element-text {
@@ -82,7 +85,7 @@ header {
   outline: 2px solid #6098f3;
   outline-offset: 4px;
 }
-
+  
 .user_menu__user_photo {
   border-radius: 50%;
 }
@@ -99,20 +102,21 @@ header {
 .first_page {
   height: 448px;
 }
-
+    
 .more_apps__checkbox:focus + .more_apps__label {
-  background-color: #1f6ff1;
+  background-color: rgb(31, 111, 241);
 }
 
 .more_apps__label {
   display: block;
   height: 32px;
   line-height: 32px;
-  background-color: #94b8f1;
+  background-color: rgb(148, 184, 241);
   cursor: pointer;
-}
-.more_apps__label:hover {
-  background-color: #1f6ff1;
+  
+  &:hover {
+    background-color: rgb(31, 111, 241);
+  }
 }
 
 .more_apps__checkbox:checked + .more_apps__label {
@@ -125,7 +129,7 @@ header {
 
 .second_page {
   display: none;
-  border-top: solid 1px #6098f3;
+  border-top: solid 1px rgb(96, 152, 243);
 }
 
 .second_page__footer {
@@ -142,19 +146,22 @@ header {
   justify-content: space-around;
   border: solid 1px transparent;
   cursor: pointer;
-}
-.icon_card img {
-  max-width: 48px;
-  min-height: 48px;
-  object-fit: contain;
-}
-.icon_card:hover {
-  border: solid 1px gray;
-  border-radius: 2px;
-}
-.icon_card:focus {
-  margin: 6px;
-  outline: none;
-  border: solid 2px #6098f3;
-  border-radius: 3px;
+  
+  img {
+    max-width: 48px;
+    min-height: 48px;
+    object-fit: contain;
+  }
+  
+  &:hover {
+    border: solid 1px gray;
+    border-radius: 2px;
+  }
+  
+  &:focus {
+    margin: 6px;
+    outline: none;
+    border: solid 2px rgb(96, 152, 243);
+    border-radius: 3px;
+  }
 }
