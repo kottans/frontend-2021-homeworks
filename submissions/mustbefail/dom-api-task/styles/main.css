@@ -1,0 +1,60 @@
+main {
+  border: 1px solid #eee;
+  padding: 15px;
+  display: block;
+  margin: 5px 5px 5px 320px;
+  height: 100%;
+}
+
+main h2 {
+  font-weight: 500;
+}
+
+main .cards-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+
+main h2 {
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+main .movie-card {
+  margin: 10px;
+  width: 250px;
+  border: 5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.movie-card img {
+  width: 100%;
+}
+
+.movie-card .title {
+  padding: 15px;
+}
+
+.movie-card .card-header {
+  padding-bottom: 15px;
+}
+
+.movie-card .card-header h5 {
+  font-size: 20px;
+  font-weight: 500;
+  padding-bottom: 5px;
+}
+
+.movie-card .card-header h6 {
+  font-size: 16px;
+  font-weight: 300;
+  color: #888;
+}
+
+.movie-card:hover {
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.3s;
+}

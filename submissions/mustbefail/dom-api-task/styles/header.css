@@ -1,0 +1,28 @@
+header {
+  height: 4rem;
+  padding: 5px 10px;
+  text-align: center;
+  display: flex;
+  flex-flow: row nowrap;
+  box-shadow: 0 0 15px inset rgba(0, 0, 0, 0.2);
+}
+
+header .right-part {
+  margin-right: auto;
+  align-self: center;
+}
+
+header .right-part h1 {
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: #2e2e2e;
+}
+
+header .left-part {
+  align-self: center;
+}
+
+header .left-part a {
+  text-decoration: none;
+  font-size: 18px;
+}
