@@ -9,21 +9,16 @@
 *,*:before,*:after{
 	box-sizing: inherit;
 }
-:focus,:active{outline: none;}
-a:focus,a:active{outline: none;}
 
 nav,footer,header,aside{display: block;}
 
 html,body{
-	height: 100%;
-	width: 100%;
 	font-size: 100%;
 	line-height: 1;
-	font-size: 14px;
+	font-size: 16px;
 }
 label {display: inline-block;}
 input,button,textarea{font-family:inherit;}
-button{cursor: pointer;}
 a, a:visited{display: inline-block; text-decoration: none;}
 a:hover{text-decoration: none;}
 ul li{list-style: none;}
