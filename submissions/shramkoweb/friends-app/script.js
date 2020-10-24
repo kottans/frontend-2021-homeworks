@@ -22,11 +22,21 @@ const state = {
 
 const listElement = document.querySelector('.friends__list');
 const formElement = document.querySelector('.form');
+const resetElement = document.querySelector('.form__reset');
 
 const createElement = (template) => {
     const newElement = document.createElement('div');
     newElement.innerHTML = template;
     return newElement.firstElementChild;
+};
+
+const handleResetClick = () => {
+    state.search = '';
+    state.age = null;
+    state.name = null;
+    state.gender = Gender.ALL;
+
+    render(state);
 };
 
 const filterByGender = (users, gender) => {
@@ -131,14 +141,14 @@ const render = (state) => {
 };
 
 const loadUsers = (url) => {
-    fetch(url)
+    return fetch(url)
         .then(res => res.json())
-        .then(data => {
-            state.users = data.results;
-            render(state);
+        .then(({ results }) => {
+            state.users = results;
+            return results;
         }).catch((error) => {
-        console.log(error);
-    });
+            console.log(error);
+        });
 };
 
 const handleFormInput = (evt) => {
@@ -147,9 +157,11 @@ const handleFormInput = (evt) => {
     render(state);
 };
 
-const init = () => {
-    loadUsers(RANDOM_USER_URL);
+const init = async () => {
+    await loadUsers(RANDOM_USER_URL);
+    render(state);
 
+    resetElement.addEventListener('click', handleResetClick);
     formElement.addEventListener('input', handleFormInput);
 };
 
