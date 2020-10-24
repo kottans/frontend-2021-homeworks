@@ -49,8 +49,8 @@ a {
 }
 
 .nav-container__body {
-    /* width: 320px;
-    height: 100%; */
+    width: 320px;
+    height: 100%;
 }
 
 .nav-container__li {
@@ -82,10 +82,10 @@ a {
     outline: 2px solid rgb(77, 77, 77);
 }
 
-.toggle-pop-up:checked ~ .toggle-pop-up__label:before {
-    position: absolute;
+.toggle-pop-up:checked ~ .pop-up-container:before {
+    position: fixed;
     content: "";
-    right: 153px;
+    right: 154px;
     top: 53px;
     width: 10px;
     height: 10px;
@@ -94,6 +94,8 @@ a {
     border-top: 2px solid grey;
     border-left: 2px solid grey;
     z-index: 1;
+    
+    
 }
 
 .toggle-pop-up:checked ~ .pop-up-container {
