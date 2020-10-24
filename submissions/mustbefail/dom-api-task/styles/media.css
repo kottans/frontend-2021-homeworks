@@ -6,6 +6,10 @@
   }
   main {
     margin-left: 5px;
+    padding: 0;
+  }
+  main h2 {
+    margin-top: 50px;
   }
   .menu-chevron {
     display: block;
@@ -14,5 +18,6 @@
 
   main .movie-card {
     width: 100%;
+    margin: 10px -10px;
   }
 }

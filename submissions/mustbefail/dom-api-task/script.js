@@ -30,7 +30,8 @@ const getMoviesByGenre = async (movieGenre) => {
   console.log(data);
 };
 
-const handler = ({ target }) => {
+const handler = (e) => {
+  const { target } = e;
   const genreId = target.dataset.genre;
   const currentActive = document.querySelector("a.active");
   const mainHeader = document.querySelector("main h2");
