@@ -10,7 +10,7 @@ body {
   display: grid;
   min-height: 100%;
   grid-template-rows: auto 1fr;
-  font-family: sans-serif;;
+  font-family: sans-serif;
   font-size: 16px;
   color: #666666;
 }
