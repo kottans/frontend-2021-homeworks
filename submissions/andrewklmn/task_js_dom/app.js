@@ -86,7 +86,21 @@ const renderPage = (state) => {
   };
 };
 
-// start App when DOM is loade
+// start App when DOM is loaded
 document.addEventListener('DOMContentLoaded', (event)=>{
+
+  // Read first menu item content from default HTML layout
+  let menu = "Overview";
+  let header = document.querySelector('article > h3').innerHTML;
+  let image = document.querySelector('article > img').src;
+  let description = document.querySelector('article > p').innerHTML;
+
+  state.items.unshift({
+    menu,
+    header,
+    image,
+    description,
+  });
+
   renderPage(state);
 });
