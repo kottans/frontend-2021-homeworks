@@ -94,15 +94,30 @@ const renderArticle = (content)=> {
   h.innerHTML = content.header;
   fragment.appendChild(h);
 
+  let p = document.createElement("p");
+  p.innerHTML = content.description;
+  p.className = "description"
+  fragment.appendChild(p);
+  
   let img = document.createElement("img");
   img.src = content.image;
   img.alt = content.image + ' image';
   fragment.appendChild(img);
   
-  let p = document.createElement("p");
-  p.innerHTML = content.description;
+  let span = document.createElement("span");
+  span.innerHTML = content.habitat;
+  span.className = "habitat"
+  p = document.createElement("p");
+  p.innerHTML = 'Habitat: ';
+  p.appendChild(span);
+  fragment.appendChild(p);
+
+  p = document.createElement("p");
+  p.innerHTML = content.method;
+  p.className = "method"
   fragment.appendChild(p);
   
+
   article.innerHTML="";
   article.appendChild(fragment);
 
@@ -121,16 +136,20 @@ const renderPage = (state) => {
 document.addEventListener('DOMContentLoaded', (event)=>{
 
   // Read first menu item content from default HTML layout
-  let menu = "Overview";
+  let menu = "Select by type:";
   let header = document.querySelector('article > h3').innerHTML;
   let image = document.querySelector('article > img').src;
-  let description = document.querySelector('article > p').innerHTML;
+  let description = document.querySelector('p.description').innerHTML;
+  let habitat = document.querySelector('span.habitat').innerHTML;
+  let method = document.querySelector('p.method').innerHTML;
 
   state.items.unshift({
     menu,
     header,
     image,
     description,
+    habitat,
+    method,
   });
 
   renderPage(state);
