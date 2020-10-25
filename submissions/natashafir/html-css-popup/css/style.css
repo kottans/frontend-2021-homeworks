@@ -1,8 +1,8 @@
-
 :root {
     --white-color: #fff;
     --main-color: #08f7fe;
     --accent-color: #ff008d;
+    --bg-color: #000018;
 }
 
 body {
@@ -10,6 +10,10 @@ body {
     margin: 0;
     background-image: url(".././img/bg.jpg");
     background-size: cover;
+}
+
+img {
+    max-width: 100%;
 }
 
 p {
@@ -28,9 +32,12 @@ a {
     text-decoration: none;
 }
 
-
-.nav {
+.navigation {
     margin: 10px;
+    color: var(--white-color);
+    float: right;
+    display: flex;
+    align-items: center;
 }
 
 .social {
@@ -58,7 +65,7 @@ a {
     opacity: 1;
 }
 
-li:focus, input:focus + label {
+.nav-item:focus, .input:focus + label {
     outline: none;
     background-color: var(--accent-color);
     color: var(--white-color);
@@ -82,10 +89,6 @@ li:focus, input:focus + label {
     border-radius: 6px
 }
 
-img {
-    max-width: 100%;
-}
-
 .bell, .user {
     width: 20px;
     height: 20px;
@@ -105,21 +108,14 @@ img {
     padding: 8px;
 }
 
-li:hover {
+.nav-item:hover {
     cursor: pointer;
     border: solid 1px var(--main-color);
     border-radius: 6px;
     box-shadow: 0 0 10px var(--main-color);
 }
 
-.nav {
-    color: var(--white-color);
-    float: right;
-    display: flex;
-    align-items: center;
-}
-
-#popup, #more-btn {
+.popup-input, .more-input {
     position: absolute;
     z-index: -1;
     opacity: 0;
@@ -151,6 +147,7 @@ li:hover {
     height: 250px;
     padding: 10px;
     border-radius: 6px;
+    background-color: var(--bg-color);
     box-shadow: 0 0 10px var(--main-color);
     border: solid 1px var(--main-color);
     overflow-y: scroll;
@@ -194,15 +191,15 @@ li:hover {
     cursor: pointer;
 }
 
-#popup[type="checkbox"]:checked ~ .popup-menu {
+.popup-input[type="checkbox"]:checked ~ .popup-menu {
     display: flex;
 }
 
-#more-btn[type="checkbox"]:checked ~ .hidden {
+.more-input[type="checkbox"]:checked ~ .hidden {
     display: flex;
 }
 
-#more-btn[type="checkbox"]:checked ~ .more-label {
+.more-input[type="checkbox"]:checked ~ .more-label {
     display: none;
 }
 
