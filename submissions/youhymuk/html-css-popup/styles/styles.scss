@@ -36,7 +36,7 @@ body {
   align-items: center;
   padding: 0 2%;
   
-  &-item:not(:last-child) {
+  &__item:not(:last-child) {
     margin-right: 1rem;
   }
 }
@@ -161,7 +161,7 @@ body {
   }
 }
 
-.menu-item-icon {
+.menu-item__icon {
   width: 75px;
   height: 75px;
   padding: 0.2rem 0;
@@ -176,7 +176,7 @@ body {
   }
 }
 
-.menu-item-title {
+.menu-item__title {
   font-size: 0.8rem;
 }
 
