@@ -22,20 +22,34 @@ const state = {
   activeIndex: null,
 };
 
+const menuItemClickListener = (event)=>{
+  let elem = event.target;
+  state.activeIndex = elem.parentNode.id;
+  renderPage(state);
+  event.stopPropagation();
+};
+
 const renderMenu = (state)=>{
   let nav = document.querySelector('nav');
   let prevUl = document.querySelector('ul');
   let fragment = document.createDocumentFragment();
-  let ul = document.createElement("div");
+  let ul = document.createElement("ul");
+
   state.items.forEach((item,index)=>{
     let li = document.createElement("li");
-    li.innerHTML = item.menu;
+    let a = document.createElement("a");
     li.id = index;
+    a.innerHTML = item.menu;
+    a.className = "menu-item";
+    a.addEventListener('click',menuItemClickListener);
+    li.appendChild(a);
     ul.appendChild(li);
   });
+
   fragment.appendChild(ul);
   prevUl.remove();
   nav.appendChild(ul);
+
 };
 
 const renderArticle = (contentArray)=> {
@@ -49,22 +63,8 @@ const renderPage = (state) => {
 
 };
 
-const menuItemClickListener = (event)=>{
-  
-  event.stopPropagation();
-  
-  let elem = event.target;
-  state.activeIndex = elem.id;
-  renderPage(state);
-};
-
 // start App when DOM is loade
 document.addEventListener('DOMContentLoaded', (event)=>{
   
   renderPage(state);
-
-  // bind event listeners to menu items
-  document.querySelectorAll('li.menu-item').forEach((item)=>{
-    item.addEventListener('click',menuItemClickListener);
-  });
 });
