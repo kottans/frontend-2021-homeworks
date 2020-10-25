@@ -51,18 +51,39 @@ const renderMenu = (state)=>{
 
   fragment.appendChild(ul);
   prevUl.remove();
-  nav.appendChild(ul);
+  nav.appendChild(fragment);
 };
 
 const renderArticle = (content)=> {
-  console.log(content);
+
+  //console.log(content);
+  let article = document.querySelector('article');
+  let fragment = document.createDocumentFragment();
+  
+  let h = document.createElement("h3");
+  h.innerHTML = content.header;
+  fragment.appendChild(h);
+
+  let img = document.createElement("img");
+  img.src = content.image;
+  fragment.appendChild(img);
+  
+  let p = document.createElement("p");
+  p.innerHTML = content.description;
+  fragment.appendChild(p);
+  
+  article.innerHTML="";
+  article.appendChild(fragment);
+
 };
 
 const renderPage = (state) => {
 
   renderMenu(state);
-  // console.log(state)
-  renderArticle(state.items[state.activeIndex]);
+  //console.log(state)
+  if (state.activeIndex) {
+    renderArticle(state.items[state.activeIndex]);
+  };
 };
 
 // start App when DOM is loade
