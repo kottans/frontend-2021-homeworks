@@ -41,6 +41,9 @@ const renderMenu = (state)=>{
     li.id = index;
     a.innerHTML = item.menu;
     a.className = "menu-item";
+    if (index==state.activeIndex) {
+      a.classList.toggle("active");
+    }
     a.addEventListener('click',menuItemClickListener);
     li.appendChild(a);
     ul.appendChild(li);
@@ -49,22 +52,20 @@ const renderMenu = (state)=>{
   fragment.appendChild(ul);
   prevUl.remove();
   nav.appendChild(ul);
-
 };
 
-const renderArticle = (contentArray)=> {
-
+const renderArticle = (content)=> {
+  console.log(content);
 };
 
 const renderPage = (state) => {
 
   renderMenu(state);
-  console.log(state);
-
+  // console.log(state)
+  renderArticle(state.items[state.activeIndex]);
 };
 
 // start App when DOM is loade
 document.addEventListener('DOMContentLoaded', (event)=>{
-  
   renderPage(state);
 });
