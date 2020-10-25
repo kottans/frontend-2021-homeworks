@@ -23,13 +23,19 @@ const state = {
 };
 
 const renderMenu = (state)=>{
+  let nav = document.querySelector('nav');
+  let prevUl = document.querySelector('ul');
   let fragment = document.createDocumentFragment();
   let ul = document.createElement("div");
-  state.items.forEach((item)=>{
+  state.items.forEach((item,index)=>{
     let li = document.createElement("li");
     li.innerHTML = item.menu;
+    li.id = index;
     ul.appendChild(li);
   });
+  fragment.appendChild(ul);
+  prevUl.remove();
+  nav.appendChild(ul);
 };
 
 const renderArticle = (contentArray)=> {
