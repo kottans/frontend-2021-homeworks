@@ -1,4 +1,4 @@
-main {
+.main-content {
   border: 1px solid #eee;
   padding: 15px;
   display: block;
@@ -6,22 +6,19 @@ main {
   height: 100%;
 }
 
-main h2 {
-  font-weight: 500;
-}
-
-main .cards-container {
+.cards-container {
   display: flex;
-  flex-flow: row wrap;
+  flex-wrap: wrap;
   justify-content: space-around;
 }
 
-main h2 {
+.main-header {
+  font-weight: 500;
   text-align: center;
   padding-bottom: 20px;
 }
 
-main .movie-card {
+.movie-card {
   margin: 10px;
   width: 250px;
   border: 5px;
@@ -30,7 +27,7 @@ main .movie-card {
   overflow: hidden;
 }
 
-.movie-card img {
+.card-img {
   width: 100%;
 }
 
@@ -38,17 +35,17 @@ main .movie-card {
   padding: 15px;
 }
 
-.movie-card .card-header {
+.card-header {
   padding-bottom: 15px;
 }
 
-.movie-card .card-header h5 {
+.movie-title {
   font-size: 20px;
   font-weight: 500;
   padding-bottom: 5px;
 }
 
-.movie-card .card-header h6 {
+.movie-rating {
   font-size: 16px;
   font-weight: 300;
   color: #888;
