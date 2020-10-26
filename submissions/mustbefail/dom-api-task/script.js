@@ -1,14 +1,14 @@
-const init = () => {
   const imgBaseUrl = "http://image.tmdb.org/t/p/w300/";
   const API_KEY = "6a4ca56d29d657ff19ba2cf05591a088";
-  const INIT_VAL = 28; //Action genre id
+  const INITIAL_GENRE = 28; //Action genre id
 
   const cardsContainer = document.querySelector(".cards-container");
   const genreList = document.querySelectorAll("[data-genre]");
   const menuChevron = document.querySelector(".menu-chevron");
-  
+
   const getMoviesByGenre = async (movieGenre) => {
     const reqUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&primary_release_year=2020&with_genres=${movieGenre}`;
+
     try {
       const response = await fetch(reqUrl);
       const data = await response.json();
@@ -26,8 +26,8 @@ const init = () => {
     mainHeader.textContent = `Movies in category ${target.textContent}`;
     currentActive.classList.remove("active");
     target.classList.add("active");
-    getMoviesByGenre(genreId);
     toggleSidebar();
+    getMoviesByGenre(genreId);
   };
 
   const toggleSidebar = () => {
@@ -58,11 +58,10 @@ const init = () => {
     });
   };
 
+const init = () => {
   genreList.forEach(addClickHandler);
-
   menuChevron.addEventListener("click", toggleSidebar);
-
-  getMoviesByGenre(INIT_VAL); //First initiation with Action genre id
+  getMoviesByGenre(INITIAL_GENRE); //First initiation with Action genre id
 };
 
 window.onload = init;
