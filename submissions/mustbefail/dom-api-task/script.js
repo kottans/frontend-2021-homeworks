@@ -3,7 +3,7 @@
   const INITIAL_GENRE = 28; //Action genre id
 
   const cardsContainer = document.querySelector(".cards-container");
-  const genreList = document.querySelectorAll("[data-genre]");
+  const genreList = document.querySelector(".genre__list");
   const menuChevron = document.querySelector(".menu-chevron");
 
   const getMoviesByGenre = async (movieGenre) => {
@@ -20,14 +20,16 @@
   };
 
   const handler = ({ target }) => {
-    const genreId = target.dataset.genre;
-    const currentActive = document.querySelector(".sidebar a.active");
-    const mainHeader = document.querySelector(".main-header");
-    mainHeader.textContent = `Movies in category ${target.textContent}`;
-    currentActive.classList.remove("active");
-    target.classList.add("active");
-    toggleSidebar();
-    getMoviesByGenre(genreId);
+    if (target.matches(".genre__list-link")) {
+      const genreId = target.dataset.genre;
+      const currentActive = document.querySelector(".sidebar a.active");
+      const mainHeader = document.querySelector(".main-header");
+      mainHeader.textContent = `Movies in category ${target.textContent}`;
+      currentActive.classList.remove("active");
+      target.classList.add("active");
+      toggleSidebar();
+      getMoviesByGenre(genreId);
+    }
   };
 
   const toggleSidebar = () => {
@@ -35,8 +37,6 @@
     sidebar.classList.toggle("show");
     menuChevron.classList.toggle("activated");
   };
-
-  const addClickHandler = (el) => el.addEventListener("click", handler);
 
   const render = (data) => {
     let cards = "";
@@ -59,7 +59,7 @@
   };
 
 const init = () => {
-  genreList.forEach(addClickHandler);
+  genreList.addEventListener('click', handler);
   menuChevron.addEventListener("click", toggleSidebar);
   getMoviesByGenre(INITIAL_GENRE); //First initiation with Action genre id
 };
