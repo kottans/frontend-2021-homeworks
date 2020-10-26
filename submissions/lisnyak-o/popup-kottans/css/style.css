@@ -28,18 +28,28 @@ body {
 }
 .menu__item-link:hover,
 .menu__item-btn:hover,
-.more-btn:hover {
+.more-btn:hover,
+.submenu__item:hover,
+.more__item:hover,
+.kottans:hover {
   color: #fff;
   background-color: rgb(122, 138, 153);
 }
 .menu__list a:active,
 .menu__item-btn:active,
-.more-btn:active {
+.more-btn:active,
+.submenu__item:active,
+.more__item:active,
+.kottans:active {
   background-color: #000;
   color: #ffdb3a;
 }
 .menu__list a:focus,
-.more-btn:focus {
+.more-btn:focus,
+.menu__item-btn:focus,
+.submenu__item:focus,
+.more__item:focus,
+.kottans:focus {
   outline: rgb(122, 138, 153) solid 1px;
 }
 .menu__item-img {
@@ -105,6 +115,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: space-between;
   text-align: center;
   padding: 20px 20px 0 20px;
 }
@@ -134,6 +145,7 @@ body {
 .more__items {
   display: none;
   flex-wrap: wrap;
+  justify-content: space-between;
   align-items: center;
   text-align: center;
   padding: 0 20px 20px 20px;
