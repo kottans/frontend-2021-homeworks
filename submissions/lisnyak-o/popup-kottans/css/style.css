@@ -27,16 +27,19 @@ body {
   transition: all 0.5s ease;
 }
 .menu__item-link:hover,
-.menu__item-btn:hover {
+.menu__item-btn:hover,
+.more-btn:hover {
   color: #fff;
-  border-radius: 10%;
   background-color: rgb(122, 138, 153);
 }
-.menu__list a:active {
+.menu__list a:active,
+.menu__item-btn:active,
+.more-btn:active {
   background-color: #000;
   color: #ffdb3a;
 }
-.menu__list a:focus {
+.menu__list a:focus,
+.more-btn:focus {
   outline: rgb(122, 138, 153) solid 1px;
 }
 .menu__item-img {
@@ -143,6 +146,7 @@ body {
   display: none;
 }
 .kottans {
+  display: block;
   width: 100%;
   margin-top: 20px;
   padding: 10px;
