@@ -148,6 +148,7 @@ body {
     display: block;
     width: 280px;
     height: 390px;
+    overflow-x: hidden;
     overflow-y: scroll;
     background-color: var(--color-white-light);
     border: 1px solid var(--color-gray-dark);
