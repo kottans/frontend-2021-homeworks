@@ -78,11 +78,11 @@ p {
 .wraper {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: 90px 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 90px 1fr 1fr 1fr 60px 1fr;
   grid-column-gap: 20px;
   grid-row-gap: 0px; 
 
-  min-height: 350px;
+  min-height: 400px;
   height: calc(100vh - 70px);
 
   margin: 0;
@@ -96,6 +96,7 @@ p {
   grid-area: 1 / 1 / 1 / 7;
   align-self: center;
   justify-self: center;
+  font-size: 30px;
 }
 
 .picture {
@@ -150,6 +151,7 @@ img {
     grid-row-gap: 20px; 
   
     height: 60vh;
+    min-height: 300px;
 
     transition: 0.5s;
   }
@@ -201,6 +203,7 @@ img {
     justify-content: flex-start;
 
     min-width: 300px;
+    min-height: 300px;
     
   }
 
