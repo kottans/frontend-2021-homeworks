@@ -1,0 +1,93 @@
+.sidebar {
+  background: #fff;
+  position: fixed;
+  left: 0;
+  padding: 30px 5px;
+  width: 320px;
+  height: 100%;
+  transition: left 0.4s;
+}
+
+.sidebar.show {
+  left: 0;
+}
+
+.sidebar ul {
+  display: flex;
+  flex-flow: column nowrap;
+  list-style: none;
+}
+
+.sidebar-header {
+  text-align: left;
+  font-weight: 500;
+  font-size: 1.3rem;
+  margin-left: 15px;
+  padding-bottom: 30px;
+}
+
+.sidebar li {
+  margin: 5px 0;
+  font-size: 1rem;
+}
+
+.sidebar li a {
+  padding: 11px 15px;
+  display: block;
+  width: 100%;
+  text-decoration: none;
+  color: #111;
+}
+
+.sidebar li a:hover {
+  background: #5962753a;
+  border-radius: 3px;
+}
+
+.sidebar li a.active {
+  color: #546de5;
+  background: #546ce548;
+}
+
+.sidebar li i.fas {
+  margin-right: 20px;
+}
+
+.menu-header {
+  margin-right: 10px;
+  width: 320px;
+}
+
+.menu-chevron {
+  display: none;
+  position: absolute;
+  top: 10px;
+  left: 0;
+}
+
+.menu-chevron a {
+  background: #f5cd79;
+  text-align: center;
+  line-height: 40px;
+  font-size: 20px;
+  display: block;
+  width: 40px;
+  height: 50px;
+  text-decoration: none;
+  color: #111;
+  padding: 5px;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
+  border-radius: 0 9px 9px 0;
+}
+
+.menu-chevron.activated {
+  left: 90%;
+}
+
+.menu-chevron.activated a {
+  border-radius: 9px 0 0 9px;
+}
+
+.menu-chevron.activated a i {
+  transform: rotate(180deg);
+}
