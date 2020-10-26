@@ -88,6 +88,7 @@ p {
   margin: 0;
   margin-left: 230px;
   margin-right: 6%;
+  padding-left: 20px;
 
   transition: 0.5s;
 }
