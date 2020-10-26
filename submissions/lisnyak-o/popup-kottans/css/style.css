@@ -10,7 +10,7 @@ body {
   margin: 0 auto;
   padding: 0 15px;
 }
-.menu__wrapper {
+.menu--wrapper {
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -63,7 +63,7 @@ body {
   border-radius: 50%;
   object-fit: cover;
 }
-.popup--relative {
+.menu--relative {
   position: relative;
 }
 .menu__item-btn {
