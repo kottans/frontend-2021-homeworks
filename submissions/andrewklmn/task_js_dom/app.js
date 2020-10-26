@@ -57,20 +57,23 @@ const menuItemClickListener = (event)=>{
   state.activeIndex = elem.parentNode.id;
   renderPage(state);
   event.stopPropagation();
+  return false;
 };
 
 const renderMenu = (state)=>{
+  
   let nav = document.querySelector('nav');
   let prevUl = document.querySelector('ul');
   let fragment = document.createDocumentFragment();
   let ul = document.createElement("ul");
-
+  
   state.items.forEach((item,index)=>{
     let li = document.createElement("li");
     let a = document.createElement("a");
     li.id = index;
     a.innerHTML = item.menu;
     a.className = "menu-item";
+    a.href = "javascript:;";
     if (index==state.activeIndex) {
       a.classList.toggle("active");
     }
@@ -84,25 +87,32 @@ const renderMenu = (state)=>{
   nav.appendChild(fragment);
 };
 
+const showTextContent = ()=>{
+  document.body.style.color = "black";
+}
+
 const renderArticle = (content)=> {
 
+  document.body.style.color = "white";
+  
   //console.log(content);
   let article = document.querySelector('article');
   let fragment = document.createDocumentFragment();
   
-  let h = document.createElement("h3");
+  let h = document.createElement("h2");
   h.innerHTML = content.header;
   fragment.appendChild(h);
+
+  let img = document.createElement("img");
+  img.src = content.image;
+  img.alt = content.image + ' image';
+  img.addEventListener('load',showTextContent);
+  fragment.appendChild(img);
 
   let p = document.createElement("p");
   p.innerHTML = content.description;
   p.className = "description"
   fragment.appendChild(p);
-  
-  let img = document.createElement("img");
-  img.src = content.image;
-  img.alt = content.image + ' image';
-  fragment.appendChild(img);
   
   let span = document.createElement("span");
   span.innerHTML = content.habitat;
@@ -137,7 +147,7 @@ document.addEventListener('DOMContentLoaded', (event)=>{
 
   // Read first menu item content from default HTML layout
   let menu = "Select by type:";
-  let header = document.querySelector('article > h3').innerHTML;
+  let header = document.querySelector('article > h2').innerHTML;
   let image = document.querySelector('article > img').src;
   let description = document.querySelector('p.description').innerHTML;
   let habitat = document.querySelector('span.habitat').innerHTML;

@@ -5,3 +5,27 @@ body {
 .active {
   color: red;
 }
+
+li {
+  list-style: none;
+}
+
+a.menu-item {
+  text-decoration: none;
+}
+
+aside {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 250px;
+}
+
+article {
+  margin-left: 250px;
+}
+
+img {
+  max-height: 250px;
+}
