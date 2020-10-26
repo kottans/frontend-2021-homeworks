@@ -1,10 +1,12 @@
   const imgBaseUrl = "http://image.tmdb.org/t/p/w300/";
   const API_KEY = "6a4ca56d29d657ff19ba2cf05591a088";
-  const INITIAL_GENRE = 28; //Action genre id
+  const INITIAL_GENRE = 28;
 
   const cardsContainer = document.querySelector(".cards-container");
   const genreList = document.querySelector(".genre__list");
   const menuChevron = document.querySelector(".menu-chevron");
+  const mainHeader = document.querySelector(".main-header");
+  const genreLinks = Array.from(document.querySelectorAll(".genre__list-link"));
 
   const getMoviesByGenre = async (movieGenre) => {
     const reqUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&primary_release_year=2020&with_genres=${movieGenre}`;
@@ -19,16 +21,17 @@
     }
   };
 
+  const deleteActiveLink = () => genreLinks.map((el) => el.classList.contains('active') ? el.classList.remove('active') : null);
+
   const handler = ({ target }) => {
     if (target.matches(".genre__list-link")) {
       const genreId = target.dataset.genre;
-      const currentActive = document.querySelector(".sidebar a.active");
-      const mainHeader = document.querySelector(".main-header");
       mainHeader.textContent = `Movies in category ${target.textContent}`;
-      currentActive.classList.remove("active");
-      target.classList.add("active");
+      console.log(target)
+      deleteActiveLink();
       toggleSidebar();
       getMoviesByGenre(genreId);
+      target.classList.toggle("active");
     }
   };
 
