@@ -99,9 +99,6 @@ body {
 .pop_up__item {
   display: block;
 }
-.pop_up__item--all_width {
-  grid-column: 1 / -1;
-}
 .app_link {
   display: grid;
   grid-template-rows: repeat(2, max-content);
@@ -117,6 +114,9 @@ body {
 .app_link:focus .app_name {
   color: #0033cc;
   text-decoration: underline;
+}
+.app_link--all_width {
+  grid-column: 1 / -1;
 }
 .app_icon {
   display: block;
@@ -236,11 +236,11 @@ body {
   opacity: 0;
   z-index: -1;
 }
-.button_more__input ~ .pop_up__item {
+.button_more__input ~ .app_link {
   display: none;
 }
-.button_more__input:checked ~ .pop_up__item {
-  display: block;
+.button_more__input:checked ~ .app_link {
+  display: grid;
 }
 .button_more__input:checked + .button_more__label {
   display: none;
@@ -248,11 +248,11 @@ body {
 .button_more__input:checked {
   display: none;
 }
-.button_more__label {
+.button_more__label {  
+  display: block;
   position: absolute;
   bottom: 0;
   left:0;
-  display: block;
   width: 100%;
   text-align: center;
   cursor: pointer;
