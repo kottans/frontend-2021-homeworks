@@ -20,7 +20,7 @@ const state = {
       menu: 'Reluctant Pornstar',
       header: "The Reluctant Porn Star",
       image: "img/adult.jpg",
-      description: "If the ingénue took a wrong turn on her road to fame, this is where she ended up. She’s not very talented, but she’s pretty—or she was before she got those ridiculous implants and started applying her makeup with a spackling knife.This is the third one.",
+      description: "If the ingénue took a wrong turn on her road to fame, this is where she ended up. She’s not very talented, but she’s pretty — or she was before she got those ridiculous implants and started applying her makeup with a spackling knife.This is the third one.",
       habitat: "Encino, Reseda, Northridge",
       method: "How to attract her: Do you really want to? Well, I guess you can tell her she has the talent to be a mainstream actress. That would probably work. If it doesn’t, offer her some cocaine.",
     },
@@ -78,6 +78,12 @@ const menuItemClickListener = (event)=>{
   let elem = event.target;
   state.activeIndex = elem.parentNode.id;
   renderPage(state);
+
+  const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+  if (vw < 820) {
+    document.querySelector('.btn-toogle-menu').click(); 
+  }
+
   event.stopPropagation();
   return false;
 };
@@ -123,7 +129,6 @@ const renderArticle = (content)=> {
 
   document.body.style.color = "white";
   
-  //console.log(content);
   let article = document.querySelector('article');
   article.className = "wraper";
   let fragment = document.createDocumentFragment();
@@ -196,6 +201,9 @@ document.addEventListener('DOMContentLoaded', (event)=>{
 
   renderPage(state);
   
-  document.querySelector('.btn-toogle-menu').click(); 
+  const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+  if (vw < 820) {
+    document.querySelector('.btn-toogle-menu').click(); 
+  }
 
 });
