@@ -68,16 +68,18 @@ const menuToogleClickListener = (event)=>{
 };
 
 const menuItemClickListener = (event)=>{
-  let elem = event.target;
-  state.activeIndex = elem.parentNode.id;
-  renderPage(state);
 
-  const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
-  if (vw < 820) {
-    document.querySelector('.btn-toogle-menu').click(); 
-  }
+  if (event.target.tagName=='A') {
+    state.activeIndex = event.target.parentNode.id;
+    renderPage(state);
+  
+    const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+    if (vw < 820) {
+      document.querySelector('.btn-toogle-menu').click(); 
+    }
+    event.stopPropagation();
+  };
 
-  event.stopPropagation();
   return false;
 };
 
@@ -104,11 +106,12 @@ const renderMenu = (state)=>{
     if (index==state.activeIndex) {
       a.classList.toggle("active");
     };
-    
-    a.addEventListener('click',menuItemClickListener);
+
     li.appendChild(a);
     ul.appendChild(li);
   });
+
+  ul.addEventListener('click',menuItemClickListener);
 
   fragment.appendChild(ul);
   prevUl.remove();
