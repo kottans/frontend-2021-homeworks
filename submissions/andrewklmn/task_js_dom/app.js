@@ -52,17 +52,17 @@ const state = {
   activeIndex: 0,
 };
 
+const aside = document.querySelector('.menu-container');
+const wraper = document.querySelector('.wraper');
+
 const getViewWidth = () => Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
 
 const toggleMenu = (event)=>{
-  let elem = event.target;
-  let aside = document.querySelector('.menu-container');
-  let wraper = document.querySelector('.wraper');
   
-  elem.innerHTML = (elem.innerHTML == "«") ? "☰":"«";
+  event.target.innerHTML = (event.target.innerHTML == "«") ? "☰":"«";
+  event.target.classList.toggle("burger");
   
   aside.classList.toggle("opened") ;
-  elem.classList.toggle("burger");
   wraper.classList.toggle("wide");
 
   event.stopPropagation();
@@ -127,9 +127,8 @@ const renderArticle = (content)=> {
 
   document.body.classList.add("text-white");
   
-  let article = document.querySelector('.wraper');
-  article.classList.add("wraper");
-  article.classList.add("narrow");
+  wraper.classList.add("wraper");
+  wraper.classList.add("narrow");
   let fragment = document.createDocumentFragment();
   
   let a = document.createElement("a");
@@ -172,8 +171,8 @@ const renderArticle = (content)=> {
   fragment.appendChild(p);
   
 
-  article.innerHTML="";
-  article.appendChild(fragment);
+  wraper.innerHTML="";
+  wraper.appendChild(fragment);
 
 };
 
