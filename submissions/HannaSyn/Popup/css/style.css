@@ -201,19 +201,19 @@ header{
     content: "More";
 }
 
-.invisible {
+.menu-popup--invisible {
     visibility: hidden;
 }
 
-.nondisplay {
+.menu-popup__link--hidden {
     display: none;
 }
 
-input.menu__input:checked ~ div.invisible {
+input.menu__input:checked ~ div.menu-popup--invisible {
     visibility: visible;
 }
 
-input:checked ~ .nondisplay {
+input:checked ~ .menu-popup__link--hidden {
     display: flex;
 }
 
