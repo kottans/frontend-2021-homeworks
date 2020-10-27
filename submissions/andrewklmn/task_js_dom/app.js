@@ -54,7 +54,7 @@ const state = {
 
 const getViewWidth = () => Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
 
-const menuToogleClickListener = (event)=>{
+const toggleMenu = (event)=>{
   let elem = event.target;
   let aside = document.querySelector('.menu-container');
   let wraper = document.querySelector('.wraper');
@@ -136,7 +136,7 @@ const renderArticle = (content)=> {
   a.innerHTML = "&laquo;";
   a.className = "btn-toogle-menu";
   a.href = "javascript:void(0)";
-  a.addEventListener('click', menuToogleClickListener);
+  a.addEventListener('click', toggleMenu);
   fragment.appendChild(a);
 
   let h = document.createElement("h2");
