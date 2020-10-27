@@ -52,8 +52,9 @@ const state = {
   activeIndex: 0,
 };
 
-const aside = document.querySelector('.menu-container');
+const menuContainer = document.querySelector('.menu-container');
 const wraper = document.querySelector('.wraper');
+const menuUl = document.querySelector('.menu');
 
 const getViewWidth = () => Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
 
@@ -62,7 +63,7 @@ const toggleMenu = (event)=>{
   event.target.innerHTML = (event.target.innerHTML == "«") ? "☰":"«";
   event.target.classList.toggle("burger");
   
-  aside.classList.toggle("opened") ;
+  menuContainer.classList.toggle("opened") ;
   wraper.classList.toggle("wide");
 
   event.stopPropagation();
@@ -86,13 +87,9 @@ const menuItemClickListener = (event)=>{
 
 const renderMenu = (state)=>{
   
-  let nav = document.querySelector('.navbar');
-  let prevUl = document.querySelector('.menu');
-  let fragment = document.createDocumentFragment();
-  let ul = document.createElement("ul");
-  ul.className = "menu";
+  menuUl.innerHTML = "";
 
- state.items.forEach((item,index)=>{
+  state.items.forEach((item,index)=>{
     let li = document.createElement("li");   
     li = document.createElement("li");
 
@@ -109,14 +106,8 @@ const renderMenu = (state)=>{
     };
 
     li.appendChild(a);
-    ul.appendChild(li);
+    menuUl.appendChild(li);
   });
-
-  ul.addEventListener('click',menuItemClickListener);
-
-  fragment.appendChild(ul);
-  prevUl.remove();
-  nav.appendChild(fragment);
 };
 
 const showTextContent = ()=>{
@@ -198,6 +189,8 @@ document.addEventListener('DOMContentLoaded', (event)=>{
 
   renderPage(state);
   
+  menuUl.addEventListener('click',menuItemClickListener);
+
   if (getViewWidth() < 820) {
     document.querySelector('.btn-toogle-menu').click(); 
   }
