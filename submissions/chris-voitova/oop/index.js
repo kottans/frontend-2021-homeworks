@@ -37,9 +37,10 @@ class Inhabitant {
   }
   toString() {
     let props = Object.entries(this);
-    props = props.map(([key, value]) => {
-      return value && key !== "greating" ? `${key}: ${value}` : null;
-    });
+    props = props.map(([key, value]) =>
+      value && key !== "greating" ? `${key}: ${value}` : null
+    );
+
     return `${props.join(" ")} ${this.saying()}`;
   }
 }
@@ -85,14 +86,22 @@ class CatWoman extends Cat {
   }
 }
 
-const cat = new Cat({ name: "Expert", gender: "male", greating: "meow!" }),
+const cat = new Cat({
+        name: "Expert",
+        gender: "male",
+        greating: "meow!",
+      }),
       dog = new Dog({
         name: "Joker",
         gender: "male",
         greating: "woof-woof!",
         friends: [cat.name],
       }),
-      man = new Human({ name: "Mark", gender: "male", greating: "Hi!" }),
+      man = new Human({
+        name: "Mark",
+        gender: "male",
+        greating: "Hi!",
+      }),
       woman = new Human({
         name: "Alice",
         gender: "female",
