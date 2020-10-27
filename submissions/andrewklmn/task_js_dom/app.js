@@ -100,7 +100,7 @@ const renderMenu = (state)=>{
 
     let a = document.createElement("a");
     a.innerHTML = item.menuTitle;
-    a.className = "menu-item";
+    a.classList.add("menu-item");
     a.href = "javascript:void(0)";
     
     if (index==state.activeIndex) {
