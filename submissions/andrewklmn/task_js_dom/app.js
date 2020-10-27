@@ -6,7 +6,7 @@ const state = {
       image: "img/beautiful-blonde.jpg",
       description: "Fresh off the bus from the Midwest, under twenty-five and full of wide-eyed innocence, the Ingénue is a commonly encountered specimen in Los Angeles. She came out here to be a star, so she’s not really looking for romance, but you’re certainly welcome to try.",
       habitat: "North Hollywood, Burbank, Mid-Wilshire",
-      method: "How to attract her: Can you help her with her acting career? If not, are you willing to lie about it? If the answer to either of those questions is yes, then you’re in. But you better nab her quick, because in all likelihood, she’s about to transform into one of two other types of L.A. women.",
+      method: "How to attract h Can you help her with her acting career? If not, are you willing to lie about it? If the answer to either of those questions is yes, then you’re in. But you better nab her quick, because in all likelihood, she’s about to transform into one of two other types of L.A. women.",
     },
     {
       menu: 'Drama Queen',
@@ -54,21 +54,14 @@ const state = {
 
 const menuToogleClickListener = (event)=>{
   let elem = event.target;
-  let aside = document.querySelector('aside');
+  let aside = document.querySelector('.menu-container');
   let wraper = document.querySelector('.wraper');
   
-
-  if (elem.innerHTML=="«") {
-    elem.innerHTML = "☰";
-    elem.style.left = "0";
-    aside.style.width = "0";
-    wraper.style.marginLeft = "20px";
-  } else {
-    elem.innerHTML = "«";
-    elem.style.left = "220px";
-    aside.style.width = "220px";
-    wraper.style.marginLeft = "240px";
-  }
+  elem.innerHTML = (elem.innerHTML == "«") ? "☰":"«";
+  
+  aside.classList.toggle("opened") ;
+  elem.classList.toggle("burger");
+  wraper.classList.toggle("wide");
 
   event.stopPropagation();
   return false;
@@ -94,7 +87,8 @@ const renderMenu = (state)=>{
   let prevUl = document.querySelector('ul');
   let fragment = document.createDocumentFragment();
   let ul = document.createElement("ul");
- 
+  ul.className = "menu";
+
  state.items.forEach((item,index)=>{
     let li = document.createElement("li");   
     li = document.createElement("li");
@@ -130,7 +124,8 @@ const renderArticle = (content)=> {
   document.body.style.color = "white";
   
   let article = document.querySelector('article');
-  article.className = "wraper";
+  article.classList.add("wraper");
+  article.classList.add("narrow");
   let fragment = document.createDocumentFragment();
   
   let a = document.createElement("a");
