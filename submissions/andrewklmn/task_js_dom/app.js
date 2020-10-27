@@ -120,12 +120,12 @@ const renderMenu = (state)=>{
 };
 
 const showTextContent = ()=>{
-  document.body.style.color = "black";
+  document.body.classList.remove("text-white");
 }
 
 const renderArticle = (content)=> {
 
-  document.body.style.color = "white";
+  document.body.classList.add("text-white");
   
   let article = document.querySelector('article');
   article.classList.add("wraper");
