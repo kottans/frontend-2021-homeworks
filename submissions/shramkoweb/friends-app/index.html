@@ -25,20 +25,20 @@
             <legend class="form__legend">Sorting by age</legend>
 
             <label class="form__label" for="sort-ascending">Ascending</label>
-            <input class="form__input" id="sort-ascending" type="radio" name="age" value="ascending">
+            <input class="form__input" id="sort-ascending" type="radio" name="sorting" value="ascending">
 
             <label class="form__label" for="sort-descending">Descending</label>
-            <input class="form__input" id="sort-descending" type="radio" name="age" value="descending">
+            <input class="form__input" id="sort-descending" type="radio" name="sorting" value="descending">
           </fieldset>
 
           <fieldset class="form__fieldset">
             <legend class="form__legend">Sorting by name</legend>
 
             <label class="form__label" for="sort-az">A to Z</label>
-            <input class="form__input" id="sort-az" type="radio" name="name" value="a">
+            <input class="form__input" id="sort-az" type="radio" name="sorting" value="a">
 
             <label class="form__label" for="sort-za">Z to A</label>
-            <input class="form__input" id="sort-za" type="radio" name="name" value="z">
+            <input class="form__input" id="sort-za" type="radio" name="sorting" value="z">
           </fieldset>
 
           <fieldset class="form__fieldset">
@@ -60,6 +60,7 @@
 
       <section class="friends">
         <h2 class="friends__title">All my friends</h2>
+        <p class="notification"></p>
 
         <div class="friends__content">
           <ul class="friends__list">
@@ -69,6 +70,7 @@
       </section>
     </main>
 
+    <script src="./utils.js"></script>
     <script src="./script.js"></script>
   </body>
 </html>

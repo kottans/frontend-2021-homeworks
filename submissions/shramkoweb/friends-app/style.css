@@ -157,3 +157,8 @@ img {
     color: #40a9ff;
     border-color: #40a9ff;
 }
+
+.notification {
+    color: red;
+    text-align: center;
+}

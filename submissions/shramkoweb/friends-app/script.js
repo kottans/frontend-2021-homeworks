@@ -4,6 +4,9 @@ const RANDOM_USER_URL = `https://randomuser.me/api/?results=${USERS_AMOUNT}`;
 const SortType = {
     ASCENDING: 'ascending',
     DESCENDING: 'descending',
+    'A-Z': 'a',
+    'Z-A': 'z',
+    DEFAULT: 'default',
 };
 
 const Gender = {
@@ -15,25 +18,18 @@ const Gender = {
 const state = {
     users: [],
     search: '',
-    age: null,
-    name: null,
+    sorting: SortType.DEFAULT,
     gender: Gender.ALL,
 };
 
 const listElement = document.querySelector('.friends__list');
 const formElement = document.querySelector('.form');
 const resetElement = document.querySelector('.form__reset');
-
-const createElement = (template) => {
-    const newElement = document.createElement('div');
-    newElement.innerHTML = template;
-    return newElement.firstElementChild;
-};
+const notificationElement = document.querySelector('.notification');
 
 const handleResetClick = () => {
     state.search = '';
-    state.age = null;
-    state.name = null;
+    state.sorting = SortType.DEFAULT;
     state.gender = Gender.ALL;
 
     render(state);
@@ -59,50 +55,47 @@ const filterByQuery = (users, query) => {
     );
 };
 
-const sortByName = (users, sortType) => {
-    switch (sortType) {
-        case 'a':
-            return users.sort((a, b) => {
-                const firstNAme = a.name.first.toUpperCase();
-                const secondName = b.name.first.toUpperCase();
+const sortAscending = (users) => users.slice().sort((a, b) => a.dob.age - b.dob.age);
+const sortDescending = (users) => users.slice().sort((a, b) => b.dob.age - a.dob.age);
+const sortByName = (users, isReverse = false) => {
+    const sorted = users.slice().sort((a, b) => {
+        const firstNAme = a.name.first.toUpperCase();
+        const secondName = b.name.first.toUpperCase();
 
-                if (firstNAme < secondName) {
-                    return -1;
-                }
-                if (firstNAme > secondName) {
-                    return 1;
-                }
+        if (firstNAme < secondName) {
+            return -1;
+        }
+        if (firstNAme > secondName) {
+            return 1;
+        }
 
-                return 0;
-            });
-        case 'z':
-            return users.sort((a, b) => {
-                const firstNAme = a.name.first.toUpperCase();
-                const secondName = b.name.first.toUpperCase();
+        return 0;
+    });
 
-                if (firstNAme < secondName) {
-                    return 1;
-                }
-                if (firstNAme > secondName) {
-                    return -1;
-                }
-
-                return 0;
-            });
-        default:
-            return users;
+    if (isReverse) {
+        return sorted.reverse();
     }
+
+    return sorted;
+};
+const defaultSort = (users) => users;
+
+
+const sortingTypeMap = {
+    [SortType.ASCENDING]: sortAscending,
+    [SortType.DESCENDING]: sortDescending,
+    [SortType['A-Z']]: (users) => sortByName(users),
+    [SortType['Z-A']]: (users) => sortByName(users, true),
+    'default': defaultSort,
+
 };
 
-const sortBy = (users, sortType) => {
-    switch (sortType) {
-        case SortType.ASCENDING:
-            return users.sort((a, b) => a.dob.age - b.dob.age);
-        case SortType.DESCENDING:
-            return users.sort((a, b) => b.dob.age - a.dob.age);
-        default:
-            return users;
+const sortUsers = (users, compareType) => {
+    if (compareType === SortType['A-Z'] || compareType === SortType['Z-A']) {
+        return sortingTypeMap[compareType](users);
     }
+
+    return sortingTypeMap[compareType](users);
 };
 
 const renderCard = (data) => {
@@ -134,7 +127,7 @@ const renderCards = (cards, target) => {
 
 const render = (state) => {
     listElement.innerHTML = '';
-    const sorted = sortBy(sortByName(state.users, state.name), state.age);
+    const sorted = sortUsers(state.users, state.sorting);
     const filteredByQuery = filterByQuery(sorted, state.search);
     const filteredUsers = filterByGender(filteredByQuery, state.gender);
     renderCards(filteredUsers, listElement);
@@ -147,7 +140,7 @@ const loadUsers = (url) => {
             state.users = results;
             return results;
         }).catch((error) => {
-            console.log(error);
+            notificationElement.textContent = error;
         });
 };
 
@@ -162,7 +155,7 @@ const init = async () => {
     render(state);
 
     resetElement.addEventListener('click', handleResetClick);
-    formElement.addEventListener('input', handleFormInput);
+    formElement.addEventListener('input', debounced(300, handleFormInput));
 };
 
 init();
