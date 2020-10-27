@@ -52,6 +52,8 @@ const state = {
   activeIndex: null,
 };
 
+const getViewWidth = () => Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+
 const menuToogleClickListener = (event)=>{
   let elem = event.target;
   let aside = document.querySelector('.menu-container');
@@ -73,8 +75,7 @@ const menuItemClickListener = (event)=>{
     state.activeIndex = event.target.parentNode.id;
     renderPage(state);
   
-    const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
-    if (vw < 820) {
+    if (getViewWidth() < 820) {
       document.querySelector('.btn-toogle-menu').click(); 
     }
     event.stopPropagation();
@@ -199,8 +200,7 @@ document.addEventListener('DOMContentLoaded', (event)=>{
 
   renderPage(state);
   
-  const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
-  if (vw < 820) {
+  if (getViewWidth() < 820) {
     document.querySelector('.btn-toogle-menu').click(); 
   }
 
