@@ -1,6 +1,14 @@
 const state = {
   items: [
     {
+      menuTitle: 'All types:',
+      title: "The Types Of Women You'll Encounter In L.A.",
+      image: "img/overview.jpg",
+      description: "I’m not sure what Jim Morrison was talking about, because there’s no one single type of “L.A. Woman.” We’re blessed with all sorts of different kinds of ladies out here on the left coast. ",
+      location: "Los Angeles",
+      attractionMethod: "Here are a few of these types of southern California girls, where they’re found, and how to attract them. Select different types just from left menu and enjoy... reading! )))",
+    },
+    {
       menuTitle: 'Ingénue',
       title: "The Ingénue",
       image: "img/beautiful-blonde.jpg",
@@ -138,18 +146,6 @@ const renderPage = (state) => {
 
 // start App when DOM is loaded
 document.addEventListener('DOMContentLoaded', (event)=>{
-
-  // Add first menu item content from default HTML layout
-  
-  state.items.unshift({
-    menuTitle: "All types:",
-    title: header.innerHTML,
-    image: image.src,
-    description: description.innerHTML,
-    location: location.innerHTML,
-    attractionMethod: attractionMethod.innerHTML,
-  });
-
   
   let a = document.createElement("a");
   a.innerHTML = "&laquo;";
