@@ -1,0 +1,52 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body,
+html {
+  height: 100%;
+}
+body {
+  font-weight: bold;
+  font-size: 14px;
+  font-family: Helvetica, sans-serif;
+  color: black;
+  background: linear-gradient(#ffd047, white);
+}
+.topnav {
+  overflow: hidden;
+  background-color: #333333ad;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.topnav a,
+.topnav label {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 20px;
+}
+.topnav a:hover,
+.topnav label:hover,
+.topnav a:focus,
+.topnav input:focus + label {
+  background-color: #ffd047;
+  color: black;
+  outline: none;
+}
+#menu-toggle {
+  position: fixed;
+  opacity: 0;
+}
+.bg-image {
+  height: 90%;
+  background-image: url('img/kottans-font.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  filter: blur(8px);
+}
