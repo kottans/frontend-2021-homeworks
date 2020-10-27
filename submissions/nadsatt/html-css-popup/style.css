@@ -92,28 +92,19 @@ body {
     fill: var(--color-gray-light);
 }
 
-.list__checkbox {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    left: 0;
-    top: 0;
-    opacity: 0;
-}
-
-.list__checkbox:hover,
-.popup__checkbox:hover {
-    cursor: pointer;
-}
-
-.list__link:hover,
-.list__checkbox:hover + .list__link {
-    border-color: var(--color-white-dark);
+.list__link:hover {
     color: var(--color-white-dark);
+    border-color: var(--color-white-dark);
+}
+
+.list__link:focus {
+    color: var(--color-white-dark);
+    border-color: var(--color-rosy);
+    background-color: var(--color-rosy);
 }
 
 .list__link:hover .list__icon,
-.list__checkbox:hover + .list__link .list__icon {
+.list__link:focus .list__icon {
     fill: var(--color-white-dark);
 }
 
@@ -122,29 +113,46 @@ body {
     border-color: var(--color-white-dark);
 }
 
-.list__link:focus,
-.list__checkbox:focus + .list__link {
-    background-color: var(--color-rosy);
-    border-color: var(--color-rosy);
-    color: var(--color-white-dark);
+.list__check-box {
+    width: auto;
+    height: calc(var(--list-item-content-height) + 
+            2 * var(--list-item-vertical-padding) + 
+            2 * var(--list-item-border-width));
+    line-height: var(--list-item-content-height);
+    padding: var(--list-item-vertical-padding) 7px;
+    margin-left: -4px;
+    color: var(--color-gray-light);
+    font-size: 18px;
+    border: var(--list-item-border-width) solid transparent; 
+    border-radius: 4px; 
+    display: inline-block;
 }
 
-.list__link:focus .list__icon,
-.list__checkbox:focus + .list__link .list__icon,
-.list__checkbox:checked + .list__link .list__icon {
+.list__check-input:hover + .list__check-box {
+    border-color: var(--color-white-dark);
+}
+
+.list__check-input:focus + .list__check-box {
+    border-color: var(--color-rosy);
+    background-color: var(--color-rosy);
+}
+
+.list__check-input:checked + .list__check-box {
+    border-color: var(--color-white-dark);
+    background-color: var(--color-rosy);
+}
+
+.list__check-input:hover + .list__check-box .list__check-icon,
+.list__check-input:focus + .list__check-box .list__check-icon,
+.list__check-input:checked + .list__check-box .list__check-icon {
     fill: var(--color-white-dark);
 }
-
-.list__checkbox:checked + .list__link {
-    background-color: var(--color-rosy);
-    border-color: var(--color-white-dark);
-} 
 
 .list__popup {
     display: none;
 }
 
-.list__checkbox:checked ~ .list__popup {
+.list__check-input:checked ~ .list__popup {
     display: block;
     width: 280px;
     height: 390px;
@@ -169,52 +177,49 @@ body {
     gap: 10px;
 }
 
-.popup__checkbox {
-    position: absolute;
-    left: 10px;
-    top: 335px;
-    width: 258px;
-    height: 40px;
-    opacity: 0;
-}
-
-.popup__fake-button {
-    display: block;
-    background-color: var(--color-gray-dark);
-    color: var(--color-white-light);
-    padding: 10px;
-    margin-top: 15px;
-    border-radius: 4px;
-    text-align: center;
-}
-
 .popup__bottom-container {
     display: none;
 }
 
-.popup__checkbox:focus + .popup__fake-button {
-    background-color: var(--color-black-dark);
-    color: var(--color-white-light);
+.popup__check-option {
+    width: 100%;
+    display: inline-block;
 }
 
-.popup__checkbox:checked + .popup__fake-button,
-.popup__checkbox:checked {
+.popup__check-box {
+    width: 100%;
+    margin-left: -4px;
+    margin-top:15px;
+    padding: 10px;
+    text-align: center;
+    color: var(--color-white-light);
+    border-radius: 4px;
+    background-color: var(--color-gray-dark);
+    display: inline-block;   
+}
+
+.popup__check-box:hover,
+.popup__check-input:focus + .popup__check-box {
+    background-color: var(--color-black-dark);
+}
+
+.popup__check-input:checked + .popup__check-box {
     display: none;
 }
 
-.popup__checkbox:checked ~ .popup__bottom-container {
-    margin-top: 10px;
+.popup__check-input:checked ~ .popup__bottom-container {
+    margin-top: -10px;
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 10px;
 }
 
 .popup__link {
-    font-size: 12px;
-    color: var(--color-black-dark);
     padding: 10px;
-    text-align: center;
+    color: var(--color-black-dark);
     border: .5px solid var(--color-gray-middle);
+    font-size: 12px;
+    text-align: center;
 }
 
 .popup__link:hover,
@@ -231,5 +236,14 @@ body {
 .popup__link:focus .popup__icon,
 .popup__link:focus path {
     fill: var(--color-white-light);
+}
+
+.check-input {
+    -webkit-appearance: none;
+}
+
+.list__check-box:hover,
+.popup__check-box:hover {
+    cursor: pointer;
 }
 
