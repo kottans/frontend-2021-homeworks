@@ -86,8 +86,8 @@ const menuItemClickListener = (event)=>{
 
 const renderMenu = (state)=>{
   
-  let nav = document.querySelector('nav');
-  let prevUl = document.querySelector('ul');
+  let nav = document.querySelector('.navbar');
+  let prevUl = document.querySelector('.menu');
   let fragment = document.createDocumentFragment();
   let ul = document.createElement("ul");
   ul.className = "menu";
@@ -127,7 +127,7 @@ const renderArticle = (content)=> {
 
   document.body.classList.add("text-white");
   
-  let article = document.querySelector('article');
+  let article = document.querySelector('.wraper');
   article.classList.add("wraper");
   article.classList.add("narrow");
   let fragment = document.createDocumentFragment();
@@ -190,11 +190,11 @@ document.addEventListener('DOMContentLoaded', (event)=>{
   // Add first menu item content from default HTML layout
   state.items.unshift({
     menu: "All types:",
-    header: document.querySelector('article > h2').innerHTML,
-    image: document.querySelector('article > img').src,
-    description: document.querySelector('p.description').innerHTML,
-    habitat: document.querySelector('span.habitat').innerHTML,
-    method: document.querySelector('p.method').innerHTML,
+    header: document.querySelector('.header').innerHTML,
+    image: document.querySelector('.picture').src,
+    description: document.querySelector('.description').innerHTML,
+    habitat: document.querySelector('.habitat').innerHTML,
+    method: document.querySelector('.method').innerHTML,
   });
 
   renderPage(state);
