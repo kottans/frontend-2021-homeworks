@@ -49,7 +49,7 @@ const state = {
       method: "How to attract her: What are you, an idiot? Just flash your cash!",
     },
   ],
-  activeIndex: null,
+  activeIndex: 0,
 };
 
 const getViewWidth = () => Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
@@ -196,7 +196,6 @@ document.addEventListener('DOMContentLoaded', (event)=>{
     habitat: document.querySelector('span.habitat').innerHTML,
     method: document.querySelector('p.method').innerHTML,
   });
-  state.activeIndex = 0;
 
   renderPage(state);
   
