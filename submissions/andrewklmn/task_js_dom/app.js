@@ -78,7 +78,7 @@ const toggleMenu = (event)=>{
 
 const menuItemClickListener = (event)=>{
 
-  if (event.target.tagName=='A') {
+  if (event.target.matches('.menu-item')) {
     state.activeIndex = event.target.parentNode.id;
     renderPage(state);
   
