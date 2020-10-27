@@ -91,12 +91,9 @@ const renderMenu = (state)=>{
 
   state.items.forEach((item,index)=>{
     let li = document.createElement("li");   
-    li = document.createElement("li");
+    li.id = index;
 
     let a = document.createElement("a");
-    li.id = index;
-      
-    a = document.createElement("a");
     a.innerHTML = item.menu;
     a.className = "menu-item";
     a.href = "javascript:void(0)";
