@@ -53,8 +53,13 @@ const state = {
 };
 
 const menuContainer = document.querySelector('.menu-container');
-const wraper = document.querySelector('.wraper');
 const menuUl = document.querySelector('.menu');
+const wraper = document.querySelector('.wraper');
+const header = document.querySelector('.header');
+const image = document.querySelector('.picture');
+const description = document.querySelector('.description');
+const locationArea = document.querySelector('.habitat');
+const attractionMethod = document.querySelector('.method');
 
 const getViewWidth = () => Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
 
@@ -114,54 +119,13 @@ const showTextContent = ()=>{
 const renderArticle = (content)=> {
 
   document.body.classList.add("text-white");
-  
-  wraper.classList.add("wraper");
-  wraper.classList.add("narrow");
-  let fragment = document.createDocumentFragment();
-  
-  let a = document.createElement("a");
-  a.innerHTML = "&laquo;";
-  a.className = "btn-toogle-menu";
-  a.href = "javascript:void(0)";
-  a.addEventListener('click', toggleMenu);
-  fragment.appendChild(a);
 
-  let h = document.createElement("h2");
-  h.innerHTML = content.title;
-  h.className = "header-line";
-  fragment.appendChild(h);
-
-  let img = document.createElement("img");
-  img.src = content.image;
-  img.className = "picture";
-  img.alt = content.image + ' image';
-  img.addEventListener('load',showTextContent);
-  fragment.appendChild(img);
-
-  let p = document.createElement("p");
-  p.innerHTML = content.description;
-  p.className = "description"
-  fragment.appendChild(p);
-  
-  let span = document.createElement("span");
-  span.innerHTML = content.location;
-  span.className = "habitat"
-  p = document.createElement("p");
-  p.innerHTML = 'Habitat: ';
-
-  p.appendChild(span);
-  p.className = "habitat-line"
-  fragment.appendChild(p);
-
-  p = document.createElement("p");
-  p.innerHTML = content.attractionMethod;
-  p.className = "method"
-  fragment.appendChild(p);
-  
-
-  wraper.innerHTML="";
-  wraper.appendChild(fragment);
-
+  header.innerHTML = content.title;
+  image.src = content.image;
+  image.alt = content.menuTitle + ' image';
+  description.innerHTML = content.description;
+  locationArea.innerHTML = content.location;
+  attractionMethod.innerHTML = content.attractionMethod;
 };
 
 const renderPage = (state) => {
@@ -175,18 +139,29 @@ const renderPage = (state) => {
 document.addEventListener('DOMContentLoaded', (event)=>{
 
   // Add first menu item content from default HTML layout
+  
   state.items.unshift({
     menuTitle: "All types:",
-    title: document.querySelector('.header').innerHTML,
-    image: document.querySelector('.picture').src,
-    description: document.querySelector('.description').innerHTML,
-    location: document.querySelector('.habitat').innerHTML,
-    attractionMethod: document.querySelector('.method').innerHTML,
+    title: header.innerHTML,
+    image: image.src,
+    description: description.innerHTML,
+    location: location.innerHTML,
+    attractionMethod: attractionMethod.innerHTML,
   });
 
-  renderPage(state);
   
+  let a = document.createElement("a");
+  a.innerHTML = "&laquo;";
+  a.className = "btn-toogle-menu";
+  a.href = "javascript:void(0)";
+  a.addEventListener('click', toggleMenu);
+  header.parentNode.insertBefore(a,header);
+  
+
+  renderPage(state);
+
   menuUl.addEventListener('click',menuItemClickListener);
+  image.addEventListener('load',showTextContent);
 
   if (getViewWidth() < 820) {
     document.querySelector('.btn-toogle-menu').click(); 
