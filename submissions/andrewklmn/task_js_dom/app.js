@@ -67,6 +67,7 @@ const wrapper = document.querySelector('.wrapper');
 const title = document.querySelector('.title');
 const image = document.querySelector('.picture');
 const description = document.querySelector('.description');
+const locationLine = document.querySelector('.habitat-line');
 const locationArea = document.querySelector('.habitat');
 const attractionMethod = document.querySelector('.method');
 
@@ -117,12 +118,18 @@ const renderMenu = (state)=>{
 };
 
 const showTextContent = ()=>{
-  document.body.classList.remove("text-white");
-}
+  setTimeout(()=> {
+    description.classList.remove("transparent");
+    locationLine.classList.remove("transparent");
+    attractionMethod.classList.remove("transparent");
+  }, 150); /* this timeout was added just for immitation longer time of image loading */
+};
 
 const renderArticle = (content)=> {
 
-  document.body.classList.add("text-white");
+  description.classList.add("transparent");
+  locationLine.classList.add("transparent");
+  attractionMethod.classList.add("transparent");
 
   title.innerHTML = content.title;
   image.src = content.image;
