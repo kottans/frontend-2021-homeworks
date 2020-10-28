@@ -55,7 +55,7 @@ body {
   padding: 0;
 }
 
-.navigation_btn {
+.navigation_button {
   width: 100%;
   margin: 0;
   text-align: left;
@@ -69,14 +69,14 @@ body {
   background: rgb(245,245,245) linear-gradient(#f4f4f4, #f1f1f1);
 }
 
-.navigation_btn:hover {
+.navigation_button:hover {
   color: rgb(24,24,24);
   border: 1px solid rgb(198,198,198);
   background: #f7f7f7 linear-gradient(#f7f7f7, #f1f1f1);
   cursor: pointer;
 }
 
-.navigation_btn:focus {
+.navigation_button:focus {
   color: rgb(51,51,51);
   background: hsl(0, 0%, 93%) linear-gradient(rgb(238,238,238), rgb(224,224,224));
   box-shadow: 0 1px 2px rgba(0,0,0,.1) inset;
@@ -100,6 +100,7 @@ body {
 }
 
 .info ul {
+  margin: 0;
   padding: 10px;
   background-color: hsla(211, 20%, 49%, 0.57);
   z-index: 2;
