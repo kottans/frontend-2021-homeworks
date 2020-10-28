@@ -73,6 +73,7 @@ a:focus,
   display: grid;
   height: 480px;
   overflow-y: scroll;
+  overflow-x: hidden;
 }
 .popup-item {
   display: grid;
