@@ -1,8 +1,19 @@
+const styles = {
+    menuLink: 'menu__link',
+    menuItem: 'menu__item',
+    heroItem: 'hero__item',
+    heroImg: 'hero__image',
+    itemIcon: 'item__icon',
+    itemTitle: 'item__caption',
+    itemPrice: 'item__price',
+    itemInfo: 'item__description'
+};
+
 async function fetchAsync () {
     let response = await fetch('./data/data.json');
     let data = await response.json();
     return data;
-}
+}   
   
 fetchAsync()
     .then(data => {
@@ -17,42 +28,33 @@ function createHtml(data) {
     const menuItems = document.createDocumentFragment();
     const heroItems = document.createDocumentFragment();
     data.pancakes.forEach((elem, index) => {
-        let navItem = document.createElement('li');
-        navItem.classList.add('menu__item');
-        let navLink = document.createElement('a');
-        navLink.classList.add('menu__link');
-        navLink.setAttribute('id', `link${index+1}`);
-        navLink.setAttribute('href', '#');
-        navLink.textContent = elem.title;
-        navItem.appendChild(navLink);
+        const navItem = generateElement('li', styles.menuItem);
+        const navLink = `<a class=${styles.menuLink} href='#' id=link${index+1}>${elem.title}</a>`;
+        navItem.insertAdjacentHTML('afterbegin', navLink);
         menuItems.appendChild(navItem);
-        let sectionItem = document.createElement('div');
-        sectionItem.classList.add('hero__item');
+        const sectionItem = generateElement('div', styles.heroItem);
         sectionItem.setAttribute('id', `tab${index+1}`);
-        let itemImageContainer = document.createElement('figure');
-        itemImageContainer.classList.add('hero__image');
-        let image = document.createElement('img');
-        image.setAttribute('src', elem.path);
-        let caption = document.createElement('figcaption');
-        caption.classList.add('item__caption');
-        caption.textContent = `Pancakes ${elem.title}`;
-        let itemPrice = document.createElement('div');
-        itemPrice.classList.add('item__price');
-        itemPrice.textContent = `Price for portion ${elem.price} $`;
-        let itemDescription = document.createElement('div');
-        itemDescription.classList.add('item__description');
-        itemDescription.textContent = elem.description;
-        itemImageContainer.appendChild(image);
-        itemImageContainer.appendChild(caption);
-        sectionItem.appendChild(itemPrice);
-        sectionItem.appendChild(itemImageContainer);
-        sectionItem.appendChild(itemDescription);
+        const heroContent = `
+            <div class=${styles.itemPrice}>Price for portion ${elem.price} $</div>
+            <figure class=${styles.heroImg} id='tab${index+1}'>
+                <img class=${styles.itemIcon} src=${elem.path} />
+                <figcaption class=${styles.itemTitle}>Pancakes ${elem.title}</figcaption>
+            </figure>
+            <div class=${styles.itemInfo}>${elem.description}</div>
+        `;
+        sectionItem.insertAdjacentHTML('afterbegin', heroContent);
         heroItems.appendChild(sectionItem);
     });
     return {
         menuItems,
         heroItems
     };
+}
+
+function generateElement(elementName, className) {
+    let item = document.createElement(elementName);
+    item.classList.add(className);
+    return item;
 }
 
 function drawPage(details) {
@@ -82,20 +84,8 @@ function animation(){
             let yAxis = (window.innerHeight / 2 - e.pageY) / 25;
             item.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
         });
-    });
-    heroImgHolders.forEach(item => {
-        item.addEventListener("mouseenter", (e) => {
-            item.style.transition = "none";
-            item.firstChild.style.transform = "translateZ(200px)";
-            item.lastChild.style.transform = "translateZ(50px)";
-        });
-    });
-    heroImgHolders.forEach(item => {
         item.addEventListener("mouseleave", (e) => {
-            item.style.transition = "all 0.5s ease";
             item.style.transform = `rotateY(0deg) rotateX(0deg)`;
-            item.lastChild.style.transform = "translateZ(0px)";
-            item.firstChild.style.transform = "translateZ(0px)";
         });
     });
 }
