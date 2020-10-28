@@ -79,7 +79,6 @@ const toggleMenu = (event)=>{
   menuContainer.classList.toggle("opened") ;
   wrapper.classList.toggle("wide");
 
-  return false;
 };
 
 const menuItemClickListener = (event)=>{
@@ -92,8 +91,6 @@ const menuItemClickListener = (event)=>{
       document.querySelector('.btn-toogle-menu').click(); 
     }
   };
-
-  return false;
 };
 
 const renderMenu = (state)=>{
