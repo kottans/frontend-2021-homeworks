@@ -64,7 +64,7 @@ const menuContainer = document.querySelector('.menu-container');
 const menuUl = document.querySelector('.menu');
 const toggleMenuButton = document.querySelector('.btn-toogle-menu');
 const wraper = document.querySelector('.wraper');
-const header = document.querySelector('.header');
+const title = document.querySelector('.header');
 const image = document.querySelector('.picture');
 const description = document.querySelector('.description');
 const locationArea = document.querySelector('.habitat');
@@ -128,7 +128,7 @@ const renderArticle = (content)=> {
 
   document.body.classList.add("text-white");
 
-  header.innerHTML = content.title;
+  title.innerHTML = content.title;
   image.src = content.image;
   image.alt = content.menuTitle + ' image';
   description.innerHTML = content.description;
@@ -146,14 +146,6 @@ const renderPage = (state) => {
 // start App when DOM is loaded
 document.addEventListener('DOMContentLoaded', (event)=>{
   
-  /*
-  let a = document.createElement("a");
-  a.className = "btn-toogle-menu";
-  a.href = "javascript:void(0)";
-  a.addEventListener('click', toggleMenu);
-  header.parentNode.insertBefore(a,header);
-  */
-
   renderPage(state);
 
   toggleMenuButton.addEventListener('click', toggleMenu);
