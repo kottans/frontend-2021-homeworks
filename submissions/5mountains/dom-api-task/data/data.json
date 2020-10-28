@@ -1,0 +1,28 @@
+{
+    "pancakes": [
+        {
+            "title": "with Butter",
+            "description": "Good old fashioned Pancakes with butter by my Grandma's recipe book. Ingredients includes: flour, salt, sugar, milk, eggs, baking powder, butter. Portion of 200 grams, it has 158 calories; protein 4.5g; carbohydrates 21.7g; fat 5.9g.",
+            "path": "./images/butter.png",
+            "price": 5
+        },
+        {
+            "title": "with Maple Syrup",
+            "description": "Good old fashioned Pancakes with maple syrup by my Grandma's recipe book. Ingredients includes: flour, salt, sugar, milk, eggs, baking powder, maple syrup. Portion of 210 grams, 178 calories; protein 5g; carbohydrates 23g; fat 6g.",
+            "path": "./images/maple.png",
+            "price": 6
+        },
+        {
+            "title": "with Banana",
+            "description": "Good old fashioned Pancakes with banana by my Grandma's recipe book. Ingredients includes: flour, salt, sugar, milk, eggs, baking powder, banana. Portion of 220 grams, 188 calories; protein 5g; carbohydrates 25g; fat 5g.",
+            "path": "./images/banana.png",
+            "price": 7
+        },
+        {
+            "title": "with Strawberry",
+            "description": "Good old fashioned Pancakes with strawberry by my Grandma's recipe book. Ingredients includes: flour, salt, sugar, milk, eggs, baking powder, strawberry, cream. Portion of 240 grams, 198 calories; protein 5g; carbohydrates 28g; fat 6g.",
+            "path": "./images/strawberry.png",
+            "price": 7.5
+        }
+    ]
+}
