@@ -17,6 +17,12 @@ body {
   font-family: Helvetica, sans-serif;
   color: black;
 }
+ul {
+  display: flex;
+}
+ul li {
+  list-style: none;
+}
 .topnav {
   overflow: hidden;
   background-color: var(--bg-grey);
@@ -26,7 +32,6 @@ body {
 }
 .topnav a,
 .topnav label {
-  float: left;
   color: white;
   text-align: center;
   padding: 14px 16px;
@@ -40,6 +45,9 @@ a:focus,
   background-color: var(--lightorange);
   color: black;
   outline: none;
+}
+.nav-item{
+  float: left;
 }
 #menu-toggle,
 #more {
@@ -87,7 +95,9 @@ a:focus,
   font-size: 14px;
   padding-top: 8px;
 }
-.popup-btn, 
+.popup-btn {
+  float: left;
+} 
 .kottans {
   grid-column-start: 1;
   grid-column-end: 3;
