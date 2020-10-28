@@ -70,8 +70,9 @@ const description = document.querySelector('.description');
 const locationArea = document.querySelector('.habitat');
 const attractionMethod = document.querySelector('.method');
 
-const getViewWidth = () => Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
-const maxAutoHideMenuWidth = 820;
+  const getViewWidth = () => Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+  const maxAutoHideMenuWidth = 820;
+
 
 const toggleMenu = (event)=>{
   
@@ -86,7 +87,7 @@ const menuItemClickListener = (event)=>{
   if (event.target.matches('.menu-item')) {
     state.activeIndex = Number(event.target.parentNode.id);
     renderPage(state);
-  
+
     if (getViewWidth() < maxAutoHideMenuWidth) {
       document.querySelector('.btn-toogle-menu').click(); 
     }
@@ -146,9 +147,5 @@ document.addEventListener('DOMContentLoaded', (event)=>{
   toggleMenuButton.addEventListener('click', toggleMenu);
   menuUl.addEventListener('click',menuItemClickListener);
   image.addEventListener('load',showTextContent);
-
-  if (getViewWidth() < maxAutoHideMenuWidth) {
-    document.querySelector('.btn-toogle-menu').click(); 
-  }
 
 });
