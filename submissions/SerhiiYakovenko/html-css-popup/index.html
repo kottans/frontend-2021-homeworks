@@ -1,91 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CyberPunk</title>
+    <link href="./css/style.css" rel="stylesheet" />
+    <link rel="icon" href="./img/favicon.png" type="image/png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CyberPunk</title>
-  <link href="./css/style.css" rel="stylesheet" />
-  <link rel="icon" href="./img/favicon.png" type="image/png" />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet" />
-</head>
-
-<body>
-  <h1>
-    <a class="release"
-      href="https://www.watchisup.com/countdown/videogames/cyberpunk-2077-br-release-date-2020-04-16-00-00"
-      title="Cyberpunk 2077 release countdown" target="_blank">"Cyberpunk 2077" release countdown</a>
-  </h1>
-  <nav class="nav">
-    <ul class="nav__menu menu">
-      <li class="nav-item headquarter">
-        <a href="https://www.cyberpunk.net/ru/ru/" class="menu-item" target="_blank">Cyberpunk.net</a>
-      </li>
-      <li class="nav-item pre-order">
-        <a href="https://www.cyberpunk.net/ru/ru/pre-order" class="menu-item pre-order" target="_blank">Pre-order</a>
-      </li>
-      <li class="nav-item">
-        <div class="menu__popup main">
-          <input type="checkbox" id="popup" class="popup-input input" />
-          <label for="popup" class="popup-label"></label>
-          <div class="popup-main">
-            <a href="https://www.facebook.com/CyberpunkGame" class="popup-item" target="_blank">
-              <img src="./img/facebook.svg" alt="facebook" />
-              <p>Facebook</p>
-            </a>
-            <a href="https://vk.com/CyberpunkGame" class="popup-item" target="_blank">
-              <img src="./img/vk.svg" alt="vk" />
-              <p>Vk</p>
-            </a>
-            <a href="https://www.instagram.com/cyberpunkgame/" class="popup-item" target="_blank">
-              <img src="./img/instagram.svg" alt="instagram" />
-              <p>Instagram</p>
-            </a>
-            <a href="https://www.youtube.com/user/CyberPunkGame" class="popup-item" target="_blank">
-              <img src="./img/youtube.svg" alt="youtube" />
-              <p>Youtube</p>
-            </a>
-            <a href="http://twitter.com/cyberpunkgame" class="popup-item hidden" target="_blank">
-              <img src="./img/twitter.svg" alt="twitter" />
-              <p>Twitter</p>
-            </a>
-            <a href="https://www.twitch.tv/cdprojektred" class="popup-item" target="_blank">
-              <img src="./img/twitch.svg" alt="twitch" />
-              <p>Twitch</p>
-            </a>
-            <input type="checkbox" id="more-btn" class="more-input input" />
-            <label for="more-btn" class="more-label">Explore more!</label>
-            <a href="https://forums.cdprojektred.com/index.php?forums/cyberpunk.21/" class="popup-item hidden"
-              target="_blank">
-              <img src="./img/forum.svg" alt="forum" />
-              <p>Forum</p>
-            </a>
-            <a href="https://discord.gg/cyberpunkgame" class="popup-item hidden" target="_blank">
-              <img src="./img/discord.svg" alt="discord" />
-              <p>Discord</p>
-            </a>
-            <a href="https://cyberpunkgame.tumblr.com/" class="popup-item hidden" target="_blank">
-              <img src="./img/world.svg" alt="world" />
-              <p>World</p>
-            </a>
-            <a class="kottans hidden" href="https://github.com/kottans">Even more from Kottans</a>
+  <body>
+    <nav class="nav">
+      <ul class="nav__lists menu">
+        <li class="nav__list-item headquarter">
+          <a
+            href="https://www.cyberpunk.net/ru/ru/"
+            class="nav__list-link"
+            target="_blank"
+            >Cyberpunk.net</a
+          >
+        </li>
+        <li class="nav__list-item pre-order">
+          <a
+            href="https://www.cyberpunk.net/ru/ru/pre-order"
+            class="nav__list-link pre-order"
+            target="_blank"
+            >Pre-order</a
+          >
+        </li>
+        <li class="nav__list-item">
+          <div class="menu__popup main">
+            <input type="checkbox" id="popup" class="popup-input input" />
+            <label for="popup" class="popup-label"></label>
+            <div class="popup-main">
+              <a
+                href="https://www.facebook.com/CyberpunkGame"
+                class="popup-item"
+                target="_blank"
+              >
+                <img src="./img/facebook.svg" alt="facebook" />
+                <p>Facebook</p>
+              </a>
+              <a
+                href="https://vk.com/CyberpunkGame"
+                class="popup-item"
+                target="_blank"
+              >
+                <img src="./img/vk.svg" alt="vk" />
+                <p>Vk</p>
+              </a>
+              <a
+                href="https://www.instagram.com/cyberpunkgame/"
+                class="popup-item"
+                target="_blank"
+              >
+                <img src="./img/instagram.svg" alt="instagram" />
+                <p>Instagram</p>
+              </a>
+              <a
+                href="https://www.youtube.com/user/CyberPunkGame"
+                class="popup-item"
+                target="_blank"
+              >
+                <img src="./img/youtube.svg" alt="youtube" />
+                <p>Youtube</p>
+              </a>
+              <a
+                href="http://twitter.com/cyberpunkgame"
+                class="popup-item hidden"
+                target="_blank"
+              >
+                <img src="./img/twitter.svg" alt="twitter" />
+                <p>Twitter</p>
+              </a>
+              <a
+                href="https://www.twitch.tv/cdprojektred"
+                class="popup-item"
+                target="_blank"
+              >
+                <img src="./img/twitch.svg" alt="twitch" />
+                <p>Twitch</p>
+              </a>
+              <input type="checkbox" id="more-btn" class="more-input input" />
+              <label for="more-btn" class="more-label">Explore more!</label>
+              <a
+                href="https://forums.cdprojektred.com/index.php?forums/cyberpunk.21/"
+                class="popup-item hidden"
+                target="_blank"
+              >
+                <img src="./img/forum.svg" alt="forum" />
+                <p>Forum</p>
+              </a>
+              <a
+                href="https://discord.gg/cyberpunkgame"
+                class="popup-item hidden"
+                target="_blank"
+              >
+                <img src="./img/discord.svg" alt="discord" />
+                <p>Discord</p>
+              </a>
+              <a
+                href="https://cyberpunkgame.tumblr.com/"
+                class="popup-item hidden"
+                target="_blank"
+              >
+                <img src="./img/world.svg" alt="world" />
+                <p>World</p>
+              </a>
+              <a class="kottans hidden" href="https://github.com/kottans"
+                >Even more from Kottans</a
+              >
+            </div>
           </div>
-        </div>
-      </li>
-      <li class="nav-item console">
-        <a href="https://www.microsoft.com/p/cyberpunk-2077/BX3M8L83BBRW" class="menu-item console-xbox"
-          target="_blank">
-          <img src="./img/xbox.svg" alt="xbox" />
-        </a>
-      </li>
-      <li class="nav-item console">
-        <a href="https://store.playstation.com/en-gb/product/EP4497-CUSA16579_00-0000000000000001"
-          class="menu-item console-ps4" target="_blank">
-          <img src="./img/ps4.svg" alt="ps4" />
-        </a>
-      </li>
-    </ul>
-  </nav>
-</body>
-
+        </li>
+        <li class="nav__list-item console">
+          <a
+            href="https://www.microsoft.com/p/cyberpunk-2077/BX3M8L83BBRW"
+            class="nav__list-link console-xbox"
+            target="_blank"
+          >
+            <img src="./img/xbox.svg" alt="xbox" />
+          </a>
+        </li>
+        <li class="nav__list-item console">
+          <a
+            href="https://store.playstation.com/en-gb/product/EP4497-CUSA16579_00-0000000000000001"
+            class="nav__list-link console-ps4"
+            target="_blank"
+          >
+            <img src="./img/ps4.svg" alt="ps4" />
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <h1>
+      <a
+        class="release"
+        href="https://www.watchisup.com/countdown/videogames/cyberpunk-2077-br-release-date-2020-04-16-00-00"
+        title="Cyberpunk 2077 release countdown"
+        target="_blank"
+        >"Cyberpunk 2077" release countdown</a
+      >
+    </h1>
+  </body>
 </html>
