@@ -89,6 +89,25 @@ p {
   font-size: 48px;
 }
 
+.btn-toogle-menu:before {
+  position: absolute;
+  content: "«";
+  top: 10px;
+  left: 10px;
+}
+
+.btn-toogle-menu:after {
+  content: "";
+}
+
+.burger:before {
+  content: "";
+}
+
+.burger:after {
+  content: "☰";
+}
+
 .wraper {
   display: grid;
   grid-template-columns: repeat(6, 1fr);

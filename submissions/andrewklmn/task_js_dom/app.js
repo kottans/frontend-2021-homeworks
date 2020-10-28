@@ -74,7 +74,6 @@ const maxAutoHideMenuWidth = 820;
 
 const toggleMenu = (event)=>{
   
-  event.target.innerHTML = (event.target.innerHTML == "«") ? "☰":"«";
   event.target.classList.toggle("burger");
   
   menuContainer.classList.toggle("opened") ;
@@ -148,7 +147,6 @@ const renderPage = (state) => {
 document.addEventListener('DOMContentLoaded', (event)=>{
   
   let a = document.createElement("a");
-  a.innerHTML = "&laquo;";
   a.className = "btn-toogle-menu";
   a.href = "javascript:void(0)";
   a.addEventListener('click', toggleMenu);
