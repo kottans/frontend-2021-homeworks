@@ -57,7 +57,7 @@ a {
   align-items: center;
 }
 
-.list__item {
+.navigation__list-item {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -70,7 +70,7 @@ a {
           justify-content: center;
 }
 
-.list__item_bell {
+.navigation__list-item_bell {
   width: 38px;
   height: 38px;
   border-radius: 50%;
@@ -260,21 +260,21 @@ a {
 }
 
 /*Settings for state hover/active/focus*/
-.list__item_link:hover,
+.navigation__list-item_link:hover,
 .even-more__link:hover {
   text-decoration: underline;
 }
 
-.list__item_link:active {
+.navigation__list-item_link:active {
   color: #1d8ffa;
 }
 
-.list__item_bell:hover,
+.navigation__list-item_bell:hover,
 .label__input:hover {
   background-color: #f8f9fa;
 }
 
-.list__item_bell:active,
+.navigation__list-item_bell:active,
 .label__input:active {
   background-color: #b2b2b2;
 }
