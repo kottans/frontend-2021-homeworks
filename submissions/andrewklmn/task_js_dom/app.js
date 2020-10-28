@@ -79,7 +79,6 @@ const toggleMenu = (event)=>{
   menuContainer.classList.toggle("opened") ;
   wrapper.classList.toggle("wide");
 
-  event.stopPropagation();
   return false;
 };
 
@@ -92,7 +91,6 @@ const menuItemClickListener = (event)=>{
     if (getViewWidth() < maxAutoHideMenuWidth) {
       document.querySelector('.btn-toogle-menu').click(); 
     }
-    event.stopPropagation();
   };
 
   return false;
