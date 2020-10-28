@@ -7,30 +7,34 @@
 
 // ======== OBJECTS DEFINITIONS ========
 // Define your objects here
+const phrases = {
+  cat: 'Meow!',
+  dog: 'bark-bark!',
+  man: 'Master Bruce, I...',
+  woman: 'Need more money!',
+};
+
 const cat = {
   species: 'cat',
   name: 'Prokhor',
-  hands: 0,
   legs: 4,
-  saying: 'Meow!',
+  saying: phrases.cat,
   gender: 'male',
   friends: 'June, Maki',
 };
 const catWoman = {
   species: 'cat',
   name: 'June',
-  hands: 0,
   legs: 4,
-  saying: cat.saying,
+  saying: phrases.cat,
   gender: 'female',
   friends: 'Anna',
 };
 const dog = {
   species: 'dog',
   name: 'Maki',
-  hands: 0,
   legs: 4,
-  saying: 'bark-bark!',
+  saying: phrases.dog,
   gender: 'male',
   friends: 'Alfred, Prokhor, Anna',
 };
@@ -39,7 +43,7 @@ const man = {
   name: 'Alfred',
   hands: 2,
   legs: 2,
-  saying: 'Master Bruce, I...',
+  saying: phrases.man,
   gender: 'male',
   friends: 'Maki, Anna',
 };
@@ -48,7 +52,7 @@ const woman = {
   name: 'Anna',
   hands: 2,
   legs: 2,
-  saying: 'Need more money!',
+  saying: phrases.woman,
   gender: 'female',
   friends: 'June, Alfred',
 };
@@ -73,7 +77,7 @@ const makeFormatOutput = ({
   gender,
   friends,
 }) => {
-  return `Hello! I am ${species}, my name is ${name}, my gender is ${gender}, I have ${hands} arms and ${legs} legs and you know what: ${saying}. My friends: ${friends}`;
+  return `Hello! I am ${species}, my name is ${name}, my gender is ${gender}, I have ${hands || '0'} arms and ${legs} legs and you know what: ${saying}. My friends: ${friends}`;
 };
 
 inhabitants.forEach((habitant) => print(makeFormatOutput(habitant), 'h5'));
