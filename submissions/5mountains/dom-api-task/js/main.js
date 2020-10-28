@@ -28,10 +28,8 @@ function createHtml(data) {
     const menuItems = document.createDocumentFragment();
     const heroItems = document.createDocumentFragment();
     data.pancakes.forEach((elem, index) => {
-        const element = elem;
-        const token = index;
-        const navContent = generateNavContent(element, token); 
-        const heroContent = generateHeroContent(element, token); 
+        const navContent = generateNavContent(elem, index); 
+        const heroContent = generateHeroContent(elem, index); 
         menuItems.appendChild(navContent);
         heroItems.appendChild(heroContent);
     });
@@ -41,23 +39,23 @@ function createHtml(data) {
     };
 }
 
-function generateNavContent(el, i) {
+function generateNavContent(elem, index) {
     let navItem = generateElement('li', styles.menuItem);
-    let navLink = `<a class=${styles.menuLink} href='#' id=link${i+1}>${el.title}</a>`;
+    let navLink = `<a class=${styles.menuLink} href='#' id=link${index+1}>${elem.title}</a>`;
     navItem.insertAdjacentHTML('afterbegin', navLink);
     return navItem;
 }
 
-function generateHeroContent(el, i) {
+function generateHeroContent(elem, index) {
     let sectionItem = generateElement('div', styles.heroItem);
-    sectionItem.setAttribute('id', `tab${i+1}`);
+    sectionItem.setAttribute('id', `tab${index+1}`);
     let sectionItemContent = `
-        <div class=${styles.itemPrice}>Price for portion ${el.price} $</div>
-        <figure class=${styles.heroImg} id='tab${i+1}'>
-            <img class=${styles.itemIcon} src=${el.path} />
-            <figcaption class=${styles.itemTitle}>Pancakes ${el.title}</figcaption>
+        <div class=${styles.itemPrice}>Price for portion ${elem.price} $</div>
+        <figure class=${styles.heroImg} id='tab${index+1}'>
+            <img class=${styles.itemIcon} src=${elem.path} />
+            <figcaption class=${styles.itemTitle}>Pancakes ${elem.title}</figcaption>
         </figure>
-        <div class=${styles.itemInfo}>${el.description}</div>
+        <div class=${styles.itemInfo}>${elem.description}</div>
     `;
     sectionItem.insertAdjacentHTML('afterbegin', sectionItemContent);
     return sectionItem;
