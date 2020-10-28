@@ -70,42 +70,66 @@ p {
 
 .btn-toogle-menu {
   position: fixed;
-  top: 0;
+  top: 0px;
   left: 220px;
 
+  width: 48px;
+  height: 48px;
+
   padding: 10px;
+  border: solid white thin;
+  border-width: 0 1px 1px 0;
   border-bottom-right-radius: 10px;
 
   font-size: 58px;
   text-decoration: none;
   color: black;
   background-color: white;
+  outline: none;
 
   transition: 0.5s;
-}
-
-.burger {
-  left: 0;
-  font-size: 48px;
 }
 
 .btn-toogle-menu:before {
   position: absolute;
   content: "«";
-  top: 10px;
+  top: -18px;
   left: 10px;
+
+  outline: none;
+  cursor: pointer;
 }
 
 .btn-toogle-menu:after {
   content: "";
 }
 
-.burger:before {
+.btn-toogle-menu:focus,
+.btn-toogle-menu:hover
+{
+  border-color: gray;
+}
+
+.btn-toogle-menu:active
+ {
+  border-color: red;
+  color: red;
+}
+
+.closed {
+  left: 0;
+  cursor: pointer;
+}
+
+.closed:before {
   content: "";
 }
 
-.burger:after {
+.closed:after {
+  position: absolute;
   content: "☰";
+  top: -18px;
+  left: 6px;
 }
 
 .wraper {
@@ -115,13 +139,13 @@ p {
   grid-column-gap: 20px;
   grid-row-gap: 0px; 
 
-  margin-left: 240px;
-  height: calc(100vh - 70px);
-  min-height: 400px;
-
   margin-top: 0;
   margin-right: 6%;
+  margin-left: 240px;
   padding-left: 20px;
+
+  height: calc(100vh - 70px);
+  min-height: 400px;
 
   transition: 0.5s;
 }

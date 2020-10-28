@@ -62,6 +62,7 @@ const state = {
 
 const menuContainer = document.querySelector('.menu-container');
 const menuUl = document.querySelector('.menu');
+const toggleMenuButton = document.querySelector('.btn-toogle-menu');
 const wraper = document.querySelector('.wraper');
 const header = document.querySelector('.header');
 const image = document.querySelector('.picture');
@@ -74,8 +75,7 @@ const maxAutoHideMenuWidth = 820;
 
 const toggleMenu = (event)=>{
   
-  event.target.classList.toggle("burger");
-  
+  event.target.classList.toggle("closed");
   menuContainer.classList.toggle("opened") ;
   wraper.classList.toggle("wide");
 
@@ -146,15 +146,17 @@ const renderPage = (state) => {
 // start App when DOM is loaded
 document.addEventListener('DOMContentLoaded', (event)=>{
   
+  /*
   let a = document.createElement("a");
   a.className = "btn-toogle-menu";
   a.href = "javascript:void(0)";
   a.addEventListener('click', toggleMenu);
   header.parentNode.insertBefore(a,header);
-  
+  */
 
   renderPage(state);
 
+  toggleMenuButton.addEventListener('click', toggleMenu);
   menuUl.addEventListener('click',menuItemClickListener);
   image.addEventListener('load',showTextContent);
 
