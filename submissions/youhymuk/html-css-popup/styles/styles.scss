@@ -1,0 +1,213 @@
+$focus-color: rgba(#40a9ff, 0.4);
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+  
+  &:hover, &:focus {
+    outline: none;
+    background-color: $focus-color;
+  }
+}
+
+img {
+  max-width: 100%;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+.toolbar {
+  height: 50px;
+  min-width: 32px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0 2%;
+  
+  &__item:not(:last-child) {
+    margin-right: 1rem;
+  }
+}
+
+.popup-wrapper {
+  position: relative;
+}
+
+.popup-btn {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  
+  &:focus ~ .popup-icon {
+    background-color: $focus-color;
+  }
+  
+  &:checked ~ .popup {
+    display: block;
+  }
+}
+
+.popup-icon {
+  display: block;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+  background: url(../img/popup-button.png) center / cover no-repeat;
+  
+  &:hover {
+    background-color: $focus-color;
+  }
+}
+
+.bell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  
+  img {
+    width: 18px;
+  }
+}
+
+.user-acc {
+  display: block;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border: 1px solid #c5c5c5;
+}
+
+.user-pic {
+  max-width: 100%;
+}
+
+.popup {
+  position: absolute;
+  top: 50px;
+  right: -90px;
+  display: none;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: -14px;
+    right: 84px;
+    z-index: -1;
+    width: 0;
+    height: 0;
+    border-left: 16px solid transparent;
+    border-right: 16px solid transparent;
+    border-bottom: 16px solid #ccc;
+  }
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: -12px;
+    right: 85px;
+    z-index: 1;
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 15px solid #fff;
+  }
+}
+
+.popup-content {
+  width: 300px;
+  height: 360px;
+  overflow: auto;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 3px rgba(0, 0, 0, .6);
+  background-color: #fff;
+}
+
+.menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 0.8rem 0;
+}
+
+.menu.extra {
+  display: none;
+  border-top: 1px solid #ccc;
+}
+
+.menu-item a {
+  display: block;
+  border-radius: 10px;
+  
+  &:hover, &:focus {
+    background-color: $focus-color;
+  }
+}
+
+.menu-item__icon {
+  width: 75px;
+  height: 75px;
+  padding: 0.2rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  
+  img {
+    max-width: 60px;
+    max-height: 45px;
+  }
+}
+
+.menu-item__title {
+  font-size: 0.8rem;
+}
+
+.more-btn {
+  position: absolute;
+  opacity: 0;
+  
+  & + label {
+    cursor: pointer;
+  }
+  
+  &:focus ~ label, &:hover ~ label {
+    outline: none;
+    background-color: $focus-color;
+  }
+  
+  &:checked ~ label {
+    display: none;
+  }
+  
+  &:checked ~ .menu.extra {
+    display: flex;
+  }
+}
+
+.more-btn + label {
+  display: block;
+  margin: 0 auto;
+  width: 60px;
+  text-align: center;
+  border: none;
+  border-radius: 5px;
+  background-color: transparent;
+}
