@@ -136,7 +136,7 @@ p {
   vertical-align: middle;
 }
 
-.wraper {
+.wrapper {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: 90px 1fr 1fr 1fr 60px 1fr;
@@ -217,7 +217,7 @@ footer {
 }
 
 @media screen and (max-width: 1030px) {
-  .wraper {
+  .wrapper {
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: 15% 1fr 1fr 1fr;
     grid-column-gap: 20px;
@@ -268,7 +268,7 @@ footer {
     font-size: 36px;
   }
 
-  .wraper {
+  .wrapper {
     
     display: flex;
     flex-direction: column;

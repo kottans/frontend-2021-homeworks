@@ -63,7 +63,7 @@ const state = {
 const menuContainer = document.querySelector('.menu-container');
 const menuUl = document.querySelector('.menu');
 const toggleMenuButton = document.querySelector('.btn-toogle-menu');
-const wraper = document.querySelector('.wraper');
+const wrapper = document.querySelector('.wrapper');
 const title = document.querySelector('.title');
 const image = document.querySelector('.picture');
 const description = document.querySelector('.description');
@@ -77,7 +77,7 @@ const toggleMenu = (event)=>{
   
   event.target.classList.toggle("closed");
   menuContainer.classList.toggle("opened") ;
-  wraper.classList.toggle("wide");
+  wrapper.classList.toggle("wide");
 
   event.stopPropagation();
   return false;
