@@ -35,13 +35,7 @@ a {
   color: black;
 }
 
-input[type="checkbox"] {
-  position: absolute;
-  top: -9999px;
-  left: -9999px;
-}
-
-.nav-el > a {
+.nav-el__item {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -51,30 +45,36 @@ input[type="checkbox"] {
   padding: 3px;
 }
 
-#menu-label {
+.nav-el__menu-button {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-#menu-label img {
+.nav-el__menu-image {
   width: 27px;
   height: 27px;
   border-radius: 3px;
 }
 
-#profile-photo {
+.input_hidden {
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+}
+
+.profile-photo {
   border-radius: 50%;
   width: 27px;
 }
 
-#bell-icon {
+.bell-icon {
   width: 24px;
 }
 
 /* apps-window elements styles */
 
-#apps-window {
+.apps-window {
   width: 330px;
   height: 516px;
   position: absolute;
@@ -89,8 +89,8 @@ input[type="checkbox"] {
   display: none;
 }
 
-#apps-window:before,
-#apps-window:after {
+.apps-window:before,
+.apps-window:after {
   content: "";
   position: absolute;
   width: 0;
@@ -103,21 +103,20 @@ input[type="checkbox"] {
   border-color: transparent transparent white transparent;
 }
 
-#apps-window:after {
-  z-index: -2;
+.apps-window:after {
+  z-index: -1;
   border-width: 0 12px 12px 12px;
   top: -11.5px;
   left: 248px;
   border-color: transparent transparent rgb(200, 218, 235) transparent;
 }
 
-#apps-cont {
+.apps-cont {
   width: 100%;
   height: 100%;
 }
 
-#apps-block1,
-#apps-block2 {
+.apps-block {
   width: 300px;
   display: flex;
   flex-wrap: wrap;
@@ -127,7 +126,7 @@ input[type="checkbox"] {
   padding: 30px 0px;
 }
 
-.app-cont {
+.app-block__item {
   height: 90px;
   width: 70px;
   display: flex;
@@ -142,13 +141,13 @@ input[type="checkbox"] {
   padding-bottom: 10px;
 }
 
-.app-cont img {
+.app-block__img {
   max-width: 58px;
   max-height: 58px;
   align-self: center;
 }
 
-#apps-window2 {
+.apps-window2 {
   position: relative;
   display: none;
   width: 100%;
@@ -157,19 +156,12 @@ input[type="checkbox"] {
   padding: 0px;
 }
 
-#more {
+.apps-window__more-button {
   width: 330px;
   height: 30px;
   position: absolute;
   top: 486px;
   background-color: rgb(245, 245, 245);
-  border: 0px;
-  padding: 0px;
-}
-
-#more-label {
-  width: 100%;
-  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -178,7 +170,7 @@ input[type="checkbox"] {
   padding: 0px;
 }
 
-#even-more {
+.even-more {
   width: 100%;
   display: flex;
   align-items: center;
@@ -190,11 +182,11 @@ input[type="checkbox"] {
 
 /* styles changes depends on user's actions */
 
-.nav-el > a:hover {
+.nav-el__item:hover {
   background-color: rgb(231, 231, 231);
   cursor: pointer;
 }
-.nav-el > a:focus {
+.nav-el__item:focus {
   background-color: rgb(173, 243, 255);
   outline: 0px;
 }
@@ -203,46 +195,46 @@ label:hover {
   cursor: pointer;
 }
 
-#button-1:focus + a {
+.nav-el__menu-input:focus + .nav-el__menu-button {
   background-color: rgb(173, 243, 255);
   outline: 0px;
 }
 
-#button-1:checked ~ #apps-window,
-#button-1:checked ~ #more {
+.nav-el__menu-input:checked ~ .apps-window,
+.nav-el__menu-input:checked ~ .apps-window__more-button {
   display: block;
 }
 
-.app-cont:hover {
+.app-block__item:hover {
   background-color: rgb(231, 231, 231);
   cursor: pointer;
 }
 
-.app-cont:focus {
+.app-block__item:focus {
   background-color: rgb(173, 243, 255);
   outline: 0px;
 }
 
-#more:hover {
+.apps-window__more-button:hover {
   background-color: rgb(231, 231, 231);
 }
 
-#button-2:focus + #more,
-#more:focus {
+.apps-window__more-input:focus + .apps-window__more-button,
+.apps-window__more-button:focus {
   background-color: rgb(173, 243, 255);
   outline: 0px;
 }
 
-#button-2:checked ~ #apps-cont > #apps-window2 {
+.apps-window__more-input:checked ~ .apps-cont > .apps-window2 {
   display: block;
 }
 
-#button-2:checked,
-#button-2:checked ~ #more {
+.apps-window__more-input:checked,
+.apps-window__more-input:checked ~ .apps-window__more-button {
   display: none;
 }
 
-#button-2:checked ~ #apps-cont {
+.apps-window__more-input:checked ~ .apps-cont {
   overflow-y: scroll;
   overflow-x: hidden;
 }

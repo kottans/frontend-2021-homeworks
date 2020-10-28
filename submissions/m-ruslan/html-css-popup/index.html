@@ -4,134 +4,130 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="app.css" />
-    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="icon" type="image/png" href="img/favicon.png" />
     <title>Popup</title>
   </head>
   <body>
     <nav>
       <ul class="nav-container">
         <li class="nav-el">
-          <a href="#" tabindex="0">Mail</a>
+          <a href="#" class="nav-el__item">Mail</a>
         </li>
         <li class="nav-el">
-          <a href="#" tabindex="0">Images</a>
+          <a href="#" class="nav-el__item">Images</a>
         </li>
 
         <li class="nav-el">
-          <input type="checkbox" id="button-1"  tabindex="0">
-          <a href="#" tabindex="-1">
-            <label for="button-1" id="menu-label">
-              <img src="img/apps_new.png" alt="Menu icon">
+          <input type="checkbox" class="input_hidden nav-el__menu-input" id="menu-button-input">
+          <label class="nav-el__item nav-el__menu-button" for="menu-button-input">
+            <img src="img/apps_new.png" alt="Menu icon" class="nav-el__menu-image">
+          </label>
+
+          <div class="apps-window">
+            <input type="checkbox" class="input_hidden apps-window__more-input" id="more-button-input">
+            <label class="apps-window__more-button" for="more-button-input">
+              More
             </label>
-          </a>
-
-          <div id="apps-window">
-            <input type="checkbox" id="button-2" tabindex="2">
-            <button id="more" tabindex="-1">
-              <label for="button-2" id="more-label">
-                More
-              </label>
-            </button>
             
-            <div id="apps-cont">
-              <div id="apps-block1">
-                <a href="#" class="app-cont" tabindex="1">
-                  <img src="img/calendar.png"  alt="Calendar icon">
+            <div class="apps-cont">
+              <div class="apps-block">
+                <a href="#" class="app-block__item">
+                  <img src="img/calendar.png" class="app-block__img" alt="Calendar icon">
                   Calendar
                 </a>
 
-                <a href="#" class="app-cont" tabindex="1">
-                  <img src="img/mail.png"  alt="Mail icon">
+                <a href="#" class="app-block__item">
+                  <img src="img/mail.png" class="app-block__img" alt="Mail icon">
                   Mail
                 </a>
 
-                <a href="#" class="app-cont" tabindex="1">
-                  <img src="img/news.png"  alt="News icon">
+                <a href="#" class="app-block__item">
+                  <img src="img/news.png" class="app-block__img" alt="News icon">
                   News
                 </a>
 
-                <a href="#" class="app-cont" tabindex="1">
-                  <img src="img/maps.png"  alt="Maps icon">
+                <a href="#" class="app-block__item">
+                  <img src="img/maps.png" class="app-block__img" alt="Maps icon">
                   Map
                 </a>
 
-                <a href="#" class="app-cont" tabindex="1">
-                  <img src="img/files.png"  alt="Files icon">
+                <a href="#" class="app-block__item">
+                  <img src="img/files.png" class="app-block__img" alt="Files icon">
                   Files
                 </a>
 
-                <a href="#" class="app-cont" tabindex="1">
-                  <img src="img/contacts.png"  alt="Contacts icon">
+                <a href="#" class="app-block__item">
+                  <img src="img/contacts.png" class="app-block__img" alt="Contacts icon">
                   Contacts
                 </a>
 
-                <a href="#" class="app-cont" tabindex="1">
-                  <img src="img/tanslation.png"  alt="Translation icon">
+                <a href="#" class="app-block__item">
+                  <img src="img/tanslation.png" class="app-block__img" alt="Translation icon">
                   Translate
                 </a>
 
-                <a href="#" class="app-cont" tabindex="1">
-                  <img src="img/videos.png"  alt="Video icon">
+                <a href="#" class="app-block__item">
+                  <img src="img/videos.png" class="app-block__img" alt="Video icon">
                   Videos
                 </a>
 
-                <a href="#" class="app-cont" tabindex="1">
-                  <img src="img/search.png"  alt="Search icon">
+                <a href="#" class="app-block__item">
+                  <img src="img/search.png" class="app-block__img" alt="Search icon">
                   Search
                 </a>
 
-                <a href="#" class="app-cont" tabindex="1">
-                  <img src="img/photos.png"  alt="Photos icon">
+                <a href="#" class="app-block__item">
+                  <img src="img/photos.png" class="app-block__img" alt="Photos icon">
                   Photo
                  </a>
 
-                <a href="#" class="app-cont" tabindex="1">
-                  <img src="img/apps.png"  alt="Apps icon">
+                <a href="#" class="app-block__item">
+                  <img src="img/apps.png" class="app-block__img" alt="Apps icon">
                   Apps
                 </a>
 
-                <a href="#" class="app-cont" tabindex="1">
-                  <img src="img/documents.png"  alt="Documents icon">
+                <a href="#" class="app-block__item">
+                  <img src="img/documents.png" class="app-block__img" alt="Documents icon">
                   Document
                 </a>
               </div>
 
-              <div id="apps-window2">
-                <div id="apps-block2">
+              <div class="apps-window2">
+                <div class="apps-block">
                   
-                  <a href="#" class="app-cont" tabindex="1"> 
-                    <img src="img/chat.png"  alt="Chat icon">
+                  <a href="#" class="app-block__item"> 
+                    <img src="img/chat.png" class="app-block__img" alt="Chat icon">
                     Chat
                   </a>
 
-                  <a href="#" class="app-cont" tabindex="1">
-                    <img src="img/classroom.png"  alt="Classroom icon">
+                  <a href="#" class="app-block__item">
+                    <img src="img/classroom.png" class="app-block__img" alt="Classroom icon">
                     Classroom
                   </a>
 
-                  <a href="#" class="app-cont" tabindex="1">
-                    <img src="img/collection.png"  alt="Collection icon">
+                  <a href="#" class="app-block__item">
+                    <img src="img/collection.png" class="app-block__img" alt="Collection icon">
                     Collection
                   </a>
 
-                  <a href="#" class="app-cont" tabindex="1">
-                    <img src="img/mars.png"  alt="Mars icon">
+                  <a href="#" class="app-block__item">
+                    <img src="img/mars.png" class="app-block__img" alt="Mars icon">
                     Mars
                   </a>
 
-                  <a href="#" class="app-cont" tabindex="1">
-                    <img src="img/blogs.png"  alt="Blogs icon">
+                  <a href="#" class="app-block__item">
+                    <img src="img/blogs.png" class="app-block__img" alt="Blogs icon">
                     Blogs
                   </a>
 
-                  <a href="#" class="app-cont" tabindex="1">
-                    <img src="img/ads.png"  alt="Ads icon">
+                  <a href="#" class="app-block__item">
+                    <img src="img/ads.png" class="app-block__img" alt="Ads icon">
                     Promos
                   </a>
                   
                 </div>
 
-                <div id="even-more">
+                <div class="even-more">
                   <p>Even more from Kottans</p>
                 </div>
                 
@@ -141,10 +137,10 @@
         </li>
 
         <li class="nav-el">
-          <a href="#" tabindex="0"><img id="bell-icon" src="img/bell.png" alt="Notifications icon"></a>
+          <a href="#" class="nav-el__item"><img class="bell-icon" src="img/bell.png" alt="Notifications icon"></a>
         </li>
         <li class="nav-el">
-          <a href="#" tabindex="0"><img id="profile-photo" src="img/bilbo.jpeg" alt="profile-photo"></a>
+          <a href="#" class="nav-el__item"><img class="profile-photo" src="img/bilbo.jpeg" alt="profile-photo"></a>
         </li>
       </ul>
     </nav>
