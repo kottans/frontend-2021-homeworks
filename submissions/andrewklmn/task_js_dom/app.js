@@ -84,7 +84,7 @@ const toggleMenu = (event)=>{
 const menuItemClickListener = (event)=>{
 
   if (event.target.matches('.menu-item')) {
-    state.activeIndex = event.target.parentNode.id;
+    state.activeIndex = Number(event.target.parentNode.id);
     renderPage(state);
   
     if (getViewWidth() < maxAutoHideMenuWidth) {
@@ -106,7 +106,7 @@ const renderMenu = (state)=>{
     a.classList.add("menu-item");
     a.href = "javascript:void(0)";
     
-    if (index==state.activeIndex) {
+    if (index===state.activeIndex) {
       a.classList.toggle("active");
     };
 
