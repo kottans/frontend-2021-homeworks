@@ -74,6 +74,9 @@ a:focus,
   height: 480px;
   overflow-y: scroll;
 }
+.popup-item {
+  display: grid;
+}
 .popup-container__more{
   grid-column-start: 1;
 }
@@ -98,6 +101,9 @@ a:focus,
 .popup-btn {
   float: left;
 } 
+.popup-item .popup-btn {
+  width: 210px;
+}
 .kottans {
   grid-column-start: 1;
   grid-column-end: 3;
