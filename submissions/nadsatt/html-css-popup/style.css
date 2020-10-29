@@ -113,10 +113,6 @@ body {
     border-color: var(--color-white-dark);
 }
 
-.list__check-label {
-    margin-left: 1px;
-}
-
 .list__check-input:hover + .list__check-label {
     border-color: var(--color-white-dark);
 }
@@ -137,7 +133,7 @@ body {
     fill: var(--color-white-dark);
 }
 
-.list__popup {
+.popup {
     display: none;
     width: 280px;
     height: 390px;
@@ -156,7 +152,7 @@ body {
     right: -190%;
 }
 
-.list__check-input:checked ~ .list__popup {
+.list__check-input:checked ~ .popup {
     display: block; 
 }
 
