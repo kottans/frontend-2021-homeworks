@@ -56,7 +56,7 @@ a {
   align-items: center;
 }
 
-.navigation__list-item {
+.navigation__item {
   display: flex;
   margin-left: 15px;
   align-items: center;
@@ -159,7 +159,6 @@ a {
 .popup__item {
   width: 88px;
   height: 88px;
-  padding: 10px 0 10px 0;
   margin-bottom: 15px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -175,8 +174,8 @@ a {
 }
 
 .item__link {
-  width: 48px;
-  height: 48px;
+  width: 88px;
+  height: 88px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -186,7 +185,7 @@ a {
   flex-direction: column;
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
-  justify-content: center;
+  justify-content: space-around;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
@@ -240,21 +239,21 @@ a {
 }
 
 /*Settings for state hover/active/focus*/
-.navigation__list-item_link:hover,
+.navigation__item_link:hover,
 .even-more__link:hover {
   text-decoration: underline;
 }
 
-.navigation__list-item_link:active {
+.navigation__item_link:active {
   color: #1d8ffa;
 }
 
-.navigation__list-item_bell:hover,
+.navigation__item_bell:hover,
 .label__input:hover {
   background-color: #f8f9fa;
 }
 
-.navigation__list-item_bell:active,
+.navigation__item_bell:active,
 .label__input:active {
   background-color: #b2b2b2;
 }
