@@ -14,21 +14,13 @@ const sectionMenu = document.querySelector('.nav__menu');
 const sectionHero = document.querySelector('.hero');
 const url = './data/data.json';
 let selectMenuItem;
-let selectHeroItem;
+let selectHeroItem;  
 
 async function fetchAsync () {
     const response = await fetch(url);
     const data = await response.json();
     return data;
-}   
-  
-fetchAsync()
-    .then(data => {
-        const details = createHtml(data);
-        drawPage(details);
-        toggleTabs();
-    })
-    .catch(reason => console.log(reason.message));
+}  
 
 function createHtml(data) {
     let navContent  = '';
@@ -46,19 +38,20 @@ function createHtml(data) {
 }
 
 function generateNavContent(elem, index) {
-    const navLink = `<a class=${styles.menuLink} href='#' id=link${index+1}>${elem.title}</a>`;
-    const navElem = `<li class=${styles.menuItem}>${navLink}</li>`;
-    return navElem;
+    return `<li class=${styles.menuItem}>
+                <a class=${styles.menuLink} href='#' id=link${index+1}>${elem.title}</a>
+            </li>`;
 }
 
 function generateHeroContent(elem, index) {
-    const heroPrice = `<div class=${styles.itemPrice}>Price for portion ${elem.price} $</div>`;
-    const heroFigureImg = `<img class=${styles.itemIcon} src=${elem.path} />`;
-    const heroFigureCaption = `<figcaption class=${styles.itemTitle}>Pancakes ${elem.title}</figcaption>`;
-    const heroFigure = `<figure class=${styles.heroImg} id='tab${index+1}'>${heroFigureImg}${heroFigureCaption}</figure>`;
-    const heroInfo = `<div class=${styles.itemInfo}>${elem.description}</div>`;
-    const heroElem = `<div class=${styles.heroItem} id='tab${index+1}'>${heroPrice}${heroFigure}${heroInfo}</div>`;
-    return heroElem;
+    return `<div class=${styles.heroItem} id='tab${index+1}'>
+                <div class=${styles.itemPrice}>Price for portion ${elem.price} $</div>
+                <figure class=${styles.heroImg} id='tab${index+1}'>
+                    <img class=${styles.itemIcon} src=${elem.path}>
+                    <figcaption class=${styles.itemTitle}>Pancakes ${elem.title}</figcaption>
+                </figure>
+                <div class=${styles.itemInfo}>${elem.description}</div>
+            </div>`;
 }
 
 function drawPage(details) {
@@ -85,11 +78,11 @@ function highlightHeroItem(target) {
     if (selectHeroItem) selectHeroItem.classList.remove(styles.heroItemActive);
     selectHeroItem = document.getElementById(target.getAttribute('id').replace('link', 'tab'));
     selectHeroItem.classList.add(styles.heroItemActive);
-    animation(selectHeroItem);
+    animateDish(selectHeroItem);
 }
 
-function animation(elem){
-    const element = elem.firstChild.nextSibling;
+function animateDish(elem){
+    const element = elem.querySelector('.hero__image');
     element.addEventListener("mousemove", (e) => {
         const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
         const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
@@ -99,4 +92,18 @@ function animation(elem){
         element.style.transform = `rotateY(0deg) rotateX(0deg)`;
     });
 }
+
+function initApp() {
+    fetchAsync().then(data => {
+            const details = createHtml(data);
+            drawPage(details);
+            toggleTabs();
+        })
+        .catch(reason => console.error(reason.message));
+}
+
+document.addEventListener('DOMContentLoaded', init = () => {
+    initApp();
+    document.removeEventListener('DOMContentLoaded', init);
+});
 
