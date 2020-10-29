@@ -188,3 +188,4 @@ img {
 .nav-popup__state-flag:checked ~ .nav-popup__container--more {
     display: flex;
 }
+
