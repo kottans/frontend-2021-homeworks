@@ -13,8 +13,6 @@ const styles = {
 const sectionMenu = document.querySelector('.nav__menu');
 const sectionHero = document.querySelector('.hero');
 const url = './data/data.json';
-let selectMenuItem;
-let selectHeroItem;  
 
 async function fetchAsync () {
     const response = await fetch(url);
@@ -62,21 +60,24 @@ function drawPage(details) {
 function toggleTabs(){
     sectionMenu.addEventListener('click', e => {
         e.preventDefault();
-        highlightMenuItem(e.target);
-        highlightHeroItem(e.target);
+        if (e.target.matches('.menu__link')) {
+            highlightMenuItem(e.target);
+            highlightHeroItem(e.target);
+         }
     });
     document.querySelector('.menu__link').click();
 }
 
 function highlightMenuItem(target) {
-    if (selectMenuItem) selectMenuItem.classList.remove(styles.menuLinkActive);
-    selectMenuItem = target;
-    selectMenuItem.classList.add(styles.menuLinkActive);
+    const activeMenuLink = document.querySelector('.menu__link--active');
+    if (activeMenuLink) activeMenuLink.classList.remove(styles.menuLinkActive);
+    target.classList.add(styles.menuLinkActive);
 }
 
 function highlightHeroItem(target) {
-    if (selectHeroItem) selectHeroItem.classList.remove(styles.heroItemActive);
-    selectHeroItem = document.getElementById(target.getAttribute('id').replace('link', 'tab'));
+    const activeHeroLink = document.querySelector('.hero__item--active');
+    if (activeHeroLink) activeHeroLink.classList.remove(styles.heroItemActive);
+    const selectHeroItem = document.getElementById(target.getAttribute('id').replace('link', 'tab'));
     selectHeroItem.classList.add(styles.heroItemActive);
     animateDish(selectHeroItem);
 }
