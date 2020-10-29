@@ -220,37 +220,39 @@ const albums = [
   }
 ];
 
-let doc = document.body;
-let navTab = document.querySelector(".navigation");
-let infoTab = document.querySelector(".info");
+const doc = document.body;
+const navTab = document.querySelector(".navigation");
+const infoTab = document.querySelector(".info");
+const infoList = document.querySelector(".info ul");
 let navTabButtonsArray;
 
 function fillNavTab() {
-  navTab.innerHTML = "";
   let navTabButton;
-  for (let i = 0; i < albums.length; i++) {
+  let fragment = document.createDocumentFragment();
+  navTab.innerHTML = "";
+  albums.forEach(function(el) {
     navTabButton = document.createElement("button");
     navTabButton.classList.add("navigation_button");
-    navTabButton.innerText = albums[i].title;
-    navTab.append(navTabButton);
-  };
+    navTabButton.innerText = el.title;
+    fragment.append(navTabButton);
+  });
+  navTab.append(fragment);
   navTabButtonsArray = Array.from(document.querySelectorAll(".navigation_button"));
 };
 
-function fillInfoTab(e) {
-  let selectedButtonIndex = navTabButtonsArray.indexOf(e.target);
-  let infoList;
+function fillInfoTab({target}) {
+  const selectedButtonIndex = navTabButtonsArray.indexOf(target);
   let infoLine;
-  infoTab.innerHTML = "";
+  let fragment = document.createDocumentFragment();
+  infoList.innerHTML = "";
   doc.style.setProperty("--background_color_h", albums[selectedButtonIndex].bgColor);
   infoTab.style.backgroundImage = "url(img/" + albums[selectedButtonIndex].cover + ".jpg)";
-  infoList = document.createElement("ul");
   albums[selectedButtonIndex].songs.forEach(function(el) {
     infoLine = document.createElement("li");
     infoLine.innerText = el;
-    infoList.append(infoLine);
+    fragment.append(infoLine);
   });
-  infoTab.append(infoList);
+  infoList.append(fragment);
 };
 
 fillNavTab();
