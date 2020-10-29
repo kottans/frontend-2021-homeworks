@@ -10,7 +10,7 @@ body {
   margin: 0 auto;
   padding: 0 15px;
 }
-.menu--wrapper {
+.menu__list--wrapper {
   display: flex;
   justify-content: flex-end;
   align-items: center;
