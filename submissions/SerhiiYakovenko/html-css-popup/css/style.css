@@ -1,0 +1,170 @@
+* {
+  margin: 0;
+  padding: 0;
+  color: black;
+}
+
+body {
+  font-family: "Orbitron", sans-serif;
+  background: url(".././img/background.jpg") no-repeat center center fixed;
+  background-size: cover;
+  height: 100%;
+  overflow: hidden;
+}
+
+img {
+  max-width: 100%;
+  max-height: 40px;
+  border: solid 5px transparent;
+}
+
+.release {
+  font-size: 35px;
+  color: yellow;
+  background-color: black;
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  opacity: 0.6;
+}
+
+.nav {
+  margin: 5px;
+  float: right;
+  display: flex;
+  align-items: center;
+}
+
+.menu {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.nav__list-item {
+  list-style: none;
+  margin: 10px 5px;
+  border: solid 1px transparent;
+}
+
+.kottans:focus,
+.nav__list-item:focus,
+.input:focus + label,
+.popup-item:focus,
+.more-label:focus,
+.nav__list-link:focus {
+  outline: none;
+  box-shadow: 0 0 14px grey;
+  border-radius: 6px;
+}
+
+.kottans:hover,
+.input:hover + label,
+.popup-item:hover,
+.more-label:hover,
+.nav__list-link:hover {
+  cursor: pointer;
+  outline: none;
+  box-shadow: 0 0 10px grey;
+  border-radius: 5px;
+}
+
+.menu__popup {
+  display: block;
+  padding: 8px;
+}
+
+.popup-input,
+.more-input {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}
+
+.popup-label {
+  padding: 8px;
+  display: block;
+  width: 150px;
+  height: 40px;
+  cursor: pointer;
+  background: url(".././img/logo.svg") no-repeat center;
+}
+
+.main {
+  position: relative;
+}
+
+.popup-main {
+  justify-content: center;
+  display: none;
+  flex-wrap: wrap;
+  position: absolute;
+  right: -50%;
+  margin-top: 20px;
+  align-self: flex-end;
+  width: 350px;
+  height: 280px;
+  padding: 10px;
+  overflow-y: scroll;
+  z-index: 1;
+  background-color: white;
+  opacity: 0.7;
+}
+
+.popup-item,
+.console-xbox,
+.console-ps4 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: solid 1px transparent;
+}
+
+.popup-item {
+  margin: 4px;
+  padding: 5px;
+  height: 80px;
+  width: 24%;
+}
+
+.popup-item > img {
+  width: 40px;
+}
+
+.popup-item > p {
+  font-size: 13px;
+  margin-top: 10px;
+}
+
+.hidden {
+  display: none;
+}
+
+.more-label {
+  display: flex;
+  font-weight: bold;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  width: 300px;
+  height: 30px;
+  cursor: pointer;
+  background-color: darkgray;
+}
+
+.kottans {
+  margin: 10px auto auto;
+}
+
+.popup-input[type="checkbox"]:checked ~ .popup-main, 
+.more-input[type="checkbox"]:checked ~ .hidden {
+  display: flex;
+}
+
+.more-input[type="checkbox"]:checked ~ .more-label {
+  display: none;
+}
