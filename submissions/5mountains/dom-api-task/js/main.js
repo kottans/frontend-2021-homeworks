@@ -1,102 +1,102 @@
 const styles = {
     menuLink: 'menu__link',
+    menuLinkActive: 'menu__link--active',
     menuItem: 'menu__item',
     heroItem: 'hero__item',
+    heroItemActive: 'hero__item--active',
     heroImg: 'hero__image',
     itemIcon: 'item__icon',
     itemTitle: 'item__caption',
     itemPrice: 'item__price',
     itemInfo: 'item__description'
 };
+const sectionMenu = document.querySelector('.nav__menu');
+const sectionHero = document.querySelector('.hero');
+const url = './data/data.json';
+let selectMenuItem;
+let selectHeroItem;
 
 async function fetchAsync () {
-    let response = await fetch('./data/data.json');
-    let data = await response.json();
+    const response = await fetch(url);
+    const data = await response.json();
     return data;
 }   
   
 fetchAsync()
     .then(data => {
-        let details = createHtml(data);
+        const details = createHtml(data);
         drawPage(details);
         toggleTabs();
-        animation();
     })
     .catch(reason => console.log(reason.message));
 
 function createHtml(data) {
-    const menuItems = document.createDocumentFragment();
-    const heroItems = document.createDocumentFragment();
+    let navContent  = '';
+    let heroContent  = '';
     data.pancakes.forEach((elem, index) => {
-        const navContent = generateNavContent(elem, index); 
-        const heroContent = generateHeroContent(elem, index); 
-        menuItems.appendChild(navContent);
-        heroItems.appendChild(heroContent);
+        const menuItems = generateNavContent(elem, index); 
+        const heroItems = generateHeroContent(elem, index); 
+        navContent += menuItems;
+        heroContent += heroItems;
     });
     return {
-        menuItems,
-        heroItems
+        navContent,
+        heroContent
     };
 }
 
 function generateNavContent(elem, index) {
-    let navItem = generateElement('li', styles.menuItem);
-    let navLink = `<a class=${styles.menuLink} href='#' id=link${index+1}>${elem.title}</a>`;
-    navItem.insertAdjacentHTML('afterbegin', navLink);
-    return navItem;
+    const navLink = `<a class=${styles.menuLink} href='#' id=link${index+1}>${elem.title}</a>`;
+    const navElem = `<li class=${styles.menuItem}>${navLink}</li>`;
+    return navElem;
 }
 
 function generateHeroContent(elem, index) {
-    let sectionItem = generateElement('div', styles.heroItem);
-    sectionItem.setAttribute('id', `tab${index+1}`);
-    let sectionItemContent = `
-        <div class=${styles.itemPrice}>Price for portion ${elem.price} $</div>
-        <figure class=${styles.heroImg} id='tab${index+1}'>
-            <img class=${styles.itemIcon} src=${elem.path} />
-            <figcaption class=${styles.itemTitle}>Pancakes ${elem.title}</figcaption>
-        </figure>
-        <div class=${styles.itemInfo}>${elem.description}</div>
-    `;
-    sectionItem.insertAdjacentHTML('afterbegin', sectionItemContent);
-    return sectionItem;
-}
-
-function generateElement(elementName, className) {
-    let item = document.createElement(elementName);
-    item.classList.add(className);
-    return item;
+    const heroPrice = `<div class=${styles.itemPrice}>Price for portion ${elem.price} $</div>`;
+    const heroFigureImg = `<img class=${styles.itemIcon} src=${elem.path} />`;
+    const heroFigureCaption = `<figcaption class=${styles.itemTitle}>Pancakes ${elem.title}</figcaption>`;
+    const heroFigure = `<figure class=${styles.heroImg} id='tab${index+1}'>${heroFigureImg}${heroFigureCaption}</figure>`;
+    const heroInfo = `<div class=${styles.itemInfo}>${elem.description}</div>`;
+    const heroElem = `<div class=${styles.heroItem} id='tab${index+1}'>${heroPrice}${heroFigure}${heroInfo}</div>`;
+    return heroElem;
 }
 
 function drawPage(details) {
-    document.querySelector('.nav__menu').appendChild(details.menuItems);
-    document.querySelector('.hero').appendChild(details.heroItems);
+    sectionMenu.innerHTML = details.navContent;
+    sectionHero.innerHTML = details.heroContent;
 }
 
 function toggleTabs(){
-    document.querySelectorAll('.menu__link').forEach(elem => {
-        elem.addEventListener('click', (e) => {
-            e.preventDefault();
-            const index = e.target.getAttribute('id').replace('link', 'tab');
-            document.querySelectorAll('.menu__link').forEach(item => item.classList.remove('menu__link--active'));
-            document.querySelectorAll('.hero__item').forEach(item => item.classList.remove('hero__item--active'));
-            elem.classList.add('menu__link--active'); 
-            document.getElementById(index).classList.add('hero__item--active');
-        });
+    sectionMenu.addEventListener('click', e => {
+        e.preventDefault();
+        highlightMenuItem(e.target);
+        highlightHeroItem(e.target);
     });
     document.querySelector('.menu__link').click();
 }
 
-function animation(){
-    const heroImgHolders = document.querySelectorAll(".hero__image");
-    heroImgHolders.forEach(item => {
-        item.addEventListener("mousemove", (e) => {
-            let xAxis = (window.innerWidth / 2 - e.pageX) / 25;
-            let yAxis = (window.innerHeight / 2 - e.pageY) / 25;
-            item.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
-        });
-        item.addEventListener("mouseleave", (e) => {
-            item.style.transform = `rotateY(0deg) rotateX(0deg)`;
-        });
+function highlightMenuItem(target) {
+    if (selectMenuItem) selectMenuItem.classList.remove(styles.menuLinkActive);
+    selectMenuItem = target;
+    selectMenuItem.classList.add(styles.menuLinkActive);
+}
+
+function highlightHeroItem(target) {
+    if (selectHeroItem) selectHeroItem.classList.remove(styles.heroItemActive);
+    selectHeroItem = document.getElementById(target.getAttribute('id').replace('link', 'tab'));
+    selectHeroItem.classList.add(styles.heroItemActive);
+    animation(selectHeroItem);
+}
+
+function animation(elem){
+    const element = elem.firstChild.nextSibling;
+    element.addEventListener("mousemove", (e) => {
+        const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+        const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+        element.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+    });
+    element.addEventListener("mouseleave", (e) => {
+        element.style.transform = `rotateY(0deg) rotateX(0deg)`;
     });
 }
 
