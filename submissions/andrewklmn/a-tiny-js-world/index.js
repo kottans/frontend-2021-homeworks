@@ -65,15 +65,12 @@ const inhabitants = [
   man,
 ];
 
-const getFormatedOutput = (obj) => Object.entries(obj).map((a) => {
-  if (typeof (a[1]) === 'object') {
-    if (a[1].length > 0) {
-      return a[1].map((elem) => elem.name).join(', ');
-    }
-    return 'No friends';
+const getFormatedOutput = ({species, name, gender, legs, hands, saying, friends}) =>  {
+  if(typeof(friends) === 'object'){
+      friends = friends.map(friend => friend.name).join(', ');
   }
-  return a[1];
-}).join('; ');
+  return `${species}; ${name}; ${gender}; ${legs}; ${hands}; ${saying}; ${friends}`;
+}
 
 // ======== OUTPUT ========
 /* Use print(message) for output.
