@@ -17,6 +17,11 @@ html {
     font-size: 16px;
 }
 
+ul li {
+    list-style: none;
+    display: block;
+}
+
 img {
     display: block;
     width: 100%;
@@ -122,7 +127,7 @@ img {
     display: flex;
     flex-flow: wrap;
     align-items: center;
-    padding: 10px 5px 0;
+    padding: 12px 5px 0;
     height: var(--nav-popup-height);
     overflow-x: hidden;
     overflow-y: auto;
@@ -137,8 +142,15 @@ img {
     border-top: 1px solid var(--nav-popup-border-color);
 }
 
-.nav-popup__item {
+.nav-popup__container li {
     width: 33%;
+}
+.nav-popup__container li:last-child {
+    width: 100%;
+}
+
+.nav-popup__item {
+    width: 100%;
     height: 115px;
     display: flex;
     flex-direction: column;
