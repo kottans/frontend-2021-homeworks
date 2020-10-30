@@ -6,45 +6,18 @@
    */
 
 // ======== OBJECTS DEFINITIONS ========
-const dog = {
-  species: 'dog',
-  name: 'Dyuka',
-  gender: 'male',
-  legs: 4,
-  hands: 0,
-  saying: 'woof!',
-  friends: [],
+function Creature(species,name,gender,legs,hands,saying,friends=[]) {
+  this.species = species;
+  this.name = name;
+  this.gender = gender;
+  this.saying = saying;
+  this.friends = friends;
 };
 
-const cat = {
-  species: 'cat',
-  name: 'Barsik',
-  gender: 'male',
-  legs: 4,
-  hands: 0,
-  saying: 'meow!',
-  friends: [],
-};
-
-const woman = {
-  species: 'human',
-  name: 'Leeloo Dallas',
-  gender: 'female',
-  legs: 2,
-  hands: 2,
-  saying: 'People hi!',
-  friends: [],
-};
-
-const man = {
-  species: 'human',
-  name: 'Korben Dallas',
-  gender: 'male',
-  legs: 2,
-  hands: 2,
-  saying: 'Hello there!',
-  friends: [],
-};
+const dog = new Creature('dog', 'Dyuka', 'male', 4, 0, 'woof!');
+const cat = new Creature('cat', 'Barsik', 'male', 4, 0, 'meow!');
+const woman = new Creature('human', 'Leeloo Dallas', 'female', 2, 2, 'People hi!');
+const man = new Creature('human', 'Korben Dallas', 'male', 2, 2, 'Hello there!');
 
 // define cat-woman
 const catWoman = Object.assign({}, woman);
