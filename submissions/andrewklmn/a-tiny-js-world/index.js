@@ -6,13 +6,15 @@
    */
 
 // ======== OBJECTS DEFINITIONS ========
-function Creature(species,name,gender,legs,hands,saying,friends=[]) {
+function Creature(species, name, gender, legs, hands, saying, friends = []) {
   this.species = species;
   this.name = name;
   this.gender = gender;
+  this.legs = legs;
+  this.hands = hands;
   this.saying = saying;
   this.friends = friends;
-};
+}
 
 const dog = new Creature('dog', 'Dyuka', 'male', 4, 0, 'woof!');
 const cat = new Creature('cat', 'Barsik', 'male', 4, 0, 'meow!');
@@ -20,9 +22,7 @@ const woman = new Creature('human', 'Leeloo Dallas', 'female', 2, 2, 'People hi!
 const man = new Creature('human', 'Korben Dallas', 'male', 2, 2, 'Hello there!');
 
 // define cat-woman
-const catWoman = Object.assign({}, woman);
-catWoman.name = 'Cat-woman';
-catWoman.saying = cat.saying;
+const catWoman = { ...woman, ...{ name: 'Cat-woman', saying: cat.saying } };
 
 // define friends for everyone except the cat...
 dog.friends = [man, woman, cat];
@@ -31,24 +31,22 @@ man.friends = [woman, dog, cat, catWoman];
 catWoman.friends = [cat];
 
 const inhabitants = [
-  dog, 
-  cat, 
-  woman, 
-  catWoman, 
+  dog,
+  cat,
+  woman,
+  catWoman,
   man,
 ];
 
-const getFormatedOutput = (obj)=> {
-  return Object.entries(obj).map((a)=>{ 
-      if (typeof(a[1]) == 'object') {
-        if (a[1].length>0) {
-          return a[1].map((elem)=>elem.name).join(",");  
-        }
-        return "No friends";
-      };
-      return a[1];
-  }).join(";");
-};
+const getFormatedOutput = (obj) => Object.entries(obj).map((a) => {
+  if (typeof (a[1]) === 'object') {
+    if (a[1].length > 0) {
+      return a[1].map((elem) => elem.name).join(', ');
+    }
+    return 'No friends';
+  }
+  return a[1];
+}).join('; ');
 
 // ======== OUTPUT ========
 /* Use print(message) for output.
@@ -63,10 +61,10 @@ const getFormatedOutput = (obj)=> {
   // ... other objects ...
 
   inhabitants.forEach((obj)=>{
-    print(getFormatedOutput(obj));  
-  });  
+    print(getFormatedOutput(obj));
+  });
 
-  // ... other print-outs ...
+ // ... other print-outs ...
 
 /* Print examples:
    print('ABC');
@@ -77,5 +75,3 @@ const getFormatedOutput = (obj)=> {
    print('human; <strong>John</strong>; male; 2; 2; <em>Hello world!</em>; Rex, Tom, Jenny');
    print('human; <strong>John</strong>; male; 2; 2; <em>Hello world!</em>; Rex, Tom, Jenny', 'div');
    */
-
-
