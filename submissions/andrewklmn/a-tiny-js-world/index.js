@@ -60,9 +60,7 @@ const getFormatedOutput = (obj) => Object.entries(obj).map((a) => {
 
   // ... other objects ...
 
-  inhabitants.forEach((obj)=>{
-    print(getFormatedOutput(obj));
-  });
+  inhabitants.forEach(obj => print(getFormatedOutput(obj)));
 
  // ... other print-outs ...
 
