@@ -1,0 +1,214 @@
+//nullstyle
+
+@import 'nullstyle.scss';
+
+//font-face
+/* font-face */
+
+@font-face {
+	font-family: 'Press Gothic';
+	src: url('../fonts/Press Gothic Regular.eot');
+	src: local('☺'), url('../fonts/Press Gothic Regular.woff') format('woff'), url('fonts/Press Gothic Regular.ttf') format('truetype'), url('fonts/Press Gothic Regular.svg') format('svg');
+	font-weight: 400;
+	font-style: normal;
+}
+
+//main
+
+html {
+	font-size: 15px;
+}
+
+body {
+	background-color: #000;
+	color: #fff;
+	font-family: 'Press Gothic';
+	font-weight: 400;
+	background-image: url(../img/bg-image/last-of-us__bg-image.jpg);
+	background-position: 50% 60%;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+}
+
+a {
+	font-family: Times New Roman;
+	color: white;
+}
+
+/*
+*
+* navbar
+*
+*/
+
+.navbar {
+	float: right;
+	padding: 10px;
+	display: flex;
+	align-items: center;
+}
+
+/*
+*
+* list
+*
+*/
+
+.list {
+	display: flex;
+	justify-content: space-around;
+	position: relative;
+}
+
+.list-link__img {
+	display: inline-block;
+	padding: 10px;
+	height: 84.5px;
+}
+
+.list-link__img > img {
+	width: 300px;
+}
+.list-link:focus {
+ 	outline: 1px solid #fff;
+}
+
+.list-item__img:hover .list-link__img:after {
+	content: "";
+	display: inline-block;
+	width: 300px;
+	height: 3px;
+	background-color: #fff;
+	position: absolute;
+	top: 85px;
+	right: 9px;
+}
+
+/*
+*
+* menu
+*
+*/
+
+.menu {
+	position: relative;
+	padding: 8px;
+}
+
+.menu-input,
+.more-input {
+	position: absolute;
+	z-index: -1;
+	opacity: 0;
+}
+
+.menu-input:focus + .menu-label {
+	outline: 1px solid #fff;
+	cursor: pointer;
+}
+
+.menu-input[type="checkbox"]:checked ~ .menu-inside {
+	display: flex;
+}
+
+.menu-label {
+	padding: 8px;
+	display: block;
+	cursor: pointer;
+}
+
+.menu-inside {
+	display: none;
+	justify-content: center;
+	align-self: flex-end;
+	flex-wrap: wrap;
+	background-color: rgba(08, 08, 08, .5);
+	position: absolute;
+	right: -50%;
+	z-index: 1;
+	overflow-y: scroll;
+	margin-top: 20px;
+	width: 350px;
+	height: 300px;
+	padding: 20px;
+	border: 1px solid #fff;
+	border-radius: 10px;
+}
+
+.menu-inside__link {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin: 4px;
+	padding: 5px;
+	height: 80px;
+	width: 70px;
+}
+
+.menu-inside__link:focus {
+	outline: 1px solid #fff;
+}
+
+.menu-inside__link > p {
+	margin-top: 10px;
+}
+
+/*
+*
+* hidden
+*
+*/
+
+.hidden {
+	display: none;
+}
+
+.hidden:last-of-type {
+	background-color: red;
+	margin-top: 10px;
+	width: 100%;
+	text-align: center;
+	padding: 10px 0;
+	text-transform: uppercase;
+	font-weight: 500;
+	font-size: 16px;
+}
+
+/*
+*
+* more
+*
+*/
+.more-input[type="checkbox"]:checked ~ .more-label {
+	display: none;
+}
+
+.more-input:focus + .more-label {
+	background-color: blue;
+	transition: background-color 1s;
+	transition-timing-function: easy-in-out;
+}
+
+.more-input[type="checkbox"]:checked ~ .hidden {
+	display: flex;
+	justify-content: center;
+}
+
+.more-label {
+	display: flex;
+	font-weight: bold;
+	justify-content: center;
+	align-items: center;
+	margin-top: 10px;
+	width: 300px;
+	height: 30px;
+	background-color: rgba(255, 255, 255, .7);
+	font-family: 'Times New Roman' ;
+	letter-spacing: 1px;
+}
+
+.more-kottans:focus {
+	outline: 1px solid #fff;
+}
