@@ -75,9 +75,22 @@ catWoman.friends = ['Tom', 'Felix'];
    print('human; <strong>John</strong>; male; 2; 2; <em>Hello world!</em>; Rex, Tom, Jenny');
    print('human; <strong>John</strong>; male; 2; 2; <em>Hello world!</em>; Rex, Tom, Jenny', 'div');
    */
-let residents = new Array(man, woman, cat, dog, catWoman);
-for(let character of residents) {
-   let sentence = `Welcome, let me tell you briefly about our resident - a wonderful <b>${character.species}</b> creature, the name is <b>${character.name}</b>! This member is the owner of legs, number is ${character.legs}, of hands, number is ${character.hands} or of paws, number is ${character.paws}, usually the greeting is <i style="text-decoration:underline;">${character.saying}</i> and friends of this inhabitant are ${character.friends.join(', ')}.`;
-   print(sentence, 'p');
-}   
+const residents = new Array(man, woman, cat, dog, catWoman);
+
+const createStory = function() {
+   let sentence = '';
+   for(let character of residents) {
+      sentence += `<p><b>Welcome</b>, wanderer, let me tell you briefly about our resident - a wonderful <b>${character.species}</b> creature, the name is <b>${character.name}</b>! This member is the owner of legs, number is ${character.legs}, of hands, number is ${character.hands} or of paws, number is ${character.paws}, usually the greeting is <i style="text-decoration:underline;">${character.saying}</i> and friends of this inhabitant are ${character.friends.join(', ')}.</p>`;
+   }
+   return sentence;
+};
+
+const printStory = function() {
+   print(createStory(), 'div');
+};
+
+document.addEventListener('DOMContentLoaded', init = () => {
+   printStory();
+   document.removeEventListener('DOMContentLoaded', init);
+});
 
