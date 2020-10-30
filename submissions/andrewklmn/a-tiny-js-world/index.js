@@ -22,7 +22,9 @@ const woman = new Creature('human', 'Leeloo Dallas', 'female', 2, 2, 'People hi!
 const man = new Creature('human', 'Korben Dallas', 'male', 2, 2, 'Hello there!');
 
 // define cat-woman
-const catWoman = { ...woman, ...{ name: 'Cat-woman', saying: cat.saying } };
+const catWoman = { ...woman };
+catWoman.name = 'Cat-woman';
+catWoman.saying = cat.saying;
 
 // define friends for everyone except the cat...
 dog.friends = [man, woman, cat];
