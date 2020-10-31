@@ -1,0 +1,181 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+}
+
+.menu {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 15px 20px;
+}
+
+.link {
+  margin: 0 15px;
+  display: inline-block;
+}
+
+.profile {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  background-image: url('img/bunny.jpg');
+  background-size: contain;
+  border-radius: 100%;
+}
+
+.popup-button {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  background-image: url('icons/favicon.png');
+  background-size: contain;
+}
+
+.popup-window {
+  display: none;
+  position: absolute;
+  top: 60px;
+  right: 50px;
+  box-sizing: border-box;
+  width: 360px;
+  max-height: 500px;
+  overflow-y: auto;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.popup-table {
+  display: grid;
+  padding: 20px;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 100px;
+  grid-gap: 10px;
+  justify-content: start;
+  align-content: start;
+}
+
+#popup-checkbox,
+#popup-more {
+  position: fixed;
+  top: -300px;
+}
+
+#popup-checkbox:checked + .popup-window {
+  display: block;
+}
+
+.popup-item {
+  padding: 15px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-origin: content-box;
+  border-radius: 10px;
+}
+
+.popup-item:hover,
+.popup-more-label:hover {
+  background-color: rgb(218, 232, 252);
+}
+
+.popup-more-label {
+  display: block;
+  box-sizing: border-box;
+  width: 95%;
+  text-align: center;
+  padding: 5px;
+  margin: -20px auto 10px auto;
+  background-color: rgb(226, 226, 226);
+}
+
+.popup-more-label:focus {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+#popup-more:checked ~ .popup-more-label {
+  display: none;
+}
+
+#popup-more:checked ~ .popup-table {
+  display: grid;
+}
+
+.popup-table-more {
+  border-top: 2px solid grey;
+  margin-top: 30px;
+}
+
+.hidden {
+  display: none;
+}
+
+.asana {
+  background-image: url('icons/Tilda_Icons_8yo_asana.svg');
+}
+
+.bindi {
+  background-image: url('icons/Tilda_Icons_8yo_bindi.svg');
+}
+
+.flame {
+  background-image: url('icons/Tilda_Icons_8yo_flame.svg');
+}
+
+.ganesh {
+  background-image: url('icons/Tilda_Icons_8yo_ganesh.svg');
+}
+
+.heart {
+  background-image: url('icons/Tilda_Icons_8yo_heart.svg');
+}
+
+.melomane {
+  background-image: url('icons/Tilda_Icons_11mu_melomane.svg');
+}
+
+.horn {
+  background-image: url('icons/Tilda_Icons_11mu_horn.svg');
+}
+
+.microphone {
+  background-image: url('icons/Tilda_Icons_11mu_microphone.svg');
+}
+
+.metronome {
+  background-image: url('icons/Tilda_Icons_11mu_metronome.svg');
+}
+
+.purse {
+  background-image: url('icons/Tilda_Icons_11mu_purse.svg');
+}
+
+.rock {
+  background-image: url('icons/Tilda_Icons_11mu_rock.svg');
+}
+
+.jossstick {
+  background-image: url('icons/Tilda_Icons_8yo_jossstick.svg');
+}
+
+.piano {
+  background-image: url('icons/Tilda_Icons_11mu_piano.svg');
+}
+
+.ear {
+  background-image: url('icons/Tilda_Icons_11mu_ear.svg');
+}
+
+.ohm {
+  background-image: url('icons/Tilda_Icons_8yo_ohm.svg');
+}
+
+.tree {
+  background-image: url('icons/Tilda_Icons_8yo_tree.svg');
+}
+
+.location {
+  background-image: url('icons/Tilda_Icons_11mu_location.svg');
+}
