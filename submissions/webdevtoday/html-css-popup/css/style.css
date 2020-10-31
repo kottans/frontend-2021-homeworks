@@ -42,8 +42,6 @@ img {
 
 .main-nav__item {
     display: block;
-    min-width: 32px;
-    min-height: 32px;
     padding: 10px;
     color: var(--icon-text-color);
 }
