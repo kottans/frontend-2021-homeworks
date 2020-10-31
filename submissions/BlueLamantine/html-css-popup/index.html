@@ -13,19 +13,19 @@
   </head>
   <body>
     <nav class="topnav">
-      <ul class="topnav-list">
+      <ul class="list">
         <li class="list-item">
-          <a href="#" class="nav-item">Mail</a>
+          <a href="#" class="list-item__nav">Mail</a>
         </li>
         <li class="list-item">
-          <a href="#" class="nav-item">Images</a>
+          <a href="#" class="list-item__nav">Images</a>
         </li>
         <li class="list-item">
-          <input id="menu-toggle" type="checkbox" />
-          <label class="popup-btn nav-item" for="menu-toggle">
+          <input id="menu-toggle" class ="list-item__check list-item__menu" type="checkbox" />
+          <label class="list-item__btn list-item__nav" for="menu-toggle">
             <i class="fa fa-bars fa-lg"></i>
           </label>
-          <ul class="popup-container">
+          <ul class="list-item__popup">
             <li class="popup-item">
               <a href="#">
                 <i class="fa fa-calendar fa-lg"></i>
@@ -87,9 +87,9 @@
               </a>
             </li>
             <li class="popup-item">
-              <input id="more" type="checkbox" />
-              <label class="popup-btn" for="more"> MORE </label>
-              <ul class="popup-container__more">
+              <input id="more" class ="popup-item__check popup-item__else" type="checkbox" />
+              <label class="popup-item__btn" for="more"> MORE </label>
+              <ul class="popup-item__more">
                 <li class="popup-item">
                   <a href="#">
                     <i class="fa fa-comments fa-lg"></i>
@@ -126,7 +126,7 @@
                     <span>Tree</span>
                   </a>
                 </li>
-                <li class="kottans">
+                <li class="popup-item__kottans">
                   <a href="https://kottans.org/"> Even more from Kottans </a>
                 </li>
               </ul>
@@ -134,12 +134,13 @@
           </ul>
         </li>
         <li class="list-item">
-          <a href="#" class="nav-item"><i class="fa fa-bell fa-lg"></i></a>
+          <a href="#" class="list-item__nav">
+            <i class="fa fa-bell fa-lg"></i>
+          </a>
         </li>
         <li class="list-item">
-          <a href="#" class="nav-item"
-            ><i class="fa fa-user-circle fa-lg"></i
-          ></a>
+          <a href="#" class="list-item__nav">
+            <i class="fa fa-user-circle fa-lg"></i></a>
         </li>
       </ul>
     </nav>
