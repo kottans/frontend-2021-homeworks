@@ -20,6 +20,7 @@ html {
 ul li {
     list-style: none;
     display: block;
+    position: relative;
 }
 
 img {
@@ -40,7 +41,6 @@ img {
 }
 
 .main-nav__item {
-    position: relative;
     display: block;
     min-width: 32px;
     min-height: 32px;
@@ -51,8 +51,12 @@ img {
 .main-nav__item:focus,
 .nav-popup__item:hover,
 .nav-popup__item:focus {
-    cursor: pointer;
     outline: 1px solid var(--icon-outline-color);
+}
+
+.main-nav__item:hover,
+.nav-popup__item:hover {
+    cursor: pointer;
 }
 
 .text-decoration-none {
@@ -96,7 +100,10 @@ img {
 .nav-popup__state-flag:focus + label.nav-popup__more {
     outline: 1px solid var(--icon-outline-color);
 }
-.main-nav__state-flag:checked ~ .main-nav__item .main-nav__popup {
+.main-nav__state-flag:checked + label.main-nav__item {
+    outline: none;
+}
+.main-nav__state-flag:checked ~ .main-nav__popup {
     visibility: visible;
     opacity: 1;
 }
@@ -105,7 +112,7 @@ img {
     border-radius: 2px;
     border: 1px solid var(--nav-popup-border-color);
     background-color: var(--nav-popup-bg-color);
-    width: 300px; /* 192 x3 icons 60 x6 paddings 20px*/
+    width: 300px;
     max-height: var(--nav-popup-height);
 }
 .nav-popup::before {
@@ -194,7 +201,6 @@ img {
 }
 
 .nav-popup__state-flag:checked ~ label.nav-popup__more {
-    /* outline: 1px solid var(--nav-popup-border-color); */
     display: none;
 }
 .nav-popup__state-flag:checked ~ .nav-popup__container--more {
