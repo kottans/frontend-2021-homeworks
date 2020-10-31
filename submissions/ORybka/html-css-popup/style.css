@@ -1,0 +1,279 @@
+/*******BASE RESET*******/
+*,
+*::before,
+*::after {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #000;
+}
+
+li {
+  list-style-type: none;
+}
+
+img {
+  height: 3rem;
+  width: 3rem;
+}
+
+/*******GENERAL*******/
+html {
+  font-family: 'Patrick Hand', Verdana, cursive;
+  font-size: 16px;
+}
+
+@media screen and (max-width: 500px) {
+  html {
+    font-size: 12px;
+  }
+}
+
+.container {
+  height: 100vh;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 15% 80% 5%;
+      grid-template-rows: 15% 80% 5%;
+}
+
+/*******HEADER*******/
+.navbar {
+  margin-top: 1rem;
+}
+
+.navbar ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.navbar ul .menu-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  font-size: 1.5rem;
+  font-weight: bold;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 0 1rem;
+}
+
+.navbar ul .menu-item .menu-item-link:hover, .navbar ul .menu-item .menu-item-link:focus,
+.navbar ul .menu-item .menu-img:hover, .navbar ul .menu-item .menu-img:focus {
+  background-color: #8ee2cf;
+  border-radius: 0.5rem;
+}
+
+.popup {
+  display: none;
+}
+
+input[type=checkbox] {
+  position: absolute;
+  display: none;
+}
+
+label {
+  cursor: pointer;
+}
+
+::-webkit-scrollbar {
+  width: 0.3rem;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+input[type=checkbox]:checked + label ~ .popup {
+  display: block;
+  position: absolute;
+  right: 1.5rem;
+  top: 5rem;
+  width: 20rem;
+  height: 18rem;
+  padding-top: 1rem;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  background-color: white;
+  border-radius: 0.5rem;
+  -webkit-box-shadow: 0 7px 30px rgba(0, 0, 0, 0.25), 0 7px 5px rgba(0, 0, 0, 0.22);
+          box-shadow: 0 7px 30px rgba(0, 0, 0, 0.25), 0 7px 5px rgba(0, 0, 0, 0.22);
+  z-index: 5;
+}
+
+input[type=checkbox]:checked + label ~ .popup::before {
+  position: fixed;
+  content: "";
+  right: 12rem;
+  top: 4.4rem;
+  width: 1rem;
+  height: 1rem;
+  background-color: white;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+  border-top: 2px solid rgba(153, 153, 153, 0.2);
+  border-left: 2px solid rgba(153, 153, 153, 0.2);
+  z-index: -1;
+}
+
+input[type=checkbox]:checked + label ~ .popup .popup-menu {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.more-popup-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.more-popup-container .more-popup {
+  display: none;
+}
+
+.more-popup-container .more-btn {
+  display: block;
+  padding: 0 5rem;
+  margin: 0.5rem 0;
+  background-color: rgba(184, 184, 192, 0.5);
+  font-size: 1.2rem;
+  border-radius: 0.5rem;
+}
+
+input[type=checkbox] {
+  position: absolute;
+  display: none;
+}
+
+input[type=checkbox]:checked + label ~ .more-popup {
+  display: block;
+}
+
+input[type=checkbox]:checked + label ~ .more-popup .more-popup-hidden {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 20rem;
+}
+
+.popup-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 6rem;
+  height: 6rem;
+  margin: 0.3rem 0;
+  padding: 0.5rem 0;
+  font-size: 1.2rem;
+}
+
+.popup-item:hover {
+  background-color: #8ee2cf;
+  border-radius: 0.5rem;
+}
+
+.popup-item:focus {
+  background-color: #f4ea64;
+  border-radius: 0.5rem;
+}
+
+.popup-item img {
+  height: 4rem;
+  width: 4rem;
+  padding-bottom: 0.5rem;
+}
+
+.popup-item-span {
+  display: inline-block;
+  margin: 1rem auto 0.5rem;
+  font-size: 1rem;
+  text-decoration: underline;
+}
+
+/*******MAIN********/
+.content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: column-reverse;
+          flex-direction: column-reverse;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  opacity: 0.7;
+}
+
+.content h1 {
+  margin-top: 1rem;
+  font-size: 2.5rem;
+}
+
+.content .img-main {
+  height: 20rem;
+  width: 20rem;
+}
+
+/*******FOOTER********/
+.footer-container {
+  float: right;
+  margin-right: 1rem;
+}
+/*# sourceMappingURL=style.css.map */
