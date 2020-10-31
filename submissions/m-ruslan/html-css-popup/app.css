@@ -126,7 +126,7 @@ a {
   padding: 30px 0px;
 }
 
-.app-block__item {
+.apps-block__item {
   height: 90px;
   width: 70px;
   display: flex;
@@ -141,7 +141,7 @@ a {
   padding-bottom: 10px;
 }
 
-.app-block__img {
+.apps-block__img {
   max-width: 58px;
   max-height: 58px;
   align-self: center;
@@ -205,12 +205,12 @@ label:hover {
   display: block;
 }
 
-.app-block__item:hover {
+.apps-block__item:hover {
   background-color: rgb(231, 231, 231);
   cursor: pointer;
 }
 
-.app-block__item:focus {
+.apps-block__item:focus {
   background-color: rgb(173, 243, 255);
   outline: 0px;
 }
@@ -219,7 +219,7 @@ label:hover {
   background-color: rgb(231, 231, 231);
 }
 
-.apps-window__more-input:focus + .apps-window__more-button,
+.apps-window__more-input:focus ~ .apps-window__more-button,
 .apps-window__more-button:focus {
   background-color: rgb(173, 243, 255);
   outline: 0px;
