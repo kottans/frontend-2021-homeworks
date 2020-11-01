@@ -156,7 +156,6 @@ nav>ul {
 .popup-expansion:focus~label {
   outline: 2px solid #b7e9ef;
   outline-offset: -2px;
-  
 }
 
 .popup-expansion:checked~.removable,
