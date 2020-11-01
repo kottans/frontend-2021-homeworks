@@ -1,9 +1,4 @@
-//nullstyle
-
 @import 'nullstyle.scss';
-
-//font-face
-/* font-face */
 
 @font-face {
 	font-family: 'Press Gothic';
@@ -12,8 +7,6 @@
 	font-weight: 400;
 	font-style: normal;
 }
-
-//main
 
 html {
 	font-size: 15px;
@@ -36,24 +29,12 @@ a {
 	color: white;
 }
 
-/*
-*
-* navbar
-*
-*/
-
 .navbar {
 	float: right;
 	padding: 10px;
 	display: flex;
 	align-items: center;
 }
-
-/*
-*
-* list
-*
-*/
 
 .list {
 	display: flex;
@@ -70,6 +51,7 @@ a {
 .list-link__img > img {
 	width: 300px;
 }
+
 .list-link:focus {
  	outline: 1px solid #fff;
 }
@@ -85,11 +67,6 @@ a {
 	right: 9px;
 }
 
-/*
-*
-* menu
-*
-*/
 
 .menu {
 	position: relative;
@@ -108,7 +85,7 @@ a {
 	cursor: pointer;
 }
 
-.menu-input[type="checkbox"]:checked ~ .menu-inside {
+.menu-input:checked ~ .menu-inside {
 	display: flex;
 }
 
@@ -155,17 +132,12 @@ a {
 	margin-top: 10px;
 }
 
-/*
-*
-* hidden
-*
-*/
-
-.hidden {
+.hidden,
+.btn {
 	display: none;
 }
 
-.hidden:last-of-type {
+.btn {
 	background-color: red;
 	margin-top: 10px;
 	width: 100%;
@@ -173,15 +145,10 @@ a {
 	padding: 10px 0;
 	text-transform: uppercase;
 	font-weight: 500;
-	font-size: 16px;
+	font-size: 15px;
 }
 
-/*
-*
-* more
-*
-*/
-.more-input[type="checkbox"]:checked ~ .more-label {
+.more-input:checked ~ .more-label {
 	display: none;
 }
 
@@ -191,7 +158,8 @@ a {
 	transition-timing-function: easy-in-out;
 }
 
-.more-input[type="checkbox"]:checked ~ .hidden {
+.more-input:checked ~ .hidden,
+.more-input:checked ~ .btn {
 	display: flex;
 	justify-content: center;
 }

@@ -1,5 +1,5 @@
 @media screen and (max-width: 655px) {
-	
+
 	.menu-inside {
 		right: -85px;
 		width: 270px;
@@ -24,7 +24,7 @@
 }
 
 @media screen and (max-width: 410px) {
-
+	
 	.list {
 		display: flex;
 		flex-wrap: wrap;

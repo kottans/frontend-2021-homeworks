@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-/*Обнуление*/
+/*Nullstyle*/
 
 * {
   padding: 0;
@@ -75,8 +75,6 @@ h1, h2, h3, h4, h5, h6 {
 
 /*--------------------*/
 
-/* font-face */
-
 @font-face {
   font-family: "Press Gothic";
   src: url("../fonts/Press Gothic Regular.eot");
@@ -106,24 +104,12 @@ a {
   color: white;
 }
 
-/*
-*
-* navbar
-*
-*/
-
 .navbar {
   float: right;
   padding: 10px;
   display: flex;
   align-items: center;
 }
-
-/*
-*
-* list
-*
-*/
 
 .list {
   display: flex;
@@ -156,12 +142,6 @@ a {
   right: 9px;
 }
 
-/*
-*
-* menu
-*
-*/
-
 .menu {
   position: relative;
   padding: 8px;
@@ -179,7 +159,7 @@ a {
   cursor: pointer;
 }
 
-.menu-input[type=checkbox]:checked ~ .menu-inside {
+.menu-input:checked ~ .menu-inside {
   display: flex;
 }
 
@@ -226,13 +206,8 @@ a {
   margin-top: 10px;
 }
 
-/*
-*
-* hidden
-*
-*/
-
-.hidden, .btn {
+.hidden,
+.btn {
   display: none;
 }
 
@@ -244,16 +219,10 @@ a {
   padding: 10px 0;
   text-transform: uppercase;
   font-weight: 500;
-  font-size: 16px;
+  font-size: 15px;
 }
 
-/*
-*
-* more
-*
-*/
-
-.more-input[type=checkbox]:checked ~ .more-label {
+.more-input:checked ~ .more-label {
   display: none;
 }
 
@@ -263,8 +232,8 @@ a {
   transition-timing-function: easy-in-out;
 }
 
-.more-input[type=checkbox]:checked ~ .hidden,
-.more-input[type=checkbox]:checked ~ .btn {
+.more-input:checked ~ .hidden,
+.more-input:checked ~ .btn {
   display: flex;
   justify-content: center;
 }
@@ -280,26 +249,8 @@ a {
   background-color: rgba(255, 255, 255, 0.7);
   font-family: "Times New Roman";
   letter-spacing: 1px;
-  cursor: pointer;
 }
 
 .more-kottans:focus {
   outline: 1px solid #fff;
-}
-
-/*
-*
-*new
-*
-*/
-
-.visually-hidden {
-  position: absolute !important;
-  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
-  clip: rect(1px, 1px, 1px, 1px);
-  padding:0 !important;
-  border:0 !important;
-  height: 1px !important; 
-  width: 1px !important; 
-  overflow: hidden;
 }
