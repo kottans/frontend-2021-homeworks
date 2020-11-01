@@ -1,0 +1,259 @@
+@import 'config';
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background-color: $blue;
+  font-family: $font;
+  text-transform: uppercase;
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+}
+
+header {
+  position: fixed;
+  width: 100%;
+  background-color: $darkblue;
+  z-index: 1;
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-left: 3px solid $lightblue;
+    border-right: 3px solid $lightblue;
+  }
+}
+
+.header-left-gr {
+  display: flex;
+  align-items: center;
+  margin-left: 1.5rem;
+  img {
+    width: 3.5rem;
+    padding: 0.8rem 0;
+  }
+  h1 {
+    font-size: 1.8rem;
+    line-height: 1.1;
+    margin-left: 1rem;
+  }
+}
+
+.next-btn {
+  border: 2px solid #fff;
+  padding: 0.7rem 1rem;
+  margin-right: 1.5rem;
+  transition: background-color 300ms ease;
+  &:active {
+    background-color: $alert;
+  }
+}
+
+.menu-btn {
+  display: none;
+}
+
+.center-content {
+  margin-top: 6rem;
+  flex: 1 0 auto;
+  display: flex;
+  width: 100%;
+}
+
+nav.side-nav {
+  flex-basis: 230px;
+  background-color: $blue;
+  border-left: 3px solid $lightblue;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  img {
+    align-self: center;
+    max-width: 9rem;
+    margin-bottom: 2rem;
+  }
+}
+
+ul.side-nav-menu {
+  .menu-link {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    padding: 0.5rem 0;
+    padding-left: 1rem;
+    font-size: 1.2rem;
+    border-top: 3px solid $lightblue;
+    transition: background-color 100ms linear;
+    &.active {
+      background-color: $lightblue;
+    }
+  }
+  li:last-child {
+    border-bottom: 3px solid $lightblue;
+  }
+}
+
+main {
+  flex: 1;
+  background-color: $lightblue;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.left-pane {
+  flex: 1.4;
+  display: flex;
+  flex-direction: column;
+  min-width: 315px;
+}
+
+.left-pane-top {
+  display: flex;
+  margin-top: 1.2rem;
+  margin-left: 1.2rem;
+  align-items: flex-start;
+}
+
+img.notice {
+  margin-left: 0.5rem;
+  width: 100%;
+  max-width: 70px;
+}
+
+.crim-photo-set {
+  position: relative;
+  border: 4px solid #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  img {
+    width: 100%;
+    max-width: 200px;
+  }
+  p {
+    position: absolute;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.404);
+    width: 100%;
+    padding: 0.3rem;
+    text-align: center;
+    font-size: 0.9rem;
+  }
+}
+
+.left-pane-bottom {
+  margin-top: 1.2rem;
+  h2 {
+    background-color: $blue;
+    font-size: 1.2rem;
+    padding: 0.5rem 1rem 0.5rem 0;
+    margin-left: 1.2rem;
+    text-align: right;
+  }
+}
+
+.evidence-set {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 1.2rem;
+  margin-right: 1.2rem;
+  margin-top: 1.2rem;
+}
+
+.evidence-item {
+  max-width: 112px;
+  background-color: #fff;
+  padding: 0.3rem;
+  border-radius: 9px;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+  transition: transform 100ms linear;
+  img {
+    border-radius: 5px;
+  }
+  p {
+    color: $darkblue;
+    text-align: center;
+    font-size: 0.9rem;
+    padding-top: 0.3rem;
+  }
+}
+
+.right-pane {
+  flex: 2;
+  margin-left: 2rem;
+  h2 {
+    margin-top: 0.8rem;
+    margin-bottom: 0.8rem;
+    background-color: $blue;
+    font-size: 1.2rem;
+    padding: 0.5rem 0 0.5rem 1rem;
+  }
+  p {
+    padding: 0.2rem;
+    font-size: 1rem;
+    text-align: left;
+  }
+}
+
+.data-group {
+  display: flex;
+}
+
+.left-column {
+  flex: 1;
+}
+
+.right-column {
+  margin-left: 2rem;
+  flex: 1;
+}
+
+p.long-desc {
+  padding-right: 2rem;
+  &:last-of-type {
+    margin-bottom: 1rem;
+  }
+}
+
+footer {
+  flex-shrink: 0;
+  background-color: $darkblue;
+}
+
+.credits {
+  text-align: center;
+  padding: 0.8rem;
+  color: #fff;
+  font-size: 0.9rem;
+  width: 100%;
+  a {
+    text-decoration: none;
+    color: inherit;
+    &:active {
+      color: $alert;
+    }
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .menu-link:hover {
+    background-color: $lightblue;
+  }
+  .evidence-item:hover {
+    transform: scale(2);
+  }
+  .next-btn:hover {
+    background-color: $alert;
+  }
+  .credits {
+    a:hover {
+      color: $alert;
+    }
+  }
+}
+
+@import 'responsive';
