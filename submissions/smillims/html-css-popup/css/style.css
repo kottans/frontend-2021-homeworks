@@ -180,14 +180,15 @@ a {
   z-index: 1;
   overflow-y: scroll;
   margin-top: 20px;
-  width: 350px;
+  width: 320px;
   height: 300px;
   padding: 20px;
   border: 1px solid #fff;
   border-radius: 10px;
 }
 
-.menu-inside__link {
+.menu-inside__link,
+.more-list__link {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -198,32 +199,37 @@ a {
   width: 70px;
 }
 
-.menu-inside__link:focus {
+.menu-inside__link:focus,
+.more-list__link:focus {
   outline: 1px solid #fff;
 }
 
-.menu-inside__link > p {
+.menu-inside__link > p,
+.more-list__item > p {
   margin-top: 10px;
 }
 
 .hidden,
-.btn {
+.button {
   display: none;
+}
+
+.button {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  margin-right: 15px;
 }
 
 .btn {
   background-color: red;
-  margin-top: 10px;
   width: 100%;
   text-align: center;
+  margin-top: 10px;
   padding: 10px 0;
   text-transform: uppercase;
   font-weight: 500;
   font-size: 15px;
-}
-
-.more-input:checked ~ .more-label {
-  display: none;
 }
 
 .more-input:focus + .more-label {
@@ -232,10 +238,17 @@ a {
   transition-timing-function: easy-in-out;
 }
 
-.more-input:checked ~ .hidden,
-.more-input:checked ~ .btn {
+.more-input:checked ~ .more-label {
+  display: none;
+}
+
+.more-input:checked ~ .more-block .hidden {
   display: flex;
   justify-content: center;
+}
+
+.more-input:checked ~ .more-block .button {
+  display: flex;
 }
 
 .more-label {
@@ -244,13 +257,31 @@ a {
   justify-content: center;
   align-items: center;
   margin-top: 10px;
-  width: 300px;
+  width: 250px;
   height: 30px;
   background-color: rgba(255, 255, 255, 0.7);
   font-family: "Times New Roman";
   letter-spacing: 1px;
 }
 
+.more-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 20px;
+}
+
 .more-kottans:focus {
   outline: 1px solid #fff;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  clip: rect(1px 1px 1px 1px);
+  /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 0 !important;
+  border: 0 !important;
+  height: 1px !important;
+  width: 1px !important;
+  overflow: hidden;
 }
