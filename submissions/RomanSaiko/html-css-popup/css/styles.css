@@ -1,0 +1,147 @@
+body, h1 {
+  margin: 0;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  width: 1200px;
+  max-width: 100%;
+  padding: 0 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-list {
+  display: flex;
+  list-style: none;
+  padding: 0;
+}
+
+.nav-list .nav-item {
+  font-size: 16px;
+  margin-left: 30px;
+  position: relative;
+  cursor: pointer;
+}
+
+.nav-list .nav-item > a {
+  text-decoration: none;
+  color: #000;
+}
+
+.nav-list .nav-item > a:focus {
+  outline: 1px solid #cdcdcd;
+}
+
+.nav-list .nav-item .fas {
+  font-size: 22px;
+}
+
+.nav-list .nav-item .submenu-item__title {
+  margin-top: 5px;
+}
+
+.nav-list .submenu {
+  display: none;
+  width: 270px;
+  position: absolute;
+  top: 40px;
+  right: -50px;
+  padding: 20px 20px 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  max-height: 260px;
+  overflow-y: auto;
+}
+
+.nav-list .hidden-checkbox {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.nav-list .hidden-checkbox:focus + label {
+  outline: 1px solid #cdcdcd;
+}
+
+.nav-list .submenu-checkbox:checked ~ .submenu {
+  display: block;
+}
+
+.nav-list .submenu-top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.nav-list .submenu-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  width: calc(100% / 3);
+  padding: 15px 12px;
+  text-decoration: none;
+  color: #000;
+  border: 1px solid transparent;
+}
+
+.nav-list .submenu-item:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.nav-list .submenu-item:focus {
+  outline: 1px solid #cdcdcd;
+}
+
+.nav-list .submenu-hidden {
+  flex-wrap: wrap;
+}
+
+.nav-list .submenu-hidden, .nav-list hr {
+  display: none;
+}
+
+.nav-list .more-checkbox:checked + label {
+  display: none;
+}
+
+.nav-list .more-checkbox:checked ~ hr,
+.nav-list .more-checkbox:checked ~ .submenu-hidden {
+  display: flex;
+}
+
+.nav-list .submenu-bottom {
+  text-align: center;
+}
+
+.nav-list .submenu-bottom hr {
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+.nav-list .submenu-bottom label {
+  color: #2626f9;
+}
+
+.nav-list .submenu-link {
+  width: 100%;
+  text-align: center;
+  margin: 10px 0 15px;
+  color: #2626f9;
+  text-decoration: none;
+}
+
+.main-content {
+  width: 100%;
+  height: calc(100vh - 38px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
