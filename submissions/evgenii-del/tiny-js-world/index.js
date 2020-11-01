@@ -44,7 +44,11 @@ const dog = {
     saying: 'woof-woof!'
 };
 
-[man, woman, cat, dog].forEach(item => print([item.species, item.name, item.gender, item.legs, item.hands, item.saying].join(';')));
+function toString(object) {
+    return [object.species, object.name, object.gender, object.legs, object.hands, object.saying].join(';');
+}
+
+[man, woman, cat, dog].forEach(object => print(toString(object)));
 
 // ======== OUTPUT ========
 /* Use print(message) for output.
