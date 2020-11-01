@@ -167,7 +167,7 @@ function printData(perp) {
   }
   document
     .getElementById('crim-portret')
-    .setAttribute('src', `./img/${suspects[perp].portret}.png`);
+    .setAttribute('src', `./img/${suspects[perp].portret}.jpg`);
   document.getElementById('crim-label').textContent = labelCreate.call(
     suspects[perp],
   );
@@ -177,7 +177,7 @@ function printData(perp) {
     const newElem = document.createElement('div');
     newElem.innerHTML = `<img src="./img/${
       suspects[perp].files[i]
-    }.png" alt="Case photo"><p>File ${i + 1}</p>`;
+    }.jpg" alt="Case photo"><p>File ${i + 1}</p>`;
     newElem.classList.add('evidence-item');
     fragment.appendChild(newElem);
   }
