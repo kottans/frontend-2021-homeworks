@@ -49,7 +49,7 @@ header nav {
 }
 
 .nav-menu li a,
-.nav-menu li .toggleMenu_label {
+.toggleMenu_label {
     padding: 0 4px;
 }
 
@@ -127,7 +127,7 @@ header nav {
     text-align: center;
 }
 
-.menu.menu-extra {
+.menu-extra {
     display: none;
     border-top: 1px solid #8a8a8a;
 }
