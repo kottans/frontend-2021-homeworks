@@ -78,23 +78,21 @@ nav.side-nav {
   }
 }
 
-ul.side-nav-menu {
-  .menu-link {
-    color: #fff;
-    text-decoration: none;
-    display: block;
-    padding: 0.5rem 0;
-    padding-left: 1rem;
-    font-size: 1.2rem;
-    border-top: 3px solid $lightblue;
-    transition: background-color 100ms linear;
-    &.active {
-      background-color: $lightblue;
-    }
+.menu-link {
+  color: #fff;
+  text-decoration: none;
+  display: block;
+  padding: 0.5rem 0;
+  padding-left: 1rem;
+  font-size: 1.2rem;
+  border-top: 3px solid $lightblue;
+  transition: background-color 100ms linear;
+  &.active {
+    background-color: $lightblue;
   }
-  li:last-child {
-    border-bottom: 3px solid $lightblue;
-  }
+}
+li:last-child {
+  border-bottom: 3px solid $lightblue;
 }
 
 main {

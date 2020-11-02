@@ -4,10 +4,10 @@
   margin: 0 auto;
 }
 
-button,
-a,
-input,
-li {
+button {
+  outline: none;
+  border: transparent;
+  background-color: rgba(255, 255, 255, 0);
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
@@ -128,7 +128,7 @@ nav.side-nav img {
   margin-bottom: 2rem;
 }
 
-ul.side-nav-menu .menu-link {
+.menu-link {
   color: #fff;
   text-decoration: none;
   display: block;
@@ -140,11 +140,11 @@ ul.side-nav-menu .menu-link {
   transition: background-color 100ms linear;
 }
 
-ul.side-nav-menu .menu-link.active {
+.menu-link.active {
   background-color: #2d5c7d;
 }
 
-ul.side-nav-menu li:last-child {
+li:last-child {
   border-bottom: 3px solid #2d5c7d;
 }
 
@@ -348,7 +348,7 @@ footer {
 }
 
 @media screen and (max-width: 920px) {
-  ul.side-nav-menu .menu-link {
+  .menu-link {
     font-size: 1rem;
   }
   .left-pane {

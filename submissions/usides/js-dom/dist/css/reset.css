@@ -7,6 +7,7 @@
 ul[class],
 ol[class] {
   padding: 0;
+  list-style: none;
 }
 
 body,
@@ -29,11 +30,6 @@ dd {
 body {
   scroll-behavior: smooth;
   text-rendering: optimizeSpeed;
-}
-
-ul[class],
-ol[class] {
-  list-style: none;
 }
 
 img {

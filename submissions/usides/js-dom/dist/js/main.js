@@ -114,14 +114,12 @@ document.addEventListener('DOMContentLoaded', function () {
   printData(current);
 });
 
-menuBtn.addEventListener('click', function (e) {
-  e.preventDefault();
+menuBtn.addEventListener('click', function () {
   sideMenu.classList.toggle('hidden');
-  this.classList.toggle('active');
+  menuBtn.classList.toggle('active');
 });
 
-nextBtn.addEventListener('click', function (e) {
-  e.preventDefault();
+nextBtn.addEventListener('click', function () {
   current++;
   printData(current);
   makeActive(current);
@@ -136,7 +134,7 @@ sideNavMenu.addEventListener('click', function (e) {
     left: 0,
     behavior: 'smooth',
   });
-  let arrNum = suspects.findIndex(
+  const arrNum = suspects.findIndex(
     (item) => item.number === Number(e.target.id.slice(1)),
   );
   printData(arrNum);
@@ -161,17 +159,17 @@ function loadMenu() {
 }
 
 function printData(perp) {
-  let holders = document.querySelectorAll('[data-holder]');
+  const holders = document.querySelectorAll('[data-holder]');
+  const crimPortret = document.getElementById('crim-portret');
+  const crimLabel = document.getElementById('crim-label');
+  const evidenceSet = document.getElementById('evidence-set');
+
   for (let i = 0; i < holders.length; i++) {
     holders[i].innerHTML = suspects[perp][holders[i].dataset.holder];
   }
-  document
-    .getElementById('crim-portret')
-    .setAttribute('src', `./img/${suspects[perp].portret}`);
-  document.getElementById('crim-label').textContent = labelCreate.call(
-    suspects[perp],
-  );
-  document.getElementById('evidence-set').innerHTML = '';
+  crimPortret.setAttribute('src', `./img/${suspects[perp].portret}`);
+  crimLabel.textContent = labelCreate.call(suspects[perp]);
+  evidenceSet.innerHTML = '';
   const fragment = document.createDocumentFragment();
   for (let i = 0; i < suspects[perp].files.length; i++) {
     const newElem = document.createElement('div');
@@ -181,17 +179,18 @@ function printData(perp) {
     newElem.classList.add('evidence-item');
     fragment.appendChild(newElem);
   }
-  document.getElementById('evidence-set').appendChild(fragment);
+  evidenceSet.appendChild(fragment);
 }
 
 function labelCreate() {
   return `#${this.number}-${this.gender.slice(0, 1)}-${this.nick}`;
 }
 
-function makeActive(menuItem) {
+function makeActive(target) {
   const items = document.querySelectorAll('.menu-link');
-  for (let i = 0; i < items.length; i++) {
-    items[i].classList.remove('active');
-    items[menuItem].classList.add('active');
+  const activeMenuLink = document.querySelector('.menu-link.active');
+  if (activeMenuLink) {
+    activeMenuLink.classList.remove('active');
   }
+  items[target].classList.add('active');
 }
