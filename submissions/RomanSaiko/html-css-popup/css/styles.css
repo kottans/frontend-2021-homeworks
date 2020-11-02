@@ -7,6 +7,21 @@ body, h1 {
   justify-content: center;
 }
 
+@media (max-width: 520px) {
+  .header h1 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 420px) {
+  .header h1 {
+    font-size: 18px;
+  }
+  .header h1 span {
+    display: none;
+  }
+}
+
 .container {
   width: 1200px;
   max-width: 100%;
@@ -29,12 +44,17 @@ body, h1 {
   cursor: pointer;
 }
 
-.nav-list .nav-item > a {
+.nav-list .nav-item label {
+  cursor: inherit;
+}
+
+.nav-list .nav-item .nav-link {
+  display: inline-block;
   text-decoration: none;
   color: #000;
 }
 
-.nav-list .nav-item > a:focus {
+.nav-list .nav-item .nav-link:focus {
   outline: 1px solid #cdcdcd;
 }
 
@@ -48,14 +68,21 @@ body, h1 {
 
 .nav-list .submenu {
   display: none;
-  width: 270px;
   position: absolute;
+  width: 270px;
+  max-height: 260px;
   top: 40px;
   right: -50px;
   padding: 20px 20px 10px;
+  background: #fff;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  max-height: 260px;
   overflow-y: auto;
+}
+
+@media (max-width: 420px) {
+  .nav-list .submenu {
+    right: -100px;
+  }
 }
 
 .nav-list .hidden-checkbox {
@@ -74,30 +101,36 @@ body, h1 {
   display: block;
 }
 
-.nav-list .submenu-top {
+.nav-list .submenu-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  width: 100%;
+  padding: 0;
+  list-style: none;
 }
 
-.nav-list .submenu-item {
+.nav-list .submenu-list .submenu-list__item {
+  box-sizing: border-box;
+  width: calc(100% / 3);
+  border: 1px solid transparent;
+}
+
+.nav-list .submenu-list .submenu-list__link {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  box-sizing: border-box;
-  width: calc(100% / 3);
   padding: 15px 12px;
   text-decoration: none;
   color: #000;
-  border: 1px solid transparent;
 }
 
-.nav-list .submenu-item:hover {
+.nav-list .submenu-list .submenu-list__link:hover {
   background: rgba(0, 0, 0, 0.1);
 }
 
-.nav-list .submenu-item:focus {
+.nav-list .submenu-list .submenu-list__link:focus {
   outline: 1px solid #cdcdcd;
 }
 

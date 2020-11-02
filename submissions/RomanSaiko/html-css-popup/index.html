@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Hooli-style Popup</title>
     <link rel="stylesheet" href="css/styles.css">
@@ -12,81 +11,109 @@
 <body>
     <header class="header">
         <div class="container">
-            <h1>Hooli-style Popup</h1>
+            <h1><span>Hooli-style</span> Popup</h1>
             <nav>
                 <ul class="nav-list">
                     <li class="nav-item">
-                        <a href="#">Mail <i class="fas fa-paper-plane"></i></a>
+                        <a class="nav-link" href="#">Mail <i class="fas fa-paper-plane"></i></a>
                     </li>
                     <li class="nav-item">
                         <input type="checkbox" id="submenu-checkbox" class="submenu-checkbox hidden-checkbox">
                         <label for="submenu-checkbox"><i class="fas fa-bars"></i></label>
                         <div class="submenu">
                             <div class="submenu-top">
-                                <a class="submenu-item" href="#">
-                                    <div class="submenu-item__img"><i class="fas fa-calendar-alt"></i></div>
-                                    <div class="submenu-item__title">Calendar</div>
-                                </a>
-                                <a class="submenu-item" href="#">
-                                    <div class="submenu-item__img"><i class="fas fa-envelope-open-text"></i></div>
-                                    <div class="submenu-item__title">Mail</div>
-                                </a>
-                                <a class="submenu-item" href="#">
-                                    <div class="submenu-item__img"><i class="fab fa-neos"></i></div>
-                                    <div class="submenu-item__title">News</div>
-                                </a>
-                                <a class="submenu-item" href="#">
-                                    <div class="submenu-item__img"><i class="fas fa-map-marker-alt"></i></div>
-                                    <div class="submenu-item__title">Map</div>
-                                </a>
-                                <a class="submenu-item" href="#">
-                                    <div class="submenu-item__img"><i class="fas fa-file-alt"></i></div>
-                                    <div class="submenu-item__title">Files</div>
-                                </a>
-                                <a class="submenu-item" href="#">
-                                    <div class="submenu-item__img"><i class="fas fa-address-book"></i></div>
-                                    <div class="submenu-item__title">Contacts</div>
-                                </a>
-                                <a class="submenu-item" href="#">
-                                    <div class="submenu-item__img"><i class="fas fa-globe"></i></div>
-                                    <div class="submenu-item__title">Translate</div>
-                                </a>
-                                <a class="submenu-item" href="#">
-                                    <div class="submenu-item__img"><i class="fas fa-file-video"></i></div>
-                                    <div class="submenu-item__title">Videos</div>
-                                </a>
-                                <a class="submenu-item" href="#">
-                                    <div class="submenu-item__img"><i class="fas fa-search"></i></div>
-                                    <div class="submenu-item__title">Search</div>
-                                </a>
+                                <ul class="submenu-list">
+                                    <li class="submenu-list__item">
+                                        <a class="submenu-list__link" href="#">
+                                            <div class="submenu-item__img"><i class="fas fa-calendar-alt"></i></div>
+                                            <div class="submenu-item__title">Calendar</div>
+                                        </a>
+                                    </li>
+                                    <li class="submenu-list__item">
+                                        <a class="submenu-list__link" href="#">
+                                            <div class="submenu-item__img"><i class="fas fa-envelope-open-text"></i></div>
+                                            <div class="submenu-item__title">Mail</div>
+                                        </a>
+                                    </li>
+                                    <li class="submenu-list__item">
+                                        <a class="submenu-list__link" href="#">
+                                            <div class="submenu-item__img"><i class="fab fa-neos"></i></div>
+                                            <div class="submenu-item__title">News</div>
+                                        </a>
+                                    </li>
+                                    <li class="submenu-list__item">
+                                        <a class="submenu-list__link" href="#">
+                                            <div class="submenu-item__img"><i class="fas fa-map-marker-alt"></i></div>
+                                            <div class="submenu-item__title">Map</div>
+                                        </a>
+                                    </li>
+                                    <li class="submenu-list__item">
+                                        <a class="submenu-list__link" href="#">
+                                            <div class="submenu-item__img"><i class="fas fa-file-alt"></i></div>
+                                            <div class="submenu-item__title">Files</div>
+                                        </a>
+                                    </li>
+                                    <li class="submenu-list__item">
+                                        <a class="submenu-list__link" href="#">
+                                            <div class="submenu-item__img"><i class="fas fa-address-book"></i></div>
+                                            <div class="submenu-item__title">Contacts</div>
+                                        </a>
+                                    </li>
+                                    <li class="submenu-list__item">
+                                        <a class="submenu-list__link" href="#">
+                                            <div class="submenu-item__img"><i class="fas fa-globe"></i></div>
+                                            <div class="submenu-item__title">Translate</div>
+                                        </a>
+                                    </li>
+                                    <li class="submenu-list__item">
+                                        <a class="submenu-list__link" href="#">
+                                            <div class="submenu-item__img"><i class="fas fa-file-video"></i></div>
+                                            <div class="submenu-item__title">Videos</div>
+                                        </a>
+                                    </li>
+                                    <li class="submenu-list__item">
+                                        <a class="submenu-list__link" href="#">
+                                            <div class="submenu-item__img"><i class="fas fa-search"></i></div>
+                                            <div class="submenu-item__title">Search</div>
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
                             <div class="submenu-bottom">
                                 <input type="checkbox" id="more-checkbox" class="more-checkbox hidden-checkbox">
                                 <label for="more-checkbox">More</label>
                                 <hr>
                                 <div class="submenu-hidden">
-                                    <a class="submenu-item" href="#">
-                                        <div class="submenu-item__img"><i class="fas fa-file-image"></i></div>
-                                        <div class="submenu-item__title">Photo</div>
-                                    </a>
-                                    <a class="submenu-item" href="#">
-                                        <div class="submenu-item__img"><i class="fas fa-mobile-alt"></i></div>
-                                        <div class="submenu-item__title">Apps</div>
-                                    </a>
-                                    <a class="submenu-item" href="#">
-                                        <div class="submenu-item__img"><i class="fas fa-comments"></i></div>
-                                        <div class="submenu-item__title">Chat</div>
-                                    </a>
+                                    <ul class="submenu-list">
+                                        <li class="submenu-list__item">
+                                            <a class="submenu-list__link" href="#">
+                                                <div class="submenu-item__img"><i class="fas fa-file-image"></i></div>
+                                                <div class="submenu-item__title">Photo</div>
+                                            </a>
+                                        </li>
+                                        <li class="submenu-list__item">
+                                            <a class="submenu-list__link" href="#">
+                                                <div class="submenu-item__img"><i class="fas fa-mobile-alt"></i></div>
+                                                <div class="submenu-item__title">Apps</div>
+                                            </a>
+                                        </li>
+                                        <li class="submenu-list__item">
+                                            <a class="submenu-list__link" href="#">
+                                                <div class="submenu-item__img"><i class="fas fa-comments"></i></div>
+                                                <div class="submenu-item__title">Chat</div>
+                                            </a>
+                                        </li>
+                                    </ul>
                                     <a href="https://github.com/kottans" target="_blank" class="submenu-link">Even more from Kottans</a>
                                 </div>
                             </div>
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a href="#"><i class="fas fa-bell"></i></a>
+                        <a class="nav-link" href="#"><i class="fas fa-bell"></i></a>
                     </li>
                     <li class="nav-item">
-                        <a href="#"><i class="fas fa-user-alt"></i></a>
+                        <a class="nav-link" href="#"><i class="fas fa-user-alt"></i></a>
                     </li>
                 </ul>
             </nav>
