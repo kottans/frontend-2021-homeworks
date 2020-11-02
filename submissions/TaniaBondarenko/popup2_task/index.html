@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hooly-style Popup</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+  <!--Navigation panel with menu-button-->
+  <nav class="navigation">
+    <button class="nav_icon"><img src="images/photos.png" class="nav_icon_image"></button>
+    <button class="nav_icon"><img src="images/mail.png" class="nav_icon_image"></button>
+    <button class="nav_icon"><img src="images/bell.png" class="nav_icon_image"></button>
+    <label for="checkbox" class="popup"><img src="images/popup-button.png" class="popup_icon_image"></label>
+    <input id="checkbox" type="checkbox">
+    <!--Popup content, which is shown/hidden after menu-button pressed-->
+    <ul>
+      <li><a href="#"><img src="images/apps.png" class="li_icon_image"></a></li>
+      <li><a href="#"><img src="images/blogs.png" class="li_icon_image"></a></li>
+      <li><a href="#"><img src="images/calendar.png" class="li_icon_image"></a></li>
+      <li><a href="#"><img src="images/chat.png" class="li_icon_image"></a></li>
+      <li><a href="#"><img src="images/contacts.png" class="li_icon_image"></a></li>
+      <li><a href="#"><img src="images/maps.png" class="li_icon_image"></a></li>
+      <li><a href="#"><img src="images/videos.png" class="li_icon_image"></a></li>
+      <li><a href="#"><img src="images/tanslation.png" class="li_icon_image"></a></li>
+      <li><a href="#"><img src="images/search.png" class="li_icon_image"></a></li>
+      <div class="show_more">
+        <label for="show_more"><span>More</span></label>
+        <input id="show_more" type="checkbox">
+        <!--Popup content, which is shown/hidden after "More" button pressed-->
+        <ol>
+          <li><a href="#"><img src="images/news.png" class="li_icon_image"></a></li>
+          <li><a href="#"><img src="images/documents.png" class="li_icon_image"></a></li>
+          <li><a href="#"><img src="images/blogs.png" class="li_icon_image"></a></li>
+          <li><a href="#"><img src="images/promo.png" class="li_icon_image"></a></li>
+          <li><a href="#"><img src="images/mars.png" class="li_icon_image"></a></li>
+          <li><a href="#"><img src="images/files.png" class="li_icon_image"></a></li>
+        </ol>
+      </div>
+    </ul>
+  </nav>
+</body>
+
+</html>
