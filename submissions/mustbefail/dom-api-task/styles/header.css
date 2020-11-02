@@ -1,0 +1,7 @@
+.page-header {
+  height: 4rem;
+  padding: 5px 10px;
+  text-align: center;
+  line-height: 1.7;
+  box-shadow: 0 0 5px inset rgba(0, 0, 0, 0.2);
+}
