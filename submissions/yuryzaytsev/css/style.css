@@ -1,0 +1,383 @@
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+html {
+  font-size: 16px;
+  font-family: "Arial", sans-serif;
+  background-color: #fbf2ba;
+  color: #000000;
+}
+
+body {
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.visually-hidden,
+.form-radio input[type="radio"],
+.form-checkbox input[type="checkbox"],
+input[type="file"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+.container {
+  width: 320px;
+  padding: 10px;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: 768px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    width: 1200px;
+  }
+}
+
+.header {
+  position: relative;
+  display: grid;
+}
+
+.header__list {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.header__item input:checked ~ .popup {
+  display: flex;
+}
+
+.header__item input:checked ~ label,
+.header__item input:focus ~ label {
+  background-color: #e75333;
+}
+
+.header__item input:checked ~ label svg,
+.header__item input:focus ~ label svg {
+  fill: #ffffff;
+}
+
+.header__item {
+  margin-left: 20px;
+}
+
+.header__item--icon:nth-last-child(-n + 2) {
+  margin-left: 5px;
+}
+
+.header__item:hover > label,
+.header__item:focus > label,
+.header__item--icon .header__link:hover,
+.header__item--icon .header__link:focus {
+  background-color: #e75333;
+  cursor: pointer;
+}
+
+.header__item:hover > label svg,
+.header__item:focus > label svg,
+.header__item--icon .header__link:hover svg,
+.header__item--icon .header__link:focus svg {
+  fill: #ffffff;
+}
+
+.header__item--icon .header__link,
+.header__item--icon .header__link > label {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.header__link {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  outline: none;
+  transition: color 0.1s linear;
+}
+
+.header__link:hover, .header__link:focus {
+  color: #e75333;
+}
+
+.header__link--user img {
+  border-radius: 50%;
+}
+
+.header__link svg {
+  fill: #000000;
+}
+
+.header__btn {
+  position: relative;
+  display: none;
+  height: max-content;
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #000000;
+}
+
+.footer__item {
+  margin: 7px;
+}
+
+.footer__link {
+  font-size: 12px;
+  font-weight: 500;
+  transition: color 0.1s linear;
+  text-decoration: none;
+  color: #ffffff;
+  outline: none;
+}
+
+.footer__link:hover, .footer__link:focus {
+  color: #e75333;
+}
+
+.page {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100%;
+  min-width: 320px;
+}
+
+.popup {
+  position: absolute;
+  display: none;
+  flex-direction: column;
+  top: 65px;
+  border-radius: 5px;
+  background-color: #ffffff;
+  box-shadow: 2px 2px 1px rgba(41, 52, 73, 0.5);
+  max-height: 400px;
+  overflow-y: auto;
+  transform: translateX(-50%);
+  left: 50%;
+}
+
+.popup::-webkit-scrollbar {
+  width: 3px;
+}
+
+.popup::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.popup::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+@media (min-width: 768px) {
+  .popup {
+    transform: initial;
+    left: initial;
+    right: 10px;
+  }
+}
+
+.popup #btn-more:focus ~ .popup__btn {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.popup #btn-more:checked ~ .popup__btn {
+  display: none;
+}
+
+.popup #btn-more:checked ~ .popup__list--hidden {
+  display: grid;
+}
+
+.popup__list {
+  display: grid;
+  gap: 5px;
+  grid-template-columns: repeat(3, 90px);
+  list-style: none;
+  padding: 10px;
+}
+
+@media (min-width: 768px) {
+  .popup__list {
+    padding: 20px;
+    gap: 10px;
+  }
+}
+
+.popup__list:first-child {
+  margin-bottom: 0;
+}
+
+.popup__list--hidden {
+  display: none;
+}
+
+.popup .popup__list:first-of-type {
+  padding-bottom: 0;
+}
+
+.popup__btn {
+  order: 1;
+  margin-top: 20px;
+  color: #000000;
+  background-color: rgba(0, 0, 0, 0.1);
+  border: none;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 10px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  text-align: center;
+}
+
+.popup__btn:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+@media (min-width: 768px) {
+  .popup__btn {
+    font-size: 16px;
+  }
+}
+
+.popup__link {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  font-size: 12px;
+  padding: 5px;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: color 0.1s linear;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .popup__link {
+    font-size: 14px;
+  }
+}
+
+.popup__link:hover, .popup__link:focus {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.popup__link svg {
+  margin-bottom: 10px;
+  fill: #000000;
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column-reverse;
+}
+
+.main__link {
+  margin-top: 50px;
+  margin-bottom: 25px;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #ffffff;
+  background-color: #e75333;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+@media (min-width: 768px) {
+  .main__link {
+    font-size: 18px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .main__link {
+    font-size: 24px;
+  }
+}
+
+.main__link:hover {
+  color: #ffffff;
+  background-color: #000000;
+}
+
+.main__link:hover ~ svg .nose,
+.main__link:hover ~ svg .eye-circle {
+  transition: transform 0.1s linear;
+  transform: translateY(10px);
+}
+
+.main__link:hover ~ svg .eye-border,
+.main__link:hover ~ svg .eye {
+  transition: transform 0.1s linear;
+  transform: translateY(30px);
+}
+
+@media (min-width: 768px) {
+  .main__image {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .main__image {
+    width: 512px;
+    height: 512px;
+  }
+}

@@ -1,0 +1,199 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}
+a:hover, a:focus {
+  outline: none;
+  background-color: rgba(64, 169, 255, 0.4);
+}
+
+img {
+  max-width: 100%;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+.toolbar {
+  height: 50px;
+  min-width: 32px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0 2%;
+}
+.toolbar__item:not(:last-child) {
+  margin-right: 1rem;
+}
+
+.popup-wrapper {
+  position: relative;
+}
+
+.popup-btn {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+.popup-btn:focus ~ .popup-icon {
+  background-color: rgba(64, 169, 255, 0.4);
+}
+.popup-btn:checked ~ .popup {
+  display: block;
+}
+
+.popup-icon {
+  display: block;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+  background: url(../img/popup-button.png) center/cover no-repeat;
+}
+.popup-icon:hover {
+  background-color: rgba(64, 169, 255, 0.4);
+}
+
+.bell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+}
+.bell img {
+  width: 18px;
+}
+
+.user-acc {
+  display: block;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border: 1px solid #c5c5c5;
+}
+
+.user-pic {
+  max-width: 100%;
+}
+
+.popup {
+  position: absolute;
+  top: 50px;
+  right: -90px;
+  display: none;
+}
+.popup::before {
+  content: "";
+  position: absolute;
+  top: -14px;
+  right: 84px;
+  z-index: -1;
+  width: 0;
+  height: 0;
+  border-left: 16px solid transparent;
+  border-right: 16px solid transparent;
+  border-bottom: 16px solid #ccc;
+}
+.popup::after {
+  content: "";
+  position: absolute;
+  top: -12px;
+  right: 85px;
+  z-index: 1;
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-bottom: 15px solid #fff;
+}
+
+.popup-content {
+  width: 300px;
+  height: 360px;
+  overflow: auto;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.6);
+  background-color: #fff;
+}
+
+.menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 0.8rem 0;
+}
+
+.menu.extra {
+  display: none;
+  border-top: 1px solid #ccc;
+}
+
+.menu-item a {
+  display: block;
+  border-radius: 10px;
+}
+.menu-item a:hover, .menu-item a:focus {
+  background-color: rgba(64, 169, 255, 0.4);
+}
+
+.menu-item__icon {
+  width: 75px;
+  height: 75px;
+  padding: 0.2rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+.menu-item__icon img {
+  max-width: 60px;
+  max-height: 45px;
+}
+
+.menu-item__title {
+  font-size: 0.8rem;
+}
+
+.more-btn {
+  position: absolute;
+  opacity: 0;
+}
+.more-btn + label {
+  cursor: pointer;
+}
+.more-btn:focus ~ label, .more-btn:hover ~ label {
+  outline: none;
+  background-color: rgba(64, 169, 255, 0.4);
+}
+.more-btn:checked ~ label {
+  display: none;
+}
+.more-btn:checked ~ .menu.extra {
+  display: flex;
+}
+
+.more-btn + label {
+  display: block;
+  margin: 0 auto;
+  width: 60px;
+  text-align: center;
+  border: none;
+  border-radius: 5px;
+  background-color: transparent;
+}
+
+/*# sourceMappingURL=styles.css.map */

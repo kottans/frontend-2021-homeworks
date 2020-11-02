@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="HandheldFriendly" content="true">
+  <meta name="MobileOptimized" content="width">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css?family=Fira+Sans:regular" rel="stylesheet" />
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/style.css">
+  <title>Popup HTML&CSS</title>
+</head>
+
+<body>
+  <header class="header">
+    <div class="container">
+      <nav class="menu">
+        <ul class="menu__list menu__list--wrapper">
+          <li class="menu__item"><a href="https://mail.google.com/" class="menu__item-link">Mail</a></li>
+          <li class="menu__item"><a href="https://www.google.com.ua/imghp?hl=ru&tab=ri&ogbl" class="menu__item-link">Picture</a></li>
+          <li class="menu__item menu--relative">
+            <input type="checkbox" class="popup-btn" id="popup-checkbox">
+            <label class="menu__item-btn" for="popup-checkbox">
+              <img class="menu__item-img" src="images/popup-button.png" alt="popup-btn">
+            </label>
+            <div class="popup__wrap">
+              <div class="square"></div>
+              <div class="popup-base content">
+                <div class="submenu__items">
+                  <a href="#" class="submenu__item">
+                    <img class="submenu__item-img" src="images/apps.png" alt="apps">
+                    <span class="submenu__item-text">Apps</span>
+                  </a>
+                  <a href="#" class="submenu__item">
+                    <img class="submenu__item-img" src="images/blogs.png" alt="blogs">
+                    <span class="submenu__item-text">Blogs</span>
+                  </a>
+                  <a href="#" class="submenu__item">
+                    <img class="submenu__item-img" src="images/calendar.png" alt="calendar">
+                    <span class="submenu__item-text">Calendar</span>
+                  </a>
+                  <a href="#" class="submenu__item">
+                    <img class="submenu__item-img" src="images/chat.png" alt="chat">
+                    <span class="submenu__item-text">Chat</span>
+                  </a>
+                  <a href="#" class="submenu__item">
+                    <img class="submenu__item-img" src="images/classroom.png" alt="classroom">
+                    <span class="submenu__item-text">Classroom</span>
+                  </a>
+                  <a href="#" class="submenu__item">
+                    <img class="submenu__item-img" src="images/collection.png" alt="collection">
+                    <span class="submenu__item-text">Collection</span>
+                  </a>
+                  <a href="#" class="submenu__item">
+                    <img class="submenu__item-img" src="images/contacts.png" alt="contacts">
+                    <span class="submenu__item-text">Contacts</span>
+                  </a>
+                  <a href="#" class="submenu__item">
+                    <img class="submenu__item-img" src="images/documents.png" alt="documents">
+                    <span class="submenu__item-text">Documents</span>
+                  </a>
+                  <a href="#" class="submenu__item">
+                    <img class="submenu__item-img" src="images/files.png" alt="files">
+                    <span class="submenu__item-text">Files</span>
+                  </a>
+                  <a href="#" class="submenu__item">
+                    <img class="submenu__item-img" src="images/mail.png" alt="mail">
+                    <span class="submenu__item-text">Mail</span>
+                  </a>
+                  <a href="#" class="submenu__item">
+                    <img class="submenu__item-img" src="images/maps.png" alt="maps">
+                    <span class="submenu__item-text">Maps</span>
+                  </a>
+                  <a href="#" class="submenu__item">
+                    <img class="submenu__item-img" src="images/mars.png" alt="mars">
+                    <span class="submenu__item-text">Mars</span>
+                  </a>
+                </div>
+                <input type="checkbox" class="popup-btn-more" id="more-checkbox">
+                <label class="more-btn" for="more-checkbox">More</label>
+                <div class="more__items content">
+                  <a href="#" class="more__item">
+                    <img class="more__item-img" src="images/photos.png" alt="photos">
+                    <span class="more__item-text">Photos</span>
+                  </a>
+                  <a href="#" class="more__item">
+                    <img class="more__item-img" src="images/news.png" alt="news">
+                    <span class="more__item-text">News</span>
+                  </a>
+                  <a href="#" class="more__item"><img class="more__item-img" src="images/promo.png" alt="promo">
+                    <span class="more__item-text">Promo</span>
+                  </a>
+                  <a href="#" class="more__item">
+                    <img class="more__item-img" src="images/search.png" alt="search">
+                    <span class="more__item-text">Search</span>
+                  </a>
+                  <a href="#" class="more__item">
+                    <img class="more__item-img" src="images/translation.png" alt="translation">
+                    <span class="more__item-text">Translation</span>
+                  </a>
+                  <a href="#" class="more__item">
+                    <img class="more__item-img" src="images/videos.png" alt="videos">
+                    <span class="more__item-text">Videos</span>
+                  </a>
+                  <a class="kottans" href="https://kottans.org/">Even more from Kottans</a>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="menu__item">
+            <a href="#" class="menu__item-link">
+              <img class="menu__item-img" src="images/bell.png" alt="bell-btn">
+            </a>
+          </li>
+          <li class="menu__item">
+            <a href="#" class="menu__item-link">
+              <img class="menu__item-photo" src="images/photo.jpg" alt="photo">
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+    </div>
+  </header>
+</body>
+
+</html>
