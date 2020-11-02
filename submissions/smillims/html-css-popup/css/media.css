@@ -1,0 +1,48 @@
+@media screen and (max-width: 655px) {
+
+	.menu-inside {
+		right: -85px;
+		width: 270px;
+	}
+
+	.menu-inside__link {
+		width: 60px;
+	}
+
+	.btn {
+		font-size: 14px;
+	}
+
+}
+
+@media screen and (max-width: 535px) {
+
+	.menu-inside {
+		right: -200px;
+	}
+
+}
+
+@media screen and (max-width: 410px) {
+	
+	.list {
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	.list-item:first-of-type {
+		order: 1;
+		position: absolute;
+		right: 0;
+		bottom: -70px;
+	}
+
+	.menu-inside {
+		right: 0px;
+	}
+
+	.btn {
+		font-size: 13px;
+	}
+
+}
