@@ -1,0 +1,145 @@
+:root {
+  --bg-grey: #333333ad;
+  --lightorange: #ffd047;
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body,
+html {
+  height: 100%;
+}
+body {
+  font-weight: bold;
+  font-size: 14px;
+  font-family: Helvetica, sans-serif;
+  color: black;
+}
+.list {
+  display: flex;
+}
+.list-item, 
+.popup-item {
+  list-style: none;
+}
+.topnav {
+  overflow: hidden;
+  background-color: var(--bg-grey);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.topnav a,
+.topnav label {
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 20px;
+}
+a:hover,
+.topnav label:hover,
+a:focus,
+.topnav input:focus + label {
+  background-color: var(--lightorange);
+  color: black;
+  outline: none;
+}
+.list-item__nav,
+.list-item__btn {
+  float: left;
+}
+.list-item__check,
+.popup-item__check {
+  position: absolute;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.bg-image {
+  height: 90%;
+  background-image: url('img/kottans-font.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  filter: blur(8px);
+}
+.list-item__popup {
+  position: fixed;
+  text-align: center;
+  top: 8%;
+  right: 4%;
+  background-color: var(--bg-grey);
+  z-index: 10;
+  visibility: hidden;
+  display: grid;
+  height: 480px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.popup-item {
+  display: grid;
+}
+.popup-item__more{
+  grid-column-start: 1;
+}
+.list-item__popup, 
+.popup-item__more {
+  grid-template-columns: repeat(2, 100px);
+  grid-gap: 10px;
+  grid-row-gap: 10px;
+}
+.popup-item__more {
+  display: none;
+}
+.list-item__popup a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.list-item__popup span {
+  font-size: 14px;
+  padding-top: 8px;
+}
+.popup-item .popup-item__btn {
+  width: 210px;
+}
+.popup-item__kottans {
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+.list-item__menu:checked ~ .list-item__popup {
+  visibility: visible;
+  animation-name: show-popup;
+  animation-duration: 2s;
+}
+@keyframes show-popup {
+  0% {
+    top: 20%;
+  }
+  50% {
+    top: 10%;
+  }
+  100% {
+    top: 8%;
+  }
+}
+.popup-item__else:checked ~ .popup-item__more {
+  display: grid;
+}
+.popup-item__else:checked ~ .popup-item__btn {
+  display: none;
+}
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px white;
+}
+::-webkit-scrollbar-thumb {
+  background: black;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: yellow;
+}
