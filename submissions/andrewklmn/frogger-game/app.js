@@ -5,6 +5,8 @@ const defaultPlayerState = {
   speed: 25,
 }
 
+const enemySprite = 'images/enemy-bug.png';
+
 const playingArea = {
   minX: 0, 
   minY: -10,
@@ -19,35 +21,18 @@ const Actor = function({sprite, x, y, speed}) {
   this.y = y;
   this.speed = speed;
 }
-
 Actor.prototype.render = function() {
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
 // Enemies our player must avoid
 var Enemy = function({x, y, speed}) {
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
-
-    // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
-    this.sprite = 'images/enemy-bug.png';
-    this.x = x;
-    this.y = y;
-    this.speed = speed;
+    Actor.call(this,{sprite: enemySprite, x, y,speed});
 };
-
-// Update the enemy's position, required method for game
-// Parameter: dt, a time delta between ticks
+Enemy.prototype = Object.create( Actor.prototype);
+Enemy.prototype.constructor = Actor;
 Enemy.prototype.update = function(dt) {
-    // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
-    // all computers.
-};
-
-// Draw the enemy on the screen, required method for game
-Enemy.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    
 };
 
 // Now write your own player class
@@ -58,7 +43,6 @@ const Player = function (state) {
 };
 Player.prototype = Object.create( Actor.prototype);
 Player.prototype.constructor = Actor;
-
 Player.prototype.update = function() {
   
 };
@@ -97,7 +81,23 @@ Player.prototype.handleInput = function(key) {
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
-const allEnemies = [];
+const allEnemies = [  
+  new Enemy({
+    x: 0,
+    y: 60,
+    speed: 20,
+  }),
+  new Enemy({
+    x: 0,
+    y: 145,
+    speed: 40,
+  }),
+  new Enemy({
+    x: 0,
+    y: 228,
+    speed: 40,
+  }),
+];
 // Place the player object in a variable called player
 const player = new Player(defaultPlayerState);
 
