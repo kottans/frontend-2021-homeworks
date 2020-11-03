@@ -11,7 +11,12 @@
   padding: 0;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin: 0;
 }
 
@@ -32,7 +37,7 @@ img {
 
 /*******GENERAL*******/
 html {
-  font-family: 'Patrick Hand', Verdana, cursive;
+  font-family: "Patrick Hand", Verdana, cursive;
   font-size: 16px;
 }
 
@@ -55,7 +60,7 @@ html {
   margin-top: 1rem;
 }
 
-.navbar ul {
+.navbar .menu {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -64,7 +69,7 @@ html {
           justify-content: flex-end;
 }
 
-.navbar ul .menu-item {
+.navbar .menu-item {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -76,8 +81,8 @@ html {
   margin: 0 1rem;
 }
 
-.navbar ul .menu-item .menu-item-link:hover, .navbar ul .menu-item .menu-item-link:focus,
-.navbar ul .menu-item .menu-img:hover, .navbar ul .menu-item .menu-img:focus {
+.navbar .menu-item-link:hover,
+.navbar :focus {
   background-color: #8ee2cf;
   border-radius: 0.5rem;
 }
@@ -86,7 +91,7 @@ html {
   display: none;
 }
 
-input[type=checkbox] {
+.btn-open[type="checkbox"] {
   position: absolute;
   display: none;
 }
@@ -104,7 +109,7 @@ label {
   background: rgba(0, 0, 0, 0.5);
 }
 
-input[type=checkbox]:checked + label ~ .popup {
+.btn-open[type="checkbox"]:checked + a ~ .popup {
   display: block;
   position: absolute;
   right: 1.5rem;
@@ -121,7 +126,7 @@ input[type=checkbox]:checked + label ~ .popup {
   z-index: 5;
 }
 
-input[type=checkbox]:checked + label ~ .popup::before {
+.btn-open[type="checkbox"]:checked + a ~ .popup::before {
   position: fixed;
   content: "";
   right: 12rem;
@@ -136,7 +141,7 @@ input[type=checkbox]:checked + label ~ .popup::before {
   z-index: -1;
 }
 
-input[type=checkbox]:checked + label ~ .popup .popup-menu {
+.btn-open[type="checkbox"]:checked + a ~ .popup .popup-menu {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -177,16 +182,21 @@ input[type=checkbox]:checked + label ~ .popup .popup-menu {
   border-radius: 0.5rem;
 }
 
-input[type=checkbox] {
+.more-popup-container .more-btn:focus {
+  background-color: rgba(184, 184, 192, 0.5);
+  border-radius: 0.5rem;
+}
+
+.btn-open[type="checkbox"] {
   position: absolute;
   display: none;
 }
 
-input[type=checkbox]:checked + label ~ .more-popup {
+.btn-open[type="checkbox"]:checked + a ~ .more-popup {
   display: block;
 }
 
-input[type=checkbox]:checked + label ~ .more-popup .more-popup-hidden {
+.btn-open[type="checkbox"]:checked + a ~ .more-popup .more-popup-hidden {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
