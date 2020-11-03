@@ -2,7 +2,7 @@ const container = document.querySelector(".main-container");
 const nav = document.querySelector(".menu");
 const content = document.createElement("div");
 
-let createMainDescription = function(elem) {
+const createMainDescription = function(elem) {
   elem.classList.add("description");
 
   const descriptionHeader = document.createElement("h2");
@@ -32,7 +32,7 @@ let createMainDescription = function(elem) {
 }
 createMainDescription(content);
 
-let filmTemplate = function(filmList, item) {
+const insertFilm = function(filmList, item) {
   const filmHeader = item.querySelector("h2");
   filmHeader.textContent = filmList.header;
 
@@ -44,11 +44,11 @@ let filmTemplate = function(filmList, item) {
   filmText.textContent = filmList.text;
 }
 
-let filmGenerator = function({ target }) {
+const filmGenerator = function({ target }) {
   let filmNameBtn = target.textContent;
   listOfFilms.forEach(film => {
     if (film.header === filmNameBtn) {
-      filmTemplate(film, content);
+      insertFilm(film, content);
     }
   });
 }
