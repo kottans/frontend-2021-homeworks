@@ -1,4 +1,5 @@
 const defaultPlayerState = {
+  sprite: 'images/char-boy.png',
   x: 200,
   y: 400,
   speed: 25,
@@ -10,6 +11,18 @@ const playingArea = {
   maxX: 400,
   maxY: 400,
 }
+
+// Actor is parent class for Enemies abd Player
+const Actor = function({sprite, x, y, speed}) {
+  this.sprite = sprite;
+  this.x = x;
+  this.y = y;
+  this.speed = speed;
+}
+
+Actor.prototype.render = function() {
+  ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+};
 
 // Enemies our player must avoid
 var Enemy = function({x, y, speed}) {
@@ -40,19 +53,14 @@ Enemy.prototype.render = function() {
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
-const Player = function ({x,y,speed}) {
-  this.sprite = 'images/char-boy.png';
-  this.x = x;
-  this.y = y;
-  this.speed = speed;
+const Player = function (state) {
+  Actor.call(this,state);
 };
+Player.prototype = Object.create( Actor.prototype);
+Player.prototype.constructor = Actor;
 
 Player.prototype.update = function() {
   
-};
-
-Player.prototype.render = function() {
-  ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
 Player.prototype.handleInput = function(key) {
