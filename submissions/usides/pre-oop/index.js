@@ -67,8 +67,10 @@ const catWoman = {
    so code reviewers might focus on a single file that is index.js.
    */
 
-for (let item of [dog, cat, man, woman, catWoman]) {
-  print(
-    `species: ${item.species}, legs: ${item.legs}, hands: ${item.hands}, name: ${item.name}, gender: ${item.gender}, saying: ${item.saying}, friends: ${item.friends}`,
-  );
+const inhabitants = [dog, cat, man, woman, catWoman];
+
+function makeString({ species, legs, hands, name, gender, saying, friends }) {
+  return `species: ${species}, legs: ${legs}, hands: ${hands}, name: ${name}, gender: ${gender}, saying: ${saying}, friends: ${friends}`;
 }
+
+inhabitants.forEach((elem) => print(makeString(elem)));
