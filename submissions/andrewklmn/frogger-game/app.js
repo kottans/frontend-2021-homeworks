@@ -28,7 +28,7 @@ Actor.prototype.render = function() {
 };
 
 // Enemies our player must avoid
-var Enemy = function({x, y, speed}) {
+const Enemy = function({x, y, speed, player}) {
     Actor.call(this,{sprite: enemySprite, x, y,speed});
 };
 Enemy.prototype = Object.create( Actor.prototype);
@@ -97,31 +97,36 @@ Player.prototype.handleInput = function(key) {
 };
 
 // Now instantiate your objects.
+
+// Place the player object in a variable called player
+const player = new Player(defaultPlayerState);
+
 // Place all enemy objects in an array called allEnemies
 const allEnemies = [  
   new Enemy({
     x: -150,
     y: 60,
     speed: 100,
+    player: player,
   }),
   new Enemy({
     x: -450,
     y: 145,
     speed: 80,
+    player: player,
   }),
   new Enemy({
     x: -100,
     y: 228,
     speed: 60,
+    player: player,
   }),
 ];
-// Place the player object in a variable called player
-const player = new Player(defaultPlayerState);
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
 document.addEventListener('keyup', function(e) {
-    var allowedKeys = {
+    const allowedKeys = {
         37: 'left',
         38: 'up',
         39: 'right',
