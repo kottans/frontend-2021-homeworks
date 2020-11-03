@@ -108,8 +108,8 @@ const mainDescriptionText = document.querySelector('.main__description-text');
 const mainUlBikes = document.querySelector('.main__ul-bikes');
 const mainAvgPrice = document.querySelector('.main__avg-price');
 
-const handleNavigationClick = (event) => {
-  const sectionName = event.target.textContent;
+const handleNavigationClick = ({ target }) => {
+  const sectionName = target.textContent;
   const section = database.find(item => item.name === sectionName);
   mainHeader.textContent = section.name;
   mainImage.setAttribute('src', section.img);
@@ -132,8 +132,8 @@ const handleNavigationClick = (event) => {
   navLink.forEach(link => {
     link.style.color = 'lightgrey';
   })
-  if (event.target.className === 'nav__link') {
-    event.target.style.color = 'orange';
+  if (target.className === 'nav__link') {
+    target.style.color = 'orange';
   }
   mainUlBikes.innerHTML = '';
   mainDescription.innerHTML = '';
