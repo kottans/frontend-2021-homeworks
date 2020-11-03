@@ -14,8 +14,13 @@ html {
   padding: 15px 20px;
 }
 
+.not-list {
+  list-style: none;
+}
+
 .link {
   margin: 0 15px;
+  padding: 5px;
   display: inline-block;
 }
 
@@ -23,17 +28,18 @@ html {
   display: inline-block;
   width: 32px;
   height: 32px;
-  background-image: url('img/bunny.jpg');
+  background-image: url('img/bunny.png');
   background-size: contain;
   border-radius: 100%;
 }
 
-.popup-button {
+.popup-label {
   display: inline-block;
   width: 32px;
   height: 32px;
   background-image: url('icons/favicon.png');
   background-size: contain;
+  cursor: pointer;
 }
 
 .popup-window {
@@ -58,14 +64,21 @@ html {
   align-content: start;
 }
 
-#popup-checkbox,
-#popup-more {
+.popup-checkbox,
+.popup-more-checkbox {
   position: fixed;
   top: -300px;
 }
 
-#popup-checkbox:checked + .popup-window {
+.popup-checkbox:checked ~ .popup-window {
   display: block;
+}
+
+.popup-checkbox:focus + .popup-label,
+.popup-more-checkbox:focus + .popup-more-label {
+  outline-style: solid;
+  outline-width: 2px;
+  outline-offset: 1px;
 }
 
 .popup-item {
@@ -76,7 +89,9 @@ html {
   border-radius: 10px;
 }
 
+.link:hover,
 .popup-item:hover,
+.popup-label:hover,
 .popup-more-label:hover {
   background-color: rgb(218, 232, 252);
 }
@@ -89,17 +104,18 @@ html {
   padding: 5px;
   margin: -20px auto 10px auto;
   background-color: rgb(226, 226, 226);
+  cursor: pointer;
 }
 
 .popup-more-label:focus {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
-#popup-more:checked ~ .popup-more-label {
+.popup-more-checkbox:checked ~ .popup-more-label {
   display: none;
 }
 
-#popup-more:checked ~ .popup-table {
+.popup-more-checkbox:checked ~ .popup-table {
   display: grid;
 }
 
