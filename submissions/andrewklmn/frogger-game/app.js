@@ -41,7 +41,7 @@ Enemy.prototype.update = function(dt) {
   if (Math.abs(this.x - player.x) < minCollisionDistance
         && Math.abs(this.y - player.y) < minCollisionDistance) {
           player.reset(defaultPlayerState);
-          alert('You loose!');
+          alert('You lose!');
   }
 };
 
