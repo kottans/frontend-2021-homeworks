@@ -2,10 +2,12 @@ const defaultPlayerState = {
   sprite: 'images/char-boy.png',
   x: 200,
   y: 400,
-  speed: 25,
+  speed: 10,
 }
 
 const enemySprite = 'images/enemy-bug.png';
+const enemySize = 100;
+const minCollisionDistance = 70;
 
 const playingArea = {
   minX: 0, 
@@ -32,7 +34,15 @@ var Enemy = function({x, y, speed}) {
 Enemy.prototype = Object.create( Actor.prototype);
 Enemy.prototype.constructor = Actor;
 Enemy.prototype.update = function(dt) {
-    
+  this.x += this.speed * dt;
+  if (this.x > playingArea.maxX + enemySize) {
+    this.x = -enemySize;
+  }
+  if (Math.abs(this.x - player.x) < minCollisionDistance
+        && Math.abs(this.y - player.y) < minCollisionDistance) {
+          player.reset(defaultPlayerState);
+          alert('You loose!');
+  }
 };
 
 // Now write your own player class
@@ -44,7 +54,14 @@ const Player = function (state) {
 Player.prototype = Object.create( Actor.prototype);
 Player.prototype.constructor = Actor;
 Player.prototype.update = function() {
-  
+
+};
+
+Player.prototype.reset = function({sprite, x, y, speed}) {
+  this.sprite = sprite;
+  this.x = x;
+  this.y = y;
+  this.speed = speed;  
 };
 
 Player.prototype.handleInput = function(key) {
@@ -83,19 +100,19 @@ Player.prototype.handleInput = function(key) {
 // Place all enemy objects in an array called allEnemies
 const allEnemies = [  
   new Enemy({
-    x: 0,
+    x: -150,
     y: 60,
-    speed: 20,
+    speed: 100,
   }),
   new Enemy({
-    x: 0,
+    x: -450,
     y: 145,
-    speed: 40,
+    speed: 80,
   }),
   new Enemy({
-    x: 0,
+    x: -100,
     y: 228,
-    speed: 40,
+    speed: 60,
   }),
 ];
 // Place the player object in a variable called player
