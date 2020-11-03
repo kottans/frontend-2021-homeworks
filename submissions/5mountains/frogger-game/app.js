@@ -1,8 +1,28 @@
+const playerFrame = {
+    borderX: {
+        start: 0,
+        end: 400
+    },
+    borderY: {
+        start: 0,
+        end: 400
+    },
+};
+
+const enemyFrame = {
+    borderX: {
+        start: -100,
+        end: 505
+    }
+};
+
 class Player {
     constructor(x, y) {
         this.x = x;
         this.y = y;
         this.sprite = 'images/char-boy.png';
+        this.stepX = 100;
+        this.stepY = 85;
     }
 
     update() {
@@ -16,16 +36,19 @@ class Player {
     handleInput(move) {
         switch(move) {
             case 'left':
-                if (this.x > 0) this.x -= 100;
+                this.x -= this.stepX;
+                if (this.x < playerFrame.borderX.start) this.x = playerFrame.borderX.start;
                 break;
             case 'right':
-                if (this.x < 400) this.x += 100;
+                this.x += this.stepX;
+                if (this.x > playerFrame.borderX.end) this.x = playerFrame.borderX.end;
                 break;
             case 'up':
-                if (this.y > 0) this.y -= 85;
+                this.y -= this.stepY;
                 break;
             case 'down':
-                if (this.y < 380) this.y += 85;
+                this.y += this.stepY;
+                if (this.y > playerFrame.borderY.end) this.y = playerFrame.borderY.end;
                 break;
             default:
                 break;
@@ -33,43 +56,46 @@ class Player {
     }
 
     checkWin() {
-        if (this.y < 0) setTimeout(() => {
+        if (this.y < playerFrame.borderY.start) setTimeout(() => {
             this.resetStart();
             alert('You win!');
         }, 10);
     }
 
     resetStart(){
-        this.x = 200;
-        this.y = 400;
+        this.x = (this.stepX * 2);
+        this.y = playerFrame.borderY.end;
     }
 }
 
 class Enemy {
-    constructor(x, y) {
+    constructor(x, y, player) {
         this.x = x;
         this.y = y;
+        this.player = player;
         this.sprite = 'images/enemy-bug.png';
         this.speed = (Math.random() * 200) + 200;
+        this.gap = 50;
     }
 
     update(dt) {
         this.x += this.speed * dt;
-        if (this.x > ctx.canvas.width) this.x = -100;
+        if (this.x > enemyFrame.borderX.end) this.x = enemyFrame.borderX.start;
         this.checkCollisions();
     }
 
     render() {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     }
+
     checkCollisions() {
         if (
-            this.x >= player.x - 50 &&
-            this.x <= player.x + 50 &&
-            this.y >= player.y - 50 &&
-            this.y <= player.y + 50
+            this.x >= this.player.x - this.gap &&
+            this.x <= this.player.x + this.gap &&
+            this.y >= this.player.y - this.gap &&
+            this.y <= this.player.y + this.gap
         ) setTimeout(() => {
-              player.resetStart();
+              this.player.resetStart();
               alert('You lose!');
         }, 10);
     }
@@ -79,13 +105,12 @@ const player = new Player(200, 400);
 
 const allEnemies = [];
 
-(function generateEnemies(){
-    const pointY = [60, 145, 225];
-    pointY.forEach(point => allEnemies.push(new Enemy((Math.random()*200), point)));
-})();
+const EnemySetY = [60, 145, 225];
+
+EnemySetY.forEach(point => allEnemies.push(new Enemy((Math.random()*200), point, player)));
 
 document.addEventListener('keyup', function(e) {
-    var allowedKeys = {
+    const allowedKeys = {
         37: 'left',
         38: 'up',
         39: 'right',
@@ -93,3 +118,4 @@ document.addEventListener('keyup', function(e) {
     };
     player.handleInput(allowedKeys[e.keyCode]);
 });
+
