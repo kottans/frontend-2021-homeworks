@@ -1,4 +1,3 @@
-/*******BASE RESET*******/
 *,
 *::before,
 *::after {
@@ -35,7 +34,6 @@ img {
   width: 3rem;
 }
 
-/*******GENERAL*******/
 html {
   font-family: "Patrick Hand", Verdana, cursive;
   font-size: 16px;
@@ -55,7 +53,6 @@ html {
       grid-template-rows: 15% 80% 5%;
 }
 
-/*******HEADER*******/
 .navbar {
   margin-top: 1rem;
 }
@@ -91,7 +88,7 @@ html {
   display: none;
 }
 
-.btn-open[type="checkbox"] {
+.btn-open {
   position: absolute;
   display: none;
 }
@@ -109,7 +106,7 @@ label {
   background: rgba(0, 0, 0, 0.5);
 }
 
-.btn-open[type="checkbox"]:checked + a ~ .popup {
+.btn-open:checked + a ~ .popup {
   display: block;
   position: absolute;
   right: 1.5rem;
@@ -126,7 +123,7 @@ label {
   z-index: 5;
 }
 
-.btn-open[type="checkbox"]:checked + a ~ .popup::before {
+.btn-open:checked + a ~ .popup::before {
   position: fixed;
   content: "";
   right: 12rem;
@@ -141,7 +138,7 @@ label {
   z-index: -1;
 }
 
-.btn-open[type="checkbox"]:checked + a ~ .popup .popup-menu {
+.btn-open:checked + a ~ .popup .popup-menu {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -183,20 +180,19 @@ label {
 }
 
 .more-popup-container .more-btn:focus {
-  background-color: rgba(184, 184, 192, 0.5);
   border-radius: 0.5rem;
 }
 
-.btn-open[type="checkbox"] {
+.btn-open {
   position: absolute;
   display: none;
 }
 
-.btn-open[type="checkbox"]:checked + a ~ .more-popup {
+.btn-open:checked + a ~ .more-popup {
   display: block;
 }
 
-.btn-open[type="checkbox"]:checked + a ~ .more-popup .more-popup-hidden {
+.btn-open:checked + a ~ .more-popup .more-popup-hidden {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -210,6 +206,11 @@ label {
       -ms-flex-pack: center;
           justify-content: center;
   width: 20rem;
+}
+
+.btn-open:checked ~ .remove,
+.btn-open:checked {
+  display: none;
 }
 
 .popup-item {
@@ -253,7 +254,6 @@ label {
   text-decoration: underline;
 }
 
-/*******MAIN********/
 .content {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -281,7 +281,6 @@ label {
   width: 20rem;
 }
 
-/*******FOOTER********/
 .footer-container {
   float: right;
   margin-right: 1rem;
