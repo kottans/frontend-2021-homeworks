@@ -14,6 +14,12 @@ This repo was created for students to submit their homeworks for review.
 - add this repository as an upstream: `git remote add upstream https://github.com/kottans/frontend-2021-homeworks.git`
 - in your local repository, add a folder with your github name under `submissions` (if you haven't yet)
 - in your local repository, under your name folder, add a folder with task name and put your code in the folder
+  (IMPORTANT! Put only code required to conduct review, i.e. `html`, `css`, `js` files and such;
+  images, IDE directories like `.idea`, `.vscode` etc are not required for code review;
+  never have `.git` directory in your task submissions)
+  
+It is recommended that you have dedicated projects/repositories for your tasks code, and only certain files
+are copied here for review.
 
   See example file structure you are expected to have below:
 
