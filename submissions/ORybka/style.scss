@@ -76,7 +76,7 @@ html {
     margin: 0 1rem;
   }
 
-  .menu-item-link:hover,
+  .menu-img:hover,
   :focus {
     background-color: color(bg-green);
     border-radius: 0.5rem;
@@ -87,7 +87,7 @@ html {
   display: none;
 }
 
-.btn-open {
+.popup-extend {
   position: absolute;
   display: none;
 }
@@ -105,7 +105,7 @@ label {
   background: rgba(0, 0, 0, 0.5);
 }
 
-.btn-open:checked + a ~ .popup {
+.popup-extend:checked + label ~ .popup {
   display: block;
   position: absolute;
   right: 1.5rem;
@@ -165,12 +165,12 @@ label {
   }
 }
 
-.btn-open {
+.popup-extend {
   position: absolute;
   display: none;
 }
 
-.btn-open:checked + a ~ .more-popup {
+.popup-extend:checked + a ~ .more-popup {
   display: block;
 
   .more-popup-hidden {
@@ -182,8 +182,8 @@ label {
   }
 }
 
-.btn-open:checked ~ .remove,
-.btn-open:checked {
+.popup-extend:checked ~ .remove,
+.popup-extend:checked {
   display: none;
 }
 
