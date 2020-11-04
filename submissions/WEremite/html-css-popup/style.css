@@ -45,6 +45,9 @@ p {
 #show2:checked~#content2 {
   display: flex;
 }
+#show2:checked~.second-label {
+  opacity: 0;
+}
 .menu {
   position: relative;
   clear: both;
@@ -79,9 +82,16 @@ p {
   display: flex;
   align-items: center;
 }
-.icons-item:hover, .more-icons-item:hover {
+li.icons-item:hover, .more-icons-item:hover {
   outline: 1px solid grey;
 }
+.show2:focus-visible + .second-label {
+  outline: 1px solid grey;
+}
+input:focus + label { 
+  outline: 1px solid black;
+}
+
 .first-menu-item:focus, .icons-item:focus, .more-icons-item:focus {
   background-color: gray;
 }
