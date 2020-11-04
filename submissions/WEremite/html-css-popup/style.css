@@ -35,6 +35,8 @@ p {
   opacity: 1;
   overflow-x: hidden;
   height: 300px;
+  margin: 10px 0px;
+  padding: 15px 20px;
 }
 #show2, #content2 {
   display: none;
@@ -72,6 +74,10 @@ p {
   border-image-slice: 1;
   background-color: #fff;
 }
+.icons-item {
+  display: flex;
+  align-items: center;
+}
 .icons-item:hover, .more-icons-item:hover {
   outline: 1px solid grey;
 }
@@ -80,7 +86,7 @@ p {
 }
 .icons-item-img, .more-icons-item-img {
   width: 60px;
-  margin: 15px 10px 0px 10px;
+  margin: 15px 10px 0px 15px;
 }
 .second-label {
   width: 250px;
