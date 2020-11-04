@@ -1,4 +1,4 @@
-let download = function () {
+const downloadInfoFromJson = function () {
     let promise = fetch('./information.json');
     promise.then(res => res.json())
         .then(data => {
@@ -9,13 +9,12 @@ let download = function () {
         .then(data=>{
             menuHandler(data);
             menuIconHandler();
-        })
-        
+        })      
 }
 
-download();
+document.addEventListener('DOMContentLoaded',downloadInfoFromJson);
 
-let addMenuItems = function (arr) {
+const addMenuItems = function (arr) {
     let menu = document.querySelector('.menu');
     let menuFr = document.createDocumentFragment();
     arr.forEach((element, index) => {
@@ -33,7 +32,7 @@ let addMenuItems = function (arr) {
     menu.appendChild(menuFr);
 }
 
-let addContentItems = function (arr) {
+const addContentItems = function (arr) {
     let content = document.querySelector('.content');
     let contentFr = document.createDocumentFragment();
 
@@ -60,14 +59,14 @@ let addContentItems = function (arr) {
     content.appendChild(contentFr);
 }
 
-let menuIconHandler = function () {
+const menuIconHandler = function () {
     let button = document.querySelector('.menu-icon');
     button.addEventListener('click', function () {
         button.classList.toggle('active');
     })
 }
 
-let menuHandler = function(data){
+const menuHandler = function(data){
     let menu = document.querySelector('.menu');
     let content = document.querySelector('.content');
     menu.addEventListener('click',function(e){
@@ -81,7 +80,7 @@ let menuHandler = function(data){
     })
 }
 
-let addActiveContent = function(wrapper,item){
+const addActiveContent = function(wrapper,item){
     let arr = Array.from(wrapper.children);
     removeActive(wrapper);
     let facultyNameActive = item.classList[1];
@@ -89,7 +88,7 @@ let addActiveContent = function(wrapper,item){
     contentItem.classList.add('active');
 }
 
-let removeActive = function(wrapper){
+const removeActive = function(wrapper){
     let arr = Array.from(wrapper.children);
     let active = arr.find(item=>item.classList.contains('active'));
     if(active){
@@ -97,7 +96,7 @@ let removeActive = function(wrapper){
     }
 }
 
-let setBgColorForParent = function(wrapper,data){
+const setBgColorForParent = function(wrapper,data){
     let arr = Array.from(wrapper.children);
     let activeChild = arr.find(element=>element.classList.contains('active'));
     let facultyname = activeChild.classList[1];
