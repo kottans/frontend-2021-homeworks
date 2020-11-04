@@ -1,7 +1,6 @@
 # place this file @ ~/
 
 ## IDE specific
-submissions/krylenger/.DS_Store
 .idea/
 .DS_Store
 DS_Store?
