@@ -135,7 +135,7 @@ const handleNavBtnToggle = ({ target }) => {
 
 const handleNavigationClick = ({ target }) => {
   const sectionName = target.textContent;
-  const section = database.find((item) => item.name === sectionName);
+  const section = database.find((item) => item.name.toLowerCase() === sectionName.toLowerCase());
   mainHeader.textContent = section.name;
   mainImage.setAttribute("src", section.img);
   mainAvgPrice.textContent = section.avgPrice;
