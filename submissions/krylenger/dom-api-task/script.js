@@ -144,12 +144,12 @@ const handleNavigationClick = ({ target }) => {
   const fragmentDescription = document.createDocumentFragment();
 
   section.models.forEach((model) => {
-    let bike = document.createElement("li");
+    const bike = document.createElement("li");
     bike.textContent = model;
     fragmentBikes.appendChild(bike);
   });
   section.description.forEach((description) => {
-    let desc = document.createElement("p");
+    const desc = document.createElement("p");
     desc.textContent = description;
     desc.setAttribute("class", "main__description-p");
     fragmentDescription.appendChild(desc);
