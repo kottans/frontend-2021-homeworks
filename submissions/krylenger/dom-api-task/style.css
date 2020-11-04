@@ -7,6 +7,35 @@ body {
     height: 100%;
 }
 
+.nav-btn-toggle {
+    height: 30px;
+    width: 30px;
+    position: fixed;
+    top: 10px;
+    left: 160px;
+    z-index: 2;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-size: 30px;
+    background-color: transparent;
+    background-image: url(./images/left-arrows.png);
+}
+
+.nav-btn-toggle--nav-closed {
+    transform: translateX(-150px);
+    transition: all 0.3s ease-in-out;
+    background-image: url(./images/right-arrows.png);
+}
+
+.nav-btn-toggle--nav-opened {
+    transform: translateX(-10px);
+    transition: all 0.3s ease-in-out;
+    background-image: url(./images/left-arrows.png);
+    margin-left: 10px;
+}
+
 .nav {
     background-color: black;
     position: fixed;
@@ -16,31 +45,24 @@ body {
     z-index: 1;
 }
 
-.nav__toggle {
-    display: inline;
-    position: fixed;
-    top: 10px;
-    left: 160px;
-    opacity: 0;
+.nav--opened {
+    width: 200px;
+    transition: all 0.3s ease-in-out;
 }
 
-.nav__toggle-label {
-    height: 30px;
-    width: 30px;
-    position: fixed;
-    top: 10px;
-    left: 160px;
-    z-index: 2;
-    cursor: pointer;
-    background-repeat: no-repeat;
-    background-size: 30px;
-    background-image: url(./images/left-arrows.png);
+.nav--closed {
+    width: 0;
+    transition: all 0.3s ease-in-out;
 }
 
-.nav__toggle:checked ~ .main {
-    transition: all 0.3s ease-in;
-    margin: 0px;
-    padding: 100px 200px 0px 200px;
+.nav__ul--display-none {
+    transform: translateX(-160px);
+    transition: all 0.3s ease-in-out;
+}
+
+.nav__ul--display-yes {
+    transform: translateX(-10px);
+    transition: all 0.3s ease-in-out;
 }
 
 .nav__li {
@@ -75,6 +97,15 @@ body {
     flex-direction: column;
 }
 
+.main--wide {
+    transition: all 0.3s ease-in;
+    margin-left: 0px;
+}
+
+.main--short {
+    transition: all 0.3s ease-in;
+}
+
 .main__img-container {
     height: 300px;
 }
@@ -103,22 +134,6 @@ body {
     color: rgb(80, 80, 80);
 }
 
-.nav__toggle:checked ~ .nav {
-    width: 0;
-    transition: all 0.3s ease-in-out;
-}
-
-.nav__toggle:checked ~ .nav > .nav__ul {
-    display: none;
-}
-
-.nav__toggle:checked ~ .nav__toggle-label {
-    transform: translateX(-160px);
-    transition: all 0.3s ease-in-out;
-    background-image: url(./images/right-arrows.png);
-    margin-left: 10px;
-}
-
 @media screen and (max-width: 800px) {
     
     .main {
@@ -132,26 +147,13 @@ body {
     .main__img-container {
         height: 180px;
     }
-    
-    .nav__toggle:checked ~ .main {
-        transition: all 0.3s ease-in;
-        margin: 0px;
-        padding: 100px 60px 0px 60px;
-    }
 }
 
 @media screen and (max-width: 550px) {
 
     .main {
         padding: 100px 20px 0px 20px;   
-        overflow-x: hidden;
     }
-
-    .nav__toggle:checked ~ .main {
-        margin: 0px;
-        padding: 100px 30px 0px 30px;
-    }
-    
 }
 
 @media screen and (max-width: 460px) {
@@ -164,7 +166,7 @@ body {
         z-index: 1;
     }
     
-    .nav__toggle, .nav__toggle-label {
+    .nav-btn-toggle{
         display: none;
     }
 
@@ -173,7 +175,7 @@ body {
         flex-direction: row;
         justify-content: space-around;
         flex-wrap: wrap;
-        padding: 0px;
+        padding-left: 3px;
     }
 
     .nav__li {
