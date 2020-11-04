@@ -27,6 +27,7 @@ p {
   text-align: center;
   display: block;
   position: relative;
+  padding: 10px 0px;
 }
 #show,#content {
   opacity: 0;
