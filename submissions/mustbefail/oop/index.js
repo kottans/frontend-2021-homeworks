@@ -16,6 +16,8 @@ class Animal {
 }
 
 class Cat extends Animal {
+  static catPhrase = 'Meow!';
+
   constructor(feature) {
     super();
     this.species = 'cat';
@@ -23,8 +25,9 @@ class Cat extends Animal {
   }
 
   saying() {
-    return 'Meow!';
+    return this.constructor.catPhrase;
   }
+
 }
 
 class Dog extends Animal {
@@ -39,6 +42,19 @@ class Dog extends Animal {
   }
 }
 
+const cat = new Cat({
+  name: 'Prokhor',
+  gender: 'male',
+  friends: ['June', 'Maki'],
+});
+
+
+const dog = new Dog({
+  name: 'Maki',
+  gender: 'male',
+  friends: ['Alfred', 'Prokhor', 'Anna'],
+});
+
 class Human {
   constructor(feature) {
     this.legs = 2;
@@ -52,23 +68,12 @@ class Human {
   }
 }
 
-const cat = new Cat({
-  name: 'Prokhor',
-  gender: 'male',
-  friends: ['June', 'Maki'],
-});
-
-const dog = new Dog({
-  name: 'Maki',
-  gender: 'male',
-  friends: ['Alfred', 'Prokhor', 'Anna'],
-});
 
 const catWoman = new Human({
   name: 'June',
   gender: 'female',
   friends: ['Anna'],
-  saying: new Cat().saying,
+  phrase: Cat.catPhrase,
 });
 
 const man = new Human({
@@ -97,17 +102,7 @@ const woman = new Human({
 const inhabitants = [cat, catWoman, man, woman, dog];
 
 const formatOutput = (habitant) => {
-  return `Hello! I am <strong>${
-    habitant.species
-  }</strong>, my name is <strong>${
-    habitant.name
-  }</strong>, my gender is <strong>${
-    habitant.gender
-  }</strong>, I have <strong>${habitant.hands}</strong> arms and <strong>${
-    habitant.legs
-  }</strong> legs and you know what: <strong>${habitant.saying()}</strong>. My friends: <strong>${
-    habitant.friends
-  }</strong>`;
+  return `Hello! I am <strong>${habitant.species}</strong>, my name is <strong>${habitant.name}</strong>, my gender is <strong>${habitant.gender}</strong>, I have <strong>${habitant.hands}</strong> arms and <strong>${habitant.legs}</strong> legs and you know what: <strong>${habitant.saying()}</strong>. My friends: <strong>${habitant.friends}</strong>`;
 };
 
 inhabitants.forEach((habitant) => print(formatOutput(habitant)));
