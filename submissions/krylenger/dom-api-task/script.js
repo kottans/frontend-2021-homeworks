@@ -102,7 +102,7 @@ const database = [
 const navBtnToggle = document.querySelector(".nav-btn-toggle");
 const nav = document.querySelector(".nav");
 const navUl = document.querySelector(".nav__ul");
-const navLinks = document.querySelectorAll(".nav__link");
+
 const main = document.querySelector(".main");
 const mainHeader = document.querySelector(".main__header");
 const mainImage = document.querySelector(".main__img");
@@ -148,23 +148,42 @@ const handleNavigationClick = ({ target }) => {
     bike.textContent = model;
     fragmentBikes.appendChild(bike);
   });
+  
   section.description.forEach((description) => {
     const desc = document.createElement("p");
     desc.textContent = description;
     desc.setAttribute("class", "main__description-p");
     fragmentDescription.appendChild(desc);
   });
+  
+  const navLinks = document.querySelectorAll(".nav__link");
   navLinks.forEach((link) => {
     if (link.classList.contains("nav__link--orange")) {
       link.classList.remove("nav__link--orange");
     }
     target.classList.add("nav__link--orange");
   });
+  
   mainUlBikes.innerHTML = "";
   mainDescription.innerHTML = "";
   mainUlBikes.appendChild(fragmentBikes);
   mainDescription.appendChild(fragmentDescription);
 };
 
+const loadNavLi = () => {
+  const fragmentUlList = document.createDocumentFragment();
+  database.forEach(section => {
+    const li = document.createElement('li');
+    li.classList.add('nav__li');
+    const link = document.createElement('a');
+    link.classList.add('nav__link');
+    link.textContent = section.name;
+    li.append(link);
+    fragmentUlList.append(li);
+  })
+  navUl.append(fragmentUlList);
+}
+
+document.addEventListener('DOMContentLoaded', loadNavLi)
 navBtnToggle.addEventListener("click", handleNavBtnToggle);
 navUl.addEventListener("click", handleNavigationClick);
