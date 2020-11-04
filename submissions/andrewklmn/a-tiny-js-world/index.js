@@ -6,7 +6,7 @@
    */
 
 // ======== OBJECTS DEFINITIONS ========
-const Inhabitant = function ({species, name, gender, legs = 0, hands = 0, friends = [] }) {
+const Inhabitant = function ({species, name, gender, legs = 0, hands = 0, saying, friends = [] }) {
   this.species = species;
   this.name = name;
   this.gender = gender;
