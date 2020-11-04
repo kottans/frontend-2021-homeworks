@@ -102,7 +102,7 @@ const database = [
 const navBtnToggle = document.querySelector(".nav-btn-toggle");
 const nav = document.querySelector(".nav");
 const navUl = document.querySelector(".nav__ul");
-const navLink = document.querySelectorAll(".nav__link");
+const navLinks = document.querySelectorAll(".nav__link");
 const main = document.querySelector(".main");
 const mainHeader = document.querySelector(".main__header");
 const mainImage = document.querySelector(".main__img");
@@ -134,7 +134,6 @@ const handleNavBtnToggle = ({ target }) => {
 };
 
 const handleNavigationClick = ({ target }) => {
-  console.log(target);
   const sectionName = target.textContent;
   const section = database.find((item) => item.name === sectionName);
   mainHeader.textContent = section.name;
@@ -155,12 +154,12 @@ const handleNavigationClick = ({ target }) => {
     desc.setAttribute("class", "main__description-p");
     fragmentDescription.appendChild(desc);
   });
-  navLink.forEach((link) => {
-    link.classList.add("nav__link--lightgrey");
-  });
-  if (target.className === "nav__link") {
+  navLinks.forEach((link) => {
+    if (link.classList.contains("nav__link--orange")) {
+      link.classList.remove("nav__link--orange");
+    }
     target.classList.add("nav__link--orange");
-  }
+  });
   mainUlBikes.innerHTML = "";
   mainDescription.innerHTML = "";
   mainUlBikes.appendChild(fragmentBikes);
