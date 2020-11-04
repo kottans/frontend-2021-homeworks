@@ -6,6 +6,19 @@
    */
 
 // ======== OBJECTS DEFINITIONS ========
+const Inhabitant = function ({species, name, gender, legs = 0, hands = 0, friends = [] }) {
+  this.species = species;
+  this.name = name;
+  this.gender = gender;
+  this.legs = legs;
+  this.hands = hands;
+  this.friends = friends;
+};
+
+Inhabitant.prototype.saying = function (fn) {
+  fn();
+};
+
 const dog = {
   species: 'dog',
   name: 'Dyuka',
