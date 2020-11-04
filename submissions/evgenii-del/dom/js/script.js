@@ -35,7 +35,7 @@ const renderCats = (position) => {
 }
 
 const renderItem = () => {
-    let fragment = document.createDocumentFragment();
+    const fragment = document.createDocumentFragment();
 
     cats.forEach((cat, index) => {
         const block = document.createElement('li');
