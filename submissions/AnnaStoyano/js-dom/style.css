@@ -1,0 +1,222 @@
+@import url('https://fonts.googleapis.com/css2?family=Henny+Penny&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a{
+    text-decoration: none;
+    color: inherit;
+}
+
+ul{
+    list-style-type: none;
+}
+
+.conteiner{
+    width:100%;
+}
+
+ .active.gryffindor{
+    background-color: #7c1317;
+    color: white;
+}
+
+ .active.hufflepuf{
+    background-color: #b1913a;
+}
+
+.active.ravenclaw{
+    background-color: #161445;
+    color: white;
+}
+
+.active.slytherin{
+    background-color: #4b8646;
+}
+
+
+/***********HEADER**************/
+
+.header{
+    display: flex;
+    width: 100%;
+    padding: 1em;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(241, 230, 125);
+    box-shadow: 0 0 10px rgba(36, 36, 36, 0.5);
+    z-index: 50;
+    position: relative;
+}
+
+.title{
+    font-family: 'Henny Penny', cursive;
+}
+
+.logo{
+    margin-right: 5vw;
+    width: 15%;
+    max-width: 210px;
+    min-width: 70px;
+}
+
+.header .title{
+    letter-spacing: 3px;
+    font-size: 6vw;
+    text-transform: uppercase;
+}
+
+/***********ASIDE MENU**************/
+
+.menu-wrapper{
+    width: 35%;
+    max-width: 250px;
+    min-width: 160px;   
+    background-color: honeydew;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+.menu-icon{
+    cursor: pointer;
+    position: absolute;
+    margin-top: 10px;
+    margin-left: 10px;
+    display: none;
+    z-index: 20;
+}
+
+.bar1, .bar2, .bar3 {
+    width: 35px;
+    height: 5px;
+    background-color: #333;
+    margin: 6px 0;
+    transition: 0.2s;
+}
+
+.active .bar1 {
+    -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+    transform: rotate(-45deg) translate(-9px, 6px);
+}
+  
+.active .bar2 {opacity: 0;}
+  
+.active .bar3 {
+    -webkit-transform: rotate(45deg) translate(-8px, -8px);
+    transform: rotate(45deg) translate(-8px, -8px);
+}
+
+.menu{
+    font-family: 'Henny Penny', cursive;
+    letter-spacing: 4px;
+    font-size: 1.2em;
+    width: 100%;
+}
+
+.menu-item{
+    width: 100%;
+    border-bottom: 1px solid darkcyan;
+}
+
+.menu-item:first-child{
+    border-top: 1px solid darkcyan;
+}
+
+.menu-item a{
+    text-align: center;
+    display: block;
+    width: 100%;
+    padding: 3.3vw 15px;
+}
+
+/**************CONTENT****************/
+
+.main{
+    display: flex;
+    position: relative;
+    z-index: 0;
+    box-shadow: 0 0 10px rgba(36, 36, 36, 0.5);
+}
+
+.content{
+    background-color: #7c1317;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+.content .logo{
+    width: 40%;
+    margin: 0 auto;
+}
+
+.content .logo img{
+    width: 100%;
+}
+
+.content .description{
+    margin-top: 10px;
+    text-align: center;
+    padding-bottom: 10px;
+    font-size: 1.2em;
+}
+
+.content-item{
+    display: none;
+}
+
+.content-item.active{
+    display: block;
+}
+
+/***********FOOTER***********/
+
+.footer{
+    font-family: 'Henny Penny', cursive;
+    letter-spacing: 3px;
+    text-align: center;
+    padding: 20px;
+    background-color: darkkhaki;
+}
+
+
+@media screen and (max-width:650px){
+    /*HEADER*/
+    .logo{
+        width: 10%;
+    }
+
+    .header .title{
+        font-size: 8vw;
+    }
+
+    /*ASIDE MENU*/
+    .menu-wrapper{
+        z-index: 10;
+        height: auto;
+        position: absolute;
+        transform: translate(0,-999px); 
+        transition: transform 0.8s;
+    }
+
+    .menu-icon{
+        display: inline-block;
+    }
+
+    .menu-icon.active + .menu-wrapper{
+        transform: translate(0,0px);
+    }
+
+    .menu{
+        margin-top: 55px;
+    }
+    
+}
