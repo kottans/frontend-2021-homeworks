@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.1/css/all.css"
+      integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp"
+      crossorigin="anonymous"
+    />
+    
+    <link rel="stylesheet" href="index.css" />
+    <title>Movie by genre</title>
+  </head>
+  <body>
+    <header class="page-header">
+      <h1>Movies by genre</h1>
+    </header>
+    <div class="sidebar">
+      <div class="menu-chevron">
+        <a href="#"><i class="fas fa-chevron-right"></i></a>
+      </div>
+      <nav>
+        <h3 class="sidebar-header">Movie Genres</h3>
+        <ul class="genre__list">
+          <li>
+            <a href="#" class="genre__list-link active"  data-genre="28"
+              ><i class="fas fa-car-crash"></i> Action
+            </a>
+          </li>
+          <li>
+            <a href="#"  class="genre__list-link" data-genre="12"
+              ><i class="fas fa-hiking"></i> Adventure
+            </a>
+          </li>
+          <li>
+            <a href="#" class="genre__list-link"  data-genre="35"
+              ><i class="fas fa-grin-squint-tears"></i> Comedy
+            </a>
+          </li>
+          <li>
+            <a href="#"  class="genre__list-link" data-genre="80"
+              ><i class="fas fa-user-secret"></i> Crime
+            </a>
+          </li>
+          <li>
+            <a href="#" class="genre__list-link"  data-genre="99"
+              ><i class="fas fa-heading"></i> Documentary
+            </a>
+          </li>
+          <li>
+            <a href="#" class="genre__list-link"  data-genre="18"
+              ><i class="fas fa-theater-masks"></i> Drama
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <main class="main-content">
+      <h2 class="main-header">Movies in category Action</h2>
+      <div class="cards-container"></div>
+    </main>
+    <script src="./script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,244 @@
+* {
+    margin: 0px;
+    font-family: monospace, Helvetica, sans-serif, Arial;
+    font-size: 17px;
+    font-weight: 500;
+    color: black;
+}
+
+a {
+    text-decoration: none;
+}
+
+.body {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.label:hover {
+    cursor: pointer;
+}
+
+.checkbox {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background-color: #eee;
+  opacity: 0;
+}
+
+.checkbox:hover {
+    cursor: pointer;
+}
+
+.ul {
+    
+    display: flex;
+    justify-content: space-around;
+    margin: 0;
+    padding-inline-start: 0px;
+}
+
+.nav-container { 
+    display: flex;
+    width: 100%;
+    height: 50px;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.nav-container__body {
+    width: 320px;
+    height: 100%;
+}
+
+.nav-container__li {
+    display: flex;
+    width: 20%; 
+}
+
+.nav-container__ul {
+    width: 320px;
+    height: 100%;
+}
+
+.nav-container__ul-link {
+    line-height: 50px;
+}
+
+.nav-list-icons {
+    background-size: 35px 35px;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+}
+
+.toggle-pop-up__label {
+    background-image: url(./icons/menu.png);
+}
+
+.toggle-pop-up:focus + .label {
+    outline: 2px solid rgb(77, 77, 77);
+}
+
+.toggle-pop-up:checked ~ .pop-up-container:before {
+    position: fixed;
+    content: "";
+    right: 154px;
+    top: 53px;
+    width: 10px;
+    height: 10px;
+    background-color: white;
+    transform: rotate(45deg);
+    border-top: 2px solid grey;
+    border-left: 2px solid grey;
+    z-index: 1;
+}
+
+.toggle-pop-up:checked ~ .pop-up-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
+    position: absolute;
+    right: 20px;
+    top: 60px;
+    overflow: auto;
+}
+
+.nav-notification {
+    background-image: url(./icons/notification.png);
+}
+
+.nav-profile {
+    background-image: url(./icons/profile.jpg);
+}
+
+.nav-container__ul-link:focus {
+    outline: 2px solid rgb(77, 77, 77);
+}
+
+.pop-up-container {
+    display: none;
+    text-align: center;
+    height: 420px;
+    width: 270px;
+    border: solid 1px lightgrey;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,1);
+}
+
+.pop-up-container__ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    padding: 30px 0px;
+}
+
+.pop-up-container-item {
+    width: 80px;
+    height: 80px;
+    margin: 2px 2px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    z-index: 2;
+}
+
+.pop-up-container-item__link {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    outline: none;
+}
+
+.pop-up-container-item__image {
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.pop-up-container-item__span {
+    height: 25%;
+    line-height: 20px;
+}
+
+.pop-up-container-item__link:hover,
+.pop-up-container-item__link:focus {
+    box-shadow: 0 0 1pt pt rgb(0, 163, 0);
+    background-color: rgba(88, 218, 88, 0.8);
+    border-radius: 5px;
+}
+
+.toggle-additional-icons {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    opacity: 0;
+}
+
+.toggle-additional-icons:focus + .label, 
+.go-to-kottans:focus {
+    background-color: rgba(0, 197, 0, 0.5);
+}
+
+.toggle-additional-icons-label {
+    width: 100%;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 100;
+    background-color: rgba(197, 197, 197, 0.4);
+    padding-top: 1px;
+}
+
+.pop-up-icons-container-additional {
+    display: none;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.toggle-additional-icons:checked ~ .pop-up-icons-container-additional {
+    display: flex;
+    flex-wrap: wrap;
+    height: 40px;
+}
+
+.toggle-additional-icons:checked ~ .toggle-additional-icons-label {
+    display: none;
+}
+
+.toggle-additional-icons:checked ~ .pop-up-icons-container-additional:before {
+    content: '';
+    width: 100%;
+    position: absolute;
+    top: 400px;
+    left: 0;
+    border-bottom: 1px solid black;
+}
+
+.go-to-kottans {
+    margin-top: 20px ;
+    width: 100%;
+    background-color: rgba(197, 197, 197, 0.4);
+}
+
+.go-to-kottans__link {
+    display: block;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    line-height: 30px;
+}
+
+.go-to-kottans:hover,
+.toggle-additional-icons-label:hover,
+.go-to-kottans__link:focus-within {
+    background-color: rgba(0, 197, 0, 0.5);
+    outline: none;
+}

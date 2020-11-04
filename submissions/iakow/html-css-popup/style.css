@@ -1,0 +1,257 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  list-style: none;
+}
+
+body {
+  height: 100vh;
+  background-image: url(./img/boys2.png);
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+nav {
+  padding: 5px 0;
+  background-color: rgb(51, 51, 51);
+}
+
+nav>ul {
+  display: flex;
+  justify-content: center;
+}
+
+.relative-box {
+  position: relative;
+}
+
+.nav-item {
+  display: block;
+  height: 40px;
+  width: 40px;
+  margin: 0 5px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  cursor: pointer;
+}
+
+.nav-item:hover {
+  background-color: rgb(98 98 98);
+}
+
+.popup-ctrl, .popup-expansion {
+  position: absolute !important;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 0 !important;
+  border: 0 !important;
+  height: 1px !important;
+  width: 1px !important;
+  overflow: hidden;
+}
+
+.popup-ctrl:checked~.popup-bg-closer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100vw;
+  height: 100vh;
+}
+
+.popup-ctrl:checked~.popup {
+  visibility: visible;
+}
+
+.popup {
+  position: absolute;
+  top: 40px;
+  left: -50px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 280px;
+  height: 316px;
+  padding: 10px 0 0;
+  border-radius: 3px;
+  visibility: hidden;
+  background: #4d4d4d;
+  overflow-y: auto;
+}
+
+.popup::-webkit-scrollbar {
+  width: 6px;
+}
+
+.popup::-webkit-scrollbar-track {
+  background-color: #b7e9ef;
+}
+
+.popup::-webkit-scrollbar-thumb {
+  height: 20px;
+  background-color: darkgrey;
+}
+
+.popup-item {
+  display: block;
+  height: 74px;
+  width: 68px;
+  margin: 8px 6px;
+  background-repeat: no-repeat;
+  color: white;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 7px;
+  background-position: center top;
+  background-origin: content-box;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.popup>a:hover{
+  background-color: rgb(98 98 98);
+}
+
+.popup-separator {
+  flex-basis: 100%;
+  height: 1px;
+  margin: 10px;
+  border: none;
+  background-color: #ffffff40;
+}
+
+.hidden, .popup-bg-closer {
+  display: none;
+}
+
+.popup-expansion:checked~.hidden {
+  display: flex;
+}
+
+.show-hidden {
+  flex-basis: 100%;
+  padding: 5px;
+  margin-top: 10px;
+  background-color: #3e3d3d;
+  font-size: 14px;
+  font-family: monospace;
+  text-align: center;
+  color: white;
+  cursor: pointer;
+}
+
+.show-hidden:hover {
+  background-color: #2b2b2b;
+}
+
+.popup>a:focus, .nav-item:focus, .popup-ctrl:focus~label {
+  outline: 1px solid #b7e9ef;
+}
+
+.popup-expansion:focus~label {
+  outline: 2px solid #b7e9ef;
+  outline-offset: -2px;
+}
+
+.popup-expansion:checked~.removable, .popup-expansion:checked {
+  display: none;
+}
+
+.kottans {
+  flex-basis: 100%;
+  font-size: 10px;
+  justify-content: center;
+  padding: 8px;
+  margin-top: 11px;
+}
+
+.kottans:visited {
+  color: #00e4ff;
+}
+
+.kottans:hover {
+  color: orange;
+  background-color: #363636;
+}
+
+.kottans:focus {
+  outline: 2px solid #b7e9ef;
+  outline-offset: -2px;
+}
+
+.email {
+  background-image: url(./img/email_24px.png);
+}
+
+.images {
+  background-image: url(./img/insert_photo_24px.png);
+}
+
+.apps {
+  background-image: url(./img/apps_24px.png);
+}
+
+.user {
+  background-image: url(./img/account_circle_24px.png);
+}
+
+.maps {
+  background-image: url(./img/apps/maps.png);
+}
+
+.movies {
+  background-image: url(./img/apps/movies.png);
+}
+
+.cloud {
+  background-image: url(./img/apps/cloud.png);
+}
+
+.music {
+  background-image: url(./img/apps/music.png);
+}
+
+.earth {
+  background-image: url(./img/apps/earth.png);
+}
+
+.weather {
+  background-image: url(./img/apps/weather.png);
+}
+
+.puzzle {
+  background-image: url(./img/apps/pazzle.png);
+}
+
+.sport {
+  background-image: url(./img/apps/sport.png);
+}
+
+.learning {
+  background-image: url(./img/apps/learn.png);
+}
+
+.shopping {
+  background-image: url(./img/apps/shopping.png);
+}
+
+.food {
+  background-image: url(./img/apps/food.png);
+}
+
+.flights {
+  background-image: url(./img/apps/avia.png);
+}
+
+.drink {
+  background-image: url(./img/apps/drink.png);
+}
