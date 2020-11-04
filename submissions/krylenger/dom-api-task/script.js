@@ -109,6 +109,7 @@ const mainUlBikes = document.querySelector('.main__ul-bikes');
 const mainAvgPrice = document.querySelector('.main__avg-price');
 
 const handleNavigationClick = ({ target }) => {
+  console.log(target)
   const sectionName = target.textContent;
   const section = database.find(item => item.name === sectionName);
   mainHeader.textContent = section.name;
@@ -130,10 +131,10 @@ const handleNavigationClick = ({ target }) => {
     fragmentDescription.appendChild(desc);
   })
   navLink.forEach(link => {
-    link.style.color = 'lightgrey';
+    link.classList.add("nav__link--lightgrey");
   })
   if (target.className === 'nav__link') {
-    target.style.color = 'orange';
+    target.classList.add("nav__link--orange");
   }
   mainUlBikes.innerHTML = '';
   mainDescription.innerHTML = '';
