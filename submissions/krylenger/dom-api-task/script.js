@@ -184,6 +184,10 @@ const loadNavLi = () => {
   navUl.append(fragmentUlList);
 }
 
-document.addEventListener('DOMContentLoaded', loadNavLi)
-navBtnToggle.addEventListener("click", handleNavBtnToggle);
-navUl.addEventListener("click", handleNavigationClick);
+const initApp = () => {
+  loadNavLi();
+  navBtnToggle.addEventListener("click", handleNavBtnToggle);
+  navUl.addEventListener("click", handleNavigationClick);
+}
+
+document.addEventListener('DOMContentLoaded', initApp)
