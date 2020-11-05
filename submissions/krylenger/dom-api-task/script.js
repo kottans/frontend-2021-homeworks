@@ -110,75 +110,82 @@ const mainDescriptionText = document.querySelector(".main__description-text");
 const mainUlBikes = document.querySelector(".main__ul-bikes");
 const mainAvgPrice = document.querySelector(".main__avg-price");
 
-
 const handleNavBtnToggle = ({ target }) => {
+  navBtnToggle.classList.toggle("nav-btn-toggle--nav-closed");
+  nav.classList.toggle("nav--closed");
+  main.classList.toggle("main--wide");
+  navUl.classList.toggle("nav__ul--display-none");
+};
 
-    navBtnToggle.classList.toggle("nav-btn-toggle--nav-closed");
-    nav.classList.toggle("nav--closed");
-    main.classList.toggle("main--wide");
-    navUl.classList.toggle("nav__ul--display-none");
+const generateModels = (section) => {
+  const fragmentBikes = document.createDocumentFragment();
+
+  section.models.forEach((model) => {
+    const bike = document.createElement("li");
+    bike.textContent = model;
+    fragmentBikes.appendChild(bike);
+  });
+  mainUlBikes.innerHTML = "";
+  mainUlBikes.appendChild(fragmentBikes);
+};
+
+const generateDescription = (section) => {
+  const fragmentDescription = document.createDocumentFragment();
+
+  section.description.forEach((description) => {
+    const desc = document.createElement("p");
+    desc.textContent = description;
+    desc.classList.add("main__description-p");
+    fragmentDescription.appendChild(desc);
+  });
+  mainDescription.innerHTML = "";
+  mainDescription.appendChild(fragmentDescription);
+};
+
+const handleNavLinkClick = (target) => {
+  const navLinks = document.querySelectorAll(".nav__link");
+  navLinks.forEach((link) => {
+    if (link.classList.contains("nav__link--orange")) {
+      link.classList.remove("nav__link--orange");
+    }
+    target.classList.add("nav__link--orange");
+  });
 };
 
 const handleNavigationClick = ({ target }) => {
-  
-  if (target.classList.contains('nav__link')) {
+  if (target.classList.contains("nav__link")) {
     const sectionName = target.textContent;
-    const section = database.find((item) => item.name.toLowerCase() === sectionName.toLowerCase());
+    const section = database.find(
+      (item) => item.name.toLowerCase() === sectionName.toLowerCase()
+    );
     mainHeader.textContent = section.name;
     mainImage.setAttribute("src", section.img);
     mainAvgPrice.textContent = section.avgPrice;
-  
-    const fragmentBikes = document.createDocumentFragment();
-    const fragmentDescription = document.createDocumentFragment();
-  
-    section.models.forEach((model) => {
-      const bike = document.createElement("li");
-      bike.textContent = model;
-      fragmentBikes.appendChild(bike);
-    });
-    
-    section.description.forEach((description) => {
-      const desc = document.createElement("p");
-      desc.textContent = description;
-      desc.classList.add("main__description-p");
-      fragmentDescription.appendChild(desc);
-    });
-    
-    const navLinks = document.querySelectorAll(".nav__link");
-    navLinks.forEach((link) => {
-      if (link.classList.contains("nav__link--orange")) {
-        link.classList.remove("nav__link--orange");
-      }
-      target.classList.add("nav__link--orange");
-    });
-    
-    mainUlBikes.innerHTML = "";
-    mainDescription.innerHTML = "";
-    mainUlBikes.appendChild(fragmentBikes);
-    mainDescription.appendChild(fragmentDescription);
+
+    generateModels(section);
+    generateDescription(section);
+    handleNavLinkClick(target);
   }
 };
 
 const loadNavLi = () => {
-
   const fragmentUlList = document.createDocumentFragment();
-  database.forEach(section => {
-    const li = document.createElement('li');
-    li.classList.add('nav__li');
-    const link = document.createElement('a');
-    link.classList.add('nav__link');
+  database.forEach((section) => {
+    const li = document.createElement("li");
+    li.classList.add("nav__li");
+    const link = document.createElement("a");
+    link.classList.add("nav__link");
     link.textContent = section.name;
     li.append(link);
     fragmentUlList.append(li);
-  })
+  });
   navUl.append(fragmentUlList);
-}
+};
 
 const initApp = () => {
-
   loadNavLi();
   navBtnToggle.addEventListener("click", handleNavBtnToggle);
   navUl.addEventListener("click", handleNavigationClick);
-}
+};
 
-document.addEventListener('DOMContentLoaded', initApp)
+document.addEventListener("DOMContentLoaded", initApp);
