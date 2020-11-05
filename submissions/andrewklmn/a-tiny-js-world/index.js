@@ -4,115 +4,76 @@
    Code repository: https://github.com/andrewklmn/a-tiny-JS-world
    Web app: https://andrewklmn.github.io/a-tiny-JS-world/
    */
-
 // ======== OBJECTS DEFINITIONS ========
-const Inhabitant = function ({species, name, gender, legs = 0, hands = 0, saying, friends = [] }) {
-  this.species = species;
-  this.name = name;
-  this.gender = gender;
-  this.legs = legs;
-  this.hands = hands;
-  this.saying = saying;
-  this.friends = friends;
-};
-Inhabitant.prototype.getFriendsList = function () {
-  if (this.friends.length > 0) {
-    return this.friends.map(friend => friend.name).join(', ');
-  };
-  return 'No friends!';
-};
-Inhabitant.prototype.toString = function () {
-  return `${this.species}; ${this.name}; ${this.gender}; ${this.legs}; ${this.hands}; ${this.saying}; ${this.getFriendsList()}`;
-};
+class Inhabitant {
+  constructor ({ species, name, gender, legs = 0, hands = 0, saying, friends = [] }) {
+    this.species = species;
+    this.name = name;
+    this.gender = gender;
+    this.legs = legs;
+    this.hands = hands;
+    this.saying = saying;
+    this.friends = friends;
+  }
 
-const Pet = function ({ species, name, gender, saying }) {
-  const legs = 4;
-  Inhabitant.call(this, { species, name, gender, legs, saying });
-};
-Pet.prototype = Object.create( Inhabitant.prototype);
-Pet.prototype.constructor = Inhabitant;
+  getFriendsList () {
+    if (this.friends.length > 0) {
+      return this.friends.map(friend => friend.name).join(', ');
+    }
+    return 'No friends!';
+  }
 
-const Dog = function ({ name, gender }) {
-  const species = 'dog';
-  const saying = 'woof!';
-  Pet.call(this, {species, name, gender, saying});
-};
-Dog.prototype = Object.create(Pet.prototype);
-Dog.prototype.constructor = Pet;
+  toString () {
+    return `${this.species}; ${this.name}; ${this.gender}; ${this.legs}; ${this.hands}; ${this.saying}; ${this.getFriendsList()}`;
+  }
+}
 
-const MaleDog = function (name) {
-  const gender = 'male';
-  Dog.call(this, { name, gender });
-};
-MaleDog.prototype = Object.create(Dog.prototype);
-MaleDog.prototype.constructor = Dog;
+class Pet extends Inhabitant {
+  constructor ({ species, name, gender, saying }) {
+    super({ species, name, gender, legs: 4, saying });
+  }
+}
 
-const FemaleDog = function (name) {
-  const gender = 'female';
-  Dog.call(this, { name, gender });
-};
-FemaleDog.prototype = Object.create(Dog.prototype);
-FemaleDog.prototype.constructor = Dog;
+class Dog extends Pet {
+  constructor ({ name, gender }) {
+    super({ species: 'dog', name, gender, saying: 'woof!' });
+  }
+}
 
-const Cat = function ({ name, gender }) {
-  const species = 'cat';
-  const saying = 'meow!';
-  Pet.call(this, {species, name, gender, saying });
-};
-Cat.prototype = Object.create(Pet.prototype);
-Cat.prototype.constructor = Pet;
+class Cat extends Pet {
+  constructor ({ name, gender }) {
+    super({ species: 'cat', name, gender, saying: 'meow!' });
+  }
+}
 
-const MaleCat = function (name) {
-  const gender = 'male';
-  Cat.call(this, { name, gender });
-};
-MaleCat.prototype = Object.create(Cat.prototype);
-MaleCat.prototype.constructor = Cat;
+class Human extends Inhabitant {
+  constructor ({ name, gender, saying }) {
+    super({ species: 'human', name, gender, legs: 2, hands: 2, saying });
+  }
+}
 
-const FemaleCat = function (name) {
-  const gender = 'female';
-  Cat.call(this, { name, gender });
-};
-FemaleCat.prototype = Object.create(Cat.prototype);
-FemaleCat.prototype.constructor = Cat;
+class Woman extends Human {
+  constructor({ name, saying }) {
+    super({ name, gender: 'woman', saying });
+  }
+}
 
-const Human = function ({ name, gender, saying}) {
-  const species = 'human';
-  const legs = 2;
-  const hands = 2;
-  Inhabitant.call(this, { species, name, gender, legs, hands, saying });
-};
-Human.prototype = Object.create(Inhabitant.prototype);
-Human.prototype.constructor = Inhabitant;
+class Man extends Human {
+  constructor({ name, saying }) {
+    super({ name, gender: 'man', saying });
+  }
+}
 
-const Woman = function ({ name, saying }) {
-  const gender = 'woman';
-  Human.call(this, { name, gender, saying });
-};
-Woman.prototype = Object.create(Human.prototype);
-Woman.prototype.constructor = Human;
-
-const Man = function ({ name, saying }) {
-  const gender = 'man';
-  Human.call(this, { name, gender, saying });
-};
-Man.prototype = Object.create(Human.prototype);
-Man.prototype.constructor = Human;
-
-const CatWoman = function () {
-  const name = 'Cat-woman';
-  Woman.call(this, { name });
-
-  const catSpirit = {};
-  FemaleCat.call(catSpirit, name);
-  this.saying = catSpirit.saying;
-};
-CatWoman.prototype = Object.create(Woman.prototype);
-CatWoman.prototype.constructor = Woman;
+class CatWoman extends Woman {
+  constructor() {
+    const catSpirit =new Cat({ name: 'Cat-woman', gender: 'female'});
+    super({ name: catSpirit.name, saying: catSpirit.saying });
+  }
+}
 
 // define inhabitants
-const dog = new MaleDog('Dyuka');
-const cat = new MaleCat('Barsik');
+const dog = new Dog({ name: 'Dyuka', gender: 'male' });
+const cat = new Cat({ name: 'Barsik', gender: 'male' });
 const woman = new Woman({ name: 'Leeloo Dallas', saying: 'People hi!' });
 const man = new Man({ name: 'Korben Dallas', saying: 'Hello there!' });
 const catWoman = new CatWoman();
