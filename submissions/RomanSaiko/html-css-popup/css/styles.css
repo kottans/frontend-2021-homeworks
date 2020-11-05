@@ -45,7 +45,7 @@ body, h1 {
 }
 
 .nav-list .nav-item label {
-  cursor: inherit;
+  cursor: pointer;
 }
 
 .nav-list .nav-item .nav-link {
@@ -173,8 +173,8 @@ body, h1 {
 
 .main-content {
   width: 100%;
-  height: calc(100vh - 38px);
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-top: 150px;
 }
