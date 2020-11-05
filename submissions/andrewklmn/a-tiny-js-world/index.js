@@ -40,6 +40,20 @@ const Dog = function ({ name, gender }) {
 Dog.prototype = Object.create(Pet.prototype);
 Dog.prototype.constructor = Pet;
 
+const MaleDog = function (name) {
+  const gender = 'male';
+  Dog.call(this, { name, gender });
+};
+MaleDog.prototype = Object.create(Dog.prototype);
+MaleDog.prototype.constructor = Dog;
+
+const FemaleDog = function (name) {
+  const gender = 'female';
+  Dog.call(this, { name, gender });
+};
+FemaleDog.prototype = Object.create(Dog.prototype);
+FemaleDog.prototype.constructor = Dog;
+
 const Cat = function ({ name, gender }) {
   const species = 'cat';
   const saying = 'meow!';
@@ -72,7 +86,7 @@ Man.prototype = Object.create(Human.prototype);
 Man.prototype.constructor = Human;
 
 // define inhabitants
-const dog = new Dog({ name: 'Dyuka', gender: 'male' });
+const dog = new MaleDog('Dyuka');
 const cat = new Cat({ name: 'Barsik', gender: 'male' });
 const woman = new Woman({ name: 'Leeloo Dallas', saying: 'People hi!' });
 const man = new Man({ name: 'Korben Dallas', saying: 'Hello there!' });
