@@ -15,14 +15,12 @@ const Inhabitant = function ({species, name, gender, legs = 0, hands = 0, saying
   this.saying = saying;
   this.friends = friends;
 };
-
 Inhabitant.prototype.getFriendsList = function () {
   if (this.friends.length > 0) {
     return this.friends.map(friend => friend.name).join(', ');
   };
   return 'No friends!';
 };
-
 Inhabitant.prototype.toString = function () {
   return `${this.species}; ${this.name}; ${this.gender}; ${this.legs}; ${this.hands}; ${this.saying}; ${this.getFriendsList()}`;
 };
@@ -34,11 +32,18 @@ const Pet = function ({ species, name, gender, saying }) {
 Pet.prototype = Object.create( Inhabitant.prototype);
 Pet.prototype.constructor = Inhabitant;
 
-const dog = new Pet({
-  species: 'dog',
+const Dog = function ({ name, gender }) {
+  const species = 'dog';
+  const saying = 'woof!';
+  Pet.call(this, {species, name, gender, saying});
+};
+Dog.prototype = Object.create( Pet.prototype);
+Dog.prototype.constructor = Pet;
+
+
+const dog = new Dog({
   name: 'Dyuka',
   gender: 'male',
-  saying: 'woof!',
 });
 
 const cat = new Pet({
