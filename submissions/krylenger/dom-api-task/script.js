@@ -102,7 +102,6 @@ const database = [
 const navBtnToggle = document.querySelector(".nav-btn-toggle");
 const nav = document.querySelector(".nav");
 const navUl = document.querySelector(".nav__ul");
-
 const main = document.querySelector(".main");
 const mainHeader = document.querySelector(".main__header");
 const mainImage = document.querySelector(".main__img");
@@ -111,66 +110,56 @@ const mainDescriptionText = document.querySelector(".main__description-text");
 const mainUlBikes = document.querySelector(".main__ul-bikes");
 const mainAvgPrice = document.querySelector(".main__avg-price");
 
+
 const handleNavBtnToggle = ({ target }) => {
-  if (navBtnToggle.classList.contains("nav-btn-toggle--nav-closed")) {
-    navBtnToggle.classList.remove("nav-btn-toggle--nav-closed");
-    navBtnToggle.classList.add("nav-btn-toggle--nav-opened");
-    nav.classList.add("nav--opened");
-    nav.classList.remove("nav--closed");
-    main.classList.remove("main--wide");
-    main.classList.add("main--short");
-    navUl.classList.remove("nav__ul--display-none");
-    navUl.classList.add("nav__ul--display-yes");
-  } else {
-    navBtnToggle.classList.remove("nav-btn-toggle--nav-opened");
-    navBtnToggle.classList.add("nav-btn-toggle--nav-closed");
-    nav.classList.remove("nav--opened");
-    nav.classList.add("nav--closed");
-    main.classList.remove("main--short");
-    main.classList.add("main--wide");
-    navUl.classList.remove("nav__ul--display-yes");
-    navUl.classList.add("nav__ul--display-none");
-  }
+
+    navBtnToggle.classList.toggle("nav-btn-toggle--nav-closed");
+    nav.classList.toggle("nav--closed");
+    main.classList.toggle("main--wide");
+    navUl.classList.toggle("nav__ul--display-none");
 };
 
 const handleNavigationClick = ({ target }) => {
-  const sectionName = target.textContent;
-  const section = database.find((item) => item.name.toLowerCase() === sectionName.toLowerCase());
-  mainHeader.textContent = section.name;
-  mainImage.setAttribute("src", section.img);
-  mainAvgPrice.textContent = section.avgPrice;
-
-  const fragmentBikes = document.createDocumentFragment();
-  const fragmentDescription = document.createDocumentFragment();
-
-  section.models.forEach((model) => {
-    const bike = document.createElement("li");
-    bike.textContent = model;
-    fragmentBikes.appendChild(bike);
-  });
+  if (target.nodeName === 'A') {
+    const sectionName = target.textContent;
+    const section = database.find((item) => item.name.toLowerCase() === sectionName.toLowerCase());
+    mainHeader.textContent = section.name;
+    mainImage.setAttribute("src", section.img);
+    mainAvgPrice.textContent = section.avgPrice;
   
-  section.description.forEach((description) => {
-    const desc = document.createElement("p");
-    desc.textContent = description;
-    desc.classList.add("main__description-p");
-    fragmentDescription.appendChild(desc);
-  });
+    const fragmentBikes = document.createDocumentFragment();
+    const fragmentDescription = document.createDocumentFragment();
   
-  const navLinks = document.querySelectorAll(".nav__link");
-  navLinks.forEach((link) => {
-    if (link.classList.contains("nav__link--orange")) {
-      link.classList.remove("nav__link--orange");
-    }
-    target.classList.add("nav__link--orange");
-  });
-  
-  mainUlBikes.innerHTML = "";
-  mainDescription.innerHTML = "";
-  mainUlBikes.appendChild(fragmentBikes);
-  mainDescription.appendChild(fragmentDescription);
+    section.models.forEach((model) => {
+      const bike = document.createElement("li");
+      bike.textContent = model;
+      fragmentBikes.appendChild(bike);
+    });
+    
+    section.description.forEach((description) => {
+      const desc = document.createElement("p");
+      desc.textContent = description;
+      desc.classList.add("main__description-p");
+      fragmentDescription.appendChild(desc);
+    });
+    
+    const navLinks = document.querySelectorAll(".nav__link");
+    navLinks.forEach((link) => {
+      if (link.classList.contains("nav__link--orange")) {
+        link.classList.remove("nav__link--orange");
+      }
+      target.classList.add("nav__link--orange");
+    });
+    
+    mainUlBikes.innerHTML = "";
+    mainDescription.innerHTML = "";
+    mainUlBikes.appendChild(fragmentBikes);
+    mainDescription.appendChild(fragmentDescription);
+  }
 };
 
 const loadNavLi = () => {
+
   const fragmentUlList = document.createDocumentFragment();
   database.forEach(section => {
     const li = document.createElement('li');
@@ -185,6 +174,7 @@ const loadNavLi = () => {
 }
 
 const initApp = () => {
+
   loadNavLi();
   navBtnToggle.addEventListener("click", handleNavBtnToggle);
   navUl.addEventListener("click", handleNavigationClick);

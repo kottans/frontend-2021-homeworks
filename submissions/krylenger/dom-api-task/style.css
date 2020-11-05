@@ -21,19 +21,12 @@ body {
     background-size: 30px;
     background-color: transparent;
     background-image: url(./images/left-arrows.png);
+    transition: all 0.3s ease-in-out;
 }
 
 .nav-btn-toggle--nav-closed {
     transform: translateX(-150px);
-    transition: all 0.3s ease-in-out;
     background-image: url(./images/right-arrows.png);
-}
-
-.nav-btn-toggle--nav-opened {
-    transform: translateX(-10px);
-    transition: all 0.3s ease-in-out;
-    background-image: url(./images/left-arrows.png);
-    margin-left: 10px;
 }
 
 .nav {
@@ -43,26 +36,19 @@ body {
     height: 100%;
     padding-top: 100px;
     z-index: 1;
-}
-
-.nav--opened {
-    width: 200px;
     transition: all 0.3s ease-in-out;
 }
 
 .nav--closed {
     width: 0;
+}
+
+.nav__ul {
     transition: all 0.3s ease-in-out;
 }
 
 .nav__ul--display-none {
     transform: translateX(-160px);
-    transition: all 0.3s ease-in-out;
-}
-
-.nav__ul--display-yes {
-    transform: translateX(-10px);
-    transition: all 0.3s ease-in-out;
 }
 
 .nav__li {
@@ -95,16 +81,13 @@ body {
     height: 80vh;
     display: flex;
     flex-direction: column;
+    transition: all 0.3s ease-in;
 }
 
 .main--wide {
-    transition: all 0.3s ease-in;
     margin-left: 0px;
 }
 
-.main--short {
-    transition: all 0.3s ease-in;
-}
 
 .main__img-container {
     height: 300px;
