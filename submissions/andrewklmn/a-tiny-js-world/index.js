@@ -74,7 +74,7 @@ class CatWoman extends Woman {
 // define inhabitants
 const dog = new Dog({ name: 'Dyuka', gender: 'male' });
 const cat = new Cat({ name: 'Barsik', gender: 'male' });
-const woman = new Woman({ name: 'Leeloo Dallas', saying: 'People hi!' });
+const woman = new Woman({ name: 'Leeloo Dallas', saying: 'Multi-pass!' });
 const man = new Man({ name: 'Korben Dallas', saying: 'Hello there!' });
 const catWoman = new CatWoman();
 
