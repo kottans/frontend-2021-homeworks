@@ -143,13 +143,12 @@ const generateDescription = (section) => {
 };
 
 const handleNavLinkClick = (target) => {
-  const navLinks = document.querySelectorAll(".nav__link");
-  navLinks.forEach((link) => {
-    if (link.classList.contains("nav__link--orange")) {
-      link.classList.remove("nav__link--orange");
-    }
-    target.classList.add("nav__link--orange");
-  });
+  const activeElement = document.querySelector(".nav__link.nav__link--orange");
+
+  if (activeElement) {
+    activeElement.classList.remove("nav__link--orange");
+  }
+  target.classList.add("nav__link--orange");
 };
 
 const handleNavigationClick = ({ target }) => {
