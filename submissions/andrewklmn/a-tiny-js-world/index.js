@@ -57,10 +57,24 @@ FemaleDog.prototype.constructor = Dog;
 const Cat = function ({ name, gender }) {
   const species = 'cat';
   const saying = 'meow!';
-  Pet.call(this, {species, name, gender, saying});
+  Pet.call(this, {species, name, gender, saying });
 };
 Cat.prototype = Object.create(Pet.prototype);
 Cat.prototype.constructor = Pet;
+
+const MaleCat = function (name) {
+  const gender = 'male';
+  Cat.call(this, { name, gender });
+};
+MaleCat.prototype = Object.create(Cat.prototype);
+MaleCat.prototype.constructor = Cat;
+
+const FemaleCat = function (name) {
+  const gender = 'female';
+  Cat.call(this, { name, gender });
+};
+FemaleCat.prototype = Object.create(Cat.prototype);
+FemaleCat.prototype.constructor = Cat;
 
 const Human = function ({ name, gender, saying}) {
   const species = 'human';
@@ -87,7 +101,7 @@ Man.prototype.constructor = Human;
 
 // define inhabitants
 const dog = new MaleDog('Dyuka');
-const cat = new Cat({ name: 'Barsik', gender: 'male' });
+const cat = new MaleCat('Barsik');
 const woman = new Woman({ name: 'Leeloo Dallas', saying: 'People hi!' });
 const man = new Man({ name: 'Korben Dallas', saying: 'Hello there!' });
 
