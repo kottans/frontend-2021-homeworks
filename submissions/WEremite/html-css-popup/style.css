@@ -86,7 +86,7 @@ p {
   display: flex;
   align-items: center;
 }
-li.icons-item:hover, .more-icons-item:hover {
+li.icons-item:hover {
   outline: 1px solid grey;
 }
 .show:focus + .show-label {
@@ -95,10 +95,10 @@ li.icons-item:hover, .more-icons-item:hover {
 .second-show:focus + .second-show-label {
   outline: 1px solid grey;
 }
-.first-menu-item:focus, .icons-item:focus, .more-icons-item:focus {
+.first-menu-item:focus, .icons-item:focus {
   background-color: grey;
 }
-.icons-item-img, .more-icons-item-img {
+.icons-item-img {
   width: 60px;
   margin: 15px 10px 0px 15px;
 }
