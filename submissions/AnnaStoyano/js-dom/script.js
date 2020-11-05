@@ -4,11 +4,8 @@ const downloadInfoFromJson = function () {
         .then(data => {
             addMenuItems(data.faculties);
             addContentItems(data.faculties);
-            return data;
-        })
-        .then(data=>{
-            menuHandler(data);
-            menuIconHandler();
+            addMenuHandler(data);
+            addMenuIconHandler();
         })      
 }
 
@@ -16,7 +13,7 @@ document.addEventListener('DOMContentLoaded',downloadInfoFromJson);
 
 const addMenuItems = function (arr) {
     let menu = document.querySelector('.menu');
-    let menuFr = document.createDocumentFragment();
+    let menuFragment = document.createDocumentFragment();
     arr.forEach((element, index) => {
         let menuItem = document.createElement('li');
         let link = document.createElement('a');
@@ -27,9 +24,9 @@ const addMenuItems = function (arr) {
         if (index === 0) {
             menuItem.classList.add('active');
         }
-        menuFr.appendChild(menuItem);
+        menuFragment.appendChild(menuItem);
     });
-    menu.appendChild(menuFr);
+    menu.appendChild(menuFragment);
 }
 
 const addContentItems = function (arr) {
@@ -59,47 +56,59 @@ const addContentItems = function (arr) {
     content.appendChild(contentFr);
 }
 
-const menuIconHandler = function () {
-    let button = document.querySelector('.menu-icon');
+const addMenuIconHandler = function () {
+    const button = document.querySelector('.menu-icon');
     button.addEventListener('click', function () {
         button.classList.toggle('active');
     })
 }
 
-const menuHandler = function(data){
-    let menu = document.querySelector('.menu');
-    let content = document.querySelector('.content');
+const addMenuHandler = function(data){
+    const menu = document.querySelector('.menu');
     menu.addEventListener('click',function(e){
         e.preventDefault();
         let target = e.target;
         let menuItemClick = target.parentElement;
-        removeActive(menu);
+        const activeMenuItem = menu.querySelector('.active');
+        activeMenuItem.classList.remove('active');
         menuItemClick.classList.add('active');
-        addActiveContent(content,menuItemClick); 
-        setBgColorForParent(content,data); 
+        addActiveContent(menuItemClick); 
+        setBgColorForParent(data); 
     })
 }
 
-const addActiveContent = function(wrapper,item){
-    let arr = Array.from(wrapper.children);
-    removeActive(wrapper);
-    let facultyNameActive = item.classList[1];
-    let contentItem = arr.find(element=>element.classList.contains(facultyNameActive));
+const addActiveContent = function(item){
+    const activeContentItem = document.querySelector('.content .active');
+    activeContentItem.classList.remove('active');
+    let faculty = checkFaculty(item);
+    const contentItem = document.querySelector(`.content .${faculty}`);
     contentItem.classList.add('active');
 }
 
-const removeActive = function(wrapper){
-    let arr = Array.from(wrapper.children);
-    let active = arr.find(item=>item.classList.contains('active'));
-    if(active){
-        active.classList.remove('active');
+const checkFaculty = function(item){
+    let faculty;
+    switch(true){
+        case item.classList.contains('gryffindor'):
+            faculty = 'gryffindor';
+            break;
+        case item.classList.contains('hufflepuf'):
+            faculty = 'hufflepuf';
+            break;
+        
+        case item.classList.contains('ravenclaw'):
+            faculty = 'ravenclaw';
+            break;
+        
+        case item.classList.contains('slytherin'):
+            faculty = 'slytherin';
+            break;      
     }
+    return faculty;
 }
 
-const setBgColorForParent = function(wrapper,data){
-    let arr = Array.from(wrapper.children);
-    let activeChild = arr.find(element=>element.classList.contains('active'));
-    let facultyname = activeChild.classList[1];
-    let faculty = data.faculties.find(item=>item.name.toLowerCase() == facultyname);
-    wrapper.style.backgroundColor = faculty.bc;
+const setBgColorForParent = function(data){
+    const activeContentItem = document.querySelector('.content .active');
+    let facultyItemClassName = checkFaculty(activeContentItem);
+    let faculty = data.faculties.find(item=>item.name.toLowerCase() == facultyItemClassName);
+    activeContentItem.parentElement.style.backgroundColor = faculty.bc;
 }
