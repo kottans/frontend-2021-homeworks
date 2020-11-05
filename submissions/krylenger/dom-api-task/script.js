@@ -152,7 +152,7 @@ const handleNavigationClick = ({ target }) => {
   section.description.forEach((description) => {
     const desc = document.createElement("p");
     desc.textContent = description;
-    desc.setAttribute("class", "main__description-p");
+    desc.classList.add("main__description-p");
     fragmentDescription.appendChild(desc);
   });
   
