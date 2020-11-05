@@ -120,7 +120,8 @@ const handleNavBtnToggle = ({ target }) => {
 };
 
 const handleNavigationClick = ({ target }) => {
-  if (target.nodeName === 'A') {
+  
+  if (target.classList.contains('nav__link')) {
     const sectionName = target.textContent;
     const section = database.find((item) => item.name.toLowerCase() === sectionName.toLowerCase());
     mainHeader.textContent = section.name;
