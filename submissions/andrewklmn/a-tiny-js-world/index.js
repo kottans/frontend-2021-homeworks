@@ -54,14 +54,28 @@ const Human = function ({ name, gender, saying}) {
   const hands = 2;
   Inhabitant.call(this, { species, name, gender, legs, hands, saying });
 };
-Human.prototype = Object.create( Inhabitant.prototype);
+Human.prototype = Object.create(Inhabitant.prototype);
 Human.prototype.constructor = Inhabitant;
 
+const Woman = function ({ name, saying }) {
+  const gender = 'woman';
+  Human.call(this, { name, gender, saying });
+};
+Woman.prototype = Object.create(Human.prototype);
+Woman.prototype.constructor = Human;
 
+const Man = function ({ name, saying }) {
+  const gender = 'man';
+  Human.call(this, { name, gender, saying });
+};
+Man.prototype = Object.create(Human.prototype);
+Man.prototype.constructor = Human;
+
+// define inhabitants
 const dog = new Dog({ name: 'Dyuka', gender: 'male' });
 const cat = new Cat({ name: 'Barsik', gender: 'male' });
-const woman = new Human({ name: 'Leeloo Dallas', gender: 'female', saying: 'People hi!' });
-const man = new Human({ name: 'Korben Dallas', gender: 'male', saying: 'Hello there!' });
+const woman = new Woman({ name: 'Leeloo Dallas', saying: 'People hi!' });
+const man = new Man({ name: 'Korben Dallas', saying: 'Hello there!' });
 
 // define cat-woman
 const catWoman = Object.create(woman);
