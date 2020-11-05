@@ -40,9 +40,12 @@ p {
   padding: 15px 20px;
 }
 #show2, #content2 {
-  display: none;
+  opacity: 0;
+  position: absolute;       
 }
 #show2:checked~#content2 {
+  opacity: 1;
+  position: relative;
   display: flex;
   border-top: 1px solid #c5c5c547
  }
