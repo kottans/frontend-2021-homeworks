@@ -37,21 +37,20 @@ const Dog = function ({ name, gender }) {
   const saying = 'woof!';
   Pet.call(this, {species, name, gender, saying});
 };
-Dog.prototype = Object.create( Pet.prototype);
+Dog.prototype = Object.create(Pet.prototype);
 Dog.prototype.constructor = Pet;
 
+const Cat = function ({ name, gender }) {
+  const species = 'cat';
+  const saying = 'meow!';
+  Pet.call(this, {species, name, gender, saying});
+};
+Cat.prototype = Object.create(Pet.prototype);
+Cat.prototype.constructor = Pet;
 
-const dog = new Dog({
-  name: 'Dyuka',
-  gender: 'male',
-});
 
-const cat = new Pet({
-  species: 'cat',
-  name: 'Barsik',
-  gender: 'male',
-  saying: 'meow!',
-});
+const dog = new Dog({ name: 'Dyuka', gender: 'male' });
+const cat = new Cat({ name: 'Barsik', gender: 'male' });
 
 const woman = new Inhabitant({
   species: 'human',
