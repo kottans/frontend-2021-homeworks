@@ -27,19 +27,24 @@ Inhabitant.prototype.toString = function () {
   return `${this.species}; ${this.name}; ${this.gender}; ${this.legs}; ${this.hands}; ${this.saying}; ${this.getFriendsList()}`;
 };
 
-const dog = new Inhabitant({
+const Pet = function ({ species, name, gender, saying }) {
+  const legs = 4;
+  Inhabitant.call(this, { species, name, gender, legs, saying });
+};
+Pet.prototype = Object.create( Inhabitant.prototype);
+Pet.prototype.constructor = Inhabitant;
+
+const dog = new Pet({
   species: 'dog',
   name: 'Dyuka',
   gender: 'male',
-  legs: 4,
   saying: 'woof!',
 });
 
-const cat = new Inhabitant({
+const cat = new Pet({
   species: 'cat',
   name: 'Barsik',
   gender: 'male',
-  legs: 4,
   saying: 'meow!',
 });
 
