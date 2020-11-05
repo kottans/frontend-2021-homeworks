@@ -99,16 +99,24 @@ const Man = function ({ name, saying }) {
 Man.prototype = Object.create(Human.prototype);
 Man.prototype.constructor = Human;
 
+const CatWoman = function () {
+  const name = 'Cat-woman';
+  Woman.call(this, { name });
+
+  const catSpirit = {};
+  Cat.call(catSpirit,{ name, gender: this.gender });
+  this.saying = catSpirit.saying;
+};
+CatWoman.prototype = Object.create(Woman.prototype);
+CatWoman.prototype.constructor = Woman;
+
 // define inhabitants
 const dog = new MaleDog('Dyuka');
 const cat = new MaleCat('Barsik');
 const woman = new Woman({ name: 'Leeloo Dallas', saying: 'People hi!' });
 const man = new Man({ name: 'Korben Dallas', saying: 'Hello there!' });
+const catWoman = new CatWoman();
 
-// define cat-woman
-const catWoman = Object.create(woman);
-catWoman.name = 'Cat-woman';
-catWoman.saying = cat.saying;
 
 const inhabitants = [
   dog,
