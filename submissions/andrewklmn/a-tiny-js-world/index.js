@@ -26,6 +26,12 @@ class Inhabitant {
   toString () {
     return `${this.species}; ${this.name}; ${this.gender}; ${this.legs}; ${this.hands}; ${this.saying}; ${this.getFriendsList()}`;
   }
+
+  addFriends(friends){
+    friends.forEach(friend => {
+      this.friends.push(friend);
+    });
+  }
 }
 
 class Pet extends Inhabitant {
@@ -88,10 +94,10 @@ const inhabitants = [
 ];
 
 // define friends for everyone except the cat...
-dog.friends = [man, woman, cat];
-woman.friends = [man, dog, cat];
-man.friends = [woman, dog, cat, catWoman];
-catWoman.friends = [cat];
+dog.addFriends([man, woman, cat]);
+woman.addFriends([man, dog, cat]);
+man.addFriends([woman, dog, cat, catWoman]);
+catWoman.addFriends([cat]);
 
 // ======== OUTPUT ========
 /* Use print(message) for output.
