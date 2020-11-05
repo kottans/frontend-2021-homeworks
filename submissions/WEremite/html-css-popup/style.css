@@ -44,9 +44,10 @@ p {
 }
 #show2:checked~#content2 {
   display: flex;
-}
-#show2:checked~.second-label {
-  opacity: 0;
+  border-top: 1px solid #c5c5c547
+ }
+#show2:checked~.second-show-label {
+  display: none;
 }
 .menu {
   position: relative;
@@ -85,21 +86,20 @@ p {
 li.icons-item:hover, .more-icons-item:hover {
   outline: 1px solid grey;
 }
-.show2:focus-visible + .second-label {
+.show:focus + .show-label {
   outline: 1px solid grey;
 }
-input:focus + label { 
-  outline: 1px solid black;
+.second-show:focus + .second-show-label {
+  outline: 1px solid grey;
 }
-
 .first-menu-item:focus, .icons-item:focus, .more-icons-item:focus {
-  background-color: gray;
+  background-color: grey;
 }
 .icons-item-img, .more-icons-item-img {
   width: 60px;
   margin: 15px 10px 0px 15px;
 }
-.second-label {
+.second-show-label {
   width: 250px;
 }
 .more-icons-menu {
