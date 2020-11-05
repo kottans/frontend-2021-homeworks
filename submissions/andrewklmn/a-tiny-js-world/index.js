@@ -104,7 +104,7 @@ const CatWoman = function () {
   Woman.call(this, { name });
 
   const catSpirit = {};
-  Cat.call(catSpirit,{ name, gender: this.gender });
+  FemaleCat.call(catSpirit, name);
   this.saying = catSpirit.saying;
 };
 CatWoman.prototype = Object.create(Woman.prototype);
