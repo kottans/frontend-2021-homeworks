@@ -16,67 +16,55 @@ const Inhabitant = function ({species, name, gender, legs = 0, hands = 0, saying
   this.friends = friends;
 };
 
-Inhabitant.prototype.listFriedns = function () {
+Inhabitant.prototype.getFriendsList = function () {
   if (this.friends.length > 0) {
     return this.friends.map(friend => friend.name).join(', ');
   };
-  return '';
+  return 'No friends!';
 };
 
 Inhabitant.prototype.toString = function () {
-  return `${this.species}; ${this.name}; ${this.gender}; ${this.legs}; ${this.hands}; ${this.saying}; ${this.listFriedns}`;
+  return `${this.species}; ${this.name}; ${this.gender}; ${this.legs}; ${this.hands}; ${this.saying}; ${this.getFriendsList()}`;
 };
 
-const dog = {
+const dog = new Inhabitant({
   species: 'dog',
   name: 'Dyuka',
   gender: 'male',
   legs: 4,
-  hands: 0,
   saying: 'woof!',
-  friends: [],
-};
+});
 
-const cat = {
+const cat = new Inhabitant({
   species: 'cat',
   name: 'Barsik',
   gender: 'male',
   legs: 4,
-  hands: 0,
   saying: 'meow!',
-  friends: [],
-};
+});
 
-const woman = {
+const woman = new Inhabitant({
   species: 'human',
   name: 'Leeloo Dallas',
   gender: 'female',
   legs: 2,
   hands: 2,
   saying: 'People hi!',
-  friends: [],
-};
+});
 
-const man = {
+const man = new Inhabitant({
   species: 'human',
   name: 'Korben Dallas',
   gender: 'male',
   legs: 2,
   hands: 2,
   saying: 'Hello there!',
-  friends: [],
-};
+});
 
 // define cat-woman
-const catWoman = { ...woman };
+const catWoman = Object.create(woman);
 catWoman.name = 'Cat-woman';
 catWoman.saying = cat.saying;
-
-// define friends for everyone except the cat...
-dog.friends = [man, woman, cat];
-woman.friends = [man, dog, cat];
-man.friends = [woman, dog, cat, catWoman];
-catWoman.friends = [cat];
 
 const inhabitants = [
   dog,
@@ -86,12 +74,11 @@ const inhabitants = [
   man,
 ];
 
-const getFormatedOutput = ({species, name, gender, legs, hands, saying, friends}) =>  {
-  if(typeof(friends) === 'object'){
-      friends = friends.map(friend => friend.name).join(', ');
-  }
-  return `${species}; ${name}; ${gender}; ${legs}; ${hands}; ${saying}; ${friends}`;
-}
+// define friends for everyone except the cat...
+dog.friends = [man, woman, cat];
+woman.friends = [man, dog, cat];
+man.friends = [woman, dog, cat, catWoman];
+catWoman.friends = [cat];
 
 // ======== OUTPUT ========
 /* Use print(message) for output.
@@ -102,12 +89,12 @@ const getFormatedOutput = ({species, name, gender, legs, hands, saying, friends}
    so code reviewers might focus on a single file that is index.js.
    */
 
-
   // ... other objects ...
+  inhabitants.forEach( creature => {
+    print(creature.toString());
+  });
 
-  inhabitants.forEach(obj => print(getFormatedOutput(obj)));
-
- // ... other print-outs ...
+  // ... other print-outs ...
 
 /* Print examples:
    print('ABC');
