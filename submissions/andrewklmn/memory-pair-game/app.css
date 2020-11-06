@@ -13,7 +13,7 @@ body {
   padding-bottom: 20px;
 
   width: 100%;
-  
+
   font-size: 1.2em;
   text-align: center;
 }
@@ -50,18 +50,20 @@ body {
 
   font-size: 10px;
   text-align: center;
+  transition-duration: 0.5s;
 }
 
 .start-btn {
   margin-top: 10px;
   padding: 10px;
 
-  border: white solid thin;
+  border: none;
   border-radius: 10px;
 
   font-weight: bold;
   background-color: gray;
   color: white;
+  box-shadow: 3px 6px lightgray;
   cursor: pointer;
 }
 
@@ -71,6 +73,8 @@ body {
 
 .start-btn:active {
   background-color: yellowgreen;
+  box-shadow: 3px 3px lightgray;
+  transform: translateY(3px);
 }
 
 .preview-option {
