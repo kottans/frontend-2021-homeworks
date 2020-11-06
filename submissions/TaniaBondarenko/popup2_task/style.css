@@ -1,35 +1,44 @@
-/*Common styles*/
 .navigation {
   background-color: #fc7e08;
-  text-align: end;
-  height: 35px;
-  padding: 5px 5px 15px 5px;
+  height: 45px;
+  width: 100%;
+  display: inline-flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 
-.popup_icon_image {
-  height: 35px;
-  width: 35px;
+.nav {
+  list-style-type: none;
+  display: inline-flex;
+  flex-direction: row;
 }
+
 .nav_icon {
-  margin-left: 10px;
-  margin-right: 10px;
+  margin-right: 8px;
+  margin-left: 8px;
 }
 
 .nav_icon_image {
   height: 28px;
   width: 25px;
 }
-.nav_icon:hover {
+
+.nav_icon:focus {
   cursor: pointer;
   background: rgb(175, 172, 172);
 }
 
-.popup :hover {
+.navigation input:focus ~ .nav_icon {
   cursor: pointer;
-  background: rgb(175, 172, 172);
+  background-color: rgb(175, 172, 172);
+  border-radius: 10%;
 }
 
-span:hover {
+.hidden_checkbox {
+  position: absolute;
+}
+
+.text_more:hover {
   cursor: pointer;
   background: #fc7e08;
   border: 1px solid #fc7e08;
@@ -41,7 +50,7 @@ span:hover {
 }
 
 /*Styles for pressing menu-button*/
-ul {
+.main_menu_icons {
   display: none;
   list-style-type: none;
   margin: 0;
@@ -50,13 +59,16 @@ ul {
   margin-left: auto;
   padding: 10px 10px 10px 10px;
 }
-#checkbox,
-#show_more {
+
+.hidden_checkbox,
+.more_images {
   opacity: 0;
 }
-#checkbox:checked + ul {
+
+.hidden_checkbox:checked ~ .main_menu_icons {
   display: grid;
-  margin-top: 16px;
+  margin-top: 135px;
+  margin-right: 20px;
   grid-template-columns: 40px 40px 40px;
   grid-template-rows: 40px 40px 40px;
   gap: 15px 15px;
@@ -67,17 +79,18 @@ ul {
   justify-content: flex-start;
   background-color: rgb(175, 172, 172);
   transition-delay: 2s;
+  position: fixed;
 }
-/*Styles for pressing "More" button*/
 
-ol {
+/*Styles for pressing "More" button*/
+.more_menu_icons {
   display: none;
   list-style-type: none;
   margin: 0;
   padding: 0;
 }
 
-#show_more:checked + ol {
+.more_images:checked + .more_menu_icons {
   display: grid;
   grid-template-columns: 40px 40px 40px;
   grid-template-rows: auto;
@@ -90,7 +103,7 @@ li:hover {
   border-radius: 10%;
 }
 
-span {
+.text_more {
   border: 0.5px solid grey;
   border-width: 1px auto 1px auto;
   border-radius: 0;
