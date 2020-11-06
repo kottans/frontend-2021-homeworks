@@ -23,13 +23,17 @@ document.addEventListener('DOMContentLoaded', (event)=>{
 
   images.sort(function() { return 0.5 - Math.random() });
 
+
   images.forEach((name,i)=>{
+    const firstCard = container.querySelector('.flip-container');
+    //clone last card with new image
     if (i>0) {
-      //clone last card with new image
-      const card = container.querySelector('.flip-container').cloneNode(true);
+      const card = firstCard.cloneNode(true);
       const cardImages = card.querySelectorAll('.card');
       cardImages[1].src = `img/${name}`;
       container.appendChild(card);
+    } else {
+      firstCard.querySelectorAll('.card')[1].src = `img/${name}`;
     }
   });
 
