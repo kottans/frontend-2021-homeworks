@@ -63,7 +63,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* init */
   menuList.querySelector('.menu__button').classList.add('active');
-
+  showArticle(list[0]); 
+  /* init end */
 
   menuList.addEventListener('click', (elem) => {
     const lastActive = menuList.querySelector('.active');
