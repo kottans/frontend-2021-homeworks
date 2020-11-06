@@ -28,9 +28,7 @@ class Inhabitant {
   }
 
   addFriends(friends){
-    friends.forEach(friend => {
-      this.friends.push(friend);
-    });
+    this.friends = this.friends.concat(friends);
   }
 }
 
