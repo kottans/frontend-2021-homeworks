@@ -81,7 +81,9 @@ const cardClickListener = function(e) {
   const cardImages = flipper.querySelectorAll('.card');
   
   if (getOpenedCards().length < 2) {
-    flipper.classList.toggle('opened');
+    if (!flipper.matches('.opened')) {
+      flipper.classList.toggle('opened');
+    };
   };
 
   const openedCards = getOpenedCards();
