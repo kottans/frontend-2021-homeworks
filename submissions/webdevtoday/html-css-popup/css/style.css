@@ -1,0 +1,207 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --icon-text-color: rgb(117, 117, 117);
+    --icon-outline-color: rgb(117, 117, 117);
+    --nav-popup-border-color: #e3e3e3;
+    --nav-popup-bg-color: #fff;
+    --nav-popup-height: 520px;
+}
+
+html {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+}
+
+ul li {
+    list-style: none;
+    display: block;
+    position: relative;
+}
+
+img {
+    display: block;
+    width: 100%;
+}
+
+.main-nav {
+    max-width: 1366px;
+    max-height: 80px;
+}
+
+.main-nav__container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 12px 10px;
+}
+
+.main-nav__item {
+    display: block;
+    padding: 10px;
+    color: var(--icon-text-color);
+}
+.main-nav__item:hover,
+.main-nav__item:focus,
+.nav-popup__item:hover,
+.nav-popup__item:focus {
+    outline: 1px solid var(--icon-outline-color);
+}
+
+.main-nav__item:hover,
+.nav-popup__item:hover {
+    cursor: pointer;
+}
+
+.text-decoration-none {
+    text-decoration: none;
+}
+
+.main-nav__icon {
+    width: 32px;
+    height: 32px;
+}
+.main-nav__icon--bell {
+    width: 22px;
+    height: 24px;
+}
+.main-nav__icon--user-photo {
+    width: 36px;
+    height: 36px;
+    object-fit: cover;
+}
+.main-nav__icon--round {
+    border-radius: 50%;
+}
+
+.main-nav__state-flag,
+.nav-popup__state-flag {
+    position: absolute;
+    width: 0px;
+    height: 0px;
+}
+
+.main-nav__popup {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    transform: translateX(-61.5%) translateY(12px);
+    transition: opacity .1s ease;
+}
+.main-nav__state-flag:focus + label.main-nav__item,
+.nav-popup__state-flag:focus + label.nav-popup__more {
+    outline: 1px solid var(--icon-outline-color);
+}
+.main-nav__state-flag:checked + label.main-nav__item {
+    outline: none;
+}
+.main-nav__state-flag:checked ~ .main-nav__popup {
+    visibility: visible;
+    opacity: 1;
+}
+
+.nav-popup {
+    border-radius: 2px;
+    border: 1px solid var(--nav-popup-border-color);
+    background-color: var(--nav-popup-bg-color);
+    width: 300px;
+    max-height: var(--nav-popup-height);
+}
+.nav-popup::before {
+    content: "";
+    display: block;
+    border: 1px solid var(--nav-popup-border-color);
+    border-right: none;
+    border-bottom: none;
+    width: 15px;
+    height: 15px;
+    transform: rotate(46.1deg) translateY(-75%);
+    position: absolute;
+    top: 0;
+    right: 30%;
+    background-color: var(--nav-popup-bg-color);
+}
+
+.nav-popup__container {
+    display: flex;
+    flex-flow: wrap;
+    align-items: center;
+    padding: 12px 5px 0;
+    height: var(--nav-popup-height);
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.nav-popup__container--more {
+    display: none;
+    height: auto;
+    overflow-x: unset;
+    overflow-y: unset;
+    margin: 10px 0 0 0;
+    padding: 10px 0 0 0;
+    border-top: 1px solid var(--nav-popup-border-color);
+}
+
+.nav-popup__container li {
+    width: 33%;
+}
+.nav-popup__container li:last-child {
+    width: 100%;
+}
+
+.nav-popup__item {
+    width: 100%;
+    height: 115px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 10px;
+    color: var(--icon-text-color);
+}
+
+.nav-popup__icon {
+    width: 64px;
+    max-height: 64px;
+}
+.nav-popup__icon--photo,
+.nav-popup__icon--documents {
+    width: 52px;
+}
+.nav-popup__icon--translate {
+    width: 74px;
+}
+
+.nav-popup__title {
+    margin: 12px 0 0 0;
+}
+.nav-popup__title--translate {
+    margin: 3px 0 0 0;
+}
+.nav-popup__title--search {
+    margin: 0;
+}
+
+.nav-popup__more,
+.kottans-link {
+    margin: 10px 0 0 0;
+    display: block;
+    text-align: center;
+    width: 100%;
+    height: auto;
+    padding: 10px 5px;
+    background-color: #e3e3e3;
+}
+
+.nav-popup__state-flag:checked ~ label.nav-popup__more {
+    display: none;
+}
+.nav-popup__state-flag:checked ~ .nav-popup__container--more {
+    display: flex;
+}
+
