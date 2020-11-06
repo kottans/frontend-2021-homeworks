@@ -24,7 +24,7 @@ body {
   cursor: pointer;
 }
 
-.hidden {
+.card.hidden {
   opacity: 0;
   cursor: default;
 }
