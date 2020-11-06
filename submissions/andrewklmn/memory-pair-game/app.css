@@ -16,7 +16,7 @@ body {
   text-align: center;
 }
 
-.container{
+.gameboard{
   display: grid;
   grid-template-columns: 25% 25% 25% 25%;
   grid-template-rows: 25% 25% 25% 25%;
@@ -32,12 +32,41 @@ body {
   width:100%;
 }
 
+.guessed {
+  opacity: 0.3;
+}
+
+.hide {
+  opacity: 0;
+}
+
 .control {
-  padding-top: 20px;
-  padding-bottom: 20px;
-  padding-left: 20px;
-  
+  padding-top: 5px;
+
+  width:100%;
+
   font-size: 10px;
+  text-align: center;
+}
+
+.start-btn {
+  margin-top: 10px;
+  padding: 10px;
+
+  border: white solid thin;
+  border-radius: 10px;
+
+  font-weight: bold;
+  background-color: gray;
+  color: white;
+}
+
+.start-btn:hover {
+  background-color: darkgreen;
+}
+
+.start-btn:active {
+  background-color: yellowgreen;
 }
 
 /* entire container, keeps perspective */
@@ -63,7 +92,7 @@ body {
 .flipper {
   position: relative;
   
-	transition: 0.6s;
+	transition: 0.3s;
 	transform-style: preserve-3d;
 }
 

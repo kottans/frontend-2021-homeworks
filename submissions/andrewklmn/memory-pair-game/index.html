@@ -10,8 +10,8 @@
   <div class="info">
       <span class="info-line">Welcome to Memory Pairs Game</span>
   </div>
-  <div class="container">
-    <div class="flip-container">
+  <div class="gameboard">
+    <div class="flip-container" id="img/image1.webp">
       <div class="flipper">
         <div class="front">
           <img class="card" src="img/empty.jpg" alt="Back">
@@ -23,9 +23,10 @@
     </div>
   </div>
   <div class="control">
-    <button>Start new game</button>
     <input class="preview-option" id="preview-option" type="checkbox">
-    <label for="preview-label">show preview for 10 seconds before start</label>
+    <label for="preview-option">show preview for 10 seconds before start</label>
+    <br>
+    <button class="start-btn">Start new game</button>
   </div>
   <script src="app.js"></script>
 </body>
