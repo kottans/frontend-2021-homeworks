@@ -54,7 +54,7 @@ const ART = document.getElementById('articles');
 
 function render() {
 	document.getElementById('topHeader').innerHTML = `
-    <h1 class="mainHeader">Cat & C<span class="o"></span>ffe</h1>
+    <h1 class="mainHeader">Cat & C<span class="o"></span>ffee</h1>
     `;
 	COFFEE.forEach(element => {
 		MENU.appendChild(listNode(element));
