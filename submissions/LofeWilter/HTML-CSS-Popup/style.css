@@ -27,6 +27,7 @@ body {
     color: #66646F;
     font-size: 16px;
     align-self: center;
+    list-style-type: none;
 }
 
 .nav_item img {
@@ -38,7 +39,7 @@ body {
 .wrapper {
     display: none;
     align-self: flex-end;
-    width: 252px;
+    width: 255px;
     height: 335px;
     overflow-y: auto;
 }
@@ -50,19 +51,19 @@ body {
     margin: 2px;
 }
 
-figure {
+.img {
     padding: 5px;
     margin: 0 2px;
 }
 
-figure img {
+.img img {
     width: 50px;
     height: 35px;
     margin: 5px;
     cursor: pointer;
 } 
 
-figcaption {
+.img figcaption {
     text-align: center;
     color: #66646F;
     font-size: 12px;
@@ -82,11 +83,11 @@ figcaption {
     width: 100%;
 }
 
-#moreservices:checked ~ .wrapper {
+.firstCheckbox:checked ~ .wrapper {
     display: block;
 }
 
-#moreservices {
+.firstCheckbox {
     display: none;
 }
 
@@ -97,18 +98,19 @@ figcaption {
     margin: 2px;
 }
 
-#evenmore:checked ~ .additional-services {
+.secondCheckbox:checked ~ .additional-services {
     display: flex;
 }
 
-#evenmore:checked ~ .hide {
+.secondCheckbox:checked ~ .hide {
     display: none;
 }
-#evenmore:checked ~ .empty {
+
+.secondCheckbox:checked ~ .empty {
     display: block;
 }
 
-#evenmore {
+.secondCheckbox {
     display: none;
 }
 
@@ -129,6 +131,6 @@ a:focus {
     outline: 4px solid lightblue;
 }
 
-.test:focus {
-    outline: 4px solid lightblue;
-} 
+a {
+    text-decoration: none;
+}
