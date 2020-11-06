@@ -13,6 +13,8 @@ body {
   padding-bottom: 20px;
 
   width: 100%;
+  
+  font-size: 1.2em;
   text-align: center;
 }
 
@@ -30,6 +32,7 @@ body {
 
 .card {
   width:100%;
+  cursor: pointer;
 }
 
 .guessed {
@@ -59,6 +62,7 @@ body {
   font-weight: bold;
   background-color: gray;
   color: white;
+  cursor: pointer;
 }
 
 .start-btn:hover {
@@ -67,6 +71,10 @@ body {
 
 .start-btn:active {
   background-color: yellowgreen;
+}
+
+.preview-option {
+  cursor: pointer;
 }
 
 /* entire container, keeps perspective */
