@@ -186,11 +186,7 @@ function defineBackgrounds(name){
     name = name.replace(/\s/g, '-');
     const root = document.documentElement;
 
-    root.style.setProperty('--background-mobile', `url(\'../images/backgrounds/${name}-mobile.png\')`);
+    root.style.setProperty('--background-mobile', `url(\'./images/backgrounds/${name}-mobile.png\')`);
     root.style.setProperty('--background', `url(\'../images/backgrounds/${name}.png\')`);
 }
-
-
-
-
 
