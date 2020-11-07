@@ -62,7 +62,7 @@ main {
   color: #292828;
 }
 
-.active, h2 {
+.active, .car-name {
   color: #fb6c33;
 }
 
@@ -75,7 +75,7 @@ a, a:active {
   font-weight: normal;
 }
 
-.hidden, h2 {
+.hidden, .car-name {
   display: none;
 }
 
@@ -176,7 +176,7 @@ a, a:active {
     padding: 19px 39px;
   }
 
-  h2 {
+  .car-name {
     display: block;
     margin: 0;
     margin-bottom: 20px;
@@ -186,7 +186,7 @@ a, a:active {
 
 
 @media (max-width: 530px) {
-  h2 {
+  .car-name {
     font-size: 20px;
   }
 
