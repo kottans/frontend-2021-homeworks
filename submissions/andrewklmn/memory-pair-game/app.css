@@ -2,6 +2,8 @@ body {
   width: 90%;
   max-width: 450px;
   
+  background-color: lightgray;
+  
   font-family: 'Courier New', Courier, monospace;
   margin: auto;
 }
@@ -93,9 +95,6 @@ body {
 }
 
 .flip-container, .front, .back {
-  margin: 0;
-  padding: 0;
-
   width: 100%;
   height: 100%;
 }

@@ -1,20 +1,20 @@
 const images = [
-  'image1.webp',
-  'image2.webp',
-  'image3.webp',
-  'image4.webp',
-  'image5.webp',
-  'image6.webp',
-  'image7.webp',
-  'image8.webp',
-  'image1.webp',
-  'image2.webp',
-  'image3.webp',
-  'image4.webp',
-  'image5.webp',
-  'image6.webp',
-  'image7.webp',
-  'image8.webp',
+  'image1.png',
+  'image2.png',
+  'image3.png',
+  'image4.png',
+  'image5.png',
+  'image6.png',
+  'image7.png',
+  'image8.png',
+  'image1.png',
+  'image2.png',
+  'image3.png',
+  'image4.png',
+  'image5.png',
+  'image6.png',
+  'image7.png',
+  'image8.png',
 ];
 
 let numberOfFails = 0; 
@@ -50,7 +50,7 @@ const spreadCards = function () {
     gameBoard.innerHTML += `<div class="flip-container" id="img/${name}">
       <div class="flipper">
         <div class="front">
-          <img class="card" src="img/empty.jpg" alt="Back">
+          <img class="card" src="img/empty.png" alt="Back">
         </div>
         <div class="back">
           <img class="card" src="img/${name}" alt="${name}">
