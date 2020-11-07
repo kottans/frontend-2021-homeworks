@@ -132,7 +132,7 @@ const CARS = [
 ]
 
 const carPhoto = document.querySelector('.photo');
-const carName = document.querySelector('h2');
+const carName = document.querySelector('.car-name');
 const carYears = document.querySelector('.years');
 const carDesign = document.querySelector('.design');
 const carWins = document.querySelector('.wins');
