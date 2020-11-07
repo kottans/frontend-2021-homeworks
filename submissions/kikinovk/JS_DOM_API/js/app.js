@@ -1,7 +1,7 @@
 /*
 * 
 */
-const list  = [
+const listTea  = [
   {
     id: '01',
     title : 'Black tea',
@@ -67,17 +67,17 @@ const toggleActive = (elem) => {
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  menuList.appendChild(createMenu(list));
+  menuList.appendChild(createMenu(listTea));
 
   menuList.querySelector('.menu__button').classList.add('active');
-  showArticle(list[0]); 
+  showArticle(listTea[0]); 
 
   menuList.addEventListener('click', (elem) => {
     
     toggleActive(elem);
 
     mainSection.querySelector('article').remove();
-    showArticle(list.filter(item => item.id === elem.target.id)[0]);
+    showArticle(listTea.filter(item => item.id === elem.target.id)[0]);
   });
 
 
