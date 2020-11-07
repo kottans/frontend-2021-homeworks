@@ -150,10 +150,10 @@ const handler = (e) => {
   target.classList.toggle('active');
 
   carPhoto.setAttribute('src', CARS[target.id].pic);
-  carName.innerText = CARS[target.id].name;
-  carYears.innerText = CARS[target.id].years;
-  carDesign.innerText = CARS[target.id].design;
-  carWins.innerText = CARS[target.id].wins;
+  carName.textContent = CARS[target.id].name;
+  carYears.textContent = CARS[target.id].years;
+  carDesign.textContent = CARS[target.id].design;
+  carWins.textContent = CARS[target.id].wins;
 
   document.querySelectorAll('.descr > p').forEach(item => item.remove());
 
