@@ -49,10 +49,7 @@ const showArticle = (item) => {
   newArticle.innerHTML = createArticle(item);
   mainSection.appendChild(newArticle);
 };
-
-document.addEventListener('DOMContentLoaded', () => {
-
-  /* create menu */
+const createMenu = (list) => {
   const fragmentMenu = document.createDocumentFragment();
   list.forEach(item => {
     const newItem = document.createElement('li');
@@ -60,18 +57,24 @@ document.addEventListener('DOMContentLoaded', () => {
     newItem.innerHTML = createItemMenu(item);
     fragmentMenu.appendChild(newItem);
   });
-  menuList.appendChild(fragmentMenu);
-  /* end create menu */
+  return fragmentMenu;
+};
+const toggleActive = (elem) => {
+  const lastActive = document.querySelector(`.${elem.target.classList.item(0)}.active`);
+  lastActive.classList.remove('active');
+  elem.target.classList.add('active');
+};
 
-  /* init */
+document.addEventListener('DOMContentLoaded', () => {
+
+  menuList.appendChild(createMenu(list));
+
   menuList.querySelector('.menu__button').classList.add('active');
   showArticle(list[0]); 
-  /* init end */
 
   menuList.addEventListener('click', (elem) => {
-    const lastActive = menuList.querySelector('.active');
-    lastActive.classList.remove('active');
-    elem.target.classList.add('active');
+    
+    toggleActive(elem);
 
     mainSection.querySelector('article').remove();
     showArticle(list.filter(item => item.id === elem.target.id)[0]);
