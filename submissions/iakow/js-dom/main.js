@@ -140,9 +140,7 @@ const carDescription = document.querySelector('.descr');
 
 let currentCarIndex = "0";
 
-const handler = (e) => {
-  const { target } = e;
-
+const handler = ({ target }) => {
   if (target.id === currentCarIndex) return;
   currentCarIndex = target.id;
 
