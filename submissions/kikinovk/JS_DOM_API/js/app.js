@@ -59,10 +59,10 @@ const createMenu = (list) => {
   });
   return fragmentMenu;
 };
-const toggleActive = (elem) => {
-  const lastActive = document.querySelector(`.${elem.target.classList.item(0)}.active`);
+const toggleActive = (event) => {
+  const lastActive = document.querySelector(`.${event.target.classList.item(0)}.active`);
   lastActive.classList.remove('active');
-  elem.target.classList.add('active');
+  event.target.classList.add('active');
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -72,12 +72,12 @@ document.addEventListener('DOMContentLoaded', () => {
   menuList.querySelector('.menu__button').classList.add('active');
   showArticle(listTea[0]); 
 
-  menuList.addEventListener('click', (elem) => {
+  menuList.addEventListener('click', (event) => {
     
-    toggleActive(elem);
+    toggleActive(event);
 
     mainSection.querySelector('article').remove();
-    showArticle(listTea.filter(item => item.id === elem.target.id)[0]);
+    showArticle(listTea.filter(item => item.id === event.target.id)[0]);
   });
 
 
