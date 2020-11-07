@@ -51,6 +51,7 @@ body {
 }
 .menu__item {
   display: block;
+  cursor: pointer;
 }
 .menu__button {
   width: 100%;
