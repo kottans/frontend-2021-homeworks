@@ -226,7 +226,10 @@ a {
 .icon {
   display: none;
 }
-
+.icon:focus, .icon:active {
+  border: none;
+  outline: none;
+}
 @media screen and (max-width: 768px) {
   .content {
     flex-direction: column;
@@ -237,7 +240,9 @@ a {
   .icon {
     display: block;
     margin-left: 15px;
+    border: none;
     color: black;
+    background-color: white;
   }
   .coffee {
     width: 400px;

@@ -5,8 +5,7 @@ const COFFEE = [{
 		bgColor: 'doppio-bg',
 		textColor: 'latte-text'
 	},
-	paragraph: 'Double shot of espresso. Straight.',
-	state: true
+	paragraph: 'Double shot of espresso. Straight.'
 }, {
 	title: 'Americano',
 	id: 'americano',
@@ -53,36 +52,30 @@ const CUP = document.getElementById('coffeeCups');
 const ART = document.getElementById('articles');
 
 function render() {
-	document.getElementById('topHeader').innerHTML = `
-    <h1 class="mainHeader">Cat & C<span class="o"></span>ffee</h1>
-    `;
 	COFFEE.forEach(element => {
-		MENU.appendChild(listNode(element));
-		CUP.appendChild(cupNode(element));
-		ART.appendChild(contentNode(element));
+		MENU.appendChild(createListNode(element));
+		CUP.appendChild(createCupNode(element));
+		ART.appendChild(createContentNode(element));
 	});
-	document.getElementById('mainFooter').innerHTML = `
-    Made with &hearts; by <a href="#"> BlueLamantine </a> for <a href="#">Kottans</a>
-    `
 };
 
-function listNode(el) {
+function createListNode(el) {
 	let listItem = document.createElement('li');
 	listItem.className = `menu-item ${el.classes.bgColor}`;
 	listItem.innerHTML = `
     <a href="#" id="${el.id}" class="item__link ${el.classes.textColor}">${el.title}</a>
     `;
-	if (el.state == true) {
+	if (el.id == 'doppio') {
 		listItem.classList.add('active');
 	}
 	return listItem;
 };
 
-function cupNode(el) {
+function createCupNode(el) {
 	let cup = document.createElement('div');
 	cup.id = `${el.id}-cup`;
 	cup.className = `cup ${el.id}-cup__bg `;
-	if (!el.state) {
+	if (el.id !== 'doppio') {
 		cup.hidden = true;
 	}
 	cup.innerHTML = `
@@ -90,15 +83,15 @@ function cupNode(el) {
         <div class = "paw-right"></div>
     `;
 	return cup;
-}
+};
 
-function contentNode(el) {
+function createContentNode(el) {
 	const articleContent = document.createElement('article');
 	const headerContent = document.createElement('h2');
 	const textContent = document.createElement('p');
 	articleContent.id = `${el.id}-article`;
 	articleContent.className = 'description';
-	if (!el.state) {
+	if (el.id !== 'doppio') {
 		articleContent.hidden = true;
 	}
 	headerContent.innerHTML = el.title;
@@ -108,7 +101,7 @@ function contentNode(el) {
 	return articleContent;
 };
 
-function toggleMenu() {
+function toggleMenuItem() {
 	const content = {
 		articles: [...document.getElementsByTagName('article')],
 		cups: [...document.getElementsByClassName('cup')]
@@ -131,24 +124,21 @@ function toggleContent(idEL, arr) {
 	setHidden.hidden = true;
 	const removeHidden = arr.find(el => el.id.indexOf(idEL) == 0);
 	removeHidden.hidden = false;
-}
+};
 
-function responsiveMenu() {
+function toggleMenu() {
 	document.getElementById('menu-btn').addEventListener('click', e => {
 		e.preventDefault();
 		e.target.classList.toggle("fa-bars");
 		e.target.classList.toggle("fa-times");
-		if (MENU.className === "menu") {
-			MENU.className += " responsive";
-		} else {
-			MENU.className = "menu";
-		}
+		MENU.className === "menu" ? 
+		MENU.classList.add('responsive') : MENU.classList.remove('responsive');
 	});
-}
+};
 
 document.addEventListener('DOMContentLoaded', (load = () => {
 	render();
+	toggleMenuItem();
 	toggleMenu();
-	responsiveMenu();
 	document.removeEventListener('DOMContentLoaded', load);
 }));
