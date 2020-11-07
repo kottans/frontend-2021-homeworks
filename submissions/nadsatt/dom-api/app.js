@@ -33,7 +33,7 @@ const movies = [
     {
         id: 3,
         name: 'kitty potter', 
-        description: 'High-school student Bella Swan, always a bit of a misfit, doesn\'t expect life to change much when she moves from sunny Arizona to rainy Washington state. Then she meets Edward Cullen, a handsome but mysterious teen whose eyes seem to peer directly into her soul. Edward is a vampire whose family does not drink blood, and Bella, far from being frightened, enters into a dangerous romance with her immortal soulmate.',
+        description: 'Harry Potter\'s third year at Hogwarts starts off badly when he learns deranged killer Sirius Black has escaped from Azkaban prison and is bent on murdering the teenage wizard. While Hermione\'s (Emma Watson) cat torments Ron\'s sickly rat, causing a rift among the trio, a swarm of nasty Dementors is sent to protect the school from Black. A mysterious new teacher helps Harry learn to defend himself, but what is his secret tie to Sirius Black?',
         rating: 9,
         colors: ['rgb(0,145,194)', 'rgb(0,26,57)', 'rgb(175, 171, 171)', 'rgb(116,153,156)']
     },
