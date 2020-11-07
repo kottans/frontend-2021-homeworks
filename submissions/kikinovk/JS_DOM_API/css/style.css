@@ -61,6 +61,7 @@ body {
   text-align: left;
   padding: 1em 1em 1em 2em;  
   color: var(--secondory-font-color);
+  cursor: pointer;
 }
 .menu__button:hover, .active  {
   background-color: var(--secondory-bg-color-hover);
