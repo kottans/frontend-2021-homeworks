@@ -1,0 +1,24 @@
+# place this file @ ~/
+
+## IDE specific
+.idea/
+.DS_Store
+DS_Store?
+.vscode/
+**/.DS_Store
+
+## Building
+node_modules/
+dist/
+build/
+.cache
+
+# Logs
+logs
+*.log*
+
+## Other
+Desktop.ini
+Thumbs.db
+._*
+tmp/
