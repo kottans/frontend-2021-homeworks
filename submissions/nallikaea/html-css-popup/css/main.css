@@ -1,0 +1,254 @@
+* {
+  font-family:'Nanum Gothic', sans-serif;
+  text-decoration:none;
+  padding: 0 0;
+  margin: 0 0;
+}
+
+body {
+background-image: url(../popup-icons/background.png);
+background-size: cover;
+}
+
+#navigation {
+  display:inline-flex;
+  width:100%;
+  height:35px;
+  flex-direction:row-reverse;
+  align-items:center;
+  background-color:hsla(0, 0%, 0%, 0.8);
+}
+
+.text-nav-item{
+  color: hsl(0, 0%, 70%);
+  font-family: 'Nanum Gothic', sans-serif;
+  font-size: 16px;
+}
+
+.menu-button, .more_button{
+  display: none;
+}
+.menu-link-popup {
+  background-image: url(../popup-icons/popup-button.png);
+  background-size: cover;
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+
+.menu-link-bell {
+  background-image: url(../popup-icons/bell.png);
+  background-size: cover;
+  display: block;
+  width: 23px;
+  height: 23px;
+}
+
+.menu-link-popup:checked,
+.text-nav-item:hover,
+.menu-link-bell:hover,
+.popup-item:hover,
+.search-button:hover,
+.show-more:hover,
+.search-icon {
+  opacity: 0.5;
+  transition-duration: 1s;
+}
+
+.menu-link-popup:focus,
+.text-nav-item:focus,
+.menu-link-bell:focus,
+.popup-item:focus,
+.show-more:focus {
+  outline: 2px solid hsl(0, 0%, 75%);
+  border-radius: 2px;
+  transition-duration: 0.5s;
+}
+
+.logo {
+  display: flex;
+  filter: invert(100%);
+  justify-content: center;
+  text-align: center;
+  margin-top: 150px;
+  padding-top: 0;
+  padding-bottom: 0;
+  opacity: 0.8;
+  align-content: stretch;
+}
+
+#logo-hooli {
+  width: 250px;
+}
+
+.search-box {
+  display:flex;
+  border-radius: 10px;
+  border: none;
+  margin: 35px 30%;
+  background-color: hsl(0, 0%, 100%);
+  opacity: 0.9
+}
+
+.search-input {
+  display: flex;
+  border-radius: 10px;
+  align-items: stretch;
+  border: none;
+  color: hsl(0, 0%, 10%);
+  font-size: 22px;
+  outline: none;
+  height: 40px;
+  width: 90%;
+  margin-top: auto;
+  vertical-align: middle;
+}
+
+.left-search-box {
+  flex-basis: 80%;
+}
+
+.right-search-box {
+  display: inline-flex;
+  height: 40px;
+  align-items: center;
+  margin-right: 3px;
+
+}
+
+.left-search-box, .right-search-box {
+  margin-left: auto;
+}
+
+.search-icon{
+  width: 30px;
+  height: 30px;
+  vertical-align: middle;
+}
+
+.search-button-box {
+  width: 100%;
+  text-align: center;
+}
+
+.search-button{
+  font-size: 22px;
+  font-weight: bold;
+  background-color:hsla(0, 0%, 0%, 0.8);
+  color: hsl(0, 0%, 80%);
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+  margin: 10px 4px;
+  min-width: 70px;
+  text-align:center;
+  width: 20%;
+  padding: 10px 0;
+}
+
+ul{
+  list-style:none;
+  margin:0;
+  padding:0;
+}
+
+li{
+  float: left;
+  padding: 10px;
+  cursor: pointer;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: hsla(0, 0%, 0%, 0.8);
+  width:100%;
+  height:30px;
+  text-align:center;
+  padding-top: 10px;
+}
+
+h4 {
+      color: hsl(0, 0%, 80%);
+      font-weight: normal;
+}
+
+.menu-button:checked ~ .popup {
+  display: block;
+  z-index: 2;
+}
+
+.popup {
+  display: none;
+  position: absolute;
+  width: 320px;
+  height: 480px;
+  right: 20px;
+  top: 50px;
+}
+
+.popup img {
+  width: 48px;
+  height: 36px;
+}
+
+.main-menu {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 20px;
+  flex-wrap: wrap;
+  background-color: hsla(0, 0%, 0%, 0.7);
+}
+
+.popup-item-icon-title{
+  color: hsl(0, 0%, 70%);
+  font-size: 16px;
+}
+
+.more-menu {
+  display: none;
+  justify-content: space-between;
+  padding: 5px 20px;
+  flex-wrap: wrap;
+  background-color: hsla(0, 0%, 0%, 0.7);
+}
+
+.popup-content {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+.show-more {
+  display: flex;
+  height: 30px;
+  justify-content: space-around;
+  flex-direction: row-reverse;
+  background-color:hsla(0, 0%, 0%, 0.8);
+  color: hsl(0, 0%, 80%);
+  border: none;
+  cursor: pointer;
+  padding-top: 10px;
+}
+
+.more_button:checked ~ .more-menu {
+  display: flex;
+}
+
+.more_button:checked ~ .show-more {
+  opacity: 0;
+  margin-top: -40px;
+}
+
+.popup-item {
+  width: 75px;
+  height: 90px;
+  padding: 3px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: flex-end;
+  box-sizing: border-box;
+}
