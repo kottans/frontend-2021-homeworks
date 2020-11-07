@@ -36,6 +36,7 @@ img {
 $colors: (
   bg-green: rgb(142, 226, 207),
   bg-yellow: rgb(244, 234, 100),
+  bg-grey: rgb(226, 225, 225),
   border-grey: rgba(153, 153, 153, 0.2),
 );
 
@@ -75,41 +76,48 @@ html {
     align-items: center;
     margin: 0 1rem;
   }
-
-  .menu-img:hover,
-  :focus {
-    background-color: color(bg-green);
-    border-radius: 0.5rem;
-  }
 }
 
-.popup {
-  display: none;
-}
-
-.popup-extend {
+.check-input,
+.check-input-more {
   position: absolute;
-  display: none;
+  appearance: none;
 }
 
-label {
-  cursor: pointer;
+.check-box {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 3rem;
+  height: 3rem;
+  background-image: url(./assets/menu.svg);
+  background-size: contain;
 }
 
-::-webkit-scrollbar {
-  width: 0.3rem;
-  background-color: transparent;
+.check-box:hover,
+.check-input:focus + .check-box,
+.menu-link:hover,
+.menu-link:focus {
+  background-color: color(bg-green);
+  outline: 0;
+  border-radius: 0.5rem;
 }
 
-::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.5);
+.visually-hidden {
+  position: absolute;
+  width: 0.1rem;
+  height: 0.1rem;
+  margin: -1rem;
+  border: 0;
+  padding: 0;
+  overflow: hidden;
 }
 
-.popup-extend:checked + label ~ .popup {
+.check-input:checked ~ .popup {
   display: block;
   position: absolute;
-  right: 1.5rem;
-  top: 5rem;
+  right: 3rem;
+  top: 6rem;
   width: 20rem;
   height: 18rem;
   padding-top: 1rem;
@@ -123,7 +131,7 @@ label {
   &::before {
     position: fixed;
     content: "";
-    right: 12rem;
+    right: 11.7rem;
     top: 4.4rem;
     width: 1rem;
     height: 1rem;
@@ -142,36 +150,60 @@ label {
   }
 }
 
+::-webkit-scrollbar {
+  width: 0.3rem;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.5);
+}
+
 .more-popup-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  .more-popup {
-    display: none;
-  }
-
-  .more-btn {
-    display: block;
-    padding: 0 5rem;
-    margin: 0.5rem 0;
-    background-color: rgba(184, 184, 192, 0.5);
-    font-size: 1.2rem;
-    border-radius: 0.5rem;
-
-    &:focus {
-      border-radius: 0.5rem;
-    }
-  }
 }
 
-.popup-extend {
+.check-box-more {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  width: 20rem;
+  height: 2rem;
+  background-color: color(bg-grey);
+  text-transform: uppercase;
+}
+
+.check-input-more:focus + .check-box-more,
+.check-input-more:hover + .check-box-more {
+  background-color: color(bg-green);
+  outline: 0;
+  border-radius: 0.5rem;
+}
+
+.check-input-more:checked + .check-box-more {
   position: absolute;
   display: none;
 }
 
-.popup-extend:checked + a ~ .more-popup {
+.check-input-more:checked ~ .more-popup {
   display: block;
+  position: relative;
+  width: 20rem;
+  height: 20.3rem;
+  padding-top: 3rem;
+  overflow-x: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    height: 0.3rem;
+    width: 80%;
+    background-color: color(border-grey);
+    top: 2rem;
+    left: 2.5rem;
+  }
 
   .more-popup-hidden {
     display: flex;
@@ -180,11 +212,6 @@ label {
     justify-content: center;
     width: 20rem;
   }
-}
-
-.popup-extend:checked ~ .remove,
-.popup-extend:checked {
-  display: none;
 }
 
 .popup-item {
