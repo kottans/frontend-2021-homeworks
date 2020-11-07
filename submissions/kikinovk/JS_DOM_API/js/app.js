@@ -38,8 +38,10 @@ const list  = [
 let menuList = document.querySelector('.nav__menu');
 let mainSection = document.querySelector('.main');
 
-const createItemMenu = (id, nameItem) => `<button type="button" id="${id}" class="menu__button">${nameItem}</button>`;
-const createArticle = (item) => `<h1>${item.caption}</h1><img src="${item.image}" alt="${item.caption}"><p>${item.description}</p>`;
+const createItemMenu = ({id, title}) => `<button type="button" id="${id}" class="menu__button">${title}</button>`;
+const createArticle = ({caption, image, description}) => `<h1>${caption}</h1>
+                                                          <img src="${image}" alt="${caption}">
+                                                          <p>${description}</p>`;
 
 const showArticle = (item) => {  
   const newArticle = document.createElement('article');    
@@ -55,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
   list.forEach(item => {
     const newItem = document.createElement('li');
     newItem.classList.add('menu__item');
-    newItem.innerHTML = createItemMenu(item.id, item.title);
+    newItem.innerHTML = createItemMenu(item);
     fragmentMenu.appendChild(newItem);
   });
   menuList.appendChild(fragmentMenu);
