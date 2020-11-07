@@ -126,9 +126,13 @@ const startButtonListener = ()=> {
 };
 
 document.addEventListener('DOMContentLoaded', (event)=>{  
+
+  showInfo('Welcome to Memory Pairs Game');
+
   spreadCards();
   openAllCards();
 
   gameBoard.addEventListener('click',cardClickListener);
   document.querySelector('.start-btn').addEventListener('click', startButtonListener);
 });
+

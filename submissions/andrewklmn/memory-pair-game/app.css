@@ -1,7 +1,7 @@
 body {
   width: 90%;
   max-width: 450px;
-  
+
   background-color: lightgray;
   
   font-family: 'Courier New', Courier, monospace;
@@ -65,7 +65,7 @@ body {
   font-weight: bold;
   background-color: gray;
   color: white;
-  box-shadow: 3px 6px lightgray;
+  box-shadow: 3px 6px #555555;
   cursor: pointer;
 }
 
@@ -75,7 +75,7 @@ body {
 
 .start-btn:active {
   background-color: yellowgreen;
-  box-shadow: 3px 3px lightgray;
+  box-shadow: 3px 3px #555555;
   transform: translateY(3px);
 }
 
