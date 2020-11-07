@@ -141,23 +141,23 @@ const carDescription = document.querySelector('.descr');
 let currentCarIndex = "0";
 
 const handler = (e) => {
-  const navLink = e.target;
+  const { target } = e;
 
-  if (navLink.id === currentCarIndex) return;
-  currentCarIndex = navLink.id;
+  if (target.id === currentCarIndex) return;
+  currentCarIndex = target.id;
 
   document.querySelector('.active').classList.toggle('active');
-  navLink.classList.toggle('active');
+  target.classList.toggle('active');
 
-  carPhoto.setAttribute('src', CARS[navLink.id].pic);
-  carName.innerText = CARS[navLink.id].name;
-  carYears.innerText = CARS[navLink.id].years;
-  carDesign.innerText = CARS[navLink.id].design;
-  carWins.innerText = CARS[navLink.id].wins;
+  carPhoto.setAttribute('src', CARS[target.id].pic);
+  carName.innerText = CARS[target.id].name;
+  carYears.innerText = CARS[target.id].years;
+  carDesign.innerText = CARS[target.id].design;
+  carWins.innerText = CARS[target.id].wins;
 
   document.querySelectorAll('.descr > p').forEach(item => item.remove());
 
-  CARS[navLink.id].descr.forEach(item => {
+  CARS[target.id].descr.forEach(item => {
     const p = document.createElement('p');
     p.innerHTML = item;
     carDescription.append(p);
@@ -166,4 +166,4 @@ const handler = (e) => {
   document.querySelector('#burger-ctrl').checked = false;
 }
 
-document.querySelectorAll('.nav-link').forEach(item => item.addEventListener("click", handler));
+document.querySelector('nav').addEventListener("click", handler);
