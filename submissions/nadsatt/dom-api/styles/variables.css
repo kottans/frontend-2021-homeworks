@@ -1,0 +1,15 @@
+:root {
+    --white: white;
+    --black: #00000078;
+    --gray-dark: #727272;
+    --gray-middle: rgb(212, 212, 212);
+    --gray-light: #E6E6E6;
+
+    --color1: unset;
+    --color2: unset;
+    --color3: unset;
+    --color4: unset;
+
+    --background-mobile: unset;
+    --background: unset;
+}
