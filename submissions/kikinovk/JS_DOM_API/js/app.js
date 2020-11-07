@@ -39,9 +39,9 @@ let menuList = document.querySelector('.nav__menu');
 let mainSection = document.querySelector('.main');
 
 const createItemMenu = (id, nameItem) => `<button type="button" id="${id}" class="menu__button">${nameItem}</button>`;
+const createArticle = (item) => `<h1>${item.caption}</h1><img src="${item.image}" alt="${item.caption}"><p>${item.description}</p>`;
 
-const showArticle = (item) => {
-  const createArticle = (item) => `<h1>${item.caption}</h1><img src="${item.image}" alt="${item.caption}"><p>${item.description}</p>`;
+const showArticle = (item) => {  
   const newArticle = document.createElement('article');    
   newArticle.classList.add('main__article');
   newArticle.innerHTML = createArticle(item);
