@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
     toggleActive(event);
 
     mainSection.querySelector('article').remove();
-    showArticle(listTea.filter(item => item.id === event.target.id)[0]);
+    showArticle(listTea.find(item => item.id === event.target.id));
   });
 
 
