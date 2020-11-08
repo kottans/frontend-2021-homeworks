@@ -127,13 +127,11 @@ document.addEventListener('DOMContentLoaded', () => {
     function fillPosterSection(name){
         const posterSectionHeading = posterSection.querySelector('.poster-section__heading');
         const posterSectionContent = posterSection.querySelector('.poster-section__content');
-        
+        const formattedName = name.replace(/\s/g, '-');
+
         posterSectionHeading.textContent = name;
-
-        name = name.replace(/\s/g, '-');
-
-        posterSectionContent.setAttribute('src', `images/posters/${name}-poster.png`);
-        posterSectionContent.setAttribute('alt', `${name}-poster`);
+        posterSectionContent.setAttribute('src', `images/posters/${formattedName}-poster.png`);
+        posterSectionContent.setAttribute('alt', `${formattedName}-poster`);
     }
 
     function fillRatingIcons(rating){
@@ -162,12 +160,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function fillActorsImgs(name){
-        name = name.replace(/\s/g, '-');
+        const formattedName = name.replace(/\s/g, '-');
         const imgs = actorsSectionContent.querySelectorAll('.actors-section__img');
 
         imgs.forEach((img, i) => {
-            img.setAttribute('src', `images/actors/${name}-actor${++i}.png`);
-            img.setAttribute('alt', `${name}-actor${++i}`);
+            img.setAttribute('src', `images/actors/${formattedName}-actor${++i}.png`);
+            img.setAttribute('alt', `${formattedName}-actor${++i}`);
         });
     }
 
@@ -182,10 +180,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function defineBackgrounds(name){
-        name = name.replace(/\s/g, '-');
+        const formattedName = name.replace(/\s/g, '-');
         const root = document.documentElement;
 
-        root.style.setProperty('--background-mobile', `url(\'./images/backgrounds/${name}-mobile.png\')`);
-        root.style.setProperty('--background', `url(\'../images/backgrounds/${name}.png\')`);
+        root.style.setProperty('--background-mobile', `url(\'./images/backgrounds/${formattedName}-mobile.png\')`);
+        root.style.setProperty('--background', `url(\'../images/backgrounds/${formattedName}.png\')`);
     }
 })
