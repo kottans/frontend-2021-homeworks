@@ -1,10 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
     const initialMovieId = 0;
 
-    createInitialElements(); 
     headerIcon.addEventListener('click', toggleSidebar);
     sidebarIcon.addEventListener('click', toggleSidebar);
-    establishSidebarItemSelection();
+    sidebarList.addEventListener('click', selectSidebarItem);
+    createInitialElements(); 
     fillPageByMovieId(initialMovieId);
 });
 
@@ -56,23 +56,20 @@ const movies = [
     },
 ];
 
-function establishSidebarItemSelection(){
-    sidebarList.addEventListener('click', e => {
-        const target = e.target;
-
-        if(target instanceof HTMLLIElement){
-            let id = movies.find(movie => movie.name === target.textContent).id;
-
-            fillPageByMovieId(id)
-            toggleSidebar();
-        }
-    });
-}
-
 function toggleSidebar(){
     headerIcon.classList.toggle('icon-wrapper--active');
     sidebarIcon.classList.toggle('icon-wrapper--active');
     sidebar.classList.toggle('sidebar--active');
+}
+
+function selectSidebarItem(e){
+    const target = e.target;
+
+    if(target instanceof HTMLLIElement){
+        let id = movies.find(movie => movie.name === target.textContent).id;
+        fillPageByMovieId(id)
+        toggleSidebar();
+    }
 }
 
 function createInitialElements(){
