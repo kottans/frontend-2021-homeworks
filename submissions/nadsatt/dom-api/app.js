@@ -93,9 +93,8 @@ document.addEventListener('DOMContentLoaded', () => {
         for (let i = 1; i <= iconsNumber; i++){
             container.insertAdjacentHTML('beforeend', ratingIcon);
             container.lastElementChild.classList.add('rating-section__icon');
-        }
-        while (container.firstElementChild){
-            fragment.appendChild(container.firstElementChild);
+
+            fragment.appendChild(container.lastElementChild);
         }
     
         ratingSectionContent.append(fragment); 
