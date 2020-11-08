@@ -1,3 +1,21 @@
+@font-face {
+  font-family: 'Nanum Gothic';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('NanumGothic'), url(https://fonts.gstatic.com/s/nanumgothic/v17/PN_3Rfi-oW3hYwmKDpxS7F_z-7rJxHVIsPV5MbNO2rV2_va-Nv6p.0.woff2) format('woff2');
+  unicode-range: U+f9ca-fa0b, U+ff03-ff05, U+ff07, U+ff0a-ff0b, U+ff0d-ff19, U+ff1b, U+ff1d, U+ff20-ff5b, U+ff5d, U+ffe0-ffe3, U+ffe5-ffe6;
+}
+
+@font-face {
+  font-family: 'Nanum Gothic';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('NanumGothic Bold'), local('NanumGothic-Bold'), url(https://fonts.gstatic.com/s/nanumgothic/v17/PN_oRfi-oW3hYwmKDpxS7F_LQv37yzkx1Yl3P690375P--a0I5vFgZwP.0.woff2) format('woff2');
+  unicode-range: U+f9ca-fa0b, U+ff03-ff05, U+ff07, U+ff0a-ff0b, U+ff0d-ff19, U+ff1b, U+ff1d, U+ff20-ff5b, U+ff5d, U+ffe0-ffe3, U+ffe5-ffe6;
+}
+
 * {
   font-family:'Nanum Gothic', sans-serif;
   text-decoration:none;
@@ -10,7 +28,7 @@ background-image: url(../popup-icons/background.png);
 background-size: cover;
 }
 
-#navigation {
+.navigation {
   display:inline-flex;
   width:100%;
   height:35px;
@@ -26,7 +44,8 @@ background-size: cover;
 }
 
 .menu-button, .more_button{
-  display: none;
+  opacity: 0;
+  position: absolute;
 }
 .menu-link-popup {
   background-image: url(../popup-icons/popup-button.png);
@@ -77,7 +96,7 @@ background-size: cover;
   align-content: stretch;
 }
 
-#logo-hooli {
+.logo-hooli {
   width: 250px;
 }
 
@@ -158,23 +177,6 @@ li{
   cursor: pointer;
 }
 
-footer {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: hsla(0, 0%, 0%, 0.8);
-  width:100%;
-  height:30px;
-  text-align:center;
-  padding-top: 10px;
-}
-
-h4 {
-      color: hsl(0, 0%, 80%);
-      font-weight: normal;
-}
-
 .menu-button:checked ~ .popup {
   display: block;
   z-index: 2;
@@ -190,8 +192,10 @@ h4 {
 }
 
 .popup img {
+  filter: invert(100%);
+  opacity: 0.9;
   width: 48px;
-  height: 36px;
+  object-fit: contain;
 }
 
 .main-menu {
@@ -251,4 +255,28 @@ h4 {
   text-align: center;
   align-items: flex-end;
   box-sizing: border-box;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: hsla(0, 0%, 0%, 0.8);
+  width:100%;
+  height:40px;
+  text-align:center;
+  padding-top: 10px;
+}
+
+h4 {
+      font-size: 12px;
+      color: hsl(0, 0%, 80%);
+      font-weight: normal;
+}
+
+.footer-icons, .footer-icons a {
+  font-size: 10px;
+  text-decoration: none;
+  color: hsl(0, 0%, 80%);
 }
