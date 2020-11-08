@@ -1,9 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const initialMovieId = 0;
+
     createInitialElements(); 
     headerIcon.addEventListener('click', toggleSidebar);
     sidebarIcon.addEventListener('click', toggleSidebar);
     establishSidebarItemSelection();
-    fillPageByMovieId(0);
+    fillPageByMovieId(initialMovieId);
 });
 
 const headerIcon = document.querySelector('.header__icon-wrapper');
