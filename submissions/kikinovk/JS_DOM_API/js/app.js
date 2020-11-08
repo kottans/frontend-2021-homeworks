@@ -73,7 +73,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 
-  /* Open the navigation when the menu ison is clicked.*/
   let toggleButton = document.querySelector('#toggle_menu');
   let navBar = document.querySelector('#nav_bar');
 
