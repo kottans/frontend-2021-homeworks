@@ -1,4 +1,4 @@
-window.onload = () => {
+document.addEventListener('DOMContentLoaded', () => {
     const headerIcon = document.querySelector('.header__icon-wrapper');
     const sidebarIcon = document.querySelector('.sidebar__icon-wrapper');
     const sidebar = document.querySelector('.sidebar');
@@ -52,8 +52,8 @@ window.onload = () => {
     fillPageByMovieId(0);
 
     function establishSidebarToogling(){
-        headerIcon.onclick = toggleSidebar;
-        sidebarIcon.onclick = toggleSidebar;
+        headerIcon.addEventListener('click', toggleSidebar);
+        sidebarIcon.addEventListener('click', toggleSidebar);
     }
 
     function toggleSidebar(){
@@ -74,12 +74,12 @@ window.onload = () => {
             sidebarItem.textContent = name;
             sidebarItem.classList.add('sidebar__item')  
 
-            sidebarItem.onclick = function(){
+            sidebarItem.addEventListener('click', function(){
                 let id = movies.find(movie => movie.name === this.textContent).id;
 
                 fillPageByMovieId(id)
                 toggleSidebar();
-            };
+            });
         
             sidebarList.append(sidebarItem);
         });
@@ -185,4 +185,4 @@ window.onload = () => {
         root.style.setProperty('--background-mobile', `url(\'./images/backgrounds/${name}-mobile.png\')`);
         root.style.setProperty('--background', `url(\'../images/backgrounds/${name}.png\')`);
     }
-}
+})
