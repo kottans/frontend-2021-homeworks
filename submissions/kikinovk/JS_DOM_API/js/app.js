@@ -37,18 +37,13 @@ const listTea  = [
 
 let menuList = document.querySelector('.nav__menu');
 let mainSection = document.querySelector('.main');
+const newArticle = document.querySelector('.main__article');
 
 const createItemMenu = ({id, title}) => `<button type="button" id="${id}" class="menu__button">${title}</button>`;
 const createArticle = ({caption, image, description}) => `<h1>${caption}</h1>
                                                           <img src="${image}" alt="${caption}">
                                                           <p>${description}</p>`;
 
-const showArticle = (item) => {  
-  const newArticle = document.createElement('article');    
-  newArticle.classList.add('main__article');
-  newArticle.innerHTML = createArticle(item);
-  mainSection.appendChild(newArticle);
-};
 const createMenu = (list) => {
   const fragmentMenu = document.createDocumentFragment();
   list.forEach(item => {
@@ -70,14 +65,11 @@ document.addEventListener('DOMContentLoaded', () => {
   menuList.appendChild(createMenu(listTea));
 
   menuList.querySelector('.menu__button').classList.add('active');
-  showArticle(listTea[0]); 
+  newArticle.innerHTML = createArticle(listTea[0]);
 
-  menuList.addEventListener('click', (event) => {
-    
-    toggleActive(event);
-
-    mainSection.querySelector('article').remove();
-    showArticle(listTea.find(item => item.id === event.target.id));
+  menuList.addEventListener('click', (event) => {    
+    toggleActive(event);        
+    newArticle.innerHTML = createArticle(listTea.find(item => item.id === event.target.id));
   });
 
 
