@@ -4,58 +4,84 @@
    Code repository: https://github.com/andrewklmn/a-tiny-JS-world
    Web app: https://andrewklmn.github.io/a-tiny-JS-world/
    */
-
 // ======== OBJECTS DEFINITIONS ========
-const dog = {
-  species: 'dog',
-  name: 'Dyuka',
-  gender: 'male',
-  legs: 4,
-  hands: 0,
-  saying: 'woof!',
-  friends: [],
-};
+class Inhabitant {
+  constructor ({ species, name, gender, legs = 0, hands = 0, saying, friends = [] }) {
+    this.species = species;
+    this.name = name;
+    this.gender = gender;
+    this.legs = legs;
+    this.hands = hands;
+    this.saying = saying;
+    this.friends = friends;
+  }
 
-const cat = {
-  species: 'cat',
-  name: 'Barsik',
-  gender: 'male',
-  legs: 4,
-  hands: 0,
-  saying: 'meow!',
-  friends: [],
-};
+  getFriendsList () {
+    if (this.friends.length > 0) {
+      return this.friends.map(friend => friend.name).join(', ');
+    }
+    return 'No friends!';
+  }
 
-const woman = {
-  species: 'human',
-  name: 'Leeloo Dallas',
-  gender: 'female',
-  legs: 2,
-  hands: 2,
-  saying: 'People hi!',
-  friends: [],
-};
+  toString () {
+    return `${this.species}; ${this.name}; ${this.gender}; ${this.legs}; ${this.hands}; ${this.saying}; ${this.getFriendsList()}`;
+  }
 
-const man = {
-  species: 'human',
-  name: 'Korben Dallas',
-  gender: 'male',
-  legs: 2,
-  hands: 2,
-  saying: 'Hello there!',
-  friends: [],
-};
+  addFriends(friends){
+    this.friends = this.friends.concat(friends);
+  }
+}
 
-// define cat-woman
-const catWoman = { ...woman };
-catWoman.name = 'Cat-woman';
-catWoman.saying = cat.saying;
+class Pet extends Inhabitant {
+  constructor ({ species, name, gender, saying }) {
+    super({ species, name, gender, legs: 4, saying });
+  }
+}
 
-// define friends for everyone except the cat...
-dog.friends = [man, woman, cat];
-woman.friends = [man, dog, cat];
-man.friends = [woman, dog, cat, catWoman];
-catWoman.friends = [cat];
+class Dog extends Pet {
+  constructor ({ name, gender }) {
+    super({ species: 'dog', name, gender, saying: 'woof!' });
+  }
+}
+
+class Cat extends Pet {
+  constructor ({ name, gender }) {
+    super({ species: 'cat', name, gender, saying: 'meow!' });
+  }
+}
+
+class Human extends Inhabitant {
+  constructor ({ name, gender, saying }) {
+    super({ species: 'human', name, gender, legs: 2, hands: 2, saying });
+  }
+}
+
+class Woman extends Human {
+  constructor({ name, saying }) {
+    super({ name, gender: 'woman', saying });
+  }
+}
+
+class Man extends Human {
+  constructor({ name, saying }) {
+    super({ name, gender: 'man', saying });
+  }
+}
+
+class CatWoman extends Woman {
+  constructor() {
+    const catSpirit =new Cat({ name: 'Cat-woman', gender: 'female'});
+    super({ name: catSpirit.name, saying: catSpirit.saying });
+  }
+}
+
+// define inhabitants
+const dog = new Dog({ name: 'Dyuka', gender: 'male' });
+const cat = new Cat({ name: 'Barsik', gender: 'male' });
+const woman = new Woman({ name: 'Leeloo Dallas', saying: 'Multi-pass!' });
+const man = new Man({ name: 'Korben Dallas', saying: 'Hello there!' });
+const catWoman = new CatWoman();
+
 
 const inhabitants = [
   dog,
@@ -65,12 +91,11 @@ const inhabitants = [
   man,
 ];
 
-const getFormatedOutput = ({species, name, gender, legs, hands, saying, friends}) =>  {
-  if(typeof(friends) === 'object'){
-      friends = friends.map(friend => friend.name).join(', ');
-  }
-  return `${species}; ${name}; ${gender}; ${legs}; ${hands}; ${saying}; ${friends}`;
-}
+// define friends for everyone except the cat...
+dog.addFriends([man, woman, cat]);
+woman.addFriends([man, dog, cat]);
+man.addFriends([woman, dog, cat, catWoman]);
+catWoman.addFriends([cat]);
 
 // ======== OUTPUT ========
 /* Use print(message) for output.
@@ -81,12 +106,12 @@ const getFormatedOutput = ({species, name, gender, legs, hands, saying, friends}
    so code reviewers might focus on a single file that is index.js.
    */
 
-
   // ... other objects ...
+  inhabitants.forEach( creature => {
+    print(creature.toString());
+  });
 
-  inhabitants.forEach(obj => print(getFormatedOutput(obj)));
-
- // ... other print-outs ...
+  // ... other print-outs ...
 
 /* Print examples:
    print('ABC');
