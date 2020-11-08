@@ -76,11 +76,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const toggleButton = document.querySelector('#toggle_menu');
   const navBar = document.querySelector('#nav_bar');
 
-  toggleButton.addEventListener('click', function(e) {
+  toggleButton.addEventListener('click', () => {
     navBar.classList.toggle('open');
-    e.stopPropagation();
   });
-  mainSection.addEventListener('click', function() {
+  mainSection.addEventListener('click', () => {
     navBar.classList.remove('open');
   });
 
