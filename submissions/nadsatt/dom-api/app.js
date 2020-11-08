@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         imgs.forEach((img, i) => {
             img.setAttribute('src', `images/actors/${formattedName}-actor${++i}.png`);
-            img.setAttribute('alt', `${formattedName}-actor${++i}`);
+            img.setAttribute('alt', `${formattedName}-actor${i}`);
         });
     }
 
