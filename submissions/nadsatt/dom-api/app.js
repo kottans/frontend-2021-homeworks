@@ -79,7 +79,7 @@ window.onload = () => {
             names.forEach(name => {
                 let sidebarItem = document.createElement('li');
                 sidebarItem.textContent = name;
-                sidebarItem.className = 'sidebar__item';
+                sidebarItem.classList.add('sidebar__item');
 
                 sidebarItem.onclick = function(){
                     let id = movies.find(movie => movie.name === this.textContent).id;
