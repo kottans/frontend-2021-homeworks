@@ -77,7 +77,6 @@
         position: absolute;
         left: 0;
         top: 100px;
-        overflow: hidden scroll;
     }
     body .sidebar--active {
         width: 30%;
