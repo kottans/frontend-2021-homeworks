@@ -43,7 +43,7 @@ background-size: cover;
   font-size: 16px;
 }
 
-.menu-button, .more_button{
+.menu-button, .more-button{
   opacity: 0;
   position: absolute;
 }
@@ -63,22 +63,23 @@ background-size: cover;
   height: 23px;
 }
 
-.menu-link-popup:checked,
+.menu-link-popup:hover,
 .text-nav-item:hover,
 .menu-link-bell:hover,
 .popup-item:hover,
 .search-button:hover,
 .show-more:hover,
-.search-icon {
+.search-icon:hover {
   opacity: 0.5;
   transition-duration: 1s;
 }
 
-.menu-link-popup:focus,
+.menu-button:focus + .menu-link-popup,
 .text-nav-item:focus,
 .menu-link-bell:focus,
 .popup-item:focus,
-.show-more:focus {
+.more-button:focus + .show-more,
+.search-icon:focus {
   outline: 2px solid hsl(0, 0%, 75%);
   border-radius: 2px;
   transition-duration: 0.5s;
@@ -171,7 +172,7 @@ ul{
   padding:0;
 }
 
-li{
+.rightbar-item {
   float: left;
   padding: 10px;
   cursor: pointer;
@@ -237,11 +238,11 @@ li{
   padding-top: 10px;
 }
 
-.more_button:checked ~ .more-menu {
+.more-button:checked ~ .more-menu {
   display: flex;
 }
 
-.more_button:checked ~ .show-more {
+.more-button:checked ~ .show-more {
   opacity: 0;
   margin-top: -40px;
 }
