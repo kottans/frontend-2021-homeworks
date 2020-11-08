@@ -125,12 +125,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function fillPosterSection(name){
-        posterSection.firstElementChild.textContent = name;
+        const posterSectionHeading = posterSection.querySelector('.poster-section__heading');
+        const posterSectionContent = posterSection.querySelector('.poster-section__content');
+        
+        posterSectionHeading.textContent = name;
 
         name = name.replace(/\s/g, '-');
 
-        posterSection.lastElementChild.setAttribute('src', `images/posters/${name}-poster.png`);
-        posterSection.lastElementChild.setAttribute('alt', `${name}-poster`);
+        posterSectionContent.setAttribute('src', `images/posters/${name}-poster.png`);
+        posterSectionContent.setAttribute('alt', `${name}-poster`);
     }
 
     function fillRatingIcons(rating){
