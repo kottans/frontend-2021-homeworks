@@ -47,10 +47,14 @@ window.onload = () => {
     },
     ];
 
-    headerIcon.onclick = toggleSidebar;
-    sidebarIcon.onclick = toggleSidebar;
-
+    establishSidebarToogling();
+    createInitialElements();
     fillPageByMovieId(0);
+
+    function establishSidebarToogling(){
+        headerIcon.onclick = toggleSidebar;
+        sidebarIcon.onclick = toggleSidebar;
+    }
 
     function toggleSidebar(){
         headerIcon.classList.toggle('icon-wrapper--active');
@@ -58,38 +62,66 @@ window.onload = () => {
         sidebar.classList.toggle('sidebar--active');
     }
 
-    function fillPageByMovieId(id){
-        const movie = movies.find(movie => id === movie.id);
-
-        fillSidebarList(movies.map(movie => movie.name));
-        fillPosterSection(movies[id].name);
-        fillRatingSection(movies[id].rating);
-        fillActorsSection(movies[id].name);
-        fillDescriptionSection(movies[id].description);
-        defineColors(movies[id].colors);
-        defineBackgrounds(movies[id].name);
+    function createInitialElements(){
+        createSidebarItems();
+        createRatingIcons();
+        createActorsImgs();
     }
 
-    function fillSidebarList(names){
-        if(sidebarList.firstElementChild){
-            const sidebarItems = sidebar.querySelectorAll('.sidebar__item');
-            sidebarItems.forEach((item, i) => item.textContent = names[i]);
-        }
-        else {
-            names.forEach(name => {
-                let sidebarItem = document.createElement('li');
-                sidebarItem.textContent = name;
-                sidebarItem.classList.add('sidebar__item');
+    function createSidebarItems(){
+        movies.map(movie => movie.name).forEach(name => {
+            let sidebarItem = document.createElement('li');
+            sidebarItem.textContent = name;
+            sidebarItem.classList.add('sidebar__item')  
 
-                sidebarItem.onclick = function(){
-                    let id = movies.find(movie => movie.name === this.textContent).id;
-                    fillPageByMovieId(id)
-                    toggleSidebar();
-                };
-            
-                sidebarList.append(sidebarItem);
-            });
+            sidebarItem.onclick = function(){
+                let id = movies.find(movie => movie.name === this.textContent).id;
+
+                fillPageByMovieId(id)
+                toggleSidebar();
+            };
+        
+            sidebarList.append(sidebarItem);
+        });
+    }
+
+    function createRatingIcons(){
+        const fragment = document.createDocumentFragment();
+        const container = document.createElement('div');
+    
+        for (let i = 1; i <= 10; i++){
+            container.insertAdjacentHTML('beforeend', ratingIcon);
+            container.lastElementChild.classList.add('rating-section__icon');
         }
+        while (container.firstElementChild){
+            fragment.appendChild(container.firstElementChild);
+        }
+    
+        ratingSectionContent.append(fragment); 
+    }
+
+    function createActorsImgs(){
+        const fragment = document.createDocumentFragment();
+
+        for(let i = 1; i <= 4; i++){
+            let img = document.createElement('img');
+            img.classList.add('actors-section__img');
+        
+            fragment.appendChild(img);
+        }
+    
+        actorsSectionContent.appendChild(fragment);
+    }
+
+    function fillPageByMovieId(id){
+        const movie = movies[id]
+
+        fillPosterSection(movie.name);
+        fillRatingIcons(movie.rating);
+        fillActorsImgs(movie.name);
+        fillDescriptionSection(movie.description);
+        defineColors(movie.colors);
+        defineBackgrounds(movie.name);
     }
 
     function fillPosterSection(name){
@@ -101,28 +133,9 @@ window.onload = () => {
         posterSection.lastElementChild.setAttribute('alt', `${name}-poster`);
     }
 
-    function fillRatingSection(rating){
-        if(!ratingSectionContent.firstElementChild){
-            const fragment = document.createDocumentFragment();
-            const container = document.createElement('div');
-        
-            for (let i = 1; i <= 10; i++){
-                container.insertAdjacentHTML('beforeend', ratingIcon);
-                container.lastElementChild.classList.add('rating-section__icon');
-            }
-
-            while (container.firstElementChild){
-                fragment.appendChild(container.firstElementChild);
-            }
-        
-            ratingSectionContent.append(fragment);
-
-            selectRatingIcons(rating);   
-        }
-        else {
-            selectRatingIcons(rating);
-            unselectRatingIcons(rating);
-        } 
+    function fillRatingIcons(rating){
+        selectRatingIcons(rating);
+        unselectRatingIcons(rating);
     }
 
     function selectRatingIcons(rating){
@@ -145,32 +158,14 @@ window.onload = () => {
             );
     }
 
-    function fillActorsSection(name){
+    function fillActorsImgs(name){
         name = name.replace(/\s/g, '-');
+        const imgs = actorsSectionContent.querySelectorAll('.actors-section__img');
 
-        if(!actorsSectionContent.firstElementChild){
-            const fragment = document.createDocumentFragment();
-
-            for(let i = 1; i <= 4; i++){
-                let img = document.createElement('img');
-            
-                img.className = 'actors-section__img';
-                img.setAttribute('src', `images/actors/${name}-actor${i}.png`);
-                img.setAttribute('alt', `${name}-actor${i}`);
-            
-                fragment.appendChild(img);
-            }
-        
-            actorsSectionContent.appendChild(fragment);
-        }
-        else {
-            const imgs = actorsSectionContent.querySelectorAll('.actors-section__img');
-
-            imgs.forEach((img, i) => {
-                img.setAttribute('src', `images/actors/${name}-actor${++i}.png`);
-                img.setAttribute('alt', `${name}-actor${++i}`);
-            });
-        } 
+        imgs.forEach((img, i) => {
+            img.setAttribute('src', `images/actors/${name}-actor${++i}.png`);
+            img.setAttribute('alt', `${name}-actor${++i}`);
+        });
     }
 
     function fillDescriptionSection(description){
