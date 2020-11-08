@@ -88,8 +88,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function createRatingIcons(){
         const fragment = document.createDocumentFragment();
         const container = document.createElement('div');
+        const iconsNumber = 10;
     
-        for (let i = 1; i <= 10; i++){
+        for (let i = 1; i <= iconsNumber; i++){
             container.insertAdjacentHTML('beforeend', ratingIcon);
             container.lastElementChild.classList.add('rating-section__icon');
         }
