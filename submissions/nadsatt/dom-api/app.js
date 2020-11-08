@@ -103,8 +103,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function createActorsImgs(){
         const fragment = document.createDocumentFragment();
+        const imgsNumber = 4;
 
-        for(let i = 1; i <= 4; i++){
+        for(let i = 1; i <= imgsNumber; i++){
             let img = document.createElement('img');
             img.classList.add('actors-section__img');
         
