@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function fillPosterSection(name){
         const posterSectionHeading = posterSection.querySelector('.poster-section__heading');
         const posterSectionContent = posterSection.querySelector('.poster-section__content');
-        const formattedName = name.replace(/\s/g, '-');
+        const formattedName = formatName(name);
 
         posterSectionHeading.textContent = name;
         posterSectionContent.setAttribute('src', `images/posters/${formattedName}-poster.png`);
@@ -162,7 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function fillActorsImgs(name){
-        const formattedName = name.replace(/\s/g, '-');
+        const formattedName = formatName(name);
         const imgs = actorsSectionContent.querySelectorAll('.actors-section__img');
 
         imgs.forEach((img, i) => {
@@ -182,10 +182,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function defineBackgrounds(name){
-        const formattedName = name.replace(/\s/g, '-');
+        const formattedName = formatName(name);
         const root = document.documentElement;
 
         root.style.setProperty('--background-mobile', `url(\'./images/backgrounds/${formattedName}-mobile.png\')`);
         root.style.setProperty('--background', `url(\'../images/backgrounds/${formattedName}.png\')`);
+    }
+
+    function formatName(name){
+        return name.replace(/\s/g, '-');
     }
 })
