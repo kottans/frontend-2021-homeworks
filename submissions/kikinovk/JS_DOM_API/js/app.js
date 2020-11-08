@@ -35,8 +35,8 @@ const listTea  = [
   }
 ];
 
-let menuList = document.querySelector('.nav__menu');
-let mainSection = document.querySelector('.main');
+const menuList = document.querySelector('.nav__menu');
+const mainSection = document.querySelector('.main');
 const newArticle = document.querySelector('.main__article');
 
 const createItemMenu = ({id, title}) => `<button type="button" id="${id}" class="menu__button">${title}</button>`;
@@ -73,8 +73,8 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 
-  let toggleButton = document.querySelector('#toggle_menu');
-  let navBar = document.querySelector('#nav_bar');
+  const toggleButton = document.querySelector('#toggle_menu');
+  const navBar = document.querySelector('#nav_bar');
 
   toggleButton.addEventListener('click', function(e) {
     navBar.classList.toggle('open');
