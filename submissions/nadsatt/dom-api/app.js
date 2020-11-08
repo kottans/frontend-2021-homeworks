@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
-   
-    establishSidebarToogling();
-    establishSidebarItemSelection();
     createInitialElements(); 
+    headerIcon.addEventListener('click', toggleSidebar);
+    sidebarIcon.addEventListener('click', toggleSidebar);
+    establishSidebarItemSelection();
     fillPageByMovieId(0);
 });
 
@@ -53,11 +53,6 @@ const movies = [
         colors: ['rgb(23,131,72)', 'rgb(93, 150, 18)', 'rgb(175, 171, 171)', 'rgb(128,126,44)']
     },
 ];
-
-function establishSidebarToogling(){
-    headerIcon.addEventListener('click', toggleSidebar);
-    sidebarIcon.addEventListener('click', toggleSidebar);
-}
 
 function establishSidebarItemSelection(){
     sidebarList.addEventListener('click', e => {
