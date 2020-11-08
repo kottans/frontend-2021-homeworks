@@ -140,12 +140,16 @@ const carDescription = document.querySelector('.descr');
 
 let currentCarIndex = "0";
 
+const toggleActiveLink = (newActiveEl) => {
+  document.querySelector('.active').classList.toggle('active');
+  newActiveEl.classList.toggle('active');
+}
+
 const handler = ({ target }) => {
   if (target.id === currentCarIndex) return;
   currentCarIndex = target.id;
 
-  document.querySelector('.active').classList.toggle('active');
-  target.classList.toggle('active');
+  toggleActiveLink(target);
 
   carPhoto.setAttribute('src', CARS[target.id].pic);
   carName.textContent = CARS[target.id].name;
