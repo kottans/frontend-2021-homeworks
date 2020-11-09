@@ -22,8 +22,8 @@ class Inhabitant {
 }
 
 class Man extends Inhabitant {
-    constructor(species, name, gender, saying, hands, legs) {
-        super(species, name, gender, saying);
+    constructor(name, gender, saying = "Hi!", hands = 2, legs = 2) {
+        super('man', name, gender,);
         this.hands = hands;
         this.legs = legs;
     }
@@ -34,8 +34,8 @@ class Man extends Inhabitant {
 }
 
 class Woman extends Inhabitant {
-    constructor(species, name, gender, saying, hands, legs) {
-        super(species, name, gender, saying);
+    constructor(name, gender, saying = 'Hello!', hands = 2, legs = 2) {
+        super('woman', name, gender, saying);
         this.hands = hands;
         this.legs = legs;
     }
@@ -46,9 +46,9 @@ class Woman extends Inhabitant {
 }
 
 class Cat extends Inhabitant {
-    constructor(species, name, gender, saying, legs) {
-        super(species, name, gender, saying);
-        this.legs = legs;
+    constructor(name, gender, saying = 'meow-meow!') {
+        super('cat', name, gender, saying);
+        this.legs = 4;
     }
 
     toString(object) {
@@ -57,8 +57,8 @@ class Cat extends Inhabitant {
 }
 
 class Dog extends Inhabitant {
-    constructor(species, name, gender, saying, legs) {
-        super(species, name, gender, saying);
+    constructor(name, gender, saying = 'woof-woof!', legs = 4) {
+        super('dog', name, gender, saying);
         this.legs = legs;
     }
 
@@ -68,10 +68,10 @@ class Dog extends Inhabitant {
 }
 
 const inhabitants = [
-    new Man('man', 'John', 'male', 'Hi!', 2, 2),
-    new Woman('woman', 'Emma', 'female', 'Hello!', 2, 2),
-    new Cat('cat', 'Sam', 'make', 'meow-meow!', 4),
-    new Dog('dog', 'Bob', 'female', 'woof-woof!', 4)
+    new Man('John', 'male'),
+    new Woman('woman', 'Emma', 'female'),
+    new Cat('Sam', 'male'),
+    new Dog('Bob', 'female')
 ];
 
 inhabitants.forEach(obj => print(obj));
