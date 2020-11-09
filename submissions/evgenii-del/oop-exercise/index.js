@@ -23,7 +23,7 @@ class Inhabitant {
 
 class Man extends Inhabitant {
     constructor(name, gender, saying = "Hi!", hands = 2, legs = 2) {
-        super('man', name, gender,);
+        super('human', name, 'male', saying);
         this.hands = hands;
         this.legs = legs;
     }
@@ -35,7 +35,7 @@ class Man extends Inhabitant {
 
 class Woman extends Inhabitant {
     constructor(name, gender, saying = 'Hello!', hands = 2, legs = 2) {
-        super('woman', name, gender, saying);
+        super('human', name, 'female', saying);
         this.hands = hands;
         this.legs = legs;
     }
@@ -68,8 +68,8 @@ class Dog extends Inhabitant {
 }
 
 const inhabitants = [
-    new Man('John', 'male'),
-    new Woman('woman', 'Emma', 'female'),
+    new Man('John'),
+    new Woman('Emma'),
     new Cat('Sam', 'male'),
     new Dog('Bob', 'female')
 ];
