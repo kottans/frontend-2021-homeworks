@@ -22,12 +22,12 @@
             </li>
             <li class="nav-item" style="position:relative;">
                 <label for="mypopup" class="popup-label nav-image"></label>
-                <input type="checkbox" id="mypopup">
+                <input type="checkbox" id="mypopup" class='mypopup'>
                 <a href="#myhtmlpopup" class="nav-link nav-link-btn">
                     <img src="./images/popup-button.png" alt="Button">
                 </a>
 
-                <div id="myhtmlpopup" class="overlay">
+                <div id="myhtmlpopup" class="overlay myhtmlpopup">
                     <div class="popup">
                         <div class="popup-item">
                            <a href="#" class="popup-link">
@@ -86,10 +86,12 @@
                     </div>
                     
                     <div class="more-wrap">
-                        <div style="text-align: center;">
+                        <div class="more-wrapper">
                             
                             <input type="checkbox" class="read-more-state" id="post-1" />
-                            <label for="post-1" class="read-more-trigger"></label>
+                            <label for="post-1" class="read-more-trigger">
+                                <span>More</span>
+                            </label>
                           
                             <div class="read-more-wrap">
                                 <div class="read-more-target">
@@ -166,9 +168,5 @@
             </li>
         </ul>    
     </nav>
-
-
-    
-
 </body>
 </html>

@@ -2,7 +2,9 @@
     max-width: 30px;
 }
 .nav {
-    float: right;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
 }
 .nav-list {
     display: flex;
@@ -21,30 +23,31 @@
     max-width: 50px;
 }
 
-#myhtmlpopup {
+.myhtmlpopup {
     display: none;
     position: absolute;
     top: 40px;
     width: 300px;
     left: -200px;
-    max-height: 250px;
-    max-height: 256px;
+    max-height: 325px;
     overflow: auto;
     box-shadow:1px -2px 10px 0px rgba(50, 50, 50, 0.5)
 }
 
-#mypopup:checked ~ #myhtmlpopup {
+.mypopup:checked ~ .myhtmlpopup {
     display: block;
 }
 
-#mypopup {
+.mypopup {
     position: absolute;
     top: 32%;
     left: 34%;
     transform: translate(-50%, -50%);
-    opacity: 0;
-    height: 50px;
-    width: 50px;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    height: 20px;
+    width: 20px;
 }
 
 .popup {
@@ -55,63 +58,69 @@
     align-items: center;
 }
 
+.more-wrapper {
+    text-align: center;
+    position: relative;
+}
+
 .popup-link {
     display: flex;
     flex-direction: column;
 }
 
 .popup-item {
+    padding: 10px 0;
     width: 33%;
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
 }
 
-a, a:focus, a:hover, a:active {
+a, a:focus, a:hover {
     text-decoration: none;
 }
 
-:focus, 
-#mypopup:checked ~ .nav-link-btn,
-.nav-item:hover, 
-.nav-item:active, 
-.popup-item:hover, 
-.popup-item:focus, 
-.popup-item:active {
-    outline: blue auto 1px;
+.nav-link-btn:focus {
+    outline: none;
 }
 
 .read-more-state {
-    display: none;
-  }
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    height: 22px;
+    width: 37px;
+    position: absolute;
+}
   
-  .read-more-target {
+.read-more-target {
     display: none;
     max-height: 0;
     transition: .25s ease;
-  }
+}
   
-  .read-more-state:checked ~ .read-more-wrap .read-more-target {
-    display: block;
-    max-height: 999em;
+.read-more-state:checked ~ .read-more-wrap .read-more-target {
     display: flex;
     flex-wrap: wrap;
-  }
+}
   
-  .read-more-state ~ .read-more-trigger:before { 
-    content: 'More';
-  }
+.read-more-state:checked ~ .read-more-trigger {
+    display: none;
+} 
+
+.read-more-state:checked {
+    height: 0;
+    width: 0;
+}
   
-  .read-more-state:checked ~ .read-more-trigger:before {
-    content: '';
-  }
-  
-  .read-more-trigger {
+.read-more-trigger {
     cursor: pointer;
     display: inline-block;
     padding: 0 .5em;
     color: #666;
     font-size: .9em;
     line-height: 2;
-  }
+}
+
   
