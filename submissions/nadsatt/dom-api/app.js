@@ -64,8 +64,10 @@ function toggleSidebar(){
 
 function selectSidebarItem({target}){
     if(target.classList.contains('sidebar__item')){
-        let id = movies.find(movie => movie.name === target.textContent).id;
-        fillPageByMovieId(id)
+        let movie = movies.find(movie => movie.name === target.textContent);
+        let id = movie ? movie.id : 0;
+
+        fillPageByMovieId(id);
         toggleSidebar();
     }
 }
