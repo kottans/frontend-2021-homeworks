@@ -48,16 +48,27 @@ const COFFEE = [{
 	paragraph: 'A shot of espresso in steamed milk lightly topped with foam.',
 }];
 const MENU = document.getElementById('mainMenu');
-const CUP = document.getElementById('coffeeCups');
-const ART = document.getElementById('articles');
+const MAIN = document.getElementById('main-content');
 
 function render() {
+	
 	COFFEE.forEach(element => {
 		MENU.appendChild(createListNode(element));
-		CUP.appendChild(createCupNode(element));
-		ART.appendChild(createContentNode(element));
+
+		let coffeeWrap = document.createElement('div');
+		coffeeWrap.id = `${element.id}-type`;
+		coffeeWrap.className = `coffee`;	
+		
+		if (element.id !== 'doppio') {
+			coffeeWrap.classList.add('hidden');
+		}
+		MAIN.appendChild(coffeeWrap);
+
+		coffeeWrap.appendChild(createCupNode(element));
+		coffeeWrap.appendChild(createContentNode(element));
 	});
 };
+
 
 function createListNode(el) {
 	let listItem = document.createElement('li');
@@ -72,17 +83,15 @@ function createListNode(el) {
 };
 
 function createCupNode(el) {
-	let cup = document.createElement('div');
-	cup.id = `${el.id}-cup`;
-	cup.className = `cup ${el.id}-cup__bg `;
-	if (el.id !== 'doppio') {
-		cup.hidden = true;
-	}
-	cup.innerHTML = `
-        <div class = "paw-left"></div>
-        <div class = "paw-right"></div>
+	let coffeeCup = document.createElement('div');
+	coffeeCup.className = `coffe-content`;
+	coffeeCup.innerHTML = `
+		<div id="${el.id}-cup" class="cup ${el.id}-cup__bg">
+        	<div class = "paw-left"></div>
+			<div class = "paw-right"></div>
+		</div>
     `;
-	return cup;
+	return coffeeCup;
 };
 
 function createContentNode(el) {
@@ -91,9 +100,6 @@ function createContentNode(el) {
 	const textContent = document.createElement('p');
 	articleContent.id = `${el.id}-article`;
 	articleContent.className = 'description';
-	if (el.id !== 'doppio') {
-		articleContent.hidden = true;
-	}
 	headerContent.innerHTML = el.title;
 	textContent.innerHTML = el.paragraph;
 	articleContent.appendChild(headerContent);
@@ -114,21 +120,12 @@ function toggleMenuItem() {
 	});
 };
 
-function toggleContent(idEL, arr) {
-	const content = {
-		articles: [...document.getElementsByTagName('article')],
-		cups: [...document.getElementsByClassName('cup')]
-	}
-
-	const setHiddenCup = content.cups.find(el => !el.hasAttribute('hidden'));
-	setHiddenCup.hidden = true;
-	const removeHiddenCup = content.cups.find(el => el.id.indexOf(idEL) == 0);
-	removeHiddenCup.hidden = false;
-
-	const setHiddenArt = content.articles.find(el => !el.hasAttribute('hidden'));
-	setHiddenArt.hidden = true;
-	const removeHiddenArt = content.articles.find(el => el.id.indexOf(idEL) == 0);
-	removeHiddenArt.hidden = false;
+function toggleContent(idEL) {
+	const content = [...document.getElementsByClassName('coffee')];	
+	const setHidden = content.find(el => !el.classList.contains('hidden'));
+	setHidden.classList.toggle('hidden');
+	const removeHidden = content.find(el => el.id.indexOf(idEL) == 0);
+	removeHidden.classList.toggle('hidden');
 };
 
 function toggleMenu() {
