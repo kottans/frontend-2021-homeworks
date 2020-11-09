@@ -55,7 +55,7 @@ catWoman.friends = [cat, man];
 
 const inhabitants = [dog, cat, man, woman, catWoman];
 
-const Description = obj => {
+const description = obj => {
   const nameFriends = obj.friends.reduce((result, item) => result + `${item.name}; `, '')
   return `${obj.species}; ${obj.name}; ${obj.gender}; ${obj.legs}; ${obj.hands}; ${obj.saying}; ${nameFriends}`  
 };
