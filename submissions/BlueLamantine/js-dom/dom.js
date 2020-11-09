@@ -136,8 +136,7 @@ function toggleMenu() {
 		e.preventDefault();
 		e.target.classList.toggle('fa-bars');
 		e.target.classList.toggle('fa-times');
-		MENU.className.contains('menu') ? 
-		MENU.classList.add('responsive') : MENU.classList.remove('responsive');
+		MENU.classList.toggle('responsive');
 	});
 };
 
