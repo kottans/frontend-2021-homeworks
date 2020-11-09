@@ -15,13 +15,14 @@
         <a href="#" class="navbar-link">
             Images
         </a>
-
-        <label for="navbar-button" class="navbar-button"  >
-            <input type="checkbox"  id="navbar-button" tabindex="0"/>
-            <img src="assets/icons/popup-button.png" alt="popup-button" />
-            <div class="popup" >
-                <div class="popup-icons" >
-                    <div class="popup-icons_main" >
+        <a class="navbar-popup_container">
+            <input type="checkbox" id="navbar-button" tabindex="0"/>
+            <label for="navbar-button" class="navbar-button">
+                <img src="assets/icons/popup-button.png" alt="popup-button"/>
+            </label>
+            <section class="popup">
+                <div class="popup-icons">
+                    <div class="popup-icons_main">
                         <figure class="popup-icon" tabindex="0">
                             <img src="assets/icons/calendar.png" alt="calendar"/>
                             <figcaption>Calendar</figcaption>
@@ -71,7 +72,7 @@
                             <figcaption>Document</figcaption>
                         </figure>
                     </div>
-                    <input type="checkbox" id="popup-more" />
+                    <input type="checkbox" id="popup-more"/>
                     <div class="popup-icons_more">
                         <figure class="popup-icon" tabindex="0">
                             <img src="assets/icons/chat.png" alt="chat"/>
@@ -99,11 +100,11 @@
                         </figure>
                     </div>
                     <footer class="popup-icons_footer">
-                        <label class="popup-icons_footer-text" for="popup-more" tabindex="0">More</label>
+                        <label class="popup-icons_footer-text" for="popup-more">More</label>
                     </footer>
                 </div>
-            </div>
-        </label>
+            </section>
+        </a>
 
         <a href="#" class="navbar-button">
             <img src="assets/icons/bell.png" alt="bell"/>
