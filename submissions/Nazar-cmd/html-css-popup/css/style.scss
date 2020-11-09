@@ -23,6 +23,7 @@ $border_color_images: #a5c7fe;
 }
 
 
+
 body {
     font: caption;
     color: $text_color;
@@ -82,6 +83,11 @@ body {
             visibility: visible;
             overflow: visible;
             max-height: 100%;
+
+        }
+
+        #navbar-button:checked ~ .popup .popup-icons{
+            opacity: 1;
         }
 
         #navbar-button {
@@ -91,10 +97,10 @@ body {
         .popup {
             transition: all 0.3s ease;
             visibility: hidden;
-            max-height: 0;
             border: 1px solid $border_color;
             margin-right: 150px;
             top: 50px;
+            max-height: 0;
             right: -77px;
             position: absolute;
             overflow: hidden;
@@ -127,6 +133,8 @@ body {
             }
 
             &-icons {
+                transition: opacity 0.3s ease;
+                opacity: 0;
                 position: relative;
                 overflow: auto;
                 max-height: 100%;
