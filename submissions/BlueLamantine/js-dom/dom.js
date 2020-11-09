@@ -102,36 +102,41 @@ function createContentNode(el) {
 };
 
 function toggleMenuItem() {
-	const content = {
-		articles: [...document.getElementsByTagName('article')],
-		cups: [...document.getElementsByClassName('cup')]
-	}
 	MENU.addEventListener('click', e => {
 		e.preventDefault();
-		if (e.target.matches('.item__link')) {
-			const arrLi = [...MENU.children];
-			const isActive = arrLi.find(li => li.classList.contains("active"));
-			isActive.classList.remove('active');
-			e.target.parentNode.classList.add('active');
-			toggleContent(e.target.id, content.cups);
-			toggleContent(e.target.id, content.articles);
+		const selectedMenuItem = e.target;
+		if (selectedMenuItem.matches('.item__link')) {
+			const currentMenuItem = document.querySelector('.menu-item.active');
+			currentMenuItem.classList.remove('active');
+			selectedMenuItem.closest('li').classList.add('active');
+			toggleContent(selectedMenuItem.id);
 		}
 	});
 };
 
 function toggleContent(idEL, arr) {
-	const setHidden = arr.find(el => !el.hasAttribute('hidden'));
-	setHidden.hidden = true;
-	const removeHidden = arr.find(el => el.id.indexOf(idEL) == 0);
-	removeHidden.hidden = false;
+	const content = {
+		articles: [...document.getElementsByTagName('article')],
+		cups: [...document.getElementsByClassName('cup')]
+	}
+
+	const setHiddenCup = content.cups.find(el => !el.hasAttribute('hidden'));
+	setHiddenCup.hidden = true;
+	const removeHiddenCup = content.cups.find(el => el.id.indexOf(idEL) == 0);
+	removeHiddenCup.hidden = false;
+
+	const setHiddenArt = content.articles.find(el => !el.hasAttribute('hidden'));
+	setHiddenArt.hidden = true;
+	const removeHiddenArt = content.articles.find(el => el.id.indexOf(idEL) == 0);
+	removeHiddenArt.hidden = false;
 };
 
 function toggleMenu() {
 	document.getElementById('menu-btn').addEventListener('click', e => {
 		e.preventDefault();
-		e.target.classList.toggle("fa-bars");
-		e.target.classList.toggle("fa-times");
-		MENU.className === "menu" ? 
+		e.target.classList.toggle('fa-bars');
+		e.target.classList.toggle('fa-times');
+		MENU.className.contains('menu') ? 
 		MENU.classList.add('responsive') : MENU.classList.remove('responsive');
 	});
 };
