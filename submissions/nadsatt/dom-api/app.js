@@ -62,9 +62,7 @@ function toggleSidebar(){
     sidebar.classList.toggle('sidebar--active');
 }
 
-function selectSidebarItem(e){
-    const target = e.target;
-
+function selectSidebarItem({target}){
     if(target instanceof HTMLLIElement){
         let id = movies.find(movie => movie.name === target.textContent).id;
         fillPageByMovieId(id)
