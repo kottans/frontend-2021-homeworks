@@ -46,9 +46,9 @@ class Woman extends Inhabitant {
 }
 
 class Cat extends Inhabitant {
-    constructor(name, gender, saying = 'meow-meow!') {
+    constructor(name, gender, saying = 'meow-meow!', legs = 4) {
         super('cat', name, gender, saying);
-        this.legs = 4;
+        this.legs = legs;
     }
 
     toString(object) {
