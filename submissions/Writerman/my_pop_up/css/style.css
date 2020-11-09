@@ -1,0 +1,249 @@
+* {
+  margin: 0;
+  padding: 0;
+  outline:none;
+}
+html {
+  height: 100%;
+}
+body {
+  display: grid;
+  min-height: 100%;
+  grid-template-rows: auto 1fr;
+  font-family: sans-serif;
+  font-size: 16px;
+  color: #444;
+}
+.nav {
+  padding: 20px;
+  position: absolute;
+  top: 3.0em;
+  right: 2em;
+  width: 350px;
+  border: 2px solid #666666;
+  background: #fff;
+}
+.nav_menu {
+  display: grid;
+  column-gap: 48px;
+  grid-template-columns: repeat(4, max-content);
+  justify-content: end;
+}
+.menu_item {
+  display: block;
+  line-height: 1.5em;
+}
+.menu_icon {
+  display: block;
+  width: 1.5em;
+  height: 1.5em;
+  background-size: contain;
+}
+.menu_link {
+  text-decoration: none;
+  color: #666666;
+}
+.menu_link:hover >  .icon_User {
+  box-shadow: 10px -10px 22px 10px #000
+}
+.menu_link:focus > .icon_User  {
+  opacity:0.5;
+  box-shadow: 10px -10px 22px 10px #000
+}
+
+.menu_link:hover >  .icon_Defend {
+  box-shadow: 10px -10px 22px 10px #000
+}
+.menu_link:focus > .icon_Defend  {
+  opacity:0.5;
+  box-shadow: 10px -10px 22px 10px #000
+}
+.menu_link:hover >  .icon_Atack{
+  box-shadow: 10px -10px 22px 10px #000
+}
+.menu_link:focus > .icon_Atack  {
+  opacity:0.5;
+  box-shadow: 10px -10px 22px 10px #000
+}
+
+.icon_User {
+  background-image: url(../images/User.png);
+  width: 50px;
+  height: 50px;
+}
+
+.icon_Defend
+{
+  background-image: url(../images/Defend.png);
+  width: 50px;
+  height: 50px;
+}
+.icon_Atack {
+  background-image: url(../images/Atack.png);
+  width: 50px;
+  height: 50px;
+}
+.pop_up {
+  display: none;
+  position: absolute;
+  top: 3.0em;
+  right: 2em;
+  width: 350px;
+  border: 2px solid #666666;
+  background: #fff;
+}
+.pop_up:before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: -0.7em;
+  right: 5.5em;
+  width: 1em;
+  height: 1em;
+  border: 2px solid #666666;
+  border-right:none;
+  border-bottom: none;
+  background: #fff;
+  transform: rotate(45deg);
+}
+
+.pop_up_list {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  row-gap: 35px;
+  grid-template-columns: repeat(3, max-content);
+  justify-content: space-between;
+  padding: 40px;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+.pop_up_list::-webkit-scrollbar {
+  width: 2px;
+  background-color: rgba(102,102,102,0.1);
+
+}
+.pop_up_list::-webkit-scrollbar-thumb {
+  background-color: rgba(102,102,102,0.5);
+}
+.pop_up_item {
+  display: inline-block;
+}
+
+.app_link {
+  display: grid;
+  grid-template-rows: repeat(2, max-content);
+  text-decoration: none;
+  color: #666666;
+  padding: 3px;
+
+}
+.app_link:hover,
+.app_link:focus {
+  opacity:0.5;
+  box-shadow: 10px -10px 22px 10px #000
+
+}
+.app_link:hover .app_name,
+.app_link:focus .app_name {
+  color: #0033cc;
+  text-decoration: underline;
+}
+.app_link_all_width {
+  grid-column: 1 / -1;
+}
+.app_icon {
+  display: block;
+  width: 50px;
+  height: 50px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-position-y: bottom;
+  justify-self: center;
+}
+.app_name {
+  display: block;
+  text-align: center;
+}
+.toggle_input {
+  position: absolute;
+  opacity: 0;
+  z-index: -1;
+}
+
+.toggle_input:checked ~ .pop_up {
+  display: block;
+}
+.icon_book {
+  background-image: url(../images/book.png);
+  width: 50px;
+  height: 50px;
+}
+.toggle_input:focus + .toggle_label > .icon_book {
+opacity:0.5;
+box-shadow: 10px -10px 22px 10px #000
+}
+
+.toggle_input:hover + .toggle_label >  .icon_book {
+  box-shadow: 10px -10px 22px 10px #000
+}
+
+.toggle_label {
+  cursor: pointer;
+}
+
+
+/* --More-- */
+
+.button_extra_input {
+  position: absolute;
+  opacity: 0;
+  z-index: -1;
+}
+.button_extra_input ~ .app_link {
+  display: none;
+}
+.button_extra_input:checked ~ .app_link {
+  display: grid;
+}
+.button_extra_input:checked + .button_extra_label {
+  display: none;
+}
+.button_extra_input:checked {
+  display: none;
+}
+.button_extra_label {
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left:0;
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+  background-color: greY;
+}
+.button_extra_input:hover + .button_more_label,
+.button_extra_input:focus + .button_more_label{
+  color: #0033cc;
+  text-decoration: underline;
+}
+
+.icon_first {
+  background-image: url(../images/first.png);
+}
+.icon_second {
+  background-image: url(../images/second.png);
+}
+.icon_third {
+  background-image: url(../images/third.png);
+}
+.icon_extra1 {
+  background-image: url(../images/extra1.png);
+}
+.icon_extra2 {
+  background-image: url(../images/extra2.png);
+}
+.icon_extra3 {
+  background-image: url(../images/extra3.png);
+}
