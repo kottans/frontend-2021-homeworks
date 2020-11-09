@@ -1,0 +1,169 @@
+* {margin: 0; padding: 0;}
+.header{
+    width: 100%;
+    height:50px;
+    align-items: center; 
+}
+nav{ 
+    width: 300px;
+    float: right;
+    padding-top: 10px;
+display: flex;
+align-items: center;
+justify-content: space-around;
+}
+nav a{
+    text-decoration:none;   
+    color: gray;
+}
+.imagePoup{
+    width:28px;
+    height:28px;
+    border: 1px solid transparent;
+}
+nav div{
+    border-radius: 50%;
+    background-color: yellow;
+    width: 30px;
+    height:30px;
+}
+nav *{
+    margin-right: 20px;
+}
+.variousApp{
+      overflow: auto;
+    width: 375px;
+    height:482px;
+    text-align: center;
+    border: solid 1px rgb(179, 179, 179);
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    opacity: 0;
+    visibility: hidden;
+    margin-left: 68%;  
+    
+}
+.variousApp img{
+    width: 40px;
+    height: auto;
+    max-height: 40px;
+}
+.variousApp p{
+    color: gray;
+    padding-top: 10px;   
+}
+.appFirst{
+    padding: 35px 25px 0 25px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.itemsApp{
+    display: table;
+    width: 100px;
+    height: 80px;
+    padding-top: 20px;
+    
+}
+.imgBloc{
+    width: 40px;
+    height: 40px;
+    margin: auto;
+}
+.buttonApp{
+    border: 1px solid transparent;
+    text-decoration:none;
+}
+.buttonApp:hover{  
+    border: solid 1px rgb(194, 194, 194);
+    border-radius: 10px;
+}
+.buttomPoupApp{
+text-decoration: none;
+width: 100%-1px;
+height: 30px;
+border: none;
+background-color: rgb(212, 212, 212) ;
+margin-top:8px;
+visibility: visible;
+opacity: 1;
+}
+.buttom{
+width: 100%;
+height: 30px;
+border: none;
+background-color: rgb(212, 212, 212) ;
+margin-top:5px;
+outline: none;
+}
+.buttom:hover{
+    border: solid 1px rgb(139, 139, 139);
+}
+.buttom a{
+    width: 100%;
+    height: 100%;
+}
+.appSecond{
+    padding: 35px 25px 0 25px;
+    display: flex;
+    flex-wrap: wrap;
+    display: none;
+}
+  .variousApp::before,.variousApp::after  {
+    content: ''; 
+    position: absolute;
+    right: 10.9%;
+    top: 35px;
+    z-index: -1;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 15px solid rgb(179, 179, 179);
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  }
+  .variousApp::before  {
+    box-shadow: none;
+  }
+  .variousApp::after  {
+    top: 36px;
+    z-index: 1; /* Накладываем поверх, чтобы скрыть следы тени */
+    border-bottom: 15px solid #fff;
+    border-top: 0 solid transparent; 
+    box-shadow: none;
+  }
+  .secondInput {
+    display: none;
+}
+.firstInput{
+    opacity: 0;
+    position: absolute;
+}
+.firstInput:checked ~.variousApp,.imageDiv{
+    opacity: 1;
+      visibility: visible;
+  } 
+  .secondInput:checked ~.appSecond{
+      display: flex;
+      }
+  .secondInput:checked ~.second-navbar-button{
+    display: none;
+  }
+  .line{
+      border-top: 1px solid rgb(212, 212, 212);
+      width: 100%;
+  }
+  .text_end{
+      font-size: 20px;
+ padding: 10px  0  0 60px ;
+ justify-content: center;
+  }
+  .firstInput:focus {
+}
+  a:focus~.ImgDiv{
+      background-color: blue;
+      border: 2px solid black;
+  }
+  .navbar-button{
+      width: 32px;
+  }
+
+
+
+  
