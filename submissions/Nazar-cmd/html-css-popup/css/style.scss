@@ -1,0 +1,193 @@
+@import "reset_styles";
+/* End of resetting css */
+
+$text_color: #5f6368;
+$border_color: #d9d9d9;
+$border_color_images: #a5c7fe;
+
+@mixin animated_border($border_width, $transition_time) {
+    border: $border_width solid transparent;
+    border-radius: 3px;
+    transition: border-color $transition_time ease-out;
+}
+
+
+body {
+    font: caption;
+    color: $text_color;
+    font-size: 12px;
+}
+
+.navbar{
+    display: flex;
+    justify-content: flex-end;
+
+    a{
+        color: $text_color!important;
+        text-decoration: none;
+    }
+
+    &-link,  &-button{
+        cursor: pointer;
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &-profile_icon{
+        border-radius: 50%;
+    }
+
+    &-button{
+
+        &:focus {
+            outline: none;
+        }
+
+        &:focus-within img {
+            border-color: $border_color_images;
+        }
+
+        img{
+            @include animated_border(2px, 0.25s);
+            max-width: 25px;
+            max-height: 25px;
+        }
+
+
+
+        input:checked ~ .popup{
+            visibility: visible;
+            overflow: visible;
+            max-height: 100%;
+        }
+
+        #navbar-button {
+            opacity: 0;
+            position: absolute;
+        }
+
+        .popup {
+            transition: all 0.3s ease;
+            visibility: hidden;
+            max-height: 0;
+            border: 1px solid $border_color;
+            margin-right: 150px;
+            top: 50px;
+            right: -77px;
+            position: absolute;
+            overflow: hidden;
+            width: 300px;
+            box-shadow: 1px 5px 15px 4px #cfcfcf;
+
+            &:after,
+            &:before {
+                content: '';
+                display: block;
+                position: absolute;
+                left: 100%;
+                width: 0;
+                height: 0;
+                border-style: solid;
+            }
+
+            &:after {
+                left: 250px;
+                bottom: 100%;
+                border-color: transparent transparent white transparent;
+                border-width: 11px;
+            }
+
+            &:before {
+                left: 249px;
+                bottom: 100%;
+                border-color: transparent transparent $border_color transparent;
+                border-width: 12px;
+            }
+
+            &-icons {
+                position: relative;
+                overflow: auto;
+                max-height: 100%;
+
+                &_main, &_more {
+
+                    width: 100%;
+                    display: flex;
+                    flex-wrap: wrap;
+                    padding: 3rem 15px 0;
+
+                    .popup-icon {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: space-between;
+                        width: 33.333%;
+                        padding: 1rem 1.25rem;
+                        @include animated_border(1px, 0.1s);
+
+                        &:hover {
+                            border-color: $border_color;
+                        }
+
+                        &:focus {
+                            border-color: $border_color_images;
+                        }
+
+                        img {
+                            max-width: 100%;
+                            max-height: 40px;
+                            margin-bottom: 1.5rem;
+                        }
+
+                    }
+                }
+
+                &_more {
+                    display: none;
+                    position: absolute;
+                    border-top: 1px solid $border_color;
+
+                    &:after {
+                        padding: 20px  0;
+                        display: block;
+                        width: 100%;
+                        text-align: center;
+                        content: "Even more from Kottans";
+                    }
+                }
+
+                #popup-more {
+                    display: none;
+                }
+
+                #popup-more:checked ~ footer{
+                    display: none;
+                }
+
+                #popup-more:checked ~ .popup-icons_more {
+                    display: flex;
+                }
+
+                &_footer {
+                    display: block;
+                    padding: 10px 0;
+                    width: 100%;
+                    background-color: #f5f5f5;
+                    text-align: center;
+
+
+                    .popup-icons_footer-text {
+                        cursor: pointer;
+                    }
+
+                }
+            }
+        }
+    }
+}
+
+
+
+
