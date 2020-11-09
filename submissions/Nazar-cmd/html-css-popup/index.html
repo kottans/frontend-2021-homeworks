@@ -12,110 +12,159 @@
 </head>
 <body>
 <header>
-    <nav class="navbar" >
-        <a href="#" class="navbar-link">
-            Mail
-        </a>
-        <a href="#" class="navbar-link">
-            Images
-        </a>
-        <a class="navbar-popup_container">
-            <input type="checkbox" id="navbar-button" tabindex="0"/>
-            <label for="navbar-button" class="navbar-button">
-                <img src="assets/icons/popup-button.png" alt="popup-button"/>
-            </label>
-            <section class="popup">
-                <div class="popup-icons">
-                    <div class="popup-icons_main">
-                        <figure class="popup-icon" tabindex="0">
-                            <img src="assets/icons/calendar.png" alt="calendar"/>
-                            <figcaption>Calendar</figcaption>
-                        </figure>
-                        <figure class="popup-icon" tabindex="0">
-                            <img src="assets/icons/mail.png" alt="mail"/>
-                            <figcaption>Mail</figcaption>
-                        </figure>
-                        <figure class="popup-icon" tabindex="0">
-                            <img src="assets/icons/news.png" alt="news"/>
-                            <figcaption>News</figcaption>
-                        </figure>
-                        <figure class="popup-icon" tabindex="0">
-                            <img src="assets/icons/maps.png" alt="map"/>
-                            <figcaption>Map</figcaption>
-                        </figure>
-                        <figure class="popup-icon" tabindex="0">
-                            <img src="assets/icons/files.png" alt="files"/>
-                            <figcaption>Files</figcaption>
-                        </figure>
-                        <figure class="popup-icon" tabindex="0">
-                            <img src="assets/icons/contacts.png" alt="contacts"/>
-                            <figcaption>Contacts</figcaption>
-                        </figure>
-                        <figure class="popup-icon" tabindex="0">
-                            <img src="assets/icons/tanslation.png" alt="translation"/>
-                            <figcaption>Translate</figcaption>
-                        </figure>
-                        <figure class="popup-icon" tabindex="0">
-                            <img src="assets/icons/videos.png" alt="videos"/>
-                            <figcaption>Videos</figcaption>
-                        </figure>
-                        <figure class="popup-icon" tabindex="0">
-                            <img src="assets/icons/search.png" alt="search"/>
-                            <figcaption>Search</figcaption>
-                        </figure>
-                        <figure class="popup-icon" tabindex="0">
-                            <img src="assets/icons/photos.png" alt="photos"/>
-                            <figcaption>Photo</figcaption>
-                        </figure>
-                        <figure class="popup-icon" tabindex="0">
-                            <img src="assets/icons/apps.png" alt="apps"/>
-                            <figcaption>Apps</figcaption>
-                        </figure>
-                        <figure class="popup-icon" tabindex="0">
-                            <img src="assets/icons/documents.png" alt="document"/>
-                            <figcaption>Document</figcaption>
-                        </figure>
-                    </div>
-                    <input type="checkbox" id="popup-more"/>
-                    <div class="popup-icons_more">
-                        <figure class="popup-icon" tabindex="0">
-                            <img src="assets/icons/chat.png" alt="chat"/>
-                            <figcaption>Chat</figcaption>
-                        </figure>
-                        <figure class="popup-icon" tabindex="0">
-                            <img src="assets/icons/classroom.png" alt="clssroom"/>
-                            <figcaption>Classroom</figcaption>
-                        </figure>
-                        <figure class="popup-icon" tabindex="0">
-                            <img src="assets/icons/collection.png" alt="collection"/>
-                            <figcaption>Collection</figcaption>
-                        </figure>
-                        <figure class="popup-icon" tabindex="0">
-                            <img src="assets/icons/maps.png" alt="mars"/>
-                            <figcaption>Mars</figcaption>
-                        </figure>
-                        <figure class="popup-icon" tabindex="0">
-                            <img src="assets/icons/blogs.png" alt="blogs"/>
-                            <figcaption>Blogs</figcaption>
-                        </figure>
-                        <figure class="popup-icon" tabindex="0">
-                            <img src="assets/icons/promo.png" alt="promo"/>
-                            <figcaption>Promos</figcaption>
-                        </figure>
-                    </div>
-                    <footer class="popup-icons_footer">
-                        <label class="popup-icons_footer-text" for="popup-more">More</label>
-                    </footer>
-                </div>
-            </section>
-        </a>
+    <nav class="navbar">
+        <ul role="list" class="navbar-container">
+            <li class="navbar-container_link">
+                <a href="#" >Mail</a>
+            </li>
+            <li class="navbar-container_link">
+                <a href="#" >Images</a>
+            </li>
+            <li class="navbar-container_button navbar-popup_container">
+                <input type="checkbox" id="navbar-button"/>
+                <label for="navbar-button" class="navbar-container_button-image">
+                        <img src="assets/icons/popup-button.png" alt="popup-button"/>
+                </label>
+                <div class="popup">
+                    <div class="popup-icons">
+                        <div class="popup-icons_main">
 
-        <a href="#" class="navbar-button">
-            <img src="assets/icons/bell.png" alt="bell"/>
-        </a>
-        <a href="#" class="navbar-button navbar-profile_icon">
-            <img src="assets/icons/favicon.png" alt="bell"/>
-        </a>
+                            <a href="#" class="popup-icon_container">
+                                <figure class="popup-icon">
+                                    <img src="assets/icons/calendar.png" class="icon-image" alt="calendar"/>
+                                    <figcaption class="icon-text">Calendar</figcaption>
+                                </figure>
+                            </a>
+                            <a href="#" class="popup-icon_container">
+                                <figure class="popup-icon">
+                                    <img src="assets/icons/mail.png" class="icon-image" alt="mail"/>
+                                    <figcaption class="icon-text">Mail</figcaption>
+                                </figure>
+                            </a>
+                            <a href="#" class="popup-icon_container">
+                                <figure class="popup-icon">
+                                    <img src="assets/icons/news.png" class="icon-image" alt="news"/>
+                                    <figcaption class="icon-text">News</figcaption>
+                                </figure>
+                            </a>
+
+                            <a href="#" class="popup-icon_container">
+                                <figure class="popup-icon">
+                                    <img src="assets/icons/maps.png" class="icon-image" alt="map"/>
+                                    <figcaption class="icon-text">Map</figcaption>
+                                </figure>
+                            </a>
+                            <a href="#" class="popup-icon_container">
+                                <figure class="popup-icon">
+                                    <img src="assets/icons/files.png" class="icon-image" alt="files"/>
+                                    <figcaption class="icon-text">Files</figcaption>
+                                </figure>
+                            </a>
+                            <a href="#" class="popup-icon_container">
+                                <figure class="popup-icon">
+                                    <img src="assets/icons/contacts.png" class="icon-image" alt="contacts"/>
+                                    <figcaption class="icon-text">Contacts</figcaption>
+                                </figure>
+                            </a>
+
+                            <a href="#" class="popup-icon_container">
+                                <figure class="popup-icon">
+                                    <img src="assets/icons/tanslation.png" class="icon-image" alt="translation"/>
+                                    <figcaption class="icon-text">Translate</figcaption>
+                                </figure>
+                            </a>
+                            <a href="#" class="popup-icon_container">
+                                <figure class="popup-icon">
+                                    <img src="assets/icons/videos.png" class="icon-image" alt="videos"/>
+                                    <figcaption class="icon-text">Videos</figcaption>
+                                </figure>
+                            </a>
+                            <a href="#" class="popup-icon_container">
+                                <figure class="popup-icon">
+                                    <img src="assets/icons/search.png" class="icon-image" alt="search"/>
+                                    <figcaption class="icon-text">Search</figcaption>
+                                </figure>
+                            </a>
+
+                            <a href="#" class="popup-icon_container">
+                                <figure class="popup-icon">
+                                    <img src="assets/icons/photos.png" class="icon-image" alt="photos"/>
+                                    <figcaption class="icon-text">Photo</figcaption>
+                                </figure>
+                            </a>
+                            <a href="#" class="popup-icon_container">
+                                <figure class="popup-icon">
+                                    <img src="assets/icons/apps.png" class="icon-image" alt="apps"/>
+                                    <figcaption class="icon-text">Apps</figcaption>
+                                </figure>
+                            </a>
+                            <a href="#" class="popup-icon_container">
+                                <figure class="popup-icon">
+                                    <img src="assets/icons/documents.png" class="icon-image" alt="document"/>
+                                    <figcaption class="icon-text">Document</figcaption>
+                                </figure>
+                            </a>
+
+                        </div>
+                        <input type="checkbox" id="popup-more"/>
+                        <div class="popup-icons_more">
+
+                            <a href="#" class="popup-icon_container">
+                                <figure class="popup-icon" >
+                                    <img src="assets/icons/chat.png" class="icon-image" alt="chat"/>
+                                    <figcaption>Chat</figcaption>
+                                </figure>
+                            </a>
+                            <a href="#" class="popup-icon_container">
+                                <figure class="popup-icon" >
+                                    <img src="assets/icons/classroom.png" class="icon-image" alt="clssroom"/>
+                                    <figcaption>Classroom</figcaption>
+                                </figure>
+                            </a>
+                            <a href="#" class="popup-icon_container">
+                                <figure class="popup-icon" >
+                                    <img src="assets/icons/collection.png" class="icon-image" alt="collection"/>
+                                    <figcaption>Collection</figcaption>
+                                </figure>
+                            </a>
+
+                            <a href="#" class="popup-icon_container">
+                                <figure class="popup-icon" >
+                                    <img src="assets/icons/maps.png" class="icon-image" alt="mars"/>
+                                    <figcaption>Mars</figcaption>
+                                </figure>
+                            </a>
+                            <a href="#" class="popup-icon_container">
+                                <figure class="popup-icon" >
+                                    <img src="assets/icons/blogs.png" class="icon-image" alt="blogs"/>
+                                    <figcaption>Blogs</figcaption>
+                                </figure>
+                            </a>
+                            <a href="#" class="popup-icon_container">
+                                <figure class="popup-icon" >
+                                    <img src="assets/icons/promo.png" class="icon-image" alt="promo"/>
+                                    <figcaption>Promos</figcaption>
+                                </figure>
+                            </a>
+
+                        </div>
+                        <a class="popup-icons_footer">
+                            <label class="popup-icons_footer-text"  for="popup-more">More</label>
+                        </a>
+                    </div>
+                </div>
+            </li>
+            <li class="navbar-container_button">
+                <a href="#" >
+                    <img src="assets/icons/bell.png" class="navbar-container_button-image" alt="bell"/>
+                </a>
+            </li>
+            <li class="navbar-container_button navbar-container_profile_icon">
+                <a href="#">
+                    <img src="assets/icons/favicon.png" class="navbar-container_button-image" alt="bell"/>
+                </a>
+            </li>
+        </ul>
     </nav>
 </header>
 

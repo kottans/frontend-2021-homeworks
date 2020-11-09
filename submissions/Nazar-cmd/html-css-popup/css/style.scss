@@ -34,48 +34,41 @@ body {
     display: flex;
     justify-content: flex-end;
 
-    a{
-        color: $text_color!important;
+    a {
         text-decoration: none;
+        color: $text_color!important;
     }
 
-    &-link,  &-button{
-        cursor: pointer;
-        margin: 10px;
+    .navbar-container {
         display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+        margin-top: 0;
 
-    &-profile_icon{
-        border-radius: 50%;
-    }
-
-    &-button{
-
-        &:focus {
-            outline: none;
+        &_link,  &_button{
+            cursor: pointer;
+            margin: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        &:focus-within img {
-            border-color: $border_color_images;
+        &_profile_icon{
+            border-radius: 50%;
         }
 
-        img{
-            @include animated_border(2px, 0.25s);
-            max-width: 25px;
-            max-height: 25px;
+        &_button{
+
+            &-image{
+                @include animated_border(2px, 0.25s);
+                max-width: 25px;
+                max-height: 25px;
+            }
         }
-
     }
 
-    input:focus img {
-        background-color: black;
-    }
 
     &-popup_container {
 
-        #navbar-button:focus ~ .navbar-button img {
+        #navbar-button:focus ~ .navbar-container_button-image {
             border-color: $border_color_images;
         }
 
@@ -83,7 +76,6 @@ body {
             visibility: visible;
             overflow: visible;
             max-height: 100%;
-
         }
 
         #navbar-button:checked ~ .popup .popup-icons{
@@ -95,16 +87,16 @@ body {
         }
 
         .popup {
-            transition: all 0.3s ease;
-            visibility: hidden;
-            border: 1px solid $border_color;
-            margin-right: 150px;
-            top: 50px;
-            max-height: 0;
-            right: -77px;
             position: absolute;
             overflow: hidden;
+            visibility: hidden;
             width: 300px;
+            margin-right: 150px;
+            top: 50px;
+            right: -75px;
+            max-height: 0;
+            transition: all 0.3s ease;
+            border: 1px solid $border_color;
             box-shadow: 1px 5px 15px 4px #cfcfcf;
 
             &:after,
@@ -133,27 +125,36 @@ body {
             }
 
             &-icons {
-                transition: opacity 0.3s ease;
-                opacity: 0;
                 position: relative;
-                overflow: auto;
                 max-height: 100%;
+                opacity: 0;
+                overflow: auto;
+                transition: opacity 0.3s ease;
 
                 &_main, &_more {
-
-                    width: 100%;
                     display: flex;
                     flex-wrap: wrap;
-                    padding: 3rem 15px 0;
+                    width: 100%;
+                    padding: 0.5rem 5px;
 
-                    .popup-icon {
-                        display: flex;
-                        flex-direction: column;
-                        align-items: center;
-                        justify-content: space-between;
+
+                    .popup-icon_container {
                         width: 33.333%;
-                        padding: 1rem 1.25rem;
                         @include animated_border(1px, 0.1s);
+                        padding: 1rem 0.5rem;
+
+                        .popup-icon {
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            justify-content: space-between;
+
+                            .icon-image {
+                                max-width: 100%;
+                                max-height: 40px;
+                                margin-bottom: 1rem;
+                            }
+                        }
 
                         &:hover {
                             border-color: $border_color;
@@ -163,14 +164,8 @@ body {
                             outline: none;
                             border-color: $border_color_images!important;
                         }
-
-                        img {
-                            max-width: 100%;
-                            max-height: 40px;
-                            margin-bottom: 1rem;
-                        }
-
                     }
+
                 }
 
                 &_more {
@@ -191,16 +186,16 @@ body {
                     @extend %hide_checkbox;
                 }
 
-                #popup-more:focus ~ .popup-icons_footer .popup-icons_footer-text {
-                    outline: -webkit-focus-ring-color auto 1px;
-                }
-
-                #popup-more:checked ~ footer{
+                #popup-more:checked ~ .popup-icons_footer{
                     display: none;
                 }
 
                 #popup-more:checked ~ .popup-icons_more {
                     display: flex;
+                }
+
+                #popup-more:focus ~ .popup-icons_footer {
+                    border: 2px solid black;
                 }
 
                 &_footer {
@@ -209,6 +204,7 @@ body {
                     width: 100%;
                     background-color: #f5f5f5;
                     text-align: center;
+                    cursor: default;
 
 
                     .popup-icons_footer-text {
