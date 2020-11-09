@@ -38,9 +38,9 @@ Enemy.prototype.render = function () {
 
 Enemy.prototype.checkCollision = function () {
   if (
-    this.x >= player.x - conf.bugWidth &&
-    this.x <= player.x + conf.playerWidth &&
-    this.y == player.y
+    this.x >= this.player.x - conf.bugWidth &&
+    this.x <= this.player.x + conf.playerWidth &&
+    this.y == this.player.y
   )
     gameOver();
 };
