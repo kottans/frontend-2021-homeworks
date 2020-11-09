@@ -154,7 +154,6 @@ const cardClickListener = function(e) {
 const startButtonListener = function() {
   
   controlDiv.classList.add('hide');
-  showInfo(`Try to guess!`);
   numberOfFails = 0;
   
   if (document.querySelector('.preview-option').checked) {
@@ -172,6 +171,7 @@ const startButtonListener = function() {
       showInfo(`And now try to guess!`);
     },10000);
   } else {
+    showInfo(`Try to guess!`);
     if (getOpenedCards().length == 16) {
       closeAllCards();
       setTimeout(()=>{
