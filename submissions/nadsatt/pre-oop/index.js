@@ -19,6 +19,7 @@ class Inhabitant {
    }
 
    toString(){
+      console.log(this)
       return Object.entries(this).reduce((res, [key, value]) => {
 
          if(key === 'friends' && value.length === 0) res += `${key}: no friends; `
@@ -31,50 +32,55 @@ class Inhabitant {
 }
 
 class Cat extends Inhabitant {
-   constructor(gender, name, friends){
+   constructor(gender, name, ...friends){
       super({species: 'cat', legs: 4, saying: 'meov-meov!', gender, name, friends});
    }
 }
 
 class Dog extends Inhabitant {
-   constructor(gender, name, friends){
+   constructor(gender, name, ...friends){
       super({species: 'dog', legs: 4, saying: 'woof-woof!', gender, name, friends});
    }
 }
 
 class Human extends Inhabitant {
-   constructor({saying, name, gender, friends}){
+   constructor(saying, gender, name, ...friends){
       super({species: 'human', hands: 2, legs: 2, saying, gender, name, friends});
    }
 }
 
 class Man extends Human {
-   constructor(name, friends){
-      super({saying: 'i\'m a man!', gender: 'male', name, friends});
+   constructor(name, ...friends){
+      super('i\'m a man!', 'male', name, ...friends);
    }
 }
 
 class Woman extends Human {
-   constructor(name, friends){
-      super({saying: 'i\'m a woman!', gender: 'female', name, friends});
+   constructor(name, ...friends){
+      super('i\'m a woman!', 'female', name, ...friends);
    }
 }
 
 class CatWoman extends Cat {
-   constructor(name, friends){
-      super('female', name, friends);
+   constructor(name, ...friends){
+      super('female', name, ...friends);
       this.species = 'human';
       this.hands = 2;
       this.legs = 2;
    }
 }
 
+const woman1 = new Human('i\'m a special woman!', 'female', 'Linda');
+const man1 = new Man('Tom');
+const dog1 = new Dog('female', 'Stella');
+const cat1 = new Cat('male', 'Simon');
+
 const inhabitants = [
    new Cat('female', 'Kitty'),
-   new Dog('male', 'Bob', [new Dog('female', 'Stella')]),
-   new Man('Nick', [new Dog('male','Baxter'), new Cat('male', 'Simon')]),
+   new Dog('male', 'Bob', dog1),
+   new Man('Nick', cat1, woman1),
    new Woman('Lucy'),
-   new CatWoman('Kate', [new Man('Tom')])
+   new CatWoman('Kate', man1)
 ];
 
 // ======== OUTPUT ========
@@ -87,13 +93,5 @@ const inhabitants = [
    so code reviewers might focus on a single file that is index.js.
 */
 
-inhabitants.forEach(inhabitant => print(inhabitant.toString(), 'div'));
+inhabitants.forEach(inhabitant => print(inhabitant.toString()));
 
-function print(strObj, el = 'pre'){
-   const main = document.querySelector('main');
-
-   el = document.createElement(el);
-   el.innerHTML = strObj;
-
-   main.appendChild(el);
-}
