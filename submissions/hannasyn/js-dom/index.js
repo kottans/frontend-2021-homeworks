@@ -39,33 +39,37 @@ const title = document.createElement('h2');
 
 const asideBtn = document.querySelector('.aside-btn');
 const navigation = document.querySelector('.navigation');
+const startContent = 'Feminism is usually misunderstood and is viewed as a man-hating movement But it’s really quite the opposite! Feminism is about establishing equality between both men and women. Many women throughout history have undergone severe sexist laws thus the initiation of feminism movement was created to end discrimination. From eradicating female genital disfigurement to setting “girl power” in the 90’s. Relentless, stimulating, lively, serious, provocative, and above all empowering.';
+
 
 function generateText(){
   title.classList.add('title-content');
   paragraph.classList.add('content');
-  const startContent = 'Feminism is usually misunderstood and is viewed as a man-hating movement But it’s really quite the opposite! Feminism is about establishing equality between both men and women. Many women throughout history have undergone severe sexist laws thus the initiation of feminism movement was created to end discrimination. From eradicating female genital disfigurement to setting “girl power” in the 90’s. Relentless, stimulating, lively, serious, provocative, and above all empowering.';
   paragraph.textContent = startContent;
   container.append(paragraph);
 };
 
 function createNavItem() {
-  facts.forEach(function(fact) {
-    const navItem = document.createElement('li');
-    navItem.classList.add('navigation__list-item');
-    navItem.innerHTML = `<a data-id="${fact.id}" class="navigation__list-link" href="#">${fact.navName}</a>`;
-    navList.append(navItem);
-  })
+    let content = '';
+    facts.forEach(({id, navName})=> {
+      content += `<li class='navigation__list-item'>
+      <a data-id="${id}" class="navigation__list-link" href="#">${navName}</a>
+      </li>`
+    })
+    navList.innerHTML = content;
 };
 
 function displayFact(navLink) {
-  facts.find(function(fact) {
-    if (navLink.dataset.id == fact.id) {
-        title.innerText = fact.title;
-        paragraph.innerText = fact.text;
-        container.append(title);
-        container.append(paragraph);
-      }
-  }) 
+  const fact = facts.find( function (el) {
+    return navLink.dataset.id == el.id;
+  })
+  if (!fact) {
+    return;
+  }
+  title.innerText = fact.title;
+  paragraph.innerText = fact.text;
+  container.append(title);
+  container.append(paragraph);
 };
 
 navList.addEventListener('click', function(e) {
@@ -79,8 +83,10 @@ navList.addEventListener('click', function(e) {
   displayFact(target);
 });
 
-generateText();
-createNavItem();
+document.addEventListener("DOMContentLoaded", function(e) {
+  generateText();
+  createNavItem();
+});
 
 asideBtn.addEventListener('click', function(e) {
   asideBtn.classList.toggle('clicked');
