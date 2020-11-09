@@ -194,7 +194,7 @@ body {
                     display: flex;
                 }
 
-                #popup-more:focus ~ .popup-icons_footer {
+                #popup-more:focus ~ .popup-icons_footer .popup-icons_footer-text{
                     border: 2px solid black;
                 }
 
