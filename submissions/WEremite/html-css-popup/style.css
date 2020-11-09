@@ -1,0 +1,113 @@
+body {
+  background-image: url(https://raw.githubusercontent.com/WEremite/html-css-popup/308fb72a699779f60528cfa6fed26cdefcb59d0e/icons/unicorn-main.svg);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-color: rgb(255, 250, 250);
+}
+a {
+  text-decoration: none;
+}
+ul {
+  list-style: none;
+}
+li {
+  display: inline;
+}
+input {
+  appearance: none;
+}
+p {
+  text-align: center;
+  margin-top: 5px;
+  font-size: 14px;
+}
+.icons-menu label {
+  cursor: pointer;
+  text-align: center;
+  display: block;
+  position: relative;
+  padding: 10px 0px;
+}
+#show,#content {
+  opacity: 0;
+}
+#show:checked~#content {
+  opacity: 1;
+  overflow-x: hidden;
+  height: 300px;
+  margin: 10px 0px;
+  padding: 15px 20px;
+}
+#show2, #content2 {
+  opacity: 0;
+  position: absolute;       
+}
+#show2:checked~#content2 {
+  opacity: 1;
+  position: relative;
+  display: flex;
+  border-top: 1px solid #c5c5c547
+ }
+#show2:checked~.second-show-label {
+  display: none;
+}
+.menu {
+  position: relative;
+  clear: both;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  font-family: Helvetica, sans;
+}
+.first-menu-item {
+  margin: 10px;
+}
+.popup-button {
+  position: relative;
+  bottom: -6px;
+  cursor: pointer;
+}
+.popup {
+  overflow-y: auto;
+  height: 300px;
+  width: 350px;
+}
+.icons-menu {
+  display: flex;
+  width: 280px;
+  flex-wrap: wrap;
+  border: 2px solid transparent;
+  border-image: linear-gradient(to bottom left, #b827fc 0%, #2c90fc 25%, #b8fd33 50%, #fec837 75%, #fd1892 100%);
+  border-image-slice: 1;
+  background-color: #fff;
+}
+.icons-item {
+  display: flex;
+  align-items: center;
+}
+li.icons-item:hover {
+  outline: 1px solid grey;
+}
+.show:focus + .show-label {
+  outline: 1px solid grey;
+}
+.second-show:focus + .second-show-label {
+  outline: 1px solid grey;
+}
+.first-menu-item:focus, .icons-item:focus {
+  background-color: grey;
+}
+.icons-item-img {
+  width: 60px;
+  margin: 15px 10px 0px 15px;
+}
+.second-show-label {
+  width: 250px;
+}
+.more-icons-menu {
+  display: flex;
+  width: 280px;
+  flex-wrap: wrap;
+  padding-left: 0px;
+}
