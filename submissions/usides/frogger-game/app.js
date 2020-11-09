@@ -114,7 +114,8 @@ Player.prototype.render = function () {
 };
 
 const player = new Player();
-const allEnemies = [new Enemy(1), new Enemy(2), new Enemy(3)];
+
+const allEnemies = [1, 2, 3].map((row) => new Enemy(row, player));
 
 document.addEventListener('keyup', function (e) {
   var allowedKeys = {
