@@ -94,6 +94,11 @@ html {
   background-size: contain;
 }
 
+#check-label {
+  width: 3rem;
+  height: 3rem;
+}
+
 .check-box:hover,
 .check-input:focus + .check-box,
 .menu-link:hover,
@@ -101,6 +106,7 @@ html {
   background-color: color(bg-green);
   outline: 0;
   border-radius: 0.5rem;
+  cursor: pointer;
 }
 
 .visually-hidden {
@@ -111,7 +117,7 @@ html {
 .check-input:checked ~ .popup {
   display: block;
   position: absolute;
-  right: 2rem;
+  right: 2.5rem;
   top: 5rem;
   width: 20rem;
   height: 18rem;
@@ -126,7 +132,7 @@ html {
   &::before {
     position: fixed;
     content: "";
-    right: 11.7rem;
+    right: 12rem;
     top: 4.4rem;
     width: 1rem;
     height: 1rem;
@@ -168,16 +174,20 @@ html {
   height: 2rem;
   background-color: color(bg-grey);
   text-transform: uppercase;
+
+  &:hover {
+    background-color: color(bg-green);
+    outline: 0;
+    cursor: pointer;
+  }
 }
 
-.check-input-more:focus + .check-box-more,
-.check-input-more:hover + .check-box-more {
+#check-label-more:focus ~ * .check-box-more {
   background-color: color(bg-green);
   outline: 0;
-  border-radius: 0.5rem;
 }
 
-.check-input-more:checked + .check-box-more {
+#check-label-more:checked ~ * .check-box-more {
   position: absolute;
   display: none;
 }
