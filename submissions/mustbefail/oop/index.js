@@ -8,48 +8,60 @@
 // ======== OBJECTS DEFINITIONS ========
 // Define your objects here
 class Inhabitant {
-  constructor(species, name, gender, hands, legs, friends, phrase) {
-    this.friends = friends;
-    this.species = species;
+  constructor(name, gender, phrase, friends, legs) {
+    this.friends = friends ? friends : ['no friends'];
     this.name = name;
     this.gender = gender;
-    this.hands = hands;
     this.legs = legs;
     this.phrase = phrase;
   }
   saying() {
     return this.phrase;
   }
+
+  toString() {
+    return `Hello! I am <strong>${this.species}</strong>, my name is <strong>${
+      this.name
+    }</strong>, my gender is <strong>${this.gender}</strong>, I have <strong>${
+      this.hands
+    }</strong> arms and <strong>${
+      this.legs
+    }</strong> legs and you know what: <strong>${this.saying()}</strong>. My friends: <strong>${
+      this.friends
+    }</strong>`;
+  }
 }
 
 class Cat extends Inhabitant {
-  constructor(name, gender, friends, phrase) {
-    super('cat', name, gender, 0, 4, friends, phrase);
+  constructor(name, gender, phrase, friends, legs = 4) {
+    super(name, gender, phrase, friends, legs);
+    this.species = 'cat';
   }
 }
 
 class Dog extends Inhabitant {
-  constructor(name, gender, friends, phrase) {
-    super('dog', name, gender, 0, 4, friends, phrase);
+  constructor(name, gender, phrase, friends, legs = 4) {
+    super(name, gender, phrase, friends, legs);
+    this.species = 'dog';
   }
 }
 
 class Human extends Inhabitant {
-  constructor(name, gender, friends, phrase) {
-    super('human', name, gender, 2, 2, friends, phrase);
+  constructor(name, gender, phrase, friends, hands = 2, legs = 2) {
+    super(name, gender, phrase, friends, legs);
+    this.species = 'human';
+    this.hands = hands;
   }
 }
 
-const dog = new Dog('Maki', 'male', ['Alfred', 'Prokhor'], 'Bark-bark!');
-const cat = new Cat('Prokhor', 'male', ['June', 'Maki'], 'Meow!');
-const man = new Human('Alfred', 'male', ['Maki', 'Anna'], 'Master Bruce, I...');
-const woman = new Human(
-  'Anna',
-  'female',
-  ['June', 'Alfred'],
-  'Need more money!'
-);
+const dog = new Dog('Maki', 'male', 'Bark-bark!');
+const cat = new Cat('Prokhor', 'male', 'Meow!');
+const man = new Human('Alfred', 'male', 'Master Bruce, I...');
+const woman = new Human('Anna', 'female', 'Need more money!');
 
+dog.friends = [cat.name, man.name];
+cat.friends = [woman.name, dog.name];
+man.friends = [woman.name, dog.name, cat.name, man.name];
 // ======== OUTPUT ========
 /* Use print(message) for output.
   Default tag for message is <pre>. Use print(message,'div') to change containing element tag.
@@ -59,23 +71,9 @@ const woman = new Human(
   so code reviewers might focus on a single file that is index.js.
 */
 
-const inhabitants = [cat, man, woman, dog];
+const inhabitants = [man, woman, dog, cat];
 
-const formatOutput = (habitant) => {
-  return `Hello! I am <strong>${
-    habitant.species
-  }</strong>, my name is <strong>${
-    habitant.name
-  }</strong>, my gender is <strong>${
-    habitant.gender
-  }</strong>, I have <strong>${habitant.hands}</strong> arms and <strong>${
-    habitant.legs
-  }</strong> legs and you know what: <strong>${habitant.saying()}</strong>. My friends: <strong>${
-    habitant.friends
-  }</strong>`;
-};
-
-inhabitants.forEach((habitant) => print(formatOutput(habitant)));
+inhabitants.forEach((habitant) => print(habitant));
 
 /* Print examples:
   print('ABC');
