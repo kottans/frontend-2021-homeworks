@@ -1,4 +1,3 @@
-// Enemies our player must avoid
 const borders = {
     topY: 49,
     rightX: 420,
@@ -21,19 +20,10 @@ const randomSpeed = () => {
 //////////  Enemy /////////////////
 
 const Enemy = function() {
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
-
-    // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
     this.width = 70;
     this.height = 83;
     this.speed = randomSpeed();
 };
-
-// Update the enemy's position, required method for game
-// Parameter: dt, a time delta between ticks
-
 
 Enemy.prototype.handleGameOver = function () {
   if (
@@ -60,20 +50,11 @@ Enemy.prototype.handleGameOver = function () {
   }
 };
 
-
-// Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-// Now write your own player class
-// This class requires an update(), render() and
-// a handleInput() method.
-
-
 //////////  EnemyBoy /////////////////
-
-
 
 const EnemyBoy = function(x, y) {
     Enemy.apply(this, arguments);
@@ -85,14 +66,7 @@ const EnemyBoy = function(x, y) {
 EnemyBoy.prototype = Object.create(Enemy.prototype);
 EnemyBoy.prototype.constructor = EnemyBoy;  
 
-// EnemyBoy.prototype.render = function() {
-//     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-// };
-
 EnemyBoy.prototype.update = function(dt) {
-    // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
-    // all computers.
     this.x -= this.speed * dt;
     if (this.x < -150) {
         this.x = 500;
@@ -101,9 +75,7 @@ EnemyBoy.prototype.update = function(dt) {
     this.handleGameOver();
 };
 
-
 //////////  EnemyGirl /////////////////
-
 
 const EnemyGirl = function(x, y) {
     Enemy.apply(this, arguments)
@@ -116,22 +88,13 @@ EnemyGirl.prototype = Object.create(Enemy.prototype);
 EnemyGirl.prototype.constructor = EnemyGirl;
 
 EnemyGirl.prototype.update = function(dt) {
-    // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
-    // all computers.
     this.x += this.speed * dt;
     if (this.x > 500) {
         this.x = -150;
         this.speed = randomSpeed();
     }
-
     this.handleGameOver();
 };
-
-
-
-
-
 
 let enemyGirlFirst = new EnemyGirl(-150, 132);
 let enemyGirlSecond = new EnemyGirl(-150, 215);
@@ -142,11 +105,7 @@ let enemyBoyThird = new EnemyBoy(550, 298);
 const allEnemies = [enemyGirlFirst, enemyGirlSecond, enemyGirlThird, enemyBoyFirst, enemyBoySecond, enemyBoyThird];
 
 
-
-
 //////////  PLAYER /////////////////
-
-
 
 const Player = function(x, y) {
     this.x = x;
@@ -174,25 +133,21 @@ Player.prototype.handleInput = function(keyPress) {
       case "up":
         if (this.y > borders.topY) {
           this.y -= tileDimensions.height;
-        //   console.log(this.x, this.y);
         }
         break;
       case "down":
         if (this.y < borders.bottomY) {
           this.y += tileDimensions.height;
-        //   console.log(this.x, this.y);
         }
         break;
       case "left":
         if (this.x > borders.leftX) {
             this.x -= tileDimensions.width;
-            // console.log(this.x, this.y);
         }
         break;
       case "right":
         if (this.x < borders.rightX) {
             this.x += tileDimensions.width;
-            // console.log(this.x, this.y);
         }
         break;
     }
@@ -205,17 +160,7 @@ Player.prototype.render = function() {
 
 let player = new Player(220, 464);
 
-
-// Now instantiate your objects.
-// Place all enemy objects in an array called allEnemies
-
-// Place the player object in a variable called player
-
-
-
 //////////  ITEM /////////////////
-
-
 
 const randomPositionInArray = (arrLength) => {
     return (Math.floor(Math.random() * arrLength));
@@ -242,10 +187,7 @@ Item.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
 
-
 //////////  STAR /////////////////
-
-
 
 const Star = function() {
     Item.apply(this, arguments);
@@ -266,10 +208,7 @@ Star.prototype.update = function() {
     }
 }
 
-
 //////////  HEART /////////////////
-
-
 
 const Heart = function() {
     Item.apply(this, arguments);
@@ -280,8 +219,6 @@ Heart.prototype = Object.create(Item.prototype);
 Heart.prototype.constructor = Heart;
 
 Heart.prototype.update = function() {
-    // Item.prototype.update.apply(this, arguments);
-    
     if (this.y === player.y && this.x === player.x - 20) {
         this.x = randomPosition().x;
         this.y = randomPosition().y;
@@ -293,16 +230,10 @@ Heart.prototype.update = function() {
     }
 }
 
-
 let star = new Star();
 let heart = new Heart();
 
 
-// x 0, 100, 200, 300, 400  
-// y 132, 215, 298
-
-// This listens for key presses and sends the keys to your
-// Player.handleInput() method. You don't need to modify this.
 document.addEventListener('keyup', function(e) {
     var allowedKeys = {
         37: 'left',
