@@ -90,7 +90,7 @@ body {
 }
 
 /* flip the pane*/
-.flip-container.opened .flipper {
+.opened .flipper {
   transform: rotateY(180deg);
 }
 

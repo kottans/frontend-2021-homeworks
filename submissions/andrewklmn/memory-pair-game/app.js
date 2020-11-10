@@ -1,12 +1,4 @@
-const imageNames = [
-  'image1.png',
-  'image2.png',
-  'image3.png',
-  'image4.png',
-  'image5.png',
-  'image6.png',
-  'image7.png',
-  'image8.png',
+const files = [
   'image1.png',
   'image2.png',
   'image3.png',
@@ -17,12 +9,12 @@ const imageNames = [
   'image8.png',
 ];
 
-let numberOfFails = 0; 
-
+const imageNames = [...files,...files];
 const cardsShuffler = function() { return 0.5 - Math.random() };
-
 const gameBoard = document.querySelector(".gameboard");
 const controlDiv = document.querySelector('.control');
+
+let numberOfFails = 0; 
 
 const openAllCards = function() {
   const cards = gameBoard.querySelectorAll('.flip-container');
