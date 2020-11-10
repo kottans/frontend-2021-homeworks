@@ -17,12 +17,12 @@ class Inhabitant {
     }
 
     toString() {
-        return [this.species, this.name, this.gender, this.saying].join(';');
+        return [this.species, this.name, this.gender, this.saying].join(';') + ';';
     }
 }
 
 class Human extends Inhabitant {
-    constructor(name, gender, saying = "Hi!", hands = 2, legs = 2) {
+    constructor(name, gender, saying = "Hi", hands = 2, legs = 2) {
         super('human', name, gender, saying);
         this.hands = hands;
         this.legs = legs;
@@ -34,7 +34,7 @@ class Human extends Inhabitant {
 }
 
 class Cat extends Inhabitant {
-    constructor(name, gender, saying = 'meow-meow!', legs = 4) {
+    constructor(name, gender, saying = 'meow-meow', legs = 4) {
         super('cat', name, gender, saying);
         this.legs = legs;
     }
@@ -45,7 +45,7 @@ class Cat extends Inhabitant {
 }
 
 class Dog extends Inhabitant {
-    constructor(name, gender, saying = 'woof-woof!', legs = 4) {
+    constructor(name, gender, saying = 'woof-woof', legs = 4) {
         super('dog', name, gender, saying);
         this.legs = legs;
     }
