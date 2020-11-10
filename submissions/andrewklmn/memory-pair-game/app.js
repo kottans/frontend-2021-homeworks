@@ -161,7 +161,8 @@ const startButtonListener = function() {
     if (getOpenedCards().length == 0) {
       openAllCards();
     };
-    for (let i=11; i>1; i--) {
+    showInfo('Remember cards! Time left: 10');
+    for (let i=10; i>=1; i--) {
       setTimeout(()=>{
         showInfo(`Remember cards! Time left: ${(10-i)}`);
       },i*1000);
