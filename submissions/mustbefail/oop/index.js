@@ -17,7 +17,7 @@ class Inhabitant {
     this.phrase = phrase;
   }
 
-  saying() {
+  sayPhrase() {
     return this.phrase;
   }
 
