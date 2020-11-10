@@ -8,13 +8,15 @@
 // ======== OBJECTS DEFINITIONS ========
 // Define your objects here
 class Inhabitant {
-  constructor(name, gender, phrase, friends, legs) {
+  constructor(species, name, gender, phrase, friends, legs) {
     this.friends = friends ? friends : ['no friends'];
+    this.species = species;
     this.name = name;
     this.gender = gender;
     this.legs = legs;
     this.phrase = phrase;
   }
+
   saying() {
     return this.phrase;
   }
@@ -22,41 +24,48 @@ class Inhabitant {
   toString() {
     return `Hello! I am <strong>${this.species}</strong>, my name is <strong>${
       this.name
-    }</strong>, my gender is <strong>${this.gender}</strong>, I have <strong>${
-      this.hands
-    }</strong> arms and <strong>${
-      this.legs
-    }</strong> legs and you know what: <strong>${this.saying()}</strong>. My friends: <strong>${
+    }</strong>, my gender is <strong>${
+      this.gender
+    }</strong>,My friends: <strong>${
       this.friends
-    }</strong>`;
+    }</strong>  and you know what: <strong>${this.saying()}</strong>`;
   }
 }
 
 class Cat extends Inhabitant {
   constructor(name, gender, phrase, friends, legs = 4) {
-    super(name, gender, phrase, friends, legs);
-    this.species = 'cat';
+    super('cat', name, gender, phrase, friends, legs);
+  }
+
+  toString() {
+    return super.toString() + ` I have <strong>${this.legs}</strong> legs`;
   }
 }
 
 class Dog extends Inhabitant {
   constructor(name, gender, phrase, friends, legs = 4) {
-    super(name, gender, phrase, friends, legs);
-    this.species = 'dog';
+    super('dog', name, gender, phrase, friends, legs);
+  }
+  toString() {
+    return super.toString() + ` I have <strong>${this.legs}</strong> legs`;
   }
 }
 
 class Human extends Inhabitant {
   constructor(name, gender, phrase, friends, hands = 2, legs = 2) {
-    super(name, gender, phrase, friends, legs);
-    this.species = 'human';
+    super('human', name, gender, phrase, friends, legs);
     this.hands = hands;
+  }
+  toString() {
+    return (
+      super.toString() + ` I have <strong>${this.hands}</strong> hands and <strong>${this.legs}</strong> legs`
+    );
   }
 }
 
 const dog = new Dog('Maki', 'male', 'Bark-bark!');
 const cat = new Cat('Prokhor', 'male', 'Meow!');
-const man = new Human('Alfred', 'male', 'Master Bruce, I...');
+const man = new Human('Alfred', 'male', 'Master Bruce!');
 const woman = new Human('Anna', 'female', 'Need more money!');
 
 dog.friends = [cat.name, man.name];
