@@ -1,0 +1,131 @@
+.navigation {
+  background-color: #fc7e08;
+  height: 45px;
+  width: 100%;
+  display: inline-flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.nav {
+  list-style-type: none;
+  display: inline-flex;
+  flex-direction: row;
+}
+
+.nav_icon,
+.nav_popup {
+  margin-right: 8px;
+  margin-left: 8px;
+}
+
+.nav_icon_image {
+  height: 28px;
+  width: 25px;
+}
+
+.nav_popup {
+  width: 35px;
+  height: 30px;
+  border-radius: 0%;
+  text-align: center;
+  padding-top: 3px;
+}
+
+.nav_icon:focus {
+  background: rgb(175, 172, 172);
+}
+
+.nav_icon,
+.nav_popup {
+  cursor: pointer;
+  background: whitesmoke;
+  border: 2px solid rgb(114, 109, 109);
+}
+
+.navigation input:focus ~ .nav_popup {
+  cursor: pointer;
+  background-color: rgb(175, 172, 172);
+  border-radius: 10%;
+  border: 2px solid black;
+}
+
+.text_more:hover,
+.more_images:focus ~ .text_more {
+  cursor: pointer;
+  background: #fc7e08;
+  border: 1px solid #fc7e08;
+}
+
+.li_icon_image {
+  width: 37px;
+  height: 35px;
+}
+
+/*Styles for pressing menu-button*/
+.main_menu_icons {
+  display: none;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  margin-right: 2px;
+  margin-left: auto;
+  padding: 10px 10px 10px 10px;
+}
+
+.hidden_checkbox,
+.more_images {
+  opacity: 0;
+  position: absolute;
+}
+
+.hidden_checkbox:checked ~ .main_menu_icons {
+  display: grid;
+  margin-top: 135px;
+  margin-right: 20px;
+  grid-template-columns: 40px 40px 40px;
+  grid-template-rows: 40px 40px 40px;
+  gap: 15px 15px;
+  width: 170px;
+  height: 200px;
+  overflow-y: auto;
+  box-shadow: 6px 6px 2px 1px darkgrey;
+  justify-content: flex-start;
+  background-color: rgb(175, 172, 172);
+  transition-delay: 2s;
+  position: fixed;
+}
+
+/*Styles for pressing "More" button*/
+.more_menu_icons {
+  display: none;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.more_images:checked ~ .more_menu_icons {
+  display: grid;
+  grid-template-columns: 40px 40px 40px;
+  grid-template-rows: auto;
+  gap: 15px 15px;
+  justify-content: left;
+  margin-top: 40px;
+  margin-left: -55px;
+}
+
+.main_menu_icons a:hover {
+  background-color: #fc7e08;
+  border-radius: 10%;
+}
+
+.text_more {
+  border: 0.5px solid grey;
+  border-width: 1px auto 1px auto;
+  border-radius: 0;
+  display: inline-block;
+  width: 160px;
+  height: 20px;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
