@@ -1,0 +1,275 @@
+html, body {
+ font-family: Arial, Helvetica, sans-serif;
+ height: 100%;
+ width:100%;
+}
+
+.hidden {
+  display: none;
+}
+
+.wrapper-video {
+  max-height: 100vh;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+header {
+  width: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  background-color: rgb(33 33 33 / 35%);
+}
+
+.menu {
+  display: flex;
+  justify-content: flex-end;
+  max-width: 1200px;
+  height: 70px;
+  margin: 0 auto;
+}
+
+.menu-items {
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+  margin-left: 15px;
+  outline: none;
+}
+
+li:nth-child(4) {
+  margin-left: 20px;
+}
+
+.menu-link {
+  text-decoration: none;
+  color: #fff;
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight: bold;
+  padding: 10px;
+}
+
+
+li:focus .menu-link, 
+li:hover .menu-link, 
+li:active .menu-link {
+  color: #F9A7A7;
+  transition: color 0.3s ease-in-out 0s;
+}
+
+.menu-popup {
+  position: relative;
+}
+
+label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 38px;
+  height: 38px;
+}
+
+.menu-popup-icon {
+  width: 32px;
+  height: 32px;
+  color: #fff;
+  fill: #fff;
+}
+
+.menu-popup:hover .menu-popup-icon, 
+.menu-popup:focus .menu-popup-icon, 
+.menu-popup:active .menu-popup-icon  {
+  width: 38px;
+  height: 38px;
+  color: #4671C6;
+  fill: #F9A7A7;
+  cursor: pointer;
+}
+
+.popup {
+  display: none;
+  position: absolute;
+  top: 54px;
+  right: 0;
+  max-height: 400px;
+  width: 300px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  box-shadow: 2px 2px 1px rgba(41, 52, 73, 0.5);
+  overflow-y: auto; 
+}
+
+.popup-list {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 10px 10px 0 10px;
+}
+
+.popup-list li {
+  margin-left: 0;
+}
+.popup-list li:focus, 
+.popup-list li:hover, 
+.popup-list li:active {
+  background: #eaeaeafa;
+  border-radius: 5px;
+}
+
+.popup-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 70px;
+  font-size: 14px;
+  text-align: center;
+  color: #4671C6;
+  padding: 10px;
+  text-decoration: none;   
+}
+
+.popup-list li:focus .popup-item, 
+.popup-list li:hover .popup-item, 
+.popup-list li:active .popup-item {
+  color: #F9A7A7;
+  transition: color 0.1s linear;
+}
+
+.popup-item svg {
+  width: 40px;
+  height: 40px;
+  padding-bottom: 10px;
+}
+
+.menu-popup input:checked ~ .popup {
+  display: block;
+} 
+
+.btn-more {
+  display: block;
+  width: 100%;
+  height: auto;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  color: #000000;
+  background-color: #F9A7A7;
+  border: none;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.btn-more:focus, 
+.btn-more:hover, 
+.btn-more:active {
+  color: #fff;
+  background-color: #fd8787;
+  transition: color 0.1s linear;
+  cursor: pointer;
+}
+
+.popup  input:checked ~ .btn-more {
+  display: none;
+}
+
+.popup-list-more {
+  display: none;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 10px;
+}
+
+.popup-list-more li {
+  margin-left: 0;
+}
+
+
+.popup input:checked ~ .popup-list-more {
+  display: flex;
+}
+
+.menu-link-user {
+  display: flex;
+  justify-content: center;
+  align-items: center;  
+  width: 34px;
+  height: 34px;
+  padding: 2px;
+  border-radius: 50%;
+}
+  
+li:focus .menu-link-user, 
+li:active .menu-link-user, 
+li:hover .menu-link-user {
+  background-color: #F9A7A7;
+}
+  
+.user-img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: url(../src/user.jpeg) no-repeat center;
+}
+
+@supports (object-fit: cover) {
+  .background-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+
+/* Media queries */
+
+@media (max-width: 1199px) { 
+  .menu {
+    margin-right: 30px;
+  }
+}
+
+@media (max-width: 425px) { 
+  .menu {
+    margin: 0 auto;
+    height: 170px;
+    padding-top: 20px;
+    justify-content: center;
+  }
+
+  .menu-items {
+    flex-direction: column;
+    align-items: center; 
+    margin: 0;
+  }
+
+  .menu-items li {
+    padding-bottom: 10px;
+    margin-left: 0;;
+  }
+
+  .menu-popup {
+    order: 4;
+  }
+
+  .popup {
+    top: 67px;
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
+}
+  
