@@ -86,8 +86,8 @@ body {
 .pop_up {
   display: none;
   position: absolute;
-  top: 3.0em;
-  right: 2em;
+  top: 6.5em;
+  right: 0.6em;
   width: 350px;
   border: 2px solid #666666;
   background: #fff;
@@ -96,10 +96,10 @@ body {
   content: '';
   display: block;
   position: absolute;
-  top: -0.7em;
+  top: -1.1em;
   right: 5.5em;
-  width: 1em;
-  height: 1em;
+  width: 2em;
+  height: 2em;
   border: 2px solid #666666;
   border-right:none;
   border-bottom: none;
@@ -223,10 +223,11 @@ box-shadow: 10px -10px 22px 10px #000
   cursor: pointer;
   background-color: greY;
 }
-.button_extra_input:hover + .button_more_label,
-.button_extra_input:focus + .button_more_label{
+.button_extra_input:hover + .button_extra_label,
+.button_extra_input:focus + .button_extra_label{
   color: #0033cc;
   text-decoration: underline;
+  opacity: 0.5;
 }
 
 .icon_first {
