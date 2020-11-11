@@ -9,8 +9,9 @@ const files = [
   'image8.png',
 ];
 
-const imageNames = [...files,...files];
 const cardsShuffler = function() { return 0.5 - Math.random() };
+
+const imageNames = [...files,...files].sort(cardsShuffler);
 const infoDiv = document.querySelector('.info');
 const gameBoard = document.querySelector(".gameboard");
 const controlDiv = document.querySelector('.control');
@@ -38,8 +39,6 @@ const closeAllCards = function() {
 };
 
 const initBoard = function () {
-
-  imageNames.sort(cardsShuffler);
 
   gameBoard.innerHTML = '';
 
