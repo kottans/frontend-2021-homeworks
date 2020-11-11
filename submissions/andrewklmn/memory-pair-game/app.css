@@ -83,13 +83,11 @@ body {
   cursor: pointer;
 }
 
-/* entire container, keeps perspective */
 .flip-container {
   perspective: 1000px;
 
 }
 
-/* flip the pane*/
 .opened .flipper {
   transform: rotateY(180deg);
 }
@@ -99,7 +97,6 @@ body {
   height: 100%;
 }
 
-/* flip speed goes here */
 .flipper {
   position: relative;
   
@@ -107,24 +104,20 @@ body {
 	transform-style: preserve-3d;
 }
 
-/* hide back of pane during swap */
 .front, .back {
   position: absolute;
-	top: 0;
+  top: 0;
   left: 0;
   
   -webkit-backface-visibility: hidden;
-	backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
-/* front pane, placed above back */
 .front {
 	z-index: 2;
-	/* for firefox 31 */
 	transform: rotateY(0deg);
 }
 
-/* back, initially hidden pane */
 .back {
 	transform: rotateY(180deg);
 }

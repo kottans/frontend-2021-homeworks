@@ -11,6 +11,7 @@ const files = [
 
 const imageNames = [...files,...files];
 const cardsShuffler = function() { return 0.5 - Math.random() };
+const infoDiv = document.querySelector('.info');
 const gameBoard = document.querySelector(".gameboard");
 const controlDiv = document.querySelector('.control');
 
@@ -101,7 +102,7 @@ const getGuessedCards = function() {
 }
 
 const showInfo = (text) => {
-  document.querySelector('.info').innerHTML = text;
+  infoDiv.innerHTML = text;
 }
 
 const cardClickListener = function(e) { 
