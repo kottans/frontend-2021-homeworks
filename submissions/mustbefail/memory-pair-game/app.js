@@ -42,8 +42,6 @@ const makeCardpool = () => {
   cards.forEach((el) => el.addEventListener('click', handler));
 };
 
-// const sleep = (ms, fn) => setTimeout(fn, ms);
-
 const updateCardsState = () => {
   const flippedCards = document.querySelectorAll('[data-flip="true"]');
   state.flippedCards.flippedCardsCount = flippedCards.length;
@@ -113,7 +111,6 @@ const handler = ({ target }) => {
   
   render();
 };
-
 
 export default () => {
   render();
