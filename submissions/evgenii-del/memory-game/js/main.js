@@ -58,9 +58,9 @@ const renderItems = (cards) => {
     let fragment = document.createDocumentFragment();
     cards.forEach((card) => {
         let block = createItem(card);
-        fragment.appendChild(block);
+        fragment.append(block);
     })
-    cards_container.appendChild(fragment);
+    cards_container.append(fragment);
 }
 
 const flipCard = (target) => {
@@ -101,7 +101,7 @@ const wrongCards = () => {
     }, 500);
 }
 
-window.onload = () => {
+document.addEventListener('DOMContentLoaded', () => {
     cards_container.addEventListener('click', (event) => {
         const target = event.target;
         if (playing) return;
@@ -110,4 +110,4 @@ window.onload = () => {
 
     const newArray = [...cards, ...cards].sort(() => 0.2 - Math.random());
     renderItems(newArray);
-}
+})
