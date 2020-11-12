@@ -33,10 +33,8 @@ const cards = [
     }
 ];
 const cards_container = document.querySelector('.js-cards_container');
-let step = 0;
-let hasFlipped = false;
-let playing = false;
-let firstCard, secondCard;
+let hasFlipped, playing, restart = false;
+let firstCard, secondCard, step;
 
 const createItem = (card) => {
     const block = document.createElement('div');
@@ -74,14 +72,19 @@ const flipCard = (target) => {
             secondCard = target;
             if (firstCard.dataset.id === secondCard.dataset.id) {
                 rightCards();
-                setTimeout(() => {
-                    if (step === 8) {
-                        alert('Вы победили!');
-                    }
-                }, 300);
+                setTimeout(countSteps, 300);
             } else {
                 wrongCards();
             }
+        }
+    }
+}
+
+const countSteps = () => {
+    if (step === 8) {
+        restart = confirm('Вы победили! Хотите начать игру снова?');
+        if (restart) {
+            restartGame();
         }
     }
 }
@@ -101,13 +104,18 @@ const wrongCards = () => {
     }, 500);
 }
 
+const restartGame = () => {
+    step = 0;
+    cards_container.innerHTML = "";
+    const newArray = [...cards, ...cards].sort(() => 0.2 - Math.random());
+    renderItems(newArray);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     cards_container.addEventListener('click', (event) => {
         const target = event.target;
         if (playing) return;
         flipCard(target);
     })
-
-    const newArray = [...cards, ...cards].sort(() => 0.2 - Math.random());
-    renderItems(newArray);
+    restartGame();
 })
