@@ -110,13 +110,9 @@ function changeMovie(e) {
 
         updateActiveNav(clickedElem);
 
-        let chosenYear = clickedElem.dataset.year;
+        const chosenYear = clickedElem.dataset.year;
 
-        let chosenMovie = moviesData.find(movie => {
-            for (let item in movie) {
-                if (movie['year'] === chosenYear) return true;
-            }
-        });
+        const chosenMovie = moviesData.find(movie => movie['year'] === chosenYear);
 
         renderCard(chosenMovie);
         toggleSidebar();
