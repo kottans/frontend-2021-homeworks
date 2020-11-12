@@ -1,0 +1,175 @@
+* {
+  margin: 0;
+  padding: 0;
+  appearance: none;
+  list-style: none;
+  text-align: center;
+  text-decoration: none;
+}
+
+.navbar {
+  display: flex;
+  height: 50px;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 20px 0;
+  font-family: Arial, sans-serif;
+  font-size: 24px;
+  color: #757575;
+}
+
+.navbar li {
+  position: relative;
+  margin: 5px 20px;
+}
+
+.navbar a {
+  display: inline-block;
+  padding: 5px;
+}
+
+.navbar a:focus,
+.navbar input:focus {
+  background-color: rgb(224, 224, 224, 0.5);
+}
+
+.navbar a:hover {
+  background-color: rgb(224, 224, 224, 0.7);
+  border-radius: 4px;
+}
+
+.app-button-label {
+  display: block;
+  width: 40px;
+  border-radius: 4px;
+}
+
+label:hover {
+  cursor: pointer;
+}
+
+.app-button {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: -1;
+}
+
+.avatar {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+
+label img {
+  width: 100%;
+  vertical-align: middle;
+}
+
+a img {
+  vertical-align: middle;
+}
+
+a:visited {
+  color: #757575;
+}
+
+.app-menu {
+  display: none;
+}
+
+.app-menu a {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  box-sizing: border-box;
+  width: 30%;
+  height: 150px;
+  padding: 5%;
+  border: 2px solid transparent;
+  border-radius: 4px;
+}
+
+.app-menu a img {
+  max-width: 90%;
+  max-height: 60%;
+}
+
+.app-menu a:focus {
+  border-color: rgba(224, 224, 224, 0.7);
+  background-color: transparent;
+  outline: none;
+}
+
+.app-menu a:hover {
+  background-color: rgba(224, 224, 224, 0.7);
+}
+
+.app-button:checked ~ label {
+  background-color: rgba(224, 224, 224, 0.5);
+}
+
+.app-button:checked ~ .app-menu {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  align-content: flex-start;
+  overflow: scroll;
+  position: absolute;
+  box-sizing: border-box;
+  top: 60px;
+  right: -90px;
+  width: 400px;
+  max-width: 400px;
+  max-height: 650px;
+  padding: 10%;
+  box-shadow: 0 0 20px gray;
+  border-radius: 4px;
+  font-size: 0.7em;
+  line-height: 2.5em;
+}
+
+.app-menu a:nth-child(n+13),
+.app-menu .div-line {
+  display: none;
+}
+
+.div-line {
+  height: 2px;
+  width: 100%;
+  border-top: 2px solid rgba(224, 224, 224, 0.5);
+}
+
+.more-button {
+  display: block;
+  position: absolute;
+  bottom: 1%;
+  width: 97.5%;
+  height: 6%;
+  border-radius: 4px;
+  z-index: -1;
+}
+
+.more-button-label {
+  display: block;
+  background-color: rgba(224, 224, 224, 0.5);
+  border-radius: 4px;
+  width: 100%;
+}
+
+.more-button:focus ~ .more-button-label {
+  background-color: rgba(133, 132, 132, 0.5);
+  color: white;
+}
+
+.more-button:checked,
+.more-button:checked ~ label {
+  display: none;
+}
+
+.more-button:checked ~ a:nth-child(n+13),
+.more-button:checked ~ .div-line {
+  display: flex;
+}
