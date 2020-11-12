@@ -22,7 +22,21 @@
      align-items: center;
  }
  
- figure figcaption {
+ img {
+     max-width: 50px;
+     max-height: 40px;
+ }
+ 
+ .bell {
+     max-width: 25px;
+     max-height: 25px;
+ }
+ 
+ .avatar {
+     border-radius: 50%;
+ }
+ 
+ p {
      text-align: center;
  }
  
@@ -32,27 +46,28 @@
      align-items: center;
      padding: auto;
      margin: auto;
-     max-width: 50px;
+     max-width: 100px;
      max-height: 30px;
+     font-size: 18px;
  }
  
  .overlay {
      display: none;
-     position: absolute;
+     position: fixed;
      right: 50px;
      top: 60px;
      width: 310px;
-     height: 430px;
+     height: 440px;
      overflow-y: auto;
      border: solid 1px gainsboro;
      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
      grid-auto-flow: row;
  }
  
- .popup,
- .more {
+ .popup {
      display: grid;
      margin: auto;
+     padding: auto;
      grid-template-rows: repeat (4, 100px);
      grid-template-columns: repeat(3, 100px);
      grid-auto-rows: 100px;
@@ -61,12 +76,13 @@
      align-items: auto;
  }
  
- .popup {
-     width: 100%;
-     height: 90%;
+ .more {
+     margin: auto;
+     display: none;
  }
  
- #toggle {
+ #toggle,
+ #toggle1 {
      position: absolute;
      display: none;
  }
@@ -75,10 +91,23 @@
      display: block;
  }
  
+ #toggle1:checked~.more {
+     display: grid;
+     margin: auto;
+     position: absolute;
+     grid-template-rows: repeat (4, 100px);
+     grid-template-columns: repeat(3, 100px);
+     grid-auto-rows: 100px;
+     grid-auto-columns: 100px;
+     justify-content: space-around;
+     align-items: auto;
+ }
+ 
  .el {
-     display: inline-block;
+     display: block;
      align-items: center;
      margin: auto;
+     padding: 5px;
      max-width: 100px;
      text-align: center;
      font-size: 14px;
@@ -89,36 +118,41 @@
      opacity: 0.7;
  }
  
- #moreButton {
-     padding-top: 10px;
-     display: block;
-     text-align: center;
-     font-size: 18px;
-     color: #D6EAF8;
-     outline: none;
+ .popup-button {
+     cursor: pointer;
  }
  
- #moreButton::-webkit-details-marker {
+ .more-button {
+     position: absolute;
+     height: 30px;
+     width: 100%;
+     margin: auto;
+     display: block;
+     text-align: center;
+     font-size: 14px;
+     color: #D6EAF8;
+     outline: none;
+     cursor: pointer;
+     z-index: 1;
+ }
+ 
+ ::-webkit-details-marker {
      display: none;
  }
  
- #moreButton::before {
+ .more-button::before {
      color: #34495E;
-     content: 'More';
-     font-size: 14px;
  }
  
- #moreButton:hover {
+ .more-button:hover {
      opacity: 0.4;
      color: grey;
-     transform: translateY(5%);
  }
  
- #moreButton:focus {
+ .more-button:focus {
      outline: 0;
      opacity: 0.4;
      color: grey;
-     transform: translateY(10%);
  }
  
  a:focus,
@@ -130,17 +164,8 @@
      width: 5px;
  }
  
- ::-webkit-scrollbar-track {
-     -webkit-box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.1);
- }
- 
- ::-webkit-scrollbar-thumb {
-     -webkit-box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.2);
- }
- 
- .el>a:focus,
- .more>a:focus {
-     background: rgba(238, 210, 232, 0.2);
+ .el>a:focus {
+     outline: rgba(238, 210, 232, 0.2);
  }
  
  a:focus,
