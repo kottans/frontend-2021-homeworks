@@ -26,6 +26,7 @@
 .navbar a {
   display: inline-block;
   padding: 5px;
+  color: #757575;
 }
 
 .navbar a:focus,
@@ -131,7 +132,7 @@ a:visited {
   line-height: 2.5em;
 }
 
-.app-menu a:nth-child(n+13),
+.app-menu a:nth-child(n + 13),
 .app-menu .div-line {
   display: none;
 }
@@ -169,7 +170,7 @@ a:visited {
   display: none;
 }
 
-.more-button:checked ~ a:nth-child(n+13),
+.more-button:checked ~ a:nth-child(n + 13),
 .more-button:checked ~ .div-line {
   display: flex;
 }
