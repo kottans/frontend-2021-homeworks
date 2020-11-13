@@ -20,7 +20,7 @@ class Habitant {
   }
 
   addFriends(newFriend) {
-    this.friends.pop(newFriend);
+    this.friends.push(newFriend);
   }
 
   listFriends() {
