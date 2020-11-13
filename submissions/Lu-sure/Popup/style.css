@@ -73,8 +73,6 @@ ul {
   z-index: -1;
 }
 
- /* ---------------- popup ---------------- */
-
  .popup {
   overflow-y: auto;
   padding-top: 8px;
@@ -91,8 +89,6 @@ ul {
   right: 70px;
   display: none;
 }
-
-/*  ----- grey background & white foreground triangle ----- */
 
 .popup-wrapper::before, .popup-wrapper::after {
   content: '';
@@ -156,6 +152,11 @@ ul {
 
 #more-button {
   display: block;
+}
+
+#more-button:focus {
+  text-decoration: underline;
+  background-color: red;
 }
 
 .more-bt-label {
