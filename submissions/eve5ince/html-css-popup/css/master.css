@@ -126,6 +126,11 @@ input[type=checkbox] {
 	display: none;
 }
 
+.extra__input:focus ~ .extra__label {
+	outline: 1px solid #757575;
+	background: rgba(238,210,232, 0.3); 
+}
+
 .hr_line {
 	display: none;
 	border: 1px solid rgba(75, 75, 75, 0.2);
@@ -158,5 +163,3 @@ input[type=checkbox] {
 .bell {background-image: url(../img/bell.png);width:32px; height: 32px;}
 .main__label {background-image: url(../img/popup-button.png);cursor: pointer;}
 .profile {background-image: url(../img/favicon.png);}
-
-
