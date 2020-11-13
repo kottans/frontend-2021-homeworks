@@ -82,6 +82,15 @@ a:visited {
   display: none;
 }
 
+.app-menu::-webkit-scrollbar  {
+  width: 3px;
+}
+
+.app-menu::-webkit-scrollbar-thumb  {
+  background-color: rgba(133, 132, 132, 0.5);
+  border-radius: 5px;
+}
+
 .app-menu .menu-item {
   display: flex;
   flex-direction: column;
@@ -132,7 +141,7 @@ a:visited {
   flex-flow: row wrap;
   justify-content: space-around;
   align-content: flex-start;
-  overflow: scroll;
+  overflow: auto;
   position: absolute;
   box-sizing: border-box;
   top: 60px;
