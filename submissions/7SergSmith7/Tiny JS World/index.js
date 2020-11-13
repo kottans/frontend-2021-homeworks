@@ -24,9 +24,7 @@ class Habitant {
   }
 
   listFriends() {
-    return this.friends.length
-      ? this.friends.map((friend) => friend).join(", ")
-      : "I am loner";
+    return this.friends.length ? this.friends.join(", ") : "I am loner";
   }
 
   sayPhrase() {
