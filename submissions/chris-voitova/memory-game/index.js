@@ -12,6 +12,9 @@ const cards = [...images, ...images];
 const field = document.querySelector(".field");
 let cardsAmount = cards.length;
 let isBlockedField = false;
+const winMessage = "u are win!";
+const standartTimeout = 1000;
+const longTimeout = 2000;
 
 const htmlTemplate = (img) => `
 <div class="card" data-name="${img}">
@@ -42,14 +45,14 @@ function goToInitState(cards) {
     shuffleCards(cards);
     createCardsFromArr(cards);
     cardsAmount = cards.length;
-  }, 2000);
+  }, longTimeout);
 }
 
-function checkTwoCards(field) {
+function checkTwoCards() {
   let checkedCards = [];
   cardsInField = Array.from(field.children);
 
-  cardsInField.forEach((item) => {
+  cardsInField.filter((item) => {
     item.classList.contains("active") ? checkedCards.push(item) : null;
   });
   if (checkedCards.length === 2) {
@@ -63,7 +66,7 @@ function checkTwoCards(field) {
               item.classList.remove("active");
               item.classList.add("hidden");
             }, (isBlockedField = false)),
-          1000
+          standartTimeout
         );
         checkedCards = [];
       } else {
@@ -74,7 +77,7 @@ function checkTwoCards(field) {
                 (item) => item.classList.remove("flipped"),
                 (isBlockedField = false)
               ),
-            1000
+            standartTimeout
           );
         checkedCards = [];
       }
@@ -90,16 +93,15 @@ function toggleClassName(element, classNames) {
 shuffleCards(cards);
 createCardsFromArr(cards);
 
-field.addEventListener("click", function (e) {
-  const target = e.target;
+field.addEventListener("click", function ({ target }) {
   if (target.classList.contains("card") && !isBlockedField) {
     toggleClassName(target, ["active", "flipped"]);
-    checkTwoCards(field);
+    checkTwoCards();
   }
   if (cardsAmount === 0) {
     setTimeout(() => {
-      alert("u are win!");
-    }, 2000);
+      alert(winMessage);
+    }, longTimeout);
     goToInitState(cards);
   }
 });
