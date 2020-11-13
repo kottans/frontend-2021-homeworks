@@ -5,7 +5,7 @@ const secCount = document.getElementById('secCount');
 const meowSound = new Audio('./sounds/meow.mp3');
 const lockSound = new Audio('./sounds/lock.mp3');
 
-const pics = [
+const PICS = [
   'crim_01.jpg',
   'crim_02.jpg',
   'crim_03.jpg',
@@ -14,53 +14,76 @@ const pics = [
   'crim_06.jpg',
 ];
 
-const cards = [];
-let PairsQty = pics.length;
-let PairsOpen = 0;
-let firstOpen = false;
-let secondOpen = false;
-let secCountTimer = false;
+const pairsMax = PICS.length;
+let pairsOpen = 0;
+let firstOpen = null;
+let secondOpen = null;
+let secCountTimer = null;
 
-createCards();
-shuffleCards();
-
-gameBoard.addEventListener('click', function (e) {
-  const card = e.target.closest('.card');
-  if (!secCountTimer) {
-    secCountTimer = setInterval(updateTime, 1000);
-  }
-  if (!card) return;
-  if (card.classList.contains('block')) return;
-  if (firstOpen && secondOpen) return;
-  if (!firstOpen) {
-    firstOpen = card;
-  } else if (firstOpen === card) {
-    return;
-  } else {
-    secondOpen = card;
-    checkCards();
-  }
-  card.classList.add('flip');
-});
+gameBoard.addEventListener('click', cardClick);
 
 newGameBtn.addEventListener('click', function () {
   this.classList.remove('visible');
   newGame();
 });
 
+const cards = PICS.flatMap((pict) => {
+  const newElem1 = document.createElement('div');
+  const newElem2 = document.createElement('div');
+  newElem1.classList.add('card');
+  newElem2.classList.add('card');
+  newElem1.setAttribute('data-card', pict.match(/[^.]+/gi)[0]);
+  newElem2.setAttribute('data-card', pict.match(/[^.]+/gi)[0]);
+  const template = `<div class="back"><img src="./img/logo.svg" alt="Logo"></div><div class="front"><img src="./img/${pict}" alt="Cat Picture">
+    <img class='grid' src="./img/grid.png" alt="Grid"></div>`;
+  newElem1.innerHTML = template;
+  newElem2.innerHTML = template;
+  return [newElem1, newElem2];
+});
+
+function cardClick(e) {
+  const card = e.target.closest('.card');
+  if (!card) return;
+  if (!secCountTimer) {
+    secCountTimer = setInterval(updateTime, 1000);
+  }
+
+  if (firstOpen && secondOpen) return;
+  if (card.classList.contains('block')) return;
+  assignOpenCard(card);
+
+  card.classList.add('flip');
+  if (firstOpen && secondOpen) checkCards();
+
+  function assignOpenCard(card) {
+    if (!firstOpen) {
+      firstOpen = card;
+    } else if (firstOpen !== card) {
+      secondOpen = card;
+    }
+  }
+}
+
 function newGame() {
   cards.forEach((item) => {
-    item.classList.remove('flip');
-    item.classList.remove('block');
+    item.classList.remove('flip', 'block');
   });
   mistCount.textContent = 0;
   secCount.textContent = 0;
   secCountTimer = false;
-  PairsOpen = 0;
+  pairsOpen = 0;
   setTimeout(() => {
     shuffleCards();
+    gameBoard.append(...cards);
   }, 200);
 }
+
+const shuffleCards = function () {
+  for (let i = cards.length - 1; i > 0; i--) {
+    let j = Math.floor(Math.random() * (i + 1));
+    [cards[i], cards[j]] = [cards[j], cards[i]];
+  }
+};
 
 function updateTime() {
   secCount.textContent = Number(secCount.textContent) + 1;
@@ -73,42 +96,28 @@ function checkCards() {
     setTimeout(() => {
       firstOpen.classList.remove('flip');
       secondOpen.classList.remove('flip');
-      firstOpen = false;
-      secondOpen = false;
+      firstOpen = null;
+      secondOpen = null;
     }, 800);
   } else {
-    PairsOpen += 1;
+    lockSound.play();
+    pairsOpen += 1;
     firstOpen.classList.add('block');
     secondOpen.classList.add('block');
-    firstOpen = false;
-    secondOpen = false;
-    lockSound.play();
-    if (PairsOpen === PairsQty) {
-      newGameBtn.classList.add('visible');
-      clearInterval(secCountTimer);
-    }
+    firstOpen = null;
+    secondOpen = null;
+    checkWin();
   }
 }
 
-function createCards() {
-  pics.forEach((pict) => {
-    for (let i = 1; i <= 2; i++) {
-      const newElem = document.createElement('div');
-      newElem.classList.add('card');
-      newElem.setAttribute('data-card', pict.slice(0, -4));
-      newElem.innerHTML = `<div class="back"><img src="./img/logo.svg" alt="Logo"></div><div class="front"><img src="./img/${pict}" alt="Cat Picture">
-      <img class='grid' src="./img/grid.png" alt="Grid"></div>`;
-      cards.push(newElem);
-    }
-  });
+function checkWin() {
+  if (pairsOpen === pairsMax) {
+    newGameBtn.classList.add('visible');
+    clearInterval(secCountTimer);
+  }
 }
 
-function shuffleCards() {
-  for (let i = cards.length - 1; i > 0; i--) {
-    let j = Math.floor(Math.random() * (i + 1));
-    [cards[i], cards[j]] = [cards[j], cards[i]];
-  }
-  cards.forEach((item) => {
-    gameBoard.appendChild(item);
-  });
-}
+(function init() {
+  shuffleCards();
+  gameBoard.append(...cards);
+})();
