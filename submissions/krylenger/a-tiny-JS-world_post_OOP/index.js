@@ -1,35 +1,35 @@
 /* Refer to https://github.com/OleksiyRudenko/a-tiny-JS-world for the task details */
 
 const dog = {
-    type: "animal",
+    species: "animal",
     legs: 4,
     hands: 0,
     gender: "male",
     friends: ["Anna", "Eugene"],
   },
   cat = {
-    type: "animal",
+    species: "animal",
     legs: 4,
     hands: 0,
     gender: "female",
     friends: ["Anna", "Eugene"],
   },
   woman = {
-    type: "human",
+    species: "human",
     legs: 2,
     hands: 2,
     gender: "female",
     friends: ["Eugene", "Murzik", "Sharik"],
   },
   man = {
-    type: "human",
+    species: "human",
     legs: 2,
     hands: 2,
     gender: "male",
     friends: ["Anna", "Murzik", "Sharik"],
   },
   catWoman = {
-    type: "cat-woman",
+    species: "cat-woman",
     legs: 2,
     hands: 2,
     gender: "female",
@@ -37,13 +37,13 @@ const dog = {
   };
 
 const introduceSelf = ({
-  type,
+  species,
   name,
   gender,
   legs,
   hands,
   friends,
-}) => `Hi! My name is <em>${name}</em> and I'm <em>${type}</em>. 
+}) => `Hi! My name is <em>${name}</em> and I'm <em>${species}</em>. 
     My gender is <em>${gender}</em>. I have <em>${legs}</em> legs and <em>${hands}</em> hands. 
     These are my friends: <em>${friends.join(", ")}</em>.<em> 
     </em><br><br>`;
@@ -54,9 +54,9 @@ const inhabitantSays = (self) => ({
   },
 });
 
-const createInhabitant = ({ type, legs, hands, gender, friends }) => {
+const createInhabitant = ({ species, legs, hands, gender, friends }) => {
   let self = {
-    type,
+    species,
     legs,
     hands,
     gender,
@@ -68,7 +68,7 @@ const createInhabitant = ({ type, legs, hands, gender, friends }) => {
 const catSays = (self) => ({
   introduction: () => {
     return `Meow! Meow meow <em>${self.name}</em> meow meow <em>${
-      self.type
+      self.species
     }</em>. 
       meow meow <em>${self.gender}</em>. meow <em>${self.legs}</em> meow <em>${
       self.hands
@@ -81,7 +81,7 @@ const catSays = (self) => ({
 const dogSays = (self) => ({
   introduction: () => {
     return `Woof! Woof woof <em>${self.name}</em> woof woof <em>${
-      self.type
+      self.species
     }</em>. 
       woof woof <em>${self.gender}</em>. woof <em>${self.legs}</em> woof <em>${
       self.hands
