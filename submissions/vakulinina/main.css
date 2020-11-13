@@ -30,7 +30,7 @@
 }
 
 .navbar a:focus,
-.navbar input:focus {
+.navbar > li > input:focus {
   background-color: rgb(224, 224, 224, 0.5);
 }
 
@@ -151,6 +151,10 @@ a:visited {
   height: 6%;
   border-radius: 4px;
   z-index: -1;
+}
+
+.more-button:focus {
+  outline: none;
 }
 
 .more-button-label {
