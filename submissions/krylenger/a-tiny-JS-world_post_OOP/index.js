@@ -1,39 +1,19 @@
 /* Refer to https://github.com/OleksiyRudenko/a-tiny-JS-world for the task details */
 
 const dog = {
-    species: "animal",
-    legs: 4,
-    hands: 0,
-    gender: "male",
-    friends: ["Anna", "Eugene"],
+    species: "dog",
   },
   cat = {
-    species: "animal",
-    legs: 4,
-    hands: 0,
-    gender: "female",
-    friends: ["Anna", "Eugene"],
+    species: "cat",
   },
   woman = {
     species: "human",
-    legs: 2,
-    hands: 2,
-    gender: "female",
-    friends: ["Eugene", "Murzik", "Sharik"],
   },
   man = {
     species: "human",
-    legs: 2,
-    hands: 2,
-    gender: "male",
-    friends: ["Anna", "Murzik", "Sharik"],
   },
   catWoman = {
-    species: "cat-woman",
-    legs: 2,
-    hands: 2,
-    gender: "female",
-    friends: ["Anna", "Murzik"],
+    species: "catWoman",
   };
 
 const introduceSelf = ({
@@ -54,78 +34,78 @@ const inhabitantSays = (self) => ({
   },
 });
 
-const createInhabitant = ({ species, legs, hands, gender, friends }) => {
+const createInhabitant = ({species}) => {
   let self = {
-    species,
-    legs,
-    hands,
-    gender,
-    friends,
+    species
   };
   return Object.assign(self, inhabitantSays(self));
 };
 
-const catSays = (self) => ({
+const carnivoraPetSays = (self) => ({
   introduction: () => {
-    return `Meow! Meow meow <em>${self.name}</em> meow meow <em>${
+    let word = (self.species === 'dog') ? 'woof' : 'meow';
+    let capitalizeWord = word.charAt(0).toUpperCase() + word.slice(1);
+    if (self.species === 'catWoman') {
+      self.paws = word;
+    }
+    return `${capitalizeWord}! ${capitalizeWord} ${word} <em>${self.name}</em>. ${capitalizeWord} ${word} <em>${
       self.species
     }</em>. 
-      meow meow <em>${self.gender}</em>. meow <em>${self.legs}</em> meow <em>${
-      self.hands
-    }</em> meow. 
-      Meow meow meow: <em>${self.friends.join(", ")}</em>.<em> 
+      ${capitalizeWord} ${word} <em>${self.gender}</em>. ${capitalizeWord} <em>${self.legs}</em> ${word} <em>${
+      self.paws
+    }</em> ${word}. 
+      Meow ${word} ${word}: <em>${self.friends.join(", ")}</em>.<em> 
       </em><br><br>`;
   },
 });
 
-const dogSays = (self) => ({
-  introduction: () => {
-    return `Woof! Woof woof <em>${self.name}</em> woof woof <em>${
-      self.species
-    }</em>. 
-      woof woof <em>${self.gender}</em>. woof <em>${self.legs}</em> woof <em>${
-      self.hands
-    }</em> woof. 
-      Woof woof woof: <em>${self.friends.join(", ")}</em>.<em> 
-      </em><br><br>`;
-  },
-});
-
-const createCat = (name) => {
-  const self = createInhabitant(cat);
-  self.name = name;
-  return Object.assign(self, catSays(self));
-};
-
-const createDog = (name) => {
-  const self = createInhabitant(dog);
-  self.name = name;
-  return Object.assign(self, dogSays(self));
-};
-
-const createMan = (name) => {
-  const self = createInhabitant(man);
-  self.name = name;
+const createCarnivoraPet = (speciesObj) => {
+  const self = createInhabitant(speciesObj);
+  self.legs = 4;
+  self.paws = 4;
   return Object.assign(self);
-};
+}
 
-const createWoman = (name) => {
-  const self = createInhabitant(woman);
-  self.name = name;
+const createHuman = (speciesObj) => {
+  const self = createInhabitant(speciesObj);
+  self.legs = 2;
+  self.hands = 2;
   return Object.assign(self);
+}
+
+const createCat = (name, gender, friends) => {
+  const self = createCarnivoraPet(cat);
+  return Object.assign(self, {name, gender, friends}, carnivoraPetSays(self));
 };
 
-const createCatWoman = (name) => {
-  const self = createInhabitant(catWoman);
-  self.name = name;
-  return Object.assign(self, catSays(self));
+const createDog = (name, gender, friends) => {
+  const self = createCarnivoraPet(dog);
+  return Object.assign(self, {name, gender, friends}, carnivoraPetSays(self));
 };
 
-const dogSharik = createDog("Sharik");
-const catBarsik = createCat("Barsik");
-const manEugene = createMan("Eugene");
-const womanAnna = createWoman("Anna");
-const catWomanSofia = createCatWoman("Sofia");
+const createMan = (name, friends) => {
+  const self = createHuman(man);
+  self.gender = "male";
+  return Object.assign(self, {name, friends});
+};
+
+const createWoman = (name, friends) => {
+  const self = createHuman(woman);
+  self.gender = "female";
+  return Object.assign(self, {name, friends});
+};
+
+const createCatWoman = (name, friends) => {
+  const self = createWoman(catWoman);
+  self.species = "catWoman";
+  return Object.assign(self, {name, friends}, carnivoraPetSays(self));
+};
+
+const dogSharik = createDog("Sharik", 'male', ['Anna', 'Eugene']);
+const catBarsik = createCat("Barsik", 'female', ['Eugene']);
+const manEugene = createMan("Eugene", ['Anna', 'Eugene']);
+const womanAnna = createWoman("Anna", ['Anna', 'Eugene']);
+const catWomanSofia = createCatWoman("Sofia", ['Anna', 'Eugene']);
 
 const inhabitants = [manEugene, womanAnna, catBarsik, catWomanSofia, dogSharik];
 const introductions = inhabitants.map(inhabitant => inhabitant.introduction())
