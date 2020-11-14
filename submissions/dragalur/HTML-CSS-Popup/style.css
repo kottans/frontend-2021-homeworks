@@ -1,177 +1,179 @@
-* {margin: 0; padding: 0;}
-.header{
-    width: 100%;
-    height: 50px;
-    align-items: center; 
+* {
+	margin: 0;
+	padding: 0;
 }
-nav{ 
-    width: 300px;
-    float: right;
-    padding-top: 10px;
+.header {
+	width: 100%;
+	height: 50px;
+	align-items: center;
 }
-nav a{
-    text-decoration:none;   
-    color: gray;
-    align-items: center;
-justify-content: space-around;
-margin-top: 10px;
+nav {
+	width: 300px;
+	float: right;
+	padding-top: 10px;
 }
-.imagePoup{
-    width:28px;
-    height:28px;
-    border: 1px solid transparent;
+nav a {
+	text-decoration: none;
+	color: gray;
+	align-items: center;
+	justify-content: space-around;
+	margin-top: 10px;
 }
-.menu-item-personLink{
-    border-radius: 50%;
-    background-color: yellow;
-    width: 30px;
-    height:30px;
+.imagePoup {
+	width: 28px;
+	height: 28px;
+	border: 1px solid transparent;
 }
-.variousApp{
-      overflow: auto;
-    width: 375px;
-    height:482px;
-    text-align: center;
-    border: solid 1px rgb(179, 179, 179);
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
-    opacity: 0;
-    visibility: hidden; 
-    margin-left: 940px;
+.menu-item-personLink {
+	border-radius: 50%;
+	background-color: yellow;
+	width: 30px;
+	height: 30px;
 }
-.variousApp img{
-    width: 40px;
-    height: auto;
-    max-height: 40px;
+.variousApp {
+	overflow: auto;
+	width: 375px;
+	height: 482px;
+	text-align: center;
+	border: solid 1px rgb(179, 179, 179);
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+	opacity: 0;
+	visibility: hidden;
+	margin-left: 940px;
 }
-.variousApp p{
-    color: gray;
-    padding-top: 10px;   
+.variousApp img {
+	width: 40px;
+	height: auto;
+	max-height: 40px;
 }
-.appFirst{
-    padding: 35px 25px 0 25px;
-    display: flex;
-    flex-wrap: wrap;
+.variousApp p {
+	color: gray;
+	padding-top: 10px;
 }
-.itemsApp{
-    display: table;
-    width: 100px;
-    height: 80px;
-    padding-top: 20px;
-    
+.appFirst {
+	padding: 35px 25px 0 25px;
+	display: flex;
+	flex-wrap: wrap;
 }
-.imgBloc{
-    width: 40px;
-    height: 40px;
-    margin: auto;
+.itemsApp {
+	display: table;
+	width: 100px;
+	height: 80px;
+	padding-top: 20px;
 }
-.buttonApp{
-    border: 1px solid transparent;
-    text-decoration:none;
+.imgBloc {
+	width: 40px;
+	height: 40px;
+	margin: auto;
 }
-.buttonApp:hover{  
-    border: solid 1px rgb(194, 194, 194);
-    border-radius: 10px;
+.buttonApp {
+	border: 1px solid transparent;
+	text-decoration: none;
 }
-.buttomPoupApp{
-text-decoration: none;
-width: 100%-1px;
-height: 30px;
-border: none;
-background-color: rgb(212, 212, 212) ;
-margin-top:8px;
-visibility: visible;
-opacity: 1;
+.buttonApp:hover {
+	border: solid 1px rgb(194, 194, 194);
+	border-radius: 10px;
 }
-.buttom{
-width: 100%;
-height: 30px;
-border: none;
-background-color: rgb(212, 212, 212) ;
-margin-top:5px;
-outline: none;
+.buttomPoupApp {
+	text-decoration: none;
+	width: 100%-1px;
+	height: 30px;
+	border: none;
+	background-color: rgb(212, 212, 212);
+	margin-top: 8px;
+	visibility: visible;
+	opacity: 1;
 }
-.buttom:hover{
-    border: solid 1px rgb(139, 139, 139);
+.buttom {
+	width: 100%;
+	height: 30px;
+	border: none;
+	background-color: rgb(212, 212, 212);
+	margin-top: 5px;
+	outline: none;
 }
-.buttom a{
-    width: 100%;
-    height: 100%;
+.buttom:hover {
+	border: solid 1px rgb(139, 139, 139);
 }
-.appSecond{
-    padding: 35px 25px 0 25px;
-    display: flex;
-    flex-wrap: wrap;
-    display: none;
+.buttom a {
+	width: 100%;
+	height: 100%;
 }
-  .variousApp::before,.variousApp::after  {
-    content: ''; 
-    position: absolute;
-    right: 139px;
-    top: 35px;
-    z-index: -1;
-    border-left: 15px solid transparent;
-    border-right: 15px solid transparent;
-    border-bottom: 15px solid rgb(179, 179, 179);
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
-  }
-  .variousApp::before  {
-    box-shadow: none;
-  }
-  .variousApp::after  {
-    top: 36px;
-    z-index: 1; /* Накладываем поверх, чтобы скрыть следы тени */
-    border-bottom: 15px solid #fff;
-    border-top: 0 solid transparent; 
-    box-shadow: none;
-  }
-  .secondInput {
-    display: none;
+.appSecond {
+	padding: 35px 25px 0 25px;
+	display: flex;
+	flex-wrap: wrap;
+	display: none;
 }
-.firstInput{
-    position: absolute;
-opacity: 0;
+.variousApp::before,
+.variousApp::after {
+	content: '';
+	position: absolute;
+	right: 139px;
+	top: 35px;
+	z-index: -1;
+	border-left: 15px solid transparent;
+	border-right: 15px solid transparent;
+	border-bottom: 15px solid rgb(179, 179, 179);
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
-.firstInput:checked ~.variousApp,.imageDiv{
-    opacity: 1;
-      visibility: visible;
-  } 
-  .secondInput:checked ~.appSecond{
-      display: flex;
-      }
-  .secondInput:checked ~.second-navbar-button{
-    display: none;
-  }
-  .line{
-      border-top: 1px solid rgb(212, 212, 212);
-      width: 100%;
-  }
-  .text_end{
-      font-size: 20px;
- padding: 10px  0  0 60px ;
- justify-content: center;
-  }
-  .navbar-button{
-      width: 32px;
-      cursor: pointer;
-  }
-  .menu-list{
-      list-style-type: none;
-      display: flex;
-  }
-.menu-list li{
-    cursor: pointer;
-margin-left: 20px;
+.variousApp::before {
+	box-shadow: none;
 }
-.focusDiv{
-    width: 29px;
-    height: 29px;
-    position: absolute;
-    right: 141px;
-    top: 10px;
-    z-index: -1;
+.variousApp::after {
+	top: 36px;
+	z-index: 1; /* Накладываем поверх, чтобы скрыть следы тени */
+	border-bottom: 15px solid #fff;
+	border-top: 0 solid transparent;
+	box-shadow: none;
 }
-input:focus~.focusDiv{
-    outline: 2px solid black;
+.secondInput {
+	display: none;
 }
-
-  
+.firstInput {
+	position: absolute;
+	opacity: 0;
+}
+.firstInput:checked ~ .variousApp,
+.imageDiv {
+	opacity: 1;
+	visibility: visible;
+}
+.secondInput:checked ~ .appSecond {
+	display: flex;
+}
+.secondInput:checked ~ .second-navbar-button {
+	display: none;
+}
+.line {
+	border-top: 1px solid rgb(212, 212, 212);
+	width: 100%;
+}
+.text_end {
+	font-size: 20px;
+	padding: 10px 0 0 60px;
+	justify-content: center;
+}
+.navbar-button {
+	width: 32px;
+	cursor: pointer;
+}
+.menu-list {
+	list-style-type: none;
+	display: flex;
+}
+.menu-list li {
+	cursor: pointer;
+	margin-left: 20px;
+}
+.focusDiv {
+	width: 29px;
+	height: 29px;
+	position: absolute;
+	right: 141px;
+	top: 10px;
+	z-index: -1;
+}
+input:focus ~ .focusDiv {
+	outline: 2px solid black;
+}
