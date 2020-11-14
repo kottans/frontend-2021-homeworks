@@ -54,26 +54,30 @@
  .overlay {
      display: none;
      position: fixed;
+     margin: 0;
+     padding: 0;
      right: 50px;
      top: 60px;
      width: 310px;
      height: 440px;
-     overflow-y: auto;
      border: solid 1px gainsboro;
      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-     grid-auto-flow: row;
  }
  
  .popup {
      display: grid;
+     position: relative;
      margin: auto;
      padding: auto;
-     grid-template-rows: repeat (4, 100px);
+     height: 100%;
+     width: 100%;
+     grid-template-rows: 100px 100px 100px 100px 38px;
      grid-template-columns: repeat(3, 100px);
      grid-auto-rows: 100px;
      grid-auto-columns: 100px;
-     justify-content: space-around;
-     align-items: auto;
+     overflow-y: auto;
+     grid-auto-flow: row;
+     justify-content: space-between;
  }
  
  .more {
@@ -113,62 +117,57 @@
      font-size: 14px;
  }
  
+ .popup-button:hover,
+ .upperButton:hover,
  .el:hover {
      transition-duration: 0.2s;
      opacity: 0.7;
  }
  
+ .popup-button:focus,
+ .upperButton:focus,
+ a:focus,
+ input:focus,
+ #toggle:focus {
+     outline: 1px solid #757575;
+ }
+ 
  .popup-button {
      cursor: pointer;
+     width: 40px;
+     height: 40px;
+     z-index: 1;
+ }
+ 
+ .button {
+     grid-column-start: 1;
+     grid-column-end: 4;
+     height: 100%;
+     width: 100%;
  }
  
  .more-button {
-     position: absolute;
-     height: 30px;
+     position: relative;
+     height: 100%;
      width: 100%;
      margin: auto;
+     padding: 10px;
      display: block;
      text-align: center;
      font-size: 14px;
-     color: #D6EAF8;
+     background-color: #D6EAF8;
      outline: none;
      cursor: pointer;
      z-index: 1;
  }
  
- ::-webkit-details-marker {
-     display: none;
- }
- 
- .more-button::before {
-     color: #34495E;
- }
- 
  .more-button:hover {
-     opacity: 0.4;
-     color: grey;
+     opacity: 0.5;
+     color: #5cb8ee;
  }
  
  .more-button:focus {
-     outline: 0;
+     outline: 1;
      opacity: 0.4;
      color: grey;
- }
- 
- a:focus,
- input:focus {
-     outline: 1px solid #757575;
- }
- 
- ::-webkit-scrollbar {
-     width: 5px;
- }
- 
- .el>a:focus {
-     outline: rgba(238, 210, 232, 0.2);
- }
- 
- a:focus,
- input:focus {
-     outline: 1px solid #757575;
  }
