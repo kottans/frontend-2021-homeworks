@@ -20,13 +20,6 @@ let firstOpen = null;
 let secondOpen = null;
 let secCountTimer = null;
 
-gameBoard.addEventListener('click', cardClick);
-
-newGameBtn.addEventListener('click', function () {
-  this.classList.remove('visible');
-  newGame();
-});
-
 const cards = PICS.flatMap((pict) => {
   const newElem1 = document.createElement('div');
   const newElem2 = document.createElement('div');
@@ -34,14 +27,20 @@ const cards = PICS.flatMap((pict) => {
   newElem2.classList.add('card');
   newElem1.setAttribute('data-card', pict.match(/[^.]+/gi)[0]);
   newElem2.setAttribute('data-card', pict.match(/[^.]+/gi)[0]);
-  const template = `<div class="back"><img src="./img/logo.svg" alt="Logo"></div><div class="front"><img src="./img/${pict}" alt="Cat Picture">
-    <img class='grid' src="./img/grid.png" alt="Grid"></div>`;
+  const template = `
+    <div class="back">
+      <img src="./img/logo.svg" alt="Logo">
+    </div>
+    <div class="front">
+      <img src="./img/${pict}" alt="Cat Picture">
+      <img class='grid' src="./img/grid.png" alt="Grid">
+    </div>`;
   newElem1.innerHTML = template;
   newElem2.innerHTML = template;
   return [newElem1, newElem2];
 });
 
-function cardClick(e) {
+const cardClick = function (e) {
   const card = e.target.closest('.card');
   if (!card) return;
   if (!secCountTimer) {
@@ -54,17 +53,17 @@ function cardClick(e) {
 
   card.classList.add('flip');
   if (firstOpen && secondOpen) checkCards();
+};
 
-  function assignOpenCard(card) {
-    if (!firstOpen) {
-      firstOpen = card;
-    } else if (firstOpen !== card) {
-      secondOpen = card;
-    }
+const assignOpenCard = function (card) {
+  if (!firstOpen) {
+    firstOpen = card;
+  } else if (firstOpen !== card) {
+    secondOpen = card;
   }
-}
+};
 
-function newGame() {
+const newGame = function () {
   cards.forEach((item) => {
     item.classList.remove('flip', 'block');
   });
@@ -73,23 +72,24 @@ function newGame() {
   secCountTimer = false;
   pairsOpen = 0;
   setTimeout(() => {
-    shuffleCards();
-    gameBoard.append(...cards);
+    gameBoard.append(...shuffleCards(cards));
   }, 200);
-}
-
-const shuffleCards = function () {
-  for (let i = cards.length - 1; i > 0; i--) {
-    let j = Math.floor(Math.random() * (i + 1));
-    [cards[i], cards[j]] = [cards[j], cards[i]];
-  }
 };
 
-function updateTime() {
-  secCount.textContent = Number(secCount.textContent) + 1;
-}
+const shuffleCards = function (cards) {
+  let arr = [...cards];
+  for (let i = arr.length - 1; i > 0; i--) {
+    let j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+};
 
-function checkCards() {
+const updateTime = function () {
+  secCount.textContent = Number(secCount.textContent) + 1;
+};
+
+const checkCards = function () {
   if (firstOpen.dataset.card !== secondOpen.dataset.card) {
     meowSound.play();
     mistCount.textContent = Number(mistCount.textContent) + 1;
@@ -108,16 +108,23 @@ function checkCards() {
     secondOpen = null;
     checkWin();
   }
-}
+};
 
-function checkWin() {
+const checkWin = function () {
   if (pairsOpen === pairsMax) {
     newGameBtn.classList.add('visible');
     clearInterval(secCountTimer);
   }
-}
+};
 
-(function init() {
-  shuffleCards();
-  gameBoard.append(...cards);
-})();
+const init = function () {
+  gameBoard.addEventListener('click', cardClick);
+
+  newGameBtn.addEventListener('click', function () {
+    this.classList.remove('visible');
+    newGame();
+  });
+  gameBoard.append(...shuffleCards(cards));
+};
+
+init();
