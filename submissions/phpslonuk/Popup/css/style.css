@@ -18,7 +18,7 @@ header {
 
 a {
   text-decoration: none;
-  color: black
+  color: black;
 }
 
 /* Navigation */
@@ -49,9 +49,10 @@ a {
 }
 
 .nav_item_img {
-  width: 26px;
-  height: 26px;
-  border-radius: 10px
+  width: 20px;
+  height: 20px;
+  margin-top: 3px;
+  border-radius: 10px;
 }
 
 #trigger {
@@ -61,7 +62,7 @@ a {
 
 .popup_icon {
   display: block;
-  background: url(../popup-icons/popup-button.png) no-repeat;
+  background: url(https://raw.githubusercontent.com/phpslonuk/Hooli-style_Popup/main/popup-icons/popup-button.png) no-repeat;
   background-position: left center;
   background-size: auto 100%;
   width: 26px;
@@ -75,7 +76,7 @@ input[type="checkbox"]:checked+.popup_icon {
 }
 
 input[type="checkbox"]:checked~.popup_menu {
-  display: block
+  display: block;
 }
 
 /* Popup menu */
@@ -87,7 +88,7 @@ input[type="checkbox"]:checked~.popup_menu {
   height: 500px;
   position: absolute;
   top: 55px;
-  right: 20px;
+  right: 10px;
 }
 
 .popup_menu::before {
@@ -100,7 +101,7 @@ input[type="checkbox"]:checked~.popup_menu {
   border-bottom: 16px solid black;
   z-index: -1;
   top: -16px;
-  left: 198px
+  left: 198px;
 }
 
 .popup_menu::after {
@@ -113,13 +114,13 @@ input[type="checkbox"]:checked~.popup_menu {
   border-bottom: 15px solid white;
   top: -15px;
   left: 199px;
-  z-index: 5
+  z-index: 5;
 }
 
 .popup-content {
   width: 100%;
   height: 100%;
-  overflow: auto
+  overflow: auto;
 }
 
 .main-menu {
@@ -128,17 +129,17 @@ input[type="checkbox"]:checked~.popup_menu {
   flex-wrap: wrap;
   padding: 40px 20px 5px 20px;
   width: 100%;
-  height: 90%
+  height: 90%;
 }
 
 .popup-item:hover {
   outline-style: none;
-  border: 1px solid gray
+  border-color: gray;
 }
 
 .popup-item:focus {
   outline-style: none;
-  border: 1px solid blue
+  border-color: blue;
 }
 
 .popup-item {
@@ -147,7 +148,8 @@ input[type="checkbox"]:checked~.popup_menu {
   padding: 3px;
   display: flex;
   justify-content: center;
-  text-align: center
+  text-align: center;
+  border: 1px solid transparent;
 }
 
 .popup-item-icon {
@@ -155,25 +157,25 @@ input[type="checkbox"]:checked~.popup_menu {
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between
+  justify-content: space-between;
 }
 
 .popup-item-icon img {
   margin: 0 auto;
   max-width: 55px;
   max-height: 45px;
-  object-fit: cover
+  object-fit: cover;
 }
 
 .show-more_btn {
   opacity: 0;
-  position: absolute
+  position: absolute;
 }
 
 .show-more:hover, .show-more_btn:focus+.show-more {
   color: white;
   background-color: #ebe2da;
-  cursor: pointer
+  cursor: pointer;
 }
 
 .show-more {
@@ -190,7 +192,7 @@ input[type="checkbox"]:checked~.popup_menu {
 }
 
 .show-more_btn:checked+.show-more {
-  display: none
+  display: none;
 }
 
 .sub-menu {
@@ -200,9 +202,10 @@ input[type="checkbox"]:checked~.popup_menu {
   flex-wrap: wrap;
   padding: 40px 20px 10px 20px;
   width: 100%;
-  height: 55%
+  height: 55%;
 }
 
 .kottans {
   margin: 10px auto 0px auto;
 }
+
