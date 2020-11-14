@@ -1,152 +1,156 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>HTML & CSS practice: Hooli-style Popup</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="main_style.css">
+  <link rel="stylesheet" href="css/main_style.css">
 </head>
+
 <body>
   <header class="header">
     <nav class="head_nav">
       <div class="container">
-        <ul class="main_menu">
-          <li>Mail</li>
-          <li>Images</li>
-          <li>
-            <input id="check01" type="checkbox" name="menu" />
-            <label for="check01"><img class="popup_png" src="/popup-icons/popup-button.png" alt="popup button"
-                tabindex="1"></label>
+        <ul class="nav_menu">
+          <li class="nav_item"><a class="nav_item_a" href="#">Mail</a></li>
+          <li class="nav_item"><a class="nav_item_a" href="#">Images</a></li>
+          <li class="nav_item">
+            <input id="check01" class="menu_button" type="checkbox" name="menu" />
+            <label for="check01"><img class="popup_png" src="/popup-icons/popup-button.png"
+                alt="popup menu button"></label>
             <div class="sub_menu">
-              <div class="sub_container">
-                <a href="#">
-                  <div class="align_self" tabindex="1">
-                    <img src="/popup-icons/calendar.png" alt="calendar icon">
+              <ul class="sub_container">
+                <li>
+                  <a class="align_self" href="#">
+                    <img src="/popup-icons/calendar.png" alt="calendar">
                     <p>Calendar</p>
-                  </div>
-                </a>
-                <a href="#">
-                  <div class="align_self" tabindex="1">
-                    <img src="/popup-icons/mail.png" alt="mail icon">
+                  </a>
+                </li>
+                <li>
+                  <a class="align_self" href="#">
+                    <img src="/popup-icons/mail.png" alt="mail">
                     <p>Mail</p>
-                  </div>
-                </a>
-                <a href="#">
-                  <div class="align_self" tabindex="1">
-                    <img src="/popup-icons/news.png" alt="news icon">
+                  </a>
+                </li>
+                <li>
+                  <a class="align_self" href="#">
+                    <img src="/popup-icons/news.png" alt="news">
                     <p>News</p>
-                  </div>
-                </a>
-                <a href="#">
-                  <div class="align_self" tabindex="1">
-                    <img src="/popup-icons/maps.png" alt="maps icon">
+                  </a>
+                </li>
+                <li>
+                  <a class="align_self" href="#">
+                    <img src="/popup-icons/maps.png" alt="maps">
                     <p>Maps</p>
-                  </div>
-                </a>
-                <a href="#">
-                  <div class="align_self" tabindex="1">
-                    <img src="/popup-icons/files.png" alt="files icon">
+                  </a>
+                </li>
+                <li>
+                  <a class="align_self" href="#">
+                    <img src="/popup-icons/files.png" alt="files">
                     <p>Files</p>
-                  </div>
-                </a>
-                <a href="#">
-                  <div class="align_self" tabindex="1">
-                    <img src="/popup-icons/contacts.png" alt="contacts icon">
+                  </a>
+                </li>
+                <li>
+                  <a class="align_self" href="#">
+                    <img src="/popup-icons/contacts.png" alt="contacts">
                     <p>Contacts</p>
-                  </div>
-                </a>
-                <a href="#">
-                  <div class="align_self" tabindex="1">
-                    <img src="/popup-icons/translate.png" alt="translate icon">
+                  </a>
+                </li>
+                <li>
+                  <a class="align_self" href="#">
+                    <img src="/popup-icons/translate.png" alt="translate">
                     <p>Translate</p>
-                  </div>
-                </a>
-                <a href="#">
-                  <div class="align_self" tabindex="1">
-                    <img src="/popup-icons/videos.png" alt="videos icon">
+                  </a>
+                </li>
+                <li>
+                  <a class="align_self" href="#">
+                    <img src="/popup-icons/videos.png" alt="videos">
                     <p>Videos</p>
-                  </div>
-                </a>
-                <a href="#">
-                  <div class="align_self" tabindex="1">
-                    <img src="/popup-icons/search.png" alt="search icon">
+                  </a>
+                </li>
+                <li>
+                  <a class="align_self" href="#">
+                    <img src="/popup-icons/search.png" alt="search">
                     <p>Search</p>
-                  </div>
-                </a>
-                <a href="#">
-                  <div class="align_self" tabindex="1">
-                    <img src="/popup-icons/photos.png" alt="photos icon">
+                  </a>
+                </li>
+                <li>
+                  <a class="align_self" href="#">
+                    <img src="/popup-icons/photos.png" alt="photos">
                     <p>Photos</p>
-                  </div>
-                </a>
-                <a href="#">
-                  <div class="align_self" tabindex="1">
-                    <img src="/popup-icons/apps.png" alt="apps icon">
+                  </a>
+                </li>
+                <li>
+                  <a class="align_self" href="#">
+                    <img src="/popup-icons/apps.png" alt="apps">
                     <p>Apps</p>
-                  </div>
-                </a>
-                <a href="#">
-                  <div class="align_self" tabindex="1">
-                    <img src="/popup-icons/documents.png" alt="documents icon">
+                  </a>
+                </li>
+                <li>
+                  <a class="align_self" href="#">
+                    <img src="/popup-icons/documents.png" alt="documents">
                     <p>Documents</p>
-                  </div>
-                </a>
-              </div>
-              <input id="check02" type="checkbox" name="more_menu" />
+                  </a>
+                </li>
+              </ul>
+              <input id="check02" class="more_button" type="checkbox" name="more_menu" />
+              <label for="check02" class="more_button_label">More</label>
               <div class="more_sub_menu">
                 <hr />
-                <div class="more_sub_container">
-                  <a href="#">
-                    <div class="align_self" tabindex="1">
-                      <img src="/popup-icons/chat.png" alt="chat icon">
+                <ul class="more_sub_container">
+                  <li>
+                    <a class="align_self" href="#">
+                      <img src="/popup-icons/chat.png" alt="chat">
                       <p>Chat</p>
-                    </div>
-                  </a>
-                  <a href="#">
-                    <div class="align_self" tabindex="1">
-                      <img src="/popup-icons/classroom.png" alt="classroom icon">
+                    </a>
+                  </li>
+                  <li>
+                    <a class="align_self" href="#">
+                      <img src="/popup-icons/classroom.png" alt="classroom">
                       <p>Classroom</p>
-                    </div>
-                  </a>
-                  <a href="#">
-                    <div class="align_self" tabindex="1">
-                      <img src="/popup-icons/collection.png" alt="collection icon">
+                    </a>
+                  </li>
+                  <li>
+                    <a class="align_self" href="#">
+                      <img src="/popup-icons/collection.png" alt="collection">
                       <p>Collection</p>
-                    </div>
-                  </a>
-                  <a href="#">
-                    <div class="align_self" tabindex="1">
-                      <img src="/popup-icons/mars.png" alt="mars icon">
+                    </a>
+                  </li>
+                  <li>
+                    <a class="align_self" href="#">
+                      <img src="/popup-icons/mars.png" alt="mars">
                       <p>Photos</p>
-                    </div>
-                  </a>
-                  <a href="#">
-                    <div class="align_self" tabindex="1">
-                      <img src="/popup-icons/blogs.png" alt="blogs icon">
+                    </a>
+                  </li>
+                  <li>
+                    <a class="align_self" href="#">
+                      <img src="/popup-icons/blogs.png" alt="blogs">
                       <p>Apps</p>
-                    </div>
-                  </a>
-                  <a href="#">
-                    <div class="align_self" tabindex="1">
-                      <img src="/popup-icons/promo.png" alt="promo icon">
+                    </a>
+                  </li>
+                  <li>
+                    <a class="align_self" href="#">
+                      <img src="/popup-icons/promo.png" alt="promo">
                       <p>Documents</p>
-                    </div>
-                  </a>
-                </div>
-                <p><a href="https://kottans.org/" target="_blank">Even more from Kottans</a></p>
+                    </a>
+                  </li>
+                </ul>
+                <p class="more_sub_menu_footer"><a href="https://kottans.org/" target="_blank">Even more from
+                    Kottans</a></p>
               </div>
-              <label for="check02" class="more_behavior">More</label>
             </div>
           </li>
-          <li><img class="bell_png" src="/popup-icons/bell.png" alt="favicon bell"></li>
-          <li><img class="kottans_png" src="/popup-icons/favicon.png" alt="favicon kottans"></li>
+          <li class="nav_item"><a class="nav_item_a" href="#"><img class="bell_png" src="/popup-icons/bell.png"
+                alt="bell"></a></li>
+          <li class="nav_item"><a class="nav_item_a" href="#"><img class="kottans_png" src="/popup-icons/favicon.png"
+                alt="kottans"></a></li>
         </ul>
       </div>
     </nav>
   </header>
-  <!-- <script src="" async defer></script> -->
 </body>
 
 </html>
