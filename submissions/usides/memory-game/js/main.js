@@ -20,25 +20,23 @@ let firstOpen = null;
 let secondOpen = null;
 let secCountTimer = null;
 
-const cards = PICS.flatMap((pict) => {
-  const newElem1 = document.createElement('div');
-  const newElem2 = document.createElement('div');
-  newElem1.classList.add('card');
-  newElem2.classList.add('card');
-  newElem1.setAttribute('data-card', pict.match(/[^.]+/gi)[0]);
-  newElem2.setAttribute('data-card', pict.match(/[^.]+/gi)[0]);
+const createCard = (elem) => {
+  const newElem = document.createElement('div');
+  newElem.classList.add('card');
+  newElem.setAttribute('data-card', elem.match(/[^.]+/gi)[0]);
   const template = `
     <div class="back">
       <img src="./img/logo.svg" alt="Logo">
     </div>
     <div class="front">
-      <img src="./img/${pict}" alt="Cat Picture">
+      <img src="./img/${elem}" alt="Cat Picture">
       <img class='grid' src="./img/grid.png" alt="Grid">
     </div>`;
-  newElem1.innerHTML = template;
-  newElem2.innerHTML = template;
-  return [newElem1, newElem2];
-});
+  newElem.innerHTML = template;
+  return newElem;
+};
+
+const cards = PICS.flatMap((pict) => [createCard(pict), createCard(pict)]);
 
 const cardClick = function (e) {
   const card = e.target.closest('.card');
