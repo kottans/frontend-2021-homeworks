@@ -9,14 +9,22 @@ const files = [
   'image8.png',
 ];
 
-const cardsShuffler = function() { return 0.5 - Math.random() };
 
-const imageNames = [...files,...files].sort(cardsShuffler);
+const imageNames = [...files,...files];
 const infoDiv = document.querySelector('.info');
 const gameBoard = document.querySelector(".gameboard");
 const controlDiv = document.querySelector('.control');
+const startButton = document.querySelector('.start-btn');
+const previewOption = document.querySelector('.preview-option');
+const previewTime = 10;         /* time in sec */
+const oneCardRemoveTime = 50;   /* time in ms */
+const oneCardSpreadTime = 100;  /* time in ms */
 
 let numberOfFails = 0; 
+
+const getShuffledCards = function(list) { 
+  return list.sort(() => Math.random() - 0.5); 
+};
 
 const openAllCards = function() {
   const cards = gameBoard.querySelectorAll('.flip-container');
@@ -24,7 +32,7 @@ const openAllCards = function() {
     setTimeout(() => {
       c.classList.remove('guessed');
       c.classList.add('opened');      
-    }, 100*i);
+    }, oneCardSpreadTime*i);
   })
 };
 
@@ -34,65 +42,68 @@ const closeAllCards = function() {
     setTimeout(() => {
       c.classList.remove('guessed');
       c.classList.remove('opened');     
-    }, 100*i);
+    }, oneCardSpreadTime*i);
   })
 };
 
-const initBoard = function () {
-
-  gameBoard.innerHTML = '';
-
-  imageNames.forEach((image)=>{
-    
-    const fragment = document.createDocumentFragment();
-
-    const flipContainer = document.createElement('div');
-    flipContainer.classList.add('flip-container')
-    flipContainer.dataset.label = image;
-
-    const flipper = document.createElement('div');
-    flipper.classList.add('flipper');
-
-    const front = document.createElement('div'); 
-    front.classList.add('front'); 
-    
-    const frontImage = document.createElement('img'); 
-    frontImage.classList.add('card');
-    frontImage.src = 'img/empty.png'; 
-    frontImage.alt = 'Back';
-
-    front.appendChild(frontImage);
-
-    const back = document.createElement('div'); 
-    back.classList.add('back');
-
-    const backImage = document.createElement('img'); 
-    backImage.classList.add('card');
-    backImage.src = `img/${image}`; 
-    backImage.alt = 'Image';
-    
-    back.appendChild(backImage);
-    flipper.appendChild(front);
-    flipper.appendChild(back);
-    flipContainer.appendChild(flipper);
-    fragment.appendChild(flipContainer);
-
-    gameBoard.appendChild(fragment);
+const removeAllCards = function () {
+  const cards = getAllCards();
+  cards.forEach((card,i)=>{
+    setTimeout(()=>{
+      card.remove();
+    },(cards.length-i)*oneCardRemoveTime)
   });
-
+  return cards.length*oneCardRemoveTime;
 }
 
-const spreadCards = function () {
+const initBoard = function () {
+  const timeDelayForRemoving = removeAllCards();
+  setTimeout(()=>{
+    getShuffledCards(imageNames).forEach((image,i)=>{
+      setTimeout(function () {
+        const fragment = document.createDocumentFragment();
   
-  const backImages = gameBoard.querySelectorAll('.back > img');
+        const flipContainer = document.createElement('div');
+        flipContainer.classList.add('flip-container');
+        flipContainer.dataset.label = image;
+  
+        const flipper = document.createElement('div');
+        flipper.classList.add('flipper');
+  
+        const front = document.createElement('div');
+        front.classList.add('front');
+  
+        const frontImage = document.createElement('img');
+        frontImage.classList.add('card');
+        frontImage.src = 'img/empty.png';
+        frontImage.alt = 'Back';
+  
+        front.appendChild(frontImage);
+  
+        const back = document.createElement('div');
+        back.classList.add('back');
+  
+        const backImage = document.createElement('img');
+        backImage.classList.add('card');
+        backImage.src = `img/${image}`;
+        backImage.alt = 'Image';
+  
+        back.appendChild(backImage);
+        flipper.appendChild(front);
+        flipper.appendChild(back);
+        flipContainer.appendChild(flipper);
+        fragment.appendChild(flipContainer);
+  
+        gameBoard.appendChild(fragment);
+      },oneCardSpreadTime*i);
+    });
+  },timeDelayForRemoving);
+  return timeDelayForRemoving + oneCardSpreadTime*imageNames.length;
+}
 
-  imageNames.sort(cardsShuffler);
-
-  backImages.forEach((image,i) => {
-    image.src = `img/${imageNames[i]}`;
-    image.parentNode.parentNode.parentNode.dataset.label = imageNames[i];
-  });
-};
+const getAllCards = function() {
+  return gameBoard.querySelectorAll('.flip-container');
+}
 
 const getOpenedCards = function() {
   return gameBoard.querySelectorAll('.opened:not(.guessed)');
@@ -107,7 +118,6 @@ const showInfo = (text) => {
 }
 
 const cardClickListener = function(e) { 
-
   if (getOpenedCards().length == 16) return;
   const flipper = e.target.parentNode.parentNode.parentNode;
   controlDiv.classList.add('hide');
@@ -145,46 +155,52 @@ const cardClickListener = function(e) {
   };
 };
 
+const countDown = (time)=>{
+  showInfo(`Remember cards! Time left: ${time}`);
+  for (let i=time; i>=1; i--) {
+    setTimeout(()=>{
+      showInfo(`Remember cards! Time left: ${(time-i)}`);
+    },i*1000);
+  };
+}
+
 const startButtonListener = function() {
-  
   controlDiv.classList.add('hide');
   numberOfFails = 0;
+  const timeout = initBoard();
   
-  if (document.querySelector('.preview-option').checked) {
-    spreadCards();
-    if (getOpenedCards().length == 0) {
-      openAllCards();
-    };
-    showInfo('Remember cards! Time left: 10');
-    for (let i=10; i>=1; i--) {
-      setTimeout(()=>{
-        showInfo(`Remember cards! Time left: ${(10-i)}`);
-      },i*1000);
-    };
+  if (previewOption.checked) {    
     setTimeout(()=>{
-      closeAllCards();
-      showInfo(`And now try to guess!`);
-    },10000);
-  } else {
-    showInfo(`Try to guess!`);
-    if (getOpenedCards().length == 16) {
-      closeAllCards();
+      if (getOpenedCards().length == 0) {
+        openAllCards();
+      };
+
+      countDown(previewTime);
+
       setTimeout(()=>{
-        spreadCards();
-      },100*imageNames.length);  
-    } else {
-      spreadCards();
-    };
+        closeAllCards();
+        showInfo(`And now try to guess!`);
+      },1000*previewTime);
+
+    },timeout);
+  } else {
+    setTimeout(()=>{
+      showInfo(`Try to guess!`);
+    },timeout);
   };
 };
 
-document.addEventListener('DOMContentLoaded', ()=>{  
-
+const init = function() {
   showInfo('Welcome to Memory Pairs Game');
 
   initBoard();
   
-  gameBoard.addEventListener('click',cardClickListener);
-  document.querySelector('.start-btn').addEventListener('click', startButtonListener);
-});
+  setTimeout(()=>{
+    gameBoard.addEventListener('click',cardClickListener);
+    startButton.addEventListener('click', startButtonListener);
+  }, oneCardSpreadTime*imageNames.length);
+}
 
+document.addEventListener('DOMContentLoaded', ()=>{  
+  init();
+});
