@@ -22,6 +22,8 @@ const randomSpeed = () => {
 const Enemy = function() {
     this.width = 70;
     this.height = 83;
+    this.leftPlayingBorder = -150;
+    this.rightPlayingBorder = 500;
     this.speed = randomSpeed();
 };
 
@@ -68,8 +70,8 @@ EnemyBoy.prototype.constructor = EnemyBoy;
 
 EnemyBoy.prototype.update = function(dt) {
     this.x -= this.speed * dt;
-    if (this.x < -150) {
-        this.x = 500;
+    if (this.x < this.leftPlayingBorder) {
+        this.x = this.rightPlayingBorder;
         this.speed = randomSpeed();
     }
     this.handleGameOver();
@@ -89,8 +91,8 @@ EnemyGirl.prototype.constructor = EnemyGirl;
 
 EnemyGirl.prototype.update = function(dt) {
     this.x += this.speed * dt;
-    if (this.x > 500) {
-        this.x = -150;
+    if (this.x > this.rightPlayingBorder) {
+        this.x = this.leftPlayingBorder;
         this.speed = randomSpeed();
     }
     this.handleGameOver();
