@@ -1,0 +1,252 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@700;900&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  line-height: 1;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+input::-ms-clear {
+  display: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+button::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+
+a, a:visited, a:hover {
+  text-decoration: none;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+img {
+  vertical-align: top;
+  max-width: 100%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+body {
+  font-family: "Raleway", sans-serif;
+  font-weight: 700;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  background-color: #FEF5EF;
+}
+
+body::before {
+  content: "";
+  background-image: url(../assets/noise.png);
+  animation: grain 8s steps(10) infinite;
+  height: 300%;
+  left: -50%;
+  opacity: 0.6;
+  position: fixed;
+  top: -100%;
+  width: 300%;
+}
+
+@keyframes grain {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  10% {
+    transform: translate3d(-5%, -10%, 0);
+  }
+  20% {
+    transform: translate3d(-15%, 5%, 0);
+  }
+  30% {
+    transform: translate3d(7%, -25%, 0);
+  }
+  40% {
+    transform: translate3d(-5%, 25%, 0);
+  }
+  50% {
+    transform: translate3d(-15%, 10%, 0);
+  }
+  60% {
+    transform: translate3d(15%, 0%, 0);
+  }
+  70% {
+    transform: translate3d(0%, 15%, 0);
+  }
+  80% {
+    transform: translate3d(3%, 35%, 0);
+  }
+  90% {
+    transform: translate3d(-10%, 10%, 0);
+  }
+}
+
+.header {
+  padding: 30px 40px;
+}
+
+.title {
+  text-align: center;
+  font-size: 28px;
+  -webkit-text-stroke: 1.3px #584b53;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  font-weight: 900;
+  animation: marquee 5s linear infinite;
+}
+
+.title span {
+  -webkit-text-fill-color: #85b4f5;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translate3d(-2%, 0, 0);
+  }
+  50% {
+    transform: translate3d(2%, 0, 0);
+  }
+  100% {
+    transform: translate3d(-2%, 0, 0);
+  }
+}
+
+.wrapper {
+  display: flex;
+}
+
+.aside {
+  height: 100vh;
+  flex: 0 0 30%;
+}
+
+.navigation {
+  margin: 40px 0;
+}
+
+.navigation__list {
+  text-align: center;
+}
+
+.navigation__list-item {
+  margin: 10px 30px;
+  padding: 10px 0;
+  transition: 0.3s ease-in;
+  transform: scale(1);
+}
+
+.navigation__list-item:hover {
+  transform: scale(1.2);
+}
+
+@media (max-width: 970px) {
+  .navigation__list-item {
+    margin: 10px 0;
+  }
+}
+
+.navigation__list-link {
+  font-size: 24px;
+  -webkit-text-stroke: 1.3px #9D5C63;
+  -webkit-text-fill-color: transparent;
+}
+
+.navigation__list-item.active {
+  background: url(../assets/emblem.svg) right/contain no-repeat;
+  transform: scale(1.2);
+}
+
+.navigation__list-item.active .navigation__list-link {
+  -webkit-text-fill-color: #85b4f5;
+}
+
+.main {
+  flex: 1 1 70%;
+  background: url(../assets/bg.png) 50% 0% no-repeat;
+}
+
+@media (max-width: 730px) {
+  body {
+    overflow-y: scroll;
+  }
+  .wrapper {
+    flex-direction: column;
+  }
+  .aside {
+    position: relative;
+    flex: 0 0 100%;
+  }
+  .aside-btn {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    background: url(../assets/down.svg) no-repeat;
+    width: 20px;
+    height: 30px;
+    transition: 0.3s ease-in;
+  }
+  .aside-btn.clicked {
+    transform: translate(-50%, 0) rotate(180deg);
+  }
+  .navigation {
+    margin: -150% 0 0;
+    opacity: 0;
+    transition: 0.5s ease-in;
+  }
+  .navigation.visible {
+    margin: 40px 0;
+    opacity: 1;
+  }
+  .navigation__list-item {
+    margin: 10px 55px;
+  }
+  .main {
+    flex: 0 0 100%;
+  }
+}
+
+.container {
+  max-width: 90%;
+  margin: 10vh auto;
+  padding: 30px;
+  border-radius: 30px;
+}
+
+.content {
+  font-size: 18px;
+  line-height: 25px;
+  color: #297373;
+}
+
+.title-content {
+  font-size: 24px;
+  font-weight: 900;
+  -webkit-text-stroke: 1.3px #101942;
+  -webkit-text-fill-color: #35d5b5;
+  margin: 0 0 30px;
+  letter-spacing: 0.5px;
+}
