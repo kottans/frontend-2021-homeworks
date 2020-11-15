@@ -1,0 +1,27 @@
+/*Menu setup*/
+#menu_recycle_checkbox {
+    position: absolute;
+    top: -50px;
+}
+#menu_recycle_extended_checkbox {
+    position: absolute;
+    top: -50px;
+}
+.recycle_extended {
+    display: none;
+}
+label.nav_text_link {
+    cursor: pointer;
+}
+/*Show popup*/
+#menu_recycle_checkbox:checked ~ #menu_recycle {
+    display: flex;
+    flex-wrap: wrap;
+}
+#menu_recycle_extended_checkbox:checked ~ label {
+    display: none;
+}
+/*Show all items in popup*/
+#menu_recycle_extended_checkbox:checked ~ .recycle_extended {
+    display: unset;
+}

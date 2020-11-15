@@ -1,0 +1,18 @@
+/*Menu setup*/
+#menu_recycle_close {
+    display: none;
+}
+/*Show popup / Show popup with all items*/
+#menu_recycle_open_essential:target #menu_recycle_essential,
+#menu_recycle_open_full:target #menu_recycle_full {
+    display: flex;
+    flex-wrap: wrap;
+}
+#menu_recycle_open_essential:target #menu_recycle_close,
+#menu_recycle_open_full:target #menu_recycle_close {
+    display: unset;
+}
+#menu_recycle_open_essential:target #menu_recycle_open,
+#menu_recycle_open_full:target #menu_recycle_open {
+    display: none;
+}
