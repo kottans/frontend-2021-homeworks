@@ -7,6 +7,27 @@
   text-decoration: none;
 }
 
+a {
+  display: block;
+  padding: 5px;
+  color: #757575;
+}
+
+a:visited {
+  color: #757575;
+}
+
+img {
+  vertical-align: middle;
+}
+
+label:hover {
+  cursor: pointer;
+  background-color: rgba(224, 224, 224, 0.7);
+}
+
+/* Navigation bar*/
+
 .navbar {
   display: flex;
   height: 50px;
@@ -18,36 +39,19 @@
   color: #757575;
 }
 
-.navbar li {
+.nav-item {
   position: relative;
   margin: 5px 20px;
 }
 
-.navbar a {
-  display: block;
-  padding: 5px;
-  color: #757575;
-}
-
-.navbar > li > a:focus,
-.navbar > li > input:focus {
+.nav-item > a:focus,
+.nav-item > input:focus {
   background-color: rgba(224, 224, 224, 0.5);
 }
 
-.navbar > li > a:hover {
+.nav-item:hover {
   background-color: rgba(224, 224, 224, 0.7);
   border-radius: 4px;
-}
-
-.app-button-label {
-  display: block;
-  width: 40px;
-  border-radius: 4px;
-}
-
-label:hover {
-  cursor: pointer;
-  background-color: rgba(224, 224, 224, 0.7);
 }
 
 .app-button {
@@ -58,30 +62,26 @@ label:hover {
   z-index: -1;
 }
 
+.app-button-label {
+  display: block;
+  width: 40px;
+  border-radius: 4px;
+}
+
+.app-button-label img {
+  width: 100%;
+}
+
 .avatar {
   border-radius: 50%;
   width: 40px;
   height: 40px;
 }
 
-label img {
-  width: 100%;
-  vertical-align: middle;
-}
-
-a img {
-  vertical-align: middle;
-}
-
-a:visited {
-  color: #757575;
-}
-
-/* App-menu */
+/* Main App-menu */
 
 .app-menu-main,
-.more-menu-items,
-.div-line {
+.more-menu-items {
   display: none;
 }
 
@@ -94,7 +94,7 @@ a:visited {
   border-radius: 5px;
 }
 
-.app-menu-main .menu-item {
+.menu-item {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -106,7 +106,7 @@ a:visited {
   border-radius: 4px;
 }
 
-.app-menu-main .menu-item a {
+.menu-item a {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -119,23 +119,23 @@ a:visited {
   padding: 20%;
 }
 
-.app-menu-main .menu-item img {
+.menu-item img {
   max-width: 90%;
   max-height: 60%;
   margin-bottom: 10%;
 }
 
-.app-menu-main .menu-item a:focus {
+.menu-item a:focus {
   border-color: rgba(224, 224, 224, 0.7);
   background-color: transparent;
   outline: none;
 }
 
-.app-menu-main .menu-item:hover {
+.menu-item:hover {
   background-color: rgba(224, 224, 224, 0.7);
 }
 
-.app-button:checked ~ label {
+.app-button:checked ~ .app-button-label {
   background-color: rgba(224, 224, 224, 0.5);
 }
 
@@ -159,19 +159,11 @@ a:visited {
   line-height: 1.5em;
 }
 
-.app-menu-main .app-menu-more {
-  flex-flow: row wrap;
-  justify-content: space-around;
-  align-content: flex-start;
+/* Additional part of App-menu */
+
+.app-menu-more {
   margin: 0;
   width: 100%;
-}
-
-.div-line {
-  height: 2px;
-  width: 100%;
-  border-top: 2px solid rgba(224, 224, 224, 0.5);
-  margin-top: 1%;
 }
 
 .more-button {
@@ -193,8 +185,8 @@ a:visited {
   background-color: rgba(224, 224, 224, 0.5);
   border-radius: 4px;
   width: 100%;
-  line-height: 2.5em;
   margin-top: 3%;
+  line-height: 2.5em;
 }
 
 .more-button:focus ~ .more-button-label {
@@ -203,12 +195,16 @@ a:visited {
 }
 
 .more-button:checked,
-.more-button:checked ~ label {
+.more-button:checked ~ .more-button-label {
   display: none;
 }
 
-.more-button:checked ~ .div-line {
-  display: flex;
+.more-button:checked ~ .more-menu-items::before {
+  content: "";
+  height: 2px;
+  width: 100%;
+  border-top: 2px solid rgba(224, 224, 224, 0.5);
+  margin: 1% 0 0.7% 0;
 }
 
 .more-button:checked ~ .more-menu-items {
