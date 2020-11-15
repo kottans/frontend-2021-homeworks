@@ -17,6 +17,82 @@ const getRandomSpeed = () => {
     return Math.floor(Math.random() * (350 - 100 + 1)) + 100;
 }
 
+
+//////////  PLAYER /////////////////
+
+const Player = function(x, y) {
+  this.x = x;
+  this.y = y;
+  this.width = 60;
+  this.height = 83;
+  this.sprite = 'images/enemy-bug.png';
+  this.score = 0;
+  this.lives = 3;
+}
+
+Player.prototype.update = function () {
+if (this.y === borders.topY) {
+  setTimeout(() => {
+      this.score += 2;
+      score.textContent = `Score: ${this.score}`
+    alert(`Well done! Your score is ${this.score}. Keep it up!`);
+    this.y = borders.bottomY;
+  }, 13);
+}
+};
+
+Player.prototype.handleInput = function(keyPress) {
+  switch (keyPress) {
+    case "up":
+      if (this.y > borders.topY) {
+        this.y -= tileDimensions.height;
+      }
+      break;
+    case "down":
+      if (this.y < borders.bottomY) {
+        this.y += tileDimensions.height;
+      }
+      break;
+    case "left":
+      if (this.x > borders.leftX) {
+          this.x -= tileDimensions.width;
+      }
+      break;
+    case "right":
+      if (this.x < borders.rightX) {
+          this.x += tileDimensions.width;
+      }
+      break;
+  }
+}
+
+Player.prototype.movePlayerToStartPosition = function() {
+  this.y = borders.bottomY;
+  this.x = 220;
+}
+
+Player.prototype.decreaseOneLife = function() {
+  this.lives -= 1;
+  score.textContent = `Score: ${this.score}`;
+  lives.textContent = `Lives: ${this.lives}`;
+  alert("Oooops..");
+}
+
+Player.prototype.resetGame = function() {
+  alert(`You lose :( Your score is ${this.score} Another try?`);
+  this.lives = 3;
+  this.score = 0;
+  score.textContent = `Score: ${this.score}`;
+  lives.textContent = `Lives: ${this.lives}`;
+}
+
+Player.prototype.render = function() {
+  ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+}
+
+let player = new Player(220, 464);
+
+
 //////////  Enemy /////////////////
 
 const Enemy = function() {
@@ -27,27 +103,19 @@ const Enemy = function() {
     this.speed = getRandomSpeed();
 };
 
-Enemy.prototype.handleGameOver = function () {
+Enemy.prototype.handleCollision = function () {
   if (
-    this.x + this.width > player.x &&
-    player.x + player.width > this.x &&
-    player.y > this.y - this.height &&
-    player.y - player.height < this.y
+    this.x + this.width > this.player.x &&
+    this.player.x + this.player.width > this.x &&
+    this.player.y > this.y - this.height &&
+    this.player.y - this.player.height < this.y
   ) {
     setTimeout(() => {
-      player.lives -= 1;
-      score.textContent = `Score: ${player.score}`;
-      lives.textContent = `Lives: ${player.lives}`;
-      alert("Oooops..");
-      if (player.lives === 0) {
-        alert(`You lose :( Your score is ${player.score} Another try?`);
-        player.lives = 3;
-        player.score = 0;
-        score.textContent = `Score: ${player.score}`;
-        lives.textContent = `Lives: ${player.lives}`;
+      this.player.decreaseOneLife();
+      if (this.player.lives === 0) {
+        this.player.resetGame();
       }
-      player.y = borders.bottomY;
-      player.x = 220;
+      this.player.movePlayerToStartPosition();
     }, 13);
   }
 };
@@ -58,10 +126,11 @@ Enemy.prototype.render = function() {
 
 //////////  EnemyBoy /////////////////
 
-const EnemyBoy = function(x, y) {
-    Enemy.apply(this, arguments);
+const EnemyBoy = function(x, y, player) {
+  Enemy.apply(this, arguments);
     this.x = x;
     this.y = y;
+    this.player = player;
     this.sprite = 'images/char-boy.png';
 }
 
@@ -74,15 +143,16 @@ EnemyBoy.prototype.update = function(dt) {
         this.x = this.rightPlayingBorder;
         this.speed = getRandomSpeed();
     }
-    this.handleGameOver();
+    this.handleCollision();
 };
 
 //////////  EnemyGirl /////////////////
 
-const EnemyGirl = function(x, y) {
+const EnemyGirl = function(x, y, player) {
     Enemy.apply(this, arguments)
     this.x = x;
     this.y = y;
+    this.player = player; 
     this.sprite = 'images/char-horn-girl.png'
 }
 
@@ -95,72 +165,17 @@ EnemyGirl.prototype.update = function(dt) {
         this.x = this.leftPlayingBorder;
         this.speed = getRandomSpeed();
     }
-    this.handleGameOver();
+    this.handleCollision();
 };
 
-let enemyGirlFirst = new EnemyGirl(-150, 132);
-let enemyGirlSecond = new EnemyGirl(-150, 215);
-let enemyGirlThird = new EnemyGirl(-150, 298);
-let enemyBoyFirst = new EnemyBoy(550, 132);
-let enemyBoySecond = new EnemyBoy(550, 215);
-let enemyBoyThird = new EnemyBoy(550, 298);
+let enemyGirlFirst = new EnemyGirl(-150, 132, player);
+let enemyGirlSecond = new EnemyGirl(-150, 215, player);
+let enemyGirlThird = new EnemyGirl(-150, 298, player);
+let enemyBoyFirst = new EnemyBoy(550, 132, player);
+let enemyBoySecond = new EnemyBoy(550, 215, player);
+let enemyBoyThird = new EnemyBoy(550, 298, player);
 const allEnemies = [enemyGirlFirst, enemyGirlSecond, enemyGirlThird, enemyBoyFirst, enemyBoySecond, enemyBoyThird];
 
-
-//////////  PLAYER /////////////////
-
-const Player = function(x, y) {
-    this.x = x;
-    this.y = y;
-    this.width = 60;
-    this.height = 83;
-    this.sprite = 'images/enemy-bug.png';
-    this.score = 0;
-    this.lives = 3;
-}
-
-Player.prototype.update = function () {
-  if (this.y === borders.topY) {
-    setTimeout(() => {
-        this.score += 2;
-        score.textContent = `Score: ${this.score}`
-      alert(`Well done! Your score is ${this.score}. Keep it up!`);
-      this.y = borders.bottomY;
-    }, 13);
-  }
-};
-
-Player.prototype.handleInput = function(keyPress) {
-    switch (keyPress) {
-      case "up":
-        if (this.y > borders.topY) {
-          this.y -= tileDimensions.height;
-        }
-        break;
-      case "down":
-        if (this.y < borders.bottomY) {
-          this.y += tileDimensions.height;
-        }
-        break;
-      case "left":
-        if (this.x > borders.leftX) {
-            this.x -= tileDimensions.width;
-        }
-        break;
-      case "right":
-        if (this.x < borders.rightX) {
-            this.x += tileDimensions.width;
-        }
-        break;
-    }
-}
-
-Player.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-    
-}
-
-let player = new Player(220, 464);
 
 //////////  ITEM /////////////////
 
@@ -191,8 +206,9 @@ Item.prototype.render = function() {
 
 //////////  STAR /////////////////
 
-const Star = function() {
+const Star = function(player) {
     Item.apply(this, arguments);
+    this.player = player;
     this.sprite = 'images/Star.png';
 }
 
@@ -200,20 +216,21 @@ Star.prototype = Object.create(Item.prototype);
 Star.prototype.constructor = Star;
 
 Star.prototype.update = function() {
-    if (this.y === player.y && this.x === player.x - 20) {
+    if (this.y === this.player.y && this.x === this.player.x - 20) {
         this.x = getRandomPosition().x;
         this.y = getRandomPosition().y;
         setTimeout(() => {
-            player.score += 1;
-            score.textContent = `Score: ${player.score}`;
+            this.player.score += 1;
+            score.textContent = `Score: ${this.player.score}`;
         }, 100);
     }
 }
 
 //////////  HEART /////////////////
 
-const Heart = function() {
+const Heart = function(player) {
     Item.apply(this, arguments);
+    this.player = player;
     this.sprite = 'images/Heart2.png';
 }
 
@@ -221,19 +238,18 @@ Heart.prototype = Object.create(Item.prototype);
 Heart.prototype.constructor = Heart;
 
 Heart.prototype.update = function() {
-    if (this.y === player.y && this.x === player.x - 20) {
+    if (this.y === this.player.y && this.x === this.player.x - 20) {
         this.x = getRandomPosition().x;
         this.y = getRandomPosition().y;
         setTimeout(() => {
-            console.log('hi');
-            player.lives += 1;
-            lives.textContent = `Lives: ${player.lives}`
+            this.player.lives += 1;
+            lives.textContent = `Lives: ${this.player.lives}`
         }, 13);
     }
 }
 
-let star = new Star();
-let heart = new Heart();
+let star = new Star(player);
+let heart = new Heart(player);
 
 
 document.addEventListener('keyup', function(e) {
