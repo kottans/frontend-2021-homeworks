@@ -13,7 +13,7 @@ const tileDimensions = {
 const score = document.querySelector('.score');
 const lives = document.querySelector('.lives');
 
-const randomSpeed = () => {
+const getRandomSpeed = () => {
     return Math.floor(Math.random() * (350 - 100 + 1)) + 100;
 }
 
@@ -24,7 +24,7 @@ const Enemy = function() {
     this.height = 83;
     this.leftPlayingBorder = -150;
     this.rightPlayingBorder = 500;
-    this.speed = randomSpeed();
+    this.speed = getRandomSpeed();
 };
 
 Enemy.prototype.handleGameOver = function () {
@@ -72,7 +72,7 @@ EnemyBoy.prototype.update = function(dt) {
     this.x -= this.speed * dt;
     if (this.x < this.leftPlayingBorder) {
         this.x = this.rightPlayingBorder;
-        this.speed = randomSpeed();
+        this.speed = getRandomSpeed();
     }
     this.handleGameOver();
 };
@@ -93,7 +93,7 @@ EnemyGirl.prototype.update = function(dt) {
     this.x += this.speed * dt;
     if (this.x > this.rightPlayingBorder) {
         this.x = this.leftPlayingBorder;
-        this.speed = randomSpeed();
+        this.speed = getRandomSpeed();
     }
     this.handleGameOver();
 };
@@ -164,21 +164,21 @@ let player = new Player(220, 464);
 
 //////////  ITEM /////////////////
 
-const randomPositionInArray = (arrLength) => {
+const getRandomPositionInArray = (arrLength) => {
     return (Math.floor(Math.random() * arrLength));
 }
 
-const randomPosition = () => {
+const getRandomPosition = () => {
   const x = [0, 100, 200, 300, 400];
   const y = [132, 215, 298];
 
-  const randomX = x[randomPositionInArray(x.length)];
-  const randomY = y[randomPositionInArray(y.length)];
+  const randomX = x[getRandomPositionInArray(x.length)];
+  const randomY = y[getRandomPositionInArray(y.length)];
   return { x: randomX, y: randomY };
 };
 
 const Item = function() {
-    this.rndPosition = randomPosition();
+    this.rndPosition = getRandomPosition();
     this.x = this.rndPosition.x;
     this.y = this.rndPosition.y;
     this.width = 100;
@@ -201,8 +201,8 @@ Star.prototype.constructor = Star;
 
 Star.prototype.update = function() {
     if (this.y === player.y && this.x === player.x - 20) {
-        this.x = randomPosition().x;
-        this.y = randomPosition().y;
+        this.x = getRandomPosition().x;
+        this.y = getRandomPosition().y;
         setTimeout(() => {
             player.score += 1;
             score.textContent = `Score: ${player.score}`;
@@ -222,8 +222,8 @@ Heart.prototype.constructor = Heart;
 
 Heart.prototype.update = function() {
     if (this.y === player.y && this.x === player.x - 20) {
-        this.x = randomPosition().x;
-        this.y = randomPosition().y;
+        this.x = getRandomPosition().x;
+        this.y = getRandomPosition().y;
         setTimeout(() => {
             console.log('hi');
             player.lives += 1;
