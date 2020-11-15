@@ -156,11 +156,12 @@ const cardClickListener = function(e) {
 };
 
 const countDown = (time)=>{
-  showInfo(`Remember cards! Time left: ${time}`);
-  for (let i=time; i>=1; i--) {
-    setTimeout(()=>{
-      showInfo(`Remember cards! Time left: ${(time-i)}`);
-    },i*1000);
+  /* Cool solution with recursion by madmaxWMFU! Thanks! */
+  if (time < 0) {
+    showInfo(`And now try to guess!`);
+  } else {
+    showInfo(`Remember cards! Time left: ${time}`);
+    setTimeout(()=>{ countDown(time-1); },1000);
   };
 }
 
