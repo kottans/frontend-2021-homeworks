@@ -47,6 +47,7 @@
 
 label:hover {
   cursor: pointer;
+  background-color: rgba(224, 224, 224, 0.7);
 }
 
 .app-button {
