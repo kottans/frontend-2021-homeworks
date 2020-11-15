@@ -48,7 +48,7 @@ const initBoard = function () {
 
     const flipContainer = document.createElement('div');
     flipContainer.classList.add('flip-container')
-    flipContainer.id = image;
+    flipContainer.dataset.label = image;
 
     const flipper = document.createElement('div');
     flipper.classList.add('flipper');
@@ -90,7 +90,7 @@ const spreadCards = function () {
 
   backImages.forEach((image,i) => {
     image.src = `img/${imageNames[i]}`;
-    image.parentNode.parentNode.parentNode.id = imageNames[i];
+    image.parentNode.parentNode.parentNode.dataset.label = imageNames[i];
   });
 };
 
@@ -124,7 +124,7 @@ const cardClickListener = function(e) {
   
   const openedCards = getOpenedCards();
   if (openedCards.length == 2) {
-    if (openedCards[0].id == openedCards[1].id) {
+    if (openedCards[0].dataset.label == openedCards[1].dataset.label) {
       setTimeout(()=>openedCards.forEach(c=>{
         c.classList.add('guessed');
       }),500);
