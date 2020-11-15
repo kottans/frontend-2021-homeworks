@@ -16,11 +16,6 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  --color: #f6da73;
-  --background_color: #3e5336;
-  --decor_color: #e55b7e;
-  --base_font_size: 16px;
-  --font_family: theme1_font;
   color: var(--color);
   background-color: var(--background_color);
   font-size: var(--base_font_size);
@@ -28,6 +23,22 @@ body {
   min-height: 100vh;
   display: grid;
   grid-template-rows: auto 1fr auto;
+}
+
+.theme1 {
+  --color: #f6da73;
+  --background_color: #3e5336;
+  --decor_color: #e55b7e;
+  --base_font_size: 16px;
+  --font_family: theme1_font;
+}
+
+.theme2 {
+  --color: #f4f6ec;
+  --background_color: #2d0c03;
+  --decor_color: #f8b786;
+  --base_font_size: 16px;
+  --font_family: theme2_font;
 }
 
 header {
@@ -60,6 +71,10 @@ button {
   width: 80px;
   margin: 3px;
   padding: 5px 0;
+  color: var(--color);
+  background-color: var(--background_color);
+  font-size: calc(var(--base_font_size) - 1);
+  font-family: var(--font_family);
   border: 2px solid var(--decor_color);
   border-radius: 3px;
   cursor: pointer;
@@ -158,7 +173,7 @@ option {
 
 .game_field {
   text-align: center;
-  margin-bottom: 10px;
+  margin: 20px 0;
 }
 
 .game_area {
@@ -258,7 +273,7 @@ a {
   text-decoration: none;
 }
 
-.popup_hail {
+.popup_hail__window {
   position: absolute;
   width: 200px;
   height: 140px;
@@ -266,8 +281,8 @@ a {
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 5;
-  background-color: inherit;
-  color: inherit;
+  background-color: var(--background_color);
+  color: var(--color);
   border-radius: 3px;
   border: 2px solid var(--decor_color);
   display: flex;
@@ -284,4 +299,13 @@ a {
   color: inherit;
   border-radius: 3px;
   border: 2px solid var(--decor_color);
+}
+
+.popup_hail__background {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #00000090;
 }
