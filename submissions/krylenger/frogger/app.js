@@ -235,7 +235,7 @@ let heart = new Heart();
 
 
 document.addEventListener('keyup', function(e) {
-    var allowedKeys = {
+    const allowedKeys = {
         37: 'left',
         38: 'up',
         39: 'right',
