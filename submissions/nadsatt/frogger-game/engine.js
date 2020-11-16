@@ -102,9 +102,9 @@ var Engine = (function(global) {
         var now = Date.now(),
             dt = (now - lastTime) / 1000.0;
 
-        updateEntities(dt);
+        updateEnemies(dt);
         renderField();
-        renderEnemies();
+        renderEntities();
 
         lastTime = now;
 
@@ -134,7 +134,7 @@ var Engine = (function(global) {
         }
     }
 
-    function updateEntities(dt) {
+    function updateEnemies(dt) {
         allEnemies.forEach(function(enemy) {
             enemy.update(dt);
         });
@@ -164,7 +164,7 @@ var Engine = (function(global) {
         }
     }
 
-    function renderEnemies() {
+    function renderEntities() {
         allEnemies.forEach(function(enemy) {
             enemy.render();
         });
