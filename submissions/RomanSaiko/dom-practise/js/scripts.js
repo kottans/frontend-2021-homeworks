@@ -37,42 +37,43 @@ const content = [
     }
 ];
 
-let renderPage = () => {
-    const iconMenu = document.getElementById('menu-handler');
-    const sidebarMenu = document.getElementById('aside-menu');
-    const article = document.getElementById('article');
-    const navMenu = document.getElementById('nav-list');
+const iconMenu = document.getElementById('menu-handler');
+const sidebarMenu = document.getElementById('aside-menu');
+const article = document.getElementById('article');
+const navMenu = document.getElementById('nav-list');
 
-    const handleMenuToggle = () => {
-        iconMenu.classList.toggle('open');
-        if (iconMenu.classList.contains('open')) {
-            sidebarMenu.classList.add('open');
-        }
-        else {
-            sidebarMenu.classList.remove('open');
-        }
-    };
-
-    const changeInfo = (e) => {
-        createInfoBlock(e.target.dataset.id);
-        article.style.backgroundImage = `url(img/${content[e.target.dataset.id].city.toLowerCase()}.jpg)`
+const handleMenuToggle = () => {
+    iconMenu.classList.toggle('open');
+    if (iconMenu.classList.contains('open')) {
+        sidebarMenu.classList.add('open');
     }
+    else {
+        sidebarMenu.classList.remove('open');
+    }
+};
 
-    const createInfoBlock = (id) => {
-        const infoBlock = `
+const changeInfo = (e) => {
+    const id = e.target.dataset.id;
+    createInfoBlock(id);
+    article.style.backgroundImage = `url(img/${content[id].city.toLowerCase()}.jpg)`;
+}
+
+const createInfoBlock = (id) => {
+    const {city, country, region, population, area, website} = content[id];
+    const infoBlock = `
         <div class="info-block">
-            <h2><strong>City:</strong> ${content[id].city}</h2>
-            <p><strong>Country:</strong> ${content[id].country}</p>
-            <p><strong>Region:</strong> ${content[id].region}</p>
-            <p><strong>Population:</strong> ${content[id].population}</p>
-            <p><strong>Area:</strong> ${content[id].area} km<sup>2</sup></p>
-            <p><strong>Website:</strong> <a target="_blank" href=${content[id].website}>${content[id].website}</a></p>
+            <h2><strong>City:</strong> ${city}</h2>
+            <p><strong>Country:</strong> ${country}</p>
+            <p><strong>Region:</strong> ${region}</p>
+            <p><strong>Population:</strong> ${population}</p>
+            <p><strong>Area:</strong> ${area} km<sup>2</sup></p>
+            <p><strong>Website:</strong> <a target="_blank" href=${website}>${website}</a></p>
         </div>`
-        article.innerHTML = infoBlock;
-    }
+    article.innerHTML = infoBlock;
+}
 
+const renderPage = () => {
     createInfoBlock(0);
-
     iconMenu.addEventListener('click', handleMenuToggle);
     navMenu.addEventListener('click', changeInfo);
 }
