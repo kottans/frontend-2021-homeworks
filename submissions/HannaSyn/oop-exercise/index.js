@@ -16,7 +16,7 @@ class Inhabitant {
       this.friends = friends;
       this.say = say
    }
-   speak() {
+   toString() {
       return `${this.say} I'm ${this.biologicalSpecies}! My name is ${this.name}, my gender is ${this.gender}, and I have friends: ${this.friends}.`;
    }
 }
@@ -24,47 +24,49 @@ class Inhabitant {
 class Human extends Inhabitant {
    constructor( name, gender, friends, say, legs, hands ) {
       super( name, gender, friends, say, 'human');
-      this.legs = legs;
-      this.hands = hands;
+      this.legs = 2 || legs;
+      this.hands = 2 || hands;
    } 
-   speak() {
-      return super.speak() + ` I have ${this.legs} legs and ${this.hands} hands.`
+   toString() {
+      return super.toString() + ` I have ${this.legs} legs and ${this.hands} hands.`
    }
 }
 
 class Animal extends Inhabitant {
    constructor( name, gender, friends, say, biologicalSpecies, paws) {
       super( name, gender, friends, say, biologicalSpecies )
-      this.paws = paws;
+      this.paws = 4 || paws;
    }
-   speak() {
-      return super.speak() + ` I have ${this.paws} paws.`
+   toString() {
+      return super.toString() + ` I have ${this.paws} paws.`
    }
 }
 
 class Cat extends Animal {
    constructor( name, gender, friends, say, paws) {
       super( name, gender, friends, say, 'cat', paws );
+      this.say = 'Meow!' || say;
    } 
 }
 
 class Dog extends Animal {
-   constructor( name, gender, friends, say, paws, Human ) {
+   constructor( name, gender, friends, Human, say, paws) {
       super( name, gender, friends, say, 'dog', paws);
       this.master = Human;
+      this.say = 'Woof!' || say;
    } 
-   speak() {
-      return super.speak() + ` I love my master ${this.master.name} very much!`
+   toString() {
+      return super.toString() + ` I love my master ${this.master.name} very much!`
    }
 }
 
 
-const woman = new Human('Hanna', 'female', ['Vlad', 'Ernest', 'Emilia'], 'Hi!', 2, 2);
-const man = new Human('Vlad', 'male', ['Hanna', 'Ernest', 'Emilia'], 'Hello!', 2, 2);
-const cat = new Cat('Ernest', 'male', ['Vlad', 'Hanna', 'Emilia'], 'Meow!', 4);
-const dog = new Dog('Emilia', 'female', ['Vlad', 'Ernest'], 'Wooof!', 4, woman);
+const woman = new Human('Hanna', 'female', ['Vlad', 'Ernest', 'Emilia'], 'Hi!');
+const man = new Human('Vlad', 'male', ['Hanna', 'Ernest', 'Emilia'], 'Hello!');
+const cat = new Cat('Ernest', 'male', ['Vlad', 'Hanna', 'Emilia']);
+const dog = new Dog('Emilia', 'female', ['Vlad', 'Ernest'], woman);
 
-[woman, man, cat, dog].forEach(inhabitant => print(inhabitant.speak()));
+[woman, man, cat, dog].forEach(inhabitant => print(inhabitant));
 
 // ======== OUTPUT ========
 /* Use print(message) for output.
