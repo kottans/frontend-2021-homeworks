@@ -28,7 +28,6 @@ class Position {
         this.x = this.initX;
         this.y = this.initY;
     }
-
 }
 
 class PositionEnemy extends Position {
@@ -36,7 +35,6 @@ class PositionEnemy extends Position {
     run(speed, dt) {
         this.x += (speed * dt); 
     }
-
 }
 
 class PositionPlayer extends Position {
@@ -85,13 +83,11 @@ class Enemy {
         } else {
             this.position.reset();
         }
-        
     }
 
     render = function() {
         ctx.drawImage(Resources.get(this.sprite), this.position.x, this.position.y);
     }
-
 }
 
 class Player {
@@ -132,36 +128,35 @@ class Player {
             default: 
                 break;
         }
-    
     }
 
     render () {
         ctx.drawImage(Resources.get(this.sprite), this.position.x, this.position.y);
     }
-
 }    
 
 let allEnemies = [
-    enemy = new Enemy (new PositionEnemy ( 1, 0 )),
-    enemy = new Enemy (new PositionEnemy ( 2, 0 )),
-    enemy = new Enemy (new PositionEnemy ( 3, 0 )),
+    new Enemy (new PositionEnemy ( 1, 0 )),
+    new Enemy (new PositionEnemy ( 2, 0 )),
+    new Enemy (new PositionEnemy ( 3, 0 )),
 ];
 
 let player = new Player( new PositionPlayer( 5, 3 ) );
 
 function checkCollisions() {
+    let collisionedEnemies = allEnemies.filter(filterCollisionedEnemies, player);
+    
+    if (collisionedEnemies.length) {
+        player.position.reset();
+    }
+}
 
-    allEnemies.forEach(function(enemy) {
-        let checkDiffPlayerX = player.position.x - enemy.position.x < (cellWidth / 2) && player.position.x - enemy.position.x >= 0;
-        let checkDiffEnemyX = enemy.position.x - player.position.x < (cellWidth / 2) && enemy.position.x - player.position.x >= 0;
-        let checkEqualY = player.position.y === enemy.position.y;
+function filterCollisionedEnemies(enemy) {
+    let fromPlayerToEnemyX = this.position.x - enemy.position.x;
+    let halfCellWidth = (cellWidth / 2);
+    let isEqualY = this.position.y === enemy.position.y;
 
-        if ((checkDiffPlayerX && checkEqualY) || ( checkDiffEnemyX && checkEqualY)) {
-            
-            return player.position.reset();
-        }
-    });
-
+    return (Math.abs(fromPlayerToEnemyX) < halfCellWidth) && isEqualY;
 }
 
 document.addEventListener('keyup', function(e) {
