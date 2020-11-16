@@ -9,30 +9,28 @@
 // Define your objects here
 
 class Mammals{
-   constructor(option){
+   constructor(name,gender,friends){
       this.species = 'mammals',
-      this.name = option.name,
-      this.gender = option.gender,
+      this.name = name,
+      this.gender = gender,
       this.legs = 4,
-      this.hands = 0,
-      this.saying = option.saying,
-      this.friends = option.friends
+      this.friends = friends
    }
 }
 
 class Dog extends Mammals{
-   constructor(option){
-      super(option);
+   constructor(name,gender,friends,saying){
+      super(name,gender,friends);
       this.species = 'dog',
-      this.saying = option.saying || 'guf'
+      this.saying = saying || 'guf'
    }
 };
 
 class Cat extends Mammals{
-   constructor(option){
-      super(option);
+   constructor(name,gender,friends,saying){
+      super(name,gender,saying,friends);
       this.species = 'cat',
-      this.saying = option.saying || 'meow'
+      this.saying = saying || 'guf'
    }
 
    getSaying(){
@@ -41,48 +39,53 @@ class Cat extends Mammals{
 }
 
 class Human extends Mammals{
-   constructor(option){
-      super(option);
+   constructor(name,gender,friends,saying){
+      super(name,gender,friends);
       this.species = 'human'
       this.hands = 2;
       this.legs =2;
-      this.saying = option.saying || `Hello! My name is ${this.name}`
+      this.saying = saying || `Hello! My name is ${this.name}`
    }
 }
 
 class Woman extends Human{
-   constructor(option){
-      super(option);
+   constructor(name,friends,saying){
+      super(name,friends,saying);
       this.gender = 'female'
    }
 }
 
 class Man extends Human{
-   constructor(option){
-      super(option);
+   constructor(name,friends,saying){
+      super(name,friends,saying);
       this.gender = 'male'
    }
 }
 
 class CatWoman extends Woman{
-   constructor(option){
-      super(option);
+   constructor(name,friends,saying){
+      super(name,friends,saying);
       this.saying = Cat.prototype.getSaying();
    }
 }
 
-const cat = new Cat({name:'Murzic',gender:'male',friends:['Elza','Nicky']})
-const dog = new Dog({name:'Lucy',gender:'female',saying:'guffyy',friends:['Alla','Dima']});
-const man = new Man({name:'Vlad',friends:['Sergay','Anton'],saying:'Hello everyone!'});
-const woman = new Woman({name:'Anna',friends:['Sergay','Artem']});
-const catWoman = new CatWoman({name:'Lily',friends:['Batman']})
-
+const cat = new Cat(name='Murzic',gender='male',friends=['Elza','Nicky'])
+const dog = new Dog(name='Lucy',gender='female',saying='guffyy',friends=['Alla','Dima']);
+const man = new Man(name='Vlad',friends=['Sergay','Anton'],saying='Hello everyone!');
+const woman = new Woman(name='Anna',friends=['Sergay','Artem']);
+const catWoman = new CatWoman(name='Lily',friends=['Batman'])
 
 const inhabitants = [man,woman,cat,dog,catWoman];
 
 const properties = ['name','species','gender','legs','hands','saying','friends'];
 let output = inhabitants.map(inhabitant=>
-   properties.map(property=>`<b>${property}:</b> ${inhabitant[property]}`
+   properties.map(property=>{
+      if(inhabitant.hasOwnProperty(property))
+         return `<b>${property}:</b> ${inhabitant[property]}`
+      else
+         return `<b>${property}:</b> ${inhabitant['species']} doesn't have`
+      
+   }
    ).join('\t')
 ).join('\n');
 
