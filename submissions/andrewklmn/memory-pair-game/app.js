@@ -140,7 +140,7 @@ const cardClickListener = function(e) {
         if(getGuessedCards().length === 16) {
           showInfo(`You won! Number of fails: ${numberOfFails}`);
           openAllCards();
-          document.querySelector('.control').classList.remove('hide');
+          controlDiv.classList.remove('hide');
         };
       }, 700);
     } else {
