@@ -11,11 +11,14 @@ const files = [
 
 
 const imageNames = [...files,...files];
+const maxNumberOfOpenedCards = imageNames.length;
+
 const infoDiv = document.querySelector('.info');
 const gameBoard = document.querySelector(".gameboard");
 const controlDiv = document.querySelector('.control');
 const startButton = document.querySelector('.start-btn');
 const previewOption = document.querySelector('.preview-option');
+
 const previewTime = 10;         /* time in sec */
 const oneCardRemoveTime = 50;   /* time in ms */
 const oneCardSpreadTime = 100;  /* time in ms */
@@ -137,7 +140,7 @@ const cardClickListener = function(e) {
     if (openedCards[0].dataset.label == openedCards[1].dataset.label) {
       setTimeout(()=>openedCards.forEach(card => card.classList.add('guessed')),500);
       setTimeout(() => {
-        if(getGuessedCards().length === 16) {
+        if(getGuessedCards().length === maxNumberOfOpenedCards) {
           showInfo(`You won! Number of fails: ${numberOfFails}`);
           openAllCards();
           controlDiv.classList.remove('hide');
