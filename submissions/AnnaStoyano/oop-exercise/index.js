@@ -8,29 +8,34 @@
 // ======== OBJECTS DEFINITIONS ========
 // Define your objects here
 
-class Mammals{
-   constructor(name,gender,friends){
-      this.species = 'mammals',
+class Mammal{
+   constructor(species,name,gender,legs,friends,saying){
+      this.species = species,
       this.name = name,
       this.gender = gender,
-      this.legs = 4,
-      this.friends = friends
+      this.legs = legs,
+      this.friends = friends,
+      this.saying = saying
    }
-}
 
-class Dog extends Mammals{
-   constructor(name,gender,friends,saying){
-      super(name,gender,friends);
-      this.species = 'dog',
-      this.saying = saying || 'guf'
+   getProperty(property){
+      if(this[property]){
+         return `<b>${property}:</b> ${this[property]}`;
+      }else{
+         return `<b>${property}:</b> ${this.species} doesn't have`;
+      }
    }
 };
 
-class Cat extends Mammals{
+class Dog extends Mammal{
    constructor(name,gender,friends,saying){
-      super(name,gender,saying,friends);
-      this.species = 'cat',
-      this.saying = saying || 'guf'
+      super('dog',name,gender,4,friends,saying || 'guf');
+   }
+};
+
+class Cat extends Mammal{
+   constructor(name,gender,friends,saying){
+      super('cat',name,gender,4,friends,saying || 'meow');
    }
 
    getSaying(){
@@ -38,55 +43,44 @@ class Cat extends Mammals{
    }
 }
 
-class Human extends Mammals{
+class Human extends Mammal{
    constructor(name,gender,friends,saying){
-      super(name,gender,friends);
-      this.species = 'human'
+      super('human',name,gender,2,friends,saying);
       this.hands = 2;
-      this.legs =2;
-      this.saying = saying || `Hello! My name is ${this.name}`
+      this.saying = saying || `Hello! My name is ${this.name}`;
    }
 }
 
 class Woman extends Human{
    constructor(name,friends,saying){
-      super(name,friends,saying);
-      this.gender = 'female'
+      super(name,'female',friends,saying);
    }
 }
 
 class Man extends Human{
    constructor(name,friends,saying){
-      super(name,friends,saying);
-      this.gender = 'male'
+      super(name,'male',friends,saying);
    }
 }
 
 class CatWoman extends Woman{
-   constructor(name,friends,saying){
-      super(name,friends,saying);
-      this.saying = Cat.prototype.getSaying();
+   constructor(name,friends){
+      super(name,friends,Cat.prototype.getSaying());
    }
-}
+};
 
-const cat = new Cat(name='Murzic',gender='male',friends=['Elza','Nicky'])
-const dog = new Dog(name='Lucy',gender='female',saying='guffyy',friends=['Alla','Dima']);
-const man = new Man(name='Vlad',friends=['Sergay','Anton'],saying='Hello everyone!');
-const woman = new Woman(name='Anna',friends=['Sergay','Artem']);
-const catWoman = new CatWoman(name='Lily',friends=['Batman'])
+const cat = new Cat('Murzic','male',['Elza','Nicky']);
+const dog = new Dog('Lucy','female',['Alla','Dima'],'guffyy');
+const man = new Man('Vlad',['Sergay','Anton'],'Hello everyone!');
+const woman = new Woman('Anna',['Sergay','Artem']);
+const catWoman = new CatWoman('Lily',['Batman']);
 
 const inhabitants = [man,woman,cat,dog,catWoman];
 
 const properties = ['name','species','gender','legs','hands','saying','friends'];
 let output = inhabitants.map(inhabitant=>
-   properties.map(property=>{
-      if(inhabitant.hasOwnProperty(property))
-         return `<b>${property}:</b> ${inhabitant[property]}`
-      else
-         return `<b>${property}:</b> ${inhabitant['species']} doesn't have`
-      
-   }
-   ).join('\t')
+   properties.map(property=> inhabitant.getProperty(property))
+   .join('\t')
 ).join('\n');
 
 print(output);
