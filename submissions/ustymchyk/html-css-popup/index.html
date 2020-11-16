@@ -10,142 +10,153 @@
 </head>
 
 <body>
-  <header class="header">
+  <header>
     <nav class="nav">
-      <a class="header__item" href>Mail</a>
-      <a class="header__item" href>Images</a>
-      <input type="checkbox" id="menu" class="header__item menu-btn">
+      <ul class="nav__list">
+        <li class="nav__item">
+          <a href>Mail</a>
+        </li>
+        <li class="nav__item">
+          <a href>Images</a>
+        </li>
+        <li class="nav__item">
+          <input type="checkbox" class="menu-btn">
 
-      <div class="menu">
-        <div class="menu-scroll">
+          <div class="menu">
+            <div class="menu-scroll">
 
-          <ul class="menu-list">
-            <li>
-              <a href class="card">
-                <img src="./popup-icons/calendar.png" alt="calendar" class="card-img">
-                <p>Calendar</p>
-              </a>
-            </li>
-            <li>
-              <a href class="card">
-                <img src="./popup-icons/mail.png" alt="main" class="card-img">
-                <p>Main</p>
-              </a>
-            </li>
-            <li>
-              <a href class="card">
-                <img src="./popup-icons/news.png" alt="news" class="card-img">
-                <p>News</p>
-              </a>
-            </li>
-            <li>
-              <a href class="card">
-                <img src="./popup-icons/maps.png" alt="maps" class="card-img">
-                <p>Maps</p>
-              </a>
-            </li>
-            <li>
-              <a href class="card">
-                <img src="./popup-icons/files.png" alt="files" class="card-img">
-                <p>Files</p>
-              </a>
-            </li>
-            <li>
-              <a href class="card">
-                <img src="./popup-icons/contacts.png" alt="contacts" class="card-img">
-                <p>Contacts</p>
-              </a>
-            </li>
-            <li>
-              <a href class="card">
-                <img src="./popup-icons/tanslation.png" alt="tanslation" class="card-img">
-                <p>Tanslation</p>
-              </a>
-            </li>
-            <li>
-              <a href class="card">
-                <img src="./popup-icons/videos.png" alt="videos" class="card-img">
-                <p>Videos</p>
-              </a>
-            </li>
-            <li>
-              <a href class="card">
-                <img src="./popup-icons/search.png" alt="search" class="card-img">
-                <p>Search</p>
-              </a>
-            </li>
-            <li>
-              <a href class="card">
-                <img src="./popup-icons/photos.png" alt="photos" class="card-img">
-                <p>Photos</p>
-              </a>
-            </li>
-            <li>
-              <a href class="card">
-                <img src="./popup-icons/apps.png" alt="apps" class="card-img">
-                <p>Apps</p>
-              </a>
-            </li>
-            <li>
-              <a href class="card">
-                <img src="./popup-icons/documents.png" alt="documents" class="card-img">
-                <p>Documents</p>
-              </a>
-            </li>
-          </ul>
+              <ul class="menu-list">
+                <li>
+                  <a href class="card">
+                    <img src="./popup-icons/calendar.png" alt="calendar" class="card__img">
+                    <p>Calendar</p>
+                  </a>
+                </li>
+                <li>
+                  <a href class="card">
+                    <img src="./popup-icons/mail.png" alt="main" class="card__img">
+                    <p>Main</p>
+                  </a>
+                </li>
+                <li>
+                  <a href class="card">
+                    <img src="./popup-icons/news.png" alt="news" class="card__img">
+                    <p>News</p>
+                  </a>
+                </li>
+                <li>
+                  <a href class="card">
+                    <img src="./popup-icons/maps.png" alt="maps" class="card__img">
+                    <p>Maps</p>
+                  </a>
+                </li>
+                <li>
+                  <a href class="card">
+                    <img src="./popup-icons/files.png" alt="files" class="card__img">
+                    <p>Files</p>
+                  </a>
+                </li>
+                <li>
+                  <a href class="card">
+                    <img src="./popup-icons/contacts.png" alt="contacts" class="card__img">
+                    <p>Contacts</p>
+                  </a>
+                </li>
+                <li>
+                  <a href class="card">
+                    <img src="./popup-icons/tanslation.png" alt="tanslation" class="card__img">
+                    <p>Tanslation</p>
+                  </a>
+                </li>
+                <li>
+                  <a href class="card">
+                    <img src="./popup-icons/videos.png" alt="videos" class="card__img">
+                    <p>Videos</p>
+                  </a>
+                </li>
+                <li>
+                  <a href class="card">
+                    <img src="./popup-icons/search.png" alt="search" class="card__img">
+                    <p>Search</p>
+                  </a>
+                </li>
+                <li>
+                  <a href class="card">
+                    <img src="./popup-icons/photos.png" alt="photos" class="card__img">
+                    <p>Photos</p>
+                  </a>
+                </li>
+                <li>
+                  <a href class="card">
+                    <img src="./popup-icons/apps.png" alt="apps" class="card__img">
+                    <p>Apps</p>
+                  </a>
+                </li>
+                <li>
+                  <a href class="card">
+                    <img src="./popup-icons/documents.png" alt="documents" class="card__img">
+                    <p>Documents</p>
+                  </a>
+                </li>
+              </ul>
 
-          <input type="checkbox" name="more" id="more" class="menu-more-checkbox">
-          <label for="more" class="menu-more">More</label>
+              <input type="checkbox" name="more" id="more" class="menu__more-checkbox">
+              <label for="more" class="menu__more-label">More</label>
 
-          <ul class="menu-list addition-list">
-            <li>
-              <a href class="card">
-                <img src="./popup-icons/chat.png" alt="chat" class="card-img">
-                <p>Chat</p>
-              </a>
-            </li>
-            <li>
-              <a href class="card">
-                <img src="./popup-icons/classroom.png" alt="classroom" class="card-img">
-                <p>Classroom</p>
-              </a>
-            </li>
-            <li>
-              <a href class="card">
-                <img src="./popup-icons/collection.png" alt="collection" class="card-img">
-                <p>Collection</p>
-              </a>
-            </li>
-            <li>
-              <a href class="card">
-                <img src="./popup-icons/mars.png" alt="mars" class="card-img">
-                <p>Mars</p>
-              </a>
-            </li>
-            <li>
-              <a href class="card">
-                <img src="./popup-icons/blogs.png" alt="blogs" class="card-img">
-                <p>Blogs</p>
-              </a>
-            </li>
-            <li>
-              <a href class="card">
-                <img src="./popup-icons/promo.png" alt="promos" class="card-img">
-                <p>Promos</p>
-              </a>
-            </li>
-            <li class="menu-footer">
-              <a href>Even more from Kottans</a>
-            </li>
-          </ul>
+              <ul class="menu-list menu-list_hidden">
+                <li>
+                  <a href class="card">
+                    <img src="./popup-icons/chat.png" alt="chat" class="card__img">
+                    <p>Chat</p>
+                  </a>
+                </li>
+                <li>
+                  <a href class="card">
+                    <img src="./popup-icons/classroom.png" alt="classroom" class="card__img">
+                    <p>Classroom</p>
+                  </a>
+                </li>
+                <li>
+                  <a href class="card">
+                    <img src="./popup-icons/collection.png" alt="collection" class="card__img">
+                    <p>Collection</p>
+                  </a>
+                </li>
+                <li>
+                  <a href class="card">
+                    <img src="./popup-icons/mars.png" alt="mars" class="card__img">
+                    <p>Mars</p>
+                  </a>
+                </li>
+                <li>
+                  <a href class="card">
+                    <img src="./popup-icons/blogs.png" alt="blogs" class="card__img">
+                    <p>Blogs</p>
+                  </a>
+                </li>
+                <li>
+                  <a href class="card">
+                    <img src="./popup-icons/promo.png" alt="promos" class="card__img">
+                    <p>Promos</p>
+                  </a>
+                </li>
+                <li class="menu__footer">
+                  <a href>Even more from Kottans</a>
+                </li>
+              </ul>
 
-        </div>
-      </div>
-      <a class="header__item notifications" href>Notifications menu</a>
-      <a class="header__item user" href>Account menu</a>
+            </div>
+          </div>
+        </li>
+        <li class="nav__item">
+          <a class="notifications" href>Notifications menu</a>
+        </li>
+        <li class="nav__item">
+          <a class="user" href>Account menu</a>
+        </li>
+      </ul>
     </nav>
   </header>
-  <main></main>
 </body>
 
 </html>
