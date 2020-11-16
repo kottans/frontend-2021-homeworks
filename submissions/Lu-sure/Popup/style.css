@@ -16,7 +16,7 @@ body {
   align-items: center;
 }
 
-ul {
+.nav-icon, .popup-list {
   list-style: none;
 }
 
@@ -67,7 +67,7 @@ ul {
   border-radius: 50%;
 }
 
-#hoogle-menu, #more-button {
+.hide-checkbox {
   opacity: 0;
   position: absolute;
   z-index: -1;
@@ -148,15 +148,18 @@ ul {
   width: 104px;
   margin-left: 3px;
   margin-right: 3px;
+  outline: none;
 }
 
-#more-button {
+.more {
   display: block;
 }
 
-#more-button:focus {
+.more-bt-label:focus {
+  border-color: rgb(145, 181, 248);
+  font-size: 1.1em;
   text-decoration: underline;
-  background-color: red;
+  outline: none;
 }
 
 .more-bt-label {
@@ -187,15 +190,15 @@ ul {
   display: none;
 }
 
-#more-button:checked ~ .add-popup {
+.more:checked ~ .add-popup {
   display: flex;
 }
 
-#more-button:checked ~ .more-bt-label {
+.more:checked ~ .more-bt-label {
   display: none;
 }
 
-#more-button:checked ~ .popup-divider {
+.more:checked ~ .popup-divider {
   display: block;
 }
 
@@ -205,4 +208,9 @@ ul {
   display: block;
   height: 30px;
   padding-top: 20px;
+}
+
+.popup-bottom:focus {
+  outline: none;
+  text-decoration: underline;
 }
