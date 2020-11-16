@@ -76,6 +76,7 @@
      grid-auto-rows: 100px;
      grid-auto-columns: 100px;
      overflow-y: auto;
+     overflow-x:hidden;
      grid-auto-flow: row;
      justify-content: space-between;
  }
