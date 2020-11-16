@@ -28,30 +28,30 @@ const getShuffledCards = function(list) {
 
 const openAllCards = function() {
   const cards = gameBoard.querySelectorAll('.flip-container');
-  cards.forEach((c,i)=>{
+  cards.forEach((card, index)=>{
     setTimeout(() => {
-      c.classList.remove('guessed');
-      c.classList.add('opened');      
-    }, oneCardSpreadTime*i);
+      card.classList.remove('guessed');
+      card.classList.add('opened');      
+    }, oneCardSpreadTime*index);
   })
 };
 
 const closeAllCards = function() {
   const cards = gameBoard.querySelectorAll('.flip-container');
-  cards.forEach((c,i)=>{
+  cards.forEach((card, index)=>{
     setTimeout(() => {
-      c.classList.remove('guessed');
-      c.classList.remove('opened');     
-    }, oneCardSpreadTime*i);
+      card.classList.remove('guessed');
+      card.classList.remove('opened');     
+    }, oneCardSpreadTime*index);
   })
 };
 
 const removeAllCards = function () {
   const cards = getAllCards();
-  cards.forEach((card,i)=>{
+  cards.forEach((card, index)=>{
     setTimeout(()=>{
       card.remove();
-    },(cards.length-i)*oneCardRemoveTime)
+    },(cards.length-index)*oneCardRemoveTime)
   });
   return cards.length*oneCardRemoveTime;
 }
@@ -59,7 +59,7 @@ const removeAllCards = function () {
 const initBoard = function () {
   const timeDelayForRemoving = removeAllCards();
   setTimeout(()=>{
-    getShuffledCards(imageNames).forEach((image,i)=>{
+    getShuffledCards(imageNames).forEach((image, index)=>{
       setTimeout(function () {
         const fragment = document.createDocumentFragment();
   
@@ -95,7 +95,7 @@ const initBoard = function () {
         fragment.appendChild(flipContainer);
   
         gameBoard.appendChild(fragment);
-      },oneCardSpreadTime*i);
+      },oneCardSpreadTime*index);
     });
   },timeDelayForRemoving);
   return timeDelayForRemoving + oneCardSpreadTime*imageNames.length;
@@ -135,11 +135,9 @@ const cardClickListener = function(e) {
   const openedCards = getOpenedCards();
   if (openedCards.length == 2) {
     if (openedCards[0].dataset.label == openedCards[1].dataset.label) {
-      setTimeout(()=>openedCards.forEach(c=>{
-        c.classList.add('guessed');
-      }),500);
+      setTimeout(()=>openedCards.forEach(card => card.classList.add('guessed')),500);
       setTimeout(() => {
-        if(getGuessedCards().length==16) {
+        if(getGuessedCards().length === 16) {
           showInfo(`You won! Number of fails: ${numberOfFails}`);
           openAllCards();
           document.querySelector('.control').classList.remove('hide');
@@ -147,7 +145,7 @@ const cardClickListener = function(e) {
       }, 700);
     } else {
       numberOfFails++;
-      setTimeout(()=>openedCards.forEach(c=>c.classList.remove('opened')),500);
+      setTimeout(()=>openedCards.forEach(card => card.classList.remove('opened')),500);
     };
   };
   if (numberOfFails>0) {
