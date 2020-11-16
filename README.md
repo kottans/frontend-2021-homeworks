@@ -1,6 +1,7 @@
 # [Hooli-style-Popup](https://liddell777.github.io/Hooli-style-Popup)
 
-## Requirements
+## Requirements 
+
 - no JavaScript, only HTML/CSS, use of preprocessors is allowed
 - no external libraries or frameworks
 browser support: Chrome only (feel free to use latest features)
