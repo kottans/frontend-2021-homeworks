@@ -196,7 +196,8 @@ const startButtonListener = function() {
 
 const init = function() {
   showInfo('Welcome to Memory Pairs Game');
-
+  controlDiv.querySelector('.preview-time').innerHTML = previewTime;
+  
   initBoard();
   
   setTimeout(()=>{
