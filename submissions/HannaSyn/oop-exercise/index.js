@@ -8,62 +8,63 @@
 // ======== OBJECTS DEFINITIONS ========
 // Define your objects here
 
-class Inhabitans {
-   constructor ( name, gender, friends, say, biologicalSpecies ){
+class Inhabitant {
+   constructor ( name, gender, friends, say, biologicalSpecies ) {
       this.name = name;
       this.biologicalSpecies = biologicalSpecies;
       this.gender = gender;
       this.friends = friends;
       this.say = say
    }
-
+   speak() {
+      return `${this.say} I'm ${this.biologicalSpecies}! My name is ${this.name}, my gender is ${this.gender}, and I have friends: ${this.friends}.`;
+   }
 }
 
-class Human extends Inhabitans {
+class Human extends Inhabitant {
    constructor( name, gender, friends, say, legs, hands ) {
       super( name, gender, friends, say, 'human');
       this.legs = legs;
       this.hands = hands;
    } 
-
    speak() {
-      return ` ${this.say} I'm ${this.biologicalSpecies}! My name is ${this.name}, my gender is ${this.gender}, I have ${this.legs} legs and ${this.hands} hands and I have friends: ${this.friends}.`;
+      return super.speak() + ` I have ${this.legs} legs and ${this.hands} hands.`
    }
-   
 }
 
-class Cat extends Inhabitans {
+class Animal extends Inhabitant {
+   constructor( name, gender, friends, say, biologicalSpecies, paws) {
+      super( name, gender, friends, say, biologicalSpecies )
+      this.paws = paws;
+   }
+   speak() {
+      return super.speak() + ` I have ${this.paws} paws.`
+   }
+}
+
+class Cat extends Animal {
    constructor( name, gender, friends, say, paws) {
-      super( name, gender, friends, say, 'cat' );
-      this.paws = paws;
+      super( name, gender, friends, say, 'cat', paws );
    } 
-
-   purr() {
-      return ` ${this.say}  I'm ${this.biologicalSpecies}! My name is ${this.name}, my gender is ${this.gender}, I have ${this.paws} paws and I have friends: ${this.friends}.` 
-   }
 }
 
-class Dog extends Inhabitans {
+class Dog extends Animal {
    constructor( name, gender, friends, say, paws, Human ) {
-      super( name, gender, friends, say, 'dog' );
-      this.paws = paws;
+      super( name, gender, friends, say, 'dog', paws);
       this.master = Human;
    } 
-
-   bark() {
-      return ` ${this.say}  I'm ${this.biologicalSpecies}! My name is ${this.name}, my gender is ${this.gender}, I have ${this.paws} paws, I love my master ${this.master.name} very much! And I have friends: ${this.friends}.` 
+   speak() {
+      return super.speak() + ` I love my master ${this.master.name} very much!`
    }
 }
+
 
 const woman = new Human('Hanna', 'female', ['Vlad', 'Ernest', 'Emilia'], 'Hi!', 2, 2);
 const man = new Human('Vlad', 'male', ['Hanna', 'Ernest', 'Emilia'], 'Hello!', 2, 2);
 const cat = new Cat('Ernest', 'male', ['Vlad', 'Hanna', 'Emilia'], 'Meow!', 4);
 const dog = new Dog('Emilia', 'female', ['Vlad', 'Ernest'], 'Wooof!', 4, woman);
 
-print(woman.speak());
-print(man.speak());
-print(cat.purr());
-print(dog.bark());
+[woman, man, cat, dog].forEach(inhabitant => print(inhabitant.speak()));
 
 // ======== OUTPUT ========
 /* Use print(message) for output.
