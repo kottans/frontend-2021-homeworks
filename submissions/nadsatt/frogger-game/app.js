@@ -119,5 +119,3 @@ Player.prototype.changeImg = function(imgIndex, img){
     this.img = img;
 }
 
-
-
