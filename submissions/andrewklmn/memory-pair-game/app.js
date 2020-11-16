@@ -19,9 +19,11 @@ const controlDiv = document.querySelector('.control');
 const startButton = document.querySelector('.start-btn');
 const previewOption = document.querySelector('.preview-option');
 
-const previewTime = 10;         /* time in sec */
-const oneCardRemoveTime = 50;   /* time in ms */
-const oneCardSpreadTime = 100;  /* time in ms */
+const previewTime = 10;             /* time in periods of countDownStepTime */
+const oneCardRemoveTime = 50;       /* time in ms */
+const oneCardSpreadTime = 100;      /* time in ms */
+const cardStateChangingTime = 500;  /* time in ms */
+const countDownStepTime = 1000;     /* time in ms */
 
 let numberOfFails = 0; 
 
@@ -138,20 +140,20 @@ const cardClickListener = function(e) {
   const openedCards = getOpenedCards();
   if (openedCards.length == 2) {
     if (openedCards[0].dataset.label == openedCards[1].dataset.label) {
-      setTimeout(()=>openedCards.forEach(card => card.classList.add('guessed')),500);
+      setTimeout(()=>openedCards.forEach(card => card.classList.add('guessed')),cardStateChangingTime);
       setTimeout(() => {
         if(getGuessedCards().length === maxNumberOfOpenedCards) {
           showInfo(`You won! Number of fails: ${numberOfFails}`);
           openAllCards();
           controlDiv.classList.remove('hide');
         };
-      }, 700);
+      }, cardStateChangingTime);
     } else {
       numberOfFails++;
-      setTimeout(()=>openedCards.forEach(card => card.classList.remove('opened')),500);
+      setTimeout(()=>openedCards.forEach(card => card.classList.remove('opened')),cardStateChangingTime);
     };
   };
-  if (numberOfFails>0) {
+  if (numberOfFails > 0) {
     showInfo(`Number of fails: ${numberOfFails}`);
   };
 };
@@ -162,7 +164,7 @@ const countDown = (time)=>{
     showInfo(`And now try to guess!`);
   } else {
     showInfo(`Remember cards! Time left: ${time}`);
-    setTimeout(()=>{ countDown(time-1); },1000);
+    setTimeout(()=>{ countDown(time-1); }, countDownStepTime);
   };
 }
 
@@ -182,7 +184,7 @@ const startButtonListener = function() {
       setTimeout(()=>{
         closeAllCards();
         showInfo(`And now try to guess!`);
-      },1000*previewTime);
+      }, countDownStepTime * previewTime);
 
     },timeout);
   } else {
