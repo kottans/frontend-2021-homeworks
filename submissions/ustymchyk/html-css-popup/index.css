@@ -58,6 +58,8 @@ body {
   border-radius: 100%;
   background: url(./popup-icons/popup-button.png) center / auto no-repeat;
 
+  -webkit-appearance: none;
+  -moz-appearance: none;
   appearance: none;
   cursor: pointer;
 }
@@ -81,7 +83,8 @@ body {
   height: 460px;
 
   background-color: #fff;
-
+  
+  -webkit-filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.2));
   filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.2));
 }
 
@@ -98,6 +101,18 @@ body {
   background-color: inherit;
   
   transform: rotate(-45deg);
+  clip-path: polygon(0 0, 100% 0, 100% 100%);
+}
+
+@media screen and (max-width: 500px) {
+  .menu {
+    width: 100%;
+    right: 0;
+  }
+
+  .menu::before {
+    right: 120px;
+  }
 }
 
 .menu-scroll {
@@ -138,6 +153,8 @@ body {
   width: 0;
   height: 0;
 
+  -webkit-appearance: none;
+  -moz-appearance: none;
   appearance: none;
 }
 
