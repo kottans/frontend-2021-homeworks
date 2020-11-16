@@ -16,7 +16,18 @@ const dog = {
     species: "catWoman",
   };
 
-const introduceSelf = ({
+const capitalizeWord = (word) => {
+  return word.charAt(0).toUpperCase() + word.slice(1);
+}
+
+const createInhabitant = ({species}) => {
+  let self = {
+    species
+  };
+  return Object.assign(self);
+};
+
+const outputHumanIntroduction = ({
   species,
   name,
   gender,
@@ -28,34 +39,32 @@ const introduceSelf = ({
     These are my friends: <em>${friends.join(", ")}</em>.<em> 
     </em><br><br>`;
 
-const inhabitantSays = (self) => ({
+const outputPetIntroduction = ({
+  word,
+  name,
+  gender,
+  legs,
+  paws,
+  friends,
+  species,
+}) => {
+  const capitalizedWord = capitalizeWord(word);
+
+  return `${capitalizedWord}! ${capitalizedWord} ${word} <em>${name}</em>. ${capitalizedWord} ${word} <em>${species}</em>. 
+  ${capitalizedWord} ${word} <em>${gender}</em>. ${capitalizedWord} <em>${legs}</em> ${word} <em>${paws}</em> ${word}. 
+  Meow ${word} ${word}: <em>${friends.join(", ")}</em>.<em> 
+  </em><br><br>`;
+};
+
+const humanSays = (self) => ({
   introduction: () => {
-    return introduceSelf(self);
+    return outputHumanIntroduction(self);
   },
 });
 
-const createInhabitant = ({species}) => {
-  let self = {
-    species
-  };
-  return Object.assign(self, inhabitantSays(self));
-};
-
 const carnivoraPetSays = (self) => ({
-  introduction: () => {
-    let word = (self.species === 'dog') ? 'woof' : 'meow';
-    let capitalizeWord = word.charAt(0).toUpperCase() + word.slice(1);
-    if (self.species === 'catWoman') {
-      self.paws = word;
-    }
-    return `${capitalizeWord}! ${capitalizeWord} ${word} <em>${self.name}</em>. ${capitalizeWord} ${word} <em>${
-      self.species
-    }</em>. 
-      ${capitalizeWord} ${word} <em>${self.gender}</em>. ${capitalizeWord} <em>${self.legs}</em> ${word} <em>${
-      self.paws
-    }</em> ${word}. 
-      Meow ${word} ${word}: <em>${self.friends.join(", ")}</em>.<em> 
-      </em><br><br>`;
+  introduction: () => {    
+    return outputPetIntroduction(self);
   },
 });
 
@@ -63,24 +72,26 @@ const createCarnivoraPet = (speciesObj) => {
   const self = createInhabitant(speciesObj);
   self.legs = 4;
   self.paws = 4;
-  return Object.assign(self);
+  return Object.assign(self, carnivoraPetSays(self));
 }
 
 const createHuman = (speciesObj) => {
   const self = createInhabitant(speciesObj);
   self.legs = 2;
   self.hands = 2;
-  return Object.assign(self);
+  return Object.assign(self, humanSays(self));
 }
 
 const createCat = (name, gender, friends) => {
   const self = createCarnivoraPet(cat);
-  return Object.assign(self, {name, gender, friends}, carnivoraPetSays(self));
+  self.word = 'meow';
+  return Object.assign(self, {name, gender, friends});
 };
 
 const createDog = (name, gender, friends) => {
   const self = createCarnivoraPet(dog);
-  return Object.assign(self, {name, gender, friends}, carnivoraPetSays(self));
+  self.word = 'woof';
+  return Object.assign(self, {name, gender, friends});
 };
 
 const createMan = (name, friends) => {
@@ -98,7 +109,7 @@ const createWoman = (name, friends) => {
 const createCatWoman = (name, friends) => {
   const self = createWoman(catWoman);
   self.species = "catWoman";
-  return Object.assign(self, {name, friends}, carnivoraPetSays(self));
+  return Object.assign(self, {name, friends});
 };
 
 const dogSharik = createDog("Sharik", 'male', ['Anna', 'Eugene']);
