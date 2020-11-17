@@ -119,8 +119,9 @@ const womanAnna = createWoman("Anna", ['Anna', 'Eugene']);
 const catWomanSofia = createCatWoman("Sofia", ['Anna', 'Eugene']);
 
 const inhabitants = [manEugene, womanAnna, catBarsik, catWomanSofia, dogSharik];
-const introductions = inhabitants.map(inhabitant => inhabitant.introduction())
+inhabitants
+  .map((inhabitant) => inhabitant.introduction())
+  .forEach((introduction) => {
+    print(introduction, "pre");
+  });
 
-introductions.forEach((introduction) => {
-  print(introduction, "pre");
-});
