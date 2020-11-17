@@ -38,14 +38,19 @@ a {
   margin: 10px;
 }
 
+.nav_item:hover {
+  outline-style: none;
+  border-color: gray;
+}
+
 .nav_item_link {
   padding-top: 5px;
 }
 
 .nav_item_mail, .nav_item_images {
-  font-size: 16px;
+  font-size: 17px;
   text-decoration: none;
-  color: #b9b9b9;
+  color: #767676;
 }
 
 .nav_item_img {
