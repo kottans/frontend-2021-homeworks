@@ -8,80 +8,77 @@
 // ======== OBJECTS DEFINITIONS ========
 // Define your objects here
 
-class Mammal{
-   constructor(species,name,gender,legs,friends,saying){
-      this.species = species,
-      this.name = name,
-      this.gender = gender,
-      this.legs = legs,
-      this.friends = friends,
-      this.saying = saying
+class Mammal {
+   constructor(species, name, gender, legs, friends, saying) {
+      this.species = species;
+      this.name = name;
+      this.gender = gender;
+      this.legs = legs;
+      this.friends = friends;
+      this.saying = saying;
    }
 
-   getProperty(property){
-      if(this[property]){
-         return `<b>${property}:</b> ${this[property]}`;
-      }else{
-         return `<b>${property}:</b> ${this.species} doesn't have`;
+   tellAbout() {
+      const properties = ['species', 'name', 'gender']; //all mammals have this properties
+      for (let property in this) {
+         if (!properties.includes(property))
+            properties.push(property);
       }
+      return properties.map(property => `<b>${property}:</b> ${this[property]}`).join('\t');
    }
 };
 
-class Dog extends Mammal{
-   constructor(name,gender,friends,saying){
-      super('dog',name,gender,4,friends,saying || 'guf');
+class Dog extends Mammal {
+   constructor(name, gender, friends, saying) {
+      super('dog', name, gender, 4, friends, saying || 'guf');
    }
 };
 
-class Cat extends Mammal{
-   constructor(name,gender,friends,saying){
-      super('cat',name,gender,4,friends,saying || 'meow');
+class Cat extends Mammal {
+   constructor(name, gender, friends, saying) {
+      super('cat', name, gender, 4, friends, saying || 'meow');
    }
 
-   getSaying(){
+   getSaying() {
       return this.saying || 'meow';
    }
 }
 
-class Human extends Mammal{
-   constructor(name,gender,friends,saying){
-      super('human',name,gender,2,friends,saying);
+class Human extends Mammal {
+   constructor(name, gender, friends, saying) {
+      super('human', name, gender, 2, friends, saying);
       this.hands = 2;
       this.saying = saying || `Hello! My name is ${this.name}`;
    }
 }
 
-class Woman extends Human{
-   constructor(name,friends,saying){
-      super(name,'female',friends,saying);
+class Woman extends Human {
+   constructor(name, friends, saying) {
+      super(name, 'female', friends, saying);
    }
 }
 
-class Man extends Human{
-   constructor(name,friends,saying){
-      super(name,'male',friends,saying);
+class Man extends Human {
+   constructor(name, friends, saying) {
+      super(name, 'male', friends, saying);
    }
 }
 
-class CatWoman extends Woman{
-   constructor(name,friends){
-      super(name,friends,Cat.prototype.getSaying());
+class CatWoman extends Woman {
+   constructor(name, friends) {
+      super(name, friends, Cat.prototype.getSaying());
    }
 };
 
-const cat = new Cat('Murzic','male',['Elza','Nicky']);
-const dog = new Dog('Lucy','female',['Alla','Dima'],'guffyy');
-const man = new Man('Vlad',['Sergay','Anton'],'Hello everyone!');
-const woman = new Woman('Anna',['Sergay','Artem']);
-const catWoman = new CatWoman('Lily',['Batman']);
+const cat = new Cat('Murzic', 'male', ['Elza', 'Nicky']);
+const dog = new Dog('Lucy', 'female', ['Alla', 'Dima'], 'guffyy');
+const man = new Man('Vlad', ['Sergay', 'Anton'], 'Hello everyone!');
+const woman = new Woman('Anna', ['Sergay', 'Artem']);
+const catWoman = new CatWoman('Lily', ['Batman']);
 
-const inhabitants = [man,woman,cat,dog,catWoman];
+const inhabitants = [man, woman, cat, dog, catWoman];
 
-const properties = ['name','species','gender','legs','hands','saying','friends'];
-let output = inhabitants.map(inhabitant=>
-   properties.map(property=> inhabitant.getProperty(property))
-   .join('\t')
-).join('\n');
+let output = inhabitants.map(inhabitant => inhabitant.tellAbout()).join('\n');
 
 print(output);
 // ======== OUTPUT ========
@@ -102,5 +99,3 @@ print(output);
    print('human; <strong>John</strong>; male; 2; 2; <em>Hello world!</em>; Rex, Tom, Jenny');
    print('human; <strong>John</strong>; male; 2; 2; <em>Hello world!</em>; Rex, Tom, Jenny', 'div');
    */
-
-
