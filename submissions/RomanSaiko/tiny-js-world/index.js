@@ -50,8 +50,10 @@ const catWoman = {
 
 const inhabitants = [dog, cat, man, woman, catWoman]
 
-const introduceInhabitants = ({species, name, gender, legs, hands, saying, friends}) => {
-    return `${species}; ${name}; ${gender}; ${legs}; ${hands}; ${saying}; ${friends.join(', ')}.`
+const introduceInhabitants = (inhabitants) => {
+    const inhabitantValues = Object.values(inhabitants)
+    const inhabitant = inhabitantValues.map(item => Array.isArray(item) ? item.map(nestedItem => nestedItem).join(', ') : item).join('; ')
+    return inhabitant;
 }
 
 inhabitants.forEach((item) => {
