@@ -63,7 +63,7 @@ const humanSays = (self) => ({
 });
 
 const carnivoraPetSays = (self) => ({
-  toString: () => {    
+  toString: () => { 
     return outputPetIntroduction(self);
   },
 });
@@ -82,34 +82,33 @@ const createHuman = (speciesObj) => {
   return Object.assign(self, humanSays(self));
 }
 
+const meower = () => ({
+  word: 'meow'
+})
+
+const woofer = () => ({
+  word: 'woof'
+})
+
 const createCat = (name, gender, friends) => {
-  const self = createCarnivoraPet(cat);
-  self.word = 'meow';
-  return Object.assign(self, {name, gender, friends});
+  return Object.assign(createCarnivoraPet(cat), meower(), {name, gender, friends});
 };
 
 const createDog = (name, gender, friends) => {
-  const self = createCarnivoraPet(dog);
-  self.word = 'woof';
-  return Object.assign(self, {name, gender, friends});
+  return Object.assign(createCarnivoraPet(dog), woofer(), {name, gender, friends});
 };
 
 const createMan = (name, friends) => {
-  const self = createHuman(man);
-  self.gender = "male";
-  return Object.assign(self, {name, friends});
+  return Object.assign(createHuman(man), {gender: 'male', name, friends});
 };
 
 const createWoman = (name, friends) => {
-  const self = createHuman(woman);
-  self.gender = "female";
-  return Object.assign(self, {name, friends});
+  return Object.assign(createHuman(woman), {gender: 'female', name, friends});
 };
 
 const createCatWoman = (name, friends) => {
-  const self = createWoman(catWoman);
-  self.species = "catWoman";
-  return Object.assign(self, {name, friends});
+  const self = Object.assign(createWoman(catWoman), createInhabitant(catWoman));
+  return Object.assign(self, {name, friends}, meower(), carnivoraPetSays(self));
 };
 
 const dogSharik = createDog("Sharik", 'male', ['Anna', 'Eugene']);
@@ -117,6 +116,8 @@ const catBarsik = createCat("Barsik", 'female', ['Eugene']);
 const manEugene = createMan("Eugene", ['Anna', 'Eugene']);
 const womanAnna = createWoman("Anna", ['Anna', 'Eugene']);
 const catWomanSofia = createCatWoman("Sofia", ['Anna', 'Eugene']);
+
+// console.log(catWomanSofia);
 
 const inhabitants = [manEugene, womanAnna, catBarsik, catWomanSofia, dogSharik];
 inhabitants.forEach(inhabitant => print(inhabitant))
