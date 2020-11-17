@@ -1,119 +1,120 @@
 const canvas = {
-    width:505,
-    height:450
+    width: 505,
+    height: 450
 }
-class Entity {
-    constructor(option){
-        this.x = option.x;
-        this.level = 1;
-        this.y = option.y;
-        this.speed = option.speed;
-        this.sprite = option.sprite;
+
+const Entity = function (x, y, speed, sprite) {
+    this.position = {
+        x,
+        y
+    };
+    this.speed = speed;
+    this.sprite = sprite;
+    this.level = 1;
+}
+
+Entity.prototype.render = function () {
+    ctx.drawImage(Resources.get(this.sprite), this.position.x, this.position.y);
+}
+
+const Enemy = function (x, y, speed, sprite, player) {
+    Entity.call(this, x, y, speed, sprite);
+    this.player = player;
+}
+
+Enemy.prototype = Object.create(Entity.prototype);
+Enemy.prototype.update = function (dt) {
+    this.position.x += this.speed * dt * (this.level * 0.8);
+    if (this.position.x >= canvas.width) {
+        this.position.x = -90;
     }
-
-    render(){
-        ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    let lose = this.checkCollision();
+    if (lose) {
+        player.enemies.forEach(enemy => enemy.level = 1);
     }
-
-} 
-
-// Enemies our player must avoid
-class Enemy extends Entity{
-    constructor(option){
-        super(option);
-        this.sprite = 'images/enemy-bug.png';
-        this.player = option.player
-    }
-
-    update(dt){
-        this.x += this.speed * dt * (this.level * 0.8);
-        if(this.x >= canvas.width){
-            this.x = -90;
+    this.increaseLevel();
+}
+Enemy.prototype.checkCollision = function () {
+    let positionX = Math.floor(this.position.x);
+    if (positionX - 50 < player.position.x && player.position.x < positionX + 50) {
+        if (this.position.y - 55 < player.position.y && player.position.y < this.position.y + 20) {
+            alert(`You lose!\nYour level is ${this.player.level}`);
+            player.restartPosition();
+            player.level = 1;
+            return true;
         }
-        let lose = this.checkCollision();
-        if(lose){
-            player.enemies.forEach(enemy=>enemy.level = 1);
-        }
-        this.increaseLevel();   
     }
-    
-    increaseLevel(){
-        if(this.player.level!=this.level){
-            this.level++;
-        }
-    }
+    return false;
+}
 
-    checkCollision(){
-        let positionX = Math.floor(this.x);
-        if(positionX-50<player.x && player.x<positionX+50){
-            if(this.y-55<player.y && player.y<this.y+20){
-                alert(`You lose!\nYour level is ${this.player.level}`);
-                player.restartPosition();
-                player.level = 1;
-                return true;
-            }
-        }
-        return false
+Enemy.prototype.increaseLevel = function () {
+
+    if (this.player.level != this.level) {
+        this.level++;
     }
 }
 
-class Player extends Entity{
-    constructor(option){
-        super(option);
-        this.startX = this.x;
-        this.startY = this.y;
-        this.sprite = 'images/char-boy.png';
+
+const Player = function (x, y, speed, sprite) {
+    Entity.call(this, x, y, speed, sprite);
+    this.startX = this.position.x;
+    this.startY = this.position.y;
+}
+
+Player.prototype = Object.create(Entity.prototype);
+Player.prototype.update = function () {
+    this.checkWin();
+    this.checkWallCollision();
+}
+Player.prototype.checkWin = function () {
+    if (this.position.y < -10) {
+        alert(`You win!\nYour level is ${this.level}`);
+        this.level++;
+        this.restartPosition();
     }
-    update(){
-        this.checkWin();
-        this.checkWallCollision();
-    }
-    checkWin(){
-        if(this.y < -10){
-            alert(`You win!\nYour level is ${this.level}`);
-            this.level++;
-            this.restartPosition();
-        }
-    }
-    checkWallCollision(){
-        if(this.x < -30){
-            this.x = -20;
-        }
-        else if (this.x > canvas.width-80){
-            this.x = canvas.width-85;
-        }
-        else if(this.y > canvas.height-5){
-            this.y = canvas.height-5;
-        }
-    }
-    restartPosition(){
-        this.x = this.startX ;
-        this.y = this.startY;
-    }
-    handleInput(key){
-        switch(key){
-            case 'left':
-                this.x -= 20;
-                break;
-            case 'right':
-                this.x += 20;
-                break;
-            case 'up':
-                this.y -= 20;
-                break;
-            case 'down':
-                this.y += 20;
-                break; 
-        }
+}
+Player.prototype.restartPosition = function () {
+    this.position.x = this.startX;
+    this.position.y = this.startY;
+}
+
+Player.prototype.checkWallCollision = function () {
+    if (this.position.x < -30) {
+        this.position.x = -20;
+    } else if (this.position.x > canvas.width - 80) {
+        this.position.x = canvas.width - 85;
+    } else if (this.position.y > canvas.height - 5) {
+        this.position.y = canvas.height - 5;
     }
 }
 
-const player = new Player({x:200,y:404,speed:7})
-const enemies = [{x:30,y:120,speed:60,player:player},{x:15,y:220,speed:30,player:player},{x:0,y:50,speed:20,player:player}]
-const allEnemies = enemies.map(item=> new Enemy(item));
+Player.prototype.handleInput = function (key) {
+    switch (key) {
+        case 'left':
+            this.position.x -= 20;
+            break;
+        case 'right':
+            this.position.x += 20;
+            break;
+        case 'up':
+            this.position.y -= 20;
+            break;
+        case 'down':
+            this.position.y += 20;
+            break;
+    }
+}
+
+const player = new Player(200, 404, 7, 'images/char-boy.png');
+
+const enemy1 = new Enemy(30, 120, 60, 'images/enemy-bug.png', player);
+const enemy2 = new Enemy(15, 220, 30, 'images/enemy-bug.png', player);
+const enemy3 = new Enemy(0, 50, 20, 'images/enemy-bug.png', player);
+const allEnemies = [enemy1, enemy2, enemy3];
+
 player.enemies = allEnemies;
 
-document.addEventListener('keyup', function(e) {
+document.addEventListener('keyup', function (e) {
     var allowedKeys = {
         37: 'left',
         38: 'up',
