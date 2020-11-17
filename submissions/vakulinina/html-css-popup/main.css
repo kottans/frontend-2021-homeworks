@@ -1,0 +1,215 @@
+* {
+  margin: 0;
+  padding: 0;
+  appearance: none;
+  list-style: none;
+  text-align: center;
+  text-decoration: none;
+}
+
+a {
+  display: block;
+  padding: 5px;
+  color: #757575;
+}
+
+a:visited {
+  color: #757575;
+}
+
+img {
+  vertical-align: middle;
+}
+
+label:hover {
+  cursor: pointer;
+  background-color: rgba(224, 224, 224, 0.7);
+}
+
+/* Navigation bar*/
+
+.navbar {
+  display: flex;
+  height: 50px;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 20px 0;
+  font-family: Arial, sans-serif;
+  font-size: 24px;
+  color: #757575;
+}
+
+.nav-item {
+  position: relative;
+  margin: 5px 20px;
+}
+
+.nav-item > a:focus,
+.nav-item > input:focus {
+  background-color: rgba(224, 224, 224, 0.5);
+}
+
+.nav-item:hover {
+  background-color: rgba(224, 224, 224, 0.7);
+  border-radius: 4px;
+}
+
+.app-button {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: -1;
+}
+
+.app-button-label {
+  display: block;
+  width: 40px;
+  border-radius: 4px;
+}
+
+.app-button-label img {
+  width: 100%;
+}
+
+.avatar {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+
+/* Main App-menu */
+
+.app-menu-main,
+.more-menu-items {
+  display: none;
+}
+
+.app-menu-main::-webkit-scrollbar  {
+  width: 3px;
+}
+
+.app-menu-main::-webkit-scrollbar-thumb  {
+  background-color: rgba(133, 132, 132, 0.5);
+  border-radius: 5px;
+}
+
+.menu-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  box-sizing: border-box;
+  width: 30%;
+  max-height: 24%;
+  margin: 0;
+  border-radius: 4px;
+}
+
+.menu-item a {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 20%;
+}
+
+.menu-item img {
+  max-width: 90%;
+  max-height: 60%;
+  margin-bottom: 10%;
+}
+
+.menu-item a:focus {
+  border-color: rgba(224, 224, 224, 0.7);
+  background-color: transparent;
+  outline: none;
+}
+
+.menu-item:hover {
+  background-color: rgba(224, 224, 224, 0.7);
+}
+
+.app-button:checked ~ .app-button-label {
+  background-color: rgba(224, 224, 224, 0.5);
+}
+
+.app-button:checked ~ .app-menu-main {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  align-content: flex-start;
+  overflow: auto;
+  position: absolute;
+  box-sizing: border-box;
+  top: 60px;
+  right: -90px;
+  width: 400px;
+  max-width: 400px;
+  height: 600px;
+  padding: 10%;
+  box-shadow: 0 0 20px gray;
+  border-radius: 4px;
+  font-size: 0.7em;
+  line-height: 1.5em;
+}
+
+/* Additional part of App-menu */
+
+.app-menu-more {
+  margin: 0;
+  width: 100%;
+}
+
+.more-button {
+  display: block;
+  position: absolute;
+  bottom: 1%;
+  width: 97.5%;
+  height: 6%;
+  border-radius: 4px;
+  z-index: -1;
+}
+
+.more-button:focus {
+  outline: none;
+}
+
+.more-button-label {
+  display: block;
+  background-color: rgba(224, 224, 224, 0.5);
+  border-radius: 4px;
+  width: 100%;
+  margin-top: 3%;
+  line-height: 2.5em;
+}
+
+.more-button:focus ~ .more-button-label {
+  background-color: rgba(133, 132, 132, 0.5);
+  color: white;
+}
+
+.more-button:checked,
+.more-button:checked ~ .more-button-label {
+  display: none;
+}
+
+.more-button:checked ~ .more-menu-items::before {
+  content: "";
+  height: 2px;
+  width: 100%;
+  border-top: 2px solid rgba(224, 224, 224, 0.5);
+  margin: 1% 0 0.7% 0;
+}
+
+.more-button:checked ~ .more-menu-items {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  align-content: flex-start;
+}
