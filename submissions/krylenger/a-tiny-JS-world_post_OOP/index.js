@@ -44,16 +44,15 @@ const outputPetIntroduction = ({
   name,
   gender,
   legs,
-  paws,
   friends,
   species,
 }) => {
   const capitalizedWord = capitalizeWord(word);
 
-  return `${capitalizedWord}! ${capitalizedWord} ${word} <em>${name}</em>. ${capitalizedWord} ${word} <em>${species}</em>. 
-  ${capitalizedWord} ${word} <em>${gender}</em>. ${capitalizedWord} <em>${legs}</em> ${word} <em>${paws}</em> ${word}. 
-  Meow ${word} ${word}: <em>${friends.join(", ")}</em>.<em> 
-  </em><br><br>`;
+  return `${capitalizedWord}! ${capitalizedWord} ${word} <em>${name}</em>. ${capitalizedWord} ${word} <em>${species}</em>.
+      ${capitalizedWord} ${word} <em>${gender}</em>. ${capitalizedWord} <em>${legs}</em> ${word} ${word}. 
+      Meow ${word} ${word}: <em>${friends.join(", ")}</em>.<em> 
+      </em><br><br>`;
 };
 
 const humanSays = (self) => ({
@@ -71,7 +70,6 @@ const carnivoraPetSays = (self) => ({
 const createCarnivoraPet = (speciesObj) => {
   const self = createInhabitant(speciesObj);
   self.legs = 4;
-  self.paws = 4;
   return Object.assign(self, carnivoraPetSays(self));
 }
 
@@ -116,8 +114,6 @@ const catBarsik = createCat("Barsik", 'female', ['Eugene']);
 const manEugene = createMan("Eugene", ['Anna', 'Eugene']);
 const womanAnna = createWoman("Anna", ['Anna', 'Eugene']);
 const catWomanSofia = createCatWoman("Sofia", ['Anna', 'Eugene']);
-
-// console.log(catWomanSofia);
 
 const inhabitants = [manEugene, womanAnna, catBarsik, catWomanSofia, dogSharik];
 inhabitants.forEach(inhabitant => print(inhabitant))
