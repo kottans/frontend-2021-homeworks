@@ -69,15 +69,12 @@ const carnivoraPetSays = (self) => ({
 
 const createCarnivoraPet = (speciesObj) => {
   const self = createInhabitant(speciesObj);
-  self.legs = 4;
-  return Object.assign(self, carnivoraPetSays(self));
+  return Object.assign(self, {legs: 4}, carnivoraPetSays(self));
 }
 
 const createHuman = (speciesObj) => {
   const self = createInhabitant(speciesObj);
-  self.legs = 2;
-  self.hands = 2;
-  return Object.assign(self, humanSays(self));
+  return Object.assign(self, {legs: 2, hands: 2}, humanSays(self));
 }
 
 const meower = () => ({
