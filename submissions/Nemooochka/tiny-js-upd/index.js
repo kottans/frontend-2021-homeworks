@@ -9,93 +9,98 @@
 // Define your objects here
 
 class Inhabitant {
-    constructor(species, name, gender, saying, friends) {
+    constructor(species, name, gender, legs, saying, friends = []) {
         this.species = species;
         this.name = name;
         this.gender = gender;
+        this.legs = legs;
         this.saying = saying;
         this.friends = friends;
+        this.addFriends(friends);
+    }
+
+    addFriends(friends) {
+        if(Array.isArray(friends)) this.friends = [...this.friends, ...friends];
+        else this.friends.push(friends);
+    }
+
+    getFriendsName() {
+        return this.friends.length > 0
+            ? this.friends.map(friend => friend.name).join(', ')
+            : 'the world';
     }
 
     sayHi() {
-        return( `${this.saying} I'm a ${this.species} with the name ${this.name}, which means I'm ${this.gender}. I want to say hi to <b>${this.friends}</b>, you are the best!`);
+        return( `${this.saying} I'm a ${this.species}, ${this.gender} with the name ${this.name}. I want to say hi to <b>${this.getFriendsName()}</b>, you are the best! By the way, I have ${this.legs} legs.`);
     }
 }
 
 class Animal extends Inhabitant {
-    legs = 4;
-    constructor(name, gender, friends) {
-        super();
-        this.name = name;
-        this.gender = gender;
-        this.friends = friends;
-    }
-
-    sayHi() {
-        return(
-            super.sayHi() + ` By the way, I have ${this.legs} legs.`
-        )
+    constructor(species, name, gender, saying, friends) {
+        super(species, name, gender, 4, saying, friends);
     }
 }
 
 
 class Dog extends Animal {
-    species = 'dog';
-    saying = 'Woof-woof';
     constructor(name, gender, friends) {
-        super(name, gender, friends);
+        super('dog', name, gender, 'Woof-woof', friends);
     }
 }
 
 class Cat extends Animal {
-    species = 'cat';
-    saying = 'Meeeow!';
     constructor(name, gender, friends) {
-        super(name, gender, friends);
+        super('cat', name, gender, 'Meeeow!', friends);
     }
 }
 
 class Human extends Inhabitant {
-    species = 'human';
     hands = 2;
-    constructor(name, friends) {
-        super();
-        this.name = name;
-        this.friends = friends;
+    constructor(name, gender, saying, friends) {
+        super('human', name, gender, 2, saying, friends);
     }
 
     sayHi() {
         return(
-            super.sayHi() + ` By the way, I have ${this.hands} hands.`
+            super.sayHi() + ` And ${this.hands} hands.`
         )
     }
 }
 
 class Man extends Human {
-    gender = 'male';
-    saying = 'How you doing?';
-
-    constructor(name, friends) {
-        super(name, friends);
+    constructor(name, saying, friends) {
+        super(name, 'male', saying, friends);
     }
 }
 
 class Woman extends Human {
-    gender = 'female';
-    saying = 'Nice to meet you!';
-
-    constructor(name, friends) {
-        super(name, friends);
+    constructor(name, saying, friends) {
+        super(name, 'female', saying, friends);
     }
 }
 
-const dog = new Dog('Ivan', 'male',  ['Ira']);
-const cat = new Cat('Pushok', 'male',  ['Sharik', 'Ponchik']);
-const catWoman = new Cat('Murka', 'female',  ['Pushok']);
-const man = new Man('Andre', ['Vasya', 'Mitya']);
-const woman = new Woman('Natali', ['Madona']);
+const dog = new Dog('Ivan', 'male');
+const cat = new Cat('Pushok', 'male');
+const catWoman = new Cat('Murka', 'female');
+const manAndre = new Man('Andre', 'How you doing?');
+const manVasya = new Man('Vasya', 'How do you dou?');
+const manMitya = new Man('Mitya', 'How are you?');
+const womanNatali = new Woman('Natali', 'Nice to meet you!');
 
-const inhabitants = [dog, cat, catWoman, man, woman];
+dog.friends = [cat, catWoman, manVasya];
+cat.friends = [dog, womanNatali];
+catWoman.friends = [dog, womanNatali];
+manAndre.friends = [manVasya, manMitya];
+manVasya.friends = [dog, manAndre, manMitya];
+manMitya.friends = [manAndre, manVasya];
+womanNatali.friends = [cat, catWoman];
+
+// Andre met Natali, they are friends now!
+manAndre.addFriends(womanNatali);
+womanNatali.addFriends(manAndre);
+
+
+const inhabitants = [dog, cat, catWoman, manAndre, manVasya, manMitya, womanNatali];
 
 inhabitants.forEach(inhabitant => print(inhabitant.sayHi()));
 
