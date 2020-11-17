@@ -57,13 +57,13 @@ const outputPetIntroduction = ({
 };
 
 const humanSays = (self) => ({
-  introduction: () => {
+  toString: () => {
     return outputHumanIntroduction(self);
   },
 });
 
 const carnivoraPetSays = (self) => ({
-  introduction: () => {    
+  toString: () => {    
     return outputPetIntroduction(self);
   },
 });
@@ -119,9 +119,5 @@ const womanAnna = createWoman("Anna", ['Anna', 'Eugene']);
 const catWomanSofia = createCatWoman("Sofia", ['Anna', 'Eugene']);
 
 const inhabitants = [manEugene, womanAnna, catBarsik, catWomanSofia, dogSharik];
-inhabitants
-  .map((inhabitant) => inhabitant.introduction())
-  .forEach((introduction) => {
-    print(introduction, "pre");
-  });
-
+inhabitants.forEach(inhabitant => print(inhabitant))
+  
