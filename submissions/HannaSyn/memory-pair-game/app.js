@@ -65,8 +65,7 @@ function resetField() {
   fillField();
 }
 
-function flipCards(e) {
-  let target = e.target;
+function flipCards({target}) {
   let cardClicked = target.closest('.card.closed');
   if (!cardClicked) {
     return
