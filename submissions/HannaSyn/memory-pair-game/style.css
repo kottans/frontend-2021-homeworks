@@ -1,0 +1,162 @@
+@import url("https://fonts.googleapis.com/css2?family=Goldman&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+:focus, :active {
+  outline: none;
+}
+
+a:focus, a:active {
+  outline: none;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  line-height: 1;
+  font-size: 14px;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+input, button, textarea {
+  font-family: inherit;
+}
+
+input::-ms-clear {
+  display: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+button::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+
+a, a:visited, a:hover {
+  text-decoration: none;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+img {
+  vertical-align: top;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+body {
+  font-family: "Goldman", cursive;
+}
+
+.header {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.title {
+  font-size: 28px;
+}
+
+.main {
+  max-width: 380px;
+  margin: 0 auto;
+}
+
+.playing-field {
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.playing-field.blocked::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  z-index: 100000;
+}
+
+.card {
+  flex: 1 1 20%;
+  height: 120px;
+  margin: 5px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: 0.6s;
+}
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.card.flipped {
+  transform: rotateY(-180deg);
+}
+
+.card.opened .back {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(117, 182, 150, 0.5);
+}
+
+.winner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 350px;
+  background: url(../assets/portal.png) 0 0/300px 350px no-repeat;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  font-size: 26px;
+}
+
+.front,
+.back {
+  height: 120px;
+  border: 2px solid #000000;
+  background: #ffffff;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  position: absolute;
+  transition: 0.6s ease;
+  top: 0;
+  left: 0;
+}
+
+.front {
+  z-index: 2;
+  transform: rotateY(0deg);
+}
+
+.back {
+  transform: rotateY(-180deg);
+}
