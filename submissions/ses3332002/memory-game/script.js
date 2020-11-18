@@ -1,11 +1,12 @@
 "use strict";
   
   const doc = document.body;
-  const themeButtons = document.querySelectorAll(".theme_selector__button");
+  const themeButtons = document.querySelector(".theme_selector");
   const sizeSelector = document.querySelector(".size_selector");
   const cardThemeSelector = document.querySelectorAll('input[name="option"]');
   const startButton = document.querySelector(".start_button");
   const gameArea = document.querySelector(".game_area");
+  const switchableControls = document.querySelectorAll(".switchable");
   let numbersArray;
   let cardThemeSelected;
   let cardSelected;
@@ -14,33 +15,27 @@
   
   startButton.addEventListener("click", startGame);
   doc.classList.add("theme1");
-
-  themeButtons.forEach((el,i) => {
-    el.classList.add("theme"+(i+1));
-    el.addEventListener("click", function() {
-      setupTheme(i);
-    });
-  });
-
-  function setupTheme(i) {
+  
+  themeButtons.addEventListener("click", function({target}) {
+    if (target.tagName != "BUTTON") {
+      return;
+    };
     doc.classList.remove(doc.classList[0]);
-    doc.classList.add("theme"+(i+1));
-  };
+    doc.classList.add(target.dataset.theme);
+  });
   
   function startGame() {
     cardThemeSelected = document.querySelector('input[name="option"]:checked');
-    cardThemeSelector.forEach((item) => {
-      item.disabled = true;
-      item.nextElementSibling.classList.add("form_item-desabled");
-      item.nextElementSibling.style.pointerEvents = "none";
-    });
-    sizeSelector.disabled = true;
-    sizeSelector.classList.add("form_item-desabled");
-    startButton.disabled = true;
-    startButton.classList.add("form_item-desabled");
-    startButton.style.pointerEvents = "none";
     matchedCounter = 0;
     prepareGameField();
+    switchControls();
+  };
+  
+  function switchControls() {
+    switchableControls.forEach((item) => {
+      item.disabled = !item.disabled;
+      item.classList.toggle("form_item-desabled");
+    });
   };
   
   function prepareGameField() {
@@ -130,27 +125,16 @@
   };
 
   function hailWinner() {
-    const hailWindow = document.createElement("div");
-    hailWindow.classList.add("popup_hail__background");
-    hailWindow.innerHTML = `<div class="popup_hail__window">Вы выиграли!<button class="popup_hail__button">Ok</button></div>`;
-    doc.append(hailWindow);
+    const popupHailWindow = document.querySelector(".popup_hail");
+    popupHailWindow.classList.toggle("popup_hail-hide");
     const okButton = document.querySelector(".popup_hail__button");
     okButton.addEventListener("click", resetWindow);
     
     function resetWindow() {
       okButton.removeEventListener("click", resetWindow);
-      hailWindow.remove();
-      sizeSelector.disabled = false;
-      sizeSelector.classList.remove("form_item-desabled");
-      startButton.disabled = false;
-      startButton.classList.remove("form_item-desabled");
-      startButton.style.pointerEvents = "all";
-      cardThemeSelector.forEach((item) => {
-        item.disabled = false;
-        item.nextElementSibling.classList.remove("form_item-desabled");
-        item.nextElementSibling.style.pointerEvents = "all";
-      });
+      popupHailWindow.classList.toggle("popup_hail-hide");
       gameArea.classList.remove(gameArea.classList[1]);
       gameArea.innerHTML = "";
+      switchControls();
     };
   };

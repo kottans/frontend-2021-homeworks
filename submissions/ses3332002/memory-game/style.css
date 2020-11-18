@@ -168,7 +168,8 @@ option {
 }
 
 .form_item-desabled {
-  filter: grayscale(); 
+  filter: grayscale();
+  pointer-events: none;
 }
 
 .game_field {
@@ -301,11 +302,15 @@ a {
   border: 2px solid var(--decor_color);
 }
 
-.popup_hail__background {
+.popup_hail {
   position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
   background-color: #00000090;
+}
+
+.popup_hail-hide {
+  display: none;
 }
