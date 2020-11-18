@@ -116,8 +116,7 @@ label {
 #popup-btn_more,
 #popup {
     position: absolute;
-    width: 0;
-    height: 0;
+    top: -9999px;
 }
 
 .popup-menu {
@@ -187,16 +186,16 @@ span {
 
 /* Change icons' size 
 ------------------------- */
-#videos,
-#chat,
-#contacts,
-#classroom,
-#mail,
-#files {
+.videos,
+.chat,
+.contacts,
+.classroom,
+.mail,
+.files {
     padding: 5px 0;
 }
 
-#documents {
+.documents {
     padding: 0 5px;
 }
 
