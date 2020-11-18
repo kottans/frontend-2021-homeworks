@@ -65,12 +65,14 @@ img {
 
 .btn:hover {
     color: #d0d5d8;
+    cursor: pointer;
 }
 
 .btn:focus {
     color: #fff;
     outline: 0;
     background-color: #1d3d51;
+    cursor: pointer;
 }
 
 .menu {

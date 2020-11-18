@@ -62,21 +62,21 @@ const mexPlaces = [
 
 ];
 
-let places = document.getElementById('main');
-let navItems = document.getElementById('nav__wrapper');
-let img = document.createElement('img');
-let nav = document.getElementById("navigation");
-let burger = document.getElementById("hamburger");
+const places = document.getElementById('main');
+const navItems = document.getElementById('nav__wrapper');
+const img = document.createElement('img');
+const nav = document.getElementById("navigation");
+const burger = document.getElementById("hamburger");
 
 img.src = mexPlaces[0].img_url;
 places.appendChild(img);
 
 mexPlaces.forEach(function (element, index) {
-    const but = document.createElement('button');
-    but.classList.add("btn");
-    but.id = mexPlaces[index].id;
-    but.innerHTML = mexPlaces[index].name;
-    navItems.appendChild(but);
+    const placeBtn = document.createElement('button');
+    placeBtn.classList.add("btn");
+    placeBtn.id = mexPlaces[index].id;
+    placeBtn.innerHTML = mexPlaces[index].name;
+    navItems.appendChild(placeBtn);
     const buter = document.getElementById(mexPlaces[index].id);
     buter.addEventListener('click', event => {
         places.removeChild(places.lastChild);
