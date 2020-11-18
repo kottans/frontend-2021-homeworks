@@ -1,4 +1,4 @@
-const info = [
+const mexPlaces = [
     {
         id: 0,
         name: 'Ciudad de México',
@@ -68,19 +68,19 @@ let img = document.createElement('img');
 let nav = document.getElementById("navigation");
 let burger = document.getElementById("hamburger");
 
-img.src = info[0].img_url;
+img.src = mexPlaces[0].img_url;
 places.appendChild(img);
 
-info.forEach(function (element, index) {
+mexPlaces.forEach(function (element, index) {
     const but = document.createElement('button');
     but.classList.add("btn");
-    but.id = info[index].id;
-    but.innerHTML = info[index].name;
+    but.id = mexPlaces[index].id;
+    but.innerHTML = mexPlaces[index].name;
     navItems.appendChild(but);
-    const buter = document.getElementById(info[index].id);
+    const buter = document.getElementById(mexPlaces[index].id);
     buter.addEventListener('click', event => {
         places.removeChild(places.lastChild);
-        img.src = info[index].img_url;
+        img.src = mexPlaces[index].img_url;
         places.appendChild(img);
     });
 });
