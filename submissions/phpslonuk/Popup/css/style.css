@@ -38,6 +38,10 @@ a {
   margin: 10px;
 }
 
+.nav_item label{
+	cursor: pointer;
+}
+
 .nav_item:hover {
   outline-style: none;
   border-color: gray;
