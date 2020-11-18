@@ -142,6 +142,7 @@ body {
 .front,
 .back {
   height: 120px;
+  width: 100%;
   border: 2px solid #000000;
   background: #ffffff;
   -webkit-backface-visibility: hidden;

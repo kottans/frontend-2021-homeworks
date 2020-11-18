@@ -57,6 +57,7 @@ function createCards() {
 function fillField() {
   shuffleCards();
   createCards();
+  countCards = cards.length;
 }
 
 function resetField() {
@@ -108,7 +109,7 @@ function closeCards ( elem ) {
 }
 
 function win() {
-  let winnerContent = `<div class="winner">
+  const winnerContent = `<div class="winner">
   <p>Wubba Lubba Dub Dub!</p>
 </div>`
   if (countCards === 0) {
