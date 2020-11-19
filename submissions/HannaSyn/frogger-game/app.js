@@ -135,16 +135,16 @@ class Player {
     }
 }    
 
-let allEnemies = [
+const allEnemies = [
     new Enemy (new PositionEnemy ( 1, 0 )),
     new Enemy (new PositionEnemy ( 2, 0 )),
     new Enemy (new PositionEnemy ( 3, 0 )),
 ];
 
-let player = new Player( new PositionPlayer( 5, 3 ) );
+const player = new Player( new PositionPlayer( 5, 3 ) );
 
 function checkCollisions() {
-    let collisionedEnemies = allEnemies.filter(filterCollisionedEnemies, player);
+    const collisionedEnemies = allEnemies.filter(filterCollisionedEnemies, player);
     
     if (collisionedEnemies.length) {
         player.position.reset();
@@ -152,9 +152,9 @@ function checkCollisions() {
 }
 
 function filterCollisionedEnemies(enemy) {
-    let fromPlayerToEnemyX = this.position.x - enemy.position.x;
-    let halfCellWidth = (cellWidth / 2);
-    let isEqualY = this.position.y === enemy.position.y;
+    const fromPlayerToEnemyX = this.position.x - enemy.position.x;
+    const halfCellWidth = (cellWidth / 2);
+    const isEqualY = this.position.y === enemy.position.y;
 
     return (Math.abs(fromPlayerToEnemyX) < halfCellWidth) && isEqualY;
 }
