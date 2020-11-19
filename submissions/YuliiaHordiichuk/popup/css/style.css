@@ -176,7 +176,6 @@ body {
     display: flex; 
     justify-content: center;
     padding: 10px; 
-    margin-left: 15px;
 
     background-color:  rgba(128, 128, 128, 0.1);
     border: 1px solid transparent;
