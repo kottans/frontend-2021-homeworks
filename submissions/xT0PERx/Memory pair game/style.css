@@ -1,0 +1,39 @@
+.cards {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-auto-rows: 240px;
+  margin: 3px;
+  max-width: 800px;
+}
+
+.card {
+  position: relative;
+  background: url('../images/cardClosed.png') no-repeat;
+  margin: 5px;
+  border-radius: 10px;
+  height: 225px;
+  transition: transform 0.5s;
+  transform: rotateY(180deg);
+}
+
+.card:active {
+  transform: scale(0.95);
+  transition: transform 150ms;
+}
+
+.card__clicked {
+  margin: 5px;
+  border-radius: 10px;
+  transition: transform 0.5s;
+  transform: ease;
+}
+.card__clicked img {
+  display: block;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.card img {
+  display: none;
+}
