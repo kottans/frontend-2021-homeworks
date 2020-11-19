@@ -33,8 +33,9 @@ const cards = [
     }
 ];
 const cards_container = document.querySelector('.js-cards_container');
-let hasFlipped, playing, restart = false;
-let firstCard, secondCard, step;
+const finalStep = 8;
+let hasFlipped, playing = false;
+let firstCard, secondCard, curStep;
 
 const createItem = (card) => {
     const block = document.createElement('div');
@@ -62,7 +63,7 @@ const renderItems = (cards) => {
 }
 
 const flipCard = (target) => {
-    if (target.classList.value === 'flipper card') {
+    if (target.classList.contains('card')) {
         target.classList.add('flipped');
         if (!hasFlipped) {
             hasFlipped = true;
@@ -81,8 +82,8 @@ const flipCard = (target) => {
 }
 
 const countSteps = () => {
-    if (step === 8) {
-        restart = confirm('Вы победили! Хотите начать игру снова?');
+    if (curStep === finalStep) {
+        const restart = confirm('Вы победили! Хотите начать игру снова?');
         if (restart) {
             restartGame();
         }
@@ -92,7 +93,7 @@ const countSteps = () => {
 const rightCards = () => {
     firstCard.classList.remove('card');
     secondCard.classList.remove('card');
-    step++;
+    curStep++;
 }
 
 const wrongCards = () => {
@@ -105,15 +106,14 @@ const wrongCards = () => {
 }
 
 const restartGame = () => {
-    step = 0;
+    curStep = 0;
     cards_container.innerHTML = "";
     const newArray = [...cards, ...cards].sort(() => 0.2 - Math.random());
     renderItems(newArray);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    cards_container.addEventListener('click', (event) => {
-        const target = event.target;
+    cards_container.addEventListener('click', ({target}) => {
         if (playing) return;
         flipCard(target);
     })
