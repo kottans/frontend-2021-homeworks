@@ -33,6 +33,7 @@ const cards = [
     }
 ];
 const cards_container = document.querySelector('.js-cards_container');
+const finalText = 'Вы победили! Хотите начать игру снова?';
 const finalStep = 8;
 let hasFlipped, playing = false;
 let firstCard, secondCard, curStep;
@@ -54,9 +55,9 @@ const createItem = (card) => {
 }
 
 const renderItems = (cards) => {
-    let fragment = document.createDocumentFragment();
+    const fragment = document.createDocumentFragment();
     cards.forEach((card) => {
-        let block = createItem(card);
+        const block = createItem(card);
         fragment.append(block);
     })
     cards_container.append(fragment);
@@ -83,7 +84,7 @@ const flipCard = (target) => {
 
 const countSteps = () => {
     if (curStep === finalStep) {
-        const restart = confirm('Вы победили! Хотите начать игру снова?');
+        const restart = confirm(finalText);
         if (restart) {
             restartGame();
         }
