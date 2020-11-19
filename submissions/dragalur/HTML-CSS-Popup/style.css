@@ -81,7 +81,7 @@
 	height: 30px;
 	border: none;
 	background-color: rgb(212, 212, 212);
-	margin-top: 8px;
+	margin-top: 9px;
 	visibility: visible;
 	opacity: 1;
 }
@@ -135,8 +135,7 @@
 	position: absolute;
 	opacity: 0;
 }
-.first-input:checked ~ .various-app,
-.imageDiv {
+.first-input:checked ~ .various-app{
 	opacity: 1;
 	visibility: visible;
 }
@@ -146,14 +145,23 @@
 .second-input:checked ~ .second-navbar-button {
 	display: none;
 }
+.second-input:checked ~ .line {
+	display: block;
+}
 .line {
 	border-top: 1px solid rgb(212, 212, 212);
 	width: 100%;
+	position: relative;
+	top:20px;
+	display: none;
 }
 .text-end {
+	text-decoration: none;
 	font-size: 20px;
 	padding: 10px 0 0 60px;
 	justify-content: center;
+	color: gray;
+	margin-bottom:20px ;
 }
 .navbar-button {
 	width: 32px;
