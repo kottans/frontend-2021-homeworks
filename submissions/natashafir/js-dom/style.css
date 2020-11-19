@@ -30,7 +30,7 @@ img {
 
 .content {
     display: flex;
-    margin-top: 16px;
+    margin-top: 5%;
     justify-content: space-around;
     position: relative;
     padding: 0 20px;
@@ -39,6 +39,7 @@ img {
 }
 
 .navigation {
+    display: block;
     width: 30%;
     flex: 1;
 }
@@ -65,14 +66,12 @@ img {
 
 .btn:hover {
     color: #d0d5d8;
-    cursor: pointer;
 }
 
 .btn:focus {
     color: #fff;
     outline: 0;
     background-color: #1d3d51;
-    cursor: pointer;
 }
 
 .menu {
@@ -111,8 +110,17 @@ input[type="checkbox"]:checked ~ .main {
     }
 
     .navigation {
+        display: none;
         width: 60%;
         left: 0;
         position: absolute;
+    }
+
+    .hamburger--open {
+        background: url("./img/x.png") no-repeat center;
+    }
+
+    .navigation--open {
+        display: block;
     }
 }
