@@ -36,8 +36,8 @@ const characters = [
 const playingField = document.querySelector('.playing-field');
 const cards = [...characters, ...characters];
 const cardsCollection = document.getElementsByClassName('card');
-const timeoutCheck = 1000;
-const timeoutReset = 2000;
+const checkTimeout = 1000;
+const resetTimeout = 2000;
 
 let firstClicked = null;
 let countCards = cards.length;
@@ -83,14 +83,14 @@ function checkIdentity(secondClicked) {
   const isIdentity = secondClicked.dataset.id == firstClicked.dataset.id;
   setTimeout(() => {
     playingField.classList.remove('blocked');
-  }, timeoutCheck)
+  }, checkTimeout)
 
   if (!isIdentity) {
     setTimeout(() => {
       closeCards(firstClicked);
       closeCards(secondClicked);
       firstClicked = null;
-    }, timeoutCheck);
+    }, checkTimeout);
   } else {
     secondClicked.classList.add('opened');
     firstClicked.classList.add('opened');
@@ -113,7 +113,7 @@ function getWin() {
     playingField.insertAdjacentHTML('afterbegin', winnerContent);
     setTimeout (() => {
       resetField();
-    }, timeoutReset)
+    }, resetTimeout)
   }
 }
 
