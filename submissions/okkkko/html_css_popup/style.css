@@ -27,14 +27,13 @@ a {
   height: 26px;
   cursor: pointer;
 }
-#images {
+.nav_item.images {
   width: 83px;
 }
-label img {
+.label {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 11px;
 }
 .nav_links {
   display: flex;
@@ -57,6 +56,11 @@ label img {
 .nav_item.img a {
   padding-top: 8.5px;
   padding-bottom: 8px;
+}
+.dd_label a{
+  padding-top:12px;
+  padding-bottom:12px;
+  cursor:pointer;
 }
 .dd_checkbox,
 .checkbox_more {
@@ -126,16 +130,20 @@ label img {
   background-color: white;
   border-radius: 3px;
 }
-.nav_links > li:hover {
+.nav_item > a:hover,
+.dd_label > a:hover {
   background-color: #d9d9d9e8;
+  border-radius: 3px;
 }
 .dropdown a:focus {
   border: 2px solid #538687bd;
-  border-radius: 3px;
 }
 .nav_item a:focus {
   background-color: rgba(238, 232, 170, 0.938);
   border-radius: 3px;
+}
+.dd_checkbox:checked + .dd_label a {
+  background-color:rgba(238, 232, 170, 0.938)
 }
 ::-webkit-scrollbar {
   width: 11px;
