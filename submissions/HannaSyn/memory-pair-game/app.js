@@ -42,8 +42,6 @@ const timeoutReset = 2000;
 let firstClicked = null;
 let countCards = cards.length;
 
-const playingFieldBlocked = () => playingField.classList.add('blocked');
-const playingFieldUnblocked = () => playingField.classList.remove('blocked');
 const shuffleCards = () => cards.sort(function() { return 0.5 - Math.random() });
 
 function createCards() {
@@ -66,7 +64,7 @@ function resetField() {
 }
 
 function flipCards({target}) {
-  let cardClicked = target.closest('.card.closed');
+  const cardClicked = target.closest('.card.closed');
   if (!cardClicked) {
     return
   }
@@ -77,14 +75,14 @@ function flipCards({target}) {
     firstClicked = cardClicked;
   } else {
     checkIdentity(cardClicked);
-    playingFieldBlocked();
+    playingField.classList.add('blocked');
   }
 }
 
 function checkIdentity(secondClicked) {
-  let isIdentity = secondClicked.dataset.id == firstClicked.dataset.id;
+  const isIdentity = secondClicked.dataset.id == firstClicked.dataset.id;
   setTimeout(() => {
-    playingFieldUnblocked();
+    playingField.classList.remove('blocked');
   }, timeoutCheck)
 
   if (!isIdentity) {
@@ -98,7 +96,7 @@ function checkIdentity(secondClicked) {
     firstClicked.classList.add('opened');
     firstClicked = null;
     countCards -= 2;
-    win();
+    getWin();
   }
 }
 
@@ -107,7 +105,7 @@ function closeCards ( elem ) {
   elem.classList.add('closed');
 }
 
-function win() {
+function getWin() {
   const winnerContent = `<div class="winner">
   <p>Wubba Lubba Dub Dub!</p>
 </div>`
