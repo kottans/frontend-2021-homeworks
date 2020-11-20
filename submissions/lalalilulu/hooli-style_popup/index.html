@@ -8,14 +8,14 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <nav>
+    <nav class="popup-menu">
         <ul class="menu">
             <li><a href="#" class="nav-text">Mail</a></li>
             <li><a href="#" class="nav-text">Images</a></li>
-            <li><div class="popup">
-                <img class="popup-icon" src="icons/popup-button.png" alt="popup">
+            <li class="popup-icon">
+                <input type="checkbox" id="main-popup" class="main-popup">
+                <label for="main-popup" class="popup_open"></label>
                 <div class="popup-container">
-                    <div class="arrow"></div>
                     <ul class="popup-items">
                         <li class="pop-item"><a href="#" class="popup-item"><img class="popup-item-icon" src="icons/calendar.png" alt="calendar">Calendar</a></li>
                         <li class="pop-item"><a href="#" class="popup-item"><img class="popup-item-icon" src="icons/mail.png" alt="mail">Mail</a></li>
@@ -30,20 +30,21 @@
                         <li class="pop-item"><a href="#" class="popup-item"><img class="popup-item-icon" src="icons/apps.png" alt="apps">Apps</a></li>
                         <li class="pop-item"><a href="#" class="popup-item"><img class="popup-item-icon" src="icons/documents.png" alt="documents">Docs</a></li>
                     </ul>
-                <div class="more-hidden">
-                    <a href="#" class="more-text">More</a>
-                    <ul class="more">
-                        <li class="pop-item"><a href="#" class="more-item"><img class="more-item-icon" src="icons/chat.png" alt="chat">Chat</a></li>
-                        <li class="pop-item"><a href="#" class="more-item"><img class="more-item-icon" src="icons/classroom.png" alt="classroom">Classroom</a></li>
-                        <li class="pop-item"><a href="#" class="more-item"><img class="more-item-icon" src="icons/collection.png" alt="collection">Collection</a></li>
-                        <li class="pop-item"><a href="#" class="more-item"><img class="more-item-icon" src="icons/mars.png" alt="mars">Mars</a></li>
-                        <li class="pop-item"><a href="#" class="more-item"><img class="more-item-icon" src="icons/blogs.png" alt="blogs">Blogs</a></li>
-                        <li class="pop-item"><a href="#" class="more-item"><img class="more-item-icon" src="icons/promo.png" alt="promos">Promos</a></li>
-                        <li><a href="https://kottans.org/" class="more-last-item kottans">Even more from Kottans</a></li>
-                    </ul>
+                    <input type="checkbox" id="more-popup" class="more-popup">
+                    <label for="more-popup" class="more-open">More</label>
+                    <div class="more-hidden">
+                        <ul class="more-items">
+                            <li class="pop-item"><a href="#" class="more-item"><img class="more-item-icon" src="icons/chat.png" alt="chat">Chat</a></li>
+                            <li class="pop-item"><a href="#" class="more-item"><img class="more-item-icon" src="icons/classroom.png" alt="classroom">Classroom</a></li>
+                            <li class="pop-item"><a href="#" class="more-item"><img class="more-item-icon" src="icons/collection.png" alt="collection">Collection</a></li>
+                            <li class="pop-item"><a href="#" class="more-item"><img class="more-item-icon" src="icons/mars.png" alt="mars">Mars</a></li>
+                            <li class="pop-it                   em"><a href="#" class="more-item"><img class="more-item-icon" src="icons/blogs.png" alt="blogs">Blogs</a></li>
+                            <li class="pop-item"><a href="#" class="more-item"><img class="more-item-icon" src="icons/promo.png" alt="promos">Promos</a></li>
+                            <li><a href="https://kottans.org/" class="more-last-item kottans" target="_blank">Even more from Kottans</a></li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-            </div></li>
+            </li>
             <li><a href="#" class="icon"><img src="icons/bell.png" alt="bell"></a></li>
             <li><a href="#" class="avatar"><img src="icons/avatar.png" alt="avatar"></a></li>
         </ul>

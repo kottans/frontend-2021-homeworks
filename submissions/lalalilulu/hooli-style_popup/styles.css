@@ -1,6 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:wght@300&display=swap);
 
-nav {
+.popup-menu {
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -30,8 +30,28 @@ nav {
     object-fit: cover;
 }
 
+.main-popup {
+    position: absolute;
+    opacity: 0;
+}
+
+.popup_open {
+    display: flex;
+    width: 24px;
+    height: 24px;
+    background: url(icons/popup-button.png) center no-repeat;
+}
+
+.popup-icon {
+    margin-right: 20px;
+}
+
 .popup-icon:hover, .icon:hover, .avatar:hover {
     border: 1px solid #95d0ed;
+}
+
+.main-popup:focus + .popup_open {
+    border: 1px solid #c6cccf;
 }
 
 ul {
@@ -54,7 +74,6 @@ a{
 
 a:focus {
     border: 1px solid #c6cccf;
-    border-radius: 2px;
     outline-style: none;
 }
 
@@ -68,70 +87,70 @@ a:focus {
     margin-right: 20px;
 }
 
-.popup .popup-container {
+.popup-container {
+    display: none;
     position: fixed;
-    z-index: 1;
-    top: -100%;
+    top: 6%;
     left: 83%;
     width: 14%;
     height: 380px;
     background-color: #fff;
     border: 1px solid #c6cccf;
     box-shadow: 5px 0 20px 0 rgba(0, 0, 0, 0.2);
-    transition: opacity .2s ease-in-out .5s, top .2s ease-in-out .5s;
+    flex-wrap: wrap;
+    text-align: center;
     overflow: auto;
-    opacity: 0;
 }
 
-.popup:hover .popup-container {
-    top: 6%;
-    opacity: 1;
+li > input:checked ~ .popup-container {
+    display: block;
 }
 
-.popup-container:hover {
-    top: 6%;
-    opacity: 1;
-}
-
-.popup-items, .more-hidden {
+.popup-items, .more-items {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
     text-align: center;
     align-items: center;
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 
-.more-text {
+.more-open {
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
     color: #4a4d4f;
-    width: 100%;
-    padding: 12px;
-    background-color: #c6cccf;
-    justify-self: stretch;
+    flex-wrap: nowrap;
+    margin-left: -10px;
 }
 
-.more-text:focus {
-    border: 1px solid #95d0ed;
+.more-popup {
+    opacity: 0;
 }
 
 .more-hidden {
-    width: 100%;
-}
-
-.more-hidden .more{
-    display: flex;
+    display: none;
     flex-wrap: wrap;
     justify-content: space-evenly;
     text-align: center;
     align-items: center;
-    opacity: 0;
-    transition: opacity .2s ease-in-out .5s;
+    width: 100%;
 }
 
-.more-hidden:hover .more, .more-hidden:focus .more{
-    opacity: 1;
+.more-popup:focus + .more-open {
+    border: 1px solid #95d0ed;
+}
+
+.popup-container > input:checked ~ .more-hidden{
+    display: block;
+}
+
+.popup-container > input:checked ~ .more-open {
+    display: none;
+}
+
+.more-popup:checked ~ .more-hidden{
+    border-top: 1px solid #c6cccf;
 }
 
 .popup-item,
@@ -157,4 +176,23 @@ a:focus {
     width: 100%;
     height: 30px;
     margin-top: 20px;
+}
+
+/* custon scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }
