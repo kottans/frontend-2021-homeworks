@@ -67,6 +67,14 @@ const navItems = document.getElementById('nav__wrapper');
 const img = document.createElement('img');
 const nav = document.getElementById("navigation");
 const burger = document.getElementById("hamburger");
+const showSideMenu = ({target}) => {
+    target.classList.toggle('hamburger--open');
+    nav.classList.toggle('navigation--open');
+};
+const changeImg = (event) => {
+    let target = event.target;
+    img.src = mexPlaces[target.id].img_url;
+};
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -79,15 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
         placeBtn.id = mexPlaces[index].id;
         placeBtn.innerHTML = mexPlaces[index].name;
         navItems.appendChild(placeBtn);
-        nav.onclick = function(event){
-            let target = event.target;
-            img.src = mexPlaces[target.id].img_url;
-        };
     });
+    burger.addEventListener('click', showSideMenu);
+    nav.addEventListener('click', changeImg);
 });
-
-const showSideMenu = ({target}) => {
-    target.classList.toggle('hamburger--open');
-    nav.classList.toggle('navigation--open');
-};
-burger.addEventListener('click', showSideMenu);

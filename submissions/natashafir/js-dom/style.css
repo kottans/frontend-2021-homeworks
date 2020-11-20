@@ -20,7 +20,7 @@ img {
 .title {
     display: flex;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 2%;
 }
 
 .wrapper {
@@ -30,7 +30,7 @@ img {
 
 .content {
     display: flex;
-    margin-top: 5%;
+    margin-top: 4%;
     justify-content: space-around;
     position: relative;
     padding: 0 20px;
