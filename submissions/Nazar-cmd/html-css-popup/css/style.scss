@@ -1,0 +1,225 @@
+@import "reset_styles";
+// End of resetting css
+
+// Variables
+
+$text_color: #5f6368;
+$border_color: #d9d9d9;
+$border_color_images: #a5c7fe;
+
+// Templates
+
+%hide_checkbox {
+    opacity: 0;
+    position: absolute;
+}
+
+// Mixins
+
+@mixin animated_border($border_width, $transition_time) {
+    border: $border_width solid transparent;
+    border-radius: 3px;
+    transition: border-color $transition_time ease-out;
+}
+
+
+
+body {
+    font: caption;
+    color: $text_color;
+    font-size: 12px;
+}
+
+.navbar{
+    display: flex;
+    justify-content: flex-end;
+
+    a {
+        text-decoration: none;
+        color: $text_color!important;
+    }
+
+    .navbar-container {
+        display: flex;
+        margin-top: 0;
+
+        &_link,  &_button{
+            cursor: pointer;
+            margin: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        &_profile_icon{
+            border-radius: 50%;
+        }
+
+        &_button{
+
+            &-image{
+                @include animated_border(2px, 0.25s);
+                max-width: 25px;
+                max-height: 25px;
+            }
+        }
+    }
+
+
+    &-popup_container {
+
+        #navbar-button:focus ~ .navbar-container_button-image {
+            border-color: $border_color_images;
+        }
+
+        #navbar-button:checked ~ .popup{
+            visibility: visible;
+            overflow: visible;
+            max-height: 100%;
+        }
+
+        #navbar-button:checked ~ .popup .popup-icons{
+            opacity: 1;
+        }
+
+        #navbar-button {
+            @extend %hide_checkbox;
+        }
+
+        .popup {
+            position: absolute;
+            overflow: hidden;
+            visibility: hidden;
+            width: 300px;
+            margin-right: 150px;
+            top: 50px;
+            right: -75px;
+            max-height: 0;
+            transition: all 0.3s ease;
+            border: 1px solid $border_color;
+            box-shadow: 1px 5px 15px 4px #cfcfcf;
+
+            &:after,
+            &:before {
+                content: '';
+                display: block;
+                position: absolute;
+                left: 100%;
+                width: 0;
+                height: 0;
+                border-style: solid;
+            }
+
+            &:after {
+                left: 250px;
+                bottom: 100%;
+                border-color: transparent transparent white transparent;
+                border-width: 11px;
+            }
+
+            &:before {
+                left: 249px;
+                bottom: 100%;
+                border-color: transparent transparent $border_color transparent;
+                border-width: 12px;
+            }
+
+            &-icons {
+                position: relative;
+                max-height: 100%;
+                opacity: 0;
+                overflow: auto;
+                transition: opacity 0.3s ease;
+
+                &_main, &_more {
+                    display: flex;
+                    flex-wrap: wrap;
+                    width: 100%;
+                    padding: 0.5rem 5px;
+
+
+                    .popup-icon_container {
+                        width: 33.333%;
+                        @include animated_border(1px, 0.1s);
+                        padding: 1rem 0.5rem;
+
+                        .popup-icon {
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            justify-content: space-between;
+
+                            .icon-image {
+                                max-width: 100%;
+                                max-height: 40px;
+                                margin-bottom: 1rem;
+                            }
+                        }
+
+                        &:hover {
+                            border-color: $border_color;
+                        }
+
+                        &:focus {
+                            outline: none;
+                            border-color: $border_color_images!important;
+                        }
+                    }
+
+                }
+
+                &_more {
+                    display: none;
+                    position: absolute;
+                    border-top: 1px solid $border_color;
+
+                    &:after {
+                        padding: 20px  0;
+                        display: block;
+                        width: 100%;
+                        text-align: center;
+                        content: "Even more from Kottans";
+                    }
+                }
+
+                #popup-more {
+                    @extend %hide_checkbox;
+                }
+
+                #popup-more:checked ~ .popup-icons_footer{
+                    display: none;
+                }
+
+                #popup-more:checked ~ .popup-icons_more {
+                    display: flex;
+                }
+
+                #popup-more:focus ~ .popup-icons_footer .popup-icons_footer-text{
+                    border: 2px solid black;
+                }
+
+                &_footer {
+                    display: block;
+                    padding: 10px 0;
+                    width: 100%;
+                    background-color: #f5f5f5;
+                    text-align: center;
+                    cursor: default;
+
+
+                    .popup-icons_footer-text {
+                        cursor: pointer;
+                    }
+
+                }
+            }
+        }
+    }
+
+}
+
+
+
+
+
+
