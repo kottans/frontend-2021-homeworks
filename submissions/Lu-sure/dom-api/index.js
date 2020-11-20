@@ -50,14 +50,15 @@ const renderSide = function () {
     const ul = document.createElement('ul');
     for (let i=0; i<contentArray.length; i++) {
         const sideHero = document.createElement('li');
-        ul.appendChild(sideHero);
         sideHero.innerHTML = contentArray[i].sideName;
         sideHero.classList.add('side-hero');
-        sideHero.addEventListener('click', function () {
-            changeContent(i);
-            side.classList.remove('open');
-        });
+        sideHero.setAttribute("data-idx", i);
+        ul.appendChild(sideHero);
     };
+    ul.addEventListener('click', function (evt) {
+        changeContent(evt.target.getAttribute("data-idx"));
+        side.classList.remove('open');
+    });
     side.appendChild(ul);
 };
 
@@ -69,44 +70,38 @@ const render = function (index) {
     const name = document.createElement('h2');
     name.innerHTML = content.name;
     name.classList.add('name');
-    contentWrapper.appendChild(name);
 
     const img = document.createElement('img');
     img.setAttribute('src', content.img);
     img.classList.add('image');
-    contentWrapper.appendChild(img);
 
     const known = document.createElement('h3');
-    known.innerHTML = 'Also known as: ' + content.known;
+    known.innerHTML = `Also known as: ${content.known}`;
     known.classList.add('known-for');
-    contentWrapper.appendChild(known);
 
     const appearance = document.createElement('p');
-    appearance.innerHTML = 'Appearance: ' + content.appearance;
+    appearance.innerHTML = `Appearance: ${content.appearance}`;
     appearance.classList.add('about-hero');
-    contentWrapper.appendChild(appearance);
 
     const quotes = document.createElement('p');
-    quotes.innerHTML = 'Most famous quotes: ' + content.quotes;
+    quotes.innerHTML = `Most famous quotes: ${content.quotes}`;
     quotes.classList.add('about-hero');
-    contentWrapper.appendChild(quotes);
 
     const fondOf = document.createElement('p');
-    fondOf.innerHTML = 'He is fond of: ' + content.fondOf;
+    fondOf.innerHTML = `He is fond of: ${content.fondOf}`;
     fondOf.classList.add('about-hero');
-    contentWrapper.appendChild(fondOf);
 
     const features = document.createElement('p');
-    features.innerHTML = 'Special features: ' + content.features;
+    features.innerHTML = `Special features: ${content.features}`;
     features.classList.add('about-hero');
-    contentWrapper.appendChild(features);
 
+    contentWrapper.append(name, img, known, appearance, quotes, fondOf, features);
     main.appendChild(contentWrapper);
     contentWrapper.classList.add('hero');
 };
 
 const changeContent = function (index) {
-    main.removeChild(main.firstChild);
+    main.innerHTML = "";
     render(index);
 }
 
