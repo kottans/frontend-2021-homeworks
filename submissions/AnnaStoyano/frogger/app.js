@@ -17,6 +17,20 @@ Entity.prototype.render = function () {
     ctx.drawImage(Resources.get(this.sprite), this.position.x, this.position.y);
 }
 
+Entity.prototype.increaseLevel = function () {
+    this.level++;
+}
+
+Entity.prototype.checkWallCollision = function (wallX, wallY, newX, newY) {
+    if (this.position.x >= wallX) {
+        this.position.x = newX;
+    } else if (this.position.y >= wallY) {
+        this.position.y = newY;
+    }
+}
+
+/*Enemy*/
+
 const Enemy = function (x, y, speed, sprite, player) {
     Entity.call(this, x, y, speed, sprite);
     this.player = player;
@@ -25,35 +39,30 @@ const Enemy = function (x, y, speed, sprite, player) {
 Enemy.prototype = Object.create(Entity.prototype);
 Enemy.prototype.update = function (dt) {
     this.position.x += this.speed * dt * (this.level * 0.8);
-    if (this.position.x >= canvas.width) {
-        this.position.x = -90;
-    }
-    let lose = this.checkCollision();
-    if (lose) {
-        player.enemies.forEach(enemy => enemy.level = 1);
-    }
-    this.increaseLevel();
+    this.checkWallCollision(canvas.width, canvas.height, -90, 0);
+    this.checkLose();
 }
+
 Enemy.prototype.checkCollision = function () {
     let positionX = Math.floor(this.position.x);
     if (positionX - 50 < player.position.x && player.position.x < positionX + 50) {
         if (this.position.y - 55 < player.position.y && player.position.y < this.position.y + 20) {
             alert(`You lose!\nYour level is ${this.player.level}`);
-            player.restartPosition();
-            player.level = 1;
             return true;
         }
     }
     return false;
 }
-
-Enemy.prototype.increaseLevel = function () {
-
-    if (this.player.level != this.level) {
-        this.level++;
+Enemy.prototype.checkLose = function () {
+    let lose = this.checkCollision();
+    if (lose) {
+        player.restartPosition();
+        player.level = 1;
+        player.enemies.forEach(enemy => enemy.level = 1);
     }
 }
 
+/*Player*/
 
 const Player = function (x, y, speed, sprite) {
     Entity.call(this, x, y, speed, sprite);
@@ -66,10 +75,12 @@ Player.prototype.update = function () {
     this.checkWin();
     this.checkWallCollision();
 }
+
 Player.prototype.checkWin = function () {
     if (this.position.y < -10) {
         alert(`You win!\nYour level is ${this.level}`);
-        this.level++;
+        this.increaseLevel();
+        this.enemies.forEach(enemy => enemy.increaseLevel());
         this.restartPosition();
     }
 }
@@ -79,12 +90,9 @@ Player.prototype.restartPosition = function () {
 }
 
 Player.prototype.checkWallCollision = function () {
+    Entity.prototype.checkWallCollision.bind(this)(canvas.width - 80, canvas.height - 5, canvas.width - 85, canvas.height - 5);
     if (this.position.x < -30) {
         this.position.x = -20;
-    } else if (this.position.x > canvas.width - 80) {
-        this.position.x = canvas.width - 85;
-    } else if (this.position.y > canvas.height - 5) {
-        this.position.y = canvas.height - 5;
     }
 }
 
