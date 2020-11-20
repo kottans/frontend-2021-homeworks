@@ -2,48 +2,45 @@ import creatures from './tower.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   const navigation = document.getElementById('navigation');
+  const navList = document.getElementById('nav-list');
   const main = document.getElementById('main');
   const buttonText = document.getElementById('button-text');
 
+  navList.innerHTML = createMenuItems(creatures);
+
   navigation.addEventListener('click', (e) => {
-    if (e.target.classList.contains('nav-item')) {
-      buttonText.textContent = e.target.textContent;
+    e.preventDefault();
 
-      // main.innerHTML = '';
-      let desc = main.getElementsByClassName('description');
-      if (desc.length) {
-        desc[0].remove();
-      }
-      let newDesc = createDescription(e.target.textContent, creatures);
-      main.appendChild(newDesc);
-      // main.insertAdjacentElement('beforeend', newDesc);
+    if (e.target.classList.contains('nav-link')) {
+      const item = e.target.parentElement;
+      const name = item.firstElementChild.textContent;
+      buttonText.textContent = name;
+      main.innerHTML = createDescription(name, creatures);
 
-      let active = navigation.getElementsByClassName('active');
+      const active = navigation.getElementsByClassName('active');
       if (active.length) {
         active[0].classList.remove('active');
       }
-      e.target.classList.add('active');
+      item.classList.add('active');
     }
   });
 
+  function createMenuItems(data) {
+    const items = data.map(
+      ({ name }) =>
+        `<li class="nav-item"><a href="" class="nav-link">${name}</a></li>`
+    );
+    return items.join('');
+  }
+
   function createDescription(creatureName, creatures) {
-    const creature = creatures.find((c) => {
-      return c.name === creatureName;
-    });
-
-    const newDescription = document.createElement('div');
-    newDescription.classList.add('description');
-
-    const image = document.createElement('img');
-    image.src = creature.imageUrl;
-    image.alt = creature.name;
-    image.classList.add('description-image');
-    newDescription.appendChild(image);
-
-    const text = document.createElement('p');
-    text.textContent = creature.description;
-    text.classList.add('description-text');
-    newDescription.appendChild(text);
+    const creature = creatures.find(({ name }) => name === creatureName);
+    const image = `<img class="description-image"
+      src="${creature.imageUrl}"
+      alt="${creature.name}"
+    />`;
+    const text = `<p class="description-text">${creature.description}</p>`;
+    const newDescription = `<div class="description">${image} ${text}</div>`;
 
     return newDescription;
   }

@@ -42,21 +42,27 @@ body {
 }
 
 .nav-item {
-  margin: 10px 0px;
-  padding: 5px 10px;
-  border-radius: 5px;
+  margin: 10px;
   position: relative;
 }
 
-.nav-item:hover {
+.nav-link {
+  color: initial;
+  text-decoration: none;
+  display: block;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.nav-link:hover {
   background-color: rgba(255, 255, 255, 0.5);
 }
 
-.nav-item:focus {
+.nav-link:focus {
   box-shadow: 0 0 3px 3px #000080;
 }
 
-.nav-item:active {
+.nav-link:active {
   background-color: rgba(255, 255, 255, 0.9);
 }
 
@@ -120,13 +126,6 @@ body {
     position: absolute;
     width: 100%;
     top: 100%;
-  }
-
-  .nav-item {
-    margin: 0px;
-    padding: 5px 10px;
-    width: 100%;
-    box-sizing: border-box;
   }
 
   .navigation:hover .nav-list {
