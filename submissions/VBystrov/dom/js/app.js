@@ -12,36 +12,38 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault();
 
     if (e.target.classList.contains('nav-link')) {
-      const item = e.target.parentElement;
-      const name = item.firstElementChild.textContent;
-      buttonText.textContent = name;
-      main.innerHTML = createDescription(name, creatures);
+      const navItem = e.target.closest('.nav-item');
+      const creatureName = navItem.querySelector('.nav-link').textContent;
+      buttonText.textContent = creatureName;
+      main.innerHTML = createDescription(creatureName, creatures);
 
-      const active = navigation.getElementsByClassName('active');
+      const active = navList.getElementsByClassName('active');
       if (active.length) {
         active[0].classList.remove('active');
       }
-      item.classList.add('active');
+      navItem.classList.add('active');
     }
   });
 
-  function createMenuItems(data) {
-    const items = data.map(
+  function createMenuItems(creatures) {
+    const menuItems = creatures.map(
       ({ name }) =>
         `<li class="nav-item"><a href="" class="nav-link">${name}</a></li>`
     );
-    return items.join('');
+    return menuItems.join('');
   }
 
   function createDescription(creatureName, creatures) {
     const creature = creatures.find(({ name }) => name === creatureName);
-    const image = `<img class="description-image"
-      src="${creature.imageUrl}"
-      alt="${creature.name}"
-    />`;
-    const text = `<p class="description-text">${creature.description}</p>`;
-    const newDescription = `<div class="description">${image} ${text}</div>`;
+    if (!creature) return;
+    const { imageUrl, name, description } = creature;
 
-    return newDescription;
+    return `<div class="description">
+      <img class="description-image"
+        src="${imageUrl}"
+        alt="${name}"
+      /> 
+      <p class="description-text">${description}</p>
+    </div>`;
   }
 });
