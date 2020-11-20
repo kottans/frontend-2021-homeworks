@@ -2,107 +2,51 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hooli-style Popup</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<header>
     <nav>
         <ul class="menu">
-            <li>Mail</li>
-            <li>Images</li>
-        </ul>
-        <div class="popup">
-            <img class="popup-icon" src="icons/popup-button.png">
-            <div class="popup-container">
+            <li><a href="#" class="nav-text">Mail</a></li>
+            <li><a href="#" class="nav-text">Images</a></li>
+            <li><div class="popup">
+                <img class="popup-icon" src="icons/popup-button.png" alt="popup">
+                <div class="popup-container">
                     <div class="arrow"></div>
-                    <div class="popup-items">
-                        <div class="popup-item">
-                            <img class="popup-item-icon" src="icons/calendar.png" alt="calendar">
-                            <span>Calendar</span>
-                        </div>
-                        <div class="popup-item">
-                            <img class="popup-item-icon" src="icons/mail.png" alt="mail">
-                            <span>Mail</span>
-                        </div>
-                        <div class="popup-item">
-                            <img class="popup-item-icon" src="icons/news.png" alt="news">
-                            <span>News</span>
-                        </div>
-                        <div class="popup-item">
-                            <img class="popup-item-icon" src="icons/maps.png" alt="map">
-                            <span>Map</span>
-                        </div>
-                        <div class="popup-item">
-                            <img class="popup-item-icon" src="icons/files.png" alt="apps">
-                            <span>Files</span>
-                        </div>
-                        <div class="popup-item">
-                            <img class="popup-item-icon" src="icons/contacts.png" alt="apps">
-                            <span>Contacts</span>
-                        </div>
-                        <div class="popup-item">
-                            <img class="popup-item-icon" src="icons/translation.png" alt="apps">
-                            <span>Translate</span>
-                        </div>
-                        <div class="popup-item">
-                            <img class="popup-item-icon" src="icons/videos.png" alt="apps">
-                            <span>Videos</span>
-                        </div>
-                        <div class="popup-item">
-                            <img class="popup-item-icon" src="icons/search.png" alt="apps">
-                            <span>Search</span>
-                        </div>
-                        <div class="popup-item">
-                            <img class="popup-item-icon" src="icons/photos.png" alt="apps">
-                            <span>Photo</span>
-                        </div>
-                        <div class="popup-item">
-                            <img class="popup-item-icon" src="icons/apps.png" alt="apps">
-                            <span>Apps</span>
-                        </div>
-                        <div class="popup-item">
-                            <img class="popup-item-icon" src="icons/documents.png" alt="apps">
-                            <span>Document</span>
-                        </div>
-                    </div>
-                <div class="more-open">
-                    <div class="more-text">More</div>
-                    <div class="more">
-                        <div class="more-item">
-                            <img class="more-item-icon" src="icons/chat.png" alt="photos">
-                            <span>Chat</span>
-                        </div>
-                        <div class="more-item">
-                            <img class="more-item-icon" src="icons/classroom.png" alt="photos">
-                            <span>Classroom</span>
-                        </div>
-                        <div class="more-item">
-                            <img class="more-item-icon" src="icons/collection.png" alt="photos">
-                            <span>Collection</span>
-                        </div>
-                        <div class="more-item">
-                            <img class="more-item-icon" src="icons/mars.png" alt="photos">
-                            <span>Mars</span>
-                        </div>
-                        <div class="more-item">
-                            <img class="more-item-icon" src="icons/blogs.png" alt="photos">
-                            <span>Blogs</span>
-                        </div>
-                        <div class="more-item">
-                            <img class="more-item-icon" src="icons/promo.png" alt="photos">
-                            <span>Promos</span>
-                        </div>
-                        <div class="more-last-item">
-                            <a href="https://kottans.org/" class="kottans">Even more from Kottans</a>
-                        </div>
-                    </div>
+                    <ul class="popup-items">
+                        <li class="pop-item"><a href="#" class="popup-item"><img class="popup-item-icon" src="icons/calendar.png" alt="calendar">Calendar</a></li>
+                        <li class="pop-item"><a href="#" class="popup-item"><img class="popup-item-icon" src="icons/mail.png" alt="mail">Mail</a></li>
+                        <li class="pop-item"><a href="#" class="popup-item"><img class="popup-item-icon" src="icons/news.png" alt="news">News</a></li>
+                        <li class="pop-item"><a href="#" class="popup-item"><img class="popup-item-icon" src="icons/maps.png" alt="map">Map</a></li>
+                        <li class="pop-item"><a href="#" class="popup-item"><img class="popup-item-icon" src="icons/files.png" alt="files">Files</a></li>
+                        <li class="pop-item"><a href="#" class="popup-item"><img class="popup-item-icon" src="icons/contacts.png" alt="contacts">Contacts</a></li>
+                        <li class="pop-item"><a href="#" class="popup-item"><img class="popup-item-icon" src="icons/translation.png" alt="translate">Translate</a></li>
+                        <li class="pop-item"><a href="#" class="popup-item"><img class="popup-item-icon" src="icons/videos.png" alt="videos">Videos</a></li>
+                        <li class="pop-item"><a href="#" class="popup-item"><img class="popup-item-icon" src="icons/search.png" alt="search">Search</a></li>
+                        <li class="pop-item"><a href="#" class="popup-item"><img class="popup-item-icon" src="icons/photos.png" alt="photo">Photo</a></li>
+                        <li class="pop-item"><a href="#" class="popup-item"><img class="popup-item-icon" src="icons/apps.png" alt="apps">Apps</a></li>
+                        <li class="pop-item"><a href="#" class="popup-item"><img class="popup-item-icon" src="icons/documents.png" alt="documents">Docs</a></li>
+                    </ul>
+                <div class="more-hidden">
+                    <a href="#" class="more-text">More</a>
+                    <ul class="more">
+                        <li class="pop-item"><a href="#" class="more-item"><img class="more-item-icon" src="icons/chat.png" alt="chat">Chat</a></li>
+                        <li class="pop-item"><a href="#" class="more-item"><img class="more-item-icon" src="icons/classroom.png" alt="classroom">Classroom</a></li>
+                        <li class="pop-item"><a href="#" class="more-item"><img class="more-item-icon" src="icons/collection.png" alt="collection">Collection</a></li>
+                        <li class="pop-item"><a href="#" class="more-item"><img class="more-item-icon" src="icons/mars.png" alt="mars">Mars</a></li>
+                        <li class="pop-item"><a href="#" class="more-item"><img class="more-item-icon" src="icons/blogs.png" alt="blogs">Blogs</a></li>
+                        <li class="pop-item"><a href="#" class="more-item"><img class="more-item-icon" src="icons/promo.png" alt="promos">Promos</a></li>
+                        <li><a href="https://kottans.org/" class="more-last-item kottans">Even more from Kottans</a></li>
+                    </ul>
                 </div>
             </div>
-        </div>
-            <img class="icon" src="icons/bell.png">
-            <img  class="avatar" width="24" height="24" src="icons/avatar.png">
+            </div></li>
+            <li><a href="#" class="icon"><img src="icons/bell.png" alt="bell"></a></li>
+            <li><a href="#" class="avatar"><img src="icons/avatar.png" alt="avatar"></a></li>
+        </ul>
     </nav>
-</header>
 </body>
 </html>
