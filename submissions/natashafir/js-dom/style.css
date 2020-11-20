@@ -66,6 +66,7 @@ img {
 
 .btn:hover {
     color: #d0d5d8;
+    cursor: pointer;
 }
 
 .btn:focus {
