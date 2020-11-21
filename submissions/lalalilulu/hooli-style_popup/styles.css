@@ -32,7 +32,9 @@
 
 .main-popup {
     position: absolute;
-    opacity: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
 
 .popup_open {
@@ -72,7 +74,7 @@ a{
     color: #4a4d4f;
 }
 
-a:focus {
+a:focus, a:hover {
     border: 1px solid #c6cccf;
     outline-style: none;
 }
@@ -91,8 +93,8 @@ a:focus {
     display: none;
     position: fixed;
     top: 6%;
-    left: 83%;
-    width: 14%;
+    left: 82%;
+    width: 15%;
     height: 380px;
     background-color: #fff;
     border: 1px solid #c6cccf;
@@ -102,7 +104,7 @@ a:focus {
     overflow: auto;
 }
 
-li > input:checked ~ .popup-container {
+.main-popup:checked ~ .popup-container {
     display: block;
 }
 
@@ -125,7 +127,10 @@ li > input:checked ~ .popup-container {
 }
 
 .more-popup {
-    opacity: 0;
+    position: absolute;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
 
 .more-hidden {
@@ -155,9 +160,10 @@ li > input:checked ~ .popup-container {
 
 .popup-item,
 .more-item {
-    width: 45px;
-    height: 45px;
-    margin: 15px;
+    width: 50px;
+    height: 50px;
+    margin: 8px;
+    padding: 12px;
 }
 
 .popup-item-icon,
@@ -168,17 +174,12 @@ li > input:checked ~ .popup-container {
     margin: 0;
 }
 
-.pop-item:hover {
-    border: 1px solid #c6cccf;
-}
-
 .more-last-item {
     width: 100%;
-    height: 30px;
     margin-top: 20px;
 }
 
-/* custon scrollbar */
+/* custom scrollbar */
 ::-webkit-scrollbar {
     width: 8px;
 }
