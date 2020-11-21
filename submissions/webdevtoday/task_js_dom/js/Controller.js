@@ -11,8 +11,10 @@ export class Controller {
             this.renderInstance.render( `<h1>404 Page Not Found</h1>` );
             return false;
         }
-        controllerName = controllerName[0].toUpperCase() + controllerName.slice(1).toLowerCase();
-        import(`./controllers/${controllerName}Controller.js`)
+        const firstUpperCaseLetter = controllerName[0].toUpperCase();
+        const restLowerCaseLetters = controllerName.slice(1).toLowerCase();
+        const firstPartControllerName = firstUpperCaseLetter + restLowerCaseLetters;
+        import(`./controllers/${firstPartControllerName}Controller.js`)
             .then(controller => {
                 const content = new controller.default();
                 this.renderInstance.render(content.get());
