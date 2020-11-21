@@ -20,8 +20,8 @@ export class Controller {
                 this.renderInstance.render(content.get());
             })
             .catch(err => {
-                console.log('catch');
-                console.log(err);
+                console.error('Catch: A Controller is not found!');
+                console.error(err);
                 this.renderInstance.render( `<h1>404 Page Not Found</h1>` );
             });
     }
