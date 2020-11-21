@@ -14,7 +14,6 @@ export class Controller {
         controllerName = controllerName[0].toUpperCase() + controllerName.slice(1).toLowerCase();
         import(`./controllers/${controllerName}Controller.js`)
             .then(controller => {
-                console.log('then');
                 const content = new controller.default();
                 this.renderInstance.render(content.get());
             })
