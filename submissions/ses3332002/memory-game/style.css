@@ -241,12 +241,12 @@ option {
   transform: rotateX(180deg);
 }
 
-.card__back-flip {
-  transform: rotateX(0deg) !important;
+.card-flip .card__front {
+  transform: rotateX(-180deg) !important;
 }
 
-.card__front-flip {
-  transform: rotateX(-180deg) !important;
+.card-flip .card__back {
+  transform: rotateX(0deg) !important;
 }
 
 .card-vanish {

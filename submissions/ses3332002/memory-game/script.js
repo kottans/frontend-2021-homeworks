@@ -98,46 +98,45 @@
       return;
     };
     
-    flipCard.call(target);
+    flipCard(target);
     setTimeout(function() {
       if (!cardSelected) {
         cardSelected = cardsArray.indexOf(target) + 1;
-        lockCard.call(target);
+        lockCard(target);
       } else if ((numbersArray[cardSelected - 1] == numbersArray[cardsArray.indexOf(target)])&&(cardSelected - 1 != cardsArray.indexOf(target))) {
-        vanishCard.call(cardsArray[cardSelected - 1]);
-        vanishCard.call(target);
+        vanishCard(cardsArray[cardSelected - 1]);
+        vanishCard(target);
         cardSelected = "";
         matchedCounter++;
         if (matchedCounter == sizeSelector.value/2) {
           hailWinner();
         };
       } else {
-        flipCard.call(cardsArray[cardSelected - 1]);
-        unlockCard.call(cardsArray[cardSelected - 1])
+        flipCard(cardsArray[cardSelected - 1]);
+        unlockCard(cardsArray[cardSelected - 1])
         cardSelected = "";      
-        flipCard.call(target);
+        flipCard(target);
       };
     }, animationDelay);
   };
   
-  function vanishCard() {
-    this.classList.add("card-vanish");
-    this.setAttribute("tabindex", "-1");
+  function vanishCard(target) {
+    target.classList.add("card-vanish");
+    target.setAttribute("tabindex", "-1");
   };
   
-  function flipCard() {
-    this.firstElementChild.classList.toggle("card__front-flip");
-    this.lastElementChild.classList.toggle("card__back-flip");
+  function flipCard(target) {
+    target.classList.toggle("card-flip");
   };
   
-  function lockCard() {
-    this.classList.add("card-locked");
-    this.setAttribute("disabled", "true");
+  function lockCard(target) {
+    target.classList.add("card-locked");
+    target.setAttribute("disabled", "true");
   };
   
-  function unlockCard() {
-    this.classList.remove("card-locked");
-    this.removeAttribute("disabled");
+  function unlockCard(target) {
+    target.classList.remove("card-locked");
+    target.removeAttribute("disabled");
   };
 
   function hailWinner() {
