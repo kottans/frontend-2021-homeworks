@@ -16,3 +16,4 @@ export class Route {
         this.controller.get( this.get(route) );
     }
 }
+

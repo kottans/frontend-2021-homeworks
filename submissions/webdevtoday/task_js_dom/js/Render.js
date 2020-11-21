@@ -7,3 +7,4 @@ export class Render {
         this.main.innerHTML = content;
     }
 }
+

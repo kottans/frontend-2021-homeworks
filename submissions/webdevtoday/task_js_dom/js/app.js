@@ -33,3 +33,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     updatestate({page: location.hash});
 });
+
