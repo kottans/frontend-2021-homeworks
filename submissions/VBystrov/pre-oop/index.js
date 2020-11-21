@@ -58,6 +58,8 @@ const catWoman = {
   saying: cat.saying,
 };
 
+const creatures = [dog, cat, woman, man, catWoman];
+
 // ======== OUTPUT ========
 /* Use print(message) for output.
    Default tag for message is <pre>. Use print(message,'div') to change containing element tag.
@@ -67,21 +69,21 @@ const catWoman = {
    so code reviewers might focus on a single file that is index.js.
    */
 
-print(
-  `${dog.species}; ${dog.name}; ${dog.gender}; ${dog.legs}; ${dog.hands}; ${dog.saying}; ${dog.friends};`
-);
-print(
-  `${cat.species}; ${cat.name}; ${cat.gender}; ${cat.legs}; ${cat.hands}; ${cat.saying}; ${cat.friends};`
-);
-print(
-  `${woman.species}; ${woman.name}; ${woman.gender}; ${woman.legs}; ${woman.hands}; ${woman.saying}; ${woman.friends};`
-);
-print(
-  `${man.species}; ${man.name}; ${man.gender}; ${man.legs}; ${man.hands}; ${man.saying}; ${man.friends};`
-);
-print(
-  `${catWoman.species}; ${catWoman.name}; ${catWoman.gender}; ${catWoman.legs}; ${catWoman.hands}; ${catWoman.saying}; ${catWoman.friends};`
-);
+const getTemplate = ({
+  species,
+  name,
+  gender,
+  legs,
+  hands,
+  friends,
+  saying,
+}) => {
+  return `${species}; ${name}; ${gender}; ${legs}; ${hands}; ${saying}; ${friends};`;
+};
+
+creatures.forEach((creature) => {
+  print(getTemplate(creature));
+});
 
 /* Print examples:
    print('ABC');
