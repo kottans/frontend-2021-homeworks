@@ -314,3 +314,7 @@ a {
 .popup_hail-hide {
   display: none;
 }
+
+.card-locked {
+  pointer-events: none;
+}
