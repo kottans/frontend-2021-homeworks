@@ -69,16 +69,19 @@ const creatures = [dog, cat, woman, man, catWoman];
    so code reviewers might focus on a single file that is index.js.
    */
 
-const getTemplate = ({
-  species,
-  name,
-  gender,
-  legs,
-  hands,
-  friends,
-  saying,
-}) => {
-  return `${species}; ${name}; ${gender}; ${legs}; ${hands}; ${saying}; ${friends};`;
+const getTemplate = (creature) => {
+  let template = '';
+
+  for (let key in creature) {
+    if (Array.isArray(creature[key]) && !creature[key].length) {
+      continue;
+    }
+    if (creature[key]) {
+      template += `${key}: ${creature[key]}; `;
+    }
+  }
+
+  return template;
 };
 
 creatures.forEach((creature) => {
