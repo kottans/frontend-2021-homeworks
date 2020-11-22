@@ -39,12 +39,8 @@ class Inhabitant {
 class Primate extends Inhabitant {
    constructor(species, saying, gender, name, ...friends){
       super(species, saying, gender, name, friends);
-      this.hands = 2;
       this.legs = 2;
-   }
-
-   toString(){
-      return super.toString() + `, legs: ${this.legs}, hands: ${this.hands}`;
+      this.hands = 2;
    }
 }
 
@@ -71,10 +67,6 @@ class Predator extends Inhabitant {
       super(species, saying, gender, name, friends);
       this.legs = 4;
    }
-
-   toString(){
-      return super.toString() + `, legs: ${this.legs}`;
-   }
 }
 
 class Dog extends Predator {
@@ -95,10 +87,6 @@ class CatWoman extends Cat {
       this.species = 'human';
       this.hands = 2;
       this.legs = 2;
-   }
-
-   toString(){
-      return super.toString() + `, hands: ${this.hands}`;
    }
 }
 
