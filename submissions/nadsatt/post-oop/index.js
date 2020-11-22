@@ -32,7 +32,7 @@ class Inhabitant {
    }
 
    toString(){
-      return `species: ${this.species}, saying: ${this.saying}, gender: ${this.gender}, name: ${this.name}, friends: ${this.friendsManager.getFriends()}`;
+      return Object.entries(this).slice(1).map(([key, value]) => `${key}: ${value}`).join(', ') + `, friends: ${this.friendsManager.getFriends()}`;
    }
 }
 
