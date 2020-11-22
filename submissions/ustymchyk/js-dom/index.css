@@ -1,0 +1,209 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --grey: #263238;
+  --yellow: rgb(247, 202, 75);
+  --blue: rgb(64, 98, 163);
+}
+
+.body {
+  display: grid;
+  grid-template-areas: 
+    'header header'
+    'menu main';
+  grid-template-columns: minmax(250px, 20%) 1fr;
+  grid-template-rows: 140px 1fr;
+
+  margin: 0;
+  min-height: 100vh;
+}
+
+@media (max-width: 769px) {
+  .body {
+    grid-template-areas:
+        'main'
+        'header';
+    grid-template-columns: 1fr;
+    grid-template-rows: calc(100vh - 80px) 80px;
+  }
+}
+
+
+/* Header */
+
+
+.header {
+  grid-area: header;
+
+  display: flex;
+
+  background: 
+    url(https://raw.githubusercontent.com/PokeAPI/media/master/logo/pokeapi_256.png)
+    var(--grey) center / auto calc(100% - 40px) no-repeat;
+}
+
+.header__btn {
+  display: none;
+
+
+  width: 50%;
+  height: 80%;
+  margin: auto;
+
+  border: none;
+  background: none;
+}
+
+@media (max-width: 769px) { 
+  .header__btn {
+    display: block;
+  }
+}
+
+
+/* Menu */
+
+
+.menu {
+  grid-area: menu;
+  background-color: var(--grey);
+}
+
+@media (max-width: 769px) {
+  .menu {
+    position: fixed;
+    bottom: 80px;
+
+    width: 100%;
+  }
+
+  .menu:not(.open) {
+    display: none;
+  }
+}
+
+.menu__list {
+  display: flex;
+  flex-direction: column;
+
+  padding: 0;
+  margin: 0;
+
+  list-style: none;
+}
+
+.menu__item {
+  width: 100%;
+  padding: 15px 0 15px 35px;
+
+  font-size: 20px;
+  font-family: 'Press Start 2P', cursive;
+  text-align: left;
+  text-transform: uppercase;
+  color: var(--yellow);
+
+  border: none;
+  background-color: transparent;
+  background-image: linear-gradient(var(--yellow), var(--yellow));
+  background-size: 0 100%;
+  background-repeat: no-repeat;
+  
+  transition: .3s background-size;
+
+  cursor: pointer;
+}
+
+@media (max-width: 769px) { 
+  .menu__item {
+    padding-left: 0;
+
+    text-align: center;
+  }
+}
+
+
+.menu__item:hover,
+.menu__item:focus {
+  outline: none;
+  background-size: 10px 100%;
+}
+
+.menu__item.active {
+  background-size: 100% 100%;
+  color: var(--grey);
+}
+
+
+/* MAIN */
+
+.main {
+  grid-area: main;
+
+  background: var(--grey);
+
+  overflow-y: scroll;
+}
+
+.main__list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px 20px 20px;
+
+  list-style: none;
+}
+
+@media (max-width: 1200px) {
+  .main__list {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 769px) {
+  .main__list {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+}
+
+
+/* CARD */
+
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 20px;
+
+  font-family: 'Press Start 2P', cursive;
+  font-size: 18px;
+  text-transform: uppercase;
+  color: var(--yellow);
+
+  border: 5px solid var(--yellow);
+}
+
+.card__title {
+  font-size: 24px;
+}
+
+.card__list {
+  padding: 0;
+  width: 100%;
+}
+
+.card__list-item {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card img {
+  max-width: 100%;
+}
