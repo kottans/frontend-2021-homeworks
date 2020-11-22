@@ -18,19 +18,20 @@ class Mammal {
       this.saying = saying;
    }
 
-   tellAbout() {
-      const properties = ['species', 'name', 'gender']; //all mammals have this properties
-      for (let property in this) {
-         if (!properties.includes(property))
-            properties.push(property);
-      }
-      return properties.map(property => `<b>${property}:</b> ${this[property]}`).join('\t');
+   tellAbout(properties) {
+      let propertiesForDispaly = properties || ['species', 'name', 'gender', 'legs', 'friends', 'saying'];
+      return propertiesForDispaly.map(property => `<b>${property}:</b> ${this[property]}`).join('\t');
    }
 };
 
 class Dog extends Mammal {
    constructor(name, gender, friends, saying) {
       super('dog', name, gender, 4, friends, saying || 'guf');
+   }
+
+   tellAbout() {
+      let properties = ['name', 'species', 'friends']; /* properties for display */
+      return super.tellAbout(properties);
    }
 };
 
@@ -39,8 +40,13 @@ class Cat extends Mammal {
       super('cat', name, gender, 4, friends, saying || 'meow');
    }
 
-   getSaying() {
-      return this.saying || 'meow';
+   tellAbout() {
+      let properties = ['species', 'name', 'gender', 'legs', 'friends', 'saying']; /* properties for display */
+      return super.tellAbout(properties);
+   }
+
+   get getSaying() {
+      return this.saying;
    }
 }
 
@@ -50,11 +56,19 @@ class Human extends Mammal {
       this.hands = 2;
       this.saying = saying || `Hello! My name is ${this.name}`;
    }
+   tellAbout() {
+      let childProperties = arguments[0]; /* array of properties for display from child if it exists*/
+      let properties = ['species', 'name', 'gender', 'legs', 'hands', 'friends', 'saying']; /* properties for display */
+      return super.tellAbout(childProperties || properties);
+   }
 }
 
 class Woman extends Human {
    constructor(name, friends, saying) {
       super(name, 'female', friends, saying);
+   }
+   tellAbout() {
+      return super.tellAbout(); /* You can also add array of property to display them */
    }
 }
 
@@ -62,13 +76,20 @@ class Man extends Human {
    constructor(name, friends, saying) {
       super(name, 'male', friends, saying);
    }
+   tellAbout() {
+      let properties = ['name', 'friends', 'saying'];
+      return super.tellAbout(properties);
+   }
 }
 
 class CatWoman extends Woman {
    constructor(name, friends) {
-      super(name, friends, Cat.prototype.getSaying());
+      super(name, friends, 'meow', Cat.prototype.getSaying);
    }
-};
+   tellAbout() {
+      return super.tellAbout();
+   }
+}
 
 const cat = new Cat('Murzic', 'male', ['Elza', 'Nicky']);
 const dog = new Dog('Lucy', 'female', ['Alla', 'Dima'], 'guffyy');
@@ -76,7 +97,7 @@ const man = new Man('Vlad', ['Sergay', 'Anton'], 'Hello everyone!');
 const woman = new Woman('Anna', ['Sergay', 'Artem']);
 const catWoman = new CatWoman('Lily', ['Batman']);
 
-const inhabitants = [man, woman, cat, dog, catWoman];
+const inhabitants = [cat, dog, man, woman, catWoman];
 
 let output = inhabitants.map(inhabitant => inhabitant.tellAbout()).join('\n');
 
