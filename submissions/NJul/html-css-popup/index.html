@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" href="./img/favicon.ico" />
+  <title>Hooli-style Popup</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <section class="background">
+    <header>
+      <nav class="navbar flex-horizontal-right">
+
+        <ul class="navbar__list">
+          <li class="navbar__item navbar__item--my-cat">
+
+            <input type="checkbox" id="my-cat-checkbox">
+            <!--del label tabindex attribute-->
+            <label for="my-cat-checkbox" class="menu-toggler">
+              <span class="popup-button">My cat</span>
+            </label>
+
+
+            <ul id="sub-navbar__list--1" class="sub-navbar__list sub-navbar__list--1">
+              <li class="sub-navbar__item">
+                <a href="#" class="sub-navbar__link">Sub cat 1</a>
+              </li>
+              <li class="sub-navbar__item">
+                <a href="#" class="sub-navbar__link">Sub cat 2</a>
+              </li>
+              <li class="sub-navbar__item">
+                <a href="#" class="sub-navbar__link">Sub cat 3</a>
+              </li>
+              <li class="sub-navbar__item">
+                <a href="#" class="sub-navbar__link">Sub cat 4</a>
+              </li>
+            </ul>
+
+          </li>
+
+          <li class="navbar__item">
+            <a href="https://github.com/NJul/kottans-frontend" target="_blank"
+              class="navbar__link popup-button">Frontend</a>
+          </li>
+
+          <li class="navbar__item navbar__item--popup">
+
+            <!--put <input> upper than <label></label>
+                del label tabindex attribute-->
+            <input type="checkbox" id="my-checkbox" class="menu__item-input">
+            <label for="my-checkbox" class="menu-toggler">
+              <img src="./img/popup-button.png" alt="Popup button" class="popup-button-img popup-button-img--checkbox">
+            </label>
+
+            <ul class="menu__submenu">
+              <li class="submenu__item">
+                <a class="submenu__link" href="https://icons8.ru/icons/set/%D0%BA%D0%BE%D1%82" target="_blank">
+                  <img src="./img/popup-icons/cat-1.png" alt="Cats images">
+                  <span class="menu__link-text">Cats images</span>
+                </a>
+              </li>
+              <li class="submenu__item">
+                <a class="submenu__link" href="#">
+                  <img src="./img/popup-icons/cat-2.png" alt="Cat-2">
+                  Cat-2
+                </a>
+              </li>
+              <li class="submenu__item">
+                <a class="submenu__link" href="https://github.com/eve5ince" target="_blank">
+                  <img src="./img/popup-icons/cat-3.png" alt="eve5ince">
+                  <span class="menu__link-text">eve5ince</span>
+                </a>
+              </li>
+              <li class="submenu__item">
+                <a class="submenu__link" href="#">
+                  <img src="./img/popup-icons/cat-4.png" alt="Cat-4">
+                  Cat-4
+                </a>
+              </li>
+              <li class="submenu__item">
+                <a class="submenu__link" href="#">
+                  <img src="./img/popup-icons/cat-5.png" alt="Cat-5">
+                  Cat-5
+                </a>
+              </li>
+              <li class="submenu__item">
+                <a class="submenu__link" href="#">
+                  <img src="./img/popup-icons/black-cat-1.png" alt="black-cat-1">
+                  Black-cat-1
+                </a>
+              </li>
+              <li class="submenu__item">
+                <a class="submenu__link" href="#">
+                  <img src="./img/popup-icons/black-cat-2.png" alt="black-cat-2">
+                  Black-cat-2
+                </a>
+              </li>
+              <li class="submenu__item">
+                <a class="submenu__link" href="#">
+                  <img src="./img/popup-icons/kitty.png" alt="kitty">
+                  Kitty
+                </a>
+              </li>
+              <li class="submenu__item">
+                <a class="submenu__link" href="#">
+                  <img src="./img/popup-icons/black-cat.png" alt="black-cat">
+                  Black-cat
+                </a>
+              </li>
+              <li class="submenu__item">
+                <a class="submenu__link" href="#">
+                  <img src="./img/popup-icons/meowth.png" alt="meowth">
+                  Meowth
+                </a>
+              </li>
+              <li class="submenu__item">
+                <a class="submenu__link" href="#">
+                  <img src="./img/popup-icons/cat.png" alt="cat">
+                  Cat
+                </a>
+              </li>
+              <li class="submenu__item">
+                <a class="submenu__link" href="#">
+                  <img src="./img/popup-icons/grinning-cat-emoji.png" alt="grinning-cat-emoji">
+                  Grinning cat emoji
+                </a>
+              </li>
+
+              <li class="submenu__item-hidden">
+                <input type="checkbox" id="submenu__input" class="submenu__item-input" />
+                <label for="submenu__input" class="submenu__item-label">More</label>
+
+                <ul class="submenu__extramenu">
+                  <li class="extramenu__item">
+                    <a class="extramenu__link" href="#">
+                      <img src="./img/popup-icons/grinning-cat-with-smiling-eyes.png"
+                        alt="grinning-cat-with-smiling-eyes">
+                      Grinning cat with smiling eyes
+                    </a>
+                  </li>
+                  <li class="extramenu__item">
+                    <a class="extramenu__link" href="#">
+                      <img src="./img/popup-icons/kitty-1.png" alt="kitty-1">
+                      Kitty-1
+                    </a>
+                  </li>
+                  <li class="extramenu__item">
+                    <a class="extramenu__link" href="#">
+                      <img src="./img/popup-icons/weary-cat.png" alt="weary-cat">
+                      Weary cat
+                    </a>
+                  </li>
+              </li>
+              <li class="extramenu__item-link">
+                <a href="https://kottans.org/" class="extramenu__extralink" target="_blank">
+                  even more from Kottans
+                </a>
+              </li>
+            </ul>
+        </ul>
+        </li>
+
+        <li class="navbar__item">
+          <a href="#" class="navbar__link">
+            <img src="./img/bell.png" alt="Bell" class="popup-button-img">
+          </a>
+        </li>
+        <li class="navbar__item">
+          <a href="https://github.com/kottans/mock-repo" class="navbar__link" target="_blank">
+            <img src="./img/kottans.png" alt="Kottans button" class="popup-button-img">
+          </a>
+        </li>
+        </ul>
+
+      </nav>
+    </header>
+  </section>
+</body>
+
+</html>
