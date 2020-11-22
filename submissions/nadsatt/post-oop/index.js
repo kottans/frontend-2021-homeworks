@@ -131,4 +131,4 @@ const inhabitants = [
    so code reviewers might focus on a single file that is index.js.
 */
 
-inhabitants.forEach(inhabitant => print(inhabitant.toString()));
+inhabitants.forEach(inhabitant => print(inhabitant));
