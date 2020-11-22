@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap" rel="stylesheet">
+    <!-- Styles -->
+    <link rel="stylesheet" type="text/css" href="styles/normalize.css" />
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+
+<body>
+
+    <div class="intro">
+        <div class="header">
+            <div class="header__title">HTML & CSS Practice</div>
+            <p class="intro__footer intro__footer-mobile">Icon by <a class="intro__footerLink"
+                    href="https://www.flaticon.com/free-icon/maps_1673429?term=map&page=2&position=8&related_item_id=1673429"
+                    target="_blank">Flaticon</a>
+            </p>
+            <div class="header__menu">
+                <a class="header__menuLink" href="#">Mail</a>
+                <a class="header__menuLink" href="#">Images</a>
+
+                <div class="header__menuLinkBtn header__dropdownContainer">
+                    <input class="header__menuBtn" type="checkbox" id="menu">
+                    <label for="menu">
+                        <img class="header__menuIcon header__menuIcon-menu" src="./img/menu.svg" alt="menu icon">
+                    </label>
+                    <div class="dropdownBorder"></div>
+                    <div class="dropdown">
+
+                        <a class="dropdown__item" href="#">
+                            <img class="dropdown__img" src="./img/calendar-interface-symbol-tool.svg"
+                                alt="calendar icon">
+                            <p class="dropdown__linkTitle">Calendar</p>
+                        </a>
+
+                        <a class="dropdown__item" href="#">
+                            <img class="dropdown__img" src="./img/mail.svg" alt="mail icon">
+                            <p class="dropdown__linkTitle">Mail</p>
+                        </a>
+
+                        <a class="dropdown__item" href="#">
+                            <img class="dropdown__img" src="./img/news-paper.svg" alt="newspaper icon">
+                            <p class="dropdown__linkTitle">News</p>
+                        </a>
+
+                        <a class="dropdown__item" href="#">
+                            <img class="dropdown__img" src="./img/maps.svg" alt="map icon">
+                            <p class="dropdown__linkTitle">Map</p>
+                        </a>
+
+                        <a class="dropdown__item" href="#">
+                            <img class="dropdown__img" src="./img/folder.svg" alt="files icon">
+                            <p class="dropdown__linkTitle">Files</p>
+                        </a>
+
+                        <a class="dropdown__item" href="#">
+                            <img class="dropdown__img" src="./img/contact.svg" alt="contacts icon">
+                            <p class="dropdown__linkTitle">Contacts</p>
+                        </a>
+
+                        <a class="dropdown__item" href="#">
+                            <img class="dropdown__img" src="./img/translate.svg" alt="translate icon">
+                            <p class="dropdown__linkTitle">Translate</p>
+                        </a>
+
+                        <a class="dropdown__item" href="#">
+                            <img class="dropdown__img" src="./img/video-camera.svg" alt="videos icon">
+                            <p class="dropdown__linkTitle">Videos</p>
+                        </a>
+
+                        <a class="dropdown__item" href="#">
+                            <img class="dropdown__img" src="./img/magnifier.svg" alt="search icon">
+                            <p class="dropdown__linkTitle">Search</p>
+                        </a>
+
+                        <a class="dropdown__item" href="#">
+                            <img class="dropdown__img" src="./img/photo-camera.svg" alt="photo icon">
+                            <p class="dropdown__linkTitle">Photo</p>
+                        </a>
+
+                        <a class="dropdown__item" href="#">
+                            <img class="dropdown__img" src="./img/app.svg" alt="apps icon">
+                            <p class="dropdown__linkTitle">Apps</p>
+                        </a>
+
+                        <a class="dropdown__item" href="#">
+                            <img class="dropdown__img" src="./img/document.svg" alt="document icon">
+                            <p class="dropdown__linkTitle">Document</p>
+                        </a>
+
+                        <input class="dropdown__btnMore" type="checkbox" id="menuMore">
+                        <label class="dropdown__moreBtnWrapper" for="menuMore">
+                            <span class="dropdown__moreBtn">More</span>
+                        </label>
+
+                        <div class="dropdown__moreElem">
+
+                            <a class="dropdown__item" href="#">
+                                <img class="dropdown__img" src="./img/chat.svg" alt="chat icon">
+                                <p class="dropdown__linkTitle">Chat</p>
+                            </a>
+
+                            <a class="dropdown__item" href="#">
+                                <img class="dropdown__img" src="./img/whiteboard.svg" alt="classroom icon">
+                                <p class="dropdown__linkTitle">Classroom</p>
+                            </a>
+
+                            <a class="dropdown__item" href="#">
+                                <img class="dropdown__img" src="./img/stamps.svg" alt="collection icon">
+                                <p class="dropdown__linkTitle">Collection</p>
+                            </a>
+
+                            <a class="dropdown__item" href="#">
+                                <img class="dropdown__img" src="./img/mars.svg" alt="mars icon">
+                                <p class="dropdown__linkTitle">Mars</p>
+                            </a>
+
+                            <a class="dropdown__item" href="#">
+                                <img class="dropdown__img" src="./img/writing.svg" alt="blogs icon">
+                                <p class="dropdown__linkTitle">Blogs</p>
+                            </a>
+
+                            <a class="dropdown__item" href="#">
+                                <img class="dropdown__img" src="./img/megaphone.svg" alt="promos icon">
+                                <p class="dropdown__linkTitle">Promos</p>
+                            </a>
+
+                            <p class="dropdown__footer">Even more from<a class="dropdown__footerLink"
+                                    href="https://kottans.org/" target="_blank"> Kottans</a> </p>
+
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <a class="header__menuLink header__menuLink-bell" href="#">
+                    <img class="header__menuIcon header__menuIcon-bell" src="./img/bell.svg" alt="bell icon">
+                </a>
+                <a class="header__menuLink header__menuLink-last" href="#">
+                    <img class="header__menuIcon header__menuIcon-cat" src="./img/cat-in-black-silhouette.svg"
+                        alt="cat icon">
+                </a>
+            </div>
+        </div>
+        <img class="intro__img intro__imgAnimate" src="./img/cat-smile.jpg" alt="cat">
+        <p class="intro__footer">Icon by <a class="intro__footerLink"
+                href="https://www.flaticon.com/free-icon/maps_1673429?term=map&page=2&position=8&related_item_id=1673429"
+                target="_blank">Flaticon</a>
+        </p>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,413 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+/* SCROLLBAR STYLES */
+
+div .dropdown::-webkit-scrollbar {
+  width: 5px;
+}
+
+div .dropdown::-webkit-scrollbar-track {
+  margin: 10px;
+  background-color: #f5f5f5;
+  border-radius: 2px;
+}
+
+div .dropdown::-webkit-scrollbar-thumb {
+  background-color: #000;
+  border: 1px solid #fff;
+  border-radius: 2px;
+}
+
+body {
+  background: #000;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+.intro {
+  max-width: 1600px;
+  margin: 0 auto;
+  overflow: hidden;
+  background: #000;
+  height: 100vh;
+  padding: 0 15px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 15px;
+}
+
+.header__title {
+  font-family: "Kaushan Script", cursive;
+  font-size: 40px;
+  color: #ffffff;
+  border-bottom: 2px solid #fff;
+}
+
+.header__menu {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header__menuLink {
+  font-family: "Kaushan Script", cursive;
+  font-size: 24px;
+  color: #ffffff;
+  margin-right: 35px;
+  transition: 0.3s all ease-in-out;
+}
+
+.header__menuLink-last {
+  margin-right: 0;
+}
+
+.header__menuLink:hover {
+  transform: scale(1.2);
+}
+
+.header__menuLinkBtn {
+  font-family: "Kaushan Script", cursive;
+  font-size: 24px;
+  color: #ffffff;
+  margin-right: 35px;
+}
+
+.header__menuIcon {
+  width: 40px;
+  height: 40px;
+}
+
+.header__menuIcon-menu {
+  margin-left: -20px;
+  transition: 0.3s all ease-in-out;
+}
+
+.header__menuIcon-menu:hover {
+  transform: scale(1.2);
+}
+
+.header__menuBtn,
+.dropdown__btnMore {
+  opacity: 0;
+}
+
+.header__menuBtn:checked ~ .dropdown {
+  left: -140px;
+}
+
+.header__menuBtn:checked ~ .dropdownBorder {
+  top: 93px;
+}
+
+.header__menuIcon-bell,
+.header__menuIcon-cat {
+  width: 45px;
+  height: 45px;
+}
+
+.header__dropdownContainer {
+  position: relative;
+}
+
+.dropdown {
+  position: absolute;
+  z-index: 100;
+  width: 370px;
+  height: 555px;
+  overflow: auto;
+  top: 80px;
+  left: 500px;
+  transform: translate(0);
+  transition: 0.5s left ease-in-out;
+  margin: 0 -15px;
+  padding-right: 30px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.dropdownBorder {
+  position: absolute;
+  z-index: 100;
+  width: 5px;
+  height: 532px;
+  top: -700px;
+  left: -190px;
+  background: #fff;
+  transition: 0.5s top ease-in-out 0.5s;
+  border-radius: 2px;
+}
+
+.dropdown__item {
+  display: block;
+  margin: 15px;
+  width: calc((100% / 3) - 30px);
+  padding: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.01);
+  border-radius: 5px;
+  transition: 0.3s all ease-in-out;
+}
+
+.dropdown__item:hover > .dropdown__img {
+  transform: scale(1.2);
+}
+
+.dropdown__item:focus {
+  border: 1px solid #fff;
+  border-radius: 5px;
+}
+
+.dropdown__img {
+  display: block;
+  margin: 0 auto 10px;
+  width: 40px;
+  height: 40px;
+  transition: 0.3s all ease-in-out;
+}
+
+.dropdown__linkTitle {
+  font-family: "Kaushan Script", cursive;
+  font-size: 18px;
+  color: #ffffff;
+  text-align: center;
+  margin: 0;
+}
+
+.dropdown__moreBtnWrapper {
+  width: 100%;
+  text-align: center;
+}
+
+.dropdown__btnMore:checked ~ .dropdown__moreElem {
+  display: flex;
+}
+
+.dropdown__moreBtn {
+  display: block;
+  width: 100%;
+  font-family: "Kaushan Script", cursive;
+  font-size: 24px;
+  color: #ffffff;
+  margin: 15px 0;
+  border-top: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+  cursor: pointer;
+  transition: 0.3s all ease-in-out;
+}
+
+.dropdown__moreBtn:hover {
+  transform: scale(1.08);
+}
+
+.dropdown__moreElem {
+  display: none;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.dropdown__footer {
+  width: 100%;
+  text-align: center;
+  color: #fff;
+  font-family: "Kaushan Script", cursive;
+}
+
+.intro__img {
+  width: 100%;
+}
+
+.intro__imgAnimate {
+  animation: flyCat 18s ease-out infinite;
+}
+
+@keyframes flyCat {
+  0% {
+    transform: scale(0.1) translateY(600px);
+    transform-origin: 50% 16%;
+  }
+  25% {
+    transform: scale(0.5) translateY(150px) rotate(-15deg);
+    transform-origin: top;
+  }
+  50% {
+    transform: scale(0.9) translateY(200px) rotate(15deg);
+    transform-origin: top;
+  }
+  100% {
+    transform: scale(0.1) translateY(600px);
+    transform-origin: 50% 16%;
+  }
+}
+
+.intro__footer {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translate(-50%);
+  text-align: center;
+  color: #fff;
+  font-family: "Kaushan Script", cursive;
+  font-size: 16px;
+}
+
+.intro__footer-mobile {
+  display: none;
+}
+
+@media screen and (max-width: 965px) {
+  .header {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .header__title {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+
+  .header__menu {
+    width: 100%;
+  }
+
+  .header__menuBtn:checked ~ .dropdown {
+    left: 50%;
+    transform: translate(-45%);
+  }
+
+  .dropdownBorder {
+    left: -195px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .header__title {
+    font-size: 24px;
+  }
+
+  .header__menu {
+    flex-wrap: wrap;
+  }
+
+  .header__menuLink {
+    font-size: 20px;
+  }
+
+  .dropdownBorder {
+    left: -8px;
+    top: -900px;
+    height: 368px;
+  }
+
+  .dropdown {
+    width: 270px;
+    top: 30px;
+    height: 390px;
+    padding-right: 10px;
+    justify-content: space-between;
+  }
+
+  .dropdown__item {
+    margin: 5px;
+    max-height: 70px;
+  }
+
+  .dropdown__item:focus {
+    border: none;
+  }
+  .dropdown__img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .dropdown__linkTitle {
+    font-size: 15px;
+  }
+
+  .header__dropdownContainer {
+    order: 4;
+    width: 100%;
+    text-align: center;
+    margin-top: 15px;
+    margin-right: 0;
+  }
+
+  .header__menuBtn:checked ~ .dropdown {
+    left: 50%;
+    transform: translate(-43%);
+  }
+
+  .header__menuBtn:checked ~ .dropdownBorder {
+    top: 43px;
+  }
+
+  .header__menuIcon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .dropdown__btnMore {
+    position: absolute;
+    top: 100px;
+    left: -100px;
+  }
+
+  .dropdown__moreElem {
+    width: 100%;
+  }
+
+  .intro__footer {
+    display: none;
+  }
+
+  .intro__footer-mobile {
+    display: block;
+    position: static;
+    transform: translate(0);
+    margin: 0 0 10px;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .dropdownBorder {
+    left: 40px;
+  }
+
+  .dropdown__linkTitle {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .dropdownBorder {
+    left: 20px;
+  }
+
+  .dropdown__linkTitle {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 365px) {
+  .dropdownBorder {
+    left: 13px;
+  }
+}
+
+@media screen and (max-width: 330px) {
+  .dropdownBorder {
+    left: -8px;
+  }
+}
