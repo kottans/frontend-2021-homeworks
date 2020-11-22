@@ -77,8 +77,8 @@ const catwoman = {
 
 const printList = [dog, cat, man, woman, catwoman];
 
-function tmplStr(obj) {
-   return `${obj.species};${obj.name};${obj.gender};${obj.legs};${obj.hands};${obj.saying};${obj.friends.join(', ')}`;
+function tmplStr({species, name, gender, legs, hands, saying, friends}) {
+   return `${species};${name};${gender};${legs};${hands};${saying};${friends.join(', ')}`;
 }
 
 printList.forEach( obj => {
