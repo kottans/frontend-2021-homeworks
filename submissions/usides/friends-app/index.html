@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PatBud</title>
+  <link rel="stylesheet" href="./css/reset.css">
+  <link rel="stylesheet" href="./css/main.css">
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <div class="left-gr">
+        <div class="logo-group">
+          <img src="./img/logo.svg" alt="Intercatpol logo">
+          <p class="logo-text">PatBud</p>
+        </div>
+        <h1>Find and adopt a <span>human</span> that will <span>serve</span> you !</h1>
+      </div>
+
+      <button class="search-btn" id="search-btn">
+        <img src="./img/binoculars.svg" alt="Search button">
+      </button>
+
+      <a href="https://usides.github.io/meoowler/" class="meow-link">
+        <p>
+          M
+        </p>
+      </a>
+    </div>
+  </header>
+
+  <div class="container center-content">
+    <main class="left-pane">
+      <h2>Humans <span>are waiting to</span> be adopted by cats:</h2>
+      <div class="cards-holder" id="cards-holder">
+
+      </div>
+    </main>
+    <aside class="right-pane" id="right-pane">
+      <form action="index.html">
+        <section class="search">
+          <label for="first-name">Search</label>
+          <input type="text" id="name-input" placeholder="Name" spellcheck="false">
+        </section>
+        <section class="filter-sorting">
+          <p class="filter-sorting-lable">filter-sort</p>
+          <div class="option-group" id="option-group">
+            <div class="option">
+              <p>gender</p>
+              <button type="button" data-filter="male">Male</button>
+              <button type="button" data-filter="female">Female</button>
+            </div>
+            <div class="option">
+              <p>name</p>
+              <button type="button" data-sort="a-z" class="active">A-Z</button>
+              <button type="button" data-sort="z-a">Z-A</button>
+            </div>
+            <div class="option">
+              <p>age</p>
+              <button type="button" data-sort="young">Young</button>
+              <button type="button" data-sort="old">Old</button>
+            </div>
+          </div>
+        </section>
+      </form>
+      <section class="reviews">
+        <h2>Reviews</h2>
+        <img src="./img/cat.png" alt="Cat photo">
+        <p>"I found the best human ever! Thanks PatBud!" - Barsic</p>
+      </section>
+    </aside>
+
+  </div>
+
+  <footer>
+    <div class="container">
+      <p class="credits">Created by <a href="https://github.com/usides/kottans-frontend" target="_blank">Usides</a> for
+        <a href="https://kottans.org/" target="_blank">kottans</a></p>
+    </div>
+  </footer>
+  <script src="./js/main.js"></script>
+</body>
+
+</html>
