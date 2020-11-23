@@ -8,6 +8,8 @@ const optionGroup = document.getElementById('option-group');
 const sortButtons = document.querySelectorAll('button[data-sort]');
 const filterButtons = document.querySelectorAll('button[data-filter]');
 const nameInput = document.getElementById('name-input');
+const errorNotice = document.getElementById('error-notice');
+const loader = document.getElementById('loader');
 
 let humansOriginState;
 
@@ -16,6 +18,10 @@ const currentState = {
   sort: 'a-z',
   filter: 'none',
   searchValue: '',
+};
+
+const handleSearcBtn = function () {
+  rightPane.classList.toggle('visible');
 };
 
 const handleInput = function () {
@@ -61,34 +67,26 @@ const filterHumans = function (filterOption) {
   currentState.filter = filterOption;
 };
 
+const sortByAge = (a, b) => (a.dob.age <= b.dob.age ? 1 : -1);
+const sortByName = (a, b) =>
+  a.name.first.toLowerCase() >= b.name.first.toLowerCase() ? 1 : -1;
+
 const sortHumans = function (sortOption) {
   switch (sortOption) {
     case 'a-z':
-      currentState.humans.sort((a, b) => {
-        return a.name.first.toLowerCase() >= b.name.first.toLowerCase()
-          ? 1
-          : -1;
-      });
+      currentState.humans.sort((a, b) => sortByName(a, b));
       break;
 
     case 'z-a':
-      currentState.humans.sort((a, b) => {
-        return a.name.first.toLowerCase() <= b.name.first.toLowerCase()
-          ? 1
-          : -1;
-      });
+      currentState.humans.sort((a, b) => sortByName(b, a));
       break;
 
     case 'young':
-      currentState.humans.sort((a, b) => {
-        return a.dob.age > b.dob.age ? 1 : -1;
-      });
+      currentState.humans.sort((a, b) => sortByAge(b, a));
       break;
 
     case 'old':
-      currentState.humans.sort((a, b) => {
-        return a.dob.age < b.dob.age ? 1 : -1;
-      });
+      currentState.humans.sort((a, b) => sortByAge(a, b));
       break;
   }
 
@@ -120,10 +118,19 @@ const updateCards = function (arr) {
 
 const getHumans = function () {
   return fetch(HUMANS_LINK)
-    .then((res) => res.json())
+    .then((res) => {
+      if (res.status !== 200) {
+        throw new Error(`Couldn't fetch data. ${res.status}`);
+      }
+      return res.json();
+    })
     .then((data) => {
       humansOriginState = data.results;
       currentState.humans = data.results;
+      loader.classList.add('hide');
+    })
+    .catch((err) => {
+      errorNotice.innerHTML = `Sorry! We couldn't get data. <br> The problem is: ${err} !`;
     });
 };
 
@@ -132,9 +139,7 @@ const init = async () => {
   sortHumans(currentState.sort);
   updateCards(currentState.humans);
 
-  searchBtn.addEventListener('click', function () {
-    rightPane.classList.toggle('visible');
-  });
+  searchBtn.addEventListener('click', handleSearcBtn);
 
   optionGroup.addEventListener('click', handleOptionClick);
 

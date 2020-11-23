@@ -179,6 +179,71 @@ p.logo-text {
   color: #f4f7f7;
 }
 
+.error-notice {
+  font-family: "Revalia", cursive;
+  line-height: 1.3rem;
+  color: #c40000;
+  text-align: center;
+}
+
+.loader {
+  width: 50px;
+  height: 50px;
+  position: relative;
+  margin: 0 auto;
+  -webkit-animation: loader 1.5s linear infinite;
+          animation: loader 1.5s linear infinite;
+  margin-top: 3rem;
+}
+
+.loader.hide {
+  display: none;
+}
+
+.loader div {
+  position: absolute;
+  border: 8px solid transparent;
+  border-top-color: #1f4e5f;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.loader div:nth-child(2) {
+  border-color: transparent;
+  border-bottom-color: #1f4e5f;
+}
+
+@-webkit-keyframes loader {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  50% {
+    -webkit-transform: rotate(180deg);
+            transform: rotate(180deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@keyframes loader {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  50% {
+    -webkit-transform: rotate(180deg);
+            transform: rotate(180deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
 .cards-holder {
   padding: 1rem;
   display: -ms-grid;
@@ -387,7 +452,7 @@ footer .container {
 }
 
 .credits a:active {
-  color: #930000;
+  color: #c40000;
 }
 
 @media (hover: hover) and (pointer: fine) {
