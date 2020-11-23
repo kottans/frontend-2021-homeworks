@@ -6,6 +6,9 @@ const dimSong = new Audio('music/dim.mp3');
 
 let playedSongs = [];
 const oneSecond = 1000;
+const playingCards = 10;
+const guessed = 'guessed';
+const greeting = `Congratulations! Let's play once more!`;
 
 const cards = [
     {
@@ -156,29 +159,29 @@ const handlePlayingCards = (cardStatus) => {
     const playingNow = document.querySelectorAll(".playingNow");
     playingNow.forEach((card) => {
         card.classList.remove("playingNow");
-        if (cardStatus === 'guessed') {
+        if (cardStatus === guessed) {
             setTimeout(() => {
                 card.closest('.card').classList.add('card--background-green');
             }, oneSecond / 3)
         }; 
         setTimeout(() => {
-            card.parentNode.classList.toggle(cardStatus);
+            card.closest('.card__flipper').classList.toggle(cardStatus);
         }, oneSecond)
     });
 }
 
 
 const handleGameOver = (guessedCards) => {
-    if (guessedCards === 10) {
+    if (guessedCards === playingCards) {
         setTimeout(() => {
-            alert(`Congratulations! Let's play once more!`);
+            alert(greeting);
             resetGame(guessedCards);
         }, oneSecond)
     }
 }
 
 const stopPreviousSong = (playedSongs) => {
-    let previousSong = playedSongs[playedSongs.length - 1];
+    const previousSong = playedSongs[playedSongs.length - 1];
     previousSong.pause();
     previousSong.currentTime = 0;
 }
@@ -203,17 +206,17 @@ const flipCards = () => {
     mainGridContainer.addEventListener('click', ({target}) => {
         if (
           target.classList.contains("card__flipper-front") &&
-          !target.parentNode.classList.contains("guessed") &&
+          !target.closest('.card__flipper').classList.contains(guessed) &&
           playingCards.length < 2
         ) {
-          target.parentNode.classList.toggle("card__flipper--flip");
+          target.closest('.card__flipper').classList.toggle("card__flipper--flip");
           target.classList.add("playingNow");
           handleMusicCard(target);
 
           clickCounter += 1;
           playingCards.push(target.classList.value);
           if (clickCounter === 2 && playingCards[0].match(/^.{21}/)[0] === playingCards[1].match(/^.{21}/)[0]) {
-            handlePlayingCards('guessed');
+            handlePlayingCards(guessed);
             modal.classList.add('modal--visible');
             setTimeout(() => {
                 modal.classList.remove('modal--visible');
