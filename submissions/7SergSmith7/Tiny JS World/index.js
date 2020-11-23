@@ -8,7 +8,7 @@
 // ======== OBJECTS DEFINITIONS ========
 // Define your objects here
 class Habitant {
-  constructor(species, name, gender, phrase, friends = [], legs) {
+  constructor(species, name, gender, phrase, friends = [], legs, props = []) {
     this.species = species;
     this.legs = legs;
     this.name = name;
@@ -16,8 +16,12 @@ class Habitant {
     this.phrase = phrase;
     this.friends = friends;
     this.addFriends(friends);
+    this.props = props;
+    this.addProps();
   }
-
+  addProps() {
+    this.props = ["species", "legs", "name", "gender", "phrase"];
+  }
   addFriends(friends) {
     this.friends = [...this.friends, ...friends];
   }
@@ -33,12 +37,16 @@ class Habitant {
   }
 
   toString() {
-    let props = Object.entries(this);
-    props = props.map(([key, value]) =>
-      value && key !== "friends" ? `${key}: <strong>${value}</strong>` : null
-    );
+    this.props = this.props.map((prop) => `<strong>${this[prop]}</strong>`);
 
-    return `${props.join(" ")} Friends: <strong>${this.listFriends()}</strong>`;
+    return `Hi! I am ${this.props[0]}, my name is ${
+      this.props[2]
+    }, my gender is ${this.props[3]}.
+    My phrase: ${
+      this.props[4]
+    } Friends: <strong>${this.listFriends()}</strong>. I have ${
+      this.props[1]
+    } legs `;
   }
 }
 
@@ -53,9 +61,17 @@ class Cat extends Habitant {
   }
 }
 class Human extends Habitant {
-  constructor(name, gender, phrase, friends, legs = 2, hands = 2) {
-    super("human", name, gender, phrase, friends, legs, hands);
+  constructor(name, gender, phrase, friends, legs = 2, hands = 2, props) {
+    super("human", name, gender, phrase, friends, legs, hands, props);
     this.hands = hands;
+    // this.props.push("hands");
+  }
+  addProps() {
+    super.addProps();
+    this.props.push("hands");
+  }
+  toString() {
+    return super.toString() + `and  have ${this.props[5]} hands`;
   }
 }
 const dog = new Dog("Snoop", "male", "Woof!");
