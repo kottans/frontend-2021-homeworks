@@ -32,7 +32,11 @@ class Inhabitant {
    }
 
    toString(){
-      return Object.entries(this).slice(1).map(([key, value]) => `${key}: ${value}`).join(', ') + `, friends: ${this.friendsManager.getFriends()}`;
+      let props = ['species', 'saying', 'gender', 'name']
+         .map(prop => `${prop}: ${this[prop]}, `)
+         .join('');
+
+      return props + `friends: ${this.friendsManager.getFriends()}, `;
    }
 }
 
@@ -41,6 +45,14 @@ class Primate extends Inhabitant {
       super(species, saying, gender, name, friends);
       this.legs = 2;
       this.hands = 2;
+   }
+
+   toString(){
+      let props = ['legs', 'hands']
+         .map(prop => `${prop}: ${this[prop]}, `)
+         .join('');
+
+      return super.toString() + props; 
    }
 }
 
@@ -67,6 +79,10 @@ class Predator extends Inhabitant {
       super(species, saying, gender, name, friends);
       this.legs = 4;
    }
+
+   toString(){
+      return super.toString() + `legs: ${this.legs}, `;
+   }
 }
 
 class Dog extends Predator {
@@ -87,6 +103,10 @@ class CatWoman extends Cat {
       this.species = 'human';
       this.hands = 2;
       this.legs = 2;
+   }
+
+   toString(){
+      return super.toString() + `hands: ${this.hands}`;
    }
 }
 
