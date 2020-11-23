@@ -124,9 +124,7 @@ const createNewCard = (card, cardNumber) => {
     return newCard;
 }
 
-const shuffleArr = (arr) => {
-    return arr.sort(() => 0.5 - Math.random());
-}
+const shuffleArr = (arr) => arr.sort(() => 0.5 - Math.random());
 
 const loadCards = (cardsArr) => {
     const shuffledCards = shuffleArr(cardsArr);
