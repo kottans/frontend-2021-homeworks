@@ -10,55 +10,60 @@ const cards = [
     {
         key: 1,
         text: 'orel',
-        musicCard: false
+        musicCard: false,
+        song: null
     },
     {
         key: 1,
-        text: '$',
+        text: null,
         musicCard: true,
         song: orelSong
     },
     {
         key: 2,
         text: 'gopgop',
-        musicCard: false
+        musicCard: false,
+        song: null
     },
     {
         key: 2,
-        text: '$',
+        text: null,
         musicCard: true,
         song: gopgopSong
     },
     {
         key: 3,
         text: 'tanci',
-        musicCard: false
+        musicCard: false,
+        song: null
     },
     {
         key: 3,
-        text: '$',
+        text: null,
         musicCard: true,
         song: tanciSong
     },
     {
         key: 4,
         text: 'cadilac',
-        musicCard: false
+        musicCard: false,
+        song: null
     },
     {
         key: 4,
-        text: '$',
+        text: null,
         musicCard: true,
         song: cadilacSong
     },
     {
         key: 5,
         text: 'dim',
-        musicCard: false
+        musicCard: false,
+        song: null
     },
     {
         key: 5,
-        text: '$',
+        text: null,
         musicCard: true,
         song: dimSong
     }
