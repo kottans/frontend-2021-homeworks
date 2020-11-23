@@ -110,3 +110,10 @@ const contentList = [
         the burgers, particularly the notorious Bleecker Black. No need for cutlery here, it’s all about getting down and dirty with your burger mistress.',
     },
 ];
+
+//Find object by id in an array of JavaScript objects 
+//https://stackoverflow.com/questions/7364150/find-object-by-id-in-an-array-of-javascript-objects
+const getElemId = (items, id) => items.find(item => item.id === id);
+//clear input or clecked  smth in html file
+//https://stackoverflow.com/questions/3450593/how-do-i-clear-the-content-of-a-div-using-javascript
+const clearHTML = node => node.innerHTML = '';
