@@ -53,7 +53,6 @@
 .card--0 {
     grid-column: 1;
     grid-row: 4;
-
 }
 
 .card--1 {
@@ -171,6 +170,7 @@
     -webkit-transform-style: preserve-3d;
     transform-style: preserve-3d;
     position: relative;
+    cursor: pointer;
 }
 
 .card__flipper--flip {
@@ -289,5 +289,3 @@
         top: 370px;
     }
 }
-
-
