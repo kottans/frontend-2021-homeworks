@@ -1,0 +1,226 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style-type: none;
+    color: #757575;
+}
+
+body {
+    display: flex;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow-x: hidden;
+}
+
+.nav-menu {
+    margin-top: 20px;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style-type: none;
+    color: black;
+    width: 100%;
+    height: 20%;
+}
+
+.nav__list {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    background-color: transparent;
+    font-size: 16px;
+    padding: 0px 0 5px 0;
+    margin: 20px 0 0 0;
+}
+
+.extra__label {
+    position: absolute;
+    z-index: 1;
+    background: lightblue;
+    font-size: 15px;
+    padding: 15px 0 10px 0;
+    height: 50px;
+    width: 348px;
+    right: 90.5px;
+    top: 520px;
+    text-align: center;
+}
+
+.li_popup {
+    font-family: Arial, Helvetica, sans-serif;
+    list-style-type: none;
+    text-decoration: none;
+    width: 33%;
+    padding: 20px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.nav__link {
+    padding: 2px;
+    margin: 0 0px 0 20px;
+}
+
+.menu-top {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: white;
+    border: 2px solid darkgray;
+    box-shadow: 0 0 15px lightgray;
+    right: 88px;
+    justify-content: center;
+}
+
+.menu-top:focus {
+    border: 2px solid black;
+}
+
+p {
+    width: 50%;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.popup {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 40px;
+    margin: 0 auto 8px;
+}
+
+#popup_chat {
+    margin: auto;
+}
+
+#popup_classroom {
+    margin: auto;
+}
+
+#popup_collection {
+    margin: auto;
+}
+
+.popup:hover {
+    transition-duration: 0.22s;
+    opacity: 0.7;
+}
+
+.b-menu {
+    width: 1.5em;
+    height: 1.5em;
+    background-image: url(./images/apps.jpg);
+    padding: 0;
+    margin: 0 0 0 20px;
+}
+
+.check__input~.menu-top {
+    opacity: 0;
+}
+
+.check__input~.extra__label {
+    opacity: 0;
+}
+
+.check__input:checked~.menu-top {
+    position: absolute;
+    -webkit-appearance: none;
+    appearance: none;
+    opacity: 1;
+    width: 352.5px;
+    height: 473px;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+}
+
+.check__input:checked~.extra__label {
+    opacity: 1;
+}
+
+.check__input~.label {
+    opacity: 0;
+}
+
+.check__input {
+    -webkit-appearance: none;
+    appearance: none;
+    position: relative;
+    margin: 0 0 15px 15px;
+    width: 25px;
+    height: 25px;
+    left: -16px;
+    margin-top: -1px;
+}
+
+.check__input2 {
+    height: 29px;
+    width: 350px;
+    display: flex;
+    justify-content: center;
+    background-color: whitesmoke;
+    border: 1px solid #e6e6e6;
+    font-size: 15px;
+    align-items: center;
+    font-family: sans-serif;
+    opacity: 0;
+}
+
+.check__input2:checked~.menu-top {
+    height: 440px;
+    overflow: auto;
+}
+
+.check__input2:checked~.extra__label {
+    display: none;
+    opacity: 0;
+}
+
+.hr_line {
+    border: 1px solid rgba(75, 75, 75, 0.2);
+    margin: 8px 0 8px 0;
+    width: 331px;
+}
+
+.check__input2:checked~.hr_line {
+    display: block;
+}
+
+.check__input2 :checked {
+    display: block;
+}
+
+.kottans_link {
+    margin-top: 10px;
+    padding: 5px 0 15px 0;
+    font-size: 13.5px;
+}
+
+a {
+    font-family: Arial, Helvetica, sans-serif;
+    text-decoration: none;
+    color: black;
+}
+
+.menu a {
+    margin-right: 40px;
+}
+
+.bell {
+    margin: 0 0 0 20px;
+    height: 21px;
+    width: 18px;
+}
+
+.avatar {
+    margin: 0 88px 0 20px;
+    width: 33px;
+    height: 33px;
+    border-radius: 50%;
+}
