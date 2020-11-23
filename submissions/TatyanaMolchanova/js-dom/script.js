@@ -1,14 +1,12 @@
-const content = {
+const animalsData = {
     'cats': {
         'menuTitle': 'Cats',
-        'class': 'cats',
         'title': 'Cats are awesome',
         'info': 'Having a cat can mean different things to different people. Some want a cat to cuddle and sit on their laps; others are happy to live with a very independent cat which spends most of its time outside and doesn’t want too much human interaction.',
         'image': 'cat'
     },
     'dogs': {
         'menuTitle': 'Dogs',
-        'class': 'dogs',
         'title': 'Dogs are awesome',
         'info': 'The dog (Canis familiaris when considered a distinct species or Canis lupus familiaris when considered a subspecies of the wolf)[5] is a domesticated carnivore of the family Canidae. It is part of the wolf-like canids,[6] and is the most widely abundant terrestrial carnivore.[7][8][9][10][11] The dog and the extant gray wolf are sister taxa as modern wolves are not closely related to the wolves that were first domesticated,[12][13][14] which implies that the direct ancestor of the dog is extinct.[15] The dog was the first species to be domesticated,[14][16] and has been selectively bred over millennia for various behaviors, sensory capabilities, and physical attributes.[17]',
         'image': 'dog'
@@ -22,21 +20,18 @@ const content = {
     },
     'tigers': {
         'menuTitle': 'Tigers',
-        'class': 'tigers',
         'title': 'Tigers are awesome',
         'info': 'There are two recognized subspecies of tiger*: the continental (Panthera tigris tigris) and the Sunda (Panthera tigris sondaica). The largest of all the Asian big cats, tigers rely primarily on sight and sound rather than smell for hunting. They typically hunt alone and stalk prey. A tiger can consume more than 80 pounds of meat at one time. On average, tigers give birth to two to four cubs every two years. If all the cubs in one litter die, a second litter may be produced within five months.',
         'image': 'tigers'
     },
     'hares': {
         'menuTitle': 'Hares',
-        'class': 'hares',
         'title': 'Hares are awesome',
         'info': 'Hares and jackrabbits are leporids belonging to the genus Lepus. Hares are classified in the same family as rabbits. They are similar in size and form to rabbits and have similar herbivorous diets, but generally have longer ears and live solitarily or in pairs. Also unlike rabbits, their young are able to fend for themselves shortly after birth rather than emerging blind and helpless. Most are fast runners. Hare species are native to Africa, Eurasia and North America.',
         'image': 'hare'
     },
     'elephants': {
         'menuTitle': 'Elephants',
-        'class': 'elephants',
         'title': 'Elephants are awesome',
         'info': 'Elephants are mammals of the family Elephantidae and the largest existing land animals. Three species are currently recognised: the African bush elephant, the African forest elephant, and the Asian elephant. Elephantidae is the only surviving family of the order Proboscidea; extinct members include the mastodons. The family Elephantidae also contains several now-extinct groups, including the mammoths and straight-tusked elephants. African elephants have larger ears and concave backs, whereas Asian elephants have smaller ears, and convex or level backs. Distinctive features of all elephants include a long proboscis called a trunk, tusks, large ear flaps, massive legs, and tough but sensitive skin. The trunk is used for breathing, bringing food and water to the mouth, and grasping objects. Tusks, which are derived from the incisor teeth, serve both as weapons and as tools for moving objects and digging. The large ear flaps assist in maintaining a constant body temperature as well as in communication. The pillar-like legs carry their great weight.',
         'image': 'elephant'
@@ -53,27 +48,30 @@ function createMenu() {
 
     menu.classList.add('menu');
 
-
-    menu.innerHTML = `<li class="menu__item active" data-item="${content.cats.class}">${content.cats.menuTitle}</li>
-    <li class="menu__item" data-item="${content.dogs.class}">${content.dogs.menuTitle}</li>
-    <li class="menu__item" data-item="${content.lions.class}">${content.lions.menuTitle}</li>
-    <li class="menu__item" data-item="${content.tigers.class}">${content.tigers.menuTitle}</li>
-    <li class="menu__item" data-item="${content.hares.class}">${content.hares.menuTitle}</li>
-    <li class="menu__item" data-item="${content.elephants.class}">${content.elephants.menuTitle}</li>`;
+    for (const prop in animalsData) {
+        const liMenu = document.createElement('li');
+        liMenu.classList.add('menu__item');
+        liMenu.setAttribute('data-item', prop);
+        liMenu.textContent = animalsData[prop].menuTitle;
+        menu.append(liMenu);
+    }
 
     aside.append(menu);
+
+    const firstLiMenu = document.querySelectorAll('li')[0].classList.add('active');
+
 }
 
 function addInitialContent() {
-    title.textContent = content.cats.title;
-    info.textContent = content.cats.info;
+    title.textContent = animalsData.cats.title;
+    info.textContent = animalsData.cats.info;
 
     image.forEach(function(item, index) {
-        item.src = `images/${content.cats.image}${index+1}.jpg`;
+        item.src = `images/${animalsData.cats.image}${index+1}.jpg`;
     });
 }
 
-refreshContent = ({target}) => {
+let refreshContent = ({target}) => {
     
     if (target.classList.contains('menu__item')) {
 
@@ -87,11 +85,11 @@ refreshContent = ({target}) => {
 
         const dataAttribute = target.dataset.item;
 
-        title.textContent = content[dataAttribute].title;
-        info.textContent = content[dataAttribute].info;
+        title.textContent = animalsData[dataAttribute].title;
+        info.textContent = animalsData[dataAttribute].info;
     
         image.forEach(function(item, index) {
-            item.src = `images/${content[dataAttribute].image}${index+1}.jpg`;
+            item.src = `images/${animalsData[dataAttribute].image}${index+1}.jpg`;
         })
     }
 }
@@ -101,3 +99,4 @@ createMenu();
 addInitialContent();
 
 menu.addEventListener('click', refreshContent);
+
