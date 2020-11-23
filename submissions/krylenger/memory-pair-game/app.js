@@ -4,11 +4,15 @@ const tanciSong = new Audio('music/tanci.mp3');
 const cadilacSong = new Audio('music/cadilac.mp3');
 const dimSong = new Audio('music/dim.mp3');
 
-let playedSongs = [];
 const oneSecond = 1000;
-const playingCards = 10;
+const totalPlayingCards = 10;
 const guessed = 'guessed';
 const greeting = `Congratulations! Let's play once more!`;
+
+let clickCounter = 0;
+let guessedCards = 0;
+let playedSongs = [];
+let playingCards = [];
 
 const cards = [
     {
@@ -103,7 +107,6 @@ const styleNewCardFlipperFront = (newCardFlipperFront, card, cardNumber) => {
         default:
             newCardFlipperFront.classList.add('card__flipper-front', card.key, `card--clef-img`);
     }
-    
 }
 
 const createNewCard = (card, cardNumber) => {
@@ -140,19 +143,18 @@ const loadCards = (cardsArr) => {
     mainGridContainer.appendChild(fragment);
 }
 
-const recreateMainGridContainer = () => {
-    mainGridContainer.remove();
-    mainGridContainer = document.createElement('div');
-    mainGridContainer.classList.add('main__grid-container');
-    main.appendChild(mainGridContainer);
+const clearMainGridContainer = () => {
+    mainGridContainer.innerHTML = '';
+    mainGridContainer.removeEventListener('click', clickCardCallback)
 }
 
 const resetGame = () => {
-    recreateMainGridContainer();
-    loadCards(cards);
-    guessedCards = [];
+    guessedCards = 0;
+    clickCounter = 0;
     playedSongs = [];
-    flipCards();
+    playingCards = [];
+    clearMainGridContainer();
+    initApp();
 }
 
 const handlePlayingCards = (cardStatus) => {
@@ -172,7 +174,7 @@ const handlePlayingCards = (cardStatus) => {
 
 
 const handleGameOver = (guessedCards) => {
-    if (guessedCards === playingCards) {
+    if (guessedCards === totalPlayingCards) {
         setTimeout(() => {
             alert(greeting);
             resetGame(guessedCards);
@@ -195,50 +197,44 @@ const handleMusicCard = (target) => {
         }
         playedSongs.push(targetObj.song);
         targetObj.song.play();
-        
     };
 }
 
-const flipCards = () => {
-    let clickCounter = 0;
-    let guessedCards = 0;
-    let playingCards = [];
-    mainGridContainer.addEventListener('click', ({target}) => {
-        if (
-          target.classList.contains("card__flipper-front") &&
-          !target.closest('.card__flipper').classList.contains(guessed) &&
-          playingCards.length < 2
-        ) {
-          target.closest('.card__flipper').classList.toggle("card__flipper--flip");
-          target.classList.add("playingNow");
-          handleMusicCard(target);
+const clickCardCallback = ({target}) => {
+    if (
+        target.classList.contains("card__flipper-front") &&
+        !target.closest('.card__flipper').classList.contains(guessed) &&
+        playingCards.length < 2
+      ) {
+        target.closest('.card__flipper').classList.toggle("card__flipper--flip");
+        target.classList.add("playingNow");
+        handleMusicCard(target);
 
-          clickCounter += 1;
-          playingCards.push(target.classList.value);
-          if (clickCounter === 2 && playingCards[0].match(/^.{21}/)[0] === playingCards[1].match(/^.{21}/)[0]) {
-            handlePlayingCards(guessed);
-            modal.classList.add('modal--visible');
-            setTimeout(() => {
-                modal.classList.remove('modal--visible');
-            }, oneSecond)
-            clickCounter = 0;
-            playingCards = [];
-            guessedCards += 2;
-          } else if (clickCounter === 2 && playingCards[0] !== playingCards[1]) {
-            handlePlayingCards('card__flipper--flip');
-            setTimeout(() => {
-                clickCounter = 0;
-                playingCards = [];
-            }, oneSecond)
-          }
+        clickCounter += 1;
+        playingCards.push(target.classList.value);
+        if (clickCounter === 2 && playingCards[0].match(/^.{21}/)[0] === playingCards[1].match(/^.{21}/)[0]) {
+          handlePlayingCards(guessed);
+          modal.classList.add('modal--visible');
+          setTimeout(() => {
+              modal.classList.remove('modal--visible');
+          }, oneSecond)
+          clickCounter = 0;
+          playingCards = [];
+          guessedCards += 2;
+        } else if (clickCounter === 2 && playingCards[0] !== playingCards[1]) {
+          handlePlayingCards('card__flipper--flip');
+          setTimeout(() => {
+              clickCounter = 0;
+              playingCards = [];
+          }, oneSecond)
         }
-        handleGameOver(guessedCards);
-    })
+      }
+      handleGameOver(guessedCards);
 }
 
 const initApp = () => {
     loadCards(cards);
-    flipCards();
+    mainGridContainer.addEventListener('click', clickCardCallback);
 }
 
 document.addEventListener('DOMContentLoaded', initApp);
