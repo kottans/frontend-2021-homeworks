@@ -158,7 +158,7 @@ const handlePlayingCards = (cardStatus) => {
         card.classList.remove("playingNow");
         if (cardStatus === 'guessed') {
             setTimeout(() => {
-                card.parentNode.parentNode.classList.add('card--background-green');
+                card.closest('.card').classList.add('card--background-green');
             }, oneSecond / 3)
         }; 
         setTimeout(() => {
@@ -184,7 +184,7 @@ const stopPreviousSong = (playedSongs) => {
 }
 
 const handleMusicCard = (target) => {
-    if (target.parentNode.parentNode.classList.contains('musicCard')) {
+    if (target.closest('.card').classList.contains('musicCard')) {
         const targetKeyNumber = target.classList.value.match(/\d/)[0];
         const targetObj = cards.find((card) => card.musicCard && card.key === Number.parseInt(targetKeyNumber, 10));
         if (playedSongs.length) {
