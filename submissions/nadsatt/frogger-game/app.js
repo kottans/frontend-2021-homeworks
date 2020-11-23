@@ -30,10 +30,10 @@ function handleSettingsClick({target}){
     if(target.className === 'settings__item'){
         switch (target.dataset.change){
             case 'player':
-                changePlayerImg();
+                changeEntityImgs([player], playerImgs);
                 break;
             case 'enemies':
-                changeEnemyImgs();
+                changeEntityImgs(allEnemies, enemyImgs);
                 break;
             case 'speed':
                 changeEnemySpeeds();
@@ -43,7 +43,7 @@ function handleSettingsClick({target}){
 }
 
 function handleArrowKeyUp(e) {
-    var allowedKeys = {
+    const allowedKeys = {
         37: 'left',
         38: 'up',
         39: 'right',
@@ -70,7 +70,8 @@ function initEntities(){
             imgIndex,
             Enemy.initialX, 
             initialY, 
-            Enemy.getRandomSpeed()
+            Enemy.getRandomSpeed(),
+            player
         )
     );
 }
@@ -80,23 +81,14 @@ function resetEntities(){
     allEnemies.forEach(enemy => enemy.reset());
 }
 
-function changePlayerImg(){
-    let imgIndex = player.imgIndex;
-    imgIndex = increaseImgIndex(imgIndex, playerImgs);
+function changeEntityImgs(entities, entityImgs){
+    let imgIndex = entities[0].imgIndex;
+    imgIndex = increaseImgIndex(imgIndex, entityImgs);
 
-    let img = Resources.get(playerImgs[imgIndex]);
+    let img = Resources.get(entityImgs[imgIndex]);
 
-    player.changeImg(imgIndex, img);
-}
-
-function changeEnemyImgs(){
-    let imgIndex = allEnemies[0].imgIndex;
-    imgIndex = increaseImgIndex(imgIndex, enemyImgs);
-
-    let img = Resources.get(enemyImgs[imgIndex]);
-
-    allEnemies.forEach(enemy => {
-        enemy.changeImg(imgIndex, img);
+    entities.forEach(entity => {
+        entity.changeImg(imgIndex, img);
     });
 }
 
@@ -114,18 +106,26 @@ function renderScore(){
     scoreSpan.textContent = score; 
 }
 
-const Enemy = function(img, imgIndex, x, y, speed) {
+const Character = function Character(img, imgIndex, x, y){
     this.img = img;
     this.imgIndex = imgIndex;
     this.x = x;
     this.y = y;
+}
+
+const Enemy = function Enemy(img, imgIndex, x, y, speed, player) {
+    Character.call(this, img, imgIndex, x, y);
+
     this.speed = speed;
+    this.player = player;
 };
 
 Enemy.initialX = -90;
 Enemy.imgsOverlayTreshold = 10;
-Enemy.width = 98;
-Enemy.height = 77;
+Enemy.size = {
+    width: 98,
+    height: 77
+}
 Enemy.field = {
     leftBorder: -101,
     rightBorder: 505
@@ -136,6 +136,9 @@ Enemy.getRandomSpeed = function(){
         max = 500;
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+Enemy.prototype = Object.create(Character.prototype);
+Enemy.prototype.constructor = Enemy;
 
 Enemy.prototype.update = function(dt) {
     this.increaseCoordinates(dt);
@@ -154,10 +157,10 @@ Enemy.prototype.increaseCoordinates = function(dt){
 }
 
 Enemy.prototype.checkCollisions = function(){
-    let precedingEntity = player.x < this.x ? Player : Enemy;
+    let precedingEntity = this.player.x < this.x ? Player : Enemy;
 
-    return Math.abs(this.x - player.x) < precedingEntity.width - Enemy.imgsOverlayTreshold && 
-           Math.abs(this.y - player.y) < precedingEntity.height - Enemy.imgsOverlayTreshold;
+    return Math.abs(this.x - this.player.x) < precedingEntity.size.width - Enemy.imgsOverlayTreshold && 
+           Math.abs(this.y - this.player.y) < precedingEntity.size.height - Enemy.imgsOverlayTreshold;
 }
 
 Enemy.prototype.handleLose = function(){
@@ -187,26 +190,29 @@ Enemy.prototype.changeSpeed = function(){
     this.speed = Enemy.getRandomSpeed();
 }
 
-const Player = function(img, imgIndex, x, y){
+const Player = function Player (img, imgIndex, x, y){
+    Character.call(this, img, imgIndex, x, y);
+
     this.horizontalStep = 101;
     this.verticalStep = 83;
-    this.img = img;
-    this.imgIndex = imgIndex;
-    this.x = x;
-    this.y = y;
 }
 
 Player.initialX = 217;
 Player.initialY = 462;
 Player.finalY = 47;
-Player.width = 67;
-Player.height = 86;
+Player.size = {
+    width: 67,
+    height: 86
+}
 Player.field = {
     leftBorder: 116,
     rightBorder: 318,
     upBorder: 130,
     downBorder: 379
 };
+ 
+Player.prototype = Object.create(Character.prototype);
+Player.prototype.constructor = Player;
 
 Player.prototype.handleInput = function(key){
     switch(key){
