@@ -33,12 +33,12 @@ class Habitant {
   }
 
   toString() {
-    return `Hi! I am <strong>${this.species}</strong>, my name is <strong>${
-      this.name
-    }</strong>, my gender is <strong>${this.gender}</strong>.
-     My friends: <strong>${this.listFriends()}</strong> and my phrase: <strong>${this.sayPhrase()}</strong>  I have <strong>${
-      this.legs
-    }</strong> legs`;
+    let props = Object.entries(this);
+    props = props.map(([key, value]) =>
+      value && key !== "friends" ? `${key}: <strong>${value}</strong>` : null
+    );
+
+    return `${props.join(" ")} Friends: <strong>${this.listFriends()}</strong>`;
   }
 }
 
@@ -56,9 +56,6 @@ class Human extends Habitant {
   constructor(name, gender, phrase, friends, legs = 2, hands = 2) {
     super("human", name, gender, phrase, friends, legs, hands);
     this.hands = hands;
-  }
-  toString() {
-    return super.toString() + ` and <strong>${this.hands}</strong> hands.`;
   }
 }
 const dog = new Dog("Snoop", "male", "Woof!");
