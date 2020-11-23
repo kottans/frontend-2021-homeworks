@@ -67,8 +67,9 @@ a:visited {
   font-family: "Kaushan Script", cursive;
   font-size: 24px;
   color: #ffffff;
-  margin-right: 35px;
+  margin-right: 28px;
   transition: 0.3s all ease-in-out;
+  padding: 7px;
 }
 
 .header__menuLink-last {
@@ -83,7 +84,7 @@ a:visited {
   font-family: "Kaushan Script", cursive;
   font-size: 24px;
   color: #ffffff;
-  margin-right: 35px;
+  margin-right: 28px;
 }
 
 .header__menuIcon {
@@ -106,7 +107,8 @@ a:visited {
 }
 
 .header__menuBtn:checked ~ .dropdown {
-  left: -140px;
+  visibility: visible;
+  left: -160px;
 }
 
 .header__menuBtn:checked ~ .dropdownBorder {
@@ -124,6 +126,9 @@ a:visited {
 }
 
 .dropdown {
+  visibility: hidden;
+  transition-property: visibility;
+  transition-delay: 1s;
   position: absolute;
   z-index: 100;
   width: 370px;
@@ -145,7 +150,7 @@ a:visited {
   width: 5px;
   height: 532px;
   top: -700px;
-  left: -190px;
+  left: -205px;
   background: #fff;
   transition: 0.5s top ease-in-out 0.5s;
   border-radius: 2px;
