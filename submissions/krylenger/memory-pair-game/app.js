@@ -148,7 +148,7 @@ const resetGame = () => {
     loadCards(cards);
     guessedCards = [];
     playedSongs = [];
-    handleClick();
+    flipCards();
 }
 
 const handlePlayingCards = (cardStatus) => {
@@ -195,7 +195,7 @@ const handleMusicCard = (target) => {
     };
 }
 
-const flipTwoCards = () => {
+const flipCards = () => {
     let clickCounter = 0;
     let guessedCards = 0;
     let playingCards = [];
@@ -232,13 +232,9 @@ const flipTwoCards = () => {
     })
 }
 
-const handleClick = () => {
-    flipTwoCards();
-}
-
 const initApp = () => {
     loadCards(cards);
-    handleClick();
+    flipCards();
 }
 
 document.addEventListener('DOMContentLoaded', initApp);
