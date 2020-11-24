@@ -1,6 +1,7 @@
 const HUMANS_LINK =
   'https://randomuser.me/api/?nat=us&results=36&inc=gender,name,picture,dob&seed=06b64d62bc01d624a';
-const BAD_STATUS = 200;
+const OK_STATUS = 200;
+const DEBOUNCE_DELAY = 500;
 
 const searchBtn = document.getElementById('search-btn');
 const rightPane = document.getElementById('right-pane');
@@ -12,11 +13,12 @@ const errorNotice = document.getElementById('error-notice');
 const loader = document.getElementById('loader');
 
 let humansOriginState;
+const noFilter = 'none';
 
 const currentState = {
   humans: undefined,
   sort: 'a-z',
-  filter: 'none',
+  filter: noFilter,
   searchValue: '',
 };
 
@@ -33,11 +35,11 @@ const handleInput = function () {
     sortHumans(currentState.sort);
     updateCards(currentState.humans);
     timer = null;
-  }, 500);
+  }, DEBOUNCE_DELAY);
 };
 
-const handleOptionClick = function (e) {
-  const button = e.target.closest('button');
+const handleOptionClick = function ({ target }) {
+  const button = target.closest('button');
   if (!button) return;
   const { dataset } = button;
   if (dataset.sort) {
@@ -51,7 +53,7 @@ const handleOptionClick = function (e) {
   if (dataset.filter) {
     if (currentState.filter === dataset.filter) {
       button.classList.toggle('active');
-      filterHumans('none');
+      filterHumans(noFilter);
     } else {
       const prevActiveFilterBtn = document.querySelector(
         'button[data-filter].active',
@@ -70,7 +72,7 @@ const filterHumans = function (filterOption) {
     elem.name.first.toLowerCase().startsWith(currentState.searchValue),
   );
   currentState.humans =
-    filterOption === 'none'
+    filterOption === noFilter
       ? humansFilteredByName
       : humansFilteredByName.filter(({ gender }) => gender === filterOption);
   currentState.filter = filterOption;
@@ -105,8 +107,7 @@ const sortHumans = function (sortOption) {
 const updateCards = function (arr) {
   cardsHolder.innerHTML = '';
   const fragment = document.createDocumentFragment();
-  arr.forEach((elem) => {
-    const { name, picture, dob, gender } = elem;
+  arr.forEach(({ name, picture, dob, gender }) => {
     const newElem = document.createElement('div');
     newElem.classList.add('card');
     const template = `
@@ -129,14 +130,14 @@ const updateCards = function (arr) {
 const getHumans = function () {
   return fetch(HUMANS_LINK)
     .then((res) => {
-      if (res.status !== BAD_STATUS) {
+      if (res.status !== OK_STATUS) {
         throw new Error(`Couldn't fetch data. ${res.status}`);
       }
       return res.json();
     })
-    .then((data) => {
-      humansOriginState = data.results;
-      currentState.humans = data.results;
+    .then(({ results }) => {
+      humansOriginState = results;
+      currentState.humans = results;
       loader.classList.add('hide');
     })
     .catch((err) => {
