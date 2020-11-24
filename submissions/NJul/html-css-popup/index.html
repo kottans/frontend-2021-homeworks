@@ -11,19 +11,16 @@
 </head>
 
 <body>
-  <section class="background">
+  <div class="background">
     <header>
       <nav class="navbar flex-horizontal-right">
 
         <ul class="navbar__list">
           <li class="navbar__item navbar__item--my-cat">
-
-            <input type="checkbox" id="my-cat-checkbox">
-            <!--del label tabindex attribute-->
+            <input type="checkbox" id="my-cat-checkbox" class="my-cat-checkbox">
             <label for="my-cat-checkbox" class="menu-toggler">
               <span class="popup-button">My cat</span>
             </label>
-
 
             <ul id="sub-navbar__list--1" class="sub-navbar__list sub-navbar__list--1">
               <li class="sub-navbar__item">
@@ -39,7 +36,6 @@
                 <a href="#" class="sub-navbar__link">Sub cat 4</a>
               </li>
             </ul>
-
           </li>
 
           <li class="navbar__item">
@@ -48,17 +44,15 @@
           </li>
 
           <li class="navbar__item navbar__item--popup">
-
-            <!--put <input> upper than <label></label>
-                del label tabindex attribute-->
-            <input type="checkbox" id="my-checkbox" class="menu__item-input">
+            <input type="checkbox" id="my-checkbox" class="my-checkbox menu__item-input">
             <label for="my-checkbox" class="menu-toggler">
               <img src="./img/popup-button.png" alt="Popup button" class="popup-button-img popup-button-img--checkbox">
             </label>
 
             <ul class="menu__submenu">
               <li class="submenu__item">
-                <a class="submenu__link" href="https://icons8.ru/icons/set/%D0%BA%D0%BE%D1%82" target="_blank">
+                <a class="submenu__link" href="https://icons8.ru/icons/set/%D0%BA%D0%BE%D1%82" target="_blank"
+                  rel="nofollow">
                   <img src="./img/popup-icons/cat-1.png" alt="Cats images">
                   <span class="menu__link-text">Cats images</span>
                 </a>
@@ -139,7 +133,7 @@
                     <a class="extramenu__link" href="#">
                       <img src="./img/popup-icons/grinning-cat-with-smiling-eyes.png"
                         alt="grinning-cat-with-smiling-eyes">
-                      Grinning cat with smiling eyes
+                      Cat with smiling eyes
                     </a>
                   </li>
                   <li class="extramenu__item">
@@ -154,31 +148,29 @@
                       Weary cat
                     </a>
                   </li>
-              </li>
-              <li class="extramenu__item-link">
-                <a href="https://kottans.org/" class="extramenu__extralink" target="_blank">
-                  even more from Kottans
-                </a>
-              </li>
+
+                  <li class="extramenu__item-link">
+                    <a href="https://kottans.org/" class="extramenu__extralink" target="_blank">
+                      even more from Kottans
+                    </a>
+                  </li>
+                </ul>
             </ul>
-        </ul>
-        </li>
 
-        <li class="navbar__item">
-          <a href="#" class="navbar__link">
-            <img src="./img/bell.png" alt="Bell" class="popup-button-img">
-          </a>
-        </li>
-        <li class="navbar__item">
-          <a href="https://github.com/kottans/mock-repo" class="navbar__link" target="_blank">
-            <img src="./img/kottans.png" alt="Kottans button" class="popup-button-img">
-          </a>
-        </li>
+          <li class="navbar__item">
+            <a href="#" class="navbar__link">
+              <img src="./img/bell.png" alt="Bell" class="popup-button-img">
+            </a>
+          </li>
+          <li class="navbar__item">
+            <a href="https://github.com/kottans/mock-repo" class="navbar__link" target="_blank">
+              <img src="./img/kottans.png" alt="Kottans button" class="popup-button-img">
+            </a>
+          </li>
         </ul>
-
       </nav>
     </header>
-  </section>
+  </div>
 </body>
 
 </html>
