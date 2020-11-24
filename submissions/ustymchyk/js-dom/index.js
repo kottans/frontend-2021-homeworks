@@ -68,16 +68,12 @@ function addListenersToMenu() {
 }
 
 function changeView(btn) {
-  if (!btn.classList.contains('active')) {
-    appendCards(btn.getAttribute('data-type'));
-  }
+  appendCards(btn.getAttribute('data-type'));
 }
 
 function toggleActiveClassOnBtn(btn) {
-  if (!btn.classList.contains('active')) {
-    document.querySelectorAll('.menu__item').forEach(el => el.classList.remove('active'));
-    btn.classList.add('active');
-  }
+  document.querySelectorAll('.menu__item').forEach(el => el.classList.remove('active'));
+  btn.classList.add('active');
 }
 
 function initBtnOpener() {
