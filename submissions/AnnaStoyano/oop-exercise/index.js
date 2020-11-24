@@ -27,22 +27,12 @@ class Mammal {
 class Dog extends Mammal {
    constructor(name, gender, friends, saying) {
       super('dog', name, gender, 4, friends, saying || 'guf');
-      this.tail = true;
-   }
-
-   tellAbout() {
-      return super.tellAbout() + '\t' + `<b>tail:</b> ${this.tail}`;
    }
 };
 
 class Cat extends Mammal {
    constructor(name, gender, friends, saying) {
       super('cat', name, gender, 4, friends, saying || 'meow');
-      this.tail = true;
-   }
-
-   tellAbout() {
-      return super.tellAbout() + '\t' + `<b>tail:</b> ${this.tail}`;
    }
 
    get getSaying() {
