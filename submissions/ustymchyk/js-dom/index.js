@@ -1,4 +1,4 @@
-import { pokemons } from "./data.js";
+import { pokemons } from './data.js';
 
 document.addEventListener('DOMContentLoaded', init);
 
@@ -10,101 +10,74 @@ function init() {
   initBtnOpener();
 }
 
-function changeView(type) {
-  appendCards(type);
-}
-
 function appendMenu() {
   const menuWrapper = document.querySelector('.menu__list');
-  const menuItemsVirtual = document.createDocumentFragment();
+  const menuNames = pokemons.map(typeObj => typeObj.type);
 
-  generateMenu(pokemons.map(typeObj => typeObj.type)).forEach(menuItem => {
-    menuWrapper.append(menuItem);
-  });
-
-  menuWrapper.appendChild(menuItemsVirtual);
+  menuWrapper.innerHTML = generateMenu(menuNames);
+  addListenersToMenu();
 }
 
 function appendCards(type) {
   const cardWrapper = document.querySelector('.main__list');
-  const cardListVirtual = document.createDocumentFragment();
-
-  generateCards(pokemons.filter(typeObj => typeObj.type === type)[0].list).forEach(card => {
-    cardListVirtual.append(card);
-  });
-
-  cardWrapper.innerHTML = '';
-  cardWrapper.append(cardListVirtual);
+  const pokemonList = pokemons.filter(typeObj => typeObj.type === type)[0]?.list || [];
+  cardWrapper.innerHTML = generateCards(pokemonList);
 }
 
 function generateCards(pokemonList) {
   return pokemonList.map(pokemon => {
-    const wrapper = document.createElement('li');
-    const titleNode = document.createElement('p');
-    const titleText = document.createTextNode(pokemon.name);
-    const img = document.createElement('img');
-    const statList = document.createElement('ul');
+    return `
+      <li class='card'>
+        <p class='card__title'>${pokemon.name || 'unknown'}</p>
+        <img src='${pokemon.img}' alt='${pokemon.name} image' class='card__img'>
+        <ul class='card__list'>${generateCardStats(pokemon.stats)}</ul>
+      </li>
+    `;
+  }).join('');
+}
 
-    wrapper.classList.add('card');
-    titleNode.classList.add('card__title');
-    img.classList.add('card__img');
-    statList.classList.add('card__list');
-
-    img.src = pokemon.img;
-    img.alt = `${pokemon.name} img`;
-
-    titleNode.appendChild(titleText);
-    wrapper.appendChild(titleNode);
-    wrapper.appendChild(img);
-    wrapper.appendChild(statList);
-
-    pokemon.stats.forEach(stat => {
-      const listItem = document.createElement('li');
-      const statNameWrapper = document.createElement('p');
-      const statNameText = document.createTextNode(stat.name);
-      const statValueWrapper = document.createElement('p');
-      const statValueText = document.createTextNode(stat.value);
-
-      listItem.classList.add('card__list-item');
-
-      statNameWrapper.append(statNameText);
-      statValueWrapper.append(statValueText);
-      listItem.append(statNameWrapper);
-      listItem.append(statValueWrapper);
-
-      statList.append(listItem);
-    });
-
-    return wrapper;
-  });
+function generateCardStats(statsList) {
+  return statsList.map(({ name, value }) => {
+    return `
+      <li class='card__list-item'>
+        <p>${name}</p>
+        <p>${value}</p>  
+      </li>`;
+  }).join('');
 }
 
 function generateMenu(textList) {
   return textList.map((type, i) => {
-    const listItem = document.createElement('li');
-    const button = document.createElement('button');
-    const text = document.createTextNode(type);
-    button.classList.add('menu__item');
+    return `
+      <li>
+        <button 
+          class='menu__item${i === 0 ? ' active' : ''}' 
+          data-type='${type}'>
+          ${type}
+        </button>
+      </li>
+    `;
+  }).join('');
+}
 
-    button.append(text);
-    listItem.append(button);
-
-    button.addEventListener('click', toggleActiveClassOnBtn);
-    button.addEventListener('click', () => changeView(type));
-
-    if (i === 0) {
-      button.classList.add('active');
-    }
-
-    return listItem;
+function addListenersToMenu() {
+  document.querySelectorAll('.menu__item').forEach(btn => {
+    btn.addEventListener('click', ({ currentTarget }) => changeView(currentTarget));
+    btn.addEventListener('click', ({ currentTarget }) => toggleActiveClassOnBtn(currentTarget));
   });
 }
 
-function toggleActiveClassOnBtn({ currentTarget: btn }) {
+function changeView(btn) {
+  if (!btn.classList.contains('active')) {
+    appendCards(btn.getAttribute('data-type'));
+  }
+}
+
+function toggleActiveClassOnBtn(btn) {
   if (!btn.classList.contains('active')) {
     document.querySelectorAll('.menu__item').forEach(el => el.classList.remove('active'));
+    btn.classList.add('active');
   }
-  btn.classList.add('active');
 }
 
 function initBtnOpener() {
