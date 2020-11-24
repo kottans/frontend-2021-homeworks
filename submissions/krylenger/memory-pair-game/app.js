@@ -86,26 +86,32 @@ const styleNewCardFlipperFront = (newCardFlipperFront, card, cardNumber) => {
     switch (cardNumber) {
         case 0:
         case 9:
-            newCardFlipperFront.classList.add('card__flipper-front', card.key, `card--circle-img`);
+            newCardFlipperFront.classList.add('card__flipper-front', `card--circle-img`);
+            newCardFlipperFront.setAttribute('data-key', card.key);
             break;
         case 1:
         case 2:
         case 7:
         case 8:
-            newCardFlipperFront.classList.add('card__flipper-front', card.key, `card--vertical-line-img`);
+            newCardFlipperFront.classList.add('card__flipper-front', `card--vertical-line-img`);
+            newCardFlipperFront.setAttribute('data-key', card.key);
             break;
         case 3:
-            newCardFlipperFront.classList.add('card__flipper-front', card.key, `card--left-corner-img`);
+            newCardFlipperFront.classList.add('card__flipper-front', `card--left-corner-img`);
+            newCardFlipperFront.setAttribute('data-key', card.key);
             break;
         case 6:
-            newCardFlipperFront.classList.add('card__flipper-front', card.key, `card--right-corner-img`);
+            newCardFlipperFront.classList.add('card__flipper-front', `card--right-corner-img`);
+            newCardFlipperFront.setAttribute('data-key', card.key);
             break;
         case 4:
         case 5:
-            newCardFlipperFront.classList.add('card__flipper-front', card.key, `card--horizontal-line-img`);
+            newCardFlipperFront.classList.add('card__flipper-front', `card--horizontal-line-img`);
+            newCardFlipperFront.setAttribute('data-key', card.key);
             break;
         default:
-            newCardFlipperFront.classList.add('card__flipper-front', card.key, `card--clef-img`);
+            newCardFlipperFront.classList.add('card__flipper-front', `card--clef-img`);
+            newCardFlipperFront.setAttribute('data-key', card.key);
     }
 }
 
@@ -124,6 +130,7 @@ const createNewCard = (card, cardNumber) => {
     newCardFlipper.classList.add('card__flipper');
     newCardFlipper.setAttribute('ontouchstart', "this.classList.toggle('card__flipper--flip');")
     styleNewCardFlipperFront(newCardFlipperFront, card, cardNumber);
+    console.log(newCardFlipperFront);
     newCardFlipperBack.classList.add('card__flipper-back');
     newCard.appendChild(newCardFlipper);
     newCardFlipper.appendChild(newCardFlipperFront);
@@ -172,7 +179,6 @@ const handlePlayingCards = (cardStatus) => {
     });
 }
 
-
 const handleGameOver = (guessedCards) => {
     if (guessedCards === totalPlayingCards) {
         setTimeout(() => {
@@ -190,7 +196,7 @@ const stopPreviousSong = (playedSongs) => {
 
 const handleMusicCard = (target) => {
     if (target.closest('.card').classList.contains('musicCard')) {
-        const targetKeyNumber = target.classList.value.match(/\d/)[0];
+        const targetKeyNumber = target.dataset.key;
         const targetObj = cards.find((card) => card.musicCard && card.key === Number.parseInt(targetKeyNumber, 10));
         if (playedSongs.length) {
             stopPreviousSong(playedSongs);
@@ -211,8 +217,8 @@ const clickCardCallback = ({target}) => {
         handleMusicCard(target);
 
         clickCounter += 1;
-        playingCards.push(target.classList.value);
-        if (clickCounter === 2 && playingCards[0].match(/^.{21}/)[0] === playingCards[1].match(/^.{21}/)[0]) {
+        playingCards.push(target.dataset.key);
+        if (clickCounter === 2 && playingCards[0] === playingCards[1]) {
           handlePlayingCards(guessed);
           modal.classList.add('modal--visible');
           setTimeout(() => {
