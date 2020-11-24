@@ -110,7 +110,6 @@ const styleNewCardFlipperFront = (newCardFlipperFront, card, cardNumber) => {
     }
     newCardFlipperFront.classList.add('card__flipper-front', generatedClassName);
     newCardFlipperFront.setAttribute('data-key', card.key);
-
 }
 
 const createNewCard = (card, cardNumber) => {
@@ -126,7 +125,7 @@ const createNewCard = (card, cardNumber) => {
         newCardFlipperBack.classList.add(`card--${card.text}-img`);
     }
     newCardFlipper.classList.add('card__flipper');
-    newCardFlipper.setAttribute('ontouchstart', "this.classList.toggle('card__flipper--flip');")
+    newCardFlipper.addEventListener('ontouchstart', clickCardCallback);
     styleNewCardFlipperFront(newCardFlipperFront, card, cardNumber);
     newCardFlipperBack.classList.add('card__flipper-back');
     newCard.appendChild(newCardFlipper);
