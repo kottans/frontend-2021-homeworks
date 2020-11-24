@@ -128,11 +128,9 @@ const createNewCard = (card, cardNumber) => {
     newCardFlipper.classList.add('card__flipper');
     newCardFlipper.setAttribute('ontouchstart', "this.classList.toggle('card__flipper--flip');")
     styleNewCardFlipperFront(newCardFlipperFront, card, cardNumber);
-    console.log(newCardFlipperFront);
     newCardFlipperBack.classList.add('card__flipper-back');
     newCard.appendChild(newCardFlipper);
-    newCardFlipper.appendChild(newCardFlipperFront);
-    newCardFlipper.appendChild(newCardFlipperBack);
+    newCardFlipper.append(newCardFlipperFront, newCardFlipperBack);
     return newCard;
 }
 
