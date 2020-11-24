@@ -12,6 +12,7 @@
 
 .icon {
     margin-right: 20px;
+    border: 1px solid transparent;
 }
 
 .icon img {
@@ -21,6 +22,7 @@
 
 .avatar {
     margin-right: 20px;
+    border: 1px solid transparent;
 }
 
 .avatar img {
@@ -46,6 +48,7 @@
 
 .popup-icon {
     margin-right: 20px;
+    border: 1px solid transparent;
 }
 
 .popup-icon:hover, .icon:hover, .avatar:hover {
@@ -68,6 +71,7 @@ li {
 
 a{
     display: block;
+    border: 1px solid transparent;
     text-decoration: none;
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
@@ -94,8 +98,8 @@ a:focus, a:hover {
     position: fixed;
     top: 6%;
     left: 82%;
-    width: 15%;
-    height: 380px;
+    width: 300px;
+    height: 450px;
     background-color: #fff;
     border: 1px solid #c6cccf;
     box-shadow: 5px 0 20px 0 rgba(0, 0, 0, 0.2);
@@ -124,6 +128,7 @@ a:focus, a:hover {
     color: #4a4d4f;
     flex-wrap: nowrap;
     margin-left: -10px;
+    margin-bottom: 20px;
 }
 
 .more-popup {
