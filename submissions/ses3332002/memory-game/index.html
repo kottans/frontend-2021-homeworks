@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="Memory pair game with adaptability and accessibility">
+  <link rel="stylesheet" href="style.css">
+  <title>Memory pair game</title>
+</head>
+<body>
+  <header>
+    <div class="selector theme_selector">
+      <div class="caption">Выбор темы оформления:</div>
+        <button class="theme_selector__button theme1" data-theme="theme1">тема 1</button>
+        <button class="theme_selector__button theme2" data-theme="theme2">тема 2</button>
+    </div>
+    <div class="selector">
+      <div class="caption">Выбор набора картинок:</div>
+      <input type="radio" name="option" id="1" class="radio switchable" value="1" checked/>
+      <label for="1">
+        <img src="img/1_1.jpg" alt="first card set" class="switchable">
+      </label>
+      <input type="radio" name="option" id="2" class="radio switchable" value="2"/>
+      <label for="2">
+        <img src="img/2_1.jpg" alt="second card set" class="switchable">
+      </label>
+    </div>
+    <div class="selector">
+      <div class="caption">Выбор размера поля:</div>
+      <div class="select_wrapper">
+        <select size="1" name="size" class="size_selector switchable">
+          <option value="12">3 * 4</option>
+          <option selected value="16">4 * 4</option>
+          <option value="20">4 * 5</option>
+          <option value="24">4 * 6</option>
+        </select>
+      </div>
+    </div>
+    <button class="start_button switchable">Старт!</button>
+  </header>
+  <main>
+    <h1 class="invisible">Игра на память</h1>
+    <section class="game_field">
+      <h2 class="invisible">Найди одинаковые элементы</h2>
+      <div class="game_area"></div>
+    </section>
+    <div class="popup_hail popup_hail-hide">
+      <div class="popup_hail__window">Вы выиграли!<button class="popup_hail__button">Ok</button></div>
+    </div>
+  </main>
+  <footer>
+    Использованы работы иллюстратора Энноны <a href="https://www.behance.net/ennona" target="_blank"><svg class="icon"><use xlink:href="img/icons_sprite.svg#icon-behance"/></svg></a>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
