@@ -18,8 +18,8 @@ class Mammal {
       this.saying = saying;
    }
 
-   tellAbout(properties) {
-      let propertiesForDispaly = properties || ['species', 'name', 'gender', 'legs', 'friends', 'saying'];
+   tellAbout() {
+      let propertiesForDispaly = ['species', 'name', 'gender', 'legs', 'friends', 'saying'];
       return propertiesForDispaly.map(property => `<b>${property}:</b> ${this[property]}`).join('\t');
    }
 };
@@ -27,22 +27,22 @@ class Mammal {
 class Dog extends Mammal {
    constructor(name, gender, friends, saying) {
       super('dog', name, gender, 4, friends, saying || 'guf');
+      this.tail = true;
    }
 
    tellAbout() {
-      let properties = ['name', 'species', 'friends']; /* properties for display */
-      return super.tellAbout(properties);
+      return super.tellAbout() + '\t' + `<b>tail:</b> ${this.tail}`;
    }
 };
 
 class Cat extends Mammal {
    constructor(name, gender, friends, saying) {
       super('cat', name, gender, 4, friends, saying || 'meow');
+      this.tail = true;
    }
 
    tellAbout() {
-      let properties = ['species', 'name', 'gender', 'legs', 'friends', 'saying']; /* properties for display */
-      return super.tellAbout(properties);
+      return super.tellAbout() + '\t' + `<b>tail:</b> ${this.tail}`;
    }
 
    get getSaying() {
@@ -56,10 +56,9 @@ class Human extends Mammal {
       this.hands = 2;
       this.saying = saying || `Hello! My name is ${this.name}`;
    }
+
    tellAbout() {
-      let childProperties = arguments[0]; /* array of properties for display from child if it exists*/
-      let properties = ['species', 'name', 'gender', 'legs', 'hands', 'friends', 'saying']; /* properties for display */
-      return super.tellAbout(childProperties || properties);
+      return super.tellAbout() + '\t' + `<b>hands:</b> ${this.hands}`;
    }
 }
 
@@ -67,27 +66,17 @@ class Woman extends Human {
    constructor(name, friends, saying) {
       super(name, 'female', friends, saying);
    }
-   tellAbout() {
-      return super.tellAbout(); /* You can also add array of property to display them */
-   }
 }
 
 class Man extends Human {
    constructor(name, friends, saying) {
       super(name, 'male', friends, saying);
    }
-   tellAbout() {
-      let properties = ['name', 'friends', 'saying'];
-      return super.tellAbout(properties);
-   }
 }
 
 class CatWoman extends Woman {
    constructor(name, friends) {
       super(name, friends, 'meow', Cat.prototype.getSaying);
-   }
-   tellAbout() {
-      return super.tellAbout();
    }
 }
 
