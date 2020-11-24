@@ -14,8 +14,12 @@ main {
     padding: 30px;
 }
 
+.opacity-zero {
+    opacity: 0 !important;
+}
+
 .flipper .front {
-    background: url("https://lh3.googleusercontent.com/proxy/VgJDyIIxvMOm9LSsAHtINz1x8ZEYia1vhIFTooYMjiu4Gv0oTXU6xX5iljH_cihgxWcTqjDDL32T9cXAcYmSdZMFRJwWyjjXa2E0p-zPP0Wj9Azffg3pOVxah2oWxODg") no-repeat center center;
+    background: url("https://lh3.googleusercontent.com/proxy/eUqCAU-V3pJHxfJ-nR8RIyX0ihSRM-wzEC9QHKHGdVdMQNnYWCdgM-Ew3Si8N4_G0VgANj3BtaFv8Njj_zzfe1_Ug4hsYvFnGS_9JZCBgV-6jhHVVVXHKUX9MgMeRZ4p") no-repeat center center;
     background-size: 100px 100px;
 }
 
@@ -24,9 +28,10 @@ main {
     perspective: 1000px;
     margin: 15px;
     transition: opacity .8s;
+    cursor: pointer;
 }
 /* flip the pane when hovered */
-.flip-container .flipper.hover {
+.flip-container .flipper.active {
     transform: rotateY(180deg);
 }
 
