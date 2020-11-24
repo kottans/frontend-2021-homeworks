@@ -65,6 +65,7 @@ a {
 }
 
 #trigger {
+  appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
   position: absolute;
