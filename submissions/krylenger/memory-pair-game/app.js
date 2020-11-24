@@ -83,36 +83,34 @@ const modal = document.querySelector('.modal');
 
 
 const styleNewCardFlipperFront = (newCardFlipperFront, card, cardNumber) => {
+    let generatedClassName;
     switch (cardNumber) {
         case 0:
         case 9:
-            newCardFlipperFront.classList.add('card__flipper-front', `card--circle-img`);
-            newCardFlipperFront.setAttribute('data-key', card.key);
+            generatedClassName = `card--circle-img`;
             break;
         case 1:
         case 2:
         case 7:
         case 8:
-            newCardFlipperFront.classList.add('card__flipper-front', `card--vertical-line-img`);
-            newCardFlipperFront.setAttribute('data-key', card.key);
+            generatedClassName = `card--vertical-line-img`;
             break;
         case 3:
-            newCardFlipperFront.classList.add('card__flipper-front', `card--left-corner-img`);
-            newCardFlipperFront.setAttribute('data-key', card.key);
+            generatedClassName = `card--left-corner-img`;
             break;
         case 6:
-            newCardFlipperFront.classList.add('card__flipper-front', `card--right-corner-img`);
-            newCardFlipperFront.setAttribute('data-key', card.key);
+            generatedClassName = `card--right-corner-img`;
             break;
         case 4:
         case 5:
-            newCardFlipperFront.classList.add('card__flipper-front', `card--horizontal-line-img`);
-            newCardFlipperFront.setAttribute('data-key', card.key);
+            generatedClassName = `card--horizontal-line-img`;
             break;
         default:
-            newCardFlipperFront.classList.add('card__flipper-front', `card--clef-img`);
-            newCardFlipperFront.setAttribute('data-key', card.key);
+            generatedClassName = `card--clef-img`;
     }
+    newCardFlipperFront.classList.add('card__flipper-front', generatedClassName);
+    newCardFlipperFront.setAttribute('data-key', card.key);
+
 }
 
 const createNewCard = (card, cardNumber) => {
