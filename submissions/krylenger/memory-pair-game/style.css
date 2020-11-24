@@ -106,62 +106,51 @@
 
 .card--orel-img {
     background-image: url('images/orel.png');
-    background-size: cover;
+    
 }
 
 .card--gopgop-img {
     background-image: url('images/gopgop.png');
-    background-size: cover;
 }
 
 .card--cadilac-img {
     background-image: url('images/cadilac.png');
-    background-size: cover;
 }
 
 .card--tanci-img {
     background-image: url('images/tanci.png');
-    background-size: cover;
 }
 
 .card--dim-img {
     background-image: url('images/dim.png');
-    background-size: cover;
 }
 
 .card--music-img {
     background-image: url('images/music.png');
-    background-size: cover;
 }
 
 .card--clef-img {
     background-image: url('images/clef.png');
-    background-size: cover;
 }
 
 .card--circle-img {
     background-image: url('images/black-circle.png');
-    background-size: cover;
 }
 
 .card--vertical-line-img {
     background-image: url('images/vertical-line.png');
-    background-size: cover;
 }
 
 .card--horizontal-line-img {
     background-image: url('images/horizontal-line.png');
-    background-size: cover;
 }
 
 .card--left-corner-img {
     background-image: url('images/left-corner.png');
-    background-size: cover;
 }
 
 .card--right-corner-img {
     background-image: url('images/right-corner.png');
-    background-size: cover;
 }
 
 .card__flipper {
@@ -185,6 +174,7 @@
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     border-radius: 10px;
+    background-size: cover;
 }
 
 .card__flipper-front {
