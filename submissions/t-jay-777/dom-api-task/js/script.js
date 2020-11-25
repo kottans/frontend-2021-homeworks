@@ -117,3 +117,6 @@ const getElemId = (items, id) => items.find(item => item.id === id);
 //clear input or clecked  smth in html file
 //https://stackoverflow.com/questions/3450593/how-do-i-clear-the-content-of-a-div-using-javascript
 const clearHTML = node => node.innerHTML = '';
+
+//start
+init();
