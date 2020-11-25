@@ -113,8 +113,8 @@ label {
 
 /* Popup menu container
 ------------------------- */
-#popup-btn_more,
-#popup {
+.popup-btn_more,
+.popup {
     position: absolute;
     top: -9999px;
 }
@@ -137,11 +137,11 @@ label {
     background-color:var(--menu-bg-color);
 }
 
-#popup:focus ~ label {
+.popup:focus ~ label {
     background-color:var(--icon-bg-color);
 }
 
-#popup:checked ~ .popup-menu {
+.popup:checked ~ .popup-menu {
     display: flex;
 }
 
@@ -221,7 +221,7 @@ span {
     color: var( --text-hover-color);
 }
 
-#popup-btn_more:focus ~ label {
+.popup-btn_more:focus ~ label {
     background-color: var(--btn-hover-color);
     color: var( --text-hover-color);
 }
@@ -244,7 +244,7 @@ span {
     background-color:var(--menu-bg-color);
 }
 
-#popup-btn_more:checked ~ .popup-menu_more {
+.popup-btn_more:checked ~ .popup-menu_more {
     display: flex;
 }
 
