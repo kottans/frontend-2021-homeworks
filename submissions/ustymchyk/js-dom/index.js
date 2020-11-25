@@ -1,30 +1,28 @@
 import { pokemons } from './data.js';
 
-document.addEventListener('DOMContentLoaded', init);
-
-function init() {
+document.addEventListener('DOMContentLoaded', () => {
   const initialType = pokemons[0].type;
 
   appendMenu();
   appendCards(initialType);
   initBtnOpener();
-}
+});
 
-function appendMenu() {
+const appendMenu = () => {
   const menuWrapper = document.querySelector('.menu__list');
   const menuNames = pokemons.map(typeObj => typeObj.type);
 
-  menuWrapper.innerHTML = generateMenu(menuNames);
-  addListenersToMenu();
+  menuWrapper.innerHTML = generateMenuItems(menuNames);
+  addClickListener();
 }
 
-function appendCards(type) {
+const appendCards = type => {
   const cardWrapper = document.querySelector('.main__list');
   const pokemonList = pokemons.filter(typeObj => typeObj.type === type)[0]?.list || [];
   cardWrapper.innerHTML = generateCards(pokemonList);
 }
 
-function generateCards(pokemonList) {
+const generateCards = pokemonList => {
   return pokemonList.map(pokemon => {
     return `
       <li class='card'>
@@ -36,7 +34,7 @@ function generateCards(pokemonList) {
   }).join('');
 }
 
-function generateCardStats(statsList) {
+const generateCardStats = statsList => {
   return statsList.map(({ name, value }) => {
     return `
       <li class='card__list-item'>
@@ -46,7 +44,7 @@ function generateCardStats(statsList) {
   }).join('');
 }
 
-function generateMenu(textList) {
+const generateMenuItems = textList => {
   return textList.map((type, i) => {
     return `
       <li>
@@ -60,23 +58,25 @@ function generateMenu(textList) {
   }).join('');
 }
 
-function addListenersToMenu() {
-  document.querySelectorAll('.menu__item').forEach(btn => {
-    btn.addEventListener('click', ({ currentTarget }) => changeView(currentTarget));
-    btn.addEventListener('click', ({ currentTarget }) => toggleActiveClassOnBtn(currentTarget));
+const addClickListener = () => {
+  document.querySelector('.menu__list').addEventListener('click', ({ target }) => {
+    if (target.getAttribute('data-type')) {
+      toggleActiveClassOnBtn(target);
+      changeView(target);
+    }
   });
 }
 
-function changeView(btn) {
+const changeView = btn => {
   appendCards(btn.getAttribute('data-type'));
 }
 
-function toggleActiveClassOnBtn(btn) {
+const toggleActiveClassOnBtn = btn => {
   document.querySelectorAll('.menu__item').forEach(el => el.classList.remove('active'));
   btn.classList.add('active');
 }
 
-function initBtnOpener() {
+const initBtnOpener = () => {
   document.querySelector('.header__btn').addEventListener('click', () => {
     document.querySelector('.menu').classList.toggle('open');
   });
