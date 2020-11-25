@@ -47,7 +47,7 @@ function filterBySearch(arr, str) {
 }
 
 function filterByGender(value, arr) {
-  if (value == 'all') {
+  if (value === 'all') {
     return arr
   } 
   return arr.filter(el => el.gender == value)
