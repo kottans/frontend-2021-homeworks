@@ -33,8 +33,8 @@ li {
     margin: 5px 20px;
 }
 
-.nav__menu-item > a:hover,
-.nav__menu-item > a:focus {
+a:hover,
+a:focus {
     outline: thin solid #a3a2a2;
     background-color: #c2c2c2;
 }
@@ -55,8 +55,7 @@ label > img:hover,
 }
 
 .submenu__list, 
-.more__popup-menu,
-.more__popup {
+.more__popup-menu {
     display: none;
 }
 
@@ -70,7 +69,7 @@ label > img:hover,
     outline: none;
 }
 
-#popup:checked ~ .submenu__list {
+.popup__menu:checked ~ .submenu__list {
     max-width: 350px;
     width: 350px;
     height: 500px;
@@ -130,12 +129,7 @@ label > img:hover,
     color: #6b6a6a;
 }
 
-.more__list:focus {
-    outline: thin solid #c2c2c2;
-    background-color: transparent;
-}
-
-#more-popup:checked ~ .more__popup-menu {
+.more__popup:checked ~ .more__popup-menu {
     max-width: 100%;
     position: relative;
     padding-top: 5px;
@@ -147,16 +141,21 @@ label > img:hover,
     line-height: 1.5em;
 }
 
-#more-popup:checked ~ .more__popup-menu::before {
+.more__popup:checked ~ .more__popup-menu::before {
     content: "";
     width: 100%;
     border-top: 2px solid #c4c4c4;
     padding: 10px 0;
 }
 
-#more-popup:checked ~ .more__submenu, 
-#more-popup:checked {
+.more__popup:checked ~ .more__submenu, 
+.more__popup:checked {
     display: none;
+}
+.more__popup {
+    display: block;
+    appearance: none;
+    outline: none;
 }
 
 .more__submenu {
@@ -164,8 +163,8 @@ label > img:hover,
     background-color: #e9e3e3;
 }
 
-.more__submenu:hover,
-.more__submenu:focus,
+.more__popup:focus + .more__submenu,
+.more__popup:hover + .more__submenu,
 .more__popup-link:hover,
 .more__popup-link:focus {
     cursor: pointer;
