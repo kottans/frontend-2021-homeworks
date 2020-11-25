@@ -90,10 +90,14 @@ header {
 
 .menu__input {
     position: absolute;
-    width: 30px;
+    position: absolute;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    /* width: 30px;
     height: 30px;
     cursor: pointer;
-    opacity: 0;
+    opacity: 0; */
 }
 
 .menu__label {
@@ -101,7 +105,7 @@ header {
     cursor: pointer;
 }
 
-.mainpopup {
+.main-popup {
     margin: 25px 100px 0 -200px;
     display: flex;
     align-items: center;
@@ -114,7 +118,7 @@ header {
     border: 5px solid black;
     border-radius: 4px;
 }
-.mainpopup::before {
+.main-popup::before {
     content: "";
     position: absolute;
     top: 40px;
@@ -128,23 +132,23 @@ header {
     display: none;
 }
 
-.mainpopup::-webkit-scrollbar {
+.main-popup::-webkit-scrollbar {
     width: 5px;
 }
 
-.mainpopup::-webkit-scrollbar-track {
+.main-popup::-webkit-scrollbar-track {
     background: #787a7ad8;
 }
 
-.mainpopup::-webkit-scrollbar-thumb {
+.main-popup::-webkit-scrollbar-thumb {
     background: #ec8179;
 }
 
-.mainpopup::-webkit-scrollbar-thumb:hover {
+.main-popup::-webkit-scrollbar-thumb:hover {
     background: black;
 }
 
-.mainpopup__link {
+.main-popup__link {
     width: 50px;
     margin: 8px;
     padding: 15px;
@@ -157,35 +161,39 @@ header {
     border-radius: 4px;
 }
 
-.mainpopup__link:hover {
-    border: 2px solid black;
-    padding: 10px;
-}
-.mainpopup__link:focus {
+.main-popup__link:hover {
+    outline: 2px solid black;
+    /* padding: 10px; */
+} 
+
+.main-popup__link:focus {
     background-color: #a19999b9;
 }
 
-.mainpopup__link img {
+.main-popup__link img {
     object-fit: contain;
     width: 70%;
     height: 70%;
 }
 
-.mainpopup__link p {
+.main-popup__link p {
     margin: 10px 0 0;
     color: black;
 }
 
-.mainpopup__item-input {
+.main-popup__item-input {
     position: absolute;
-    width: 20px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+   /*  width: 20px;
     height: 10px;
     cursor: pointer;
     opacity: 0;
-    top: 70%;
+    top: 70%; */
 }
 
-.mainpopup__item-label {
+.main-popup__item-label {
     position: relative;
     cursor: pointer;
     flex: 0 0 90%;
@@ -196,27 +204,33 @@ header {
     margin: 40px 0;
 }
 
-.mainpopup__item-label:hover {
+.main-popup__item-label:hover {
+    font-size: 0px;
+    background-color: #eb665d;
+}
+.main-popup__item-label:hover::after {
+    font-size: 16px;
+    content: "less";
     background-color: #eb665d;
 }
 
-.mainpopup__item-label:before {
+/* .main-popup__item-label:before {
     content: "More";
-}
+} */
 
-.mainpopup--invisible {
+.main-popup--invisible {
     visibility: hidden;
 }
 
-.mainpopup__link--hidden {
+.main-popup__link--hidden {
     display: none;
 }
 
-input.menu__input:checked ~ div.mainpopup--invisible {
+input.menu__input:checked ~ div.main-popup--invisible {
     visibility: visible;
 }
 
-input:checked ~ .mainpopup__link--hidden {
+input:checked ~ .main-popup__link--hidden {
     display: flex;
 }
 
@@ -228,9 +242,9 @@ input:focus ~ label {
     outline-width: 1px;
 }
 
-.mainpopup__item-input:checked ~ .mainpopup__item-label::before {
-    content: "Less"; 
-} 
+/* .main-popup__item-input:checked ~ .main-popup__item-label::after {
+    font-size: 0px;
+}  */
 
 .menu__item-input:checked ~ .menu__item-label::before {
     display: block;
@@ -274,4 +288,3 @@ input:focus ~ label {
     cursor: pointer;
     padding: 0;
 }
-
