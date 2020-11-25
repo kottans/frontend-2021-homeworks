@@ -4,6 +4,8 @@ const FIELD_WIDTH = 505,
         START_POS_Y = 404;  
         CELL_WIDTH = 101; 
         CELL_HEIGHT = 83;
+        MIN_SPEED = 20;
+        SPEED_MULTIPL = 256;
 
 
 // Enemies our player must avoid
@@ -28,12 +30,12 @@ Enemy.prototype.update = function(dt) {
     this.x += this.speed * dt;
     if (this.x > FIELD_WIDTH) {
          this.x = 0;
-         this.speed =  Math.floor(Math.random() * 256) + 20;
+         this.speed =  Math.floor(Math.random() * SPEED_MULTIPL) + MIN_SPEED;
     }
-    if (this.collision()) player.resetPosition();
+    if (this.checkCollision()) player.resetPosition();
 };
 
-Enemy.prototype.collision = function() {
+Enemy.prototype.checkCollision = function() {
     return (this.y + CELL_HEIGHT > this.player.y && this.player.x < this.x + CELL_WIDTH  && this.player.x > this.x - CELL_WIDTH);
 }
 
