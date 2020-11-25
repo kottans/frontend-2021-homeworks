@@ -7,59 +7,59 @@
   <title>Friends App</title>
 </head>
 <body>
-  <header class="header">
-    <h1 class="title">Friends App</h1>
-  </header>
   <div class="wrapper">
-    <aside class="aside">
-      <div class="filter">
-        <h2 class="aside__title">Filter</h2>
-        <div class="filter__search">
-          <p>By name</p>
-          <input class="search-input" type="text" placeholder="type name">
-        </div>
-        <div class="filter__gender">
-          <p>By gender</p>
-          <div class="gender-filter">
-            <input id="female" type="radio" name="gender" value="female">
-            <label class="gender-filter__label" for="female">female</label>
-            <input id="male" type="radio" name="gender" value="male">
-            <label class="gender-filter__label" for="male">male</label>
-            <input id="all" type="radio" name="gender" value="all" checked>
-            <label class="gender-filter__label" for="all">all</label>
-          </div>
-        </div>
-      </div>
-      <div class="sort">
-        <h2 class="aside__title">Sort</h2>
-        <div class="sort__wrapper">
-          <p>By age</p>
-          <div class="sort-age">
-            <input class="radio" id="age-ascending" type="radio" name="sort" value="age-ascending">
-            <label class="btn" for="age-ascending"><img src="assets/sort-ascending.svg" alt="sort-ascending"></label>
-            <input class="radio" id="age-descending" type="radio" name="sort" value="age-descending">
-            <label class="btn" for="age-descending"><img src="assets/sort-descending.svg" alt="sort-descending"></label>
-          </div>
-        </div>
-        <div class="sort__wrapper">
-          <p>By name</p>
-          <div class="sort-name">
-            <input class="radio" id="name-ascending" type="radio" name="sort" value="name-ascending">
-            <label class="btn" for="name-ascending"><img src="assets/sort-ascending.svg" alt="sort-ascending"></label>
-            <input class="radio" id="name-descending" type="radio" name="sort" value="name-descending">
-            <label class="btn" for="name-descending"><img src="assets/sort-descending.svg" alt="sort-descending"></label>
-          </div>
-        </div>
-      </div>
-    </aside>
+    <header class="header">
+      <h1 class="title">Friends App</h1>
+    </header>
     <main class="main">
-      <div class="container">
+      <aside class="aside">
+        <div class="filter">
+          <h2 class="aside__title">Filter</h2>
+          <div class="filter__search">
+            <p>By name</p>
+            <input class="search-input" type="text" placeholder="type name">
+          </div>
+          <div class="filter__gender">
+            <p>By gender</p>
+            <div class="gender-filter">
+              <input id="female" type="radio" name="gender" value="female">
+              <label class="gender-filter__label" for="female">female</label>
+              <input id="male" type="radio" name="gender" value="male">
+              <label class="gender-filter__label" for="male">male</label>
+              <input id="all" type="radio" name="gender" value="all" checked>
+              <label class="gender-filter__label" for="all">all</label>
+            </div>
+          </div>
+        </div>
+        <div class="sort">
+          <h2 class="aside__title">Sort</h2>
+          <div class="sort__wrapper">
+            <p>By age</p>
+            <div class="sort-age">
+              <input class="radio" id="age-ascending" type="radio" name="sort" value="age-ascending">
+              <label class="btn" for="age-ascending"><img src="assets/sort-ascending.svg" alt="sort-ascending"></label>
+              <input class="radio" id="age-descending" type="radio" name="sort" value="age-descending">
+              <label class="btn" for="age-descending"><img src="assets/sort-descending.svg" alt="sort-descending"></label>
+            </div>
+          </div>
+          <div class="sort__wrapper">
+            <p>By name</p>
+            <div class="sort-name">
+              <input class="radio" id="name-ascending" type="radio" name="sort" value="name-ascending">
+              <label class="btn" for="name-ascending"><img src="assets/sort-ascending.svg" alt="sort-ascending"></label>
+              <input class="radio" id="name-descending" type="radio" name="sort" value="name-descending">
+              <label class="btn" for="name-descending"><img src="assets/sort-descending.svg" alt="sort-descending"></label>
+            </div>
+          </div>
+        </div>
+      </aside>
+      <div class="main-content">
       </div>
     </main>
+    <footer class="footer">
+      Created by <a target="blank" href="https://github.com/HannaSyn">HannaSyn</a> for <a target="blank" href="https://github.com/kottans">Kottans</a> with &#128156;
+    </footer>
   </div>
-  <footer class="footer">
-    Created by <a target="blank" href="https://github.com/HannaSyn">HannaSyn</a> for <a target="blank" href="https://github.com/kottans">Kottans</a> with &#128156;
-  </footer>
   <script src="index.js"></script>
 </body>
 </html>

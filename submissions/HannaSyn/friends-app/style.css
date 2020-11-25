@@ -93,6 +93,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .wrapper {
   display: flex;
+  flex-direction: column;
 }
 
 .aside {
@@ -176,10 +177,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .main {
-  flex: 1 1 75%;
+  display: flex;
+  flex: 1 0 auto;
 }
 
-.container {
+.main-content {
+  flex: 1 1 75%;
   margin: 20px 0;
   display: flex;
   justify-content: center;
@@ -250,10 +253,11 @@ h1, h2, h3, h4, h5, h6 {
   -webkit-text-stroke: 1.5px #3E2A35;
   -webkit-text-fill-color: #B5C9C3;
   text-transform: uppercase;
+  flex-shrink: 0;
 }
 
 @media (max-width: 768px) {
-  .wrapper {
+  .main {
     flex-direction: column;
   }
   .aside {
@@ -263,7 +267,7 @@ h1, h2, h3, h4, h5, h6 {
   .filter {
     flex: 0 0 50%;
   }
-  .main {
+  .main-content {
     flex: 1 1 100%;
   }
 }
