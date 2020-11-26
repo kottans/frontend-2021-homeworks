@@ -8,7 +8,7 @@
 // ======== OBJECTS DEFINITIONS ========
 // Define your objects here
 class Habitant {
-  constructor(species, name, gender, phrase, friends = [], legs, props = []) {
+  constructor(species, name, gender, phrase, friends = [], legs) {
     this.species = species;
     this.legs = legs;
     this.name = name;
@@ -16,12 +16,18 @@ class Habitant {
     this.phrase = phrase;
     this.friends = friends;
     this.addFriends(friends);
-    this.props = props;
-    this.addProps();
+
+    [
+      this.speciesProp,
+      this.nameProp,
+      this.genderProp,
+      this.phraseProp,
+      this.legsProp,
+    ] = ["species", "name", "gender", "phrase", "legs"].map(
+      (prop) => `<strong>${this[prop]}</strong>`
+    );
   }
-  addProps() {
-    this.props = ["species", "legs", "name", "gender", "phrase"];
-  }
+
   addFriends(friends) {
     this.friends = [...this.friends, ...friends];
   }
@@ -37,15 +43,13 @@ class Habitant {
   }
 
   toString() {
-    this.props = this.props.map((prop) => `<strong>${this[prop]}</strong>`);
-
-    return `Hi! I am ${this.props[0]}, my name is ${
-      this.props[2]
-    }, my gender is ${this.props[3]}.
+    return `Hi! I am ${this.speciesProp}, my name is ${
+      this.nameProp
+    }, my gender is ${this.genderProp}.
     My phrase: ${
-      this.props[4]
+      this.phraseProp
     } Friends: <strong>${this.listFriends()}</strong>. I have ${
-      this.props[1]
+      this.legsProp
     } legs `;
   }
 }
@@ -61,17 +65,23 @@ class Cat extends Habitant {
   }
 }
 class Human extends Habitant {
-  constructor(name, gender, phrase, friends, legs = 2, hands = 2, props) {
-    super("human", name, gender, phrase, friends, legs, hands, props);
+  constructor(name, gender, phrase, friends, legs = 2, hands = 2) {
+    super("human", name, gender, phrase, friends, legs, hands);
     this.hands = hands;
-    // this.props.push("hands");
+    [
+      this.speciesProp,
+      this.nameProp,
+      this.genderProp,
+      this.phraseProp,
+      this.legsProp,
+      this.handsProp,
+    ] = ["species", "name", "gender", "phrase", "legs", "hands"].map(
+      (prop) => `<strong>${this[prop]}</strong>`
+    );
   }
-  addProps() {
-    super.addProps();
-    this.props.push("hands");
-  }
+
   toString() {
-    return super.toString() + `and  have ${this.props[5]} hands`;
+    return super.toString() + `and ${this.handsProp} hands.`;
   }
 }
 const dog = new Dog("Snoop", "male", "Woof!");
