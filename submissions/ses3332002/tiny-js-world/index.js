@@ -72,16 +72,17 @@ const catWoman = {
 };
 
 const inhabitants = [dog, cat, man, woman, catWoman];
+const propsToPrint = ["species", "name", "gender", "legs", "hands", "saying", "friends"];
 
 inhabitants.forEach((item) => {
   let description = "";
-  for (let key in item) {
-    if (typeof(item[key]) == "object") {
-      description = description + item[key].join(', ');
+  propsToPrint.forEach((prop) => {
+    if (Array.isArray(item[prop])) {
+      description = description + item[prop].join(', ');
     } else {
-      description = description + item[key] + "; ";
+      description = description + item[prop] + "; ";
     };
-  };
+  });
   print(description);
 });
 
