@@ -1,3 +1,4 @@
+const randomUserUrl = 'https://randomuser.me/api/?results=30';
 
 const state = {
   friends: [],
@@ -7,7 +8,7 @@ const state = {
     ageRange: [0,150],
   },
   sorter: {
-    key: null,
+    keyName: null,
     type: null,
   }
 }
@@ -31,9 +32,19 @@ const drawPerson = (person) => {
   `;
 }
 
-const redrawFriends = (friends) => {
+const filterList = (friends)=>{
+  //TODO filter by filter settings
+  return friends;
+}
 
-  friends.forEach(friend => drawPerson(friend));
+const sortList = (friends)=>{
+  //TODO sort by sorter settings
+  return friends;
+}
+
+const redrawFriends = (friends) => {
+  container.innerHTML = '';
+  sortList(filterList(friends)).forEach(friend => drawPerson(friend));
 }
 
 const updateFriendsList = (list)=> {
@@ -45,7 +56,7 @@ const updateFriendsList = (list)=> {
 
 const initApp = (state) => {
 
-  fetch('https://randomuser.me/api/?results=30')
+  fetch(randomUserUrl)
     .then(response => response.json())
     .then(json => {
       updateFriendsList(json.results);
