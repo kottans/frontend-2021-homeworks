@@ -9,14 +9,13 @@
 // Define your objects here
 
 class Inhabitant {
-    constructor(species, name, gender, legs, saying, friends = []) {
+    constructor(species, name, gender, legs, saying) {
         this.species = species;
         this.name = name;
         this.gender = gender;
         this.legs = legs;
         this.saying = saying;
-        this.friends = friends;
-        this.addFriends(friends);
+        this.friends = [];
     }
 
     addFriends(friends) {
@@ -24,14 +23,14 @@ class Inhabitant {
         else this.friends.push(friends);
     }
 
-    getFriendsName() {
+    getFriendsNames() {
         return this.friends.length > 0
             ? this.friends.map(friend => friend.name).join(', ')
             : 'the world';
     }
 
-    sayHi() {
-        return( `${this.saying} I'm a ${this.species}, ${this.gender} with the name ${this.name}. I want to say hi to <b>${this.getFriendsName()}</b>, you are the best! By the way, I have ${this.legs} legs.`);
+    toString() {
+        return( `${this.saying} I'm a ${this.species}, ${this.gender} with the name ${this.name}. I want to say hi to <b>${this.getFriendsNames()}</b>, you are the best! By the way, I have ${this.legs} legs.`);
     }
 }
 
@@ -60,9 +59,9 @@ class Human extends Inhabitant {
         super('human', name, gender, 2, saying, friends);
     }
 
-    sayHi() {
+    toString() {
         return(
-            super.sayHi() + ` And ${this.hands} hands.`
+            super.toString() + ` And ${this.hands} hands.`
         )
     }
 }
@@ -102,7 +101,9 @@ womanNatali.addFriends(manAndre);
 
 const inhabitants = [dog, cat, catWoman, manAndre, manVasya, manMitya, womanNatali];
 
-inhabitants.forEach(inhabitant => print(inhabitant.sayHi()));
+inhabitants.forEach(inhabitant => {
+    print(inhabitant);
+});
 
 // ======== OUTPUT ========
 /* Use print(message) for output.
