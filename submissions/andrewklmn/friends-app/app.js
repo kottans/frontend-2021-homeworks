@@ -15,6 +15,25 @@ const state = {
   initialListLength: 20
 }
 
+const genderList = [];
+const countryList = [];
+
+const sorterFieldPathList = {
+  name: ['name', 'first'],
+  age: ['dob', 'age'],
+  country: ['location', 'country'],
+};
+const sorterTypes = {
+  ASC: {
+    sign: '↑', 
+    htmlSymbol: '&uarr;', 
+  },
+  DESC: {
+    sign: '↓', 
+    htmlSymbol: '&darr;', 
+  },
+};
+
 const container = document.querySelector('.container');
 
 const drawPerson = (person) => {
@@ -64,8 +83,26 @@ const filterList = (friends)=>{
 }
 
 const sortList = (friends)=>{
-  //TODO sort by sorter settings
-  return friends;
+  if(state.sorter.keyName == '') {
+    return friends;
+  }
+  
+  const index0 = sorterFieldPathList[state.sorter.keyName][0];
+  const index1 = sorterFieldPathList[state.sorter.keyName][1];
+  
+  return friends.sort(function(a, b){
+    if(state.sorter.keyName == '') return 0;
+    if(state.sorter.type == 'DESC') {
+      if (a[index0][index1] > b[index0][index1]) {
+        return -1;
+      }
+      return 1;
+    }
+    if (a[index0][index1] < b[index0][index1]) {
+      return -1;
+    }
+    return 1;
+  });
 }
 
 const redrawFriends = (friends) => {
