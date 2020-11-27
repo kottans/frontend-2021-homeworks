@@ -62,6 +62,7 @@ function findChecked(element) {
     }
   }
   return checked;
+  
 }
 
 function sortByNameAsc(arr) {
@@ -89,7 +90,7 @@ function sortByAgeDesc(arr) {
 }
 
 function showFilteredUsers() {
-  let filteredArr = users;
+  let filteredArr = [...users];
   if (searchInput.value !== '') {
     filteredArr = filterBySearch(filteredArr, searchInput.value);
   }
