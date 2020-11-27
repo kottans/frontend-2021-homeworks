@@ -17,14 +17,15 @@ const container = document.querySelector('.container');
 const drawPerson = (person) => {
   container.innerHTML += `
     <div class="person">
-      <div class="person-name">${person.name.first} ${person.name.last}</div>
+      <div class="person-name ${person.gender}">${person.name.first} ${person.name.last}</div>
       <div class="person-image">
-        <img src="${person.picture.thumbnail}" alt="Person's photo">
+        <img class="rounded" src="${person.picture.large}" alt="Person's photo">
       </div>
-      <div class="person-info">
-        ${person.email}<br>
-        ${person.phone}<br>
-        ${person.location.city}, ${person.location.country}
+      <div class="person-age">
+        ${person.dob.age} y.o.
+      </div>
+      <div class="person-location">
+        ${person.location.country}
       </div>
     </div>
   `;
@@ -44,7 +45,7 @@ const updateFriendsList = (list)=> {
 
 const initApp = (state) => {
 
-  fetch('https://randomuser.me/api/?results=5')
+  fetch('https://randomuser.me/api/?results=30')
     .then(response => response.json())
     .then(json => {
       updateFriendsList(json.results);
@@ -59,5 +60,11 @@ const initApp = (state) => {
 
 document.addEventListener('DOMContentLoaded',(event)=>{
   initApp(state);
+
+  document.addEventListener('scroll', function(e) {
+
+    console.log(window.scrollY + ' ' + window.innerHeight);
+
+  });
 
 });
