@@ -2,17 +2,18 @@ const cards = document.querySelectorAll('.card');
 const win = document.querySelector('.win');
 
 let isRolledCard = false;
+let lockRoll = false;
 let firstCard, secondCard;
 let winCondition = 0;
 
 function rollCard() {
+    if (lockRoll) return;
     this.classList.add('roll');
 
     if (!isRolledCard) {
         //first clicked Card!
         isRolledCard = true;
         firstCard = this;
-        console.log(this);
     } else {;
          //second clicked Card!
         isRolledCard = false;
@@ -41,9 +42,11 @@ function freezeCards() {
 }
 
 function cancelRollCards() {
+    lockRoll = true;
     setTimeout(function() {
         firstCard.classList.remove('roll');
         secondCard.classList.remove('roll');
+        lockRoll = false;
         }, 400)
 }
 
