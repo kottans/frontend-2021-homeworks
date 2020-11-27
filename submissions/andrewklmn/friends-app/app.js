@@ -9,8 +9,8 @@ const state = {
     country: '',
   },
   sorter: {
-    keyName: '',
-    type: '',
+    keyName: 'age',
+    type: 'ASC',
   },
   initialListLength: 20
 }
@@ -86,7 +86,7 @@ const sortList = (friends)=>{
   if(state.sorter.keyName == '') {
     return friends;
   }
-  
+
   const index0 = sorterFieldPathList[state.sorter.keyName][0];
   const index1 = sorterFieldPathList[state.sorter.keyName][1];
   
@@ -114,7 +114,7 @@ const redrawFriends = (friends) => {
 
 const updateFriendsList = (list)=> {
   state.friends = list;
-  console.log(state.friends);
+  //console.log(state.friends);
   redrawFriends(state.friends);
 }
 
@@ -130,7 +130,8 @@ const initApp = (state) => {
       console.log("Getting list error");
     });
 
-  // Add filters driver
+  // TODO Add filters layout and driver
+  // TODO Add sorter layout and driver
 
 };
 
@@ -138,9 +139,7 @@ document.addEventListener('DOMContentLoaded',(event)=>{
   initApp(state);
 
   document.addEventListener('scroll', function(e) {
-
-    console.log(window.scrollY + ' ' + window.innerHeight);
-
+    //console.log(window.scrollY + ' ' + window.innerHeight);
   });
 
 });
