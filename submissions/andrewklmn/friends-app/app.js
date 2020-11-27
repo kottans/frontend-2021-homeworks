@@ -15,7 +15,19 @@ const state = {
 const container = document.querySelector('.container');
 
 const drawPerson = (person) => {
-  container.innerHTML += `${person.name.first} ${person.name.last} <br>`;
+  container.innerHTML += `
+    <div class="person">
+      <div class="person-name">${person.name.first} ${person.name.last}</div>
+      <div class="person-image">
+        <img src="${person.picture.thumbnail}" alt="Person's photo">
+      </div>
+      <div class="person-info">
+        ${person.email}<br>
+        ${person.phone}<br>
+        ${person.location.city}, ${person.location.country}
+      </div>
+    </div>
+  `;
 }
 
 const redrawFriends = (friends) => {
