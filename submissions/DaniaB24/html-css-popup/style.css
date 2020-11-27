@@ -13,7 +13,7 @@ body {
     overflow-x: hidden;
 }
 
-.nav-menu {
+.nav__menu {
     margin-top: 20px;
     margin: 0;
     padding: 0;
@@ -44,7 +44,7 @@ body {
     height: 50px;
     width: 348px;
     right: 90.5px;
-    top: 520px;
+    top: 521px;
     text-align: center;
 }
 
@@ -53,9 +53,11 @@ body {
     list-style-type: none;
     text-decoration: none;
     width: 33%;
-    padding: 20px 0;
     display: flex;
     justify-content: center;
+    font-size: 14px;
+    margin: 0;
+    text-align: center;
 }
 
 .nav__link {
@@ -63,48 +65,23 @@ body {
     margin: 0 0px 0 20px;
 }
 
-.menu-top {
+.menu__top {
     display: flex;
     flex-wrap: wrap;
     background-color: white;
     border: 2px solid darkgray;
     box-shadow: 0 0 15px lightgray;
     right: 88px;
+    top: 100px;
     justify-content: center;
-}
-
-.menu-top:focus {
-    border: 2px solid black;
-}
-
-p {
-    width: 50%;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 14px;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
 .popup {
     display: flex;
     flex-direction: row;
     width: 100%;
-    height: 40px;
-    margin: 0 auto 8px;
-}
-
-#popup_chat {
-    margin: auto;
-}
-
-#popup_classroom {
-    margin: auto;
-}
-
-#popup_collection {
-    margin: auto;
+    height: 43px;
+    margin: 0 auto 10px;
 }
 
 .popup:hover {
@@ -112,7 +89,17 @@ p {
     opacity: 0.7;
 }
 
-.b-menu {
+.p_popup {
+    padding: 20px 20px 15px 20px;
+    margin: 0;
+    font-size: 13px;
+}
+
+.p_popup:focus {
+    border: 1.5px solid black;
+}
+
+.b__menu {
     width: 1.5em;
     height: 1.5em;
     background-image: url(./images/apps.jpg);
@@ -120,19 +107,19 @@ p {
     margin: 0 0 0 20px;
 }
 
-.check__input~.menu-top {
-    opacity: 0;
+.check__input~.menu__top {
+    display: none;
 }
 
 .check__input~.extra__label {
-    opacity: 0;
+    display: none;
 }
 
-.check__input:checked~.menu-top {
+.check__input:checked~.menu__top {
+    display: flex;
     position: absolute;
     -webkit-appearance: none;
     appearance: none;
-    opacity: 1;
     width: 352.5px;
     height: 473px;
     margin: 0;
@@ -141,11 +128,12 @@ p {
 }
 
 .check__input:checked~.extra__label {
-    opacity: 1;
+    display: flex;
+    justify-content: center;
 }
 
 .check__input~.label {
-    opacity: 0;
+    display: none;
 }
 
 .check__input {
@@ -157,29 +145,33 @@ p {
     height: 25px;
     left: -16px;
     margin-top: -1px;
+    cursor: pointer;
 }
 
 .check__input2 {
     height: 29px;
     width: 350px;
-    display: flex;
-    justify-content: center;
     background-color: whitesmoke;
     border: 1px solid #e6e6e6;
-    font-size: 15px;
-    align-items: center;
-    font-family: sans-serif;
     opacity: 0;
+    position: absolute;
+    display: flex;
+    top: 530px;
+    right: 50px;
+    z-index: 2;
 }
 
-.check__input2:checked~.menu-top {
+.check__input2:checked~.menu__top {
     height: 440px;
     overflow: auto;
 }
 
 .check__input2:checked~.extra__label {
     display: none;
-    opacity: 0;
+}
+
+.check__input2:checked {
+    display: none;
 }
 
 .hr_line {
@@ -202,20 +194,11 @@ p {
     font-size: 13.5px;
 }
 
-a {
-    font-family: Arial, Helvetica, sans-serif;
-    text-decoration: none;
-    color: black;
-}
-
-.menu a {
-    margin-right: 40px;
-}
-
 .bell {
     margin: 0 0 0 20px;
     height: 21px;
     width: 18px;
+    cursor: pointer;
 }
 
 .avatar {
@@ -223,4 +206,5 @@ a {
     width: 33px;
     height: 33px;
     border-radius: 50%;
+    cursor: pointer;
 }

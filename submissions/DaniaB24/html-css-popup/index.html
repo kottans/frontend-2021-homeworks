@@ -1,115 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web Site</title>
-    <link rel="stylesheet" href="style.css" type="text/css">
-</head>
-
-<body>
-    <nav class="nav-menu">
-        <ul class="nav__list">
-            <li class="nav__item"><a href="#" class="nav__link">Mail</a></li>
-            <li class="nav__item"><a href="#" class="nav__link">Images</a></li>
-            <li class="nav__item">
-                <div class="b-menu">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Web Site</title>
+        <link rel="stylesheet" href="style.css" type="text/css">
+    </head>
+   <body>
+     <nav class="nav__menu">
+         <ul class="nav__list">
+             <li class="nav__item"><a href="#" class="nav__link">Mail</a></li>
+             <li class="nav__item"><a href="#" class="nav__link">Images</a></li>
+             <li class="nav__item">
+                <div class="b__menu">
                     <input class="check__input" type="checkbox">
-                    <input class="check__input2" id="more-btn" type="checkbox">
-                    <label for="more-btn" class="extra__label">More</label>
-                    <ul class="menu-top">
-                        <li class="li_popup" tabindex="1">
-                            <p class="p_popup"><img src="./images/calendar.png" class="popup">Calendar</p>
+                    <input class="check__input2" id="more__btn" type="checkbox">
+                    <label for="more__btn" class="extra__label">More</label>
+                    <ul class="menu__top">
+                        <li class="li_popup">
+                            <a href="#" class="p_popup"><img src="./images/calendar.png" class="popup" alt="popup">Calendar</a>
                         </li>
-                        <li class="li_popup" tabindex="2">
-                            <p class="p_popup"><img src="/images/mail.png" class="popup">Mail</p>
+                        <li class="li_popup">
+                            <a  href="#" class="p_popup"><img src="/images/mail.png" class="popup" alt="popup">Mail</a>
                         </li>
-                        <li class="li_popup" tabindex="3">
-                            <p class="p_popup"><img src="/images/news.png" class="popup">News</p>
+                        <li class="li_popup">
+                            <a href="#" class="p_popup"><img src="/images/news.png" class="popup" alt="popup">News</a>
                         </li>
-                        <li class="li_popup" tabindex="4">
-                            <p class="p_popup"><img src="/images/maps.png" class="popup">Map</p>
+                        <li class="li_popup">
+                            <a href="#" class="p_popup"><img src="/images/maps.png" class="popup" alt="popup">Map</a>
                         </li>
-                        <li class="li_popup" tabindex="5">
-                            <p class="p_popup"><img src="/images/files.png" class="popup">Files</p>
+                        <li class="li_popup">
+                            <a href="#" class="p_popup"><img src="/images/files.png" class="popup" alt="popup">Files</a>
                         </li>
-                        <li class="li_popup" tabindex="6">
-                            <p class="p_popup"><img src="/images/contacts.png" class="popup">Contacts</p>
+                        <li class="li_popup">
+                            <a href="#" class="p_popup"><img src="/images/contacts.png" class="popup" alt="popup">Contacts</a>
                         </li>
-                        <li class="li_popup" tabindex="7">
-                            <p class="p_popup"><img src="/images/tanslation.png" class="popup">Translate</p>
+                        <li class="li_popup">
+                            <a href="#" class="p_popup"><img src="/images/tanslation.png" class="popup" alt="popup">Translate</a>
                         </li>
-                        <li class="li_popup" tabindex="8">
-                            <p class="p_popup"><img src="/images/videos.png" class="popup">Videos</p>
+                        <li class="li_popup">
+                            <a href="#" class="p_popup"><img src="/images/videos.png" class="popup" alt="popup">Videos</a>
                         </li>
-                        <li class="li_popup" tabindex="9">
-                            <p class="p_popup"><img src="/images/search.png" class="popup">Search</p>
+                        <li class="li_popup">
+                            <a  href="#" class="p_popup"><img src="/images/search.png" class="popup" alt="popup">Search</a>
                         </li>
-                        <li class="li_popup" tabindex="10">
-                            <p class="p_popup"><img src="/images/photos.png" class="popup">Photos</p>
+                        <li class="li_popup">
+                            <a href="#" class="p_popup"><img src="/images/photos.png" class="popup" alt="popup">Photos</a>
                         </li>
-                        <li class="li_popup" tabindex="11">
-                            <p class="p_popup"><img src="/images/apps.jpg" class="popup">Apps</p>
+                        <li class="li_popup">
+                            <a href="#" class="p_popup"><img src="/images/apps.jpg" class="popup" alt="popup">Apps</a>
                         </li>
-                        <li class="li_popup" tabindex="12">
-                            <p class="p_popup"><img src="/images/documents.png" class="popup">Documents</p>
+                        <li class="li_popup">
+                            <a href="#" class="p_popup"><img src="/images/documents.png" class="popup" alt="popup">Documents</a>
                         </li>
                         <li class="hr_line"></li>
-                        <li class="li_popup" tabindex="13">
-                            <p class="p_popup"><img src="/images/chat.png" class="popup" id="popup_chat">Chat</p>
+                        <li class="li_popup">
+                            <a href="#" class="p_popup"><img src="/images/chat.png" class="popup" alt="popup">Chat</a>
                         </li>
-                        <li class="li_popup" tabindex="14">
-                            <p class="p_popup"><img src="/images/classroom.png" class="popup" id="popup_classroom">Classroom</p>
+                        <li class="li_popup">
+                            <a href="#" class="p_popup"><img src="/images/classroom.png" class="popup" alt="popup">Classroom</a>
                         </li>
-                        <li class="li_popup" tabindex="15">
-                            <p class="p_popup"><img src="/images/collection.png" class="popup" id="popup_collection">Collection</p>
+                        <li class="li_popup">
+                            <a href="#" class="p_popup"><img src="/images/collection.png" class="popup" alt="popup">Collection</a>
                         </li>
-                        <li class="li_popup" tabindex="16">
-                            <p class="p_popup"><img src="/images/mars.png" class="popup">Mars</p>
+                        <li class="li_popup">
+                            <a href="#" class="p_popup"><img src="/images/mars.png" class="popup" alt="popup">Mars</a>
                         </li>
-                        <li class="li_popup" tabindex="17">
-                            <p class="p_popup"><img src="/images/blogs.png" class="popup">Blogs</p>
+                        <li class="li_popup">
+                            <a href="#" class="p_popup"><img src="/images/blogs.png" class="popup" alt="popup">Blogs</a>
                         </li>
-                        <li class="li_popup" tabindex="18">
-                            <p class="p_popup"><img src="/images/ads.png" class="popup">Ads</p>
+                        <li class="li_popup">
+                            <a href="#" class="p_popup"><img src="/images/ads.png" class="popup" alt="popup">Ads</a>
                         </li>
-                        <li><a class="kottans_link" href="https://kottans.org/" target="_blank">Even more from Kottans</a></li>
+                        <li><a href="#" class="kottans_link" href="https://kottans.org/" target="_blank">Even more from Kottans</a></li>
                     </ul>
                 </div>
-
             </li>
-            <li class="nav__item"><img src="/images/bell.png" class="bell"></li>
-            <li class="nav__item"><img src="/images/ava.jpg" class="avatar"></li>
-
-        </ul>
-    </nav>
-    <!--
-  <input class="check__input2" id="more-btn" type="checkbox">
-  <label for="more-btn" class="extra__label">More</label>
-  <div class="menu_2">
-    <ul class="menu-bottom">
-      <li class="li_popup">
-        <p><img src="/images/chat.png" class="popup">Chat</p>
-      </li>
-      <li class="li_popup">
-        <p><img src="/images/classroom.png" class="popup">Classroom</p>
-      </li>
-      <li class="li_popup">
-        <p><img src="/images/collection.png" class="popup">Collection</p>
-      </li>
-      <li class="li_popup">
-        <p><img src="/images/mars.png" class="popup">Mars</p>
-      </li>
-      <li class="li_popup">
-        <p><img src="/images/blogs.png" class="popup">Classroom</p>
-      </li>
-      <li class="li_popup">
-        <p><img src="/images/ads.png" class="popup">Ads</p>
-      </li>
-    </ul>
-  </div>
-  -->
-</body>
-
+            <li class="nav__item"><img src="/images/bell.png" class="bell" alt="bell"></li>
+            <li class="nav__item"><img src="/images/ava.jpg" class="avatar" alt="avatar"></li>
+      </nav>
+   </body>
 </html>
