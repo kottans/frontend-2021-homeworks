@@ -13,6 +13,11 @@ li {
     list-style-type: none;
 }
 
+a, 
+a:visited {
+    color: #6b6a6a;
+    text-decoration: none;
+}
 .nav__menu {
     margin: 25px 0;
     align-items: flex-end;
@@ -33,20 +38,14 @@ li {
     margin: 5px 20px;
 }
 
-a:hover,
-a:focus {
+.nav__menu-link:hover,
+.nav__menu-link:focus {
     outline: thin solid #a3a2a2;
     background-color: #c2c2c2;
 }
 
-a, 
-a:visited {
-    color: #6b6a6a;
-    text-decoration: none;
-}
-
-label > img:focus,
-label > img:hover,
+.popup-btn:hover,
+.popup-btn:focus,
 .popup__menu:hover,
 .popup__menu:focus {
     cursor: pointer;
@@ -89,6 +88,11 @@ label > img:hover,
     line-height: 1.5em;
 }
 
+.popup-image {
+    width: 35px;
+    height: 35px;
+}
+
 .submenu__list-item a {
     display: flex;
     flex-direction: column;
@@ -109,8 +113,8 @@ label > img:hover,
     width: 29%;
     height: 22%;
 }
-.submenu__list-item:hover,
-.submenu__list-item:focus {
+.submenu__list-item a:hover,
+.submenu__list-item a:focus {
     outline: thin solid #c2c2c2;
     background-color: #c2c2c2;
 }
@@ -175,4 +179,13 @@ label > img:hover,
 .more__popup-link {
     padding: 10px 90px;
     background-color: #e9e3e3;
+}
+
+.notification {
+    width: 25px;
+    height: 30px;
+}
+
+.user {
+    width: 30px;
 }
