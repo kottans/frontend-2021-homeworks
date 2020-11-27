@@ -86,11 +86,20 @@
      display: none;
  }
  
- #toggle,
- #toggle1 {
+ #toggle {
      position: absolute;
-     display: none;
+     -webkit-appearance: none;
+     height: 24px;
+     width: 24px;
  }
+
+ #toggle1 {
+    position: absolute;
+    -webkit-appearance: none;
+    margin:4px 2px;
+    height: 30px;
+    width: 100%;
+}
  
  #toggle:checked~.overlay {
      display: block;
