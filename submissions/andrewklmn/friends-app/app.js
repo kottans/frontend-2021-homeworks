@@ -1,16 +1,18 @@
-const randomUserUrl = 'https://randomuser.me/api/?results=30';
+const randomUserUrl = 'https://randomuser.me/api/?results=100';
 
 const state = {
   friends: [],
   filters: {
-    name: null,
-    gender: null,
-    ageRange: [0,150],
+    namePart: '',
+    gender: '',
+    ageRange: [18,155],
+    country: '',
   },
   sorter: {
-    keyName: null,
-    type: null,
-  }
+    keyName: '',
+    type: '',
+  },
+  initialListLength: 20
 }
 
 const container = document.querySelector('.container');
@@ -33,8 +35,32 @@ const drawPerson = (person) => {
 }
 
 const filterList = (friends)=>{
-  //TODO filter by filter settings
-  return friends;
+  return friends.filter( person => {
+    if (state.filters.namePart != '') {
+      if(person.name.first.toUpperCase()
+              .indexOf(state.filters.namePart.toUpperCase()) == -1) { 
+        return false;
+      }
+    }
+    if (state.filters.gender != '') {
+      if(person.gender != state.filters.gender) { 
+        return false;
+      }
+    }
+
+    if (state.filters.ageRange[0] > person.dob.age
+        || state.filters.ageRange[1] < person.dob.age) {
+      return false;
+    }
+
+    if (state.filters.country != '') {
+      if(person.location.country != state.filters.country) { 
+        return false;
+      }
+    };
+
+    return true;
+  })
 }
 
 const sortList = (friends)=>{
@@ -44,7 +70,9 @@ const sortList = (friends)=>{
 
 const redrawFriends = (friends) => {
   container.innerHTML = '';
-  sortList(filterList(friends)).forEach(friend => drawPerson(friend));
+  sortList(filterList(friends))
+    .slice(0, state.initialListLength)
+    .forEach(friend => drawPerson(friend));
 }
 
 const updateFriendsList = (list)=> {
