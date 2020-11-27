@@ -146,10 +146,12 @@ label {
   font-size: 30px;
 }
 .list-link {
+  width: 195px;
   display: inline-block;
   cursor: pointer;
   color: white;
   padding: 20px;
+  padding-right: 40px;
   margin-left: 20px;
 }
 .list-link:active {
@@ -173,5 +175,5 @@ label {
 }
 
 .active {
-  font-size: 37px;
+  font-size: 35px;
 }

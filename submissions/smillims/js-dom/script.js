@@ -11,12 +11,14 @@ const heroes = [
 		years: 20,
 		description: `Ciri. Also known as the Child of Destiny, Ciri is described generally as a weapon that has the potential to destroy the very world that she inhabits. Along with this there are ties to her being an apprentice to Geralt. Her Witcher training, coupled with the magical abilities, mark her as one of the most powerful individuals in the world.`
 	},
-	{	id: 3,
+	{	
+		id: 3,
 		name: "Triss",
 		years: 37,
 		description: `Triss Merigold of Maribor is a legendary Temerian sorceress of the 13th century. A member of King Foltest's royal council along with Fercart and Keira Metz, as well as a founding member of the Lodge of Sorceresses, she was involved in politics for most of her life. `
 	},
-	{	id: 4,
+	{	
+		id: 4,
 		name: "Yennefer",
 		years: 99,
 		description: `Yennefer of Vengerberg, born on Belleteyn in 1173, was a sorceress who lived in Vengerberg, the capital city of Aedirn. She was Geralt of Rivia's true love and a mother figure to Ciri, whom she viewed like a daughter to the point that she did everything she could to rescue the girl and keep her from harm.`
@@ -26,47 +28,41 @@ const heroes = [
 const nav = document.querySelector('.navbar');
 const ul = document.querySelector('.list');
 const container = document.querySelector('.container');
-const div = document.createElement('div');
-
-function generateText(){
-	div.classList.add('content-text');
-	container.append(div);
-};
 
 function createNavItem() {
 	let content = '';
-	heroes.forEach(({id, name}) => {
+	heroes.map(({id, name}) => {
 		content += `<li class='list-item'>
 		<a data-id="${id}" class="list-link" href="#">${name}</a>
 		</li>`
-		
 	})
 	
 	ul.innerHTML = content;
 }
 
 function displayFact(navLink) {
-	const heroe = heroes.find( function (el) {
- 		return navLink.dataset.id == el.id;
- 	})
- 	if (!heroe) {
+	const hero = heroes.find((el) => navLink.dataset.id == el.id)
+ 	if (!hero) {
  		return;
- 	}
-	div.innerText = heroe.description;
-	container.append(div);
+	 }
+	const newDiv = document.createElement('div');
+	newDiv.classList.add('content-text');
+	newDiv.innerText = hero.description;
+	container.innerHTML = '';
+	container.append(newDiv);
 };
 
+
 document.addEventListener("DOMContentLoaded", function(e) {
-	generateText();
 	createNavItem();
 	ul.addEventListener('click', function(e) {
-	  let target = event.target;
+	  let target = e.target;
 	  e.preventDefault();
 	  const navItemActive = document.querySelector('.list-item.active');
 	  if (navItemActive) {
 		 navItemActive.classList.remove('active');
 	  }
-	  target.parentNode.classList.add('active');
+	  target.parentElement.classList.add('active');
 	  displayFact(target);
 	});
 });
