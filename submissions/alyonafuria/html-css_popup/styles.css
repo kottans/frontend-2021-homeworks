@@ -175,8 +175,8 @@
      opacity: 0.5;
  }
  
- .more-button:focus {
+ #toggle1:focus + .more-button {
      outline: 1;
-     opacity: 0.4;
+     opacity: 0.8;
      color: grey;
  }
