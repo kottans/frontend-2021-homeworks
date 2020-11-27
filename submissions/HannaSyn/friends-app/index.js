@@ -17,7 +17,7 @@ const loadUsers = async () => {
     users = results;
   }
   catch(error) {
-    mainContent.innerHTML = `<p>Oops! Here is the error ${error}</p>`
+    mainContent.innerHTML = `<p>Oops! Here is the error ${error}</p>`;
   }
 }
 
@@ -37,25 +37,25 @@ function renderCards(arr) {
         </div>
       </div>
     </div>`
-    card += template
+    card += template;
   })
-  mainContent.innerHTML = card
+  mainContent.innerHTML = card;
 }
 
 function filterBySearch(arr, str) {
-  return arr.filter( el => `${el.name.first}${el.name.last}`.includes(str.toLowerCase()))
+  return arr.filter( el => `${el.name.first}${el.name.last}`.toLowerCase().includes(str.toLowerCase()));
 }
 
 function filterByGender(value, arr) {
   if (value === 'all') {
-    return arr
+    return arr;
   } 
-  return arr.filter(el => el.gender == value)
+  return arr.filter(el => el.gender === value);
 }
 
 function findChecked(element) {
   let checked;
-  let inputs = element.querySelectorAll('input');
+  const inputs = element.querySelectorAll('input');
   for (let input of inputs) {
     if (input.checked) {
       checked = input;   
@@ -91,25 +91,25 @@ function sortByAgeDesc(arr) {
 function showFilteredUsers() {
   let filteredArr = users;
   if (searchInput.value !== '') {
-    filteredArr = filterBySearch(filteredArr, searchInput.value)
+    filteredArr = filterBySearch(filteredArr, searchInput.value);
   }
-  let gender = findChecked(filterGender);
+  const gender = findChecked(filterGender);
   if (gender) {
-    filteredArr = filterByGender(gender.value, filteredArr)
+    filteredArr = filterByGender(gender.value, filteredArr);
   }
   if (ageAscending.checked) {
-    sortByAgeAsc(filteredArr)
+    sortByAgeAsc(filteredArr);
   }
   if (nameAscending.checked) {
-    sortByNameAsc(filteredArr)
+    sortByNameAsc(filteredArr);
   }
   if (ageDescending.checked) {
-    sortByAgeDesc(filteredArr)
+    sortByAgeDesc(filteredArr);
   }
   if (nameDescending.checked) {
-    sortByNameDesc(filteredArr)
+    sortByNameDesc(filteredArr);
   }
-  renderCards(filteredArr)
+  renderCards(filteredArr);
 }
 
 const initApp = async () => {
