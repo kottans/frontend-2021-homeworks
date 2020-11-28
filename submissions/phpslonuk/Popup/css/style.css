@@ -9,7 +9,7 @@
   margin: 0 auto;
 }
 
-header {
+.header {
   width: 100%;
   height: 50px;
   display: flex;
@@ -21,6 +21,10 @@ a {
   color: black;
 }
 
+li {
+  list-style: none;
+}
+
 /* Navigation */
 
 .nav {
@@ -29,49 +33,52 @@ a {
   right: 100px;
 }
 
-.nav_list {
-  list-style: none;
+.nav-list {
   display: flex;
 }
 
-.nav_item {
+.nav-item {
   margin: 10px;
 }
 
-.nav_item label{
-	cursor: pointer;
+.nav-item label {
+  cursor: pointer;
 }
 
-.nav_item:hover {
+.nav-item:hover {
   outline-style: none;
   border-color: gray;
 }
 
-.nav_item_link {
+.nav-item-mail:focus, .nav-item-images:focus, .nav-item-checker:focus+label, .nav-item-bell:focus, .nav-item-avatar:focus {
+  outline: solid thin blue;
+}
+
+.nav-item-link {
   padding-top: 5px;
 }
 
-.nav_item_mail, .nav_item_images {
+.nav-item-mail, .nav-item-images {
   font-size: 17px;
   text-decoration: none;
   color: #767676;
 }
 
-.nav_item_img {
+.nav-item-img {
   width: 20px;
   height: 20px;
   margin-top: 3px;
   border-radius: 10px;
 }
 
-#trigger {
+.nav-item-checker {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
   position: absolute;
 }
 
-.popup_icon {
+.popup-icon {
   display: block;
   background: url(https://raw.githubusercontent.com/phpslonuk/Hooli-style_Popup/main/popup-icons/popup-button.png) no-repeat;
   background-position: left center;
@@ -82,65 +89,29 @@ a {
 
 /* Check for correctness of work */
 
-input[type="checkbox"]:checked+.popup_icon {
-  border: 1px solid blue;
-}
-
-input[type="checkbox"]:checked~.popup_menu {
-  display: block;
+input[type="checkbox"]:checked~.popup-menu {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 40px 20px 0px 20px;
+  width: 125%;
+  height: 495px;
+  overflow-y: auto;
 }
 
 /* Popup menu */
 
-.popup_menu {
+.popup-menu {
   display: none;
   border: 1px solid black;
   width: 310px;
-  height: 500px;
   position: absolute;
   top: 55px;
   right: 10px;
 }
 
-.popup_menu::before {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 0;
-  border-left: 16px solid transparent;
-  border-right: 16px solid transparent;
-  border-bottom: 16px solid black;
-  z-index: -1;
-  top: -16px;
-  left: 198px;
-}
-
-.popup_menu::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 0;
-  border-left: 15px solid transparent;
-  border-right: 15px solid transparent;
-  border-bottom: 15px solid white;
-  top: -15px;
-  left: 199px;
-  z-index: 5;
-}
-
-.popup-content {
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-}
-
-.main-menu {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  padding: 40px 20px 5px 20px;
-  width: 100%;
-  height: 90%;
+.popup-menu-li {
+  margin-bottom: 25px;
 }
 
 .popup-item:hover {
@@ -178,12 +149,14 @@ input[type="checkbox"]:checked~.popup_menu {
   object-fit: cover;
 }
 
-.show-more_btn {
-  opacity: 0;
+.show-more-btn {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
   position: absolute;
 }
 
-.show-more:hover, .show-more_btn:focus+.show-more {
+.show-more:hover, .show-more-btn:focus+.show-more {
   color: white;
   background-color: #ebe2da;
   cursor: pointer;
@@ -191,18 +164,19 @@ input[type="checkbox"]:checked~.popup_menu {
 
 .show-more {
   transition: all 0.2s ease-in;
-  padding: 4% 44%;
-  position: absolute;
-  bottom: 0%;
   background-color: #ebe2da;
+  display: inline-block;
+  width: 275px;
+  text-align: center;
+  line-height: 2rem;
 }
 
-.show-more_btn:checked~.sub-menu {
+.show-more-btn:checked~.sub-menu {
   display: flex;
   border-top: 1px solid #ebe2da;
 }
 
-.show-more_btn:checked+.show-more {
+.show-more-btn:checked+.show-more {
   display: none;
 }
 
@@ -211,12 +185,15 @@ input[type="checkbox"]:checked~.popup_menu {
   justify-content: space-between;
   align-content: space-between;
   flex-wrap: wrap;
-  padding: 40px 20px 10px 20px;
+  padding-top: 40px;
+  padding-bottom: 10px;
   width: 100%;
   height: 55%;
 }
 
 .kottans {
-  margin: 10px auto 0px auto;
+  margin: 10px auto;
+  text-align: center;
+  line-height: 2rem;
+  margin-left: 45px;
 }
-
