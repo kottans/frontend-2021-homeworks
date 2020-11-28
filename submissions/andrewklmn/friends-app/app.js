@@ -3,30 +3,28 @@ const randomUserUrl = 'https://randomuser.me/api/?results=100';
 const state = {
   friends: [],
   filters: {
-    namePart: '',
+    partOfName: '',
     gender: '',
+    genderList: [],
     ageRange: [18,155],
     country: '',
+    countryList: [],
   },
   sorter: {
     keyName: '',
     order: '',
+    fieldPathList: {
+      name: ['name', 'first'],
+      age: ['dob', 'age'],
+      country: ['location', 'country'],
+    },
+    orderSymbols: {
+      ASC: '&#9650;', 
+      DESC: '&#9660;',
+    },
   },
   initialListLength: 20
 }
-
-const genderList = [];
-const countryList = [];
-
-const sorterFieldPathList = {
-  name: ['name', 'first'],
-  age: ['dob', 'age'],
-  country: ['location', 'country'],
-};
-const sorterOrderSymbols = {
-  ASC: '&#9650;', 
-  DESC: '&#9660;',
-};
 
 const container = document.querySelector('.container');
 const sortField = document.querySelector('.sort-field');
@@ -53,7 +51,7 @@ const filterList = (friends)=>{
   return friends.filter( person => {
     if (state.filters.namePart != '') {
       if(person.name.first.toUpperCase()
-              .indexOf(state.filters.namePart.toUpperCase()) == -1) { 
+              .indexOf(state.filters.partOfName.toUpperCase()) == -1) { 
         return false;
       }
     }
@@ -84,8 +82,8 @@ const sortList = (friends) => {
     return friends;
   }
 
-  const index0 = sorterFieldPathList[state.sorter.keyName][0];
-  const index1 = sorterFieldPathList[state.sorter.keyName][1];
+  const index0 = state.sorter.fieldPathList[state.sorter.keyName][0];
+  const index1 = state.sorter.fieldPathList[state.sorter.keyName][1];
   
   return friends.sort(function(a, b){
     if(state.sorter.keyName == '') return 0;
@@ -102,7 +100,7 @@ const sortList = (friends) => {
   });
 }
 
-const redrawFriends = () => {
+const redrawFriends = (state) => {
   container.innerHTML = '';
   sortList(filterList(state.friends))
     .slice(0, state.initialListLength)
@@ -111,13 +109,12 @@ const redrawFriends = () => {
 
 const updateFriendsList = (list)=> {
   state.friends = list;
-  //console.log(state.friends);
-  redrawFriends();
+  redrawFriends(state);
 }
 
 
-const drawSorter = ()=>{
-  Object.keys(sorterFieldPathList).forEach((field)=>{
+const drawSorter = (state)=>{
+  Object.keys(state.sorter.fieldPathList).forEach((field)=>{
     const option = document.createElement('option');
     option.value = field;
     option.innerHTML = field;
@@ -132,12 +129,12 @@ const drawSorter = ()=>{
         break;
       default:
         if(sortOrder.innerHTML == ''){
-          sortOrder.innerHTML = sorterOrderSymbols.ASC;
+          sortOrder.innerHTML = state.sorter.orderSymbols.ASC;
           state.sorter.order = 'ASC';
         };    
         state.sorter.keyName = target.value; 
     };
-    redrawFriends();
+    redrawFriends(state);
   });
 
   sortOrder.addEventListener('click',({target})=>{
@@ -146,33 +143,34 @@ const drawSorter = ()=>{
       state.sorter.order = '';
       return;
     };
-    
+
     switch (state.sorter.order) {
       case 'ASC':
-        target.innerHTML = sorterOrderSymbols.DESC;
+        target.innerHTML = state.sorter.orderSymbols.DESC;
         state.sorter.order = 'DESC';
         break;
       default:
-        target.innerHTML = sorterOrderSymbols.ASC;
+        target.innerHTML = state.sorter.orderSymbols.ASC;
         state.sorter.order = 'ASC';
         break;
     };
-    redrawFriends();
+    redrawFriends(state);
   });
 }
 
-const initApp = () => {
+const initApp = (state) => {
 
   fetch(randomUserUrl)
     .then(response => response.json())
     .then(json => {
       updateFriendsList(json.results);
-      drawSorter();
+      drawSorter(state);
     })
+    /*
     .catch(function() {
       console.log("Getting list error");
     });
-
+    */
   // TODO Add filters layout and drive
 };
 
