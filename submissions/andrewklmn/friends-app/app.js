@@ -1,5 +1,5 @@
 
-const maxNumberOfFriends = 1000;
+const maxNumberOfFriends = 100;
 const randomUserUrl = 'https://randomuser.me/api/?results=' + maxNumberOfFriends;
 
 const state = {
@@ -25,7 +25,7 @@ const state = {
       DESC: '&#9660;',
     },
   },
-  initialListLength: 25,
+  initialListLength: 45,
   numberOfShowedFriends: 0,
 }
 
@@ -46,7 +46,13 @@ const drawPerson = (person) => {
     <div class="person">
       <div class="person-name ${person.gender}">${person.name.first} ${person.name.last}</div>
       <div class="person-image">
-        <img class="rounded" src="${person.picture.large}" alt="Person's photo">
+      <picture>
+        <source media="(max-width:300px)" 
+                srcset="${person.picture.thumbnail} 1x, ${person.picture.medium} 2x">
+        <source media="(max-width:400px)" 
+                srcset="${person.picture.medium} 1x, ${person.picture.large} 2x">
+        <img class="rounded" src="${person.picture.large}">
+      </picture>
       </div>
       <div class="person-age">
         ${person.dob.age} y.o.
@@ -232,6 +238,7 @@ const initApp = (state) => {
   fetch(randomUserUrl)
     .then(response => response.json())
     .then(json => {
+      console.log(json.results)
       updateFriendsList(json.results);
       drawSorter(state);
       drawFilters(state);
