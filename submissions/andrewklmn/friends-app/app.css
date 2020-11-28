@@ -102,8 +102,8 @@ body {
   border-radius: 50%;
 }
 
-.filter-search {
-  width: 50px;
+.search-field {
+  width: 100px;
 }
 .filter-min-age,
 .filter-max-age {

@@ -6,7 +6,7 @@ const state = {
     partOfName: '',
     gender: '',
     genderList: [],
-    ageRange: [18,155],
+    ageRange: [18,150],
     country: '',
     countryList: [],
   },
@@ -27,8 +27,15 @@ const state = {
 }
 
 const container = document.querySelector('.container');
+
 const sortField = document.querySelector('.sort-field');
 const sortOrder = document.querySelector('.sort-order');
+
+const searchField = document.querySelector('.search-field');
+const filterGender = document.querySelector('.filter-gender');
+const filterMinAge = document.querySelector('.filter-min-age');
+const filterMaxAge = document.querySelector('.filter-max-age');
+const filterCountry = document.querySelector('.filter-country');
 
 const drawPerson = (person) => {
   container.innerHTML += `
@@ -112,13 +119,16 @@ const updateFriendsList = (list)=> {
   redrawFriends(state);
 }
 
+const addOptionToSelect = (select, optionValue, optionText) => {
+  const option = document.createElement('option');
+  option.value = optionValue;
+  option.innerHTML = optionText;
+  select.appendChild(option);
+}
 
 const drawSorter = (state)=>{
   Object.keys(state.sorter.fieldPathList).forEach((field)=>{
-    const option = document.createElement('option');
-    option.value = field;
-    option.innerHTML = field;
-    sortField.appendChild(option);
+    addOptionToSelect(sortField, field, field);
   });
   sortField.addEventListener('change',({target}) => {
     switch (target.value) {
@@ -158,6 +168,57 @@ const drawSorter = (state)=>{
   });
 }
 
+const drawFilters = (state) => {
+
+  const onlyUnique = (value, index, self) => {
+    return self.indexOf(value) === index;
+  };
+  
+  state.filters.genderList = state.friends.map(person => person.gender).filter(onlyUnique);
+  state.filters.genderList.forEach((gender)=>{
+    addOptionToSelect(filterGender, gender, gender);
+  });
+  filterGender.addEventListener('change',({target}) => {
+    if (target.value == state.filters.gender) {
+      return true;
+    }
+    state.filters.gender = target.value;
+    redrawFriends(state);
+  });
+
+  filterMinAge.value = state.filters.ageRange[0];
+  filterMinAge.addEventListener('change',({target})=>{
+    state.filters.ageRange[0] = target.value;
+    redrawFriends(state);
+  });
+  
+  filterMaxAge.value = state.filters.ageRange[1];
+  filterMaxAge.addEventListener('change',({target})=>{
+    state.filters.ageRange[1] = target.value;
+    redrawFriends(state);
+  });
+
+  state.filters.countryList = state.friends.map(person => person.location.country).filter(onlyUnique);
+  state.filters.countryList.sort().forEach( country => {
+    addOptionToSelect(filterCountry, country, country);
+  });
+  filterCountry.addEventListener('change', ({target}) => {
+    if (target.value == state.filters.country) {
+      return true;
+    }
+    state.filters.country = target.value;
+    redrawFriends(state);
+  });
+  
+  searchField.addEventListener('keyup',({target})=>{
+    if (state.filters.partOfName == target.value) {
+      return true;
+    }
+    state.filters.partOfName = target.value;
+    redrawFriends(state);
+  });
+};
+
 const initApp = (state) => {
 
   fetch(randomUserUrl)
@@ -165,13 +226,12 @@ const initApp = (state) => {
     .then(json => {
       updateFriendsList(json.results);
       drawSorter(state);
+      drawFilters(state);
     })
-    /*
     .catch(function() {
       console.log("Getting list error");
     });
-    */
-  // TODO Add filters layout and drive
+    
 };
 
 document.addEventListener('DOMContentLoaded',(event)=>{
