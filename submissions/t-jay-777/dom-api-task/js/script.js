@@ -118,5 +118,24 @@ const getElemId = (items, id) => items.find(item => item.id === id);
 //https://stackoverflow.com/questions/3450593/how-do-i-clear-the-content-of-a-div-using-javascript
 const clearHTML = node => node.innerHTML = '';
 
+const init = () => {
+    const burgersList = document.querySelector('.burger-list');
+
+    const handleListItemClick = (evt) => {
+        const { target } = evt;
+        const currentID = parseInt(target.id, 10);
+        const isNeedRerender = currentID !== state.activePageId;
+
+        if (target.tagName !== 'BUTTON' || !isNeedRerender) {
+            return;
+        }
+
+        state.activePageId = currentID;
+        render(state);
+    }
+    burgersList.addEventListener('click', dosmth);
+
+};
+
 //start
 init();
