@@ -1,0 +1,106 @@
+/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */html{line-height:1.15;-webkit-text-size-adjust:100%}body{margin:0}main{display:block}h1{font-size:2em;margin:.67em 0}hr{box-sizing:content-box;height:0;overflow:visible}pre{font-family:monospace,monospace;font-size:1em}a{background-color:transparent}abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted}b,strong{font-weight:bolder}code,kbd,samp{font-family:monospace,monospace;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}img{border-style:none}button,input,optgroup,select,textarea{font-family:inherit;font-size:100%;line-height:1.15;margin:0}button,input{overflow:visible}button,select{text-transform:none}[type=button],[type=reset],[type=submit],button{-webkit-appearance:button}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring,button:-moz-focusring{outline:1px dotted ButtonText}fieldset{padding:.35em .75em .625em}legend{box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal}progress{vertical-align:baseline}textarea{overflow:auto}[type=checkbox],[type=radio]{box-sizing:border-box;padding:0}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}details{display:block}summary{display:list-item}template{display:none}[hidden]{display:none}
+/*# sourceMappingURL=normalize.min.css.map */
+
+* {
+    box-sizing: border-box;
+}
+
+main {
+    display: flex;
+    flex-flow: row wrap;
+    max-width: 1140px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 30px;
+}
+
+.opacity-zero {
+    opacity: 0 !important;
+}
+
+.flipper .front {
+    background: url("https://lh3.googleusercontent.com/proxy/eUqCAU-V3pJHxfJ-nR8RIyX0ihSRM-wzEC9QHKHGdVdMQNnYWCdgM-Ew3Si8N4_G0VgANj3BtaFv8Njj_zzfe1_Ug4hsYvFnGS_9JZCBgV-6jhHVVVXHKUX9MgMeRZ4p") no-repeat center center;
+    background-size: 100px 100px;
+}
+
+/* entire container, keeps perspective */
+.flip-container {
+    perspective: 1000px;
+    margin: 15px;
+    transition: opacity .8s;
+    cursor: pointer;
+}
+/* flip the pane when hovered */
+.flip-container .flipper.active {
+    transform: rotateY(180deg);
+}
+
+.flip-container, .front, .back {
+    width: 180px;
+    height: 260px;
+}
+
+/* flip speed goes here */
+.flipper {
+    transition: 0.6s;
+    transform-style: preserve-3d;
+
+    position: relative;
+}
+
+/* hide back of pane during swap */
+.front, .back {
+    backface-visibility: hidden;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    border: 1px solid #000;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* front pane, placed above back */
+.front {
+    z-index: 2;
+    /* for firefox 31 */
+    transform: rotateY(0deg);
+}
+
+/* back, initially hidden pane */
+.back {
+    transform: rotateY(180deg);
+}
+
+.congratulations {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.congratulations p {
+    padding: 16px 50px;
+    background-color: white;
+    color: #5a5a5a;
+    font-size: 24px;
+    border: 1px solid red;
+    border-radius: 10px;
+}
+
+.congratulations .btn {
+    padding: 6px 20px;
+    background-color: red;
+    color: #fff;
+    border: none;
+    box-shadow: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all .3s;
+}
+
+.congratulations .btn:hover {
+    opacity: .7;
+}
