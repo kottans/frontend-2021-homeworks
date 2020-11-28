@@ -42,11 +42,13 @@ const filterMinAge = document.querySelector('.filter-min-age');
 const filterMaxAge = document.querySelector('.filter-max-age');
 const filterCountry = document.querySelector('.filter-country');
 
-const drawPerson = (person) => {
-  container.innerHTML += `
-    <div class="person" title="Address: ${person.location.street.number}, ${person.location.street.name}, ${person.location.city}, ${person.location.state}
-Phone: ${person.phone}
-Email: ${person.email}">
+const drawPerson = (person) => {  
+  const div = document.createElement('div');
+  div.classList.add('person');
+  div.title = `Address: ${person.location.street.number}, ${person.location.street.name}, ${person.location.city}, ${person.location.state}
+  Phone: ${person.phone}
+  Email: ${person.email}`;
+  div.innerHTML =`
       <div class="person-name ${person.gender}">${person.name.first} ${person.name.last}</div>
       <div class="person-image">
       <picture>
@@ -63,8 +65,8 @@ Email: ${person.email}">
       <div class="person-location">
         ${person.location.country}
       </div>
-    </div>
   `;
+  container.appendChild(div);
 }
 
 const filterList = (friends)=>{
@@ -250,6 +252,7 @@ const initApp = (state) => {
       drawFilters(state);
       preloader.classList.add('hidden');
     })
+    /*
     .catch(function() {
       const header = document.querySelector('.header');
       const footer = document.querySelector('.footer')
@@ -258,14 +261,11 @@ const initApp = (state) => {
       footer.innerHTML = "Try Refresh this page again!";
       footer.classList.add('error');
     });
-    
+    */
 };
 
-const drawMoreFriends = () => {
-  console.log(state.numberOfShowedFriends);
-  sortList(filterList(state.friends))
-    .slice( state.numberOfShowedFriends, state.numberOfShowedFriends + state.initialListLength)
-    .forEach(friend => {
+const drawMoreFriends = (friends) => {
+    friends.forEach(friend => {
       state.numberOfShowedFriends++;
       drawPerson(friend);
     });
@@ -277,7 +277,10 @@ const autoLoaderOnScroll = () => {
     if(state.numberOfShowedFriends < state.friends.length) {
       preloader.classList.remove('hidden');
       state.scrollDisabled = true;
-      requestAnimationFrame(drawMoreFriends);
+      const additionalFriendList = sortList(filterList(state.friends))
+        .slice( state.numberOfShowedFriends, state.numberOfShowedFriends + state.initialListLength);
+
+      requestAnimationFrame(()=>drawMoreFriends(additionalFriendList));
       container.scrollTop -= 20;
       setTimeout(()=>{        
         state.scrollDisabled = false;
