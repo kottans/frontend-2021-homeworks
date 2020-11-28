@@ -102,6 +102,15 @@ body {
   border-radius: 50%;
 }
 
+.filter-search {
+  width: 50px;
+}
+.filter-min-age,
+.filter-max-age {
+  text-align: center;
+  width: 40px;
+}
+
 @media screen and (min-width: 430px) {
   .container {
     grid-template-columns: 1fr 1fr 1fr;
