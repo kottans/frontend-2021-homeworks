@@ -1,5 +1,5 @@
 
-const maxNumberOfFriends = 100;
+const maxNumberOfFriends = 30;
 const randomUserUrl = 'https://randomuser.me/api/?results=' + maxNumberOfFriends;
 
 const state = {
@@ -25,8 +25,9 @@ const state = {
       DESC: '&#9660;',
     },
   },
-  initialListLength: 45,
+  initialListLength: 10,
   numberOfShowedFriends: 0,
+  scrollDisabled: false,
 }
 
 const preloader = document.querySelector('.preloader');
@@ -43,7 +44,9 @@ const filterCountry = document.querySelector('.filter-country');
 
 const drawPerson = (person) => {
   container.innerHTML += `
-    <div class="person">
+    <div class="person" title="Address: ${person.location.street.number}, ${person.location.street.name}, ${person.location.city}, ${person.location.state}
+Phone: ${person.phone}
+Email: ${person.email}">
       <div class="person-name ${person.gender}">${person.name.first} ${person.name.last}</div>
       <div class="person-image">
       <picture>
@@ -120,10 +123,14 @@ const sortList = (friends) => {
 const redrawFriends = (state) => {
   preloader.classList.remove('hidden');
   container.innerHTML = '';
+  state.numberOfShowedFriends = 0;
 
   sortList(filterList(state.friends))
     .slice(0, state.initialListLength)
-    .forEach(friend => drawPerson(friend));
+    .forEach(friend => {
+      state.numberOfShowedFriends++;
+      drawPerson(friend);
+    });
 
   preloader.classList.add('hidden');
 }
@@ -238,7 +245,6 @@ const initApp = (state) => {
   fetch(randomUserUrl)
     .then(response => response.json())
     .then(json => {
-      console.log(json.results)
       updateFriendsList(json.results);
       drawSorter(state);
       drawFilters(state);
@@ -255,13 +261,36 @@ const initApp = (state) => {
     
 };
 
-document.addEventListener('DOMContentLoaded',(event)=>{
+const drawMoreFriends = () => {
+  console.log(state.numberOfShowedFriends);
+  sortList(filterList(state.friends))
+    .slice( state.numberOfShowedFriends, state.numberOfShowedFriends + state.initialListLength)
+    .forEach(friend => {
+      state.numberOfShowedFriends++;
+      drawPerson(friend);
+    });
+};
+
+const autoLoaderOnScroll = () => {
+  if (state.scrollDisabled) return true;
+  if (container.scrollTop + container.clientHeight == container.scrollHeight) {
+    if(state.numberOfShowedFriends < state.friends.length) {
+      preloader.classList.remove('hidden');
+      state.scrollDisabled = true;
+      requestAnimationFrame(drawMoreFriends);
+      container.scrollTop -= 20;
+      setTimeout(()=>{        
+        state.scrollDisabled = false;
+        preloader.classList.add('hidden');
+      }, 500);
+    };
+  }
+};
+
+document.addEventListener('DOMContentLoaded',() => {
+  
   initApp(state);
 
-  /* TODO when get scrolled down, add new people to list
-  document.addEventListener('scroll', function(e) {
-    //console.log(window.scrollY + ' ' + window.innerHeight);
-  });
-  */
+  container.addEventListener('scroll', autoLoaderOnScroll);
 
 });
