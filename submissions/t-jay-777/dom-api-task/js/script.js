@@ -118,6 +118,22 @@ const getElemId = (items, id) => items.find(item => item.id === id);
 //https://stackoverflow.com/questions/3450593/how-do-i-clear-the-content-of-a-div-using-javascript
 const clearHTML = node => node.innerHTML = '';
 
+//rendering list
+const renderListItems = (items, activeID) => {
+    const burgerListElem = document.querySelector('.burger-list');
+    //clear existing list if it is
+    clearHTML(burgerListElem);
+    //https://www.w3schools.com/jsref/met_document_createdocumentfragment.asp
+    //https://habr.com/ru/post/413287/
+    //https://developer.mozilla.org/en-US/docs/Web/API/Document/createDocumentFragment
+    const fragment = document.createDocumentFragment();
+    //items.forEach((item) => fragment.append(renderListItem(item, activeID)));
+    //append buttons and li 
+    items.map((item) => fragment.append(renderListItem(item, activeID)));
+
+    burgerListElem.append(fragment);
+};
+
 //rendering images
 const renderContent = (activePageId) => {
     //getting destructured list of images id
