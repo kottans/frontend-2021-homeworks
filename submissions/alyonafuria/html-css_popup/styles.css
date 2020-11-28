@@ -1,0 +1,182 @@
+ * {
+     box-sizing: border-box;
+     margin: 0;
+     padding: 0;
+     text-decoration: none;
+     list-style-type: none;
+     color: #34495E;
+ }
+ 
+ body {
+     font-family: Arial, Helvetica, sans-serif;
+ }
+ 
+ .navigation {
+     height: 50px;
+     width: 300px;
+     position: fixed;
+     right: 10px;
+     top: 10px;
+     display: flex;
+     justify-content: space-evenly;
+     align-items: center;
+ }
+ 
+ img {
+     max-width: 50px;
+     max-height: 40px;
+ }
+ 
+ .bell {
+     max-width: 25px;
+     max-height: 25px;
+ }
+ 
+ .avatar {
+     border-radius: 50%;
+ }
+ 
+ p {
+     text-align: center;
+ }
+ 
+ .upperButton {
+     background-color: white;
+     display: flex;
+     align-items: center;
+     padding: auto;
+     margin: auto;
+     max-width: 100px;
+     max-height: 30px;
+     font-size: 18px;
+ }
+ 
+ .overlay {
+     display: none;
+     position: fixed;
+     margin: 0;
+     padding: 0;
+     right: 50px;
+     top: 60px;
+     width: 310px;
+     height: 440px;
+     border: solid 1px gainsboro;
+     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+ }
+ 
+ .popup {
+     display: grid;
+     position: relative;
+     margin: auto;
+     padding: auto;
+     height: 100%;
+     width: 100%;
+     grid-template-rows: 100px 100px 100px 100px 38px;
+     grid-template-columns: repeat(3, 100px);
+     grid-auto-rows: 100px;
+     grid-auto-columns: 100px;
+     overflow-y: auto;
+     overflow-x:hidden;
+     grid-auto-flow: row;
+     justify-content: space-between;
+ }
+ 
+ .more {
+     margin: auto;
+     display: none;
+ }
+ 
+ #toggle {
+     position: absolute;
+     -webkit-appearance: none;
+     height: 24px;
+     width: 24px;
+ }
+
+ #toggle1 {
+    position: absolute;
+    -webkit-appearance: none;
+    margin:4px 2px;
+    height: 30px;
+    width: 100%;
+}
+ 
+ #toggle:checked~.overlay {
+     display: block;
+ }
+ 
+ #toggle1:checked~.more {
+     display: grid;
+     margin: auto;
+     position: absolute;
+     grid-template-rows: repeat (4, 100px);
+     grid-template-columns: repeat(3, 100px);
+     grid-auto-rows: 100px;
+     grid-auto-columns: 100px;
+     justify-content: space-around;
+     align-items: auto;
+ }
+ 
+ .el {
+     display: block;
+     align-items: center;
+     margin: auto;
+     padding: 5px;
+     max-width: 100px;
+     text-align: center;
+     font-size: 14px;
+ }
+ 
+ .popup-button:hover,
+ .upperButton:hover,
+ .el:hover {
+     transition-duration: 0.2s;
+     opacity: 0.7;
+ }
+ 
+ .popup-button:focus,
+ .upperButton:focus,
+ a:focus,
+ input:focus,
+ #toggle:focus {
+     outline: 1px solid #757575;
+ }
+ 
+ .popup-button {
+     cursor: pointer;
+     width: 40px;
+     height: 40px;
+     z-index: 1;
+ }
+ 
+ .button {
+     grid-column-start: 1;
+     grid-column-end: 4;
+     height: 100%;
+     width: 100%;
+ }
+ 
+ .more-button {
+     position: relative;
+     height: 100%;
+     width: 100%;
+     margin: auto;
+     padding: 10px;
+     display: block;
+     text-align: center;
+     font-size: 14px;
+     background-color: #D6EAF8;
+     outline: none;
+     cursor: pointer;
+     z-index: 1;
+ }
+ 
+ .more-button:hover {
+     opacity: 0.5;
+ }
+ 
+ #toggle1:focus + .more-button {
+     outline: 1;
+     opacity: 0.8;
+     color: grey;
+ }
