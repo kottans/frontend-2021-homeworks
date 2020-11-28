@@ -118,6 +118,20 @@ const getElemId = (items, id) => items.find(item => item.id === id);
 //https://stackoverflow.com/questions/3450593/how-do-i-clear-the-content-of-a-div-using-javascript
 const clearHTML = node => node.innerHTML = '';
 
+//rendering images
+const renderContent = (activePageId) => {
+    //getting destructured list of images id
+    const { url } = getElemId(contentList, activePageId);
+    //selet class name "content"
+    const contentElement = document.querySelector('.content');
+    //create image tag
+    const image = document.createElement('img');
+    image.src = url;
+
+    clearHTML(contentElement);
+    contentElement.append(image);
+};
+
 //rendering images and buttons
 const render = (state) => {
     renderListItems(state.burgers, state.activePageId);
