@@ -1,5 +1,5 @@
 
-const maxNumberOfFriends = 30;
+const maxNumberOfFriends = 250;
 const randomUserUrl = 'https://randomuser.me/api/?results=' + maxNumberOfFriends;
 
 const state = {
@@ -25,7 +25,7 @@ const state = {
       DESC: '&#9660;',
     },
   },
-  initialListLength: 10,
+  initialListLength: 25,
   numberOfShowedFriends: 0,
   scrollDisabled: false,
   nextMoreFriendAutoloadDelay: 300,
@@ -127,6 +127,7 @@ const redrawFriends = (state) => {
   preloader.classList.remove('hidden');
   container.innerHTML = '';
   state.numberOfShowedFriends = 0;
+  container.scrollTop = 0;
 
   sortList(filterList(state.friends))
     .slice(0, state.initialListLength)
