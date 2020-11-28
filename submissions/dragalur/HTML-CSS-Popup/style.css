@@ -75,16 +75,6 @@
 	border: solid 1px rgb(194, 194, 194);
 	border-radius: 10px;
 }
-.buttom-poup-app {
-	text-decoration: none;
-	width: 100%-1px;
-	height: 30px;
-	border: none;
-	background-color: rgb(212, 212, 212);
-	margin-top: 9px;
-	visibility: visible;
-	opacity: 1;
-}
 .buttom {
 	width: 100%;
 	height: 30px;
@@ -185,4 +175,13 @@
 }
 .first-input:focus ~ .focus-div {
 	outline: 2px solid black;
+}
+.second-navbar-button{
+	display: block;
+	width: 100%-1;
+	height: 30px;
+	background-color: rgb(212, 212, 212);
+	margin-top: 9px;
+	visibility: visible;
+	opacity: 1;
 }
