@@ -1,21 +1,25 @@
 body {
   margin: 0;
-  max-width: 1060px;
-
+  padding: 0;
   margin-left: auto;
   margin-right: auto;
+
+  max-width: 980px;
+  height: 100vh;
 
   font-family: sans-serif;
 }
 
-.header {
-  position: fixed;
-  top:0px;
-  padding: 0;
-  padding-top: 5px;
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
+  height: 100vh;
+}
+
+.header {
   width:100%;
-  max-width: 1060px;
   height: 40px;
 
   font-weight: bold;
@@ -28,14 +32,16 @@ body {
 }
 
 .footer {
-  position: fixed;
-  bottom:0px;
-  padding: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 10px;
+  
   padding-top: 10px;
+  padding-bottom: 10px;
 
-  width:100%;
-  max-width: 1060px;
-  height: 40px;
+  width: 100%;
 
   font-weight: bold;
   text-align: center;
@@ -49,12 +55,17 @@ body {
 .container {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
   grid-gap: 10px;
-
+  
   padding-left: 10px;
   padding-right: 10px;
-  margin-top: 50px;
-  margin-bottom: 60px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+
+  height: 100%;
+
+  overflow-y: scroll;
 }
 
 .person {
@@ -62,6 +73,7 @@ body {
   flex-direction: column;
   
   width: 100%;
+  max-height: 200px;
   max-width: 200px;
 
   font-size: 0.8em;
@@ -102,12 +114,8 @@ body {
   border-radius: 50%;
 }
 
-.sort-field {
-
+.field  {
   height: 33px;
-
-  font-size: 1em;
-  text-align-last:center;
 
   color: #1b5f59;
   background-color: #aedede;
@@ -116,6 +124,11 @@ body {
   border-radius: 10px;
 
   cursor: pointer;
+}
+
+.sort-field {
+  font-size: 1em;
+  text-align-last:center;
 }
 
 .sort-field:active,
@@ -130,14 +143,22 @@ body {
 }
 
 .search-field {
-  width: 100px;
+  width: 120px;
+
+  text-align: center;
   cursor: pointer;
 }
 
 .filter-min-age,
 .filter-max-age {
-  text-align: center;
   width: 40px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.filter-country {  
+  text-align: center;
+  cursor: pointer;
 }
 
 .preloader {

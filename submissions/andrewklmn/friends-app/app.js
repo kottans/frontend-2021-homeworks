@@ -1,4 +1,6 @@
-const randomUserUrl = 'https://randomuser.me/api/?results=200';
+
+const maxNumberOfFriends = 1000;
+const randomUserUrl = 'https://randomuser.me/api/?results=' + maxNumberOfFriends;
 
 const state = {
   friends: [],
@@ -23,7 +25,8 @@ const state = {
       DESC: '&#9660;',
     },
   },
-  initialListLength: 20
+  initialListLength: 25,
+  numberOfShowedFriends: 0,
 }
 
 const preloader = document.querySelector('.preloader');
@@ -58,7 +61,7 @@ const drawPerson = (person) => {
 const filterList = (friends)=>{
   return friends.filter( person => {
     if (state.filters.namePart != '') {
-      if(person.name.first.toUpperCase()
+      if((person.name.first + ' ' + person.name.last).toUpperCase()
               .indexOf(state.filters.partOfName.toUpperCase()) == -1) { 
         return false;
       }
