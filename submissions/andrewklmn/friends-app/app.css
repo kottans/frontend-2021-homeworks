@@ -167,7 +167,7 @@ body {
 
 .preloader {
   position: fixed;
-  top: 20;
+  top: 10px;
   left: 30px;
 
   width: 50px;

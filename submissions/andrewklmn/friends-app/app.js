@@ -28,6 +28,7 @@ const state = {
   initialListLength: 10,
   numberOfShowedFriends: 0,
   scrollDisabled: false,
+  nextMoreFriendAutoloadDelay: 300,
 }
 
 const preloader = document.querySelector('.preloader');
@@ -273,17 +274,19 @@ const autoLoaderOnScroll = () => {
   if (state.scrollDisabled) return true;
   if (container.scrollTop + container.clientHeight == container.scrollHeight) {
     if(state.numberOfShowedFriends < state.friends.length) {
-      preloader.classList.remove('hidden');
       state.scrollDisabled = true;
+      container.scrollTop--;
+      
+      preloader.classList.remove('hidden');
+
       const additionalFriendList = sortList(filterList(state.friends))
         .slice( state.numberOfShowedFriends, state.numberOfShowedFriends + state.initialListLength);
 
       requestAnimationFrame(()=>drawMoreFriends(additionalFriendList));
-      container.scrollTop -= 20;
       setTimeout(()=>{        
         state.scrollDisabled = false;
         preloader.classList.add('hidden');
-      }, 500);
+      }, state.nextMoreFriendAutoloadDelay);
     };
   }
 };
