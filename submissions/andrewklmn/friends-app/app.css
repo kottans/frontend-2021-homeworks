@@ -16,7 +16,7 @@ body {
 
   width:100%;
   max-width: 1060px;
-  height: 20px;
+  height: 30px;
 
   font-weight: bold;
   text-align: center;
@@ -53,7 +53,7 @@ body {
 
   padding-left: 10px;
   padding-right: 10px;
-  margin-top: 40px;
+  margin-top: 50px;
   margin-bottom: 60px;
 }
 
@@ -122,6 +122,10 @@ body {
 
 .hidden {
   visibility: hidden;
+}
+
+.error {
+  background-color:red;
 }
 
 @media screen and (min-width: 430px) {

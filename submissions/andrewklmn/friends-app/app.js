@@ -1,4 +1,4 @@
-const randomUserUrl = 'https://randomuser.me/api/?results=200';
+const randomUserUrl = 'https://randomu1ser.me/api/?results=200';
 
 const state = {
   friends: [],
@@ -235,8 +235,12 @@ const initApp = (state) => {
       preloader.classList.add('hidden');
     })
     .catch(function() {
-      document.querySelector('.header').innerHTML = "ERROR: Can't get friend list!";
-      document.querySelector('.footer').innerHTML = "Try Refresh this page again!";
+      const header = document.querySelector('.header');
+      const footer = document.querySelector('.footer')
+      header.innerHTML = "ERROR: Can't get friend list!";
+      header.classList.add('error');
+      footer.innerHTML = "Try Refresh this page again!";
+      footer.classList.add('error');
     });
     
 };
