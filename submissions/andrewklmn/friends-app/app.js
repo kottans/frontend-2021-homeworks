@@ -140,24 +140,15 @@ const drawSorter = ()=>{
     redrawFriends();
   });
 
-  /*
-  Object.entries(sorterOrderSymbols).forEach((order)=>{
-    const option = document.createElement('option');
-    option.value = order[0];
-    option.innerHTML = order[1];
-    sortOrder.appendChild(option);
-  });
-  */
   sortOrder.addEventListener('click',({target})=>{
     if(sortField.value == ''){
       target.innerHTML = '';
       state.sorter.order = '';
       return;
     };
-    console.log(target.innerHTML);
-
-    switch (target.innerHTML) {
-      case '▲':
+    
+    switch (state.sorter.order) {
+      case 'ASC':
         target.innerHTML = sorterOrderSymbols.DESC;
         state.sorter.order = 'DESC';
         break;
