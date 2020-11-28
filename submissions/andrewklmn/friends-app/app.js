@@ -9,8 +9,8 @@ const state = {
     country: '',
   },
   sorter: {
-    keyName: 'age',
-    type: 'ASC',
+    keyName: '',
+    order: '',
   },
   initialListLength: 20
 }
@@ -23,18 +23,14 @@ const sorterFieldPathList = {
   age: ['dob', 'age'],
   country: ['location', 'country'],
 };
-const sorterTypes = {
-  ASC: {
-    sign: '↑', 
-    htmlSymbol: '&uarr;', 
-  },
-  DESC: {
-    sign: '↓', 
-    htmlSymbol: '&darr;', 
-  },
+const sorterOrderSymbols = {
+  ASC: '&#9650;', 
+  DESC: '&#9660;',
 };
 
 const container = document.querySelector('.container');
+const sortField = document.querySelector('.sort-field');
+const sortOrder = document.querySelector('.sort-order');
 
 const drawPerson = (person) => {
   container.innerHTML += `
@@ -82,7 +78,8 @@ const filterList = (friends)=>{
   })
 }
 
-const sortList = (friends)=>{
+const sortList = (friends) => {
+
   if(state.sorter.keyName == '') {
     return friends;
   }
@@ -92,7 +89,7 @@ const sortList = (friends)=>{
   
   return friends.sort(function(a, b){
     if(state.sorter.keyName == '') return 0;
-    if(state.sorter.type == 'DESC') {
+    if(state.sorter.order == 'DESC') {
       if (a[index0][index1] > b[index0][index1]) {
         return -1;
       }
@@ -105,9 +102,9 @@ const sortList = (friends)=>{
   });
 }
 
-const redrawFriends = (friends) => {
+const redrawFriends = () => {
   container.innerHTML = '';
-  sortList(filterList(friends))
+  sortList(filterList(state.friends))
     .slice(0, state.initialListLength)
     .forEach(friend => drawPerson(friend));
 }
@@ -115,24 +112,65 @@ const redrawFriends = (friends) => {
 const updateFriendsList = (list)=> {
   state.friends = list;
   //console.log(state.friends);
-  redrawFriends(state.friends);
+  redrawFriends();
 }
 
 
-const initApp = (state) => {
+const drawSorter = ()=>{
+  Object.keys(sorterFieldPathList).forEach((field)=>{
+    const option = document.createElement('option');
+    option.value = field;
+    option.innerHTML = field;
+    sortField.appendChild(option);
+  });
+  sortField.addEventListener('change',({target}) => {
+    switch (target.value) {
+      case '':
+        sortOrder.value = '';
+        state.sorter.order = '';
+        state.sorter.keyName = '';
+        break;
+      default:
+        if(sortOrder.value == ''){
+          sortOrder.value = 'ASC';
+          state.sorter.order = 'ASC';
+        };    
+        state.sorter.keyName = target.value; 
+    };
+    redrawFriends();
+  });
+
+  Object.entries(sorterOrderSymbols).forEach((order)=>{
+    const option = document.createElement('option');
+    option.value = order[0];
+    option.innerHTML = order[1];
+    sortOrder.appendChild(option);
+  });
+  sortOrder.addEventListener('change',({target})=>{
+    if(sortField.value == ''){
+      target.value = '';
+      state.sorter.order = '';
+      return;
+    };
+    state.sorter.order = (target.value == '') ? 'ASC' : target.value;
+    target.value = state.sorter.order;
+    redrawFriends();
+  });
+}
+
+const initApp = () => {
 
   fetch(randomUserUrl)
     .then(response => response.json())
     .then(json => {
       updateFriendsList(json.results);
+      drawSorter();
     })
     .catch(function() {
       console.log("Getting list error");
     });
 
-  // TODO Add filters layout and driver
-  // TODO Add sorter layout and driver
-
+  // TODO Add filters layout and drive
 };
 
 document.addEventListener('DOMContentLoaded',(event)=>{
