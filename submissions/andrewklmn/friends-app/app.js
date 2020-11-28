@@ -1,4 +1,4 @@
-const randomUserUrl = 'https://randomuser.me/api/?results=100';
+const randomUserUrl = 'https://randomuser.me/api/?results=200';
 
 const state = {
   friends: [],
@@ -6,7 +6,7 @@ const state = {
     partOfName: '',
     gender: '',
     genderList: [],
-    ageRange: [18,150],
+    ageRange: [18,99],
     country: '',
     countryList: [],
   },
@@ -26,6 +26,7 @@ const state = {
   initialListLength: 20
 }
 
+const preloader = document.querySelector('.preloader');
 const container = document.querySelector('.container');
 
 const sortField = document.querySelector('.sort-field');
@@ -108,10 +109,14 @@ const sortList = (friends) => {
 }
 
 const redrawFriends = (state) => {
+  preloader.classList.remove('hidden');
   container.innerHTML = '';
+
   sortList(filterList(state.friends))
     .slice(0, state.initialListLength)
     .forEach(friend => drawPerson(friend));
+
+  preloader.classList.add('hidden');
 }
 
 const updateFriendsList = (list)=> {
@@ -227,9 +232,11 @@ const initApp = (state) => {
       updateFriendsList(json.results);
       drawSorter(state);
       drawFilters(state);
+      preloader.classList.add('hidden');
     })
     .catch(function() {
-      console.log("Getting list error");
+      document.querySelector('.header').innerHTML = "ERROR: Can't get friend list!";
+      document.querySelector('.footer').innerHTML = "Try Refresh this page again!";
     });
     
 };
@@ -237,8 +244,10 @@ const initApp = (state) => {
 document.addEventListener('DOMContentLoaded',(event)=>{
   initApp(state);
 
+  /* TODO when get scrolled down, add new people to list
   document.addEventListener('scroll', function(e) {
     //console.log(window.scrollY + ' ' + window.innerHeight);
   });
+  */
 
 });

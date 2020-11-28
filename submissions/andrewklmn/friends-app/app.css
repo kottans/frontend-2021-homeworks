@@ -111,6 +111,19 @@ body {
   width: 40px;
 }
 
+.preloader {
+  position: fixed;
+  top: 20;
+  left: 30px;
+
+  width: 50px;
+  height: auto;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
 @media screen and (min-width: 430px) {
   .container {
     grid-template-columns: 1fr 1fr 1fr;
