@@ -129,8 +129,6 @@ const renderListItem = ({ name, id }, activeID) => {
     button.innerText = name;
     button.type = 'button';
     button.id = id;
-    
-    //button.className = activeID === id ? 'active button' : 'button';
 
     if (activeID === id) {
         button.className = 'active button';
@@ -192,7 +190,7 @@ const init = () => {
     const handleListItemClick = (evt) => {
         const { target } = evt;
         const currentID = parseInt(target.id, 10);
-        
+
         const isNeedRerender = currentID !== state.activePageId;
         if (target.tagName !== 'BUTTON' || !isNeedRerender) {
             return;
@@ -201,8 +199,9 @@ const init = () => {
         state.activePageId = currentID;
         render(state);
     }
-    burgersList.addEventListener('click', handleListItemClick);
 
+    burgersList.addEventListener('click', handleListItemClick);
+    render(state);
 };
 
 //start

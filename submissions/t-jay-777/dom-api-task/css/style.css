@@ -51,7 +51,7 @@ img {
     justify-content: center;
 }
 
-.frameworks-list {
+.burger-list {
     display: flex;
     flex-direction: column;
     list-style: none;
