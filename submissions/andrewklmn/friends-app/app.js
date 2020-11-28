@@ -273,7 +273,7 @@ const drawMoreFriends = (friends) => {
 
 const autoLoaderOnScroll = () => {
   if (state.scrollDisabled) return true;
-  if (container.scrollTop + container.clientHeight == container.scrollHeight) {
+  if (container.scrollTop + container.clientHeight >= --container.scrollHeight) {
     if(state.numberOfShowedFriends < state.friends.length) {
       state.scrollDisabled = true;
       container.scrollTop--;
@@ -283,7 +283,8 @@ const autoLoaderOnScroll = () => {
       const additionalFriendList = sortList(filterList(state.friends))
         .slice( state.numberOfShowedFriends, state.numberOfShowedFriends + state.initialListLength);
 
-      requestAnimationFrame(()=>drawMoreFriends(additionalFriendList));
+      requestAnimationFrame(() => drawMoreFriends(additionalFriendList) );
+      
       setTimeout(()=>{        
         state.scrollDisabled = false;
         preloader.classList.add('hidden');
