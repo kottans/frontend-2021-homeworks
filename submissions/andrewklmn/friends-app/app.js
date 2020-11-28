@@ -126,13 +126,13 @@ const drawSorter = ()=>{
   sortField.addEventListener('change',({target}) => {
     switch (target.value) {
       case '':
-        sortOrder.value = '';
+        sortOrder.innerHTML = '';
         state.sorter.order = '';
         state.sorter.keyName = '';
         break;
       default:
-        if(sortOrder.value == ''){
-          sortOrder.value = 'ASC';
+        if(sortOrder.innerHTML == ''){
+          sortOrder.innerHTML = sorterOrderSymbols.ASC;
           state.sorter.order = 'ASC';
         };    
         state.sorter.keyName = target.value; 
@@ -140,20 +140,32 @@ const drawSorter = ()=>{
     redrawFriends();
   });
 
+  /*
   Object.entries(sorterOrderSymbols).forEach((order)=>{
     const option = document.createElement('option');
     option.value = order[0];
     option.innerHTML = order[1];
     sortOrder.appendChild(option);
   });
-  sortOrder.addEventListener('change',({target})=>{
+  */
+  sortOrder.addEventListener('click',({target})=>{
     if(sortField.value == ''){
-      target.value = '';
+      target.innerHTML = '';
       state.sorter.order = '';
       return;
     };
-    state.sorter.order = (target.value == '') ? 'ASC' : target.value;
-    target.value = state.sorter.order;
+    console.log(target.innerHTML);
+
+    switch (target.innerHTML) {
+      case '▲':
+        target.innerHTML = sorterOrderSymbols.DESC;
+        state.sorter.order = 'DESC';
+        break;
+      default:
+        target.innerHTML = sorterOrderSymbols.ASC;
+        state.sorter.order = 'ASC';
+        break;
+    };
     redrawFriends();
   });
 }
