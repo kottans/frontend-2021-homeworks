@@ -72,7 +72,7 @@ a {
   width: 24px;
 }
 
-/* apps-window elements styles */
+/* apps-window elements styles  */
 
 .apps-window {
   width: 330px;
@@ -114,6 +114,8 @@ a {
 .apps-cont {
   width: 100%;
   height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .apps-block {
@@ -225,16 +227,11 @@ label:hover {
   outline: 0px;
 }
 
-.apps-window__more-input:checked ~ .apps-cont > .apps-window2 {
+.apps-window__more-input:checked ~ .apps-window2 {
   display: block;
 }
 
 .apps-window__more-input:checked,
 .apps-window__more-input:checked ~ .apps-window__more-button {
   display: none;
-}
-
-.apps-window__more-input:checked ~ .apps-cont {
-  overflow-y: scroll;
-  overflow-x: hidden;
 }
