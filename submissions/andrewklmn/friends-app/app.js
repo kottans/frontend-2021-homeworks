@@ -1,4 +1,4 @@
-const randomUserUrl = 'https://randomu1ser.me/api/?results=200';
+const randomUserUrl = 'https://randomuser.me/api/?results=200';
 
 const state = {
   friends: [],

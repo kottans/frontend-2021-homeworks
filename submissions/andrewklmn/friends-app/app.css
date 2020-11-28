@@ -12,11 +12,11 @@ body {
   position: fixed;
   top:0px;
   padding: 0;
-  padding-top: 10px;
+  padding-top: 5px;
 
   width:100%;
   max-width: 1060px;
-  height: 30px;
+  height: 40px;
 
   font-weight: bold;
   text-align: center;
@@ -102,9 +102,38 @@ body {
   border-radius: 50%;
 }
 
+.sort-field {
+
+  height: 33px;
+
+  font-size: 1em;
+  text-align-last:center;
+
+  color: #1b5f59;
+  background-color: #aedede;
+
+  border: none;
+  border-radius: 10px;
+
+  cursor: pointer;
+}
+
+.sort-field:active,
+.sort-field:focus {
+  border: none;
+  outline: none;
+}
+
+.sort-order {
+  font-size: 1.4em;
+  cursor: pointer;
+}
+
 .search-field {
   width: 100px;
+  cursor: pointer;
 }
+
 .filter-min-age,
 .filter-max-age {
   text-align: center;
