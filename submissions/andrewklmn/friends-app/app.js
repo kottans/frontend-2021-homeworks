@@ -252,16 +252,14 @@ const initApp = (state) => {
       drawFilters(state);
       preloader.classList.add('hidden');
     })
-    /*
     .catch(function() {
       const header = document.querySelector('.header');
       const footer = document.querySelector('.footer')
       header.innerHTML = "ERROR: Can't get friend list!";
       header.classList.add('error');
-      footer.innerHTML = "Try Refresh this page again!";
+      footer.innerHTML = "Try Refresh this page later!";
       footer.classList.add('error');
     });
-    */
 };
 
 const drawMoreFriends = (friends) => {
