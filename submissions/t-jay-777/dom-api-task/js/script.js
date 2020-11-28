@@ -118,6 +118,31 @@ const getElemId = (items, id) => items.find(item => item.id === id);
 //https://stackoverflow.com/questions/3450593/how-do-i-clear-the-content-of-a-div-using-javascript
 const clearHTML = node => node.innerHTML = '';
 
+//rendering list of li and button tags
+const renderListItem = ({ name, id }, activeID) => {
+    //create button
+    //https://www.w3schools.com/jsref/met_document_createelement.asp
+    const button = document.createElement('button');
+    //creating li
+    const item = document.createElement('li');
+    //Node.innerText - это свойство, позволяющее задавать или получать текстовое содержимое элемента и его потомков
+    button.innerText = name;
+    button.type = 'button';
+    button.id = id;
+    
+    //button.className = activeID === id ? 'active button' : 'button';
+
+    if (activeID === id) {
+        button.className = 'active button';
+    } else {
+        button.className = 'button';
+    }
+    //https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/append
+    item.append(button);
+
+    return item;
+};
+
 //rendering list
 const renderListItems = (items, activeID) => {
     const burgerListElem = document.querySelector('.burger-list');
