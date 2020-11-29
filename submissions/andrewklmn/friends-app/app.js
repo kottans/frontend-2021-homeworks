@@ -129,44 +129,43 @@ const sortList = (friends) => {
   });
 }
 
-const setResetButtonView = (state) => {
-  if(state.sorter.keyName != ''
-      || state.filters.partOfName != ''
-      || state.filters.gender != ''
-      || state.filters.ageRange[0] != minPersonAge
-      || state.filters.ageRange[1] != maxPersonAge
-      || state.filters.country != '') {
+const setResetButtonView = (filters, sorter) => {
+  if(sorter.keyName != ''
+      || filters.partOfName != ''
+      || filters.gender != ''
+      || filters.ageRange[0] != minPersonAge
+      || filters.ageRange[1] != maxPersonAge
+      || filters.country != '') {
     resetButton.classList.remove('off');
     return;
   };
   resetButton.classList.toggle('off',true);
 }
 
-const resetButtonClickHandler = () => {
+const resetButtonClickHandler = ({filters, sorter}) => {
   const change = new Event('change');
 
-  state.filters.partOfName = searchField.value = '';
-  state.filters.gender = filterGender.value = '';
-  state.filters.ageRange[0] = filterMinAge.value = minPersonAge;
-  state.filters.ageRange[1] = filterMaxAge.value = maxPersonAge;
-  state.filters.country = filterCountry.value = '';
+  filters.partOfName = searchField.value = '';
+  filters.gender = filterGender.value = '';
+  filters.ageRange[0] = filterMinAge.value = minPersonAge;
+  filters.ageRange[1] = filterMaxAge.value = maxPersonAge;
+  filters.country = filterCountry.value = '';
 
-  sortField.value = sortField.value = '';
+  sorter.keyName = sortField.value = '';
   sortField.dispatchEvent(change);
 }
 
-const redrawFriends = (state) => {
+const redrawFriends = ({numberOfShowedFriends, friends, filters, sorter, initialListLength}) => {
   preloader.classList.remove('hidden');
-  setResetButtonView(state);
-
+  setResetButtonView(filters, sorter);
+  numberOfShowedFriends = 0;
   container.innerHTML = '';
-  state.numberOfShowedFriends = 0;
   container.scrollTop = 0;
 
-  sortList(filterList(state.friends))
-    .slice(0, state.initialListLength)
+  sortList(filterList(friends))
+    .slice(0, initialListLength)
     .forEach((friend, index) => {
-      state.numberOfShowedFriends++;
+      numberOfShowedFriends++;
       drawPerson(friend, index);
     });
 
@@ -337,6 +336,6 @@ document.addEventListener('DOMContentLoaded',() => {
   initApp(state);
 
   container.addEventListener('scroll', autoLoaderOnScroll);
-  resetButton.addEventListener('click', resetButtonClickHandler);
+  resetButton.addEventListener('click', () => resetButtonClickHandler(state) );
 
 });
