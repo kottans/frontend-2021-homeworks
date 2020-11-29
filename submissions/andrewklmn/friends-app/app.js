@@ -190,22 +190,23 @@ const addOptionToSelect = (select, optionValue, optionText) => {
 }
 
 const drawSorter = (state)=>{
-  Object.keys(state.sorter.fieldPathList).forEach((field)=>{
+  const {sorter} = state;
+  Object.keys(sorter.fieldPathList).forEach((field)=>{
     addOptionToSelect(sortField, field, field);
   });
   sortField.addEventListener('change',({target}) => {
     switch (target.value) {
       case '':
         sortOrder.innerHTML = '';
-        state.sorter.order = '';
-        state.sorter.keyName = '';
+        sorter.keyName = '';
+        sorter.order = '';
         break;
       default:
         if(sortOrder.innerHTML == ''){
           sortOrder.innerHTML = state.sorter.orderSymbols.ASC;
-          state.sorter.order = 'ASC';
+          sorter.order = 'ASC';
         };    
-        state.sorter.keyName = target.value; 
+        sorter.keyName = target.value; 
     };
     redrawFriends(state);
   });
