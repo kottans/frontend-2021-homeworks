@@ -28,7 +28,8 @@ const state = {
   initialListLength: 25,
   numberOfShowedFriends: 0,
   scrollDisabled: false,
-  nextMoreFriendAutoloadDelay: 300,
+  afterLoadingMoreFriendsScrollShift: 25, /* px */
+  nextMoreFriendAutoloadDelay: 300,       /* ms */
 }
 
 const preloader = document.querySelector('.preloader');
@@ -270,6 +271,7 @@ const drawMoreFriends = (friends) => {
       state.numberOfShowedFriends++;
       drawPerson(friend, index);
     });
+    container.scrollTop += state.afterLoadingMoreFriendsScrollStep;
 };
 
 const autoLoaderOnScroll = () => {
