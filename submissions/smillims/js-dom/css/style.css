@@ -12,12 +12,10 @@
   box-sizing: border-box;
 }
 
-:focus,
 :active {
   outline: none;
 }
 
-a:focus,
 a:active {
   outline: none;
 }
@@ -137,7 +135,7 @@ label {
 .aside {
   display: flex;
   align-items: flex-end;
-  height: 500px;
+  min-height: 500px;
 }
 
 .list-item {
@@ -146,7 +144,7 @@ label {
   font-size: 30px;
 }
 .list-link {
-  width: 195px;
+  min-width: 195px;
   display: inline-block;
   cursor: pointer;
   color: white;
@@ -171,7 +169,7 @@ label {
   font-size: 18px;
   font-style: italic;
   text-align: center;
-  width: 50%;
+  max-width: 50%;
 }
 
 .active {
