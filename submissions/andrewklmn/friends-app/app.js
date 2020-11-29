@@ -1,5 +1,5 @@
 
-const maxNumberOfFriends = 50;
+const maxNumberOfFriends = 100;
 const randomUserUrl = 'https://randomuser.me/api/?results=' + maxNumberOfFriends + '&seed=friends';
 
 const minPersonAge = 18;
@@ -282,8 +282,8 @@ const initApp = (state) => {
 
   fetch(randomUserUrl)
     .then(response => response.json())
-    .then(json => {
-      updateFriendsList(json.results);
+    .then(({results}) => {
+      updateFriendsList(results);
       drawSorter(state);
       drawFilters(state);
       preloader.classList.add('hidden');
