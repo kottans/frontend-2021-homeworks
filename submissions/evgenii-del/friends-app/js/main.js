@@ -32,7 +32,7 @@ const createBlock = (friend) => {
     return block;
 }
 
-const renderItem = (friends) => {
+const renderItems = (friends) => {
     main.innerHTML = "";
     let fragment = document.createDocumentFragment();
     friends.forEach((friend) => {
@@ -42,14 +42,12 @@ const renderItem = (friends) => {
     main.append(fragment);
 }
 
-const getUsers = () => {
+const fetchFriends = () => {
     const headers = {
         dataType: 'json'
     }
-    fetch('https://randomuser.me/api/?inc=gender,name,phone,dob,picture&results=12', headers)
+    return fetch('https://randomuser.me/api/?inc=gender,name,phone,dob,picture&results=12', headers)
         .then(response => response.json())
-        .then(response => friendsArr = response.results)
-        .finally(() => renderItem(friendsArr));
 }
 
 const sortByName = (arr, type) => {
@@ -106,11 +104,12 @@ const filterFriends = () => {
         newFriendsArr = filterBySearch(newFriendsArr, searchProp);
     }
 
-    renderItem(newFriendsArr);
+    renderItems(newFriendsArr);
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    getUsers();
+const runApp = (data) => {
+    renderItems(data);
+    friendsArr = data;
 
     document.querySelector('.js-search').addEventListener('keyup', ({target}) => {
         searchProp = target.value.toLowerCase();
@@ -143,4 +142,8 @@ document.addEventListener("DOMContentLoaded", () => {
         genderProp = null;
         filterFriends();
     });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    fetchFriends().then((response) => runApp(response.results));
 })
