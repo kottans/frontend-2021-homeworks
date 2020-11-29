@@ -1,7 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
   console.log("DOM is loaded");
   loadMenu();
-  DEFAULT_PAGE();
+
+  const DEFAULT_PAGE = "info";
+  loadPageData(DEFAULT_PAGE);
 
   document
     .querySelector(".nav-container")
@@ -12,8 +14,6 @@ document.addEventListener("DOMContentLoaded", () => {
       loadPageData(section);
     });
 });
-
-const DEFAULT_PAGE = () => loadPageData("info");
 
 let loadMenu = () => {
   let navInnerHTML = "";
