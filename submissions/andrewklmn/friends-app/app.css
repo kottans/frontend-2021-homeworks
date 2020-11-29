@@ -131,6 +131,8 @@ body {
 }
 
 .sort-field {
+  margin-top: 5px;
+  
   font-size: 1em;
   text-align-last:center;
 }
@@ -200,6 +202,12 @@ body {
   background-image: url("images/reset_hover.png");
   outline: none
 }
+
+.reset.off:hover {
+  background-image: url("images/reset_off.gif");
+  outline: none
+}
+
 
 .reset:active {
   background-image: url("images/reset_active.png");

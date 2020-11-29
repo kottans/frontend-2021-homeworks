@@ -139,13 +139,26 @@ const setResetButtonView = (state) => {
     resetButton.classList.remove('off');
     return;
   };
-  resetButton.classList.add('off');
+  resetButton.classList.toggle('off',true);
+}
+
+const resetButtonClickHandler = () => {
+  const change = new Event('change');
+
+  state.filters.partOfName = searchField.value = '';
+  state.filters.gender = filterGender.value = '';
+  state.filters.ageRange[0] = filterMinAge.value = minPersonAge;
+  state.filters.ageRange[1] = filterMaxAge.value = maxPersonAge;
+  state.filters.country = filterCountry.value = '';
+
+  sortField.value = sortField.value = '';
+  sortField.dispatchEvent(change);
 }
 
 const redrawFriends = (state) => {
   preloader.classList.remove('hidden');
   setResetButtonView(state);
-  
+
   container.innerHTML = '';
   state.numberOfShowedFriends = 0;
   container.scrollTop = 0;
@@ -324,5 +337,6 @@ document.addEventListener('DOMContentLoaded',() => {
   initApp(state);
 
   container.addEventListener('scroll', autoLoaderOnScroll);
+  resetButton.addEventListener('click', resetButtonClickHandler);
 
 });
