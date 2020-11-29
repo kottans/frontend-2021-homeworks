@@ -65,3 +65,4 @@
  const getPrintText = (obj) => Object.values(obj).join('; ');
  
  inhabitants.forEach(creature => print(getPrintText(creature)));
+ 
