@@ -20,7 +20,7 @@ body {
 
 .header {
   width:100%;
-  height: 40px;
+  height: 50px;
 
   font-weight: bold;
   text-align: center;
@@ -135,10 +135,12 @@ body {
   text-align-last:center;
 }
 
-.sort-field:active,
-.sort-field:focus {
+.sort-field:active{
   border: none;
   outline: none;
+}
+
+.sort-field:focus {
 }
 
 .sort-order {
@@ -174,6 +176,44 @@ body {
   width: 50px;
   height: auto;
 }
+
+
+.reset {
+  float: right;
+  margin-top: 0px;
+  margin-right: 20px;
+
+  width: 43px;
+  height: 43px;
+
+  border-radius: 50%;
+  border: none;
+  outline: none;
+  
+  background-image: url("images/reset_on.gif");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.reset:hover {
+  background-image: url("images/reset_hover.png");
+  outline: none
+}
+
+.reset:active {
+  background-image: url("images/reset_active.png");
+  outline: none;
+}
+
+.reset:focus {
+  outline: none;
+}
+
+.off {
+  background-image: url("images/reset_off.gif");
+}
+
 
 .hidden {
   visibility: hidden;

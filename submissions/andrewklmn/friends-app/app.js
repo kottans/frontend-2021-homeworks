@@ -1,5 +1,5 @@
 
-const maxNumberOfFriends = 500;
+const maxNumberOfFriends = 50;
 const randomUserUrl = 'https://randomuser.me/api/?results=' + maxNumberOfFriends + '&seed=friends';
 
 const state = {
@@ -37,6 +37,7 @@ const container = document.querySelector('.container');
 
 const sortField = document.querySelector('.sort-field');
 const sortOrder = document.querySelector('.sort-order');
+const resetButton = document.querySelector('.reset');
 
 const searchField = document.querySelector('.search-field');
 const filterGender = document.querySelector('.filter-gender');
@@ -267,11 +268,15 @@ const initApp = (state) => {
 };
 
 const drawMoreFriends = (friends) => {
-    friends.forEach((friend, index) => {
-      state.numberOfShowedFriends++;
-      drawPerson(friend, index);
-    });
-    container.scrollTop += state.afterLoadingMoreFriendsScrollStep;
+  
+  friends.forEach((friend, index) => {
+    state.numberOfShowedFriends++;
+    drawPerson(friend, index);
+  });
+  
+  setTimeout(() => {
+    container.scrollTop += state.afterLoadingMoreFriendsScrollShift;
+  }, state.nextMoreFriendAutoloadDelay*2);
 };
 
 const autoLoaderOnScroll = () => {
