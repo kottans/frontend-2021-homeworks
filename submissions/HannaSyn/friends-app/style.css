@@ -1,0 +1,285 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,500;0,700;0,900;1,500&display=swap');
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+:focus, :active {
+  outline: none;
+}
+
+a:focus, a:active {
+  outline: none;
+}
+
+html, body {
+  height: 100%;
+  width: 100vw;
+  line-height: 1;
+  font-size: 14px;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: #CFD8D7;
+  font-family: "Raleway", sans-serif;
+  overflow-x: hidden;
+}
+
+input, button, textarea {
+  font-family: inherit;
+}
+
+input::-ms-clear {
+  display: none;
+}
+
+a, a:visited, a:hover {
+  text-decoration: none;
+}
+
+img {
+  vertical-align: top;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.btn {
+  width: 30px;
+  height: 30px;
+  background-color: transparent;
+  margin: 0 10px 0 0;
+  cursor: pointer;
+  transition: 0.3s ease;
+  transform: scale(1);
+}
+
+.btn:last-child {
+  margin: 0;
+}
+
+.btn:active{
+  transform: scale(0.8);
+}
+
+.header {
+  width: 100vw;
+  background: #9F9AA4;
+  padding: 20px 0;
+}
+
+.title {
+  font-size: 32px;
+  text-align: center;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  -webkit-text-stroke: 1.5px #3E2A35;
+  -webkit-text-fill-color: #B5C9C3;
+  text-transform: uppercase;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.aside {
+  background-color: #CAB1BD;
+  flex: 0 0 25%;
+  color: #3E2A35;
+}
+
+.aside__title {
+  font-size: 28px;
+  font-weight: 700;
+  -webkit-text-stroke: 1px #3E2A35;
+  -webkit-text-fill-color: #B5C9C3;
+  letter-spacing: 1px;
+}
+
+.sort {
+  margin: 30px 20px;
+}
+
+.sort__wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 20px;
+  margin: 10px;
+}
+
+.sort-age {
+  display: flex;
+}
+
+.sort-name {
+  display: flex;
+}
+
+.radio {
+  visibility: hidden;
+}
+
+.filter{
+  margin: 20px;
+}
+
+.filter__search {
+  font-size: 20px;
+  margin: 20px 10px 0;
+}
+
+.search-input {
+  background-color: #E7CFCD;
+  padding: 5px;
+  font-size: 20px;
+  width: 100%;
+  margin: 10px 0;
+}
+
+.search-input::placeholder {
+  font-size: 20px;
+  font-style: italic;
+}
+
+.gender-filter{
+  margin: 15px 10px;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+.gender-filter__label {
+  margin: 0 10px 0 5px;
+}
+
+.gender-filter__label:last-child {
+  margin: 0 0 0 5px;
+}
+
+.filter__gender {
+  font-size: 20px;
+  margin: 20px 0 0;
+}
+
+.main {
+  display: flex;
+  flex: 1 0 auto;
+}
+
+.main-content {
+  flex: 1 1 75%;
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.card {
+  flex: 0 0 30%;
+  min-width: 270px;
+  margin: 10px;
+  border-radius: 5px;
+  background-color: #B5C9C3;
+  overflow: hidden;
+  -webkit-box-shadow: 0px 0px 10px -5px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 10px -5px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 10px -5px rgba(0,0,0,0.75);
+}
+
+.card__content {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #3e2a35;
+}
+
+.card__photo {
+  width: 200px;
+  height: 200px;
+}
+
+.card__photo img {
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.card__info {
+  margin: 20px 0 0;
+  font-size: 18px;
+  text-align: center;
+}
+
+.card__name {
+  font-weight: 900;
+}
+
+.card__age{
+  margin: 5px 0;
+}
+
+.card__email {
+  font-style: italic;
+  display: inline-block;
+  font-size: 16px;
+  color: #3e2a35;
+  text-decoration: underline;
+}
+
+.footer {
+  width: 100vw;
+  background: #9F9AA4;
+  padding: 20px;
+  font-size: 22px;
+  text-align: center;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  -webkit-text-stroke: 1.5px #3E2A35;
+  -webkit-text-fill-color: #B5C9C3;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .main {
+    flex-direction: column;
+  }
+  .aside {
+    flex: 0 0 20%;
+    display: flex;
+  }
+  .filter {
+    flex: 0 0 50%;
+  }
+  .main-content {
+    flex: 1 1 100%;
+  }
+}
+
+@media (max-width: 467px) {
+  .aside {
+    flex-direction: column;
+  }
+  .filter {
+    margin: 10px;
+  }
+  .sort {
+    margin: 10px;
+  }
+}
