@@ -196,6 +196,8 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
+
+  transition: 200ms;
 }
 
 .reset:hover {
