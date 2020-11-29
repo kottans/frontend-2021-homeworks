@@ -43,9 +43,10 @@ const filterMinAge = document.querySelector('.filter-min-age');
 const filterMaxAge = document.querySelector('.filter-max-age');
 const filterCountry = document.querySelector('.filter-country');
 
-const drawPerson = (person) => {  
+const drawPerson = (person, index) => {  
   const div = document.createElement('div');
   div.classList.add('person');
+  div.dataset.index = index;
   div.title = `Address: ${person.location.street.number}, ${person.location.street.name}, ${person.location.city}, ${person.location.state}
   Phone: ${person.phone}
   Email: ${person.email}`;
@@ -131,9 +132,9 @@ const redrawFriends = (state) => {
 
   sortList(filterList(state.friends))
     .slice(0, state.initialListLength)
-    .forEach(friend => {
+    .forEach((friend, index) => {
       state.numberOfShowedFriends++;
-      drawPerson(friend);
+      drawPerson(friend, index);
     });
 
   preloader.classList.add('hidden');
@@ -265,9 +266,9 @@ const initApp = (state) => {
 };
 
 const drawMoreFriends = (friends) => {
-    friends.forEach(friend => {
+    friends.forEach((friend, index) => {
       state.numberOfShowedFriends++;
-      drawPerson(friend);
+      drawPerson(friend, index);
     });
 };
 
