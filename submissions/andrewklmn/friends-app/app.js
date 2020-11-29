@@ -194,42 +194,6 @@ const drawSorter = (state)=>{
   Object.keys(sorter.fieldPathList).forEach((field)=>{
     addOptionToSelect(sortField, field, field);
   });
-  sortField.addEventListener('change',({target}) => {
-    switch (target.value) {
-      case '':
-        sortOrder.innerHTML = '';
-        sorter.keyName = '';
-        sorter.order = '';
-        break;
-      default:
-        if(sortOrder.innerHTML == ''){
-          sortOrder.innerHTML = state.sorter.orderSymbols.ASC;
-          sorter.order = 'ASC';
-        };    
-        sorter.keyName = target.value; 
-    };
-    redrawFriends(state);
-  });
-
-  sortOrder.addEventListener('click',({target})=>{
-    if(sortField.value == ''){
-      target.innerHTML = '';
-      state.sorter.order = '';
-      return;
-    };
-
-    switch (state.sorter.order) {
-      case 'ASC':
-        target.innerHTML = state.sorter.orderSymbols.DESC;
-        state.sorter.order = 'DESC';
-        break;
-      default:
-        target.innerHTML = state.sorter.orderSymbols.ASC;
-        state.sorter.order = 'ASC';
-        break;
-    };
-    redrawFriends(state);
-  });
 }
 
 const drawFilters = (state) => {
@@ -237,49 +201,17 @@ const drawFilters = (state) => {
   const onlyUnique = (value, index, self) => {
     return self.indexOf(value) === index;
   };
-  
-  state.filters.genderList = state.friends.map(person => person.gender).filter(onlyUnique);
-  state.filters.genderList.forEach((gender)=>{
+  const {friends, filters} = state;
+
+  filters.genderList = friends.map(person => person.gender).filter(onlyUnique);
+  filters.genderList.forEach((gender)=>{
     addOptionToSelect(filterGender, gender, gender);
   });
-  filterGender.addEventListener('change',({target}) => {
-    if (target.value == state.filters.gender) {
-      return true;
-    }
-    state.filters.gender = target.value;
-    redrawFriends(state);
-  });
-
-  filterMinAge.value = state.filters.ageRange[0];
-  filterMinAge.addEventListener('change',({target})=>{
-    state.filters.ageRange[0] = target.value;
-    redrawFriends(state);
-  });
-  
-  filterMaxAge.value = state.filters.ageRange[1];
-  filterMaxAge.addEventListener('change',({target})=>{
-    state.filters.ageRange[1] = target.value;
-    redrawFriends(state);
-  });
-
-  state.filters.countryList = state.friends.map(person => person.location.country).filter(onlyUnique);
-  state.filters.countryList.sort().forEach( country => {
+  filterMinAge.value = filters.ageRange[0];
+  filterMaxAge.value = filters.ageRange[1];
+  filters.countryList = friends.map(person => person.location.country).filter(onlyUnique);
+  filters.countryList.sort().forEach( country => {
     addOptionToSelect(filterCountry, country, country);
-  });
-  filterCountry.addEventListener('change', ({target}) => {
-    if (target.value == state.filters.country) {
-      return true;
-    }
-    state.filters.country = target.value;
-    redrawFriends(state);
-  });
-  
-  searchField.addEventListener('keyup',({target})=>{
-    if (state.filters.partOfName == target.value) {
-      return true;
-    }
-    state.filters.partOfName = target.value;
-    redrawFriends(state);
   });
 };
 
@@ -337,11 +269,89 @@ const autoLoaderOnScroll = () => {
   }
 };
 
+const sorterKeyChangeHandler = (target, state) => {
+  const {sorter} = state;
+  if (target.value == '') {    
+    sortOrder.innerHTML = '';
+    sorter.keyName = '';
+    sorter.order = '';
+  } else {
+    if(sortOrder.innerHTML == ''){
+      sortOrder.innerHTML = sorter.orderSymbols.ASC;
+      sorter.order = 'ASC';
+    };    
+    sorter.keyName = target.value; 
+  };
+  redrawFriends(state);
+}
+
+const sorterOrderClickHandler = (target, state)=>{
+  const {sorter} = state;
+
+  if(sortField.value == ''){
+    target.innerHTML = '';
+    sorter.order = '';
+    return;
+  };
+  if (sorter.order == 'ASC') {
+    target.innerHTML = sorter.orderSymbols.DESC;
+    sorter.order = 'DESC';
+  } else {
+    target.innerHTML = sorter.orderSymbols.ASC;
+    sorter.order = 'ASC';
+  };
+
+  redrawFriends(state);
+}
+
+const searchFieldChangeHandler = (target, state)=>{
+  const {filters} = state;
+  if (filters.partOfName == target.value) {
+    return true;
+  }
+  filters.partOfName = target.value;
+  redrawFriends(state);
+}
+
+const filterGenderChangeHandler = (target, state) => {
+  const {filters} = state;
+  if (target.value == filters.gender) {
+    return true;
+  }
+  filters.gender = target.value;
+  redrawFriends(state);
+}
+
+const MIN_AGE_RANGE_INDEX = 0; 
+const MAX_AGE_RANGE_INDEX = 1;
+
+const filterAgeChangeHandler = (target, state, ageRangeIndex)=>{
+  state.filters.ageRange[ageRangeIndex] = target.value;
+  redrawFriends(state);
+}
+
+const filterCountryChangeHandler = (target, state) => {
+  const {filters} = state;
+  if (target.value == filters.country) {
+    return true;
+  }
+  filters.country = target.value;
+  redrawFriends(state);
+}
+
 document.addEventListener('DOMContentLoaded',() => {
-  
   initApp(state);
-
   container.addEventListener('scroll', autoLoaderOnScroll);
-  resetButton.addEventListener('click', () => resetButtonClickHandler(state) );
 
+  sortField.addEventListener('change', ({target}) => sorterKeyChangeHandler(target, state));
+  sortOrder.addEventListener('click', ({target}) => sorterOrderClickHandler(target, state));
+  
+  resetButton.addEventListener('click', () => resetButtonClickHandler(state));
+
+  searchField.addEventListener('keyup',({target}) => searchFieldChangeHandler(target, state));
+
+  filterGender.addEventListener('change', ({target}) => filterGenderChangeHandler(target, state));
+  filterMinAge.addEventListener('change', ({target}) => filterAgeChangeHandler(target, state, MIN_AGE_RANGE_INDEX));
+  filterMaxAge.addEventListener('change', ({target}) => filterAgeChangeHandler(target, state, MAX_AGE_RANGE_INDEX));
+  filterCountry.addEventListener('change', ({target}) => filterCountryChangeHandler(target,state));
 });
