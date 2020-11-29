@@ -2,13 +2,16 @@
 const maxNumberOfFriends = 50;
 const randomUserUrl = 'https://randomuser.me/api/?results=' + maxNumberOfFriends + '&seed=friends';
 
+const minPersonAge = 18;
+const maxPersonAge = 99;
+
 const state = {
   friends: [],
   filters: {
     partOfName: '',
     gender: '',
     genderList: [],
-    ageRange: [18,99],
+    ageRange: [minPersonAge, maxPersonAge],
     country: '',
     countryList: [],
   },
@@ -126,8 +129,23 @@ const sortList = (friends) => {
   });
 }
 
+const setResetButtonView = (state) => {
+  if(state.sorter.keyName != ''
+      || state.filters.partOfName != ''
+      || state.filters.gender != ''
+      || state.filters.ageRange[0] != minPersonAge
+      || state.filters.ageRange[1] != maxPersonAge
+      || state.filters.country != '') {
+    resetButton.classList.remove('off');
+    return;
+  };
+  resetButton.classList.add('off');
+}
+
 const redrawFriends = (state) => {
   preloader.classList.remove('hidden');
+  setResetButtonView(state);
+  
   container.innerHTML = '';
   state.numberOfShowedFriends = 0;
   container.scrollTop = 0;
