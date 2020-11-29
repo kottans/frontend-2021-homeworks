@@ -1,6 +1,6 @@
 
-const maxNumberOfFriends = 250;
-const randomUserUrl = 'https://randomuser.me/api/?results=' + maxNumberOfFriends;
+const maxNumberOfFriends = 500;
+const randomUserUrl = 'https://randomuser.me/api/?results=' + maxNumberOfFriends + '&seed=friends';
 
 const state = {
   friends: [],
