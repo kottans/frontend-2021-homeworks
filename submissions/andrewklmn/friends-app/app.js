@@ -248,24 +248,25 @@ const drawMoreFriends = (friends) => {
   }, state.nextMoreFriendAutoloadDelay*2);
 };
 
-const autoLoaderOnScroll = () => {
+const autoLoaderOnScroll = (state) => {
+  const {numberOfShowedFriends, friends, initialListLength, nextMoreFriendAutoloadDelay} = state;
+  
   if (state.scrollDisabled) return true;
+
   if (container.scrollTop + container.clientHeight >= --container.scrollHeight) {
-    if(state.numberOfShowedFriends < state.friends.length) {
+    if(numberOfShowedFriends < friends.length) {
       state.scrollDisabled = true;
       container.scrollTop--;
-      
       preloader.classList.remove('hidden');
 
-      const additionalFriendList = sortList(filterList(state.friends))
-        .slice( state.numberOfShowedFriends, state.numberOfShowedFriends + state.initialListLength);
+      const additionalFriendList = sortList(filterList(friends))
+        .slice( numberOfShowedFriends, numberOfShowedFriends + initialListLength);
 
       requestAnimationFrame(() => drawMoreFriends(additionalFriendList) );
-      
       setTimeout(()=>{        
         state.scrollDisabled = false;
         preloader.classList.add('hidden');
-      }, state.nextMoreFriendAutoloadDelay);
+      }, nextMoreFriendAutoloadDelay);
     };
   }
 };
@@ -355,5 +356,5 @@ document.addEventListener('DOMContentLoaded',() => {
   filterMaxAge.addEventListener('change', ({target}) => filterAgeChangeHandler(target, state, MAX_AGE_RANGE_INDEX));
   filterCountry.addEventListener('change', ({target}) => filterCountryChangeHandler(target, state));
   
-  container.addEventListener('scroll', autoLoaderOnScroll);
+  container.addEventListener('scroll', ()=>autoLoaderOnScroll(state));
 });
