@@ -185,32 +185,30 @@ body {
   width: 43px;
   height: 43px;
 
-  border-radius: 50%;
   border: none;
   outline: none;
   
-  background-image: url("images/reset_on.gif");
+  background-image: url("images/reset_on.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
+  background-color: transparent;
 
   cursor: pointer;
 }
 
 .reset:hover {
   background-image: url("images/reset_hover.png");
-  outline: none;
 }
 
 .reset.off:hover {
-  background-image: url("images/reset_off.gif");
-  outline: none;
+  background-image: url("images/reset_off.png");
+
 }
 
 
 .reset:active {
   background-image: url("images/reset_active.png");
-  outline: none;
 }
 
 .reset:focus {
@@ -218,7 +216,7 @@ body {
 }
 
 .off {
-  background-image: url("images/reset_off.gif");
+  background-image: url("images/reset_off.png");
 }
 
 
