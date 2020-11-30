@@ -244,8 +244,10 @@ const drawMoreFriends = (friends) => {
   });
   
   setTimeout(() => {
-    container.scrollTop += state.afterLoadingMoreFriendsScrollShift;
-  }, state.nextMoreFriendAutoloadDelay*2);
+    if (container.scrollTop > 0) {
+      container.scrollTop += state.afterLoadingMoreFriendsScrollShift;
+    };
+  }, state.nextMoreFriendAutoloadDelay * 2);
 };
 
 const autoLoaderOnScroll = (state) => {
@@ -263,7 +265,8 @@ const autoLoaderOnScroll = (state) => {
         .slice( numberOfShowedFriends, numberOfShowedFriends + initialListLength);
 
       requestAnimationFrame(() => drawMoreFriends(additionalFriendList) );
-      setTimeout(()=>{        
+
+      setTimeout(()=>{    
         state.scrollDisabled = false;
         preloader.classList.add('hidden');
       }, nextMoreFriendAutoloadDelay);
