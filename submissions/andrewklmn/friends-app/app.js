@@ -48,29 +48,29 @@ const filterMinAge = document.querySelector('.filter-min-age');
 const filterMaxAge = document.querySelector('.filter-max-age');
 const filterCountry = document.querySelector('.filter-country');
 
-const drawPerson = (person, index) => {  
+const drawPerson = ({location, phone, email, gender, name, picture, dob}) => {  
+  const {street, city, state, country} = location;
   const div = document.createElement('div');
   div.classList.add('person');
-  div.dataset.index = index;
-  div.title = `Address: ${person.location.street.number}, ${person.location.street.name}, ${person.location.city}, ${person.location.state}
-  Phone: ${person.phone}
-  Email: ${person.email}`;
+  div.title = `Address: ${street.number}, ${street.name}, ${city}, ${state}
+  Phone: ${phone}
+  Email: ${email}`;
   div.innerHTML =`
-      <div class="person-name ${person.gender}">${person.name.first} ${person.name.last}</div>
+      <div class="person-name ${gender}">${name.first} ${name.last}</div>
       <div class="person-image">
       <picture>
         <source media="(max-width:300px)" 
-                srcset="${person.picture.thumbnail} 1x, ${person.picture.medium} 2x">
+                srcset="${picture.thumbnail} 1x, ${picture.medium} 2x">
         <source media="(max-width:400px)" 
-                srcset="${person.picture.medium} 1x, ${person.picture.large} 2x">
-        <img class="rounded" src="${person.picture.large}">
+                srcset="${picture.medium} 1x, ${picture.large} 2x">
+        <img class="rounded" src="${picture.large}">
       </picture>
       </div>
       <div class="person-age">
-        ${person.dob.age} y.o.
+        ${dob.age} y.o.
       </div>
       <div class="person-location">
-        ${person.location.country}
+        ${country}
       </div>
   `;
   container.appendChild(div);
@@ -160,18 +160,19 @@ const resetButtonClickHandler = ({filters, sorter}) => {
   sortField.dispatchEvent(change);
 }
 
-const redrawFriends = ({numberOfShowedFriends, friends, filters, sorter, initialListLength}) => {
+const redrawFriends = (state) => {
+  const {friends, filters, sorter, initialListLength} = state;
   preloader.classList.remove('hidden');
   setResetButtonView(filters, sorter);
-  numberOfShowedFriends = 0;
+  state.numberOfShowedFriends = 0;
   container.innerHTML = '';
   container.scrollTop = 0;
 
   sortList(filterList(friends))
     .slice(0, initialListLength)
-    .forEach((friend, index) => {
-      numberOfShowedFriends++;
-      drawPerson(friend, index);
+    .forEach((friend) => {
+      state.numberOfShowedFriends++;
+      drawPerson(friend);
     });
 
   preloader.classList.add('hidden');
@@ -237,9 +238,9 @@ const initApp = (state) => {
 
 const drawMoreFriends = (friends) => {
   
-  friends.forEach((friend, index) => {
+  friends.forEach((friend) => {
     state.numberOfShowedFriends++;
-    drawPerson(friend, index);
+    drawPerson(friend);
   });
   
   setTimeout(() => {
@@ -341,17 +342,18 @@ const filterCountryChangeHandler = (target, state) => {
 
 document.addEventListener('DOMContentLoaded',() => {
   initApp(state);
-  container.addEventListener('scroll', autoLoaderOnScroll);
-
+  
   sortField.addEventListener('change', ({target}) => sorterKeyChangeHandler(target, state));
   sortOrder.addEventListener('click', ({target}) => sorterOrderClickHandler(target, state));
   
   resetButton.addEventListener('click', () => resetButtonClickHandler(state));
-
+  
   searchField.addEventListener('keyup',({target}) => searchFieldChangeHandler(target, state));
-
+  
   filterGender.addEventListener('change', ({target}) => filterGenderChangeHandler(target, state));
   filterMinAge.addEventListener('change', ({target}) => filterAgeChangeHandler(target, state, MIN_AGE_RANGE_INDEX));
   filterMaxAge.addEventListener('change', ({target}) => filterAgeChangeHandler(target, state, MAX_AGE_RANGE_INDEX));
-  filterCountry.addEventListener('change', ({target}) => filterCountryChangeHandler(target,state));
+  filterCountry.addEventListener('change', ({target}) => filterCountryChangeHandler(target, state));
+  
+  container.addEventListener('scroll', autoLoaderOnScroll);
 });
