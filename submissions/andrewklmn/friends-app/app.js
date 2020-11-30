@@ -107,8 +107,7 @@ const sortList = (friends) => {
     return friends;
   }
 
-  const index0 = state.sorter.fieldPathList[state.sorter.keyName][0];
-  const index1 = state.sorter.fieldPathList[state.sorter.keyName][1];
+  const [index0, index1] = state.sorter.fieldPathList[state.sorter.keyName];
   
   return friends.sort(function(a, b){
     if(state.sorter.keyName === '') return 0;
