@@ -80,7 +80,7 @@ const filterList = (friends)=>{
   return friends.filter( person => {
     if (state.filters.namePart != '') {
       if((person.name.first + ' ' + person.name.last).toUpperCase()
-              .indexOf(state.filters.partOfName.toUpperCase()) == -1) { 
+              .indexOf(state.filters.partOfName.toUpperCase()) === -1) { 
         return false;
       }
     }
@@ -115,8 +115,8 @@ const sortList = (friends) => {
   const index1 = state.sorter.fieldPathList[state.sorter.keyName][1];
   
   return friends.sort(function(a, b){
-    if(state.sorter.keyName == '') return 0;
-    if(state.sorter.order == 'DESC') {
+    if(state.sorter.keyName === '') return 0;
+    if(state.sorter.order === 'DESC') {
       if (a[index0][index1] > b[index0][index1]) {
         return -1;
       }
@@ -273,12 +273,12 @@ const autoLoaderOnScroll = (state) => {
 
 const sorterKeyChangeHandler = (target, state) => {
   const {sorter} = state;
-  if (target.value == '') {    
+  if (target.value === '') {    
     sortOrder.innerHTML = '';
     sorter.keyName = '';
     sorter.order = '';
   } else {
-    if(sortOrder.innerHTML == ''){
+    if(sortOrder.innerHTML === ''){
       sortOrder.innerHTML = sorter.orderSymbols.ASC;
       sorter.order = 'ASC';
     };    
@@ -290,12 +290,12 @@ const sorterKeyChangeHandler = (target, state) => {
 const sorterOrderClickHandler = (target, state)=>{
   const {sorter} = state;
 
-  if(sortField.value == ''){
+  if(sortField.value === ''){
     target.innerHTML = '';
     sorter.order = '';
     return;
   };
-  if (sorter.order == 'ASC') {
+  if (sorter.order === 'ASC') {
     target.innerHTML = sorter.orderSymbols.DESC;
     sorter.order = 'DESC';
   } else {
@@ -308,7 +308,7 @@ const sorterOrderClickHandler = (target, state)=>{
 
 const searchFieldChangeHandler = (target, state)=>{
   const {filters} = state;
-  if (filters.partOfName == target.value) {
+  if (filters.partOfName === target.value) {
     return true;
   }
   filters.partOfName = target.value;
@@ -317,7 +317,7 @@ const searchFieldChangeHandler = (target, state)=>{
 
 const filterGenderChangeHandler = (target, state) => {
   const {filters} = state;
-  if (target.value == filters.gender) {
+  if (target.value === filters.gender) {
     return true;
   }
   filters.gender = target.value;
@@ -334,7 +334,7 @@ const filterAgeChangeHandler = (target, state, ageRangeIndex)=>{
 
 const filterCountryChangeHandler = (target, state) => {
   const {filters} = state;
-  if (target.value == filters.country) {
+  if (target.value === filters.country) {
     return true;
   }
   filters.country = target.value;
