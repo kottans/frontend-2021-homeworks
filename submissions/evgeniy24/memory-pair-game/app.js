@@ -8,6 +8,7 @@ let winCondition = 0;
 
 function rollCard() {
     if (lockRoll) return;
+    if (this === firstCard) return;
     this.classList.add('roll');
 
     if (!isRolledCard) {
@@ -36,9 +37,15 @@ function checkCardMatch() {
 }
 
 function freezeCards() {
-    firstCard.removeEventListener('click', rollCard);
-    secondCard.removeEventListener('click', rollCard);
-    winCondition++;
+    setTimeout (function() {
+        firstCard.classList.add('clear');
+        secondCard.classList.add('clear');
+        firstCard.removeEventListener('click', rollCard);
+        secondCard.removeEventListener('click', rollCard);
+        winCondition++;
+        resetCards();
+    }, 700)
+    
 }
 
 function cancelRollCards() {
@@ -46,8 +53,15 @@ function cancelRollCards() {
     setTimeout(function() {
         firstCard.classList.remove('roll');
         secondCard.classList.remove('roll');
-        lockRoll = false;
-        }, 400)
+        resetCards();
+        }, 400);
+}
+
+function resetCards() {
+    isRolledCard = false;
+    lockRoll = false;
+    firstCard = null;
+    secondCard = null;
 }
 
 function checkWinCondition() {
@@ -57,6 +71,13 @@ function checkWinCondition() {
         }, 500)
     };
 }
+
+(function resetOrderCards() {
+    cards.forEach(function(card) {
+        let position = Math.floor(Math.random() * 12);
+        card.style.order = position;
+    })
+})();
 
 cards.forEach(function(card) {
     card.addEventListener('click', rollCard);
