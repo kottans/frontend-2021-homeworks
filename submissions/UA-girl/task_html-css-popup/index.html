@@ -8,163 +8,159 @@
 </head>
 <body>
 
-<header>
+<header class="header">
     <div class="container">
         <nav class="nav-top">
             <h1 class="title">KOTTANS</h1>
             <ul class="nav-list nav-list__main">
                 <li class="nav-item">
-                    <a href="#">
+                    <a href="#" class="nav-link">
                         Mail
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#">
+                    <a href="#" class="nav-link">
                         Images
                     </a>
                 </li>
                 <li class="nav-item nav-item__popup">
-                    <input type="checkbox" class="checkbox checkbox__main hidden" id="popup-main">
-                    <label for="popup-main" class="label_popup__main">
-                        <img class="checkbox-image checkbox-image__main top-nav-img" src="img/popup-button.png"
+                    <input type="checkbox" class="checkbox checkbox__main visuallyhidden" id="popup-main">
+                    <label for="popup-main" class="label-popup label-popup__main">
+                        <img src="img/popup-button.png"
                              alt="Open popup" width="25">
-                        <span class="hidden">Open popup menu</span>
+                        <span class="visuallyhidden">Open popup menu</span>
                     </label>
-
-                    <ul class="nav-list nav-list__inner">
-                        <li class="nav-item__inner__holder">
-                            <ul class="nav-list nav-list__inner__first">
+                    <ul class="nav-list nav-list__inner nav-list__inner__first">
+                        <li class="nav-item nav-item__inner">
+                            <a href="#" class="nav-link">
+                                <img src="img/calendar.png" alt="Calendar" class="nav-link__img">
+                                <span class="nav-link__label">Calendar</span>
+                            </a>
+                        </li>
+                        <li class="nav-item nav-item__inner">
+                            <a href="#" class="nav-link">
+                                <img src="img/mail.png" alt="Mail" class="nav-link__img">
+                                <span class="nav-link__label">Mail</span>
+                            </a>
+                        </li>
+                        <li class="nav-item nav-item__inner">
+                            <a href="#" class="nav-link">
+                                <img src="img/news.png" alt="News" class="nav-link__img">
+                                <span class="nav-link__label">News</span>
+                            </a>
+                        </li>
+                        <li class="nav-item nav-item__inner">
+                            <a href="#" class="nav-link">
+                                <img src="img/maps.png" alt="Maps" class="nav-link__img">
+                                <span class="nav-link__label">Maps</span>
+                            </a>
+                        </li>
+                        <li class="nav-item nav-item__inner">
+                            <a href="#" class="nav-link">
+                                <img src="img/files.png" alt="Files" class="nav-link__img">
+                                <span class="nav-link__label">Files</span>
+                            </a>
+                        </li>
+                        <li class="nav-item nav-item__inner">
+                            <a href="#" class="nav-link">
+                                <img src="img/contacts.png" alt="Contacts" class="nav-link__img">
+                                <span class="nav-link__label">Contacts</span>
+                            </a>
+                        </li>
+                        <li class="nav-item nav-item__inner">
+                            <a href="#" class="nav-link">
+                                <img src="img/tanslation.png" alt="Translate" class="nav-link__img">
+                                <span class="nav-link__label">Translate</span>
+                            </a>
+                        </li>
+                        <li class="nav-item nav-item__inner">
+                            <a href="#" class="nav-link">
+                                <img src="img/videos.png" alt="Video" class="nav-link__img">
+                                <span class="nav-link__label">Videos</span>
+                            </a>
+                        </li>
+                        <li class="nav-item nav-item__inner">
+                            <a href="#" class="nav-link">
+                                <img src="img/search.png" alt="Search" class="nav-link__img">
+                                <span class="nav-link__label">Search</span>
+                            </a>
+                        </li>
+                        <li class="nav-item nav-item__inner">
+                            <a href="#" class="nav-link">
+                                <img src="img/photos.png" alt="Photo" class="nav-link__img">
+                                <span class="nav-link__label">Photos</span>
+                            </a>
+                        </li>
+                        <li class="nav-item nav-item__inner">
+                            <a href="#" class="nav-link">
+                                <img src="img/apps.png" alt="App" class="nav-link__img">
+                                <span class="nav-link__label">Apps</span>
+                            </a>
+                        </li>
+                        <li class="nav-item nav-item__inner">
+                            <a href="#" class="nav-link">
+                                <img src="img/documents.png" alt="Documents" class="nav-link__img">
+                                <span class="nav-link__label">Documents</span>
+                            </a>
+                        </li>
+                        <li class="nav-item nav-item__inner nav-item__inner__label">
+                            <input type="checkbox" class="checkbox checkbox__additional visuallyhidden"
+                                   id="popup-additional">
+                            <label for="popup-additional" class="label-popup label-popup__additional">
+                                <span>More</span>
+                            </label>
+                            <ul class="nav-list nav-list__inner nav-list__inner__second">
                                 <li class="nav-item nav-item__inner">
-                                    <a href="#">
-                                        <img src="img/calendar.png" alt="Calendar">
-                                        <span>Calendar</span>
+                                    <a href="#" class="nav-link">
+                                        <img src="img/chat.png" alt="Chat" class="nav-link__img">
+                                        <span class="nav-link__label">Chat</span>
                                     </a>
                                 </li>
                                 <li class="nav-item nav-item__inner">
-                                    <a href="#">
-                                        <img src="img/mail.png" alt="Mail">
-                                        <span>Mail</span>
+                                    <a href="#" class="nav-link">
+                                        <img src="img/classroom.png" alt="Classroom" class="nav-link__img">
+                                        <span class="nav-link__label">Classroom</span>
                                     </a>
                                 </li>
                                 <li class="nav-item nav-item__inner">
-                                    <a href="#">
-                                        <img src="img/news.png" alt="News">
-                                        <span>News</span>
+                                    <a href="#" class="nav-link">
+                                        <img src="img/collection.png" alt="Collection" class="nav-link__img">
+                                        <span class="nav-link__label">Collection</span>
                                     </a>
                                 </li>
                                 <li class="nav-item nav-item__inner">
-                                    <a href="#">
-                                        <img src="img/maps.png" alt="Maps">
-                                        <span>Maps</span>
+                                    <a href="#" class="nav-link">
+                                        <img src="img/mars.png" alt="Mars" class="nav-link__img">
+                                        <span class="nav-link__label">Mars</span>
                                     </a>
                                 </li>
                                 <li class="nav-item nav-item__inner">
-                                    <a href="#">
-                                        <img src="img/files.png" alt="Files">
-                                        <span>Files</span>
+                                    <a href="#" class="nav-link">
+                                        <img src="img/blogs.png" alt="Blog" class="nav-link__img">
+                                        <span class="nav-link__label">Blog</span>
                                     </a>
                                 </li>
                                 <li class="nav-item nav-item__inner">
-                                    <a href="#">
-                                        <img src="img/contacts.png" alt="Contacts">
-                                        <span>Contacts</span>
+                                    <a href="#" class="nav-link">
+                                        <img src="img/promo.png" alt="Promo" class="nav-link__img">
+                                        <span class="nav-link__label">Promos</span>
                                     </a>
                                 </li>
-                                <li class="nav-item nav-item__inner">
-                                    <a href="#">
-                                        <img src="img/tanslation.png" alt="Translate">
-                                        <span>Translate</span>
+                                <li class="nav-item nav-item__inner__link">
+                                    <a href="#" class="nav-link">
+                                        Even more from Kottans
                                     </a>
-                                </li>
-                                <li class="nav-item nav-item__inner">
-                                    <a href="#">
-                                        <img src="img/videos.png" alt="Video">
-                                        <span>Videos</span>
-                                    </a>
-                                </li>
-                                <li class="nav-item nav-item__inner">
-                                    <a href="#">
-                                        <img src="img/search.png" alt="Search">
-                                        <span>Search</span>
-                                    </a>
-                                </li>
-                                <li class="nav-item nav-item__inner">
-                                    <a href="#">
-                                        <img src="img/photos.png" alt="Photo">
-                                        <span>Photos</span>
-                                    </a>
-                                </li>
-                                <li class="nav-item nav-item__inner">
-                                    <a href="#">
-                                        <img src="img/apps.png" alt="App">
-                                        <span>Apps</span>
-                                    </a>
-                                </li>
-                                <li class="nav-item nav-item__inner">
-                                    <a href="#">
-                                        <img src="img/documents.png" alt="Documents">
-                                        <span>Documents</span>
-                                    </a>
-                                </li>
-                                <li class="nav-item nav-item__inner__label">
-                                    <input type="checkbox" class="checkbox checkbox__additional hidden"
-                                           id="popup-additional">
-                                    <label for="popup-additional" class="label_popup__additional">
-                                        <span>More</span>
-                                    </label>
-                                    <ul class="nav-list nav-list__inner__second">
-                                        <li class="nav-item nav-item__inner">
-                                            <a href="#">
-                                                <img src="img/chat.png" alt="Chat">
-                                                <span>Chat</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item nav-item__inner">
-                                            <a href="#">
-                                                <img src="img/classroom.png" alt="Classroom">
-                                                <span>Classroom</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item nav-item__inner">
-                                            <a href="#">
-                                                <img src="img/collection.png" alt="Collection">
-                                                <span>Collection</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item nav-item__inner">
-                                            <a href="#">
-                                                <img src="img/mars.png" alt="Mars">
-                                                <span>Mars</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item nav-item__inner">
-                                            <a href="#">
-                                                <img src="img/blogs.png" alt="Blog">
-                                            </a>
-                                        </li>
-                                        <li class="nav-item nav-item__inner">
-                                            <a href="#">
-                                                <img src="img/promo.png" alt="Promo">
-                                                <span>Promos</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item nav-item__inner__link">
-                                            <a href="#">
-                                                Even more from Kottans
-                                            </a>
-                                        </li>
-                                    </ul>
                                 </li>
                             </ul>
                         </li>
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a href="#">
+                    <a href="#" class="nav-link">
                         <img src="img/bell.png" width="18" alt="Bell">
+                        <span class="visuallyhidden">Notifications</span>
                     </a>
                 </li>
-
             </ul>
         </nav>
     </div>
@@ -172,31 +168,31 @@
 <main>
     <div class="container">
         <section class="cats-section">
-            <h2>Some content with cats</h2>
+            <h2 class="section-title">Some content with cats</h2>
             <div class="cats">
                 <figure class="cat">
-                    <img src="img/cat.jpg" alt="Cat on the piano">
-                    <figcaption>Little cat</figcaption>
+                    <img src="img/cat.jpg" alt="Cat on the piano" class="cat-img">
+                    <figcaption class="cat-description">Little cat</figcaption>
                 </figure>
                 <figure class="cat">
-                    <img src="img/cat1.jpg" alt="Cat in the bucket">
-                    <figcaption>Little cat</figcaption>
+                    <img src="img/cat1.jpg" alt="Cat in the bucket" class="cat-img">
+                    <figcaption class="cat-description">Little cat</figcaption>
                 </figure>
                 <figure class="cat">
-                    <img src="img/cat2.jpg" alt="Sweet cat">
-                    <figcaption>Little cat</figcaption>
+                    <img src="img/cat2.jpg" alt="Sweet cat" class="cat-img">
+                    <figcaption class="cat-description">Little cat</figcaption>
                 </figure>
                 <figure class="cat">
-                    <img src="img/cat3.jpg" alt="Sleepy cat">
-                    <figcaption>Little cat</figcaption>
+                    <img src="img/cat3.jpg" alt="Sleepy cat" class="cat-img">
+                    <figcaption class="cat-description">Little cat</figcaption>
                 </figure>
                 <figure class="cat">
-                    <img src="img/cat4.jpg" alt="Kittens">
-                    <figcaption>Little cat</figcaption>
+                    <img src="img/cat4.jpg" alt="Kittens" class="cat-img">
+                    <figcaption class="cat-description">Little cat</figcaption>
                 </figure>
                 <figure class="cat">
-                    <img src="img/cat5.jpg" alt="Another cat on the piano">
-                    <figcaption>Little cat</figcaption>
+                    <img src="img/cat5.jpg" alt="Another cat on the piano" class="cat-img">
+                    <figcaption class="cat-description">Little cat</figcaption>
                 </figure>
             </div>
         </section>

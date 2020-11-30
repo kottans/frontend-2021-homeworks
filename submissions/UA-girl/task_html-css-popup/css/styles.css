@@ -19,7 +19,7 @@ img {
     height: auto;
 }
 
-label, a {
+.label-popup, .nav-link {
     color: #333333;
     font-weight: bold;
     box-sizing: border-box;
@@ -33,28 +33,24 @@ label, a {
     margin: 0 auto;
 }
 
-.hidden {
-    display: block;
-    transform: scale(0);
-    opacity: 0;
+.visuallyhidden {
     position: absolute;
     width: 1px;
     height: 1px;
-    margin: -1px;
-    padding: 0;
+    clip: rect(0, 0, 0, 0);
     overflow: hidden;
 }
 
 /*Header*/
 
-header {
+.header {
     background-color: #f3f3f3;
     box-sizing: border-box;
 }
 
 /*Navigation Common*/
 
-nav {
+.nav-top {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -80,7 +76,7 @@ nav {
     flex-shrink: 0;
 }
 
-.nav-item a, .label_popup__main {
+.nav-item .nav-link, .label-popup__main {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -96,39 +92,22 @@ nav {
 
 .nav-list__inner {
     box-sizing: border-box;
-    position: absolute;
     width: 320px;
-    right: -20px;
-    top: 67px;
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
     background-color: white;
-}
-
-.nav-list__inner::before {
-    display: block;
-    content: '';
-    width: 0;
-    height: 0;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-bottom: 13px solid white;
-    position: absolute;
-    top: -12px;
-    right: 48px;
-}
-
-.nav-item__inner__holder {
-    height: 480px;
-    overflow-x: hidden;
-    overflow-y: auto;
-}
-.nav-list__inner__first, .nav-list__inner__second {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    box-sizing: border-box;
-    width: 100%;
     padding-top: 10px;
+}
+
+.nav-list__inner__first {
+    position: absolute;
+    right: -20px;
+    top: 56px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+    height: 480px;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 .nav-list__inner__second {
@@ -141,18 +120,21 @@ nav {
     box-sizing: border-box;
 }
 
-.nav-item__inner a {
-    flex-wrap: wrap;
-    padding: 10px;
-
+.nav-item__inner__label {
+    margin-bottom: 0;
 }
 
-.nav-item__inner img {
+.nav-item__inner .nav-link {
+    flex-wrap: wrap;
+    padding: 10px;
+}
+
+.nav-link__img {
     width: 40px;
     margin-bottom: 10px;
 }
 
-.nav-item__inner span {
+.nav-link__label {
     width: 100%;
     text-align: center;
 }
@@ -162,8 +144,8 @@ nav {
     width: 100%;
 }
 
-.label_popup__additional,
-.nav-item__inner__link a {
+.label-popup__additional,
+.nav-item__inner__link .nav-link {
     width: 100%;
     padding: 10px 0;
     text-align: center;
@@ -173,24 +155,24 @@ nav {
 
 /*Checkboxes Stages*/
 
-.checkbox__main:not(:checked) ~ .nav-list__inner,
+.checkbox__main:not(:checked) ~ .nav-list__inner__first,
 .checkbox__additional:not(:checked) ~ .nav-list__inner__second {
     display: none;
     opacity: 0;
 }
 
-.checkbox__main:checked ~ .nav-list__inner,
+.checkbox__main:checked ~ .nav-list__inner__first,
 .checkbox__additional:checked ~ .nav-list__inner__second {
     display: flex;
     opacity: 1;
 }
 
-.checkbox__additional:not(:checked) + .label_popup__additional {
+.checkbox__additional:not(:checked) + .label-popup__additional {
     display: block;
     opacity: 0.5;
 }
 
-.checkbox__additional:checked + .label_popup__additional {
+.checkbox__additional:checked + .label-popup__additional {
     display: none;
     opacity: 0;
 }
@@ -198,15 +180,15 @@ nav {
 /*Hover and Focus*/
 
 .nav-item a:hover,
-.checkbox__main:hover + label,
-.checkbox__additional:hover + .label_popup__additional {
+.checkbox__main:hover + .label-popup__main,
+.checkbox__additional:hover + .label-popup__additional {
     cursor: pointer;
     opacity: 1;
 }
 
 .nav-item a:focus,
-.checkbox__main:focus + label,
-.checkbox__additional:focus + .label_popup__additional {
+.checkbox__main:focus + .label-popup__main,
+.checkbox__additional:focus + .label-popup__additional {
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
     outline: none;
     cursor: pointer;
@@ -219,7 +201,7 @@ nav {
     padding: 30px 0;
 }
 
-.cats-section h2 {
+.section-title {
     text-align: center;
     width: 100%;
     margin-bottom: 20px;
@@ -229,7 +211,6 @@ nav {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-
 }
 
 .cat {
@@ -241,12 +222,12 @@ nav {
     margin-bottom: 25px;
 }
 
-.cat img {
+.cat-img {
     width: 300px;
     height: auto;
 }
 
-.cat figcaption {
+.cat-description {
     text-align: center;
     margin-top: auto;
 }
