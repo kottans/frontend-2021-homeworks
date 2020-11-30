@@ -195,18 +195,16 @@ body {
   background-size: contain;
 
   cursor: pointer;
-
-  transition: 200ms;
 }
 
 .reset:hover {
   background-image: url("images/reset_hover.png");
-  outline: none
+  outline: none;
 }
 
 .reset.off:hover {
   background-image: url("images/reset_off.gif");
-  outline: none
+  outline: none;
 }
 
 
