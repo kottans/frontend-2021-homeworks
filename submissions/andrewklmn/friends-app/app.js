@@ -76,27 +76,24 @@ const drawPerson = ({location, phone, email, gender, name, picture, dob}) => {
   container.appendChild(div);
 }
 
-const filterList = (friends)=>{
-  return friends.filter( person => {
-    if (state.filters.namePart != '') {
-      if((person.name.first + ' ' + person.name.last).toUpperCase()
-              .indexOf(state.filters.partOfName.toUpperCase()) === -1) { 
+const filterList = ({friends, filters})=>{
+  return friends.filter(({name, gender, dob, location}) => {
+    if (filters.namePart != '') {
+      if(`${name.first} ${name.last}`.toUpperCase()
+              .indexOf(filters.partOfName.toUpperCase()) === -1) { 
         return false;
       }
     }
-    if (state.filters.gender != '') {
-      if(person.gender != state.filters.gender) { 
-        return false;
-      }
-    }
-
-    if (state.filters.ageRange[0] > person.dob.age
-        || state.filters.ageRange[1] < person.dob.age) {
+    if (filters.gender != '' 
+          && gender != filters.gender) { 
       return false;
     }
-
-    if (state.filters.country != '') {
-      if(person.location.country != state.filters.country) { 
+    if (filters.ageRange[0] > dob.age
+        || filters.ageRange[1] < dob.age) {
+      return false;
+    }
+    if (filters.country != '') {
+      if(location.country != filters.country) { 
         return false;
       }
     };
@@ -161,14 +158,14 @@ const resetButtonClickHandler = ({filters, sorter}) => {
 }
 
 const redrawFriends = (state) => {
-  const {friends, filters, sorter, initialListLength} = state;
+  const {filters, sorter, initialListLength} = state;
   preloader.classList.remove('hidden');
   setResetButtonView(filters, sorter);
   state.numberOfShowedFriends = 0;
   container.innerHTML = '';
   container.scrollTop = 0;
 
-  sortList(filterList(friends))
+  sortList(filterList(state))
     .slice(0, initialListLength)
     .forEach((friend) => {
       state.numberOfShowedFriends++;
@@ -261,7 +258,7 @@ const autoLoaderOnScroll = (state) => {
       container.scrollTop--;
       preloader.classList.remove('hidden');
 
-      const additionalFriendList = sortList(filterList(friends))
+      const additionalFriendList = sortList(filterList(state))
         .slice( numberOfShowedFriends, numberOfShowedFriends + initialListLength);
 
       requestAnimationFrame(() => drawMoreFriends(additionalFriendList) );
