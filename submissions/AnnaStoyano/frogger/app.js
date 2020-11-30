@@ -104,33 +104,35 @@ Player.prototype.handleInput = function (key) {
     }
 }
 
+const PLAYER_SPEED = 7;
 const START_POSITION_PLAYER = {
     X: 200,
     Y: 404
 };
-const START_POSITION_ENEMY_1 = {
-    X: 0,
-    Y: 120
-};
-const START_POSITION_ENEMY_2 = {
-    X: 15,
-    Y: 220
-};
-const START_POSITION_ENEMY_3 = {
-    X: 30,
-    Y: 50
-};
-const PLAYER_SPEED = 7;
-const ENEMY_1_SPEED = 20;
-const ENEMY_2_SPEED = 60;
-const ENEMY_3_SPEED = 30;
+const BUG_ICON = 'images/enemy-bug.png';
 
+const enemySettings = [{
+    start_position: {
+        X: 0,
+        Y: 120
+    },
+    speed: 20
+}, {
+    start_position: {
+        X: 30,
+        Y: 50
+    },
+    speed: 60
+}, {
+    start_position: {
+        X: 10,
+        Y: 220
+    },
+    speed: 30
+}];
 
 const player = new Player(START_POSITION_PLAYER.X, START_POSITION_PLAYER.Y, PLAYER_SPEED, 'images/char-boy.png');
-const enemy1 = new Enemy(START_POSITION_ENEMY_1.X, START_POSITION_ENEMY_1.Y, ENEMY_1_SPEED, 'images/enemy-bug.png', player);
-const enemy2 = new Enemy(START_POSITION_ENEMY_2.X, START_POSITION_ENEMY_2.Y, ENEMY_2_SPEED, 'images/enemy-bug.png', player);
-const enemy3 = new Enemy(START_POSITION_ENEMY_3.X, START_POSITION_ENEMY_3.Y, ENEMY_3_SPEED, 'images/enemy-bug.png', player);
-const allEnemies = [enemy1, enemy2, enemy3];
+const allEnemies = enemySettings.map(setting => new Enemy(setting.start_position.X, setting.start_position.Y, setting.speed, BUG_ICON, player));
 
 player.enemies = allEnemies;
 
