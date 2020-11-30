@@ -1,0 +1,256 @@
+/* Common styles
+------------------------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    font-family: sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul li {
+    position: relative;
+    list-style: none;
+}
+
+img {
+    display: block;
+    width: 100%;
+}
+
+/* Variables
+------------------------- */
+:root {
+    --text-color: #616161;
+    --text-hover-color: #ffffff;
+    --icon-bg-color: #cfcccc;
+    --icon-border-color:  #858383;
+    --btn-border-color: #ffffff;
+    --btn-hover-color: #858383;
+    --menu-bg-color:#cfcccc;
+}
+
+/* Body container
+------------------------- */
+body {
+    width: 100vw;
+    height: 100vh;
+
+    font-size: 18px;
+    background: #fff url('../img/main-bg.jpg') center center/cover no-repeat;
+}
+
+/* Nav container
+------------------------- */
+.nav {
+    padding: 10px 50px 10px 0;
+}
+
+.nav-inner {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.nav-item {
+    display: block;
+    margin: 0 10px;
+    padding: 5px;
+    color: var(--text-color);
+}
+
+/* Nav links
+------------------------- */
+.nav-link:after {
+    content:'';
+    display: block;
+    position: absolute;
+    bottom: 3px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background-color: var(--text-color);
+
+    transition: width .15s linear;
+}
+
+.nav-link:focus:after,
+.nav-link:hover:after {
+    width: 70%;
+}
+
+/* Nav icons
+------------------------- */
+.nav-icon img {
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+}
+
+label {
+    cursor: pointer;
+}
+
+.nav-icon .nav-user {
+    width: 40px;
+    height: 40px;
+} 
+
+.nav-icon {
+    border-radius: 100%;
+    transition: background-color .15s linear;
+}
+
+.nav-icon:focus,
+.nav-icon:hover {
+    background-color:var(--icon-bg-color);
+}
+
+/* Popup menu container
+------------------------- */
+.popup-btn_more,
+.popup {
+    position: absolute;
+    top: -9999px;
+}
+
+.popup-menu {
+    display: block;
+    position: absolute;
+    top: 50px;
+    right: 50%;
+    transform: translateX(50%);
+    display: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 250px;
+    height: auto;
+
+    overflow-x: hidden;
+
+    border-radius: 5px;
+    background-color:var(--menu-bg-color);
+}
+
+.popup:focus ~ label {
+    background-color:var(--icon-bg-color);
+}
+
+.popup:checked ~ .popup-menu {
+    display: flex;
+}
+
+/* Popup items
+------------------------- */
+.popup-menu li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 33.333333%;
+}
+
+.popup-menu-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 10px;
+    align-items: center;
+    width: 70px;
+    height: 70px;
+}
+
+.popup-menu-item img {
+    width: 40px;
+    height: 40px;
+}
+
+.popup-menu-item:focus {
+    border: 2px dashed var(--icon-border-color);
+}
+
+.popup-menu-item:hover {
+    border: 1px dashed var(--icon-border-color);
+}
+
+span {
+    margin-top: 5px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-color);
+}
+
+/* Change icons' size 
+------------------------- */
+.videos,
+.chat,
+.contacts,
+.classroom,
+.mail,
+.files {
+    padding: 5px 0;
+}
+
+.documents {
+    padding: 0 5px;
+}
+
+/* Popup button
+------------------------- */
+.popup-menu .btn {
+    width: 95%;
+}
+
+.popup-menu-btn {
+    text-align: center;
+    margin: 10px 0;
+    width: 100%;
+    border: 2px solid var(--btn-border-color);
+    border-radius: 5px;
+    color: var(--text-color);
+    background-color: var(--icon-bg-color);
+    transition: color .15s linear, background-color .15s linear;
+}
+
+.popup-menu-btn:hover {
+    background-color: var(--btn-hover-color);
+    color: var( --text-hover-color);
+}
+
+.popup-btn_more:focus ~ label {
+    background-color: var(--btn-hover-color);
+    color: var( --text-hover-color);
+}
+
+/* Popup menu_more container
+------------------------- */
+.popup-menu_more {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 50%;
+    transform: translateX(50%);
+    display: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 250px;
+    padding: 0 10px;
+
+    border-radius: 5px;
+    background-color:var(--menu-bg-color);
+}
+
+.popup-btn_more:checked ~ .popup-menu_more {
+    display: flex;
+}
+
+/* Popup button Kottans
+------------------------- */
+.popup-menu-btn:focus {
+    background-color: var(--btn-hover-color);
+    color: var( --text-hover-color);
+}

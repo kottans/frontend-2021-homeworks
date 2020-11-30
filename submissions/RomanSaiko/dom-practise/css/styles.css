@@ -1,0 +1,135 @@
+body {
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.main {
+  position: relative;
+}
+
+.aside-menu {
+  position: absolute;
+  width: 200px;
+  min-height: 100vh;
+  background: #fff;
+  padding: 0 15px;
+  text-align: center;
+  z-index: 3;
+  transition: all .5s ease;
+}
+
+@media (max-width: 600px) {
+  .aside-menu {
+    transform: translateX(-200px);
+  }
+}
+
+.aside-menu.open {
+  transform: translateX(0);
+}
+
+.nav {
+  margin-top: 40px;
+}
+
+.nav-list {
+  padding: 0;
+  list-style: none;
+}
+
+.nav-list .nav-list__item {
+  padding: 10px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all .5s ease;
+}
+
+.nav-list .nav-list__item:hover {
+  color: #fff;
+  background: #000;
+}
+
+.menu-handler {
+  display: none;
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  transform: rotate(0deg);
+  transition: .5s ease-in-out;
+  cursor: pointer;
+  z-index: 9;
+  top: 20px;
+  left: 20px;
+}
+
+@media (max-width: 600px) {
+  .menu-handler {
+    display: block;
+  }
+}
+
+.menu-handler span {
+  display: block;
+  position: absolute;
+  height: 3px;
+  width: 100%;
+  background: #fff;
+  left: 0;
+  transform: rotate(0deg);
+  transition: .25s ease-in-out;
+}
+
+.menu-handler span:nth-child(1) {
+  top: 0;
+}
+
+.menu-handler span:nth-child(2), .menu-handler span:nth-child(3) {
+  top: 8px;
+}
+
+.menu-handler span:nth-child(4) {
+  top: 16px;
+}
+
+.menu-handler.open {
+  transform: translateX(200px);
+}
+
+.menu-handler.open span:nth-child(1), .menu-handler.open span:nth-child(4) {
+  opacity: 0;
+}
+
+.menu-handler.open span:nth-child(2) {
+  transform: rotate(45deg);
+}
+
+.menu-handler.open span:nth-child(3) {
+  transform: rotate(-45deg);
+}
+
+.article {
+  width: 100%;
+  min-height: 100vh;
+  background-size: cover;
+  position: relative;
+  background-image: url("../img/paris.jpg");
+}
+
+.info-block {
+  position: absolute;
+  top: 100px;
+  right: 100px;
+  background: #fff;
+  width: 300px;
+  padding: 15px;
+  z-index: 2;
+}
+
+@media (max-width: 600px) {
+  .info-block {
+    right: calc(50% - 150px);
+  }
+}

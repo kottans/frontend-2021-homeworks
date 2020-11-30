@@ -1,0 +1,158 @@
+body {
+    font-family: "Times New Roman";
+    margin: 0px;
+}
+
+a {
+    text-decoration: none;
+    color:black;
+    padding: 5px;
+}
+
+img {
+    max-height: 20px;
+    width: 30px;
+}
+
+ul {
+    list-style-type: none;
+    padding-inline-start: 0px;
+}
+.navbar {
+    display: -webkit-flex;
+    display: flex;
+
+    justify-content: flex-end;
+    align-items: center;
+
+    height: 50px;
+    min-height: 50px;
+
+    margin: 0px;
+
+    background: #FFD7A7;
+}
+
+.nav-elem {
+    display: flex;
+    position: relative;
+    align-items: center;
+    padding: 0 30px 0 30px;
+    height: 100%;
+    border: 2px solid transparent;
+    color: black;
+}
+
+.nav-elem:hover {
+    cursor: pointer;
+    opacity: 70%;
+}
+.nav-elem:focus {
+    border-color: darkturquoise;
+}
+
+
+.pop-up {
+    display: none;
+}
+
+.show-popup-cb {
+    position: absolute;
+    left: -9999px;
+    appearance: none;
+}
+
+.show-popup-label {
+    width: 100%;
+    padding: 10px 0px 10px 0px;
+    border: 2px solid transparent;
+}
+
+.show-popup-cb:focus ~ .show-popup-label {
+    border-color: darkturquoise;
+}
+
+.show-popup-cb:checked ~ .pop-up {
+    position: absolute;
+    top: 50px;
+    left: -100%;
+    width: 280px;
+    max-height: 420px;
+    overflow: auto;
+    z-index: 1;
+    -webkit-transition: 0.5s ease-in-out;
+    -moz-transition: 0.5s ease-in-out;
+    -o-transition: 0.5s ease-in-out;
+    transition: 0.5s ease-in-out;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    background-color: lightblue;
+}
+
+.pop-up-item, .hidden-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 60px;
+    font-size: 14px;
+    text-align: center;
+    padding: 5px;
+    border: 2px solid transparent;
+}
+
+.pop-up-item:hover, .hidden-item:hover {
+    opacity: 70%;
+}
+.pop-up-item:focus, .hidden-item:focus {
+    border-color: darkturquoise;
+}
+
+.hidden-elements {
+    display: none;
+}
+
+.show-more-cb {
+    position: absolute;
+    left: -9999px;
+    appearance: none;
+}
+
+.show-more-cb:checked ~ .hidden-elements {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.app-menu-more {
+    display: flex;
+    text-align: center;
+    width: 100%;
+}
+
+.show-more-label {
+    width: 100%;
+    background-color: cadetblue;
+    padding: 10px 0px 10px 0px;
+    border: 2px solid transparent;
+}
+
+
+
+.show-more-label:hover, .show-popup-label {
+    cursor: pointer;
+}
+
+.show-more-cb:focus ~ .show-more-label {
+    border-color: darkturquoise;
+}
+
+.show-more-cb:checked ~ .show-more-label {
+    display: none;
+}
+
+
+
+
