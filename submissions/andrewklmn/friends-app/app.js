@@ -78,11 +78,10 @@ const drawPerson = ({location, phone, email, gender, name, picture, dob}) => {
 
 const filterList = ({friends, filters})=>{
   return friends.filter(({name, gender, dob, location}) => {
-    if (filters.namePart != '') {
-      if(`${name.first} ${name.last}`.toUpperCase()
-              .indexOf(filters.partOfName.toUpperCase()) === -1) { 
+    if (filters.namePart != ''
+          && !`${name.first} ${name.last}`.toUpperCase()
+                                          .includes(filters.partOfName.toUpperCase())) { 
         return false;
-      }
     }
     if (filters.gender != '' 
           && gender != filters.gender) { 
