@@ -29,21 +29,18 @@ const nav = document.querySelector('.navbar');
 const ul = document.querySelector('.list');
 const container = document.querySelector('.container');
 
-function createNavItem() {
-	let content = '';
-	heroes.map(({id, name}) => {
-		content += `<li class='list-item'>
-		<a data-id="${id}" class="list-link" href="#">${name}</a>
+const createNavItem = () => {
+	ul.innerHTML = heroes.map(({id, name}) => (
+		`<li class='list-item'>
+			<a data-id="${id}" class="list-link" href="#">${name}</a>
 		</li>`
-	})
-	
-	ul.innerHTML = content;
+	)).join('')
 }
 
 function displayFact(navLink) {
 	const hero = heroes.find((el) => navLink.dataset.id == el.id)
  	if (!hero) {
- 		return;
+ 		return hero = '';
 	 }
 	const newDiv = document.createElement('div');
 	newDiv.classList.add('content-text');
@@ -53,16 +50,16 @@ function displayFact(navLink) {
 };
 
 
-document.addEventListener("DOMContentLoaded", function(e) {
+document.addEventListener("DOMContentLoaded", function(el) {
 	createNavItem();
-	ul.addEventListener('click', function(e) {
-	  let target = e.target;
-	  e.preventDefault();
+	ul.addEventListener('click', function(el) {
+	  let target = el.target;
+	  el.preventDefault();
 	  const navItemActive = document.querySelector('.list-item.active');
 	  if (navItemActive) {
 		 navItemActive.classList.remove('active');
 	  }
-	  target.parentElement.classList.add('active');
+	  target.closest('.list').classList.add('active');
 	  displayFact(target);
 	});
 });

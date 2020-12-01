@@ -58,8 +58,8 @@
 
   .aside {
     justify-content: center;
-	 text-align: center;
-	 margin-top: -190px;
+    text-align: center;
+    margin-top: -190px;
     margin-right: 30px;
   }
 
@@ -68,7 +68,7 @@
   }
 
   .container {
-    padding-left: 5px;/
+    padding-left: 5px;
   }
   .content-text {
     font-size: 15px;
