@@ -1,5 +1,6 @@
 /* Refer to https://github.com/OleksiyRudenko/a-tiny-JS-world for the task details
    Complete the below for code reviewers' convenience:
+
    Code repository: _put repo URL here_
    Web app: _put project's github pages URL here_
    */
@@ -19,7 +20,7 @@ class Creature {
     }
 
     toString() {
-        return `${this.species}, ${this.name}, ${this.gender}, ${this.age}`;
+        return [this.species, this.name, this.gender, this.age].join(',  ');
     }
 
     bornCreature(partner = {}, femaleName, maleName) {
@@ -140,7 +141,11 @@ class Human extends Creature {
         const intro = `Hello! My name is ${this.name}, I'm ${this.age}. `;
         let friends = this.#friends.length ? `There is my friends: ${this.getFriendsNames()}. ` : '';
         let spouse = this.spouse ? `And i have a spouse ${this.spouse.name}; ` : '';
-        let children = this.children.length ? `My ` + this.children.length > 1 ? `children: ${this._getChildren()}` : `child: ${this._getChildren()}` : '';
+        let children = this.children.length
+            ? `My ` + this.children.length > 1
+                ? `children: ${this._getChildren()}`
+                : `child: ${this._getChildren()}`
+            : '';
 
         return intro + friends + spouse + children;
     }
@@ -207,8 +212,13 @@ class Names {
 const getRandomAge = () => Math.floor(Math.random() * 15 + 20);
 const names = new Names();
 
-const men = [0, 1, 2, 3, 4].map(() => new Human(names.getMaleName(), 'm', getRandomAge()));
-const women = [0, 1, 2, 3, 4].map(() => new Human(names.getFemaleName(), 'f', getRandomAge()));
+const men = [];
+const women = [];
+
+for (let i = 0; i < 5; i++) {
+    men.push(new Human(names.getMaleName(), 'm', getRandomAge()));
+    women.push(new Human(names.getFemaleName(), 'f', getRandomAge()));
+}
 
 men.forEach(man => {
     women.forEach(woman => {
@@ -246,4 +256,4 @@ const puppy = ruby.bornCreature(asher, 'Sushi', 'Sid');
    print('human; <strong>John</strong>; male; 2; 2; <em>Hello world!</em>; Rex, Tom, Jenny', 'div');
    */
 
-[...men, ...women, luna, leo, kitty, asher, ruby, puppy].forEach(creature => print(creature.toString()));
+[...men, ...women, luna, leo, kitty, asher, ruby, puppy].forEach(creature => print(creature));
