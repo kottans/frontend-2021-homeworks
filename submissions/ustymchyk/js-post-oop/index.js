@@ -40,7 +40,7 @@ class Pet extends Creature {
     #energy;
 
     constructor(name, gender, age, species, happySound, angrySound) {
-        if (new.target === Creature) {
+        if (new.target === Pet) {
             throw new TypeError("Cannot construct Abstract instances directly");
         }
 
