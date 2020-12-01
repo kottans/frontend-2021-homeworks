@@ -16,16 +16,6 @@ class Habitant {
     this.phrase = phrase;
     this.friends = friends;
     this.addFriends(friends);
-
-    [
-      this.speciesProp,
-      this.nameProp,
-      this.genderProp,
-      this.phraseProp,
-      this.legsProp,
-    ] = ["species", "name", "gender", "phrase", "legs"].map(
-      (prop) => `<strong>${this[prop]}</strong>`
-    );
   }
 
   addFriends(friends) {
@@ -43,14 +33,15 @@ class Habitant {
   }
 
   toString() {
-    return `Hi! I am ${this.speciesProp}, my name is ${
-      this.nameProp
-    }, my gender is ${this.genderProp}.
-    My phrase: ${
-      this.phraseProp
-    } Friends: <strong>${this.listFriends()}</strong>. I have ${
-      this.legsProp
-    } legs `;
+    let [speciesProp, nameProp, genderProp, phraseProp, legsProp] = [
+      "species",
+      "name",
+      "gender",
+      "phrase",
+      "legs",
+    ].map((prop) => `<strong>${this[prop]}</strong>`);
+    return `Hi! I am ${speciesProp}, my name is ${nameProp}, my gender is ${genderProp}.
+    My phrase: ${phraseProp} Friends: <strong>${this.listFriends()}</strong>. I have ${legsProp} legs `;
   }
 }
 
@@ -68,20 +59,11 @@ class Human extends Habitant {
   constructor(name, gender, phrase, friends, legs = 2, hands = 2) {
     super("human", name, gender, phrase, friends, legs, hands);
     this.hands = hands;
-    [
-      this.speciesProp,
-      this.nameProp,
-      this.genderProp,
-      this.phraseProp,
-      this.legsProp,
-      this.handsProp,
-    ] = ["species", "name", "gender", "phrase", "legs", "hands"].map(
-      (prop) => `<strong>${this[prop]}</strong>`
-    );
   }
 
   toString() {
-    return super.toString() + `and ${this.handsProp} hands.`;
+    let handsProp = `<strong>${this["hands"]}</strong>`;
+    return super.toString() + `and ${handsProp} hands.`;
   }
 }
 const dog = new Dog("Snoop", "male", "Woof!");
