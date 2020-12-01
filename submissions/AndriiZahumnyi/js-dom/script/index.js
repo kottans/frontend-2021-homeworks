@@ -4,6 +4,7 @@
 const hamburgerToggle = document.querySelector('#menu-toggle');
 
 hamburgerToggle.addEventListener('click', function (e) {
+  
   e.preventDefault();
 
   document.querySelector('.flexmenu').classList.toggle('active');
@@ -11,8 +12,8 @@ hamburgerToggle.addEventListener('click', function (e) {
 
 /* Aside menu -  interactive side-menu*/
 
-let arrAside = ["aside-html", "aside-css", "aside-bootstrap", "aside-js", "aside-jquery", "aside-git"];
-let arrContent = ["html-section", "css-section", "bootstrap-section", "js-section", "jquery-section", "git-section"];
+const arrAside = ["aside-html", "aside-css", "aside-bootstrap", "aside-js", "aside-jquery", "aside-git"];
+const arrContent = ["html-section", "css-section", "bootstrap-section", "js-section", "jquery-section", "git-section"];
 
 const myCustomDiv = document.getElementById("aside-container");
 
