@@ -75,7 +75,12 @@ const inhabitants = [dog, cat, man, woman, catWoman];
 const propsToPrint = ["species", "name", "gender", "legs", "hands", "friends", "saying"];
 
 inhabitants.forEach(item => {
-  print(Object.entries(item).filter(entry => propsToPrint.includes(entry[0])).map(entry => Array.isArray(entry[1]) ? entry[1].join(', ') : entry[1]).join('; '));
+  print(
+    Object.entries(item)
+      .filter(([key]) => propsToPrint.includes(key))
+      .map(([,value]) => Array.isArray(value) ? value.join(', ') : value)
+      .join('; ')
+  );
 });
 
 // ======== OUTPUT ========
