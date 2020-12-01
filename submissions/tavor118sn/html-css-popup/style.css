@@ -1,0 +1,159 @@
+/*
+ *
+ * Reset styles
+ *
+ */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: inherit;
+}
+
+/*
+ *
+ * General styles
+ *
+ */
+
+body {
+  font-family: Arial, serif;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  clip: rect(0 0 0 0)
+}
+
+/*
+ *
+ * Main navbar
+ *
+ */
+
+.header {
+  background-color: #90EE90;
+}
+
+.navbar {
+  max-width: 60%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar__title,
+.navbar__item a,
+.navbar__item label {
+  text-decoration: none;
+  color: #707070;
+  display: inline-block;
+  padding: 15px 15px;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.navbar .navbar__links,
+.navbar .popup-menu {
+  list-style: none;
+}
+
+.navbar__title {
+  font-weight: bold;
+}
+
+.navbar__links {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar__links .navbar__item:hover {
+  background-color: aquamarine;
+}
+
+.navbar__img {
+  height: auto;
+  width: 0.9em;
+}
+
+/* Emulate focus for label */
+.popup-menu__input:focus + .popup-menu__label,
+.popup-menu__more__input:focus + .popup-menu__label {
+  outline-offset: -1px;
+  outline: black auto 5px;
+}
+
+/*
+ *
+ * Pop-up menu
+ *
+ */
+
+.popup-menu__input:checked ~ .popup-menu {
+  display: flex;
+}
+
+.popup-menu {
+  display: none; /* hide element at the start */
+  position: absolute;
+  right: 20%;
+  height: 230px;
+  max-width: 300px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-color: azure;
+  box-shadow: 0 1px 2px 5px rgba(135, 130, 135, 0.5);
+}
+
+.popup-menu__item {
+  width: 30%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+.popup-menu__item:hover {
+  background-color: darkgray;
+}
+
+.popup-menu__img {
+  width: 40px;
+}
+
+.popup-menu .popup-menu__more {
+  width: 100%;
+}
+
+.popup-menu__more .popup-menu__label {
+  background-color: white;
+  width: 100%;
+  text-align: center;
+}
+
+.popup-menu__more .popup-menu__label:hover {
+  background-color: darkgray;
+}
+
+.popup-menu__more__input:checked ~ .additional-popup-menu {
+  display: flex;
+  justify-content: center;
+}
+
+.popup-menu__more__input:checked + .popup-menu__label {
+  display: none;
+}
+
+.additional-popup-menu {
+  display: none;
+}

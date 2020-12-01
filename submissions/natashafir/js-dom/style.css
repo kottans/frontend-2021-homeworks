@@ -1,0 +1,127 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #162F3E;
+    color: white;
+    font-family: 'Raleway', sans-serif;
+}
+
+h1 {
+    margin: 0;
+    padding: 0;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    margin-top: 2%;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.content {
+    display: flex;
+    margin-top: 4%;
+    justify-content: space-around;
+    position: relative;
+    padding: 0 20px;
+    width: 900px;
+    height: 648px;
+}
+
+.navigation {
+    display: block;
+    width: 30%;
+    flex: 1;
+}
+
+#nav__wrapper {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.main {
+    padding: 10px;
+    background-color: #fff;
+    width: 56%;
+}
+
+.btn {
+    height: 3em;
+    font-size: 18px;
+    color: #73828b;
+    background-color: #132a37;
+    border: 1px solid #112531;
+}
+
+.btn:hover {
+    color: #d0d5d8;
+    cursor: pointer;
+}
+
+.btn:focus {
+    color: #fff;
+    outline: 0;
+    background-color: #1d3d51;
+}
+
+.menu {
+    position: absolute;
+    top: 30px;
+    padding-left: 6%;
+}
+
+.hamburger {
+    display: none;
+    background: url("./img/menu.png") no-repeat center;
+    height: 20px;
+    width: 20px;
+    position: absolute;
+    top: -5px;
+    border: none;
+}
+
+input[type="checkbox"]:checked ~ .main {
+    background-color: orangered;
+    margin: 10px;
+    padding: 10px;
+}
+
+@media screen and (max-width: 700px) {
+    .hamburger {
+        display: block;
+    }
+
+    .title {
+        font-size: 26px;
+    }
+
+    .main {
+        width: 90%;
+    }
+
+    .navigation {
+        display: none;
+        width: 60%;
+        left: 0;
+        position: absolute;
+    }
+
+    .hamburger--open {
+        background: url("./img/x.png") no-repeat center;
+    }
+
+    .navigation--open {
+        display: block;
+    }
+}
