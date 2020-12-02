@@ -174,14 +174,6 @@ const products = [
         image: "./images/accessories/photo_4.jpg"
     }];
 
-function removeElementsIfExist(elementsList) {
-    if(elementsList.length > 0) {
-        Array.from(elementsList).forEach(element => element.remove());
-        return true;
-    }
-    return false;
-}
-
 function createElementWithClass(tagName, cssClass) {
     const element = document.createElement(tagName);
     element.classList.add(cssClass);
@@ -212,15 +204,13 @@ function createContentItem(product) {
     return productElement;
 }
 
-
-document.getElementsByClassName("menu-list")[0].addEventListener("click", function (event) {
     const content = document.getElementById("content");
-    const productType = event.target.textContent;
 
-    removeElementsIfExist(document.getElementsByClassName("content-header"));
-    removeElementsIfExist(document.getElementsByClassName("content-items"));
+    document.querySelector(".menu-list").addEventListener("click", function ({target}) {
+    const productType = target.textContent;
 
-    const contentFragment = document.createDocumentFragment();
+    const contentFragment = createElementWithClass("main", "content-box");
+    contentFragment.id = "content";
     const header = createElementWithClass("div", "content-header");
     const headerTitle = createElementWithClass("h3", "content-title");
     headerTitle.textContent = productType;
@@ -231,7 +221,7 @@ document.getElementsByClassName("menu-list")[0].addEventListener("click", functi
     header.appendChild(headerTitle);
     contentFragment.appendChild(header);
     contentFragment.appendChild(contentItems);
-    content.appendChild(contentFragment);
+    content.innerHTML = contentFragment.innerHTML;
 
 });
 

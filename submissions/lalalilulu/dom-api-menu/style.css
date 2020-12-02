@@ -73,10 +73,6 @@ body {
     margin: 0;
 }
 
-li .menu-item {
-    list-style: none;
-}
-
 .menu-item {
     display: flex;
     position: relative;
@@ -86,6 +82,7 @@ li .menu-item {
     font-size: 18px;
     font-weight: 700;
     text-transform: uppercase;
+    list-style: none;
 }
 
 .menu-item:hover {
@@ -181,7 +178,6 @@ li .menu-item {
     font-size: 18px;
 }
 
-/* custom scrollbar */
 ::-webkit-scrollbar {
     width: 8px;
 }
