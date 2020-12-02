@@ -1,4 +1,3 @@
-
 const maxNumberOfFriends = 100;
 const randomUserUrl = 'https://randomuser.me/api/?results=' + maxNumberOfFriends + '&seed=friends';
 
@@ -31,7 +30,7 @@ const state = {
   initialListLength: 25,
   numberOfShowedFriends: 0,
   scrollDisabled: false,
-  afterLoadingMoreFriendsScrollShift: 25, /* px */
+  afterLoadScrollShift: 25, /* px */
   nextMoreFriendAutoloadDelay: 300,       /* ms */
 }
 
@@ -238,7 +237,7 @@ const drawMoreFriends = (friends) => {
   
   setTimeout(() => {
     if (container.scrollTop > 0) {
-      container.scrollTop += state.afterLoadingMoreFriendsScrollShift;
+      container.scrollTop += state.afterLoadScrollShift;
     };
   }, state.nextMoreFriendAutoloadDelay * 2);
 };
