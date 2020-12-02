@@ -136,22 +136,6 @@ const setResetButtonView = (filters, sorter) => {
   resetButton.classList.add('off');
 }
 
-const resetButtonClickHandler = ({filters, sorter}) => {
-
-  if (resetButton.classList.contains('off')) return;
-
-  const change = new Event('change');
-
-  filters.partOfName = searchField.value = '';
-  filters.gender = filterGender.value = '';
-  filters.ageRange[0] = filterMinAge.value = minPersonAge;
-  filters.ageRange[1] = filterMaxAge.value = maxPersonAge;
-  filters.country = filterCountry.value = '';
-
-  sorter.keyName = sortField.value = '';
-  sortField.dispatchEvent(change);
-}
-
 const redrawFriends = (state) => {
   const {filters, sorter, initialListLength} = state;
   preloader.classList.remove('hidden');
@@ -168,6 +152,19 @@ const redrawFriends = (state) => {
     });
 
   preloader.classList.add('hidden');
+}
+
+const resetButtonClickHandler = ({filters, sorter}) => {
+  if (resetButton.classList.contains('off')) return;
+
+  filters.partOfName = searchField.value = '';
+  filters.gender = filterGender.value = '';
+  filters.ageRange[0] = filterMinAge.value = minPersonAge;
+  filters.ageRange[1] = filterMaxAge.value = maxPersonAge;
+  filters.country = filterCountry.value = '';
+  sorter.keyName = sortField.value = '';
+  
+  redrawFriends(state);
 }
 
 const updateFriendsList = (list)=> {
