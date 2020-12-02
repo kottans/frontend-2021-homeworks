@@ -29,10 +29,10 @@ class Game {
     openCard(btn) {
         btn.classList.add('active');
 
-        if (this.openCards.length < 2) {
+        if (this.openCards.length < this.matchingForRightAnswer) {
             this.openCards.push(btn);
         }
-        if (this.openCards.length === 2) {
+        if (this.openCards.length === this.matchingForRightAnswer) {
             this.checkMatch();
         }
     }
