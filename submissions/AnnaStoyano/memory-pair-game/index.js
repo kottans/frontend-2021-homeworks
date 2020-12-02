@@ -5,14 +5,12 @@ class Game {
     }
 
     render() {
-        this.cards.forEach(card => {
-            this.container.insertAdjacentElement('beforeend', card.render());
-        });
+        this.cards.forEach(card => this.container.insertAdjacentElement('beforeend', card.render()));
     }
 
     checkEqualCards(activeCards) {
-        let activeCardsNames = activeCards.map(card => card.cardForDisplay.attributes['data-name'].value);
-        if (activeCardsNames[0] == activeCardsNames[1]) {
+        const activeCardsNames = activeCards.map(card => card.cardForDisplay.dataset.name);
+        if (activeCardsNames[0] === activeCardsNames[1]) {
             activeCards.forEach(card => card.addOpened());
             return true;
         }
@@ -39,12 +37,12 @@ class Game {
                     activeCards = game.getActiveCards();
                 }
             }
-            if (activeCards.length == 2) {
+            if (activeCards.length === 2) {
                 let isOpened = game.checkEqualCards(activeCards);
                 activeCards = game.removeActiveCards(activeCards, isOpened);
             }
             game.checkWin.bind(game)();
-        }, false)
+        }, false);
     }
 
     shuffleCard() {
@@ -57,8 +55,13 @@ class Game {
         this.processClickOnCards();
     }
 
+    restartGame() {
+        this.shuffleCard();
+        this.render();
+    }
+
     findCard(cardHTMLelement) {
-        let card = this.cards.find(card => card.cardForDisplay.id == cardHTMLelement.id)
+        let card = this.cards.find(card => card.cardForDisplay.id == cardHTMLelement.id);
         return card;
     }
 
@@ -72,15 +75,16 @@ class Game {
 
     checkWin() {
         const game = this;
+        const TiME_DELAY = 700;
         let openCards = this.getOpenedCards();
-        if (openCards.length == this.cards.length) {
+        if (openCards.length === this.cards.length) {
             setTimeout(function () {
                 let restart = confirm('You WIN!\nRestart Game?');
                 if (restart) {
                     game.removeOpenedCard();
-                    game.startGame();
+                    game.restartGame();
                 }
-            }, 700);
+            }, TiME_DELAY);
         }
     }
 
