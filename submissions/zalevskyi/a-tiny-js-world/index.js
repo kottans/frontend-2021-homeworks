@@ -7,9 +7,10 @@
 
 // ======== OBJECTS DEFINITIONS ========
 // Define your objects here
-const human = {species: 'human', legs: 2, hands: 2, saying: 'Bla!'}
+const being = {species: undefined, name: undefined, gender: undefined, legs: undefined, hands: undefined, saying: undefined}
+const human = Object.assign({}, being, {species: 'human', legs: 2, hands: 2, saying: 'Bla!'})
 const cat_woman = Object.assign({}, human, {species: 'cat-woman', saying: 'Meow'})
-const pet = {legs: 4, hands: undefined}
+const pet = Object.assign({}, being, {legs: 4, hands: 0})
 const dog = Object.assign({}, pet, {species: 'dog', saying: 'Woof!'})
 const cat = Object.assign({}, pet, {species: 'cat', saying: 'Meow'})
 const species = {human: human, dog: dog, cat: cat, cat_woman: cat_woman}
@@ -30,29 +31,38 @@ const names = {
       female: ['Daisy', 'Stella', 'Cleo']
    }
 }
-const inhabitans = []
-for (let kind in names) {
-   for (let gender in names[kind]) {
-      inhabitans.push(...names[kind][gender].map(name => Object.assign({},species[kind],{gender: gender, name: name})))
-   }
-}
-inhabitans.forEach((obj, index, arr) => {
-   if (obj.species==='human') Object.defineProperty(arr[index], 'saying', {get: () => `Hi! I'm ${obj.name}`})
-   if (obj.species==='cat-woman') Object.defineProperty(arr[index], 'saying', {get: () => cat.saying})
-})
-cat.saying='Catch me! Meow!'
-const MAX_FRIENDS = 5
-inhabitans.forEach((obj, index, arr) => {
-   const myFriendsSet = new Set()
-   const myFriendsNumber = Math.floor(Math.random()*Math.min(MAX_FRIENDS, arr.length))
-   while (myFriendsSet.size < myFriendsNumber) {
-      let nextFriend = arr[Math.floor(Math.random()*(arr.length-1))]
-      if (obj !== nextFriend) {
-         myFriendsSet.add(nextFriend)
+function inhabitWorld(species, names) {
+   let inhabitans = []
+   for (let kind in names) {
+      for (let gender in names[kind]) {
+         inhabitans.push(...names[kind][gender].map(name => Object.assign({},species[kind],{gender: gender, name: name})))
       }
    }
-   arr[index].friends=myFriendsSet
-})
+   return inhabitans
+}
+function learnToTalk(inhabitans) {
+   inhabitans.forEach((obj, index, arr) => {
+      if (obj.species==='human') Object.defineProperty(arr[index], 'saying', {get: () => `Hi! I'm ${obj.name}`})
+      if (obj.species==='cat-woman') Object.defineProperty(arr[index], 'saying', {get: () => cat.saying})
+   })
+}
+function makeFriends(inhabitans, maxFriends) {
+   inhabitans.forEach((obj, index, arr) => {
+      const myFriendsSet = new Set()
+      const myFriendsNumber = Math.floor(Math.random()*Math.min(maxFriends, arr.length))
+      while (myFriendsSet.size < myFriendsNumber) {
+         let nextFriend = arr[Math.floor(Math.random()*(arr.length-1))]
+         if (obj !== nextFriend) {
+            myFriendsSet.add(nextFriend)
+         }
+      }
+      arr[index].friends=myFriendsSet
+   })
+}
+const inhabitans = inhabitWorld(species, names)
+learnToTalk(inhabitans)
+makeFriends(inhabitans, 5)
+cat.saying='Catch me! Meow!'
 
 // ======== OUTPUT ========
 /* Use print(message) for output.
@@ -72,14 +82,6 @@ inhabitans.forEach((obj, index, arr) => {
    print('human; <strong>John</strong>; male; 2; 2; <em>Hello world!</em>; Rex, Tom, Jenny');
    print('human; <strong>John</strong>; male; 2; 2; <em>Hello world!</em>; Rex, Tom, Jenny', 'div');
    */
-inhabitans.forEach(being => {
-   let listOfFriends = ''
-   if (being.hasOwnProperty('friends')) {
-      const friendsIterator = being.friends.values()
-      for (const friend of friendsIterator) {
-         listOfFriends += ` ${friend.name},`
-      }
-      listOfFriends = listOfFriends.slice(0, listOfFriends.length-1) //remove ',' at the end if any
-   }
-   print(`${being.species}; ${being.name}; ${being.gender}; ${being.legs}; ${being.hands}; ${being.saying};${listOfFriends}`,'div')
+inhabitans.forEach((being) => {
+   print(`${Object.values(being).slice(0,-1).join('; ')}; ${Array.from(being.friends).map(friend => friend.name).join(', ')}`,'div')
 })
