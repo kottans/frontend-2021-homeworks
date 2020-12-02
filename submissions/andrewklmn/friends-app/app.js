@@ -248,7 +248,7 @@ const drawMoreFriends = (friends) => {
 const autoLoaderOnScroll = (state) => {
   const {numberOfShowedFriends, friends, initialListLength, nextMoreFriendAutoloadDelay} = state;
   
-  if (state.scrollDisabled) return true;
+  if (state.scrollDisabled) return;
 
   if (container.scrollTop + container.clientHeight >= --container.scrollHeight) {
     if(numberOfShowedFriends < friends.length) {
