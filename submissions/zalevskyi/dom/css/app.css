@@ -115,6 +115,8 @@
 }
 .portrait {
     margin: auto;
+    height: 208px;
+    width: 206px;
 }
 .hidden {
     display: none;

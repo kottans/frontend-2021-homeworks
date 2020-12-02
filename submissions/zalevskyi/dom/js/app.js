@@ -63,48 +63,62 @@ const WIKI = {
         img_alt: 'Victor portrait'
     }
 }
-const ARTICLE_INNER_HTML = {
-    'overview': `<h1 id='title' class='text_heading_1'></h1><p id='description' class='text'></p>`,
-    'governor': `<h1 id='title' class='text_heading_1'></h1>
-                 <img id='portrait' alt='' src='' class='portrait'>
-                 <h2 class='text_heading_2 description_heading'>Description</h2>
-                 <p id='description' class='text description'></p>
-                 <h2 class='text_heading_2 context_heading'>Historical Context</h2>
-                 <p id='context' class='text context'></p>`
-}
 Object.freeze(WIKI)
-Object.freeze(ARTICLE_INNER_HTML)
-function updateCommon(name) {
-    document.getElementById('title').textContent = `${name} - ${WIKI[name].title}`
-    document.getElementById('description').textContent = WIKI[name].description
+const MAIN_INNER_HTML = `<input type='button' id='menu_button' class='menu_button' value='Menu'>
+                         <div id='civilopedia_path' class='civilopedia_path'>Civilization VI | Governors</div>
+                         <div id='article' class='article'><h1 id='title' class='text_heading_1'></h1>
+                            <img id='portrait' alt='' src='' class='portrait'>
+                            <h2 class='text_heading_2 description_heading'>Description</h2>
+                            <p id='description' class='text description'></p>
+                            <h2 class='text_heading_2 context_heading'>Historical Context</h2>
+                            <p id='context' class='text context'></p>
+                         </div>`
+const main = document.getElementById('main')
+const nav = document.getElementById('nav')
+main.innerHTML=MAIN_INNER_HTML
+const title = document.getElementById('title')
+const description = document.getElementById('description')
+const portrait = document.getElementById('portrait')
+const context = document.getElementById('context')
+const governorHeadings = document.querySelectorAll('.text_heading_2')
+hideGovernorDetails()
+updateMainCommon('governors')
+function updateMainCommon(name) {
+    title.textContent = `${name} - ${WIKI[name].title}`
+    description.textContent = WIKI[name].description
 }
-function updateGovernor(name) {
-    document.getElementById('context').textContent = WIKI[name].context
-    document.getElementById('portrait').src = WIKI[name].img_src
-    document.getElementById('portrait').alt = WIKI[name].img_alt
+function updateMainGovernor(name) {
+    context.textContent = WIKI[name].context
+    portrait.src = WIKI[name].img_src
+    portrait.alt = WIKI[name].img_alt
+    showGovernorDetails()
 }
-document.getElementById('menu').addEventListener('click', ({target}) => {
-    const target_before = document.querySelector('.menu_item_selected')
-    if (target!==target_before) {
-        const article = document.getElementById('article')
-        const name = target.textContent
-        const name_before = target_before.textContent
-        target_before.classList.toggle('menu_item_selected')
-        target.classList.toggle('menu_item_selected')
-        article.classList.add('hidden')
-        if (WIKI[name]['type']!==WIKI[name_before]['type']) {
-            article.innerHTML=ARTICLE_INNER_HTML[WIKI[name]['type']]
-        }
-        updateCommon(name)
-        if (WIKI[name]['type']==='governor') updateGovernor(name)
-        article.classList.remove('hidden')
-    }
-    document.querySelector('.main').classList.toggle('hidden_small')
-    document.querySelector('.nav').classList.toggle('hidden_small')
+function hideGovernorDetails() {
+    governorHeadings.forEach(element => element.classList.add('hidden'))
+    portrait.classList.add('hidden')
+    context.classList.add('hidden')
+    context.textContent = ''
+    portrait.src = ''
+    portrait.alt = ''
+}
+function showGovernorDetails() {
+    governorHeadings.forEach(element => element.classList.remove('hidden'))
+    portrait.classList.remove('hidden')
+    context.classList.remove('hidden')
+}
+function toggleHiddenSmallNavMain() {
+    main.classList.toggle('hidden_small')
+    nav.classList.toggle('hidden_small')
+}
+document.getElementById('menu').addEventListener('click', evt => {
+    const name = evt.target.textContent
+    const type = WIKI[name]['type']
+    document.querySelector('.menu_item_selected').classList.toggle('menu_item_selected')
+    evt.target.classList.toggle('menu_item_selected')
+    updateMainCommon(name)
+    if (type==='governor') updateMainGovernor(name)
+    else hideGovernorDetails()
+    toggleHiddenSmallNavMain()
+    evt.preventDefault()
 })
-document.getElementById('menu').addEventListener('click', e => e.preventDefault())
-document.getElementById('menu_button').addEventListener('click', () => {
-    document.querySelector('.main').classList.toggle('hidden_small')
-    document.querySelector('.nav').classList.toggle('hidden_small')
-})
-document.getElementById('menu_button').addEventListener('click', e => e.preventDefault())
+document.getElementById('menu_button').addEventListener('click', toggleHiddenSmallNavMain)
