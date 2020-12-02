@@ -163,7 +163,8 @@ const resetButtonClickHandler = ({filters, sorter}) => {
   filters.ageRange[1] = filterMaxAge.value = maxPersonAge;
   filters.country = filterCountry.value = '';
   sorter.keyName = sortField.value = '';
-  
+  sortOrder.innerHTML = '';
+
   redrawFriends(state);
 }
 
