@@ -304,21 +304,12 @@ const sorterOrderClickHandler = (target, state)=>{
   redrawFriends(state);
 }
 
-const searchFieldChangeHandler = (target, state)=>{
+const filterTextChangeHandler = (target, state, nameOfFilterProp) => {
   const {filters} = state;
-  if (filters.partOfName === target.value) {
+  if (filters[nameOfFilterProp] === target.value) {
     return true;
   }
-  filters.partOfName = target.value;
-  redrawFriends(state);
-}
-
-const filterGenderChangeHandler = (target, state) => {
-  const {filters} = state;
-  if (target.value === filters.gender) {
-    return true;
-  }
-  filters.gender = target.value;
+  filters[nameOfFilterProp] = target.value;
   redrawFriends(state);
 }
 
@@ -330,15 +321,6 @@ const filterAgeChangeHandler = (target, state, ageRangeIndex)=>{
   redrawFriends(state);
 }
 
-const filterCountryChangeHandler = (target, state) => {
-  const {filters} = state;
-  if (target.value === filters.country) {
-    return true;
-  }
-  filters.country = target.value;
-  redrawFriends(state);
-}
-
 document.addEventListener('DOMContentLoaded',() => {
   initApp(state);
   
@@ -347,12 +329,11 @@ document.addEventListener('DOMContentLoaded',() => {
   
   resetButton.addEventListener('click', () => resetButtonClickHandler(state));
   
-  searchField.addEventListener('keyup',({target}) => searchFieldChangeHandler(target, state));
-  
-  filterGender.addEventListener('change', ({target}) => filterGenderChangeHandler(target, state));
+  searchField.addEventListener('keyup',({target}) => filterTextChangeHandler(target, state, 'partOfName'));
+  filterGender.addEventListener('change', ({target}) => filterTextChangeHandler(target, state, 'gender'));
   filterMinAge.addEventListener('change', ({target}) => filterAgeChangeHandler(target, state, MIN_AGE_RANGE_INDEX));
   filterMaxAge.addEventListener('change', ({target}) => filterAgeChangeHandler(target, state, MAX_AGE_RANGE_INDEX));
-  filterCountry.addEventListener('change', ({target}) => filterCountryChangeHandler(target, state));
+  filterCountry.addEventListener('change', ({target}) => filterTextChangeHandler(target, state, 'country'));
   
   container.addEventListener('scroll', ()=>autoLoaderOnScroll(state));
 });
