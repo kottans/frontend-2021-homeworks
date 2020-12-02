@@ -1,4 +1,6 @@
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -23,13 +25,13 @@ body {
 
 .game {
   display: grid;
-  grid-template-areas: 
-    'i1 i2 i3'
-    'i4 empty i5'
-    'i6 i7 i8';
+  grid-template-areas:
+    "i1 i2 i3"
+    "i4 empty i5"
+    "i6 i7 i8";
   gap: 30px;
   width: 100%;
-  max-width: 900px;
+  max-width: calc(100vh - 40px);
 
   list-style: none;
   margin: 0;
@@ -39,7 +41,7 @@ body {
 .game::after {
   grid-area: empty;
 
-  content: '';
+  content: "";
 }
 
 .card {
@@ -48,7 +50,7 @@ body {
 }
 
 .card::after {
-  content: '';
+  content: "";
   padding-top: 100%;
   display: block;
 }

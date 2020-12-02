@@ -1,25 +1,32 @@
 class Game {
     constructor(selector) {
         this.gameContainer = document.querySelector(selector);
+
+        this.congratulationText = 'Congratulations!';
+        this.delayBeforeCongratulations = 300;
+        this.delayBeforeCloseCards = 500;
         this.rightAnswers = 0;
+        this.rightAnswersForWin = 4;
+        this.matchingForRightAnswer = 2;
+
         this.openCards = [];
+
+        this.gameContainer.onclick = this.onClick.bind(this);
     }
 
     startGame() {
         this.gameContainer.innerHTML = this.getCards();
-        this.addListeners();
     }
 
-    addListeners() {
-        this.gameContainer.querySelectorAll('[data-onclick]').forEach(button => {
-            const attr = button.getAttribute('data-onclick');
-            const methodName = attr.split('(')[0];
+    onClick({ target }) {
+        const btn = target.closest('button');
 
-            button.addEventListener('click', event => this[methodName](event));
-        });
+        if (btn) {
+            this[btn.dataset.onclick](btn);
+        };
     }
 
-    openCard({ currentTarget: btn }) {
+    openCard(btn) {
         btn.classList.add('active');
 
         if (this.openCards.length < 2) {
@@ -31,22 +38,19 @@ class Game {
     }
 
     checkMatch() {
-        if (this.openCards[0].getAttribute('data-id') === this.openCards[1].getAttribute('data-id')) {
-            this.addMatch();
-        } else {
-            this.closeCards();
-        }
+        this.openCards[0].dataset.id === this.openCards[1].dataset.id ? this.addMatch() : this.closeCards();
     }
 
     addMatch() {
         this.rightAnswers++;
         this.openCards = [];
 
-        if (this.rightAnswers === 4) {
+        if (this.rightAnswers === this.rightAnswersForWin) {
             setTimeout(() => {
-                alert('Congratulations!');
+                alert(this.congratulationText);
+
                 this.startGame();
-            }, 400);
+            }, this.delayBeforeCongratulations);
         }
     }
 
@@ -55,7 +59,7 @@ class Game {
 
         setTimeout(() => {
             cardsToClose.forEach(card => card.classList.remove('active'));
-        }, 1000);
+        }, this.delayBeforeCloseCards);
 
         this.openCards = [];
     }
@@ -64,7 +68,7 @@ class Game {
         return this.getShuffledIds().map(id => {
             return `
                 <li class="card">
-                    <button class="card__btn" data-id="${id}" data-onclick="openCard()">
+                    <button class="card__btn" data-id="${id}" data-onclick="openCard">
                         <span class="card__front"></span>
                         <span class="card__back" style="--image: url(${this.getPokemonImageUrl(id)})"></span>
                     </button>
