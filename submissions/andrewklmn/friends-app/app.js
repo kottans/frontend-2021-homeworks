@@ -50,12 +50,10 @@ const filterCountry = document.querySelector('.filter-country');
 
 const drawPerson = ({location, phone, email, gender, name, picture, dob}) => {  
   const {street, city, state, country} = location;
-  const div = document.createElement('div');
-  div.classList.add('person');
-  div.title = `Address: ${street.number}, ${street.name}, ${city}, ${state}
-  Phone: ${phone}
-  Email: ${email}`;
-  div.innerHTML =`
+  container.innerHTML +=`
+    <div class="person" title="Address: ${street.number}, ${street.name}, ${city}, ${state}
+Phone: ${phone}
+Email: ${email}">
       <div class="person-name ${gender}">${name.first} ${name.last}</div>
       <div class="person-image">
       <picture>
@@ -72,8 +70,8 @@ const drawPerson = ({location, phone, email, gender, name, picture, dob}) => {
       <div class="person-location">
         ${country}
       </div>
+    </div>
   `;
-  container.appendChild(div);
 }
 
 const filterList = ({friends, filters})=>{
