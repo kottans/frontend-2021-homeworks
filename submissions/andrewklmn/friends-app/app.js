@@ -133,7 +133,7 @@ const setResetButtonView = (filters, sorter) => {
     resetButton.classList.remove('off');
     return;
   };
-  resetButton.classList.toggle('off',true);
+  resetButton.classList.add('off');
 }
 
 const resetButtonClickHandler = ({filters, sorter}) => {
