@@ -10,23 +10,41 @@ class Game {
         });
     }
 
-    checkOpenCards() {
-        let game = this;
-        let activeCardsNames;
-        this.container.addEventListener('click', function (event) {
-            event.stopPropagation();
-            let activeCards = game.cards.filter(card => card.cardForDisplay.classList.contains('active'));
-            if (activeCards.length == 2) {
-                activeCardsNames = activeCards.map(card => card.cardForDisplay.attributes['data-name'].value);
-                setTimeout(function () {
-                    if (activeCardsNames[0] == activeCardsNames[1]) {
-                        activeCards.forEach(card => card.cardForDisplay.classList.add('opened'));
-                    }
-                    activeCards.forEach(card => card.cardForDisplay.classList.remove('active'));
-                    setTimeout(game.checkWin.bind(game), 700); /* In order to card has time to change background color before confirm*/
-                }, 700);
+    checkEqualCards(activeCards) {
+        let activeCardsNames = activeCards.map(card => card.cardForDisplay.attributes['data-name'].value);
+        if (activeCardsNames[0] == activeCardsNames[1]) {
+            activeCards.forEach(card => card.addOpened());
+            return true;
+        }
+        return false;
+    }
+
+    removeActiveCards(cards, isOpened) {
+        let time = isOpened ? 0 : 600;
+        setTimeout(function () {
+            cards.forEach(card => card.removeActive());
+        }, time);
+        return [];
+    }
+
+    processClickOnCards() {
+        const game = this;
+        this.container.addEventListener('click', function (e) {
+            let activeCards = game.getActiveCards();
+            let target = e.target;
+            let targetCard = target.parentElement;
+            if (activeCards.length < 2 && targetCard.classList.contains('card')) {
+                if (!targetCard.classList.contains("opened")) {
+                    game.findCard(targetCard).addActive();
+                    activeCards = game.getActiveCards();
+                }
             }
-        });
+            if (activeCards.length == 2) {
+                let isOpened = game.checkEqualCards(activeCards);
+                activeCards = game.removeActiveCards(activeCards, isOpened);
+            }
+            game.checkWin.bind(game)();
+        }, false)
     }
 
     shuffleCard() {
@@ -36,18 +54,33 @@ class Game {
     startGame() {
         this.shuffleCard();
         this.render();
-        this.checkOpenCards();
-        this.checkWin();
+        this.processClickOnCards();
+    }
+
+    findCard(cardHTMLelement) {
+        let card = this.cards.find(card => card.cardForDisplay.id == cardHTMLelement.id)
+        return card;
+    }
+
+    getOpenedCards() {
+        return this.cards.filter(card => card.cardForDisplay.classList.contains('opened'));
+    }
+
+    getActiveCards() {
+        return this.cards.filter(card => card.cardForDisplay.classList.contains('active'));
     }
 
     checkWin() {
-        let openCards = game.cards.filter(card => card.cardForDisplay.classList.contains('opened'));
+        const game = this;
+        let openCards = this.getOpenedCards();
         if (openCards.length == this.cards.length) {
-            let restart = confirm('You WIN!\nRestart Game?');
-            if (restart) {
-                this.removeOpenedCard();
-                this.startGame();
-            }
+            setTimeout(function () {
+                let restart = confirm('You WIN!\nRestart Game?');
+                if (restart) {
+                    game.removeOpenedCard();
+                    game.startGame();
+                }
+            }, 700);
         }
     }
 
@@ -57,26 +90,32 @@ class Game {
 }
 
 class Card {
-    constructor(name, img) {
+    constructor(name, img, id) {
         this.cardForDisplay = document.createElement('div');
         this.frontSide = document.createElement('div');
         this.backSide = document.createElement('div');
         this.frontSide.classList.add('front-side');
         this.backSide.classList.add('back-side');
         this.name = name;
+        this.id = id;
         this.img = img;
+    }
 
-        (() => {
-            const targetCard = this;
-            this.cardForDisplay.addEventListener('click', function () {
-                if (!targetCard.cardForDisplay.classList.contains('opened'))
-                    targetCard.cardForDisplay.classList.add('active');
-            });
-        })();
+    addActive() {
+        this.cardForDisplay.classList.add('active');
+    }
+
+    addOpened() {
+        this.cardForDisplay.classList.add('opened');
+    }
+
+    removeActive() {
+        this.cardForDisplay.classList.remove('active');
     }
 
     render() {
         this.cardForDisplay.classList.add('card');
+        this.cardForDisplay.id = this.id;
         this.backSide.style.backgroundImage = `url(${this.img})`;
         this.frontSide.innerHTML = 'Happy New Year';
         this.cardForDisplay.insertAdjacentElement('afterbegin', this.frontSide);
@@ -96,9 +135,12 @@ const entities = [
 ];
 
 const cards = [];
+let cardCount = 0;
+
 entities.forEach(item => {
     for (let i = 0; i < 2; i++) {
-        cards.push(new Card(item[0], item[1])); /* create 2 equal cards*/
+        cards.push(new Card(item[0], item[1], cardCount)); /* create 2 equal cards*/
+        cardCount++;
     }
 });
 
