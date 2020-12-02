@@ -230,9 +230,9 @@ const drawMoreFriends = (friends) => {
   
   friends.forEach((friend) => {
     friends.forEach(friend => drawPerson(friend));
-    state.numberOfShowedFriends += friends.length
     drawPerson(friend);
   });
+  state.numberOfShowedFriends += friends.length
   
   setTimeout(() => {
     if (container.scrollTop > 0) {
