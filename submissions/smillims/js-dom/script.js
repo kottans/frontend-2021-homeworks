@@ -39,9 +39,6 @@ const createNavItem = () => {
 
 function displayFact(navLink) {
 	const hero = heroes.find((el) => navLink.dataset.id == el.id)
- 	if (!hero) {
- 		return hero = '';
-	 }
 	const newDiv = document.createElement('div');
 	newDiv.classList.add('content-text');
 	newDiv.innerText = hero.description;
@@ -59,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function(el) {
 	  if (navItemActive) {
 		 navItemActive.classList.remove('active');
 	  }
-	  target.closest('.list').classList.add('active');
+	  target.closest('.list-item').classList.add('active');
 	  displayFact(target);
 	});
 });
