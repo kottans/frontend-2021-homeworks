@@ -73,52 +73,70 @@ const MAIN_INNER_HTML = `<input type='button' id='menu_button' class='menu_butto
                             <h2 class='text_heading_2 context_heading'>Historical Context</h2>
                             <p id='context' class='text context'></p>
                          </div>`
-const main = document.getElementById('main')
-const nav = document.getElementById('nav')
-main.innerHTML=MAIN_INNER_HTML
-const title = document.getElementById('title')
-const description = document.getElementById('description')
-const portrait = document.getElementById('portrait')
-const context = document.getElementById('context')
-const governorHeadings = document.querySelectorAll('.text_heading_2')
-hideGovernorDetails()
-updateMainCommon('governors')
-function updateMainCommon(name) {
-    title.textContent = `${name} - ${WIKI[name].title}`
-    description.textContent = WIKI[name].description
+const MAIN = document.getElementById('main')
+const NAV = document.getElementById('nav')
+MAIN.innerHTML=MAIN_INNER_HTML
+const TITLE = document.getElementById('title')
+const DESCRIPTION = document.getElementById('description')
+const PORTRAIT = document.getElementById('portrait')
+const CONTEXT = document.getElementById('context')
+const GOVERNOR_HEADINGS = document.querySelectorAll('.text_heading_2')
+let menu_item_current
+
+function createMenu() {
+    let navHTML = `<ul id='menu' class='menu_list'>`
+    navHTML += Object.keys(WIKI).map(element => `<li><a href='#' class='menu_item'>${element}</a></li>`).join('')
+    navHTML +=`</ul>`
+    NAV.innerHTML = navHTML
+    const MENU_ITEMS = document.querySelectorAll('.menu_item')
+    MENU_ITEMS[0].classList.add('menu_item_first')
+    MENU_ITEMS[MENU_ITEMS.length-1].classList.add('menu_item_last')
+    return MENU_ITEMS[0]
+}
+function selectMenuItem(item) {
+    try {
+        menu_item_current.classList.remove('menu_item_selected')
+    } catch (TypeError) {}
+    menu_item_current = item
+    menu_item_current.classList.add('menu_item_selected')
+    updateMain()
+}
+function updateMain() {
+    const NAME = menu_item_current.textContent
+    const TYPE = WIKI[NAME]['type']
+    TITLE.textContent = `${NAME} - ${WIKI[NAME].title}`
+    DESCRIPTION.textContent = WIKI[NAME].description
+    if (TYPE==='governor') updateMainGovernor(NAME)
+    else hideGovernorDetails()
 }
 function updateMainGovernor(name) {
-    context.textContent = WIKI[name].context
-    portrait.src = WIKI[name].img_src
-    portrait.alt = WIKI[name].img_alt
+    CONTEXT.textContent = WIKI[name].context
+    PORTRAIT.src = WIKI[name].img_src
+    PORTRAIT.alt = WIKI[name].img_alt
     showGovernorDetails()
 }
 function hideGovernorDetails() {
-    governorHeadings.forEach(element => element.classList.add('hidden'))
-    portrait.classList.add('hidden')
-    context.classList.add('hidden')
-    context.textContent = ''
-    portrait.src = ''
-    portrait.alt = ''
+    GOVERNOR_HEADINGS.forEach(element => element.classList.add('hidden'))
+    PORTRAIT.classList.add('hidden')
+    CONTEXT.classList.add('hidden')
+    CONTEXT.textContent = ''
+    PORTRAIT.src = ''
+    PORTRAIT.alt = ''
 }
 function showGovernorDetails() {
-    governorHeadings.forEach(element => element.classList.remove('hidden'))
-    portrait.classList.remove('hidden')
-    context.classList.remove('hidden')
+    GOVERNOR_HEADINGS.forEach(element => element.classList.remove('hidden'))
+    PORTRAIT.classList.remove('hidden')
+    CONTEXT.classList.remove('hidden')
 }
-function toggleHiddenSmallNavMain() {
-    main.classList.toggle('hidden_small')
-    nav.classList.toggle('hidden_small')
+function toggleHiddenSmallScreenNavMain() {
+    MAIN.classList.toggle('hidden_small_screen')
+    NAV.classList.toggle('hidden_small_screen')
 }
+
+selectMenuItem(createMenu())
 document.getElementById('menu').addEventListener('click', evt => {
-    const name = evt.target.textContent
-    const type = WIKI[name]['type']
-    document.querySelector('.menu_item_selected').classList.toggle('menu_item_selected')
-    evt.target.classList.toggle('menu_item_selected')
-    updateMainCommon(name)
-    if (type==='governor') updateMainGovernor(name)
-    else hideGovernorDetails()
-    toggleHiddenSmallNavMain()
+    selectMenuItem(evt.target)
+    toggleHiddenSmallScreenNavMain()
     evt.preventDefault()
 })
-document.getElementById('menu_button').addEventListener('click', toggleHiddenSmallNavMain)
+document.getElementById('menu_button').addEventListener('click', toggleHiddenSmallScreenNavMain)

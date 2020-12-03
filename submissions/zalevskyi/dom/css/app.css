@@ -38,7 +38,7 @@
     color: black;
 }
 .menu_item_selected {
-    background: linear-gradient(to right, lightsteelblue, transparent);
+    background: linear-gradient(to right, lightsteelblue 70%, transparent);
 }
 .menu_item:hover,
 .menu_item:focus {
@@ -147,7 +147,7 @@
     .civilopedia_path {
         grid-area: path;
     }
-    .hidden_small {
+    .hidden_small_screen {
         display: none;
     }
     .menu_item_selected {
