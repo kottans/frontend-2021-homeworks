@@ -187,9 +187,7 @@ const drawSorter = (state)=>{
   });
 }
 
-const onlyUnique = (value, index, self) => {
-  return self.indexOf(value) === index;
-};
+const onlyUnique = (value, index, self) => self.indexOf(value) === index;
 
 const drawFilters = (state) => {
 
