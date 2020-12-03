@@ -44,6 +44,7 @@ const sortField = document.querySelector('.sort-field');
 const sortOrder = document.querySelector('.sort-order');
 const resetButton = document.querySelector('.reset');
 
+const footer = document.querySelector('.footer');
 const searchField = document.querySelector('.search-field');
 const filterGender = document.querySelector('.filter-gender');
 const filterMinAge = document.querySelector('.filter-min-age');
@@ -309,19 +310,33 @@ const filterAgeChangeHandler = (target, state, ageRangeIndex)=>{
   redrawFriends(state);
 }
 
+const filterEventHandler = (target, state) => {
+  switch(target.classList[1]){
+    case 'search-field':
+      filterTextChangeHandler(target, state, 'partOfName');
+      break;
+    case 'filter-gender':
+      filterTextChangeHandler(target, state, 'gender');
+      break;
+    case 'filter-min-age':
+      filterAgeChangeHandler(target, state, MIN_AGE_RANGE_INDEX);
+      break;
+    case 'filter-max-age':
+      filterAgeChangeHandler(target, state, MAX_AGE_RANGE_INDEX);
+      break;
+    case 'filter-country':
+      filterTextChangeHandler(target, state, 'country');
+      break;
+  }
+}
+
 document.addEventListener('DOMContentLoaded',() => {
   initApp(state);
   
   sortField.addEventListener('change', ({target}) => sorterKeyChangeHandler(target, state));
   sortOrder.addEventListener('click', ({target}) => sorterOrderClickHandler(target, state));
-  
   resetButton.addEventListener('click', () => resetButtonClickHandler(state));
-  
-  searchField.addEventListener('keyup',({target}) => filterTextChangeHandler(target, state, 'partOfName'));
-  filterGender.addEventListener('change', ({target}) => filterTextChangeHandler(target, state, 'gender'));
-  filterMinAge.addEventListener('change', ({target}) => filterAgeChangeHandler(target, state, MIN_AGE_RANGE_INDEX));
-  filterMaxAge.addEventListener('change', ({target}) => filterAgeChangeHandler(target, state, MAX_AGE_RANGE_INDEX));
-  filterCountry.addEventListener('change', ({target}) => filterTextChangeHandler(target, state, 'country'));
-  
+  footer.addEventListener('keyup',({target}) => filterEventHandler(target, state));
+  footer.addEventListener('change', ({target}) => filterEventHandler(target, state));
   container.addEventListener('scroll', ()=>autoLoaderOnScroll(state));
 });
