@@ -10,12 +10,13 @@ class Game {
         this.matchingForRightAnswer = 2;
 
         this.openCards = [];
-
-        this.gameContainer.onclick = this.onClick.bind(this);
     }
 
     startGame() {
         this.gameContainer.innerHTML = this.getCards();
+        this.gameContainer.addEventListener('click', event => {
+            this.onClick(event);
+        });
     }
 
     onClick({ target }) {
