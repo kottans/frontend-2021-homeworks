@@ -2,6 +2,7 @@ class Game {
     constructor(cards) {
         this.container = document.querySelector('.container');
         this.cards = cards;
+        this.TiME_DELAY = 700;
     }
 
     render() {
@@ -18,28 +19,27 @@ class Game {
     }
 
     removeActiveCards(cards, isOpened) {
-        let time = isOpened ? 0 : 600;
-        setTimeout(function () {
-            cards.forEach(card => card.removeActive());
-        }, time);
+        const TIME_WITHOUT_DELAY = 0;
+        const TIME_FOR_DELAY = 600;
+        setTimeout(() => cards.forEach(card => card.removeActive()), isOpened ? TIME_WITHOUT_DELAY : TIME_FOR_DELAY);
         return [];
     }
 
     processClickOnCards() {
         const game = this;
-        this.container.addEventListener('click', function (e) {
-            let activeCards = game.getActiveCards();
-            let target = e.target;
-            let targetCard = target.parentElement;
+        this.container.addEventListener('click', function ({target}) {
+            let activeCards = game.getActiveCards(); // I reassign this variable in next steps. activeCards length === 0;
+            const targetCard = target.closest('div.card');
+            console.log(targetCard);
             if (activeCards.length < 2 && targetCard.classList.contains('card')) {
                 if (!targetCard.classList.contains("opened")) {
                     game.findCard(targetCard).addActive();
-                    activeCards = game.getActiveCards();
+                    activeCards = game.getActiveCards(); // Now we know new active cards. activeCards length === 1 or 2;
                 }
             }
             if (activeCards.length === 2) {
-                let isOpened = game.checkEqualCards(activeCards);
-                activeCards = game.removeActiveCards(activeCards, isOpened);
+                const isOpened = game.checkEqualCards(activeCards);
+                activeCards = game.removeActiveCards(activeCards, isOpened); // remove all active cards. activeCards length === 0;
             }
             game.checkWin.bind(game)();
         }, false);
@@ -75,16 +75,15 @@ class Game {
 
     checkWin() {
         const game = this;
-        const TiME_DELAY = 700;
         let openCards = this.getOpenedCards();
         if (openCards.length === this.cards.length) {
             setTimeout(function () {
-                let restart = confirm('You WIN!\nRestart Game?');
+                const restart = confirm('You WIN!\nRestart Game?');
                 if (restart) {
                     game.removeOpenedCard();
                     game.restartGame();
                 }
-            }, TiME_DELAY);
+            }, game.TiME_DELAY);
         }
     }
 
@@ -100,6 +99,7 @@ class Card {
         this.backSide = document.createElement('div');
         this.frontSide.classList.add('front-side');
         this.backSide.classList.add('back-side');
+        this.FRONT_CARD_TITLE = 'Happy New Year';
         this.name = name;
         this.id = id;
         this.img = img;
@@ -121,7 +121,7 @@ class Card {
         this.cardForDisplay.classList.add('card');
         this.cardForDisplay.id = this.id;
         this.backSide.style.backgroundImage = `url(${this.img})`;
-        this.frontSide.innerHTML = 'Happy New Year';
+        this.frontSide.innerHTML = this.FRONT_CARD_TITLE;
         this.cardForDisplay.insertAdjacentElement('afterbegin', this.frontSide);
         this.cardForDisplay.insertAdjacentElement('beforeend', this.backSide);
         this.cardForDisplay.dataset.name = this.name;
