@@ -39,10 +39,6 @@ button:focus,
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
-
-    &:focus-within {
-        outline: 1px solid darkcyan;
-    }
 }
 
 html,
@@ -52,6 +48,7 @@ body {
     padding: 0;
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
+    scroll-behavior: smooth;
 }
 
 .container {
@@ -194,6 +191,7 @@ body {
 
 .nav__button--focus:focus-within > .popup__button-svg {
     box-sizing: content-box;
+    // position: absolute;
     width: 30px;
     height: 30px;
     padding: 3px;
@@ -252,22 +250,24 @@ body {
     z-index: 10;
     position: absolute;
     width: 253px;
-    height: 335px;
+    height: 345px;
     top: 60px;
     left: 44px;
     background-color: #4e98b4;
     border: 1px solid #033142;
-    box-shadow: inset 0 0 2px #021d27;
     overflow-y: scroll;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
 }
 
 .popup__hide-pannel2 {
     display: none;
     z-index: 11;
     position: absolute;
-    width: 232px;
-    height: 235px;
-    top: 30px;
+    width: 236px;
+    height: 150px;
+    top: 25px;
 }
 
 .popup__items-list1 {
@@ -281,9 +281,11 @@ body {
     list-style: none;
     padding: 0;
     margin-top: 10px;
+    background-color: #4e98b4;
 }
 
 .popup__items-list2 {
+    position: relative;
     background-color: #4e98b4;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -297,7 +299,8 @@ body {
 }
 
 .popup__item {
-    box-sizing: content-box;
+    position: relative;
+    box-sizing: border-box;
     display: grid;
     justify-items: center;
     justify-content: space-around;
@@ -306,16 +309,19 @@ body {
     padding: 2px;
     width: 60px;
     height: 60px;
+    border: 1px solid transparent;
 }
 
 .popup__item-icon {
+    box-sizing: border-box;
+    position: relative;
     width: 30px;
     height: 30px;
     fill: $text-color;
 
     &:hover {
-        width: 35px;
-        height: 35px;
+        width: 34px;
+        height: 34px;
         fill: $hover-color;
     }
 
@@ -323,6 +329,7 @@ body {
         width: 27px;
         height: 27px;
         fill: $hover-color;
+        // padding:1px;
     }
 }
 
@@ -332,7 +339,7 @@ body {
 }
 
 .popup__item-more-button {
-    box-sizing: content-box;
+    box-sizing: border-box;
     display: grid;
     justify-items: center;
     justify-content: space-around;
@@ -344,7 +351,7 @@ body {
     position: relative;
     grid-column: 2 / 3;
     grid-row: 5;
-    content: "some content";
+    border: 1px solid transparent;
 
     &:focus-within {
         border: 1px solid #033142;
@@ -356,14 +363,21 @@ body {
     position: absolute;
     width: 40px;
     height: 40px;
-    left: 12px;
-    top: 15px;
+    left: 9px;
+    top: 12px;
+
+    &:hover {
+        left: 12px;
+    }
+    &:active {
+        left: 17px;
+    }
 }
 
 .popup__item-last {
     grid-column: 1 / 4;
     grid-row: 3;
-    width: 90%;
+    width: 96%;
     margin: 0 auto;
 }
 
@@ -372,10 +386,11 @@ body {
     text-decoration: none;
     color: $text-color;
     font-size: 1.08rem;
+    box-sizing: content-box;
 
     &:hover {
         color: $hover-color;
-        font-size: 1.18rem;
+        font-size: 1.16rem;
     }
 
     &:active {
