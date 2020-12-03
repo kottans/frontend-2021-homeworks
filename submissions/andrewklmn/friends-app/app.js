@@ -194,9 +194,7 @@ const drawFilters = (state) => {
   const {friends, filters} = state;
 
   filters.genderList = friends.map(person => person.gender).filter(onlyUnique);
-  filters.genderList.forEach((gender)=>{
-    addOptionToSelect(filterGender, gender, gender);
-  });
+  filters.genderList.forEach((gender)=> addOptionToSelect(filterGender, gender, gender));
   filterMinAge.value = filters.ageRange[0];
   filterMaxAge.value = filters.ageRange[1];
   filters.countryList = friends.map(person => person.location.country).filter(onlyUnique);
