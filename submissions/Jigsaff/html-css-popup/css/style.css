@@ -1,0 +1,209 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style-type: none;
+    font-family: 'Handlee', cursive;
+    font-weight: 400;
+}
+
+header {
+    padding: 20px;
+    min-width: 320px;
+}
+
+body {
+    background-color: #14394C;
+    background-image: url(../img/bg.jpg);
+    /*background-position-y: bottom;
+    background-position-x: center;*/
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+a:visited,
+a {
+    text-decoration: none;
+    color: #212121;
+}
+
+a {
+    display: block;
+    text-align: center;
+}
+
+.link_icon {
+    width: 26px;
+    height: 26px;
+    cursor: pointer;
+}
+
+.link_text {
+    color: #212121;
+}
+
+.nav_item.images {
+    width: 85px;
+}
+
+.label {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.nav_links {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.nav_item {
+    line-height: 26px;
+    font-size: 18px;
+    color: #212121;
+    margin: 4px;
+    cursor: pointer;
+    height: 50px;
+    width: 60px;
+}
+
+.nav_item.text a {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    color: #eee;
+}
+
+.nav_item.img a {
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.drop_label a {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    cursor: pointer;
+}
+
+.drop_checkbox,
+.checkbox_more {
+    display: none;
+}
+
+.dropdown {
+    display: none;
+    border: solid 3px white;
+    position: absolute;
+    top: 90px;
+    width: 315px;
+    max-height: 500px;
+    overflow: auto;
+    border-radius: 3px;
+    background-color: white;
+    right: 0;
+}
+
+.drop_checkbox:checked ~ .dropdown {
+    display: block;
+}
+
+.dropdown li img {
+    width: 62px;
+    height: 62px;
+}
+
+.dropdown ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 10px;
+}
+
+.dropdown li {
+    width: 90px;
+    height: 96px;
+    font-size: 16px;
+    line-height: 18px;
+    text-align: center;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.dropdown a {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.more_content {
+    display: none;
+}
+
+.checkbox_more:checked ~ .more_content {
+    display: block;
+    border-top: solid 4px white;
+}
+
+.checkbox_more:checked ~ .more_label {
+    display: none;
+}
+
+.more_label {
+    display: block;
+    width: 100%;
+    height: 30px;
+    background-color: #f44336;
+    cursor: pointer;
+    text-align: center;
+    color: white;
+    border-radius: 3px;
+}
+
+.dropdown a:hover {
+    background-color: white;
+    border-radius: 3px;
+}
+
+.more_label:hover {
+    background-color: #f44336;
+}
+
+.nav_item > a:hover,
+.drop_label > a:hover {
+    background-color: #f44336;
+    border-radius: 3px;
+}
+
+.dropdown a:focus {
+    border: 2px solid #f44336;
+}
+
+.dropdown a:hover {
+    border: 2px solid #f44336;
+}
+
+.nav_item a:focus {
+    border-radius: 3px;
+}
+
+/* Let's get this party started */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: rgba(255, 0, 0, 0.8);
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+    background: rgba(255, 0, 0, 0.4);
+}
