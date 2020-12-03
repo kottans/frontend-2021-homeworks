@@ -187,11 +187,12 @@ const drawSorter = (state)=>{
   });
 }
 
+const onlyUnique = (value, index, self) => {
+  return self.indexOf(value) === index;
+};
+
 const drawFilters = (state) => {
 
-  const onlyUnique = (value, index, self) => {
-    return self.indexOf(value) === index;
-  };
   const {friends, filters} = state;
 
   filters.genderList = friends.map(person => person.gender).filter(onlyUnique);
