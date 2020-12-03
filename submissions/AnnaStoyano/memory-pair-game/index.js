@@ -29,8 +29,7 @@ class Game {
         const game = this;
         this.container.addEventListener('click', function ({target}) {
             let activeCards = game.getActiveCards(); // I reassign this variable in next steps. activeCards length === 0;
-            const targetCard = target.closest('div.card');
-            console.log(targetCard);
+            const targetCard = target.closest('.card');
             if (activeCards.length < 2 && targetCard.classList.contains('card')) {
                 if (!targetCard.classList.contains("opened")) {
                     game.findCard(targetCard).addActive();
