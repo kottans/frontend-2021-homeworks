@@ -28,6 +28,9 @@
 }
 .menu_item {
     display: block;
+}
+.menu_item_link {
+    display: block;
     font-size: 1.5rem;
     text-transform: capitalize;
     padding: 1rem;
@@ -37,20 +40,17 @@
     text-decoration: none;
     color: black;
 }
-.menu_item_selected {
-    background: linear-gradient(to right, lightsteelblue 70%, transparent);
-}
-.menu_item:hover,
-.menu_item:focus {
-    background: linear-gradient(to right, lightsteelblue 70%, transparent);
-    cursor: pointer;
-}
-.menu_item_first {
+.menu_item:first-child .menu_item_link {
     border-radius: 10px 20px 0 0;
 }
-.menu_item_last {
+.menu_item:last-child .menu_item_link {
     border-radius: 0 0 10px 20px;
     border-bottom: none;
+}
+.menu_item_link:hover,
+.menu_item_link:focus {
+    background: linear-gradient(to right, lightsteelblue 70%, transparent);
+    cursor: pointer;
 }
 .disclaimer {
     background: sandybrown;
@@ -75,11 +75,6 @@
     background: lightsteelblue;
     border: solid transparent;
     text-align: center;
-}
-.menu_button > * {
-    color: black;
-    text-decoration: none;
-    padding: 0.5rem;
 }
 .menu_button:hover {
     cursor: pointer;

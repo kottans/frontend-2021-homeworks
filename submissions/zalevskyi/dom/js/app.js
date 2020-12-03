@@ -81,28 +81,13 @@ const DESCRIPTION = document.getElementById('description')
 const PORTRAIT = document.getElementById('portrait')
 const CONTEXT = document.getElementById('context')
 const GOVERNOR_HEADINGS = document.querySelectorAll('.text_heading_2')
-let menu_item_current
 
 function createMenu() {
-    let navHTML = `<ul id='menu' class='menu_list'>`
-    navHTML += Object.keys(WIKI).map(element => `<li><a href='#' class='menu_item'>${element}</a></li>`).join('')
-    navHTML +=`</ul>`
-    NAV.innerHTML = navHTML
-    const MENU_ITEMS = document.querySelectorAll('.menu_item')
-    MENU_ITEMS[0].classList.add('menu_item_first')
-    MENU_ITEMS[MENU_ITEMS.length-1].classList.add('menu_item_last')
-    return MENU_ITEMS[0]
+    const MENU_LIST_ITEMS = Object.keys(WIKI).map(element => `<li class='menu_item'><a href='#' class='menu_item_link'>${element}</a></li>`)
+    NAV.innerHTML = `<ul id='menu' class='menu_list'>${MENU_LIST_ITEMS.join('')}</ul>`
 }
-function selectMenuItem(item) {
-    try {
-        menu_item_current.classList.remove('menu_item_selected')
-    } catch (TypeError) {}
-    menu_item_current = item
-    menu_item_current.classList.add('menu_item_selected')
-    updateMain()
-}
-function updateMain() {
-    const NAME = menu_item_current.textContent
+function updateMain(menu_item) {
+    const NAME = menu_item.textContent
     const TYPE = WIKI[NAME]['type']
     TITLE.textContent = `${NAME} - ${WIKI[NAME].title}`
     DESCRIPTION.textContent = WIKI[NAME].description
@@ -133,9 +118,10 @@ function toggleHiddenSmallScreenNavMain() {
     NAV.classList.toggle('hidden_small_screen')
 }
 
-selectMenuItem(createMenu())
+createMenu()
+updateMain(document.querySelector('.menu_item_link'))
 document.getElementById('menu').addEventListener('click', evt => {
-    selectMenuItem(evt.target)
+    updateMain(evt.target)
     toggleHiddenSmallScreenNavMain()
     evt.preventDefault()
 })
