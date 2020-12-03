@@ -1,8 +1,8 @@
 /* Refer to https://github.com/OleksiyRudenko/a-tiny-JS-world for the task details
    Complete the below for code reviewers' convenience:
 
-   Code repository: https://github.com/lalalilulu/a-tiny-JS-world
-   Web app: https://lalalilulu.github.io/a-tiny-JS-world/
+   Code repository: _put repo URL here_
+   Web app: _put project's github pages URL here_
    */
 
 // ======== OBJECTS DEFINITIONS ========
@@ -10,52 +10,73 @@
 
 class Inhabitant {
 
-    constructor(species, name, gender, saying, friends = []) {
+    constructor(species, name, gender, saying, friends= [], legs) {
         this.species = species;
         this.name = name;
         this.gender = gender;
         this.saying = saying;
-        this.friends = Array.from(friends).join(", ");
-    }
-
-    introduce() {
-        return`${this.saying}, I am a ${this.species}, my name is ${this.name}, my gender is ${this.gender}. My friends: ${this.friends}`;
-    }
-}
-
-class Human extends Inhabitant{
-
-    constructor(name, gender, saying, friends, legs = 2, hands = 2) {
-        super('human', name, gender, saying, friends);
         this.legs = legs;
-        this.hands = hands;
+        this.friends = friends.join(", ");
     }
 
-    introduce() {
-        return  super.introduce() + ` and I have ${this.legs} legs and ${this.hands} hands`;
+    toString() {
+        return`${this.saying} I am a ${this.species}, my name is ${this.name}, my gender is ${this.gender}. I have ${this.legs} legs. My friends: ${this.friends}`;
     }
 }
 
 class Animal extends Inhabitant{
 
     constructor(species, name, gender, saying, friends, legs = 4) {
-        super(species, name, gender, saying, friends);
-        this.legs = legs;
-    }
-
-    introduce() {
-        return  super.introduce() + ` and I have ${this.legs} legs`;
+        super(species, name, gender, saying, friends, legs);
     }
 }
 
-const dog = new Animal('dog', 'Toby', 'male', 'woof-woof!', ["Kate", "Greg"]);
-const cat = new Animal('cat', 'Mary', 'female', 'meow-meow!', [dog.name]);
+class Human extends Animal{
+
+    constructor(name, gender, saying, friends, legs = 2, hands = 2) {
+        super('human', name, gender, saying, friends, legs);
+        this.hands = hands;
+    }
+
+    toString() {
+        return super.toString() + ` and I also have ${this.hands} hands`;
+    }
+}
+
+class Dog extends Animal{
+
+    constructor(name, gender, saying, friends) {
+        super('dog', name, gender, saying, friends, 4);
+
+    }
+}
+
+class Cat extends Animal{
+
+    constructor(name, gender, saying, friends) {
+        super('cat', name, gender, saying, friends, 4);
+
+    }
+}
+
+class CatWoman extends Animal{
+
+    constructor(name, saying, friends) {
+        super('cat', name, 'female', saying, friends, 4);
+
+    }
+}
+
+const dog = new Dog('Toby', 'male', 'woof-woof!', ["Kate", "Greg"]);
+const cat = new Cat('Mary', 'female', 'meow-meow!', [dog.name]);
 const man = new Human( 'Fred', 'male', 'Hi!', [dog.name, cat.name]);
 const woman = new Human('Katy', 'female', 'Hello!', [dog.name, cat.name, man.name]);
+const catWoman = new CatWoman('Murka', 'meow-meow! Hello!', [cat.name, woman.name]);
 
-const inhabitants = [dog, cat, man, woman];
+const inhabitants = [dog, cat, man, woman, catWoman];
 
-inhabitants.forEach(inhabitant => print(inhabitant.introduce()));
+inhabitants.forEach(inhabitant => print(inhabitant));
+
 
 // ======== OUTPUT ========
 /* Use print(message) for output.
