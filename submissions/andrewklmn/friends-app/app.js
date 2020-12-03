@@ -223,9 +223,7 @@ const initApp = (state) => {
 
 const drawMoreFriends = (friends) => {
   
-  friends.forEach((friend) => {
-    drawPerson(friend);
-  });
+  friends.forEach((friend) => drawPerson(friend));
   state.numberOfShowedFriends += friends.length
   
   setTimeout(() => {
