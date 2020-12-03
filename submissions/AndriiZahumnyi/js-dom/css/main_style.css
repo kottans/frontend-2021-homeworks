@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
   height: 100%;
 }
 
@@ -9,13 +10,14 @@ body {
   background-color: #552586;
 }
 
-button::-moz-focus-inner,
-input::-moz-focus-inner {
+button::-moz-focus-inner {
   border: 0;
   padding: 0;
 }
 
-ul, li, h3 {
+ul,
+li,
+h3 {
   margin: 0;
   padding: 0;
 }
@@ -37,16 +39,8 @@ h2 {
 }
 
 li {
-  list-style-type: none; 
+  list-style-type: none;
 }
-
-.menu-toggle {
-  display: block;
-  position: absolute;
-  z-index: -1;
-}
-
-                                                  /* Header */
 
 .header {
   text-align: center;
@@ -54,29 +48,15 @@ li {
   margin-bottom: 5px;
 }
 
-.logo-wide {
-  display: block;
-}
-
-.logo-thin {
-  display: none;
-}
-
-/* #menu-toggle {display: none;} */
-    
-/* .label-toggle {display: none;} */
-
-                                                  /* Main */
-
-
-
 .main {
   width: 100%;
   display: flex;
   margin-top: 5px;
 }
 
-                                              /* Aside menu */
+.toggle-div {
+  display: none;
+}
 
 .aside-container {
   width: 20%;
@@ -92,30 +72,26 @@ li {
   min-width: 48px;
   width: 100%;
   padding: 0.25em 2em;
-  background-color:  rgb(173, 189, 196);
+  background-color: rgb(173, 189, 196);
   border: 1px solid rgb(173, 189, 196);
   font-size: 1em;
 }
 
 .aside-button:hover {
-  background-color:  #552586;
+  background-color: #552586;
   border-left: 3em solid rgb(173, 189, 196);
   cursor: pointer;
 }
 
 .aside-button:focus {
   border-left: 3em solid rgb(173, 189, 196);
-  /* border-right: 30px solid #552586; */
-  outline: 1px solid  rgb(173, 189, 196);
-  background-color:  #552586;
+  outline: 1px solid rgb(173, 189, 196);
+  background-color: #552586;
 }
 
 .border-bottom {
   border-bottom: 1px solid #552586;
 }
-
-
-                                              /* Main content*/
 
 .main-section-container {
   width: 80%;
@@ -125,7 +101,7 @@ li {
   display: inline-block;
   border-bottom: 1px solid rgb(173, 189, 196);
   padding-bottom: 5px;
-  
+
 }
 
 .section {
@@ -135,15 +111,11 @@ li {
   height: auto;
 }
 
-#html-section {
+.section-block {
   display: block;
 }
 
-#css-section,
-#bootstrap-section,
-#js-section,
-#jquery-section,
-#git-section {
+.section-none {
   display: none;
 }
 
@@ -161,7 +133,7 @@ li {
   margin-left: 1.25em;
   margin-right: 3em;
   margin-bottom: 0.5em;
-  
+
 }
 
 .section-para {
@@ -181,13 +153,12 @@ li {
   padding: 1em;
 }
 
-
 @media screen and (max-width: 1320px) {
-  
+
   h1 {
     font-size: 3em;
   }
-  
+
 }
 
 @media screen and (max-width: 1240px) {
@@ -256,6 +227,7 @@ li {
   .section-footer-nav {
     padding: 1em;
   }
+  
 }
 
 @media screen and (max-width: 850px) {
@@ -275,37 +247,19 @@ li {
   .aside-button {
     font-size: 0.9em;
   }
+
 }
 
 @media screen and (max-width: 770px) {
 
   .header {
-    padding: 0.5em;
+    padding: 0;
     margin-bottom: 0;
   }
 
-  .logo-wide {
-    display: none;
-  }
-
-  .logo-thin {
-    display: block;
-    padding: 0 1em;
-  }
-
-  .add-container {
-    display: flex;
-  }
-
-  .logo-wrapper {
-    width: 80%;
-    text-align: center;
-    margin: auto 0;
-  }
-
   .toggle-div {
-    width: 20%;
-    margin: auto 0;
+    display: block;
+    margin-left: 70%;
   }
 
   ul {
@@ -313,27 +267,27 @@ li {
     opacity: 0;
     visibility: hidden;
   }
-  
+
   .active {
     height: 100%;
     opacity: 1;
     visibility: visible;
-    
-  }
-
-  input:checked {
-    display: block;
   }
 
   .label-toggle {
-    background: linear-gradient(to bottom,  rgb(173, 189, 196) 0%, rgb(173, 189, 196) 20%, 
-    transparent 20%, transparent 40%,  rgb(173, 189, 196) 40%,  rgb(173, 189, 196)60%, 
-    transparent 60%, transparent 80%,  rgb(173, 189, 196) 80%,  rgb(173, 189, 196) 100%); 
+    background: linear-gradient(to bottom, rgb(173, 189, 196) 0%, rgb(173, 189, 196) 20%,
+        transparent 20%, transparent 40%, rgb(173, 189, 196) 40%, rgb(173, 189, 196)60%,
+        transparent 60%, transparent 80%, rgb(173, 189, 196) 80%, rgb(173, 189, 196) 100%);
     cursor: pointer;
     display: block;
-    height: 35px;
-    margin: 0 auto;
-    width: 35px;
+    height: 40px;
+    margin: 0 auto 2.5em;
+    width: 40px;
+  }
+
+  .label-toggle:focus {
+    outline: 1px solid rgb(173, 189, 196);
+    background-color: #552586;
   }
 
   .aside-menu {
@@ -378,9 +332,14 @@ li {
   .aside-menu {
     margin-left: 50%;
   }
+
 }
 
 @media screen and (max-width: 410px) {
+
+  h1 {
+    font-size: 2em;
+  }
 
   .logo-wrapper {
     text-align: center;
@@ -399,4 +358,5 @@ li {
     padding-left: 0.5em;
     padding-right: 0;
   }
+
 }
