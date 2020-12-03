@@ -4,6 +4,9 @@ const randomUserUrl = 'https://randomuser.me/api/?results=' + maxNumberOfFriends
 const minPersonAge = 18;
 const maxPersonAge = 99;
 
+const MIN_AGE_RANGE_INDEX = 0; 
+const MAX_AGE_RANGE_INDEX = 1;
+
 const state = {
   friends: [],
   filters: {
@@ -300,9 +303,6 @@ const filterTextChangeHandler = (target, state, nameOfFilterProp) => {
   filters[nameOfFilterProp] = target.value;
   redrawFriends(state);
 }
-
-const MIN_AGE_RANGE_INDEX = 0; 
-const MAX_AGE_RANGE_INDEX = 1;
 
 const filterAgeChangeHandler = (target, state, ageRangeIndex)=>{
   state.filters.ageRange[ageRangeIndex] = target.value;
