@@ -3,37 +3,34 @@ const hamburgerToggle = document.querySelector('#menu-toggle');
 
 const flexMenu = document.querySelector('.flex-menu');
 
-hamburgerToggle.addEventListener('click', function (e) {
-
-  flexMenu.classList.toggle('active');
-
-});
-
 const arrAside = [".aside-html", ".aside-css", ".aside-bootstrap", ".aside-js", ".aside-jquery", ".aside-git"];
-const arrContent = [".html-section", ".css-section", ".bootstrap-section", ".js-section", ".jquery-section", ".git-section"];
 
+const arrContent = [".html-section", ".css-section", ".bootstrap-section", ".js-section", ".jquery-section", ".git-section"];
 
 const asideMenuList = document.getElementById("aside-menu-list");
 
-const n = arrAside.length;
+const lengthOfArrAside = arrAside.length;
 
 function respondToTheClick(evt) {
 
-  for (let i = 0; i < n; i++) {
-    
-    const asideButton = document.querySelector(arrAside[i]);
-    let sectionContent = document.querySelector(arrContent[i]);
+  const asideButton = arrAside.find(element => document.querySelector(element) === evt.target);
+  const indexOfAsideButton = arrAside.indexOf(asideButton);
+  const sectionContent = document.querySelector(arrContent[indexOfAsideButton]);
 
-    if (asideButton !== evt.target) {
-      sectionContent.classList.add("section-none");
-      sectionContent.classList.remove("section-block");
-    } else {
-      sectionContent.classList.add("section-block");
-      sectionContent.classList.remove("section-none");
-    }
+  for (let i = 0; i < lengthOfArrAside; i++) {
+    
+    const localSectionContent = document.querySelector(arrContent[i]);
+
+    localSectionContent.classList.add("section-none");
+    localSectionContent.classList.remove("section-block");
 
   }
 
+  sectionContent.classList.add("section-block");
+  sectionContent.classList.remove("section-none");
+
 }
+
+hamburgerToggle.addEventListener('click', () => flexMenu.classList.toggle('active'));
 
 asideMenuList.addEventListener('click', respondToTheClick);
