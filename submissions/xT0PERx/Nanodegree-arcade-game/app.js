@@ -78,26 +78,17 @@ Player.prototype.goStartPosition = function () {
 
 const player = new Player(X_START_POSITION_PLAYER, Y_START_POSITION_PLAYER);
 
-const enemie1 = new Enemy(
-  X_START_POSITION_ENEMY,
-  Y_START_POSITION_ENEMY[0],
-  SPEED_ENEMY[0],
-  player
-);
-const enemie2 = new Enemy(
-  X_START_POSITION_ENEMY,
-  Y_START_POSITION_ENEMY[1],
-  SPEED_ENEMY[1],
-  player
-);
-const enemie3 = new Enemy(
-  X_START_POSITION_ENEMY,
-  Y_START_POSITION_ENEMY[2],
-  SPEED_ENEMY[2],
-  player
-);
-
-const allEnemies = [enemie1, enemie2, enemie3];
+const countEmemies = 3;
+const allEnemies = Array(countEmemies)
+  .fill()
+  .map(function (enemy, index) {
+    return new Enemy(
+      X_START_POSITION_ENEMY,
+      Y_START_POSITION_ENEMY[index],
+      SPEED_ENEMY[index],
+      player
+    );
+  });
 
 document.addEventListener("keyup", function (e) {
   var allowedKeys = {
