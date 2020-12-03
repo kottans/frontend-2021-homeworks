@@ -1,33 +1,39 @@
 
-/* Toggle menu */
-
 const hamburgerToggle = document.querySelector('#menu-toggle');
 
-hamburgerToggle.addEventListener('click', function (e) {
-  
-  e.preventDefault();
+const flexMenu = document.querySelector('.flex-menu');
 
-  document.querySelector('.flexmenu').classList.toggle('active');
+hamburgerToggle.addEventListener('click', function (e) {
+
+  flexMenu.classList.toggle('active');
+
 });
 
-/* Aside menu -  interactive side-menu*/
+const arrAside = [".aside-html", ".aside-css", ".aside-bootstrap", ".aside-js", ".aside-jquery", ".aside-git"];
+const arrContent = [".html-section", ".css-section", ".bootstrap-section", ".js-section", ".jquery-section", ".git-section"];
 
-const arrAside = ["aside-html", "aside-css", "aside-bootstrap", "aside-js", "aside-jquery", "aside-git"];
-const arrContent = ["html-section", "css-section", "bootstrap-section", "js-section", "jquery-section", "git-section"];
 
-const myCustomDiv = document.getElementById("aside-container");
+const asideMenuList = document.getElementById("aside-menu-list");
+
+const n = arrAside.length;
 
 function respondToTheClick(evt) {
 
-    for (let i = 0; i < arrAside.length; i++) {
-      if (arrAside[i] !== evt.target.id) {
-        document.getElementById(arrContent[i]).style.display = "none";
-      } else {
-        document.getElementById(arrContent[i]).style.display = "block";
-      }
-
-    }
+  for (let i = 0; i < n; i++) {
     
+    const asideButton = document.querySelector(arrAside[i]);
+    let sectionContent = document.querySelector(arrContent[i]);
+
+    if (asideButton !== evt.target) {
+      sectionContent.classList.add("section-none");
+      sectionContent.classList.remove("section-block");
+    } else {
+      sectionContent.classList.add("section-block");
+      sectionContent.classList.remove("section-none");
+    }
+
+  }
+
 }
 
-myCustomDiv.addEventListener('click', respondToTheClick);
+asideMenuList.addEventListener('click', respondToTheClick);
