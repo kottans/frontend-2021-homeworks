@@ -47,13 +47,13 @@ let man = {
    so code reviewers might focus on a single file that is index.js.
    */
 
-let makeMassege = (obj) =>
-  `${obj.type}; ${obj.legs}; ${obj.hands}; ${obj.name}; ${
-    obj.saying
-  }; ${obj.friendTo.join(",")}`;
+let makeMessage = (obj) =>
+  Object.keys(obj)
+    .map((propName) => obj[propName])
+    .join("; ");
 
 let world = [dog, cat, woman, man];
-world.forEach((e) => print(makeMassege(e)));
+world.forEach((inhabitant) => print(makeMessage(inhabitant)));
 
 /* Print examples:
    print('ABC');
