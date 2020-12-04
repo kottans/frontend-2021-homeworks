@@ -136,6 +136,7 @@ label {
   display: flex;
   align-items: flex-end;
   min-height: 500px;
+  margin-left: 20px;
 }
 
 .list-item {
@@ -150,7 +151,6 @@ label {
   color: white;
   padding: 20px;
   padding-right: 40px;
-  margin-left: 20px;
 }
 .list-link:active {
   background-color: rgba(250, 61, 37);

@@ -37,8 +37,9 @@ const createNavItem = () => {
 	)).join('')
 }
 
-function displayFact(navLink) {
+const displayFact = (navLink) => {
 	const hero = heroes.find((el) => navLink.dataset.id == el.id)
+	if (!hero) return;
 	const newDiv = document.createElement('div');
 	newDiv.classList.add('content-text');
 	newDiv.innerText = hero.description;
@@ -47,9 +48,9 @@ function displayFact(navLink) {
 };
 
 
-document.addEventListener("DOMContentLoaded", function(el) {
+document.addEventListener("DOMContentLoaded", (el) => {
 	createNavItem();
-	ul.addEventListener('click', function(el) {
+	ul.addEventListener('click', (el) => {
 	  let target = el.target;
 	  el.preventDefault();
 	  const navItemActive = document.querySelector('.list-item.active');
