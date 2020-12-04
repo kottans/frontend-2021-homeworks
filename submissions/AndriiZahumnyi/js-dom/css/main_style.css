@@ -268,7 +268,7 @@ li {
     visibility: hidden;
   }
 
-  .active {
+  .activeToggle {
     height: 100%;
     opacity: 1;
     visibility: visible;
