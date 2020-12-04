@@ -39,8 +39,9 @@
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 	opacity: 0;
 	visibility: hidden;
-	float: right;
-	margin-right: 50px;
+	position: absolute;
+	right: 65px;
+	top: 55px;
 }
 .various-app img {
 	width: 40px;
@@ -96,23 +97,26 @@
 	flex-wrap: wrap;
 	display: none;
 }
-.various-app::before,
-.various-app::after {
+.triang{
+	visibility: hidden;
+	opacity: -1;
+}
+.triang::before,
+.triang::after {
 	content: '';
 	position: absolute;
-	right: 139px;
-	top: 35px;
+	top: 40px;
 	z-index: -1;
 	border-left: 15px solid transparent;
 	border-right: 15px solid transparent;
 	border-bottom: 15px solid rgb(179, 179, 179);
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
-.various-app::before {
+.triang::before {
 	box-shadow: none;
 }
-.various-app::after {
-	top: 36px;
+.triang::after {
+	top: 41px;
 	z-index: 1; /* Накладываем поверх, чтобы скрыть следы тени */
 	border-bottom: 15px solid #fff;
 	border-top: 0 solid transparent;
@@ -126,6 +130,10 @@
 	opacity: 0;
 }
 .first-input:checked ~ .various-app{
+	opacity: 1;
+	visibility: visible;
+}
+.first-input:checked ~ .triang{
 	opacity: 1;
 	visibility: visible;
 }
@@ -160,6 +168,7 @@
 .menu-list {
 	list-style-type: none;
 	display: flex;
+	align-items: center;	
 }
 .menu-list li {
 	cursor: pointer;
