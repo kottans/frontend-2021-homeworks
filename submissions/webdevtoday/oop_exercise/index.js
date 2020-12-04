@@ -8,33 +8,40 @@
 // ======== OBJECTS DEFINITIONS ========
 // Define your objects here
 
-const Mammal = function({name, gender, friends}) {
-   this.legs = 4;
-   this.hands = 0;
+class Mammal {
+   legs = 4;
 
-   this.name = name;
-   this.gender = gender;
-   this.friends = friends;
-};
+   constructor(name, gender, friends) {
+      this.name = name;
+      this.gender = gender;
+      this.friends = friends;
+   }
+}
 
-const Human = function({name, gender, saying, friends}) {
-   Mammal.call(this, {name: name, gender: gender, friends: friends});
-   this.legs = 2;
-   this.hands = 2;
-   this.saying = saying;
-   this.species = 'human';
-};
+class Human extends Mammal {
+   legs = 2;
+   hands = 2;
+   species = 'human';
 
-const Animal = function({name, gender, saying, species, friends}) {
-   Mammal.call(this, {name: name, gender: gender, friends: friends});
-   this.saying = saying;
-   this.species = species;
-};
-const dog = new Animal({name: 'Jhonny', gender: 'male', saying: 'woof-woof!', species: 'dog', friends: ['Andrew', 'Anastasia']});
-const cat = new Animal({name: 'Murka', gender: 'female', saying: 'meow!', species: 'cat', friends: ['Anastasia']});
-const woman = new Human({name: 'Anastasia', gender: 'female', saying: 'I\'m a woman!', friends: ['Andrew', 'Murka', 'Bim']});
-const man = new Human({name: 'Andrew', gender: 'male', saying: 'I\'m a man!', friends: ['Anastasia', 'Bim', 'Murka']});
-const catwoman = new Human({name: 'CatWoman', gender: 'female', saying: cat.saying, friends: []});
+   constructor(name, gender, saying, friends) {
+      super(name, gender, friends);
+      this.saying = saying;
+   }
+}
+
+class Animal extends Mammal {
+   constructor(name, gender, saying, species, friends) {
+      super(name, gender, friends);
+      this.saying = saying;
+      this.species = species;
+   }
+}
+
+const dog = new Animal('Jhonny', 'male', 'woof-woof!', 'dog', ['Andrew', 'Anastasia']);
+const cat = new Animal('Murka', 'female', 'meow!', 'cat', ['Anastasia']);
+const woman = new Human('Anastasia', 'female', 'I\'m a woman!', ['Andrew', 'Murka', 'Jhonny']);
+const man = new Human('Andrew', 'male', 'I\'m a man!', ['Anastasia', 'Jhonny', 'Murka']);
+const catwoman = new Human('CatWoman', 'female', cat.saying, []);
 
 // ======== OUTPUT ========
 /* Use print(message) for output.
