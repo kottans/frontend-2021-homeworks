@@ -3,33 +3,22 @@
 import randomQuestions from './questions.js'
 import content from './content.js'
 
-let mapContainer
-let map
-let svg
-let mapAreas
-let hintSection
-let contentSection
-let country
+const mapContainer = document.querySelector('.mapContainer')
+const map = document.querySelector('.map')
+const svg = document.querySelector('svg')
+const mapAreas = document.querySelectorAll('.land')
+const hintSection = document.querySelector('#hintSection')
+const contentSection = document.querySelector('#content')
+const country = document.querySelector('#main')
 
 
 initApp()
 
 
 function initApp() {
-    getElements()
     recalcMap()
     addListeners()
     showContent(content.main)
-}
-
-function getElements() {
-    mapContainer = document.querySelector('.mapContainer')
-    svg = document.querySelector('svg')
-    map = document.querySelector('.map')
-    mapAreas = document.querySelectorAll('.land')
-    hintSection = document.querySelector('#hintSection')
-    contentSection = document.querySelector('#content')
-    country = document.querySelector('#main')
 }
 
 function addListeners() {
