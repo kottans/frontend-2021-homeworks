@@ -111,12 +111,12 @@ li {
   height: auto;
 }
 
-.section-block {
-  display: block;
+.not-active {
+  display: none;
 }
 
-.section-none {
-  display: none;
+.active {
+  display: block;
 }
 
 .section-heading {
@@ -227,7 +227,7 @@ li {
   .section-footer-nav {
     padding: 1em;
   }
-  
+
 }
 
 @media screen and (max-width: 850px) {
