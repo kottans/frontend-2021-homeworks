@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Effective JavaScript: Frogger</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <script src="js/resources.js"></script>
+    <script src="js/engine.js"></script>
+    <div class="settings">
+        <form class="settings-form" method="post" action="#">
+            <h2 class="form-title">Let's select a few game parameters</h2>
+            <h4 class="form-title">Choose an avatar</h4>
+            <ul class="form-list form-list__avatar">
+                <li class="form-item form-item__avatar">
+                    <label class="form-label form-label__avatar">
+                        <input type="radio" class="radio radio__avatar visuallyhidden" value="char-boy.png" name="avatar" checked>
+                        <img src="images/char-boy.png" alt="char-boy" class="avatar">
+                    </label>
+                </li>
+                <li class="form-item form-item__avatar">
+                    <label class="form-label form-label__avatar">
+                        <input type="radio" class="radio radio__avatar visuallyhidden" value="char-cat-girl.png" name="avatar">
+                        <img src="images/char-cat-girl.png" alt="char-cat-girl" class="avatar">
+                    </label>
+                </li>
+                <li class="form-item form-item__avatar">
+                    <label class="form-label form-label__avatar">
+                        <input type="radio" class="radio radio__avatar visuallyhidden" value="char-horn-girl.png" name="avatar">
+                        <img src="images/char-horn-girl.png" alt="char-horn-girl" class="avatar">
+                    </label>
+                </li>
+                <li class="form-item form-item__avatar">
+                    <label class="form-label form-label__avatar">
+                        <input type="radio" class="radio radio__avatar visuallyhidden" value="char-pink-girl.png" name="avatar">
+                        <img src="images/char-pink-girl.png" alt="char-pink-girl" class="avatar">
+                    </label>
+                </li>
+                <li class="form-item form-item__avatar">
+                    <label class="form-label form-label__avatar">
+                        <input type="radio" class="radio radio__avatar visuallyhidden" value="char-princess-girl.png" name="avatar">
+                        <img src="images/char-princess-girl.png" alt="char-princess-girl" class="avatar">
+                    </label>
+                </li>
+            </ul>
+            <h4 class="form-title">Choose a level</h4>
+            <ul class="form-list form-list__level">
+                <li class="form-item form-item__level">
+                    <label class="form-label form-label__level">
+                        <input type="radio" class="radio radio__level visuallyhidden" value="low" checked name="level">
+                        <span class="ico"></span>
+                        <span class="label">Low</span>
+                    </label>
+                </li>
+                <li class="form-item form-item__level">
+                    <label class="form-label form-label__level">
+                        <input type="radio" class="radio radio__level visuallyhidden" value="medium" name="level">
+                        <span class="ico"></span>
+                        <span class="label">Medium</span>
+                    </label>
+                </li>
+                <li class="form-item form-item__level">
+                    <label class="form-label form-label__level">
+                        <input type="radio" class="radio radio__level visuallyhidden" value="hight" name="level">
+                        <span class="ico"></span>
+                        <span class="label">Hight</span>
+                    </label>
+                </li>
+            </ul>
+            <button class="button" type="button">Select parameters</button>
+        </form>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
