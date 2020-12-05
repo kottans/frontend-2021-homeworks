@@ -114,8 +114,17 @@ transform: scale(1.35) ;
 }
 
 .land{
+  fill: #000000;
+  fill-opacity: 1;
+  stroke: white;
+  stroke-opacity: 1;
+  stroke-width: 0.5;
   transition: fill ease-in-out 0.4s;
   cursor: pointer;
+}
+
+.land:hover {
+  fill: #ffeb3b;
 }
 
 

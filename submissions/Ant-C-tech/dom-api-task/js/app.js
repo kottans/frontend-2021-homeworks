@@ -29,16 +29,10 @@ function addListeners() {
     for (const iterator of mapAreas) {
         //Add hint on mouseenter, hover
         iterator.addEventListener('mouseenter', function (event) {
-            if (event.target.style.fill !== 'rgb(0, 176, 255)') {
-                event.target.style.fill = '#ffeb3b'
-            }
             hintSection.innerHTML = `${randomQuestions[getRandomIntInclusive(0, 9)]}`
         })
         //Remove hint on mouseleave, hover
         iterator.addEventListener('mouseleave', function (event) {
-            if (event.target.style.fill !== 'rgb(0, 176, 255)') {
-                event.target.style.fill = '#000'
-            }
             hintSection.innerHTML = '. . .'
         })
         //Change content on click
