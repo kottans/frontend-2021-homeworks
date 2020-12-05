@@ -34,12 +34,13 @@ function addListeners() {
         land.addEventListener('mouseleave', function (event) {
             hintSection.innerHTML = '. . .'
         })
-        //Change content on click
-        land.addEventListener('click', changeContent, { once: true })
     }
 
+    //Change content on click
+    map.addEventListener('click', changeContent)
+
     //Show main content on click
-    country.addEventListener('click', changeContent, { once: true })
+    country.addEventListener('click', changeContent)
 }
 
 
@@ -70,29 +71,29 @@ function hideContent() {
 function changeContent(event) {
     //Remove all clickListeners for animation time - solution for problem with fast change content
     
-    //Map visualization
-    for (const land of mapAreas) {
-        land.classList.remove('land-active')
-        land.removeEventListener('click', changeContent, { once: true })
-    }
-    event.target.classList.toggle('land-active')
-    
-    //Change content
-    country.removeEventListener('click', changeContent, { once: true })
-    hideContent()
-    const target = getTargetId(event)
-    contentSection.addEventListener('transitionend', function () {
-        contentSection.innerHTML = ''
-        showContent(content[target])
-        contentSection.addEventListener('transitionend', function () {
-            for (const land of mapAreas) {
-                land.addEventListener('click', changeContent, { once: true })
-            }
-            country.addEventListener('click', changeContent, { once: true })
-            event.target.removeEventListener('click', changeContent, { once: true })
-        }, { once: true })
-    }, { once: true })
+    if (event.target.classList.contains('land-active')) {
+        return false
+    } else {
+        //Map visualization
+        for (const land of mapAreas) {
+            land.classList.remove('land-active')
+        }
+        map.removeEventListener('click', changeContent)
+        event.target.classList.toggle('land-active')
 
+        //Change content
+        country.removeEventListener('click', changeContent)
+        hideContent()
+        const target = getTargetId(event)
+        contentSection.addEventListener('transitionend', function () {
+            contentSection.innerHTML = ''
+            showContent(content[target])
+            contentSection.addEventListener('transitionend', function () {
+                map.addEventListener('click', changeContent)
+                country.addEventListener('click', changeContent)
+            }, { once: true })
+        }, { once: true })
+    }
 }
 
 function getTargetId(event) {
