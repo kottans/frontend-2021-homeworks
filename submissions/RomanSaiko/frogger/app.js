@@ -92,9 +92,9 @@ Player.prototype.handleInput = function(key) {
 };
 
 const player = new Player(playerProps);
-const enemy1 = new Enemy({x: -150, y: 60, speed: 90, player: player});
-const enemy2 = new Enemy({x: -250, y: 145, speed: 70, player: player});
-const enemy3 = new Enemy({x: -50, y: 230, speed: 50, player: player});
+const enemy1 = new Enemy({x: -150, y: 60, speed: 90, player});
+const enemy2 = new Enemy({x: -250, y: 145, speed: 70, player});
+const enemy3 = new Enemy({x: -50, y: 230, speed: 50, player});
 
 const allEnemies = [enemy1, enemy2, enemy3];
 
