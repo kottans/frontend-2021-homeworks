@@ -83,7 +83,12 @@ header{
   display: flex;
   padding: 30px 15px;
   margin: 0 15px;
-    overflow-x: hidden;
+  overflow-x: hidden;
+    
+  /* Prohibit select */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 
 .mapContainer{
@@ -101,6 +106,7 @@ header{
   font-size: 40px;
   color: #ffffff;
   cursor: pointer;
+  
 }
 
 svg{
@@ -121,6 +127,10 @@ transform: scale(1.35) ;
   stroke-width: 0.5;
   transition: fill ease-in-out 0.4s;
   cursor: pointer;
+}
+
+.land-active {
+  fill: #00b0ff;
 }
 
 .land:hover {

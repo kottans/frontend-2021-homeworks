@@ -25,38 +25,24 @@ function addListeners() {
 
     window.onresize = recalcMap
 
-    //Add-Remove hint
     for (const iterator of mapAreas) {
-        //Add hint on mouseenter, hover
+        //Add hint on mouseenter
         iterator.addEventListener('mouseenter', function (event) {
             hintSection.innerHTML = `${randomQuestions[getRandomIntInclusive(0, 9)]}`
         })
-        //Remove hint on mouseleave, hover
+        //Remove hint on mouseleave
         iterator.addEventListener('mouseleave', function (event) {
             hintSection.innerHTML = '. . .'
         })
         //Change content on click
-        iterator.addEventListener('click', function (event) {
-
-            //Prohibit double click
-            if (event.target.classList.contains('show')) {
-                return false
-            } else {
-                changeContent(event)
-                event.target.classList.add('show')
-                for (const iterator of mapAreas) {
-                    if (iterator != event.target) {
-                        iterator.classList.remove('show')
-                    }
-                }
-            }
-
-        })
+        iterator.addEventListener('click', changeContent, { once: true })
     }
 
     //Show main content on click
-    country.addEventListener('click', changeContent)
+    country.addEventListener('click', changeContent, { once: true })
 }
+
+
 
 function recalcMap() {
     if (document.documentElement.clientWidth >= 1040) {
@@ -82,15 +68,29 @@ function hideContent() {
 }
 
 function changeContent(event) {
-    hideContent()
-    for (let item of mapAreas) {
-        item.style.fill = '#000'
+    //Remove all clickListeners for animation time - solution for problem with fast change content
+    
+    //Map visualization
+    for (const land of mapAreas) {
+        land.classList.remove('land-active')
+        land.removeEventListener('click', changeContent, { once: true })
     }
-    event.target.style.fill = '#00b0ff'
+    event.target.classList.toggle('land-active')
+    
+    //Change content
+    country.removeEventListener('click', changeContent, { once: true })
+    hideContent()
     const target = getTargetId(event)
     contentSection.addEventListener('transitionend', function () {
         contentSection.innerHTML = ''
         showContent(content[target])
+        contentSection.addEventListener('transitionend', function () {
+            for (const land of mapAreas) {
+                land.addEventListener('click', changeContent, { once: true })
+            }
+            country.addEventListener('click', changeContent, { once: true })
+            event.target.removeEventListener('click', changeContent, { once: true })
+        }, { once: true })
     }, { once: true })
 
 }
@@ -145,8 +145,6 @@ function createContent(content) {
 
     return fragment
 }
-
-
 
 function getRandomIntInclusive(min, max) {
     min = Math.ceil(min);
