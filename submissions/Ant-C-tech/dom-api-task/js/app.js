@@ -28,7 +28,7 @@ function addListeners() {
     for (const iterator of mapAreas) {
         //Add hint on mouseenter
         iterator.addEventListener('mouseenter', function (event) {
-            hintSection.innerHTML = `${randomQuestions[getRandomIntInclusive(0, 9)]}`
+            hintSection.innerHTML = `${randomQuestions[getRandomIntInclusive(0, randomQuestions.length - 1)]}`
         })
         //Remove hint on mouseleave
         iterator.addEventListener('mouseleave', function (event) {
