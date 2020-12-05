@@ -78,7 +78,7 @@ function createGreetingContent(obj) {
             content += `My gender is ${obj[key]}. `
             break;
          case key == 'legs':
-            if (obj[key].length > 0) {
+            if (obj[key] > 0) {
                content += `I have ${obj[key]} legs. `
             } else {
                content += `I have no legs. `
@@ -86,7 +86,7 @@ function createGreetingContent(obj) {
            
             break;
          case key == 'hands':
-            if (obj[key].length > 0) {
+            if (obj[key] > 0) {
                content += `I have ${obj[key]} hands. `
             } else {
                content += `I have no hands. `
