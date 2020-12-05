@@ -25,17 +25,17 @@ function addListeners() {
 
     window.onresize = recalcMap
 
-    for (const iterator of mapAreas) {
+    for (const land of mapAreas) {
         //Add hint on mouseenter
-        iterator.addEventListener('mouseenter', function (event) {
+        land.addEventListener('mouseenter', function (event) {
             hintSection.innerHTML = `${randomQuestions[getRandomIntInclusive(0, randomQuestions.length - 1)]}`
         })
         //Remove hint on mouseleave
-        iterator.addEventListener('mouseleave', function (event) {
+        land.addEventListener('mouseleave', function (event) {
             hintSection.innerHTML = '. . .'
         })
         //Change content on click
-        iterator.addEventListener('click', changeContent, { once: true })
+        land.addEventListener('click', changeContent, { once: true })
     }
 
     //Show main content on click
