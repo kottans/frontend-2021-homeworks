@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link rel="stylesheet" media="screen and (min-width:300px) and (max-width: 800px)" href="css/mobile.css">
+	<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Roboto:wght@300;600&display=swap" rel="stylesheet"> 
+	<title>JS DOM</title>
+</head>
+<body class="flex">
+	<header class="header flex center">
+		<nav class="nav flex column full center">
+			<div class="menu__icon-container flex full">
+				<img class="menu__icon" id="menu-btn" src="assets/menu.svg" alt="Menu button">
+			</div>
+			<ul class="menu flex column" id="menu"></ul>
+		</nav>
+	</header>
+	<main id="main" class="container flex">
+		<div class="tab__image" id="tabImage"></div>
+		<section class="tab__info-container flex column">
+			<div>
+				<div class="tab__number flex">
+					<span class="number">01</span>
+					<span class="separator"></span>
+					<span class="number" id="position"></span>
+				</div>
+				<h1 class="tab__header"></h1>
+				<p class="tab__paragraph"></p>
+			</div>
+			<div class="tab__statistics flex">
+				<h2 class="statistics__header">Orbital period</h2>
+				<p class="statistics__text"></p>
+			</div>
+		</section>
+	</main>	
+	<script type="text/javascript" src="js/script.js"></script>
+</body>
+</html>
