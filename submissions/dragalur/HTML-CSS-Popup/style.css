@@ -123,7 +123,8 @@
 	box-shadow: none;
 }
 .second-input {
-	display: none;
+	position: absolute;
+	opacity: 0;
 }
 .first-input {
 	position: absolute;
@@ -156,10 +157,12 @@
 .text-end {
 	text-decoration: none;
 	font-size: 20px;
-	padding: 10px 0 0 60px;
-	justify-content: center;
+	position: relative;
+	top: 10px;
+	left: 60px;
 	color: gray;
-	margin-bottom:20px ;
+	margin-bottom: 20px;
+
 }
 .navbar-button {
 	width: 32px;
@@ -185,12 +188,16 @@
 .first-input:focus ~ .focus-div {
 	outline: 2px solid black;
 }
+.second-input:focus ~ .second-navbar-button{
+	border: 2px solid black;
+}
 .second-navbar-button{
 	display: block;
-	width: 100%-1;
-	height: 30px;
+	width: 100%-2px;
+	height: 26px;
 	background-color: rgb(212, 212, 212);
 	margin-top: 9px;
 	visibility: visible;
 	opacity: 1;
+	border: 2px solid transparent;
 }
