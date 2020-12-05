@@ -84,9 +84,22 @@ body {
     cursor: pointer;
 }
 
-.drop_checkbox,
+/*.drop_checkbox,
 .checkbox_more {
     display: none;
+}*/
+
+.hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    border: 0;
+    padding: 0;
+    white-space: nowrap;
+    clip-path: inset(100%);
+    clip: rect(0 0 0 0);
+    overflow: hidden;
 }
 
 .dropdown {
@@ -104,6 +117,10 @@ body {
 
 .drop_checkbox:checked ~ .dropdown {
     display: block;
+}
+
+.drop_checkbox:focus ~ .nav__popup-item {
+    outline: -webkit-focus-ring-color auto 1px;
 }
 
 .dropdown li img {
@@ -144,6 +161,10 @@ body {
 
 .checkbox_more:checked ~ .more_label {
     display: none;
+}
+
+.checkbox_more:focus ~ .nav__popup-item {
+    outline: -webkit-focus-ring-color auto 2px;
 }
 
 .more_label {
