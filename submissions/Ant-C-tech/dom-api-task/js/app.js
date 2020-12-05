@@ -84,20 +84,15 @@ function changeContent(event) {
         //Change content
         country.removeEventListener('click', changeContent)
         hideContent()
-        const target = getTargetId(event)
         contentSection.addEventListener('transitionend', function () {
             contentSection.innerHTML = ''
-            showContent(content[target])
+            showContent(content[event.target.id])
             contentSection.addEventListener('transitionend', function () {
                 map.addEventListener('click', changeContent)
                 country.addEventListener('click', changeContent)
             }, { once: true })
         }, { once: true })
     }
-}
-
-function getTargetId(event) {
-    return event.target.id
 }
 
 function createContent(content) {
