@@ -17,13 +17,17 @@ initApp()
 
 function initApp() {
     recalcMap()
+    recalcContentBlock()
     addListeners()
     showContent(content.main)
 }
 
 function addListeners() {
 
-    window.onresize = recalcMap
+    window.onresize = function () {
+        recalcMap()
+        recalcContentBlock()
+    }
 
     for (const land of mapAreas) {
         //Add hint on mouseenter
@@ -58,6 +62,10 @@ function recalcMap() {
     }
 }
 
+function recalcContentBlock() {
+    contentSection.style.minHeight = mapContainer.offsetHeight + 'px'
+}
+
 function showContent(param) {
     const content = createContent(param)
     contentSection.appendChild(content)
@@ -70,7 +78,7 @@ function hideContent() {
 
 function changeContent(event) {
     //Remove all clickListeners for animation time - solution for problem with fast change content
-    
+
     if (event.target.classList.contains('land-active')) {
         return false
     } else {
