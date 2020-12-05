@@ -79,6 +79,11 @@ let catWoman = {
 
 let inhabitants = [dog, cat, woman, man, catWoman];
 
+function inhabitantInfo(inhabitant) {
+   let nameInBold = `<strong>${inhabitant.name}</strong>`;
+   return [inhabitant.species, nameInBold, inhabitant.gender, inhabitant.legs, inhabitant.hands, inhabitant.saying, inhabitant.friends.join(", ")].join("; ")
+}
+
 inhabitants.forEach(inhabitant => {
-   print(inhabitant.species + '; ' + inhabitant.name + '; ' + inhabitant.gender + '; ' + inhabitant.legs + '; ' + inhabitant.hands + '; ' + inhabitant.saying + '; ' + inhabitant.friends.join(", "));
+   print(inhabitantInfo(inhabitant));
 })
