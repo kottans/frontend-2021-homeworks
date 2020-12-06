@@ -14,8 +14,8 @@ const dog = {
    legs: 4,
    hands: 0,
    saying: 'Woof-Woof!',
-   friends: ['John']
-}
+   friends: ['John'],
+};
 
 const cat = {
    species: 'cat',
@@ -24,8 +24,8 @@ const cat = {
    legs: 4,
    hands: 0,
    saying: 'Meow-Meow!',
-   friends: ['John']
-}
+   friends: ['John'],
+};
 
 const woman = {
    species: 'human',
@@ -34,21 +34,19 @@ const woman = {
    legs: 2,
    hands: 2,
    saying: 'Nice to meet you!',
-}
+};
 
 const man = {
+   friends: ['Spike', 'Tom'],
    species: 'human',
    name: 'John',
-   gender: 'male',
    legs: 2,
    hands: 2,
    saying: 'Hi, how are you?',
-   friends: ['Spike', 'Tom']
-}
+   gender: 'male',
+};
 
 function createGreetingContent(obj) {
-
-   let content = ''
 
    const propPrefixes = {
       species: 'I am a %. ',
@@ -60,20 +58,20 @@ function createGreetingContent(obj) {
       friends: 'I have friend %. ',
    };
 
-   Object.keys(obj).forEach((key) => {
+  const greeting = Object.keys(propPrefixes).map((key) => {
       if (Array.isArray(obj[key])) {
          for (const item of obj[key]) {
-            content += propPrefixes[key].replace('%', item)
-         }
+            return propPrefixes[key].replace('%', item);
+         };
       } else if (obj[key] && propPrefixes[key]) {
-         content += propPrefixes[key].replace('%', obj[key])
-      }
-   })
-   
-   return content.trim()
-}
+         return propPrefixes[key].replace('%', obj[key]);
+      };
+   });
 
-const inhabitants = [dog, cat, woman, man]
+   return greeting.join('');
+};
+
+const inhabitants = [dog, cat, woman, man,];
 
 // ======== OUTPUT ========
 /* Use print(message) for output.
@@ -95,5 +93,5 @@ const inhabitants = [dog, cat, woman, man]
    */
 
 inhabitants.forEach((item) => {
-   print(createGreetingContent(item), 'div')
-})
+   print(createGreetingContent(item), 'div');
+});
