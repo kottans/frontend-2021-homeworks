@@ -48,27 +48,23 @@ const man = {
 
 function createGreetingContent(obj) {
 
-   const propPrefixes = {
-      species: 'I am a %. ',
-      name: 'My name is %. ',
-      gender: 'My gender is %. ',
-      hands: 'I have % hands. ',
-      legs: 'I have % legs. ',
-      saying: 'I want to say you "%". ',
-      friends: 'I have friend %. ',
+   const template = {
+      species: 'I am a %',
+      name: 'My name is %',
+      gender: 'My gender is %',
+      hands: 'I have % hands',
+      legs: 'I have % legs',
+      saying: 'I want to say you: "%"',
+      friends: 'I have friend %',
    };
 
-  const greeting = Object.keys(propPrefixes).map((key) => {
-      if (Array.isArray(obj[key])) {
-         for (const item of obj[key]) {
-            return propPrefixes[key].replace('%', item);
-         };
-      } else if (obj[key] && propPrefixes[key]) {
-         return propPrefixes[key].replace('%', obj[key]);
+   const greeting = Object.keys(template).map((key) => {
+      if (obj[key] && template[key]) {
+         return template[key].replace('%', obj[key]);
       };
-   });
+   }).filter(item => item != undefined).join('. ');
 
-   return greeting.join('');
+   return `${greeting}.`;
 };
 
 const inhabitants = [dog, cat, woman, man,];
