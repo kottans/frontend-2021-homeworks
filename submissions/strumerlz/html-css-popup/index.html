@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <title>HTML & CSS practice: Pop-Up Menu</title>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+        <div class="grid-container">
+            <header>
+                <h1>HTML & CSS practice: Pop-Up Menu </h1>
+                <nav class="navbar">
+                    <ul class="navbar-list">
+                        <li class="nav-item"><a href="#">Mail</a></li>
+                        <li class="nav-item"><a href="#">Image</a></li>
+
+                        <!-- Menu button-->
+                        <li class="nav-item">
+                            <input type="checkbox" id="menu-hidden-checkbox" class="hidden-checkbox">
+                            <label class="submenu-label" for="menu-hidden-checkbox">                            
+                                <img class="menu-icon" src="assets/menu.png" alt="Submenu"> 
+                            </label>
+                            
+                            <!-- Submenu-->
+                            <div class="submenu-hidden">
+                                <ul class="submenu-list">
+                                    <li class="submenu-item">
+                                        <a href="#">
+                                        <img class="submenu-icon" src="assets/submenu_icons/files.png" alt="Files">
+                                        <div>Files</div>
+                                        </a>
+                                    </li>
+                                    <li class="submenu-item">
+                                        <a href="#">
+                                        <img class="submenu-icon" src="assets/submenu_icons/calendar.png" alt="Calendar">
+                                        <span>Calendar</span>
+                                        </a>
+                                    </li>
+                                    <li class="submenu-item">
+                                        <a href="#">
+                                        <img class="submenu-icon" src="assets/submenu_icons/Contacts.png" alt="Contacts">
+                                        <span>Contacts</span>
+                                        </a>
+                                    </li>
+                                    <li class="submenu-item">
+                                        <a href="#">
+                                        <img class="submenu-icon" src="assets/submenu_icons/photos.png" alt="Photos">
+                                        <span>Photos</span>
+                                        </a>
+                                    </li>
+                                    <li class="submenu-item">
+                                        <a href="#">
+                                        <img class="submenu-icon" src="assets/submenu_icons/video.png" alt="Video">
+                                        <span>Video</span>
+                                        </a>
+                                    </li>
+                                    <li class="submenu-item">
+                                    <a href="#">
+                                        <img class="submenu-icon" src="assets/submenu_icons/music.png" alt="Music">
+                                        <span>Music</span>
+                                    </a>
+                                    </li>
+                                    <li class="submenu-item">
+                                    <a href="#">
+                                        <img class="submenu-icon" src="assets/submenu_icons/podcast.png" alt="Podcasts">
+                                        <span>Podcasts</span>
+                                    </a>
+                                    </li>
+                                    <li class="submenu-item">
+                                    <a href="#">
+                                        <img class="submenu-icon" src="assets/submenu_icons/map.png" alt="Map">
+                                        <span>Map</span>
+                                    </a>
+                                    </li>
+                                    <li class="submenu-item">
+                                    <a href="#">
+                                        <img class="submenu-icon" src="assets/submenu_icons/idea.png" alt="Ideas">
+                                        <span>Ideas</span>
+                                    </a>
+                                    </li>
+                                </ul>
+                                
+                                
+                                    <!-- More button-->
+                                    <input type="checkbox" id="more-hidden-checkbox" class="hidden-checkbox">
+                                    <label tabindex="0" class="submenu-more-label" for="more-hidden-checkbox">                            
+                                    More 
+                                    </label>
+                                    
+                                    <div class="horizontal-rule"> </div>  
+                                                        
+                                    <!--Second part of the menu-->
+
+                                    <div class="submenu-more-hidden">
+                                        <ul class="submenu-list">
+                                            <li class="submenu-item">
+                                                <a href="#">
+                                                <img class="submenu-icon" src="assets/submenu_icons/news.png" alt="News">
+                                                <div>News</div>
+                                                </a>
+                                            </li>
+                                            <li class="submenu-item">
+                                                <a href="#">
+                                                <img class="submenu-icon" src="assets/submenu_icons/forecast.png" alt="Forecast">
+                                                <span>Forecast</span>
+                                                </a>
+                                            </li>
+                                            <li class="submenu-item">
+                                                <a href="#">
+                                                    <img class="submenu-icon" src="assets/submenu_icons/games.png" alt="Games">
+                                                    <span>Games</span>
+                                                </a>
+                                            </li>
+                                            <li class="submenu-item">
+                                                <a href="#">
+                                                    <img class="submenu-icon" src="assets/submenu_icons/shopping.png" alt="Store">
+                                                    <span>Store</span>
+                                                </a>
+                                            </li>
+                                            <li class="submenu-item">
+                                                <a href="#">
+                                                    <img class="submenu-icon" src="assets/submenu_icons/settings.png" alt="Settings">
+                                                    <span>Settings</span>
+                                                </a>
+                                            </li>
+                                            <li class="submenu-item">
+                                                <a href="#">
+                                                <img class="submenu-icon" src="assets/submenu_icons/trash.png" alt="Trash">
+                                                <span>Trash</span>
+                                                </a>
+                                            </li>  
+                                        </ul>
+                                        <a href="https://github.com/kottans" class="kottans-link">Even more from Kottans </a>
+                                    </div>    
+                                    
+                            </div>
+                        </li>
+                        
+                        <li class="nav-item"><a href="#">
+                            <img class="menu-icon" src="assets/notif.png" alt="Notification"></a>
+                        </li>
+                        <li class="nav-item"><a href="https://github.com/strumerlz" target="_blank">
+                            <img class="menu-icon" src="assets/avatar.png" alt="User"></a>
+                        </li>
+                    </ul>
+                </nav>
+            </header>
+            <main>
+                                
+            </main>
+            <footer>
+                Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik" target="_blank">Freepik</a> from <a href="https://wwww.flaticon.com/" title="Flaticon" target="_blank"> www.flaticon.com</a>
+            </footer>
+        </div>
+    </body>
+</html>
