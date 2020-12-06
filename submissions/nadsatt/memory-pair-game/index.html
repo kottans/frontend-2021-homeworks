@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="./images/favicon.ico.png">
+    <link rel="stylesheet" href="./styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <title>CatFC</title>
+</head>
+<body>
+
+    <header class="header">
+        <div class = "header__block header__info-block"></div>
+        <div class="header__scores">
+            <div class="header__block header__fails-block">Fails:
+                <span class="header__fails-number"></span>
+            </div>
+            <div class="header__block header__wins-block">Wins:
+                <span class="header__wins-number"></span>
+            </div>
+        </div>
+    </header>
+
+    <main class="card gameboard-card">
+
+        <div class="card__front gameboard-card__front">
+            <div class="game-cards-group"></div>
+        </div>
+        
+        <div class="card__back gameboard-card__back">
+            <img class="gameboard-card__cat-gif" src="./images/overfed-cat.gif" alt="overfed-cat">
+            <button class="gameboard-card__reset-button">Omg i swear i won't do it again!</button>
+        </div>
+       
+    </main>
+
+    <footer class="footer">
+        <img class="footer__cat-img" src="./images/hungry-cat.png" alt="hungry-cat">
+    </footer>
+
+    <script src="./index.js"></script>
+</body>
+</html>
