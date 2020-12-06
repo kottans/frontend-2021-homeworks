@@ -1,5 +1,26 @@
+// parameters of field
 const FIELD_WIDTH = 505;
 const FIELD_HEIGHT = 606;
+
+// Enemy speed points and points out of field
+const ENEMY_MIN_SPEED = 1;
+const ENEMY_MAX_SPEED = 10;
+const ENEMY_DISTANCE_OUT_OF_FIELD_TO_THE_RIGHT = 50;
+const ENEMY_DISTANCE_OUT_OF_FIELD_TO_THE_LEFT = -100;
+
+// Player shifts to begin
+const PLAYER_CENTERING_SHIFT = 50;
+const PLAYER_INITIAL_BOTTOM_PADDING = 220;
+
+// Collision Player Move
+const LIMITING_LEFT_PADDING = 100;
+const LIMITING_TOP_PADDING = 50;
+const LIMITING_RIGHT_PADDING = 200;
+const LIMITING_BOTTOM_PADDING = 250;
+
+// Collision Win point
+const WIN_POINT_Y_1 = -14;
+const WIN_POINT_Y_2 = 0;
 
 function randomInteger(min, max) {
     // случайное число от min до (max+1)
@@ -13,7 +34,7 @@ var Enemy = function(x, y) {
     // x: -50; y: 50
     this.x = x;
     this.y = y;
-    this.speed = randomInteger(1, 10);
+    this.speed = randomInteger(ENEMY_MIN_SPEED, ENEMY_MAX_SPEED);
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
@@ -25,9 +46,9 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
-    if (this.x > FIELD_WIDTH + 50) {
-        this.speed = randomInteger(1, 10);
-        this.x = -100;
+    if (this.x > FIELD_WIDTH + ENEMY_DISTANCE_OUT_OF_FIELD_TO_THE_RIGHT) {
+        this.speed = randomInteger(ENEMY_MIN_SPEED, ENEMY_MAX_SPEED);
+        this.x = ENEMY_DISTANCE_OUT_OF_FIELD_TO_THE_LEFT;
     }
     ctx.drawImage(Resources.get(this.sprite), (this.x += this.speed) * dt, this.y);
 };
@@ -41,8 +62,8 @@ Enemy.prototype.render = function() {
 // This class requires an update(), render() and
 // a handleInput() method.
 var Player = function() {
-    this.initX = FIELD_WIDTH / 2 - 50;
-    this.initY = FIELD_HEIGHT - 220;
+    this.initX = FIELD_WIDTH / 2 - PLAYER_CENTERING_SHIFT;
+    this.initY = FIELD_HEIGHT - PLAYER_INITIAL_BOTTOM_PADDING;
     this.x = this.initX;
     this.y = this.initY;
     this.leftRightStepSize = 100;
@@ -54,28 +75,30 @@ Player.prototype.render = function() {
     this.checkCollision();
     ctx.drawImage( Resources.get(this.sprite), this.x, this.y );
 };
+
 Player.prototype.checkCollision = function() {
     allEnemies.forEach(enemy => {
         const offset = 20;
-        if (this.x >= enemy.x - offset && this.x <= enemy.x + offset * 3 && this.y <= enemy.y + offset && this.y >= enemy.y || this.y >= -14 && this.y <= 0) {
+        if (this.x >= enemy.x - offset && this.x <= enemy.x + offset * 3 && this.y <= enemy.y + offset && this.y >= enemy.y || this.y >= WIN_POINT_Y_1 && this.y <= WIN_POINT_Y_2) {
             this.x = this.initX;
             this.y = this.initY;
         }
     });
 };
+
 Player.prototype.handleInput = function(key) {
     switch (key) {
         case 'left':
-            if (this.x >= 100) this.x -= this.leftRightStepSize;
+            if (this.x >= LIMITING_LEFT_PADDING) this.x -= this.leftRightStepSize;
             break;
         case 'up':
-            if (this.y >= 50) this.y -= this.upDownStepSize;
+            if (this.y >= LIMITING_TOP_PADDING) this.y -= this.upDownStepSize;
             break;
         case 'right':
-            if (this.x <= FIELD_WIDTH - 200) this.x += this.leftRightStepSize;
+            if (this.x <= FIELD_WIDTH - LIMITING_RIGHT_PADDING) this.x += this.leftRightStepSize;
             break;
         case 'down':
-            if (this.y <= FIELD_HEIGHT - 250) this.y += this.upDownStepSize;
+            if (this.y <= FIELD_HEIGHT - LIMITING_BOTTOM_PADDING) this.y += this.upDownStepSize;
             break;
     }
 };
