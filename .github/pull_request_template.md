@@ -1,4 +1,4 @@
-_Have your app published on GitHub pages. Make sure your PR title contains the task name. Change task name and links below as appropriate. Remove this paragraph._
+_Have your app published on [GitHub pages](https://github.com/kottans/frontend-2021-homeworks/blob/main/publish-your-app.md). Make sure your PR title contains the task name. Change task name and links below as appropriate. Remove this paragraph._
 
 ### task name
 
