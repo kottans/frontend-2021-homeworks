@@ -47,15 +47,10 @@ let man = {
    so code reviewers might focus on a single file that is index.js.
    */
 
-let makeMessage = (obj) => {
-  let propsArr = [];
-  for (let propName in obj) {
-    propName !== "constructor"
-      ? propsArr.push(propName)
-      : console.log("constructor found");
-  }
-  return propsArr.map((propName) => obj[propName]).join("; ");
-};
+let makeMessage = (obj) =>
+  ["type", "legs", "hands", "name", "saying", "friendTo"]
+    .map((propName) => obj[propName])
+    .join();
 
 let world = [dog, cat, woman, man];
 world.forEach((inhabitant) => print(makeMessage(inhabitant)));
