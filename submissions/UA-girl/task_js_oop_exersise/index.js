@@ -19,7 +19,7 @@ class Creature {
     }
 
     toString() {
-        return `${this.say}! My name is ${this.name} and I am ${this.age} years old ${this.gender} ${this.species}.`
+        return `${this.say}! My name is ${this.name} and I am ${this.age} years old ${this.gender} ${this.species}.  I have ${this.legs} legs and ${this.hasOwnProperty('hands') ? this.hands : 'no'} hands. My friends are ${this.friends.join(', ')}.`
     }
 }
 
@@ -28,19 +28,11 @@ class Person extends Creature {
         super(species, name, age, gender, legs, say, friends);
         this.hands = 2;
     }
-
-    toString() {
-        return super.toString() + ` I have ${this.legs} legs and ${this.hands} hands. My friends are ${this.friends.join(', ')}.`
-    }
 }
 
 class Animal extends Creature {
     constructor(species, name, age, gender, legs, say, friends) {
         super(species, name, age, gender, legs, say, friends);
-    }
-
-    toString() {
-        return super.toString() + ` I have ${this.legs} legs. My friends are ${this.friends.join(', ')}.`;
     }
 }
 
