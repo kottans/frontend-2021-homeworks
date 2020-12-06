@@ -57,7 +57,7 @@ body {
 
 .header__info-block {
     flex-grow: 1;
-}
+} 
 
 .header__scores {
     display: flex;
@@ -66,6 +66,7 @@ body {
 
 .header__wins-block,
 .header__fails-block {
+    width: 90px;
     height: 50%;
     margin-left: 10px;
     color: white;
@@ -291,15 +292,18 @@ body {
 }
 
 /* ADAPTIVE STYLES */
-@media screen and (min-width: 485px){
+@media screen and (min-width: 480px){
+    body {
+        font-size: 14px;
+    }
+}
+
+@media screen and (min-width: 580px){
     :root {
         --game-cards-group-width: 60vh;
         --game-card-width: calc((60vh - 30px)/4);
         --header-height: 150px;
         --header-padding: 25px 5%;
-    }
-    body {
-        font-size: 14px;
     }
     .header__scores {
         flex-direction: row;
@@ -309,6 +313,7 @@ body {
     }
     .header__wins-block,
     .header__fails-block {
+        width: 100px;
         height: 100%;
     }
 }
