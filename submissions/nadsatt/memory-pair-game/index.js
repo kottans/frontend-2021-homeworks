@@ -1,28 +1,28 @@
 const doc = document.documentElement,
-      fragment = new DocumentFragment(),
-      infoSpan = document.querySelector('.header__info-block'),
-      failsNumberSpan = document.querySelector('.header__fails-number'),
-      winsNumberSpan = document.querySelector('.header__wins-number'),
-      gameboardCard = document.querySelector('.gameboard-card'),
-      gameCardsGroup = document.querySelector('.game-cards-group'),
-      resetButton = document.querySelector('.gameboard-card__reset-button'),
-      catImg = document.querySelector('.footer__cat-img');
+    fragment = new DocumentFragment(),
+    infoSpan = document.querySelector('.header__info-block'),
+    failsNumberSpan = document.querySelector('.header__fails-number'),
+    winsNumberSpan = document.querySelector('.header__wins-number'),
+    gameboardCard = document.querySelector('.gameboard-card'),
+    gameCardsGroup = document.querySelector('.game-cards-group'),
+    resetButton = document.querySelector('.gameboard-card__reset-button'),
+    catImg = document.querySelector('.footer__cat-img');
 
 const uniqueGameCardsNumber = 8,
-      maxOpenedGameCardsNumber = 2,
-      maxSolvedGameCardsNumber = 16;
+    maxOpenedGameCardsNumber = 2,
+    maxSolvedGameCardsNumber = 16;
 
 const initCatImgWidth = '30vw',
-      catImgGrowthFactor = 1.1,
-      vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
+    catImgGrowthFactor = 1.1,
+    vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
 
 const cardFlippingTime = 400
-      gameCardDisplayingTime = 450,
-      gameCardMovingTime = 1000,
-      catSoundTime = 1000,
-      catSoundDelay = gameCardDisplayingTime + gameCardMovingTime/2,
-      openingGameboardCardDelay = gameCardDisplayingTime + gameCardMovingTime;
-     
+    gameCardDisplayingTime = 450,
+    gameCardMovingTime = 1000,
+    catSoundTime = 1000,
+    catSoundDelay = gameCardDisplayingTime + gameCardMovingTime/2,
+    openingGameboardCardDelay = gameCardDisplayingTime + gameCardMovingTime;
+
 let firstGameCard,
     secondGameCard;
 
@@ -55,7 +55,7 @@ const createGameCards = function(){
     for(let i = 0; i < uniqueGameCardsNumber; i++){
         let card1 = createGameCard(i + 1);
         let card2 = createGameCard(i + 1);
-    
+
         fragment.append(card1, card2);
     }
 
@@ -64,7 +64,7 @@ const createGameCards = function(){
 
 const createGameCard = function(i){
     const card = document.createElement('div');
-    const cardInnerHtml =  ` 
+    const cardInnerHtml =  `
                     <div class="card__front game-card__front">
                         <img class="game-card__img" src="./images/front.jpg" alt="kfc-logo">
                     </div>
@@ -87,7 +87,7 @@ const initGame = function(){
     shuffleGameCards();
 
     renderInfo();
-    renderWinsNumber(++winsNumber); 
+    renderWinsNumber(++winsNumber);
     renderFailsNumber(failsNumber = 0);
 };
 
@@ -101,21 +101,21 @@ const resetGameCards = function(){
 };
 
 const moveOpenedGameCardsFromCorner = function(cards){
-    cards.forEach(card => 
-        card.classList.remove('first-game-card--in-corner', 
+    cards.forEach(card =>
+        card.classList.remove('first-game-card--in-corner',
                               'second-game-card--in-corner')
     );
 };
 
 const positionOpenedGameCardsRelatively = function(cards){
-    cards.forEach(card => 
-        card.classList.remove('first-game-card--abs-positioned', 
+    cards.forEach(card =>
+        card.classList.remove('first-game-card--abs-positioned',
                               'second-game-card--abs-positioned')
     );
 };
 
 const closeOpenedGameCards = function(...cards){
-    cards.forEach(card => 
+    cards.forEach(card =>
         card.classList.remove('card--flipped')
     );
 };
@@ -127,7 +127,7 @@ const resetCatImgWidth = function(){
 const shuffleGameCards = function(){
     let cardsArr = Array.from(gameCardsGroup.children);
     cardsArr.sort(() => Math.random() - 0.5);
-    
+
     cardsArr.forEach((card, i) => {
         card.dataset.gridCell = i + 1;
         fragment.append(card);
@@ -189,17 +189,17 @@ const sameGameCardsOpened = function(){
 
 const handleOpeningDiffGameCards = function(){
     setTimeout(
-        closeOpenedGameCards.bind(null, firstGameCard, secondGameCard), 
+        closeOpenedGameCards.bind(null, firstGameCard, secondGameCard),
         gameCardDisplayingTime
     );
 
-    resetOpenedGameCardsInfo(); 
+    resetOpenedGameCardsInfo();
     renderFailsNumber(++failsNumber);
 };
 
 const handleOpeningSameGameCards = function(){
     positionOpenedGameCardsAbsolutely();
-    
+
     setTimeout(
         moveOpenedGameCardsInCorner.bind(null, firstGameCard, secondGameCard),
         gameCardDisplayingTime
@@ -215,7 +215,7 @@ const handleOpeningSameGameCards = function(){
     solvedGameCardsNumber+= 2;
     if(allGameCardsSolved()) {
         setTimeout(openGameboardCard, openingGameboardCardDelay);
-    } 
+    }
 };
 
 const openGameboardCard = function(){

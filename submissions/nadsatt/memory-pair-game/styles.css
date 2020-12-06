@@ -57,7 +57,7 @@ body {
 
 .header__info-block {
     flex-grow: 1;
-} 
+}
 
 .header__scores {
     display: flex;
@@ -89,7 +89,7 @@ body {
 }
 
 .card__front,
-.card__back { 
+.card__back {
     width: 100%;
     position: absolute;
     top: 0;
@@ -173,11 +173,11 @@ body {
 
 /* GAME CARD STYLES */
 .game-card {
-    width: var(--game-card-width); 
+    width: var(--game-card-width);
     height: var(--game-card-width);
     cursor: pointer;
-    transition: left var(--game-card-moving-time) linear, 
-                top var(--game-card-moving-time) linear, 
+    transition: left var(--game-card-moving-time) linear,
+                top var(--game-card-moving-time) linear,
                 opacity var(--game-card-moving-time) linear;
 }
 
@@ -205,7 +205,7 @@ body {
     pointer-events: none;
     opacity: 1;
     z-index: 1;
-} 
+}
 
 .first-game-card--abs-positioned {
     left: var(--first-game-card-abs-left);
