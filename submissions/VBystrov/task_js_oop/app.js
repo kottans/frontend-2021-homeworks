@@ -10,6 +10,11 @@ const playerStartX = 200;
 const playerStartY = 400;
 const playerSpeed = 10;
 
+const collisionMinX = 18;
+const collisionMaxX = 84;
+const collisionMinY = 85;
+const collisionMaxY = 137;
+
 function randomMinMax(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
@@ -17,17 +22,18 @@ function randomMinMax(min, max) {
 const Enemy = function () {
   this.sprite = 'images/enemy-bug.png';
   Resources.load(this.sprite);
+  this.toStartPosition();
 };
 
 Enemy.prototype.update = function (dt) {
   const resetLine = 640;
   this.x += this.speed * dt;
   if (this.x > resetLine) {
-    this.startPosition();
+    this.toStartPosition();
   }
 };
 
-Enemy.prototype.startPosition = function () {
+Enemy.prototype.toStartPosition = function () {
   this.x = randomMinMax(enemyMinStartX, enemyMaxStartX);
   this.y = randomMinMax(enemyMinStartY, enemyMaxStartY);
   this.speed = randomMinMax(enemyMinSpeed, enemyMaxSpeed);
@@ -41,6 +47,7 @@ const Player = function () {
   this.speed = playerSpeed;
   this.sprite = 'images/char-horn-girl.png';
   Resources.load(this.sprite);
+  this.toStartPosition();
 };
 
 Player.prototype.update = function (dx = 0, dy = 0) {
@@ -93,22 +100,19 @@ Player.prototype.handleInput = function (direction) {
 };
 
 Player.prototype.checkCollisions = function (enemies) {
-  // coordinates collision
-  const minX = 18;
-  const maxX = 84;
-  const minY = 85;
-  const maxY = 137;
   return enemies.some(
     function (enemy) {
       const dx = this.x - enemy.x;
       const dy = this.y - enemy.y;
-      const checkPointX = dx > 0 ? this.x + minX : this.x + maxX;
-      const checkPointY = dy > 0 ? this.y + minY : this.y + maxY;
+      const checkPointX =
+        dx > 0 ? this.x + collisionMinX : this.x + collisionMaxX;
+      const checkPointY =
+        dy > 0 ? this.y + collisionMinY : this.y + collisionMaxY;
       if (
-        checkPointX >= enemy.x + minX &&
-        checkPointX <= enemy.x + maxX &&
-        checkPointY >= enemy.y + minY &&
-        checkPointY <= enemy.y + maxY
+        checkPointX >= enemy.x + collisionMinX &&
+        checkPointX <= enemy.x + collisionMaxX &&
+        checkPointY >= enemy.y + collisionMinY &&
+        checkPointY <= enemy.y + collisionMaxY
       ) {
         return true;
       } else {
@@ -118,7 +122,7 @@ Player.prototype.checkCollisions = function (enemies) {
   );
 };
 
-Player.prototype.startPosition = function () {
+Player.prototype.toStartPosition = function () {
   this.x = playerStartX;
   this.y = playerStartY;
 };
@@ -131,19 +135,17 @@ Player.prototype.inWater = function () {
 function checkCollisions() {
   if (player.checkCollisions(allEnemies) || player.inWater()) {
     allEnemies.forEach(function (enemy) {
-      enemy.startPosition();
+      enemy.toStartPosition();
     });
-    player.startPosition();
+    player.toStartPosition();
   }
 }
 
 const allEnemies = [];
 for (let i = 0; i < numEnemies; i++) {
   allEnemies.push(new Enemy());
-  allEnemies[i].startPosition();
 }
 const player = new Player();
-player.startPosition();
 
 document.addEventListener('keydown', function (e) {
   let direction;
