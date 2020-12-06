@@ -25,7 +25,7 @@ let allEnemies =  Array.from(Array(ENEMY_CONF.quantity),
 (val, index) => new Enemy(ENEMY_CONF.startPosX,ENEMY_CONF.startPosY[index],getRandomNumber(MIN_SPEED,MAX_SPEED)));
 
 Enemy.prototype.update = function(dt) {
-    this.x > WIDTH ? this.x = ENEMY_CONF.startPosX : this.x = this.x + this.speed * dt;
+    this.x = this.x > WIDTH ? ENEMY_CONF.startPosX : this.x + this.speed * dt;
 };
 
 Enemy.prototype.render = function() {
@@ -47,14 +47,16 @@ Player.prototype.update = function() {
         alert('WINNER, you saved the fish!');
         player.setDefault();
     }
-   // handles collision with the Player
-   allEnemies.forEach(function(enemy) {
-    if ( Math.round(enemy.x / STEP) === Math.round(player.x / STEP) && 
-         Math.round(enemy.y / BLOCK_HEIGHT) === Math.round(player.y / BLOCK_HEIGHT) ) {
-            alert('you lose! =(');
-            player.setDefault();
-    }
-   });
+    this.checkCollision();
+};
+Player.prototype.checkCollision = function () {
+    allEnemies.forEach(function(enemy) {
+        if ( Math.round(enemy.x / STEP) === Math.round(player.x / STEP) && 
+             Math.round(enemy.y / BLOCK_HEIGHT) === Math.round(player.y / BLOCK_HEIGHT) ) {
+                alert('you lose! =(');
+                player.setDefault();
+        }
+    });
 };
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
