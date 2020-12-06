@@ -48,6 +48,7 @@ function checkMatchPosition(obj1, obj2) {
         (Math.round(obj1.y / stepY) === Math.round(obj2.y / stepY));
 }
 
+
 let Enemy = function () {
     this.setDefaultPosition();
     this.setSpeed();
@@ -75,16 +76,6 @@ Enemy.prototype.render = function () {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-Enemy.prototype.checkCollisions = function (player) {
-    if (checkMatchPosition(this, player)) {
-        player.updateScore(-5);
-        holder.innerHTML = `You lose! =(
-         Your score: ${player.score}`;
-        player.setDefaultPosition();
-        allTreasures.forEach(treasure => treasure.setDefaultPosition());
-    }
-};
-
 
 let Player = function () {
     this.setDefaultPosition();
@@ -107,8 +98,6 @@ Player.prototype.update = function () {
         holder.innerHTML = `Cool! You won!!!
         Your score is ${this.score}`;
     }
-    allEnemies.forEach(enemy => enemy.checkCollisions(player));
-    allTreasures.forEach(treasure => treasure.checkCollisions(player));
 };
 
 Player.prototype.isWin = function () {
@@ -131,6 +120,23 @@ Player.prototype.handleInput = function (direction) {
     }
 };
 
+Player.prototype.checkCollisions = function (item) {
+    let collision = false;
+    if (checkMatchPosition(this, item)) {
+        if (item instanceof Enemy) {
+            this.updateScore(-5);
+            holder.innerHTML = `You lose! =(
+         Your score: ${player.score}`;
+            this.setDefaultPosition();
+        } else {
+            this.updateScore(1);
+            holder.innerHTML = `Your current score is ${player.score}`;
+        }
+        collision = true;
+    }
+    return collision
+};
+
 
 let Treasure = function (imgSource) {
     this.sprite = imgSource;
@@ -140,14 +146,6 @@ let Treasure = function (imgSource) {
 Treasure.prototype.setDefaultPosition = function () {
     this.x = startX[getRandomNumber(0, 4)];
     this.y = startY[getRandomNumber(0, 3)];
-};
-
-Treasure.prototype.checkCollisions = function (player) {
-    if (checkMatchPosition(this, player)) {
-        player.updateScore(1);
-        holder.innerHTML = `Your current score is ${player.score}`;
-        this.setDefaultPosition();
-    }
 };
 
 Treasure.prototype.render = function () {
