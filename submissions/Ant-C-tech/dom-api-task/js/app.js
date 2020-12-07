@@ -66,8 +66,8 @@ function recalcContentBlock() {
     contentSection.style.minHeight = mapContainer.offsetHeight + 'px'
 }
 
-function showContent(param) {
-    const content = createContent(param)
+function showContent(id) {
+    const content = createContent(id)
     contentSection.appendChild(content)
     contentSection.classList.remove('content-hide')
 }
