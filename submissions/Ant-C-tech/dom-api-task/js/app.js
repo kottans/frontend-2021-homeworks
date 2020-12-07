@@ -88,7 +88,7 @@ function changeContent({ target }) {
         land.classList.remove('land-active')
     }
     map.removeEventListener('click', changeContent)
-    target.classList.toggle('land-active')
+    target.classList.add('land-active')
 
     //Change content
     country.removeEventListener('click', changeContent)
