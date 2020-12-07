@@ -150,8 +150,13 @@ audio {
     width: 100%;
   }
 
+  .content_img {
+    margin-top: 0;
+  }
+
   audio {
     left: 25%;
+    top: 70px;
   }
 }
 
@@ -184,8 +189,14 @@ audio {
     max-width: 578px;
     width: 100%;
   }
+
+  .content_img {
+    margin-top: 0;
+  }
+
   audio {
     left: 18%;
+    top: 70px;
   }
 }
 
@@ -218,7 +229,13 @@ audio {
     max-width: 378px;
     width: 100%;
   }
+
+  .content_img {
+    margin-top: 0;
+  }
+
   audio {
     left: 10%;
+    top: 70px;
   }
 }
