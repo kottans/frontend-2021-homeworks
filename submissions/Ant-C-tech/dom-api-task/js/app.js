@@ -118,9 +118,7 @@ function createContent(content) {
     title.textContent = content.title
     subtitle.textContent = content.subtitle
 
-    titleBlock.appendChild(title)
-    titleBlock.appendChild(subtitle)
-    fragment.appendChild(titleBlock)
+    titleBlock.append(title, subtitle)
 
     let textBlock = document.createElement('div')
     textBlock.classList.add('content__textBlock')
@@ -129,7 +127,6 @@ function createContent(content) {
         p.textContent = item
         textBlock.appendChild(p)
     }
-    fragment.appendChild(textBlock)
 
     let imgBlock = document.createElement('div')
     imgBlock.classList.add('content__imgBlock')
@@ -139,14 +136,13 @@ function createContent(content) {
         let img = document.createElement('img')
         img.setAttribute('src', `${item.src}`)
         img.setAttribute('alt', `${item.descript}`)
-        figure.appendChild(img)
         let figcaption = document.createElement('figcaption')
         figcaption.classList.add('imgBlock__caption')
         figcaption.textContent = item.descript
-        figure.appendChild(figcaption)
+        figure.append(img, figcaption)
         imgBlock.appendChild(figure)
     }
-    fragment.appendChild(imgBlock)
+    fragment.append(titleBlock, textBlock, imgBlock)
 
     return fragment
 }
