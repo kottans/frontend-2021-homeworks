@@ -62,6 +62,6 @@ const objects = [man, woman, dog, cat, catWoman];
 
 objects.forEach(el => {
    const objFriends = el.friends.join(', ')
-   const objKeys = [`${el.species}`, `<strong>${el.name}</strong>`, `${el.gender}`, `${el.legs}`, `${el.hands}`, `<em>${el.saying}</em>`, objFriends];
+   const objKeys = [el.species, `<strong>${el.name}</strong>`, el.gender, el.legs, el.hands, `<em>${el.saying}</em>`, objFriends];
    print(objKeys.join('; '), 'div')
 });
