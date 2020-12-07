@@ -1,11 +1,15 @@
 const dx = 101;
 const dy = 80;
-const collision_offset = 60;
+const icon_height = 60;
 const player_start_x = dx * 2;
 const player_start_y = dy * 5;
 
+//enemy speed
+const max_speed_value = 350;
+const min_speed_value = 100;
+
 function calculateRandomSpeed() {
-    return Math.random() * (300 - 50) + 50;
+    return Math.random() * (max_speed_value - min_speed_value) + min_speed_value;
 }
 
 class Character {
@@ -24,7 +28,7 @@ class Character {
 
 class Enemy extends Character {
 
-    constructor(x, y, player, speed, image = 'images/enemy-bug.png') {
+    constructor(x, y, player, image = 'images/enemy-bug.png') {
         super(x, y, image);
         this.player = player;
         this.speed = calculateRandomSpeed();
@@ -40,10 +44,10 @@ class Enemy extends Character {
     }
 
     findCollision() {
-        if (this.x > this.player.x - collision_offset &&
-            this.x < this.player.x + collision_offset &&
-            this.y > this.player.y - collision_offset &&
-            this.y < this.player.y + collision_offset) {
+        if (this.x > this.player.x - icon_height &&
+            this.x < this.player.x + icon_height &&
+            this.y > this.player.y - icon_height &&
+            this.y < this.player.y + icon_height) {
             window.requestAnimationFrame(() => {
                 if (confirm('Unfortunately, you lose!\nRestart the game')) {
                     this.player.x = player_start_x;
@@ -89,7 +93,7 @@ class Enemy extends Character {
                 }
                 break;
             case 'down':
-                if (this.y + dy * 2 < ctx.canvas.height - 46) {
+                if (this.y + dy * 2 < ctx.canvas.height - icon_height) {
                     this.y += dy;
                 }
                 break;
@@ -98,7 +102,8 @@ class Enemy extends Character {
 }
 
 const player = new Player();
-const allEnemies = Array.from(Array(3).keys()).map(y => new Enemy(0, (y * dy) + 60, player));
+const arrayOfRows = [0,1,2];
+const allEnemies = arrayOfRows.map(y => new Enemy(0, (y * dy) + icon_height, player));
 
 document.addEventListener('keyup', function (e) {
     const allowedKeys = {
