@@ -1,3 +1,5 @@
+import { Events } from './events.js'
+
 export class CardsComponent {
   constructor(events, container) {
     this.container = container;
@@ -9,7 +11,7 @@ export class CardsComponent {
 
   subscribe() {
     this.events.subscribe(({ type, data }) => {
-      if (type === "pokemons") {
+      if (type === Events.pokemons) {
         this.pokemons = data;
         this.render();
       }

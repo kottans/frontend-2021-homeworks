@@ -4,16 +4,21 @@ export class Api {
   constructor() { }
 
   async getPokemons() {
-    const response = await fetch(this.aliases.list);
-    const { results } = await response.json();
+    try {
+      const response = await fetch(this.aliases.list);
+      const { results } = await response.json();
 
-    const streamPokemons = await Promise.all(
-      results.map((pokeApi) => fetch(pokeApi.url))
-    );
-    const pokemons = await Promise.all(
-      streamPokemons.map((streamPokemon) => streamPokemon.json())
-    );
+      const streamPokemons = await Promise.all(
+        results.map((pokeApi) => fetch(pokeApi.url))
+      );
+      const pokemons = await Promise.all(
+        streamPokemons.map((streamPokemon) => streamPokemon.json())
+      );
 
-    return pokemons;
+      return pokemons;
+    }
+    catch (error) {
+      return error;
+    }
   }
 }

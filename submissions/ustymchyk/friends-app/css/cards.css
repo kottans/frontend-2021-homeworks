@@ -1,15 +1,27 @@
 .cards {
+  --cols: 3;
   grid-area: cards;
 
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
   gap: 20px;
 
-  max-width: 1400px;
+  max-width: 1500px;
   margin: 0 auto;
   padding: 0 20px 20px 20px;
 
   list-style: none;
+}
+
+@media (max-width: 1560px) {
+  .cards {
+    --cols: 2;
+  }
+}
+@media (max-width: 1200px) {
+  .cards {
+    --cols: 1;
+  }
 }
 
 .card {
@@ -41,5 +53,5 @@
 }
 
 .card img {
-  max-width: 100%;
+  max-width: 80%;
 }

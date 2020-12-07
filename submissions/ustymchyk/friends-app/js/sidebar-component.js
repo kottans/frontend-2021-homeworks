@@ -1,3 +1,4 @@
+import { Events } from './events.js';
 export class SidebarComponent {
   SORT_DIRECTION_TOP = "top";
   SORT_DIRECTION_BOTTOM = "bottom";
@@ -28,7 +29,7 @@ export class SidebarComponent {
 
   subscribe() {
     this.events.subscribe(({ type, data }) => {
-      if (type === "api") {
+      if (type === Events.api) {
         this.setPokemons(data);
         this.sendPokemons();
 
