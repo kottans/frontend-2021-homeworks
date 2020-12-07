@@ -248,16 +248,23 @@ img {
 
 @media screen and (min-width: 860px) {
     .card-item {
-        flex-flow: row;
-        align-items: flex-start;
+        display: block;
+        padding: 2%;
+    }
+
+    .card-item::after {
+        content: '';
+        display: block;
+        clear: both;
     }
 
     .card-image {
-        order: 1;
+        float: right;
+        margin-left: 25px;
     }
 
     .card-description {
         padding: 0;
-        padding-right: 10px;
+        padding-right: 20px;
     }
 }
