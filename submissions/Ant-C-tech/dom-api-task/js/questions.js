@@ -1,6 +1,6 @@
 'use strict'
 
-const randomQuestions = [
+const questions = [
     'What do you know about this district?',
     'Do you know something about area?',
     'How many people live here?',
@@ -13,4 +13,4 @@ const randomQuestions = [
     'This is a wonderful place, do you want to spend here you vacation?'
 ]
 
-export default randomQuestions
+export default questions

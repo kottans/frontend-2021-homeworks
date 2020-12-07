@@ -1,6 +1,6 @@
 'use strict'
 
-import randomQuestions from './questions.js'
+import questions from './questions.js'
 import content from './content.js'
 
 const mapContainer = document.querySelector('.mapContainer')
@@ -32,7 +32,7 @@ function addListeners() {
     for (const land of mapAreas) {
         //Add hint on mouseenter
         land.addEventListener('mouseenter', function (event) {
-            hintSection.innerHTML = `${randomQuestions[getRandomIntInclusive(0, randomQuestions.length - 1)]}`
+            hintSection.innerHTML = `${questions[getRandomIntInclusive(0, questions.length - 1)]}`
         })
         //Remove hint on mouseleave
         land.addEventListener('mouseleave', function (event) {
