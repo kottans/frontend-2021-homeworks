@@ -64,7 +64,7 @@ const message = ({
    friends,
    saying
 }) => {
-   return 'I am a ' + `${species}` + '. My name is ' + `${name}` + '. I am ' + `${age}` + ' years old. I have ' + `${legs}` + ' legs and ' + `${hands}` + ' hands. My friends are: ' + `${friends}` + '. I say: ' + `${saying}`;
+   return `I am a ${species}. My name is ${name}. I am ${age} years old. I have ${legs} legs and ${hands} hands. My friends are: ${friends}. I say: ${saying}`;
 }
 inhabitants.forEach(elem => {
    print(message(elem), 'p');
