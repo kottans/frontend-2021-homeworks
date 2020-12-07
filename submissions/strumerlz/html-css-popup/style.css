@@ -5,14 +5,13 @@
 }
 
 * {
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
-html{
+html {
     font-family: 'Poppins', sans-serif;
     color: var(--basic-color);
-       
 }
 
 .grid-container {
@@ -20,12 +19,12 @@ html{
     display: grid;
     grid-template-rows: 3rem 1fr 3rem;
 }
+
 header {
     display: flex;
     border-bottom: 1px solid var(--border-color);
     justify-content: space-between;
     position: relative;
-
 }
 
 h1 {
@@ -34,18 +33,18 @@ h1 {
     line-height: 3rem;
 }
 
-.navbar, 
+.navbar,
 .navbar-list,
 .nav-item,
-.nav-item > a {
-    height: 100%; 
+.nav-item>a {
+    height: 100%;
     display: flex;
     align-items: center;
-    color: inherit; 
+    color: inherit;
 }
 
 .nav-item {
-    border-left : 1px solid var(--border-color);
+    border-left: 1px solid var(--border-color);
     list-style-type: none;
 }
 
@@ -55,55 +54,49 @@ h1 {
     cursor: pointer;
 }
 
-.nav-item > a {
+.nav-item>a {
     text-decoration: none;
     padding: 0 10px;
     color: inherit;
 }
 
-.nav-item > a:focus {
+.nav-item>a:focus {
     outline: none;
-    }
-
-.nav-item > a:visited {
-    color: inherit;
-
 }
- 
+
+.nav-item>a:visited {
+    color: inherit;
+}
+
 .menu-icon {
     vertical-align: middle;
     height: 1.2rem;
 }
 
 /* Submenu button */
-
-#menu-hidden-checkbox:checked ~ .submenu-hidden {
+.menu-hidden-checkbox:checked~.submenu-hidden {
     display: block;
-    
 }
 
 .hidden-checkbox {
-   appearance: none;
-   position: absolute;
-   
+    appearance: none;
+    position: absolute;
 }
 
 .submenu-label {
-    height: 100%; 
+    height: 100%;
     display: flex;
-    align-items: center; 
+    align-items: center;
     padding: 0 10px;
 }
 
-
 /* Submenu */
-
 .submenu-hidden {
     display: none;
     position: absolute;
     top: calc(3rem + 10px);
     right: 10px;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
     overflow-y: auto;
     overflow-x: hidden;
     height: 17rem;
@@ -127,22 +120,20 @@ h1 {
     font-size: 0.85rem;
 }
 
-.submenu-item > a {
-    
+.submenu-item>a {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: 0;
     padding: 0.25rem 0.5rem;
     text-decoration: none;
-    outline: none;  
+    outline: none;
     color: inherit;
 }
 
-.submenu-item > a:visited {
+.submenu-item>a:visited {
     color: inherit;
 }
-
 
 .submenu-icon {
     height: 2.5rem;
@@ -156,28 +147,23 @@ h1 {
 
 .submenu-more-hidden {
     display: none;
-    
 }
 
 /* Scrollbar styling */
-
-.submenu-hidden::-webkit-scrollbar
-{
-	width: 4px;
-	background-color: var(--hover-focus-background);
+.submenu-hidden::-webkit-scrollbar {
+    width: 4px;
+    background-color: var(--hover-focus-background);
 }
 
-.submenu-hidden::-webkit-scrollbar-thumb
-{
-	background-color: var(--basic-color);
+.submenu-hidden::-webkit-scrollbar-thumb {
+    background-color: var(--basic-color);
 }
 
 /* "More" button */
-
 .submenu-more-label,
 .kottans-link {
     margin: 0.25rem;
-    padding:0.25rem;
+    padding: 0.25rem;
     display: block;
     border: 1px solid var(--border-color);
     text-align: center;
@@ -193,33 +179,30 @@ h1 {
 }
 
 .submenu-more-label:hover,
-.kottans-link:hover, 
+.kottans-link:hover,
 .kottans-link:focus,
-#more-hidden-checkbox:focus ~ .submenu-more-label {
+.more-hidden-checkbox:focus~.submenu-more-label {
     background-color: var(--hover-focus-background);
     outline: none;
     cursor: pointer;
-
 }
 
-#more-hidden-checkbox:checked ~ .submenu-more-hidden,
-#more-hidden-checkbox:checked ~ .horizontal-rule {
+.more-hidden-checkbox:checked~.submenu-more-hidden,
+.more-hidden-checkbox:checked~.horizontal-rule {
     display: block;
 }
 
-#more-hidden-checkbox:checked ~ .submenu-more-label {
+.more-hidden-checkbox:checked~.submenu-more-label {
     display: none;
 }
 
 /* Footer */
- footer {
-     text-align: end;
-     padding-right: 10px;
-     line-height: 3rem;
-     
- }
- footer a {
-    color: inherit;  
- }
- 
- 
+footer {
+    text-align: end;
+    padding-right: 10px;
+    line-height: 3rem;
+}
+
+footer a {
+    color: inherit;
+}
