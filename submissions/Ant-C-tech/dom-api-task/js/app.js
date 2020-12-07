@@ -76,10 +76,10 @@ function hideContent() {
     contentSection.classList.add('content-hide')
 }
 
-function changeContent(event) {
+function changeContent({target}) {
     //Remove all clickListeners for animation time - solution for problem with fast change content
 
-    if (event.target.classList.contains('land-active')) {
+    if (target.classList.contains('land-active')) {
         return false
     } else {
         //Map visualization
@@ -87,14 +87,14 @@ function changeContent(event) {
             land.classList.remove('land-active')
         }
         map.removeEventListener('click', changeContent)
-        event.target.classList.toggle('land-active')
+        target.classList.toggle('land-active')
 
         //Change content
         country.removeEventListener('click', changeContent)
         hideContent()
         contentSection.addEventListener('transitionend', function () {
             contentSection.innerHTML = ''
-            showContent(content[event.target.id])
+            showContent(content[target.id])
             contentSection.addEventListener('transitionend', function () {
                 map.addEventListener('click', changeContent)
                 country.addEventListener('click', changeContent)
