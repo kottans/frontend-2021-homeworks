@@ -45,8 +45,9 @@ const inhabits = [
 
 const returnString = (arr) => {
 	return arr.map((person) => {
-		 return Object.values(person).map(info => info).join("; ");
+		 return Object.values(person).join("; ");
 	}).join("\n");
 }
 
 print(returnString(inhabits));
+console.log()
