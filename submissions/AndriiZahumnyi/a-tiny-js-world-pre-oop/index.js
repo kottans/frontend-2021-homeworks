@@ -8,6 +8,8 @@
 // ======== OBJECTS DEFINITIONS ========
 // Define your objects here
 
+
+
 const man = {
    species: 'human',
    name: 'John',
@@ -48,14 +50,15 @@ const cat = {
    friendlyTo: ['Tereza']
 };
 
-function printObject(object) {
-   print(Object.values(object).join('; '));
-}
+const world = [man, woman, dog, cat];
 
-printObject(man);
-printObject(woman);
-printObject(dog);
-printObject(cat);
+printArrayOfObjects = arr => {
+   arr.forEach(obj =>
+      print(obj.species + '; ' + obj.name + '; ' + obj.gender + '; ' +
+         obj.legs + '; ' + obj.hands + '; ' + obj.saying + '; ' + obj.friendlyTo));
+};
+
+printArrayOfObjects(world);
 
 // ======== OUTPUT ========
 /* Use print(message) for output.
@@ -67,8 +70,7 @@ printObject(cat);
    */
 
 
-
-/* Print examples: 
+/* Print examples:
    print('ABC');
    print('<strong>ABC</strong>');
    print('<strong>ABC</strong>', 'div');
