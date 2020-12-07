@@ -84,7 +84,7 @@ header{
   padding: 30px 15px;
   margin: 0 15px;
   overflow-x: hidden;
-    
+
   /* Prohibit select */
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -127,12 +127,14 @@ transform: scale(1.35) ;
   cursor: pointer;
 }
 
-.land-active {
-  fill: #00b0ff;
-}
-
 .land:hover {
   fill: #ffeb3b;
+}
+
+.land-active,
+.land-active:hover {
+  fill: #00b0ff;
+  cursor: auto;
 }
 
 
@@ -246,11 +248,11 @@ footer{
   .titleBlock__subtitle {
     font-size: 22px;
   }
-  
+
   .mapContainer__title {
     font-size: 32px;
   }
-  
+
   .content__title {
     font-size: 32px;
   }
@@ -264,7 +266,7 @@ footer{
   .flexWrapper {
     flex-wrap: wrap;
   }
-  
+
 .mapContainer {
   width: 100%;
   border-right: none;
@@ -292,26 +294,26 @@ flex-wrap: wrap;
     margin-left: 0;
     margin-right: 0;
   }
-  
+
   .content{
     padding-left: 15px;
     padding-right: 15px;
   }
-  
+
   .content__textBlock p {
     text-indent: 0;
     text-align: center;
     font-size: 16px;
   }
-  
+
   .content__imgBlock {
  flex-wrap: wrap;
   }
-  
+
   .imgBlock__item {
     width: 100%;
   }
-  
+
   footer {
     align-items: center;
   }
