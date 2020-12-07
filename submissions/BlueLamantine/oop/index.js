@@ -120,3 +120,5 @@
  const man = new Man({ name: 'Jack', friends: ['Hachiko', 'Eva'] });
  
  [man, woman, cat, dog, catWoman].map(el => print(el.getInfo(), 'p'));
+
+ 
