@@ -76,31 +76,32 @@ function hideContent() {
     contentSection.classList.add('content-hide')
 }
 
-function changeContent({target}) {
+function changeContent({ target }) {
     //Remove all clickListeners for animation time - solution for problem with fast change content
 
     if (target.classList.contains('land-active')) {
-        return false
-    } else {
-        //Map visualization
-        for (const land of mapAreas) {
-            land.classList.remove('land-active')
-        }
-        map.removeEventListener('click', changeContent)
-        target.classList.toggle('land-active')
-
-        //Change content
-        country.removeEventListener('click', changeContent)
-        hideContent()
-        contentSection.addEventListener('transitionend', function () {
-            contentSection.innerHTML = ''
-            showContent(content[target.id])
-            contentSection.addEventListener('transitionend', function () {
-                map.addEventListener('click', changeContent)
-                country.addEventListener('click', changeContent)
-            }, { once: true })
-        }, { once: true })
+        return
     }
+
+    //Map visualization
+    for (const land of mapAreas) {
+        land.classList.remove('land-active')
+    }
+    map.removeEventListener('click', changeContent)
+    target.classList.toggle('land-active')
+
+    //Change content
+    country.removeEventListener('click', changeContent)
+    hideContent()
+    contentSection.addEventListener('transitionend', function () {
+        contentSection.innerHTML = ''
+        showContent(content[target.id])
+        contentSection.addEventListener('transitionend', function () {
+            map.addEventListener('click', changeContent)
+            country.addEventListener('click', changeContent)
+        }, { once: true })
+    }, { once: true })
+
 }
 
 function createContent(content) {
