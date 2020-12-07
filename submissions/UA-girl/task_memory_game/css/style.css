@@ -1,0 +1,178 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #f3f3f3;
+    font-family: Arial, sans-serif;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.header {
+    width: 100%;
+    background-color: #292929;;
+    background-image: url(../img/apple-green.svg), url(../img/cherry.svg);
+    background-size: 50px auto;
+    background-repeat: no-repeat;
+    background-position: 2% 3%, 99% 94%;
+}
+
+.section-game {
+    margin-bottom: 25px;
+}
+
+.title {
+    text-align: center;
+    font-weight: bold;
+    color: white;
+    font-size: 55px;
+    padding: 45px 0;
+}
+
+.container {
+    box-sizing: border-box;
+}
+
+.container-game {
+    width: 100%;
+    height: 248px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    align-content: flex-start;
+    background-color: white;
+}
+
+
+.card {
+    flex-shrink: 0;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.6);
+    position: relative;
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    transform-style: preserve-3d;
+    transform: rotateY(180deg);
+    width: 60px;
+    height: 60px;
+    margin: 10px;
+}
+
+.toggled {
+    transform: rotateY(0deg);
+}
+
+.back {
+    background-image: url("../img/fruit-main.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    backface-visibility: hidden;
+    transform: rotateY(180deg);
+}
+
+.front {
+    background-color: white;
+    position: absolute;
+    left: 0;
+    right: 0;
+    transition: 1s ease-in;
+    backface-visibility: hidden;
+    transform: rotateY(0deg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card, .front, .back {
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+
+.front, .back {
+    width: inherit;
+    height: inherit;
+}
+
+.card-image {
+    width: 60%;
+}
+
+.hidden {
+    opacity: 0;
+}
+
+@media screen and (min-width: 340px) {
+    .container-game {
+        width: 95%;
+        height: 440px;
+        margin: 0 auto;
+        box-shadow: 0 1px 30px rgba(0, 0, 0, 0.7);
+    }
+
+    .card {
+        width: 80px;
+        height: 80px;
+        margin: 15px;
+    }
+}
+
+@media screen and (min-width: 420px) {
+    .container-game {
+        height: 520px;
+    }
+
+    .card {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+@media screen and (min-width: 540px) {
+    .header {
+        background-size: 12% auto;
+    }
+    .container-game {
+        width: 95%;
+        height: 393px;
+    }
+}
+
+@media screen and (min-width: 680px) {
+    .header {
+        background-position: 3% 43%, 97% 49%;
+    }
+
+    .container-game {
+        height: 450px;
+    }
+
+    .card {
+        width: 120px;
+        height: 120px;
+    }
+}
+
+@media screen and (min-width: 789px) {
+    .header {
+        background-size: 8% auto;
+    }
+
+    .container-game {
+        width: 760px;
+        height: 545px;
+    }
+
+    .card {
+        width: 150px;
+        height: 150px;
+    }
+}
