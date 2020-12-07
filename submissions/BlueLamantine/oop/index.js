@@ -95,9 +95,9 @@
      Object.assign(
        this,
        new Cat({
-         name: 'Mary',
-         gender: 'female',
-         friends: this.friends,
+        name: this.name,
+        gender: this.gender,
+        friends: this.friends,
        })
      );
      this.species = 'cat-woman';
@@ -121,4 +121,3 @@
  
  [man, woman, cat, dog, catWoman].map(el => print(el.getInfo(), 'p'));
 
- 
