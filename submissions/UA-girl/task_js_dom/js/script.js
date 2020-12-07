@@ -3,6 +3,10 @@ const CARD_DESCRIPTION_CLASS_NAME = 'card-description';
 const CARD_TITLE_CLASS_NAME = 'card-header';
 const CARD_TEXT_CLASS_NAME = 'card-text';
 const CARD_LINK_CLASS_NAME = 'link-wiki';
+const MENU_LIST_NAME = 'catalog-list';
+const MENU_ITEM_NAME = 'catalog-item';
+const MENU_LINK_NAME = 'catalog-link';
+const KEY_CODE_SPACE = 32;
 const catalogItemsList = [
     {
         id: 0,
@@ -94,69 +98,52 @@ const catalogItemsList = [
         }
     },
 ];
-
-const menu = document.querySelector('.catalog-list');
-const menuItems = document.querySelectorAll('.catalog-link');
+const aside = document.querySelector('.aside');
 const card = document.querySelector('.card');
 
-// menuItems.forEach(item => item.addEventListener('click', toggleCatalog));
-menu.addEventListener('click', toggleCatalog);
-menu.addEventListener('keyup', function (event) {
-    if (event.keyCode === 32) {
-        toggleCatalog(event);
-    }
-});
-
-// Animate appearance of the card
-function animate(item) {
-    let opacity = +item.style.opacity;
-    if (opacity < 1) {
-        opacity += 0.05;
-        item.style.opacity = opacity.toString();
-        setTimeout(animate, 50, item);
-    }
-}
+const menu = createMenu();
+createCards();
 
 
 // Fill card
-function createPattern(item, node) {
+function createCardPattern({title, text, link, image: {alt, url}}, node) {
     // Update image
     const img = node.querySelector(`.${IMG_CLASS_NAME}`);
-    img.setAttribute('alt', item.image.alt);
-    img.setAttribute('src', item.image.url);
+    img.setAttribute('alt', alt);
+    img.setAttribute('src', url);
     // Update data
     const caption = node.querySelector(`.${CARD_DESCRIPTION_CLASS_NAME}`);
-    caption.querySelector(`.${CARD_TITLE_CLASS_NAME}`).textContent = item.title;
-    caption.querySelector(`.${CARD_TEXT_CLASS_NAME}`).textContent = item.text;
-    caption.querySelector(`.${CARD_LINK_CLASS_NAME}`).setAttribute('href', item.link);
-    const cardItem = card.querySelector('.card-item');
-    cardItem.style.opacity = 0;
-    animate(cardItem);
+    caption.querySelector(`.${CARD_TITLE_CLASS_NAME}`).textContent = title;
+    caption.querySelector(`.${CARD_TEXT_CLASS_NAME}`).textContent = text;
+    caption.querySelector(`.${CARD_LINK_CLASS_NAME}`).setAttribute('href', link);
+    card.animate([
+        {opacity: 0},
+        {opacity: 1}
+    ], {
+        duration: 1000,
+        fill: 'forwards',
+        easing: 'ease-in'
+    })
 }
 
-
 // Execute on click of menu item
-function toggleCatalog(event) {
+function toggleCatDescriptionCard(event) {
     // Prevent link's behaviour
     event.preventDefault();
     // Delete active class
-    menuItems.forEach(item => item.classList.remove('catalog-link__active'));
+    menu.querySelector('.catalog-link__active').classList.remove('catalog-link__active');
     // Get current item of the menu
-    const menuItem = event.target;
+    const menuItem = event.target.closest('a.catalog-link');
     // Add active class
     menuItem.classList.add('catalog-link__active');
     // Get catalog item for current menu item
-    const index = Array.from(menuItems).indexOf(menuItem);
-    let catalogItem = catalogItemsList.filter(item => item.id === index)[0];
+    let catalogItem = catalogItemsList.filter(item => item.id === +menuItem.dataset.id)[0];
     // Update content
-    createPattern(catalogItem, card);
+    createCardPattern(catalogItem, card);
 }
 
 
-// Create initial content
-function createContent() {
-    // First item of the menu is active by default
-    menuItems[0].classList.add('catalog-link__active');
+function createCards() {
     const catalogItem = catalogItemsList[0];
     // Create elements for content
     const figure = document.createElement('figure');
@@ -179,8 +166,34 @@ function createContent() {
     [image, figcaption].forEach(item => figure.appendChild(item));
     card.appendChild(figure);
     // Fill content
-    createPattern(catalogItem, card);
+    createCardPattern(catalogItem, card);
 }
 
 
-window.addEventListener('load', createContent);
+// Create aside menu
+function createMenu() {
+    const menuList = document.createElement('ul');
+    menuList.classList.add(MENU_LIST_NAME);
+    for (let item of catalogItemsList) {
+        let menuItem = document.createElement('li');
+        let menuLink = document.createElement('a');
+        menuItem.classList.add(MENU_ITEM_NAME);
+        menuLink.classList.add(MENU_LINK_NAME);
+        menuLink.setAttribute('href', '#');
+        menuLink.setAttribute('data-id', item.id);
+        menuLink.textContent = item.title;
+        menuItem.appendChild(menuLink);
+        menuList.appendChild(menuItem);
+    }
+    aside.appendChild(menuList);
+    menuList.firstElementChild.firstElementChild.classList.add('catalog-link__active');
+    return menuList
+}
+
+menu.addEventListener('click', toggleCatDescriptionCard);
+menu.addEventListener('keyup', function (event) {
+    // if key was space
+    if (event.keyCode === KEY_CODE_SPACE) {
+        toggleCatDescriptionCard(event);
+    }
+});
