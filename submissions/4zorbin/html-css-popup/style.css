@@ -1,0 +1,183 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  list-style-type: none;
+  color: #838383;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-image: url(img/dots.png);
+}
+
+.nav {
+  height: 50px;
+  width: 300px;
+  position: fixed;
+  right: 10px;
+  top: 10px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+img {
+  max-width: 50px;
+  max-height: 40px;
+}
+
+.bell {
+  max-width: 25px;
+  max-height: 25px;
+}
+
+.mypage {
+  border-radius: 50%;
+  border: 2px solid white;
+}
+
+p {
+  text-align: center;
+}
+
+.nav--button {
+  display: flex;
+  align-items: center;
+  padding: auto;
+  margin: auto;
+  max-width: 100px;
+  max-height: 30px;
+  font-size: 18px;
+}
+
+.navBox {
+  display: none;
+  position: fixed;
+  margin: 0;
+  padding: 0;
+  right: 50px;
+  top: 70px;
+  width: 310px;
+  height: 440px;
+  box-shadow: 0 0 15px rgba(95, 95, 95, 0.2);
+}
+
+.uList {
+  display: grid;
+  position: relative;
+  margin: auto;
+  padding: auto;
+  height: 100%;
+  width: 100%;
+  grid-template-rows: 100px 100px 100px 100px 38px;
+  grid-template-columns: repeat(3, 100px);
+  grid-auto-rows: 100px;
+  grid-auto-columns: 100px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  grid-auto-flow: row;
+  justify-content: space-between;
+}
+
+.more {
+  margin: auto;
+  display: none;
+}
+
+#toggle {
+  position: absolute;
+  -webkit-appearance: none;
+  height: 24px;
+  width: 24px;
+}
+
+#toggle1 {
+  position: absolute;
+  -webkit-appearance: none;
+  margin: 5px 2px;
+  height: 30px;
+  width: 100%;
+}
+
+#toggle:checked ~ .navBox {
+  display: block;
+}
+
+#toggle1:checked ~ .more {
+  display: grid;
+  margin: auto;
+  position: absolute;
+  grid-template-rows: repeat (4, 100px);
+  grid-template-columns: repeat(3, 100px);
+  grid-auto-rows: 100px;
+  grid-auto-columns: 100px;
+  justify-content: space-around;
+  align-items: auto;
+}
+
+.Links {
+  display: block;
+  align-items: center;
+  margin: auto;
+  padding: 5px;
+  max-width: 100px;
+  text-align: center;
+  font-size: 16px;
+}
+
+.check-button:hover,
+.nav--button:hover,
+.Links:hover {
+  transition-duration: 0.2s;
+  opacity: 0.7;
+}
+
+.check-button:focus,
+.nav--button:focus,
+a:focus,
+input:focus,
+#toggle:focus {
+  outline: 1px solid #414141;
+}
+
+.check-button {
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  z-index: 1;
+}
+
+.Btn {
+  grid-column-start: 1;
+  grid-column-end: 4;
+  height: 100%;
+  width: 100%;
+}
+
+.more-button {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  margin: auto;
+  padding: 10px;
+  border-radius: 50% 50% 0% 100% / 53% 50% 50% 47%;
+  display: block;
+  text-align: center;
+  font-size: 18px;
+  background-color: #c4c4c4;
+  outline: none;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.more-button:hover {
+  opacity: 0.5;
+}
+
+.more-button:focus {
+  outline: 1;
+  opacity: 0.4;
+  color: rgb(150, 150, 150);
+}
