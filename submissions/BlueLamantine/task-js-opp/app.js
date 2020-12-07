@@ -32,10 +32,11 @@ Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-let Player = function() {
+let Player = function(playerEnemies) {
     this.x = PLAYER_CONF.startPosX;
     this.y = PLAYER_CONF.startPosY;
     this.sprite = 'images/fish.gif';
+    this.enemies = playerEnemies;
 };
 Player.prototype.setDefault = function () {
     this.x = PLAYER_CONF.startPosX;
@@ -45,19 +46,21 @@ Player.prototype.setDefault = function () {
 Player.prototype.update = function() {
     if (this.y < 0) {
         alert('WINNER, you saved the fish!');
-        player.setDefault();
+        this.setDefault();
     }
     this.checkCollision();
 };
+
 Player.prototype.checkCollision = function () {
-    allEnemies.forEach(function(enemy) {
-        if ( Math.round(enemy.x / STEP) === Math.round(player.x / STEP) && 
-             Math.round(enemy.y / BLOCK_HEIGHT) === Math.round(player.y / BLOCK_HEIGHT) ) {
+    this.enemies.forEach(function(enemy) {
+        if ( Math.round(enemy.x / STEP) === Math.round(this.x / STEP) && 
+            Math.round(enemy.y / BLOCK_HEIGHT) === Math.round(this.y / BLOCK_HEIGHT) ) {
                 alert('you lose! =(');
-                player.setDefault();
-        }
-    });
+                this.setDefault();
+            }
+        }, this);  
 };
+
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
@@ -83,7 +86,7 @@ Player.prototype.handleInput = function(key) {
     return (move[key] || move['default'])();
 };
  
-let player = new Player();
+let player = new Player(allEnemies);
 
 function getRandomNumber(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
