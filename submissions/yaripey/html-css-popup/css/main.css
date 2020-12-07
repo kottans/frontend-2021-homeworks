@@ -241,6 +241,19 @@ nav {
 
 .final {
   width: 100%;
-  line-height: normal;
+  /* line-height: -30px;     */
   height: 30px;
+}
+
+.final:hover {
+  background: rgb(121, 121, 121);
+  color: white;
+  transition: 0.2s ease;
+}
+
+.final:focus {
+  background: rgb(121, 121, 121);
+  color: white;
+  transition: 0.2s ease;
+  outline: none;
 }
