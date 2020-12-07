@@ -15,7 +15,7 @@ function rollCard() {
         //first clicked Card!
         isRolledCard = true;
         firstCard = this;
-    } else {;
+    } else {
          //second clicked Card!
         isRolledCard = false;
         secondCard = this;
@@ -28,24 +28,20 @@ function checkCardMatch() {
     if (firstCard.dataset.name === secondCard.dataset.name) {
         //Cards matched!
         freezeCards();
-        checkWinCondition();
-        
+        checkWinCondition();  
     } else {
         //Cards didnt match!
         cancelRollCards();
     }
 }
 
-function freezeCards() {
-    setTimeout (function() {
-        firstCard.classList.add('clear');
-        secondCard.classList.add('clear');
+function freezeCards() {    
+        firstCard.classList.add('clear'); 
         firstCard.removeEventListener('click', rollCard);
+        secondCard.classList.add('clear');
         secondCard.removeEventListener('click', rollCard);
-        winCondition++;
+        winCondition++;  
         resetCards();
-    }, 700)
-    
 }
 
 function cancelRollCards() {
@@ -54,7 +50,7 @@ function cancelRollCards() {
         firstCard.classList.remove('roll');
         secondCard.classList.remove('roll');
         resetCards();
-        }, 400);
+        }, 400);   
 }
 
 function resetCards() {
