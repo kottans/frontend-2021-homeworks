@@ -1,87 +1,97 @@
 class Inhabitant {
-  constructor({ species, name, gender, legs, hands, say }) {
-    this.species = species;
-    this.name = name;
-    this.gender = gender;
-    this.legs = legs;
-    this.hands = hands;
-    this.say = say;
-    this.friends = [];
+  constructor({ species, name, say }) {
+     this.species = species;
+     this.name = name;
+     this.say = say;
+     this.friends = new Set();
   }
 
-  makeFriends(...args) {
-    const { friends } = this;
-
-    args.forEach((item) => {
-      if (item instanceof Inhabitant && item != this && !friends.includes(item.name)) {
-        friends.push(item.name);
-      }
-    });
+  makeFriends(...applicants) {
+     applicants.filter(applicant => applicant instanceof Inhabitant)
+        .filter(applicant => applicant != this)
+        .forEach(applicant => this.friends.add(applicant));
   }
 
   toString() {
-    const { name, species, gender, legs, hands, say, friends } = this;
-
-    const aboutFriends = (friends.length) ? `My friends: ${friends.join(', ')}.` : '';
-
-    return `${say} About me: ${species}, ${gender}, ${name}, ${hands || 'no'} hands, ${legs} legs. ${aboutFriends}`;
+     const { name, species, friends } = this;
+     return (
+        `Data: ${species}, ${name}, ${friends.size || 'no'} friend` +
+        `${friends.size == 1 ? '' : 's'}`
+     )
   }
 }
 
-class Pet extends Inhabitant {
-  constructor({ species, name, gender, say }) {
-    super({ species, name, gender, legs: 4, hands: 0, say });
+class Animal extends Inhabitant {
+  constructor({ species, name, gender, say, paws = 4 }) {
+     super({ species, name, say });
+     this.paws = paws;
+     this.gender = gender;
+  }
+
+  toString() {
+     return `<b>${this.say}</b> \n${super.toString()}, ${this.paws} paws.`
   }
 }
 
-class Dog extends Pet {
-  constructor({ name, gender }) {
-    super({ species: 'dog', name, gender, say: 'WOOF-WOOF!!!' });
+class Dog extends Animal {
+  constructor({ name, gender, paws }) {
+     super({ species: 'dog', name, gender, say: 'WOOF-WOOF!!!', paws });
   }
 }
 
-class Cat extends Pet {
-  constructor({ name, gender }) {
-    super({ species: 'cat', name, gender, say: 'Meow...' });
-    this.friends = [this.name];
+class Cat extends Animal {
+  constructor({ name, gender, paws }) {
+     super({ species: 'cat', name, gender, say: 'Meow...', paws });
+     this.friends.add(this);
+  }
+
+  bite(victim) {
+     victim.species += this.species;
+     victim.say = this.say;
   }
 }
 
 class Human extends Inhabitant {
-  constructor({ name, gender, say }) {
-    super({ species: 'human', name, gender, legs: 2, hands: 2, say });
+  constructor({ species = "human", name, say, gender, hands = 2, legs = 2 }) {
+     super({ species, name, say });
+     this.legs = legs;
+     this.hands = hands;
+     this.gender = gender;
+  }
+
+  getFriendsNamesList() {
+     if (this.friends.size) {
+        return (
+           `I\'m friends with ${[...this.friends].map(friend => friend.name).join(', ')}`
+        );
+     } else {
+        return 'I don\'t need friends';
+     }
   }
 
   toString() {
-    const { name, species, gender, legs, hands, say, friends } = this;
-
-    const aboutFriends = (friends.length) ? `I am friends with ${friends.join(', ')}.` : '';
-
-    return `${say} My name is ${name} end I'm ${species}, ${gender}. Obviously, I have ${legs} legs and ${hands} hands.
-${aboutFriends}`;
-  }
-}
-
-class CatWoman extends Human {
-  constructor({ name, say }) {
-    super({ name, gender: 'female', say });
-    this.species = 'humacat';
+     return (
+        `<b>${this.say}</b>\n` +
+        `${super.toString()}, ${this.gender}, ${this.hands} hands and ${this.legs} legs.\n` +
+        `<b>${this.getFriendsNamesList()}.</b >`
+     )
   }
 }
 
 const cat = new Cat({ name: 'Murka', gender: 'female' });
 const dog = new Dog({ name: 'Gektor', gender: 'male' });
-const man = new Human({ name: 'Donald', gender: 'male', say: 'Aloha!' });
+const man = new Human({ name: 'John Silver', gender: 'male', legs: 1, say: 'Aloha!' });
 const woman = new Human({ name: 'Eva', gender: 'female', say: 'Hello.' });
-const catWoman = new CatWoman({ name: 'Akrum', say: 'Meow!' });
+const catWoman = new Human({ name: 'Akrum', gender: 'female', say: 'Hi!' });
 
 const inhabitants = [cat, dog, man, woman, catWoman];
+
+cat.bite(catWoman);
 
 inhabitants.forEach((item) => {
   dog.makeFriends(item);
   woman.makeFriends(item);
 });
-man.makeFriends(woman, catWoman, dog);
-catWoman.makeFriends(woman, cat)
+catWoman.makeFriends(woman, cat);
 
 inhabitants.forEach((item) => print(item));
