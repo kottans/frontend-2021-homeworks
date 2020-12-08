@@ -10,18 +10,17 @@ const soundsPaths = ["sounds/jan.mp3", "sounds/feb.mp3", "sounds/mar.mp3",
 "sounds/jul.mp3","sounds/aug.mp3","sounds/sep.mp3",
     "sounds/oct.mp3", "sounds/nov.mp3", "sounds/dec.mp3"];    
 
-window.onload = function () {
-    content[0].style.display = "block";
-    document.querySelector('.nav').addEventListener('click', showMonth);
-    function showMonth(event) {
-        if (event.target.className == 'month') {
-            const dataMonth = event.target.getAttribute('data-month');
+window.addEventListener("load", addContent, stayActive);
+    
+function showMonth({target}) {
+        if (target.classList.contains('month')) {
+            const dataMonth = target.getAttribute('data-month');
             for (let i = 0; i < month.length; i++){
-                month[i].classList.remove('active');
+               document.querySelector('.month.active').remove('active');
             }
-            event.target.classList.add('active');
+            target.classList.add('active');
             for (let i = 0; i < content.length; i++){
-                if (dataMonth == i) {
+                if (dataMonth === i) {
                     content[i].style.display = "block";   
                 } else {
                     content[i].style.display = "none";  
@@ -30,9 +29,7 @@ window.onload = function () {
             }
         }
     }
-}
 
-window.addEventListener("load", addContent);
 function addContent (){
     for (let i = 0; i < content.length; i++) {    
         content[i].innerHTML += '<img class="content_img" src="' + imagesPaths
@@ -48,3 +45,8 @@ function addContent (){
 function pauseAudio(i) {
     audTag[i].pause();
 } 
+
+function stayActive() {
+    content[0].style.display = "block";
+    document.querySelector('.nav').addEventListener('click', showMonth);
+}
