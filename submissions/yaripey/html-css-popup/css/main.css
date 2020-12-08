@@ -10,6 +10,7 @@
 
 a {
   text-decoration: none;
+  color: rgb(168, 168, 168)
 }
 
 a:visited {
@@ -18,7 +19,8 @@ a:visited {
 
 /* Header styles */
 
-nav {
+.header-list {
+  list-style-type: none;
   display: flex;
   height: 50px;
   justify-content: flex-end;
@@ -60,8 +62,6 @@ nav {
   transition: ease 0.2s;
 }
 
-
-
 .profile-pic {
   height: 30px;
   width: 30px;
@@ -71,7 +71,8 @@ nav {
   overflow: hidden;
 }
 
-/* Menu section */
+
+/* Drop-down menu */
 
 .menu-check {
   position: absolute;
@@ -131,12 +132,14 @@ nav {
   left: -200px;
   top: 50px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  display: block;
   transition: 0.3s ease;
+  height: 550px;
 }
 
 .popupmenu {
+  height: 100%;
   width: 300px;
-  height: 550px;
   overflow: auto;
   display: flex;
   flex-wrap: wrap;
@@ -144,6 +147,7 @@ nav {
   align-items: flex-start;
   padding-top: 30px;
 }
+
 
 /* Small triangle */
 .popupmenu-wrap:before {
@@ -157,7 +161,12 @@ nav {
   border-right: 10px solid transparent;
 }
 
+.popupmenu ul {
+  list-style-type: none;
+}
+
 .menu-item {
+  display: block;
   outline: none;
   min-width: 90px;
   height: 100px;
@@ -165,6 +174,7 @@ nav {
   padding: 20px 10px;
   border: 1px solid transparent;
   transition: ease 0.2s;
+  text-decoration: none;
 }
 
 .menu-item:hover {
@@ -172,7 +182,7 @@ nav {
   transition: ease 0.2s;
 }
 
-.menu-item:focus {
+.menu-item a:focus {
   outline: 1px solid black;
 }
 
@@ -240,7 +250,6 @@ nav {
 
 .final {
   width: 100%;
-  /* line-height: -30px;     */
   height: 30px;
 }
 

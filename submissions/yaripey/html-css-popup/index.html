@@ -10,87 +10,134 @@
 
 <body>
   <header>
-    <nav>
-      <a href="#" class="nav-item">Mail</a>
-      <a href="#" class="nav-item">Images</a>
-      <div class="nav-item menu">
-        <label class="menu-button">
-          <input type="checkbox" class="menu-check">
-          <span class="menu-icon"></span>
-          <span class="popupmenu-wrap">
-            <section class="popupmenu">
-              <a href="#" class="menu-item"><img src="img/calendar.png" alt="Calendar">
-                <div>Calendar</div>
-              </a>
-              <a href="#" class="menu-item"><img src="img/mail.png" alt="Mail">
-                <div>Mail</div>
-              </a>
-              <a href="#" class="menu-item"><img src="img/news.png" alt="News">
-                <div>News</div>
-              </a>
-              <a href="#" class="menu-item"><img src="img/maps.png" alt="Map">
-                <div>Map</div>
-              </a>
-              <a href="#" class="menu-item"><img src="img/files.png" alt="Files">
-                <div>File</div>
-              </a>
-              <a href="#" class="menu-item"><img src="img/contacts.png" alt="Contacts">
-                <div>Contacts</div>
-              </a>
-              <a href="#" class="menu-item"><img src="img/tanslation.png" alt="Translate">
-                <div>Translate</div>
-              </a>
-              <a href="#" class="menu-item"><img src="img/videos.png" alt="Videos">
-                <div>Videos</div>
-              </a>
-              <a href="#" class="menu-item"><img src="img/search.png" alt="Search">
-                <div>Search</div>
-              </a>
-              <a href="#" class="menu-item"><img src="img/photos.png" alt="Photos">
-                <div>Photo</div>
-              </a>
-              <a href="#" class="menu-item"><img src="img/apps.png" alt="Apps">
-                <div>Apps</div>
-              </a>
-              <a href="#" class="menu-item"><img src="img/documents.png" alt="Documents">
-                <div>Document</div>
-              </a>
+    <ul class="header-list">
+      <li>
+        <a href="#" class="nav-item">Mail</a>
+      </li>
+      <li>
+        <a href="#" class="nav-item">Images</a>
+      </li>
+      <li>
+        <div class="nav-item menu">
+          <label class="menu-button">
+            <input type="checkbox" class="menu-check" checked>
+            <span class="menu-icon"></span>
+            <nav class="popupmenu-wrap">
+              <ul class="popupmenu">
+                <li class="menu-item">
+                  <a href="#"><img src="img/calendar.png" alt="Calendar">
+                    <div>Calendar</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="#"><img src="img/mail.png" alt="Mail">
+                    <div>Mail</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="#"><img src="img/news.png" alt="News">
+                    <div>News</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="#"><img src="img/maps.png" alt="Map">
+                    <div>Map</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="#"><img src="img/files.png" alt="Files">
+                    <div>File</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="#"><img src="img/contacts.png" alt="Contacts">
+                    <div>Contacts</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="#"><img src="img/tanslation.png" alt="Translate">
+                    <div>Translate</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="#"><img src="img/videos.png" alt="Videos">
+                    <div>Videos</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="#"><img src="img/search.png" alt="Search">
+                    <div>Search</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="#"><img src="img/photos.png" alt="Photos">
+                    <div>Photo</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="#"><img src="img/apps.png" alt="Apps">
+                    <div>Apps</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="#"><img src="img/documents.png" alt="Documents">
+                    <div>Document</div>
+                  </a>
+                </li>
+                <input id="more-button" type="checkbox" class="more-button-checkbox">
+                <label class="more-button" for="more-button">
+                  More
+                </label>
+                <li class="menu-item hidden">
+                  <a href="#"><img src="img/chat.png" alt="Chat">
+                    <div>Chat</div>
+                  </a>
+                </li>
+                <li class="menu-item hidden">
+                  <a href="#"><img src="img/classroom.png" alt="Classroom">
+                    <div>Classroom</div>
+                  </a>
+                </li>
+                <li class="menu-item hidden">
+                  <a href="#"><img src="img/collection.png" alt="Collection">
+                    <div>Collection</div>
+                  </a>
+                </li>
+                <li class="menu-item hidden">
+                  <a href="#"><img src="img/mars.png" alt="Mars">
+                    <div>Mars</div>
+                  </a>
+                </li>
+                <li class="menu-item hidden">
+                  <a href="#"><img src="img/blogs.png" alt="Blogs">
+                    <div>Blogs</div>
+                  </a>
+                </li>
+                <li class="menu-item hidden">
+                  <a href="#"><img src="img/promo.png" alt="Promos">
+                    <div>Promos</div>
+                  </a>
+                </li>
+                <li class="menu-item hidden final">
+                  <a href="#">Even more from Kottans</a>
+                </li>
 
-              <input id="more-button" type="checkbox" class="more-button-checkbox">
-              <label class="more-button" for="more-button">
-                More
-              </label>
-
-              <a href="#" class="menu-item hidden"><img src="img/chat.png" alt="Chat">
-                <div>Chat</div>
-              </a>
-              <a href="#" class="menu-item hidden"><img src="img/classroom.png" alt="Classroom">
-                <div>Classroom</div>
-              </a>
-              <a href="#" class="menu-item hidden"><img src="img/collection.png" alt="Collection">
-                <div>Collection</div>
-              </a>
-              <a href="#" class="menu-item hidden"><img src="img/mars.png" alt="Mars">
-                <div>Mars</div>
-              </a>
-              <a href="#" class="menu-item hidden"><img src="img/blogs.png" alt="Blogs">
-                <div>Blogs</div>
-              </a>
-              <a href="#" class="menu-item hidden"><img src="img/promo.png" alt="Promos">
-                <div>Promos</div>
-              </a>
-              <a href="#" class="menu-item hidden final">Even more from Kottans</a>
-            </section>
-          </span>
-        </label>
-      </div>
-      <a href="#" class="nav-item nav-icon notifications">
-        <img src="img/bell.png" alt="Notifications icon">
-      </a>
-      <a href="#" class="nav-item nav-icon profile-pic">
-        <img src="img/profile-pic.png" alt="Profile picture">
-      </a>
-    </nav>
+              </ul>
+            </nav>
+          </label>
+        </div>
+      </li>
+      <li>
+        <a href="#" class="nav-item nav-icon notifications">
+          <img src="img/bell.png" alt="Notifications icon">
+        </a>
+      </li>
+      <li>
+        <a href="#" class="nav-item nav-icon profile-pic">
+          <img src="img/profile-pic.png" alt="Profile picture">
+        </a>
+      </li>
+    </ul>
   </header>
 </body>
 
