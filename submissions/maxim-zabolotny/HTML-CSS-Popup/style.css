@@ -1,3 +1,8 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
  body {
     margin: 0;
@@ -11,6 +16,10 @@
     text-decoration: none;
     color: unset;
     font-size: 1.2rem;
+  }
+
+  li {
+    list-style: none;
   }
   
   a:focus {
@@ -112,8 +121,18 @@
   
   .first_page {
     height: 448px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
   }
   
+  .second_page {
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+
   .more_apps__checkbox:focus + .more_apps__label {
     background-color: rgb(31, 111, 241);
   }
@@ -135,7 +154,7 @@
   }
   
   .more_apps__checkbox:checked ~ .second_page {
-    display: block;
+    display: flex;
   }
   
   .second_page {
@@ -177,4 +196,3 @@
     object-fit: contain;
   }
   
- 
