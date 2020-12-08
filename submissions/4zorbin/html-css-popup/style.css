@@ -86,14 +86,14 @@ p {
   display: none;
 }
 
-#toggle {
+input.toggle1 {
   position: absolute;
   -webkit-appearance: none;
   height: 24px;
   width: 24px;
 }
 
-#toggle1 {
+input.toggle2 {
   position: absolute;
   -webkit-appearance: none;
   margin: 5px 2px;
@@ -101,11 +101,11 @@ p {
   width: 100%;
 }
 
-#toggle:checked ~ .navBox {
+input.toggle1:checked ~ .navBox {
   display: block;
 }
 
-#toggle1:checked ~ .more {
+input.toggle2:checked ~ .more {
   display: grid;
   margin: auto;
   position: absolute;
@@ -138,7 +138,7 @@ p {
 .nav--button:focus,
 a:focus,
 input:focus,
-#toggle:focus {
+input.toggle1:focus {
   outline: 1px solid #414141;
 }
 
