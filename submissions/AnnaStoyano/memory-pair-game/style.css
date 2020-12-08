@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@300&display=swap');
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.wrapper{
+    width: 100%;
+    padding: 10px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.header{
+    font-family: 'Sansita Swashed', cursive;
+    font-size: 1.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    transform: translateY(-50px);
+}
+
+.logo img{
+    margin-right: 10px;
+    transform: translateY(5px);
+    width: 60px;
+}
+
+.author{
+    margin-left: 5px;
+    color: red;
+}
+
+.container{
+    margin: 0 auto;
+    max-width: 480px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.card {
+    position: relative;
+    perspective: 1000px;
+    width: 120px;
+    height: 120px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: 1px solid red;
+    transition: all 0.4s;
+    transform-style: preserve-3d;
+}
+
+.card:hover {
+    cursor: pointer;
+}
+
+.card.active {
+    transform: rotateY(180deg);
+}
+
+.card.opened{
+    position: relative;
+    transform: rotateY(180deg);
+    background-color: rgba(248, 0, 0, 0.3);
+}
+
+.card .front-side,
+.card .back-side {
+    position: absolute;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    width: 80%;
+    height: 80%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    backface-visibility: hidden;
+    line-height: 1.5;
+    color: red;
+}
+
+.front-size {
+    z-index: 2;
+    transform: rotateY(0deg);
+}
+
+.back-side {
+    transform: rotateY(180deg);
+}
+
+@media screen and (max-width:530px){
+    .wrapper{
+        font-size: 12px;
+    }
+
+    .container{
+        max-width: 240px;
+    }
+
+    .card{
+        width: 80px;
+        height: 90px;
+    }
+}

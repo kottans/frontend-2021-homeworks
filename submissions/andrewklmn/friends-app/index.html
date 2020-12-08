@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="app.css" type="text/css">
+  <title>Friends App</title>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="header">
+      <img class="preloader" src="images/three-dots.svg" alt="Friends are loading now">
+      sort by: 
+      <select class="field sort-field" title="Change sort field">
+        <option value="">-</option>
+      </select> 
+      <span class="sort-order" title="Change sort order"></span>
+      <button class="reset off"></button>
+    </div>
+    <div class="container"></div>
+    <div class="footer">
+      <label>
+        <input class="field search-field" type="text" value="" placeholder="Search by name">
+      </label>
+      <label>
+        Gender:
+        <select class="field filter-gender">
+          <option value="">All</option>
+        </select>
+      </label>
+      <label>
+        Age range:
+        <input class="field filter-min-age" type="number" value=""> -
+        <input class="field filter-max-age" type="number" value="">
+      </label>
+      <label>
+        Country:
+        <select class="field filter-country">
+          <option value="">All</option>
+        </select>
+      </label>
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
