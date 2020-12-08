@@ -10,14 +10,26 @@ const soundsPaths = ["sounds/jan.mp3", "sounds/feb.mp3", "sounds/mar.mp3",
 "sounds/jul.mp3","sounds/aug.mp3","sounds/sep.mp3",
     "sounds/oct.mp3", "sounds/nov.mp3", "sounds/dec.mp3"];    
 
-function openMonth(evt, monthName) {
-    for (let i = 0; i < content.length; i++) {
-        content[i].style.display = "none"; 
-        pauseAudio(i);
+window.onload = function () {
+    content[0].style.display = "block";
+    document.querySelector('.nav').addEventListener('click', showMonth);
+    function showMonth(event) {
+        if (event.target.className == 'month') {
+            const dataMonth = event.target.getAttribute('data-month');
+            for (let i = 0; i < month.length; i++){
+                month[i].classList.remove('active');
+            }
+            event.target.classList.add('active');
+            for (let i = 0; i < content.length; i++){
+                if (dataMonth == i) {
+                    content[i].style.display = "block";   
+                } else {
+                    content[i].style.display = "none";  
+                    pauseAudio(i);
+                }
+            }
         }
-    document.getElementById(monthName).style.display = "block";
-    evt.currentTarget.classList.add('active');
-    document.querySelector('.month.active').classList.remove('active');
+    }
 }
 
 window.addEventListener("load", addContent);
