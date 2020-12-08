@@ -1,0 +1,147 @@
+* {
+  font-size: 14px;
+}
+.picture {
+  width: 30px;
+  height: 30px;
+}
+/*header*/
+.container {
+  display: flex;
+  background: #538687bd;
+  width: 95%;
+  margin: 0 auto;
+  height: auto;
+  justify-content: flex-end;
+  padding-right: 20px;
+  border-radius: 5px;
+}
+/*Nav-Menu*/
+.menu {
+  display: flex;
+  list-style: none;
+  justify-content: space-between;
+  align-items: center;
+  width: 250px;
+  padding-left: 10px;
+}
+.menu-item {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  width: 30px;
+  height: 30px;
+}
+/*DropDown Btn*/
+.drop-down-input {
+  -webkit-appearance: none;
+  position: absolute;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+}
+/*DropDownMenu*/
+.dropdown-container {
+  display: none;
+  position: absolute;
+  top: 67px;
+  right: 27px;
+}
+.drop-down-menu {
+  display: flex;
+  top: 60px;
+  right: 30px;
+  list-style: none;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  background: #efefef;
+  width: 250px;
+  height: 280px;
+  padding: 3px;
+  border-radius: 5px;
+  overflow: auto;
+}
+.drop-down-menu-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 33.333333%;
+  padding-top: 5px;
+  text-decoration: none;
+}
+.drop-down-input:checked ~ .dropdown-container {
+  display: flex;
+}
+/*btn-more*/
+.btn {
+  width: 100%;
+  justify-content: center;
+}
+.btn-more-label {
+  display: block;
+  width: 100%;
+  border-radius: 3px;
+  text-align: center;
+  cursor: pointer;
+  background: #80a5a6;
+}
+.btn-more {
+  -webkit-appearance: none;
+  cursor: pointer;
+  background: #80a5a6;
+  position: absolute;
+  width: 100%;
+}
+.btn-more:focus ~ .btn-more-label {
+  background: #5e5e5e;
+}
+/*More-container*/
+.more-list {
+  display: none;
+  justify-content: space-around;
+  flex-direction: row;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 3px;
+}
+.more-list-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 33.333333%;
+  padding-top: 5px;
+  text-decoration: none;
+}
+.btn-more:checked ~ .more-list {
+  display: flex;
+}
+.btn-more:checked ~ .btn-more-label {
+  display: none;
+}
+.btn-more:checked ~ .btn-more {
+  display: none;
+}
+/*Even more from Kottans */
+.more-kottans {
+  margin-top: 10px;
+  padding-bottom: 4px;
+  width: 100%;
+}
+.more-kottans a {
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  border-radius: 3px;
+  text-align: center;
+  color: #000000;
+  cursor: pointer;
+  background: #80a5a6;
+}
+.more-kottans a:focus {
+  background: #5e5e5e;
+}
