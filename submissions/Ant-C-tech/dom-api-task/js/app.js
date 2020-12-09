@@ -24,18 +24,18 @@ function initApp() {
 
 function addListeners() {
 
-    window.onresize = function () {
+    window.onresize = function() {
         recalcMap()
         recalcContentBlock()
     }
 
     for (const land of mapAreas) {
         //Add hint on mouseenter
-        land.addEventListener('mouseenter', function (event) {
-            hintSection.innerHTML = `${questions[getRandomIntInclusive(0, questions.length - 1)]}`
-        })
-        //Remove hint on mouseleave
-        land.addEventListener('mouseleave', function (event) {
+        land.addEventListener('mouseenter', function(event) {
+                hintSection.innerHTML = `${questions[getRandomIntInclusive(0, questions.length - 1)]}`
+            })
+            //Remove hint on mouseleave
+        land.addEventListener('mouseleave', function(event) {
             hintSection.innerHTML = '. . .'
         })
     }
@@ -77,7 +77,6 @@ function hideContent() {
 }
 
 function changeContent({ target }) {
-    //Remove all clickListeners for animation time - solution for problem with fast change content
 
     if (target.classList.contains('land-active')) {
         return
@@ -87,21 +86,20 @@ function changeContent({ target }) {
     for (const land of mapAreas) {
         land.classList.remove('land-active')
     }
-    map.removeEventListener('click', changeContent)
     target.classList.add('land-active')
 
     //Change content
-    country.removeEventListener('click', changeContent)
     hideContent()
-    contentSection.addEventListener('transitionend', function () {
+    map.classList.add('map-notActive')
+    country.classList.add('mapContainer__title-notActive')
+    contentSection.addEventListener('transitionend', function() {
         contentSection.innerHTML = ''
         showContent(content[target.id])
-        contentSection.addEventListener('transitionend', function () {
-            map.addEventListener('click', changeContent)
-            country.addEventListener('click', changeContent)
+        contentSection.addEventListener('transitionend', function() {
+            map.classList.remove('map-notActive')
+            country.classList.remove('mapContainer__title-notActive')
         }, { once: true })
     }, { once: true })
-
 }
 
 function createContent(content) {
