@@ -61,10 +61,7 @@ const renderContent = (fromTarget) => {
 const handleChanges = () => {
   list.addEventListener("click", ({ target }) => {
     if (target.classList.contains("button")) {
-      [...list.children].forEach(({ children }) => {
-        const button = children[0];
-        button.classList.remove("active");
-      });
+      list.querySelector(".button.active").classList.remove("active");
       target.classList.add("active");
       renderContent(target);
     }
