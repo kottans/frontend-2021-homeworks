@@ -1,0 +1,146 @@
+body {
+    font-family: 'Ubuntu', sans-serif; 
+    color: #858282;
+}
+li {
+    list-style-type: none;
+}
+a {
+    text-decoration: none;
+    color: #858282;
+}
+.wrapper{
+    max-width: 1110px;
+    padding: 20px 15px;
+    margin: 0 auto;
+}
+/*menu*/
+.nav_menu{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 24px;
+}
+.menu_items {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 5px;
+}
+.menu_items:hover {
+    border: solid 1px blue;
+    border-radius: 10px;
+}
+.profile-img {
+    height: 50px;
+    width: 50px;
+    border-radius: 10px;
+}
+.menu_button{
+    background: url(../img/menu-icon.png) center no-repeat;
+    cursor: pointer;
+    overflow: hidden;
+}
+.submenu_btn {
+   opacity: 0;
+   cursor: pointer;
+   display: block;
+   width: 43px;
+   height: 43px;
+}
+/*submenu*/
+.submenu_btn:checked ~ .submenu {
+    display: block;
+}
+.submenu {
+    position: absolute;
+    top: 125px;
+    right: 150px;
+    display: none;
+    width: 33%;
+    min-width: 335px;
+    max-height: 100%;
+    min-height: 520px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 0 1px 2px 0 rgba(60, 64, 67, .30), 0 2px 6px 2px rgba(60, 64, 67, .15);
+    overflow-x: hidden;
+    background: #fff;
+    box-sizing: content-box;
+    font-size: 18px;
+}
+.submenu-items {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+}
+.submenu-item {
+    width: calc(100% / 3);
+    margin-top: 20px;
+}
+.submenu-link:hover {
+    border: solid 2px blue;
+    border-radius: 20px;
+}
+.submenu-link:focus {
+    border: solid 2px red;
+    border-radius: 20px;
+}
+.submenu-item a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+.submenu-item p {
+    margin-top: 0;
+}
+/*more*/
+.more-submenu {
+    display: none;
+    margin-top: 35px;
+    padding: 25px 5px;
+    position: relative;
+}
+.more-submenu:before {
+    content: "";
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    background-color: #eeeeee;
+    top: 0;
+    left: 0;
+}
+.more_button .more_btn:after {
+    content: 'More';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    line-height: 40px;
+    color: #858282;
+}
+.more_button {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    position: relative;
+}
+.more_button .more_btn {
+    background: #ebebeb;
+    width: 100%;
+    height: 40px;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    -webkit-appearance: none;
+}
+.more_btn:checked ~ .more-submenu {
+    display: flex;
+}
+.more_btn:checked {
+    display: none;
+}
