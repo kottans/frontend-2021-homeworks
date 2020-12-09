@@ -50,12 +50,13 @@ Character.prototype.render = function() {
 
 
 // Enemies our player must avoid
-const Enemy = function(x, y) {
+const Enemy = function(x, y, player) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
     // x: -50; y: 50
     Character.call(this, x, y);
     this.speed = randomInteger(ENEMY_MIN_SPEED, ENEMY_MAX_SPEED);
+    this.player = player;
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = ENEMY_SPRITE;
@@ -72,7 +73,14 @@ Enemy.prototype.update = function(dt) {
         this.speed = randomInteger(ENEMY_MIN_SPEED, ENEMY_MAX_SPEED);
         this.x = ENEMY_DISTANCE_OUT_OF_FIELD_TO_THE_LEFT;
     }
+    this.checkCollision();
     ctx.drawImage(Resources.get(this.sprite), (this.x += this.speed) * dt, this.y);
+};
+Enemy.prototype.checkCollision = function() {
+    if (this.player.x >= this.x - ENEMY_HEATBOX && this.player.x <= this.x + ENEMY_HEATBOX && this.player.y >= this.y - ENEMY_HEATBOX && this.player.y <= this.y + ENEMY_HEATBOX || this.player.y >= WIN_POINT_Y_1 && this.player.y <= WIN_POINT_Y_2) {
+        this.player.x = PLAYER_INIT_X;
+        this.player.y = PLAYER_INIT_Y;
+    }
 };
 
 // Now write your own player class
@@ -83,16 +91,6 @@ const Player = function() {
     this.sprite = PLAYER_SPRITE;
 };
 Player.prototype = Object.create(Character.prototype);
-
-Player.prototype.checkCollision = function() {
-    allEnemies.forEach(enemy => {
-        if (this.x >= enemy.x - ENEMY_HEATBOX && this.x <= enemy.x + ENEMY_HEATBOX && this.y >= enemy.y - ENEMY_HEATBOX && this.y <= enemy.y + ENEMY_HEATBOX || this.y >= WIN_POINT_Y_1 && this.y <= WIN_POINT_Y_2) {
-            this.x = PLAYER_INIT_X;
-            this.y = PLAYER_INIT_Y;
-        }
-    });
-};
-
 Player.prototype.handleInput = function(key) {
     switch (key) {
         case 'left':
@@ -110,15 +108,15 @@ Player.prototype.handleInput = function(key) {
     }
 };
 
+// var allEnemies = [new Enemy(-50, 50), new Enemy(-50, 135), new Enemy(-50, 220)];
+const player = new Player();
+
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 for (let i = ENEMY_INITIAL_Y_POSITION_START; i <= ENEMY_INITIAL_Y_POSITION_FINISH; i += ENEMY_Y_POSITION_STEP) {
-    allEnemies.push(new Enemy(ENEMY_INITIAL_X_POSITION, i));
+    allEnemies.push(new Enemy(ENEMY_INITIAL_X_POSITION, i, player));
 }
-
-// var allEnemies = [new Enemy(-50, 50), new Enemy(-50, 135), new Enemy(-50, 220)];
-const player = new Player();
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
