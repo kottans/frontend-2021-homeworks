@@ -3,7 +3,7 @@
 
    Code repository: https://github.com/LGeorge007/a-tiny-JS-world
 
-   Web app: https://github.com/LGeorge007/kottans-frontend
+   Web app: https://lgeorge007.github.io/a-tiny-JS-world/
    */
 
 // ======== OBJECTS DEFINITIONS ========
