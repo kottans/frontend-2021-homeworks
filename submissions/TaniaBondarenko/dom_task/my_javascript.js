@@ -10,9 +10,7 @@ const soundsPaths = ["sounds/jan.mp3", "sounds/feb.mp3", "sounds/mar.mp3",
 "sounds/jul.mp3","sounds/aug.mp3","sounds/sep.mp3",
     "sounds/oct.mp3", "sounds/nov.mp3", "sounds/dec.mp3"];    
 
-window.addEventListener("load", showMonth);
 window.addEventListener("load", initApp);
-
 
     function showMonth({target}) {
         if (target.classList.contains('month')) {
