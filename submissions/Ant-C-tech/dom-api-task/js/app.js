@@ -41,7 +41,10 @@ function addListeners() {
     }
 
     //Change content on click
-    map.addEventListener('click', changeContent)
+    map.addEventListener('mouseup', changeContent)
+    map.addEventListener('click', function({ target }) {
+        console.log(target.id);
+    })
 
     //Show main content on click
     country.addEventListener('click', changeContent)
