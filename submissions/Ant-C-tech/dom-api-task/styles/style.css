@@ -1,324 +1,308 @@
 /* ========================= Common styles =========================*/
+
 *,
 *:before,
 *:after {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
+
 
 /* SCROLLBAR STYLES */
 
 ::-webkit-scrollbar {
-  width: 5px;
+    width: 5px;
 }
 
 ::-webkit-scrollbar-track {
-  margin: 10px;
-  background-color: #f5f5f5;
-  border-radius: 2px;
+    margin: 10px;
+    background-color: #f5f5f5;
+    border-radius: 2px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #000;
-  border: 1px solid #fff;
-  border-radius: 2px;
+    background-color: #000;
+    border: 1px solid #fff;
+    border-radius: 2px;
 }
 
 body {
-  background: #000;
-  max-width: 1800px;
-  margin: 0 auto;
-
+    background: #000;
+    max-width: 1800px;
+    margin: 0 auto;
 }
 
 a {
-  text-decoration: none;
-  cursor: pointer;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 a:visited {
-  text-decoration: none;
+    text-decoration: none;
 }
 
-figure{
-  margin: 10px;
+figure {
+    margin: 10px;
 }
+
 
 /* ========================= Header =========================*/
 
-header{
-  padding: 15px 0 5px;
-  margin: 0 15px;
+header {
+    padding: 15px 0 5px;
+    margin: 0 15px;
 }
 
-.titleBlock{
-  width: fit-content;
-  margin: 0 auto;
+.titleBlock {
+    width: fit-content;
+    margin: 0 auto;
 }
 
-.titleBlock__title{
-  text-align: center;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  padding-bottom: 15px;
-  font-family: "Kaushan Script",
-  cursive;
-  font-size: 40px;
-  color: #ffffff;
-  border-bottom: 2px solid #616161;
+.titleBlock__title {
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding-bottom: 15px;
+    font-family: "Kaushan Script", cursive;
+    font-size: 40px;
+    color: #ffffff;
+    border-bottom: 2px solid #616161;
 }
 
 .titleBlock__subtitle {
-  margin-top: 10px;
-  margin-bottom: 10px;
-   text-align: center;
-  font-family: "Kaushan Script",
-    cursive;
-  font-size: 28px;
-  color: #ffffff;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    font-family: "Kaushan Script", cursive;
+    font-size: 28px;
+    color: #ffffff;
 }
+
 
 /* ========================= Map =========================*/
 
-.flexWrapper{
-  display: flex;
-  padding: 30px 15px;
-  margin: 0 15px;
-  overflow-x: hidden;
-
-  /* Prohibit select */
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
+.flexWrapper {
+    display: flex;
+    padding: 30px 15px;
+    margin: 0 15px;
+    overflow-x: hidden;
+    /* Prohibit select */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
-.mapContainer{
-  width: 50%;
-  border-right: 2px solid #616161;
+.mapContainer {
+    width: 50%;
+    border-right: 2px solid #616161;
 }
 
-.mapContainer__title{
-  text-align: center;
-  padding-bottom: 15px;
-  font-family: "Kaushan Script",
-  cursive;
-  font-size: 40px;
-  color: #ffffff;
-  cursor: pointer;
-  width: fit-content;
-  margin: 5px auto 15px;
+.mapContainer__title {
+    text-align: center;
+    padding-bottom: 15px;
+    font-family: "Kaushan Script", cursive;
+    font-size: 40px;
+    color: #ffffff;
+    cursor: pointer;
+    width: fit-content;
+    margin: 5px auto 15px;
 }
 
-svg{
-  width: 100%;
+svg {
+    width: 100%;
 }
 
-.map{
-transform: scale(1.35) ;
-
+.map {
+    transform: scale(1.35);
 }
 
-.land{
-  fill: #000000;
-  fill-opacity: 1;
-  stroke: white;
-  stroke-opacity: 1;
-  stroke-width: 0.5;
-  transition: fill ease-in-out 0.4s;
-  cursor: pointer;
+.land {
+    fill: #000000;
+    fill-opacity: 1;
+    stroke: white;
+    stroke-opacity: 1;
+    stroke-width: 0.5;
+    transition: fill ease-in-out 0.4s;
+    cursor: pointer;
 }
 
 .land:hover {
-  fill: #ffeb3b;
+    fill: #ffeb3b;
 }
 
 .land-active,
 .land-active:hover {
-  fill: #00b0ff;
-  cursor: auto;
+    fill: #00b0ff;
+    cursor: auto;
 }
 
 
 /* ========================= Hint =========================*/
 
-.hintSection{
-  font-family: "Kaushan Script",
-    cursive;
-  color: #ffffff;
-  font-size: 24px;
-  margin: 15px 0;
-  text-align: center;
+.hintSection {
+    font-family: "Kaushan Script", cursive;
+    color: #ffffff;
+    font-size: 24px;
+    margin: 15px 0;
+    text-align: center;
 }
+
 
 /* ========================= Content =========================*/
 
-.content{
-  width: 50%;
-  padding: 0 35px;
-  font-family: "Kaushan Script",
-  cursive;
-  font-size: 16px;
-  color: #ffffff;
-
-      position: relative;
+.content {
+    width: 50%;
+    padding: 0 35px;
+    font-family: "Kaushan Script", cursive;
+    font-size: 16px;
+    color: #ffffff;
+    position: relative;
     transition: transform ease-in-out 0.5s;
 }
 
-.content-hide{
+.content-hide {
     transform: translateX(1000px);
 }
 
 .content__titleBlock {
-  width: fit-content;
-  margin: 0 auto;
+    width: fit-content;
+    margin: 0 auto;
 }
 
 .content__title {
-  text-align: center;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  padding-bottom: 15px;
-  font-family: "Kaushan Script",
-    cursive;
-  font-size: 40px;
-  color: #ffffff;
-  border-bottom: 2px solid #616161;
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding-bottom: 15px;
+    font-family: "Kaushan Script", cursive;
+    font-size: 40px;
+    color: #ffffff;
+    border-bottom: 2px solid #616161;
 }
 
 .content__subtitle {
-  margin-top: 10px;
-  margin-bottom: 10px;
-  text-align: center;
-  font-family: "Kaushan Script",
-    cursive;
-  font-size: 28px;
-  color: #ffffff;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    font-family: "Kaushan Script", cursive;
+    font-size: 28px;
+    color: #ffffff;
 }
 
-.content__textBlock p{
-  text-indent: 25px;
+.content__textBlock p {
+    text-indent: 25px;
 }
 
-.content__imgBlock{
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+.content__imgBlock {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 
 .imgBlock__item {
-  width: 33.33%;
+    width: 33.33%;
 }
 
-.imgBlock__item img{
-  width: 100%;
+.imgBlock__item img {
+    width: 100%;
 }
 
-.imgBlock__caption{
-  text-align: center;
-  font-size: 14px;
+.imgBlock__caption {
+    text-align: center;
+    font-size: 14px;
 }
+
 
 /* ========================= Footer =========================*/
 
-footer{
-  display: flex;
-  justify-content: space-around;
-  margin: 0 15px;
-   border-top: 2px solid #616161;
+footer {
+    display: flex;
+    justify-content: space-around;
+    margin: 0 15px;
+    border-top: 2px solid #616161;
 }
 
 .footer__item {
-  text-align: center;
-  font-family: "Kaushan Script",
-  cursive;
-  font-size: 18px;
-  color: #ffffff;
+    text-align: center;
+    font-family: "Kaushan Script", cursive;
+    font-size: 18px;
+    color: #ffffff;
 }
 
-.footer__footerLink{
-  margin: 0 10px;
+.footer__footerLink {
+    margin: 0 10px;
 }
+
 
 /* ========================= Media =========================*/
 
 @media screen and (max-width: 1200px) {
-  .titleBlock__title {
-    font-size: 32px;
-  }
-
-  .titleBlock__subtitle {
-    font-size: 22px;
-  }
-
-  .mapContainer__title {
-    font-size: 32px;
-  }
-
-  .content__title {
-    font-size: 32px;
-  }
-
-  .content__subtitle {
-    font-size: 22px;
-  }
+    .titleBlock__title {
+        font-size: 32px;
+    }
+    .titleBlock__subtitle {
+        font-size: 22px;
+    }
+    .mapContainer__title {
+        font-size: 32px;
+    }
+    .content__title {
+        font-size: 32px;
+    }
+    .content__subtitle {
+        font-size: 22px;
+    }
 }
 
 @media screen and (max-width: 1040px) {
-  .flexWrapper {
-    flex-wrap: wrap;
-  }
-
-.mapContainer {
-  width: 100%;
-  border-right: none;
-  border-bottom: 2px solid #616161;
-  margin-bottom: 30px;
-}
-
-  .content {
-    width: 100%;
-  }
+    .flexWrapper {
+        flex-wrap: wrap;
+    }
+    .mapContainer {
+        width: 100%;
+        border-right: none;
+        border-bottom: 2px solid #616161;
+        margin-bottom: 30px;
+    }
+    .content {
+        width: 100%;
+    }
 }
 
 @media screen and (max-width: 768px) {
-footer {
-flex-wrap: wrap;
-}
-.footer__item{
-  margin-bottom: 10px;
-  margin-top: 10px;
-}
+    footer {
+        flex-wrap: wrap;
+    }
+    .footer__item {
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
 }
 
 @media screen and (max-width: 576px) {
-  .flexWrapper{
-    margin-left: 0;
-    margin-right: 0;
-  }
-
-  .content{
-    padding-left: 15px;
-    padding-right: 15px;
-  }
-
-  .content__textBlock p {
-    text-indent: 0;
-    text-align: center;
-    font-size: 16px;
-  }
-
-  .content__imgBlock {
- flex-wrap: wrap;
-  }
-
-  .imgBlock__item {
-    width: 100%;
-  }
-
-  footer {
-    align-items: center;
-  }
-  .footer__itemElem {
-display: block;
-margin: 10px 0;
-  }
+    .flexWrapper {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .content {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    .content__textBlock p {
+        text-indent: 0;
+        text-align: center;
+        font-size: 16px;
+    }
+    .content__imgBlock {
+        flex-wrap: wrap;
+    }
+    .imgBlock__item {
+        width: 100%;
+    }
+    footer {
+        align-items: center;
+    }
+    .footer__itemElem {
+        display: block;
+        margin: 10px 0;
+    }
 }
