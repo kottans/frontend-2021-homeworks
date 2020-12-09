@@ -42,9 +42,6 @@ function addListeners() {
 
     //Change content on click
     map.addEventListener('mouseup', changeContent)
-    map.addEventListener('click', function({ target }) {
-        console.log(target.id);
-    })
 
     //Show main content on click
     country.addEventListener('click', changeContent)
@@ -106,11 +103,11 @@ function changeContent({ target }) {
 }
 
 function createContent(content) {
-    let fragment = new DocumentFragment()
+    const fragment = new DocumentFragment()
 
-    let titleBlock = document.createElement('div')
-    let title = document.createElement('div')
-    let subtitle = document.createElement('div')
+    const titleBlock = document.createElement('div')
+    const title = document.createElement('div')
+    const subtitle = document.createElement('div')
 
     titleBlock.classList.add('content__titleBlock')
     title.classList.add('content__title')
@@ -121,23 +118,23 @@ function createContent(content) {
 
     titleBlock.append(title, subtitle)
 
-    let textBlock = document.createElement('div')
+    const textBlock = document.createElement('div')
     textBlock.classList.add('content__textBlock')
     for (let item of content.text) {
-        let p = document.createElement('p')
+        const p = document.createElement('p')
         p.textContent = item
         textBlock.appendChild(p)
     }
 
-    let imgBlock = document.createElement('div')
+    const imgBlock = document.createElement('div')
     imgBlock.classList.add('content__imgBlock')
     for (let item of content.media) {
-        let figure = document.createElement('figure')
+        const figure = document.createElement('figure')
         figure.classList.add('imgBlock__item')
-        let img = document.createElement('img')
+        const img = document.createElement('img')
         img.setAttribute('src', `${item.src}`)
         img.setAttribute('alt', `${item.descript}`)
-        let figcaption = document.createElement('figcaption')
+        const figcaption = document.createElement('figcaption')
         figcaption.classList.add('imgBlock__caption')
         figcaption.textContent = item.descript
         figure.append(img, figcaption)
