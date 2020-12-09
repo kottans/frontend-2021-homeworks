@@ -1,4 +1,4 @@
-/* Refer to https://github.com/OleksiyRudenko/a-tiny-JS-world for the task details
+ /* Refer to https://github.com/OleksiyRudenko/a-tiny-JS-world for the task details
    Complete the below for code reviewers' convenience:
 
    Code repository: https://github.com/LGeorge007/a-tiny-JS-world
