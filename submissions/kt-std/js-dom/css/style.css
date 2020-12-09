@@ -58,13 +58,13 @@ body {
 	background-color: rgba(0, 0, 0, .6);
 }
 
-.menu__icon {
+.menu__btn {
 	display: none;
-	margin: 15px;
+	padding: 15px;
 }
 
 .menu__item:hover,
-.menu__icon:hover {
+.menu__btn:hover {
 	cursor: pointer;
 }
 

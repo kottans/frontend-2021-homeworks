@@ -4,7 +4,7 @@ body {
 }
 
 .nav,
-.menu__icon-container {
+.menu__btn-container {
 	justify-content: flex-end;
 	align-items: flex-end;
 }
@@ -23,7 +23,17 @@ body {
 	display: none;
 }
 
-.menu__icon-container {
+.menu__btn{
+	background-color: transparent;
+	border: 0px;
+	display: block;
+	outline: none;
+}
+.menu__btn::-moz-focus-inner{
+	border: 0px;
+}
+
+.menu__btn-container {
 	background-color: #1e1e1e;
 	border-bottom: 1px solid #1d1d1d;
 }
@@ -69,7 +79,6 @@ body {
 }
 
 .menu__icon {
-	display: block;
 	transition: .5s;
 	width: 25px;
 	height: 25px;
