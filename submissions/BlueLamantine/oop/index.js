@@ -11,16 +11,26 @@ class General {
     this.species = species;
     this.friends = Array.isArray(friends) ? friends : 'no friends';
   }
-  getGender() {
+  getPronoun(subject) {
     return {
-      male: ['He', 'his'],
-      female: ['She', 'her'],
-    };
+      nominative: (() => {
+        return {
+          male: 'He',
+          female: 'She',
+        };
+      })()[this.gender],
+      posessive: (() => {
+        return {
+          male: 'his',
+          female: 'her',
+        };
+      })()[this.gender],
+    }[subject];
   }
   getInfo() {
     return (
       `This ${this.species} is a ${this.gender}, ` +
-      `${this.getGender()[this.gender][1]} name is ${this.name}. `
+      `${this.getPronoun('posessive')} name is ${this.name}. `
     );
   }
   getFriendsList() {
@@ -39,10 +49,10 @@ class Human extends General {
   getInfo() {
     return (
       super.getInfo() +
-      ` ${super.getGender()[this.gender][0]} has ${this.legs} legs and ${
+      ` ${this.getPronoun('nominative')} has ${this.legs} legs and ${
         this.hands
       } hands.` +
-      ` ${super.getGender()[this.gender][0]} says \'${this.voise}\'. ` +
+      ` ${this.getPronoun('nominative')} says \'${this.voise}\'. ` +
       super.getFriendsList()
     );
   }
