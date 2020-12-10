@@ -1,0 +1,22 @@
+.nav-details {
+  position: relative;
+  user-select: none;
+
+  &__btn {
+    list-style: none;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    background: url(images/popup-button.png) no-repeat center;
+
+    &:hover {
+      background-color: lighten($theme-color, 50%)
+    }
+  }
+
+  &__popup {
+    position: absolute;
+    top: 140%;
+    right: -40px;
+  }
+}

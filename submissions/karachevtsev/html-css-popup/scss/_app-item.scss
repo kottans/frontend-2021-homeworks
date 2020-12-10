@@ -1,0 +1,24 @@
+.app-item {
+
+  a {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    padding: 10px;
+    color: $theme-color;
+    border-radius: 3px;
+
+    &:hover {
+      text-decoration: none;
+      background: #fafafa;
+    }
+
+    img {
+      width: 40px;
+      height: auto;
+    }
+  }
+}
