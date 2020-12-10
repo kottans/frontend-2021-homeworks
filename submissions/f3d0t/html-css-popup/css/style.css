@@ -141,6 +141,11 @@ body{
     border: 1px solid var(--c-popup-border);
 }
 
+.popup__ul{
+	display: flex;
+	flex-wrap: wrap;
+}
+
 .popup__item{
 	display: flex;
 }
