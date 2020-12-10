@@ -1,18 +1,28 @@
+
 class Inhabitant {
-    constructor ({ species, name, gender, legs, hands, saying, friends = [] }) {
+    constructor ({ species, name, gender, saying, friends = "No friends! One man army.", paws, hands, legs }) {
         this.species = species
         this.name = name
         this.gender = gender
-        this.legs = legs
-        this.hands = hands
         this.saying = saying
         this.friends = friends
+        this.paws = paws
+        this.hands = hands
+        this.legs = legs
+    }
+
+    toString() {
+        return `${this.species}; ${this.name}; ${this.gender}; ${this.saying}; ${this.friends}`;
     }
 }
 
 class Animal extends Inhabitant {
-    constructor ({ species, name, gender, saying, friends }) {
-        super({ species, name, gender, legs: 4, hands: 0, saying, friends })
+    constructor ({ species, name, gender, saying, friends, paws = 4 }) {
+        super({ species, name, gender, saying, friends, paws })
+    }
+
+    toString() {
+        return super.toString() + ` ${this.paws}.`;
     }
 }
 
@@ -29,8 +39,12 @@ class Cat extends Animal {
 }
 
 class HomoSapiens extends Inhabitant {
-    constructor ({ name, gender, saying, friends }) {
-        super({ species: 'human', name, gender, legs: 2, hands: 2, saying, friends })
+    constructor ({ name, gender, saying, friends, hands = 2, legs = 2 }) {
+        super({ species: 'human', name, gender, saying, friends, hands, legs })
+    }
+
+    toString() {
+        return super.toString() + ` ${this.hands}, ${this.legs}.`;
     }
 }
 
@@ -53,12 +67,6 @@ const woman = new Woman({ name: 'Mariia', saying: 'Hi!', friends: ['Dolf', 'Roma
 
 const inhabitants = [dog, cat, man, woman]
 
-const introduceInhabitants = (inhabitants) => {
-    const inhabitantValues = Object.values(inhabitants)
-    const inhabitant = inhabitantValues.map(item => Array.isArray(item) ? item.map(nestedItem => nestedItem).join(', ') : item).join('; ')
-    return inhabitant
-}
-
 inhabitants.forEach((item) => {
-    print(introduceInhabitants(item))
+    print(item.toString())
 })
