@@ -36,44 +36,53 @@ document.addEventListener("DOMContentLoaded", function(e) {
 
     const mainMenu = document.querySelector('.main-menu'); 
     const cardTitle = document.querySelector('.card-title');
+    const burger = document.querySelector('.burger');
     const cardImg = document.querySelector('.card-img');
     const cardText = document.querySelector('.card-text');
 
     //Menu burger
-    document.querySelector('.burger').addEventListener('click', function(e) {
+    burger.addEventListener('click', function(e) {
         e.preventDefault();
         this.classList.toggle('active');
-        document.querySelector('.main-menu').classList.toggle('active');
+        mainMenu.classList.toggle('active');
     });
 
-    //Create a button in main menu
-    let addButtonToMenu = function(item) {
+    //Create a button for main menu
+    const addButtonToMenu = function(item) {
         const li = document.createElement('li');
         const button = document.createElement('button');
+        const buttonName = cars[item].name;
 
         //Add the button to main menu
         mainMenu.appendChild(li.appendChild(button)); 
 
         // Name and style for button
         button.classList.add('menu-btn');
-        button.textContent = cars[item].name;
+        button.innerHTML = buttonName;
 
         return button;
     };
 
-    //Add buttons with event listener to main menu 
+    //Add buttons to document fragment
+    const docFrag = document.createDocumentFragment();
+
     for (let i = 0; i < cars.length; i++) {
-        addButtonToMenu(i).addEventListener('click', function(e){
+        docFrag.appendChild(addButtonToMenu(i))
+            .addEventListener('click', function(e){
             e.preventDefault();
-            cardTitle.textContent = cars[i].name;
+            cardTitle.innerHTML = cars[i].name;
             cardImg.src = cars[i].img;
             cardText.innerHTML = cars[i].text;
-
+    
             // Hide the menu after pressing the button
             if (document.querySelector('.active')) {
-                document.querySelector('.burger').classList.remove('active');
-                document.querySelector('.main-menu').classList.remove('active');
+                burger.classList.remove('active');
+                mainMenu.classList.remove('active');
             }
         });
     }
+
+    // Add buttons from document fragment to main menu
+    mainMenu.appendChild(docFrag);
+
 });
