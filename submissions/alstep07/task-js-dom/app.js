@@ -11,7 +11,7 @@ headerBtn.addEventListener('click', function() {
 });
 
 navBtn.addEventListener('click', function(event){
-        render(movies[event.path[1].id]);
+    render(movies[event.target.id]);
 });
 
 function render(genre){

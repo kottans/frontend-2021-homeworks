@@ -96,6 +96,7 @@
 }
 
 .film__cover {
+    min-height: 265px;
     margin: auto;
     display: none;
 }
