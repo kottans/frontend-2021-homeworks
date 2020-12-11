@@ -8,6 +8,7 @@ html,
 body {
   margin: 0;
   padding: 0;
+  height: 100%;
 }
 
 html {
@@ -25,6 +26,13 @@ h2 {
   font-weight: normal;
 }
 
+.main {
+  height: 100%;
+  background: url('./img/bg.jpg');
+  background-color: #EAEAEA;
+  background-position: 50% 50%;
+}
+
 .container {
   padding: 40px;
   margin: 0 auto;
@@ -40,6 +48,7 @@ h2 {
 #navBar {
   width: 250px;
   position: fixed;
+  overflow-y: auto;
   top: 0;
   left: 0;
   height: 100vh;
@@ -50,6 +59,19 @@ h2 {
   flex-direction: column;
   justify-content: space-between;
   opacity: 0.99
+}
+
+#navBar::-webkit-scrollbar {
+  width: .15rem;
+}
+
+#navBar::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+#navBar::-webkit-scrollbar-thumb {
+  background-color: rgb(182, 180, 180);
+  border: 1px solid rgb(58, 64, 70);
 }
 
 .nav-brand {
@@ -65,7 +87,6 @@ h2 {
   margin-bottom: 10px;
   text-align: left;
   font-size: 18px;
-  /* background: #a0d6b4; */
   padding: 5px 10px;
   border-radius: 5px;
 }
@@ -100,8 +121,8 @@ a:visited {
 #hamburgerBtn {
   display: none;
   position: fixed;
-  top: 30px;
-  right: 30px;
+  top: 25px;
+  right: 25px;
 }
 
 #hamburgerBtn:hover {
@@ -130,6 +151,7 @@ a:visited {
 
 .panel p {
   font-size: 1.2em;
+  padding: 0 0.5em;
 }
 
 .panel a {
@@ -149,10 +171,13 @@ a:visited {
     margin-left: 0px;
   }
 
+  .main {
+    height: auto;
+  }
+
   .container {
     padding: 80px 60px;
   }
-
 
   #navBar {
     width: 100vw;
@@ -170,10 +195,15 @@ a:visited {
     text-align: center;
   }
 
+  .nav-list {
+    margin: auto;
+    text-align: center;
+  }
+
   #hamburgerBtn {
     display: inline-block;
     z-index: 10;
-    background-color: #ffffff5c;
+    background-color: #ffffff7c;
     border-radius: 50%;
     padding: 5px 8px;
   }
