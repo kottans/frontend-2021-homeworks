@@ -118,6 +118,7 @@ const getElemId = (items, id) => items.find(item => item.id === id);
 //https://stackoverflow.com/questions/3450593/how-do-i-clear-the-content-of-a-div-using-javascript
 const clearHTML = node => node.innerHTML = '';
 
+//https://plnkr.co/edit/VaT2rCMbRm1QGymC?p=preview&preview
 const burgerElem = document.getElementById('main');
 const menuElem = burgerElem.querySelector('.title');
 
@@ -180,6 +181,13 @@ const render = (state) => {
     renderContent(state.activePageId);
 };
 
+//hiding rendered images and buttons
+const notRender = (state) => {
+    renderListItems(state.burgers, state.activePageId);
+    //renderContent(state.activePageId);
+};
+
+//interaction on click
 const init = () => {
     const burgersList = document.querySelector('.burger-list');
     //set object of state changing
@@ -203,21 +211,28 @@ const init = () => {
     }
 
     burgersList.addEventListener('click', handleListItemClick);
+
+    render(state);
+};
+
+const noInit = () => {
+    const state = {};
+    
     render(state);
 };
 
 //open after click on buttom
 function afterClick() {
     burgerElem.classList.toggle('open');
+    (document.querySelector('.burgers').classList.contains("open"))?init():noInit();
+
     
-    if (document.querySelector('.burgers').classList.contains("open")) {
-        init();
-    } else {
-        alert('qwerty');
-    }
-    //burgerElem.classList.toggle('open');
+    // if (document.querySelector('.burgers').classList.contains("open")) {
+    //     init();
+    // } else {
+    //     noInit();
+    //     //burgerElem.classList.toggle('hidden');
+    // }
 }
 
 menuElem.onclick = afterClick;
-//start
-//init();
