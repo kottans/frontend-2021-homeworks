@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Intercatpol</title>
+  <link rel="stylesheet" href="./css/reset.css">
+  <link rel="stylesheet" href="./css/main.css">
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <div class="header-left-gr">
+        <img src="./img/logo.svg" alt="Intercatpol logo">
+        <h1>Intercatpol <br> wanted criminals </h1>
+      </div>
+      <button class="menu-btn" id="menu-btn"><img src="./img/lines.svg" alt="Menu button"></button>
+      <button class="next-btn" id="next-btn"><img src="./img/arrow.svg" alt="Next button"></button>
+    </div>
+  </header>
+
+  <div class="container center-content">
+    <nav class="side-nav hidden" id="side-nav">
+      <ul class="side-nav-menu" id="side-nav-menu">
+      </ul>
+      <img src="./img/logo.svg" alt="Intercatpol logo">
+    </nav>
+    <main>
+      <div class="left-pane">
+        <div class="left-pane-top">
+          <div class="crim-photo-set">
+            <img id="crim-portret" src="" alt="Criminal photo">
+            <p id="crim-label"></p>
+          </div>
+          <img class="notice" src="./img/notice.svg" alt="Notice">
+        </div>
+        <div class="left-pane-bottom">
+          <h2>Case files</h2>
+          <div class="evidence-set" id="evidence-set">
+          </div>
+        </div>
+      </div>
+
+      <div class="right-pane">
+        <h2>Identity particulars</h2>
+        <div class="data-group">
+          <div class="left-column">
+            <p>Nick name</p>
+            <p>Gender</p>
+            <p>Date of birth</p>
+            <p>Nationality</p>
+          </div>
+          <div class="right-column">
+            <p data-holder="nick"></p>
+            <p data-holder="gender"></p>
+            <p data-holder="birth"></p>
+            <p data-holder="nationality"></p>
+          </div>
+        </div>
+        <h2>Distinguishing marks</h2>
+        <p class="long-desc" data-holder="marks"></p>
+        <h2>Physical description</h2>
+        <div class="data-group">
+          <div class="left-column">
+            <p>Length (sm)</p>
+            <p>Weight (kg) </p>
+            <p>Hair color</p>
+          </div>
+          <div class="right-column">
+            <p data-holder="length"></p>
+            <p data-holder="weight"></p>
+            <p data-holder="color"></p>
+          </div>
+        </div>
+        <h2>Details</h2>
+        <p class="long-desc" data-holder="details"></p>
+        <h2 class="red">Charges</h2>
+        <p class="long-desc charges" data-holder="charges"></p>
+      </div>
+    </main>
+  </div>
+
+  <footer>
+    <p class="credits">Created by <a href="https://github.com/usides/kottans-frontend" target="_blank">Usides</a> for <a
+        href="https://kottans.org/" target="_blank">kottans</a></p>
+  </footer>
+  <script src="./js/main.js"></script>
+</body>
+
+</html>
