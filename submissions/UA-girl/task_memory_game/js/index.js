@@ -110,6 +110,9 @@ function checkWinGame() {
 
 function toggleCard({target}) {
     let card = target.closest('div.card');
+    if(!card) {
+        return;
+    }
     card.classList.toggle('toggled');
     const pair = cards.filter(card => card.classList.contains('toggled'));
     if (pair.length === 2) {
