@@ -167,6 +167,7 @@ body {
     flex-direction: column;
     font-family: 'BioRhyme Expanded', serif;
     color: var(--c-bg-nav);
+    overflow: hidden;
 }
 h1 {
     font-size: 7em;
