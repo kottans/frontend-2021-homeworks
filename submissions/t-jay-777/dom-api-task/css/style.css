@@ -16,6 +16,21 @@ body {
     line-height: normal;
     font-family: "Open Sans", Consolas, sans-serif;
 }
+
+.burgers {
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.burgers .title::before {
+    content: '▶ ';
+    font-size: 80%;
+    color: green;
+}
+
+.burgers.open .title::before {
+    content: '▼ ';
+}
 /* images*/
 img {
     max-width: 100%;

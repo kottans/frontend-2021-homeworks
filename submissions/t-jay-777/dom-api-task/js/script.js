@@ -118,6 +118,9 @@ const getElemId = (items, id) => items.find(item => item.id === id);
 //https://stackoverflow.com/questions/3450593/how-do-i-clear-the-content-of-a-div-using-javascript
 const clearHTML = node => node.innerHTML = '';
 
+const burgerElem = document.getElementById('main');
+const menuElem = burgerElem.querySelector('.title');
+
 //rendering list of li and button tags
 const renderListItem = ({ name, id }, activeID) => {
     //create button
@@ -204,5 +207,16 @@ const init = () => {
     render(state);
 };
 
+//open after click on buttom
+function afterClick() {
+    burgerElem.classList.toggle('open');
+    
+    if (document.querySelector('.burgers').classList.contains("open")) {
+        init();
+    } else {
+        alert('qwerty');
+    }
+    //burgerElem.classList.toggle('open');
+}
 //start
 init();
