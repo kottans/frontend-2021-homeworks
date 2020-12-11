@@ -19,8 +19,8 @@ class Inhabitant {
     }
 
     toString() {
-        return`${this.saying} I am a ${this.species}, my name is ${this.name}, my gender is ${this.gender}. 
-        My friends: ${this.friends.map(friend => friend.name).join(", ")}.`;
+        return`${this.saying} `+ [`I am a ${this.species}`, `My name is ${this.name}`, `My gender is ${this.gender}`].join(". ") +
+        `. My friends: ${this.friends.map(friend => friend.name).join(", ")}.`;
     }
 }
 
