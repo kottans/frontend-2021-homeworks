@@ -27,7 +27,8 @@ const images = [
 const TIME_DELAY = 400;
 const container = document.querySelector('.container-game');
 let cards = [];
-let starTime, endTime;
+const fragment = document.createDocumentFragment();
+let startTime, endTime;
 
 
 function shuffleArray(array) {
@@ -58,8 +59,9 @@ function createCardItem({name, src}) {
 
 function updateGame() {
     shuffleArray(cards);
-    cards.forEach(card => container.appendChild(card));
-    starTime = new Date();
+    cards.forEach(card => fragment.append(card));
+    container.appendChild(fragment);
+    startTime = new Date();
 }
 
 
@@ -96,7 +98,7 @@ function checkWinGame() {
     const hiddens = cards.filter(card => card.classList.contains('hidden'));
     if (hiddens.length === 12) {
         endTime = new Date();
-        const delta = Math.round((endTime - starTime) / 1000);
+        const delta = Math.round((endTime - startTime) / 1000);
         alert(`Cool! You are the best =)
         Your time is ${delta} sec`);
         cards.forEach(card => card.classList.remove('hidden'));
