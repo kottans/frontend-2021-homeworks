@@ -3,42 +3,43 @@
    Complete the below for code reviewers' convenience:
 */
 
-const inhabits = [
-	cat = {
-		species: 'cat',
-		name: 'Murka',
-		surname: 'My hosts didn\'t give me a surname',
-		gender: 'female',
-		legs: '4',
-		saying: 'Hey, I\'m cat',
-	},
-	man = {
-		species: 'human',
-		name: 'Jorj',
-		surname: 'Kluni',
-		gender: 'male',
-		legs: '2',
-		hands: '2',
-		saying:'Did you see Ocean\'s Eleven?',
-	},
-	man = {
-		species: 'superhuman',
-		name: 'Peter',
-		surname: 'Parker',
-		gender: 'male',
-		legs: '2',
-		hands: '2',
-		saying: 'Your friendly neighborhood Spider-Man!',
-	},
-	pig = {
-		species: 'guinea pig',
-		name: 'Darwin',
-		surname: 'My hosts didn\'t give me a surname',
-		gender: 'male',
-		legs: '4',
-		saying: 'Set aside. I forbid touching the ferret.',
-	},
-]
+const cat = {
+	species: 'cat',
+	name: 'Murka',
+	gender: 'female',
+	legs: '4',
+	saying: 'Hey, I\'m cat.',
+};
+
+const man = {
+	species: 'human',
+	name: 'Jorj',
+	surname: 'Kluni',
+	gender: 'male',
+	legs: '2',
+	hands: '2',
+	saying:'Did you see Ocean\'s Eleven?',
+};
+
+const dog = {
+	species: 'dog',
+	name: 'Arrow',
+	gender: 'female',
+	legs: '4',
+	saying: 'I were in space, what about you?',
+};
+
+const woman = {
+	species: 'human',
+	name: 'Enn',
+	surname: 'Hatuey',
+	gender: 'female',
+	legs: '2',
+	hands: '2',
+	saying: 'Follow me on instagram.',
+}
+
+const all = [cat, man, dog, woman];
 
 const returnString = (arr) => {
 	return arr.map((person) => {
@@ -46,4 +47,4 @@ const returnString = (arr) => {
 	}).join("\n");
 }
 
-print(returnString(inhabits));
+print(returnString(all));
