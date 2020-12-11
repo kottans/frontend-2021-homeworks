@@ -7,6 +7,52 @@
 
 This repo was created for students to submit their homeworks for review.
 
+Please follow the instructions below to submit your code for review.
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Setup the fork and local clone](#setup-the-fork-and-local-clone)
+- [Submitting new task](#submitting-new-task)
+- [When changes are requested](#when-changes-are-requested)
+- [When all your PRs finally merged](#when-all-your-prs-finally-merged)
+  - [How to submit](#how-to-submit)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+## Setup the fork and local clone
+
+Only need this done once.
+
+## Submitting new task
+
+Code in dedicated project repo
+Publish
+Branch from main
+Code from another task has gone - no worries
+Directory - once
+Copy only files required for review
+Push --set-upstream
+Open PR
+Follow instructions in PR template
+Check Files changed: no files or commits from other task; no files are deleted
+
+## When any changes are required
+
+Code in dedicated project repo
+publish changes
+Switch between task branches
+Copy changed files only
+Push
+Go to your PR and check Files changed
+
+## When all of your PRs are finally merged
+
+Update your clone and fork to have all your code
+
+---
+
 ### How to submit
 
 - fork this repository
