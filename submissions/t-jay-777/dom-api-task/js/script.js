@@ -188,7 +188,6 @@ const init = () => {
         burgers: contentList,
         activePageId: 0,
     }
-
     //to do when click
     const handleListItemClick = (evt) => {
         const { target } = evt;
@@ -218,5 +217,7 @@ function afterClick() {
     }
     //burgerElem.classList.toggle('open');
 }
+
+menuElem.onclick = afterClick;
 //start
-init();
+//init();
