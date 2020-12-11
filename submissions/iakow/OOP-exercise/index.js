@@ -7,8 +7,7 @@ class Inhabitant {
   }
 
   makeFriends(...applicants) {
-     applicants.filter(applicant => applicant instanceof Inhabitant)
-        .filter(applicant => applicant != this)
+     applicants.filter(applicant => applicant instanceof Inhabitant && applicant != this)
         .forEach(applicant => this.friends.add(applicant));
   }
 
