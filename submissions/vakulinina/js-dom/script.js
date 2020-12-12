@@ -78,26 +78,38 @@ const itemRecipe = document.querySelector('.recipe');
 const itemTitle = document.querySelector('h2');
 const menuButton = document.querySelector('.menu-button');
 const navBar = document.querySelector('.nav-bar');
+const listItems = document.createDocumentFragment();
 
 const hideMenu = () => {
   if (navBar.classList.contains('visible')) {
     navBar.classList.remove('visible')
   }
-}
+};
 
-const getProp = (id, prop) => coffeeDrinks.filter(obj => obj.name === id)[0][prop];
+coffeeDrinks.forEach(drink => {
+  let listItem = document.createElement('li');
+  let navButton = document.createElement('button');
+  navButton.classList.add('nav-button');
+  navButton.id = drink.name;
+  navButton.textContent = drink.name;
+  listItem.append(navButton);
+  listItems.append(listItem);
+})
+
+navButtons.append(listItems);
 
 menuButton.addEventListener('click', function () {
   navBar.classList.toggle('visible');
 })
 
 navButtons.addEventListener('click', function (evt) {
-  if (evt.target.tagName === 'BUTTON') {
-    const id = evt.target.id;
+  if (evt.target.matches('.nav-button')) {
     hideMenu();
-    itemTitle.textContent = getProp(id, 'name').toUpperCase();
-    itemImage.setAttribute('src', getProp(id, 'imageUrl'));
-    itemRecipe.innerHTML = `<p><b>Ratio</b>: ${getProp(id, 'ratio')}</p><p><b>Cup</b>: ${getProp(id, 'cup')}</p>`;
-    itemDescription.textContent = getProp(id, 'description');
+    const id = evt.target.id;
+    const drink = coffeeDrinks.find(obj => obj.name === id);
+    itemTitle.textContent = drink.name.toUpperCase();
+    itemImage.setAttribute('src', drink.imageUrl);
+    itemRecipe.innerHTML = `<p><b>Ratio</b>: ${drink.ratio}</p><p><b>Cup</b>: ${drink.cup}</p>`;
+    itemDescription.textContent = drink.description;
   }
 })
