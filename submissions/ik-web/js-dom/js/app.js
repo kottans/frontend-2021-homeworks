@@ -1,8 +1,7 @@
-document.addEventListener("DOMContentLoaded", function(e) {
+document.addEventListener("DOMContentLoaded", function (e) {
     'use strict';
 
-    const cars = [
-        {
+    const cars = [{
             name: 'Mercedes',
             img: './img/merc.png',
             text: `Mercedes is both a German automotive marque and, from late 2019 onwards, a subsidiary – as Mercedes-Benz AG. Mercedes-Benz is known for producing luxury vehicles and commercial vehicles.The headquarters is in Stuttgart, Baden-Württemberg. The name first appeared in 1926 as Daimler-Benz. In 2018, Mercedes-Benz was the largest seller of premium vehicles in the world, having sold 2.31 million passenger cars.The company's origins come from Daimler-Motoren-Gesellschaft's 1901 Mercedes and Karl Benz's 1886 Benz Patent-Motorwagen, which is widely regarded as the first internal combustion engine in a self-propelled automobile. The fuel was not gasoline, but rather a much more volatile petroleum spirit called ligroin. The slogan for the brand is "the best or nothing".`
@@ -34,27 +33,24 @@ document.addEventListener("DOMContentLoaded", function(e) {
         }
     ];
 
-    const mainMenu = document.querySelector('.main-menu'); 
-    const cardTitle = document.querySelector('.card-title');
+    const mainContent = document.querySelector('.main-content');
+    const mainMenu = document.querySelector('.main-menu');
     const burger = document.querySelector('.burger');
-    const cardImg = document.querySelector('.card-img');
-    const cardText = document.querySelector('.card-text');
 
     //Menu burger
-    burger.addEventListener('click', function(e) {
+    burger.addEventListener('click', function (e) {
         e.preventDefault();
         this.classList.toggle('active');
         mainMenu.classList.toggle('active');
     });
 
     //Create a button for main menu
-    const addButtonToMenu = function(item) {
+    const addButtonToMenu = function (buttonName) {
         const li = document.createElement('li');
         const button = document.createElement('button');
-        const buttonName = cars[item].name;
 
         //Add the button to main menu
-        mainMenu.appendChild(li.appendChild(button)); 
+        mainMenu.appendChild(li.appendChild(button));
 
         // Name and style for button
         button.classList.add('menu-btn');
@@ -63,26 +59,41 @@ document.addEventListener("DOMContentLoaded", function(e) {
         return button;
     };
 
-    //Add buttons to document fragment
+
     const docFrag = document.createDocumentFragment();
 
     for (let i = 0; i < cars.length; i++) {
-        docFrag.appendChild(addButtonToMenu(i))
-            .addEventListener('click', function(e){
-            e.preventDefault();
-            cardTitle.innerHTML = cars[i].name;
-            cardImg.src = cars[i].img;
-            cardText.innerHTML = cars[i].text;
-    
+        docFrag.appendChild(addButtonToMenu(cars[i].name));
+    }
+
+    mainMenu.appendChild(docFrag);
+
+    mainMenu.addEventListener('click', function (e) {
+        const buttonOfMainMenu = e.target.closest('.menu-btn');
+        const buttonName = buttonOfMainMenu.textContent;
+
+        if (!buttonOfMainMenu) return;
+
+        cars.find(function (obj) {
+            if (obj.name === buttonName) {
+                const content = `
+                <section class="content-card">
+                    <h2 class="card-title" id="card-title">${obj.name}</h2>
+                    <div class="card-info">
+                        <img src="${obj.img}" alt="img" class="card-img" id="card-img">
+                        <p class="card-text" id="card-text">${obj.text}</p>
+                    </div>
+                </section>
+                `;
+                mainContent.innerHTML = content;
+            }
+
             // Hide the menu after pressing the button
             if (document.querySelector('.active')) {
                 burger.classList.remove('active');
                 mainMenu.classList.remove('active');
             }
         });
-    }
-
-    // Add buttons from document fragment to main menu
-    mainMenu.appendChild(docFrag);
+    });
 
 });
