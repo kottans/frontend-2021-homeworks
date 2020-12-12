@@ -136,7 +136,7 @@ img {
     }
 }
 
-@media screen and (min-width: 540px) {
+@media screen and (min-width: 548px) {
     .header {
         background-size: 12% auto;
     }
