@@ -1,13 +1,14 @@
 const urlData = 'https://randomuser.me/api/?results=20';
 let users;
 const cardsWrapBlock = document.querySelector('.wrap-cards');
-
 const inputNameSearch = document.querySelector('.filter-name');
 const elemSortingByName = document.querySelector('.sort-by_name');
 const elemSortingByAge = document.querySelector('.sort-by_age');
 const elemFilteringByGender = document.querySelector('.wrap-filter');
 
-async function getData() {
+const filterByGenderText = 'filterByGender';
+
+async function getData(urlData) {
     try {
         let response = await fetch(urlData);
         users = await response.json();
@@ -15,7 +16,7 @@ async function getData() {
 
         renderCards(users);
         checkUrl();
-    } catch (err) {
+    } catch {
         cardsWrapBlock.innerHTML = `<div class="error">Ooops, something went wrong. Try to reload <i class="far fa-smile-beam"></i></div>`;
     }
 }
@@ -99,10 +100,10 @@ function updUrl(filterName, value) {
 function checkUrl() {
     const parsedUrl = new URL(window.location.href);
     const state = window.history.state;
-    if (state === 'filterByGender') {
-        filterByGender(parsedUrl.searchParams.get("filterByGender"));
+    if (state === filterByGenderText) {
+        filterByGender(parsedUrl.searchParams.get(filterByGenderText));
     } else {
-        updUrl('filterByGender', 'all');
+        updUrl(filterByGenderText, 'all');
         activateFilterByGenderIcon('all');
     }
 }
@@ -121,7 +122,7 @@ function clickFilterByGender({target}) {
     if (target.classList.contains('filter-gender')) {
         let filterValue = target.getAttribute('filter-gender');
 
-        updUrl('filterByGender', filterValue);
+        updUrl(filterByGenderText, filterValue);
 
         filterByGender(filterValue);
     }
@@ -191,9 +192,13 @@ function sortByAge({currentTarget}) {
     elemSortingByName.classList.remove('active');
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-    getData();
+function initApp() {
+    getData(urlData);
     onPopStepUrl();
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    initApp();
 
     inputNameSearch.addEventListener('keyup', filterByName);
     elemSortingByName.addEventListener('click', sortByName);
