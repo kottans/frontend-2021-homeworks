@@ -114,6 +114,7 @@ function createGameField() {
         card.append(cardBack, cardFace)
 
         card.addEventListener('click', () => {
+            card.classList.add('main-notActive')
             card.classList.add('card-rotate')
             cardBack.classList.add('cardBack-rotate')
             cardBack.addEventListener('transitionend', function() {
@@ -207,12 +208,13 @@ function checkAnswer() {
     const openCards = document.querySelectorAll('.card-rotate')
     if (openCards.length === 2) {
         if (openCards[0].getAttribute('data-value') === openCards[1].getAttribute('data-value')) {
-            for (const elem of openCards) {
-                elem.classList.add('played')
+            for (const card of openCards) {
+                card.classList.add('played')
                 const timeOut = setTimeout(() => {
-                    elem.classList.add(CARDS_HIDE_ANIMATION)
-                    elem.addEventListener('animationend', function() {
-                        elem.classList.remove('card-rotate')
+                    card.classList.add(CARDS_HIDE_ANIMATION)
+                    card.addEventListener('animationend', function() {
+                        card.classList.remove('card-rotate')
+                        card.classList.remove('main-notActive')
                         MAIN.classList.remove('main-notActive')
                     }, { once: true })
                     clearTimeout(timeOut)
@@ -227,6 +229,7 @@ function checkAnswer() {
                     card.children[1].classList.remove('cardFace-rotate')
                     card.children[1].addEventListener('transitionend', function() {
                         card.children[0].classList.remove('cardBack-rotate')
+                        card.classList.remove('main-notActive')
                         MAIN.classList.remove('main-notActive')
                     }, { once: true })
                     clearTimeout(timeOut)
