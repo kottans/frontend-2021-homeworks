@@ -1,5 +1,5 @@
 // Enemies our player must avoid
-var Enemy = function (x, y, speed) {
+const Enemy = function (x, y, speed, player) {
   // Variables applied to each of our instances go here,
   // we've provided one for you to get started
 
@@ -9,6 +9,7 @@ var Enemy = function (x, y, speed) {
   this.x = x;
   this.y = y;
   this.speed = speed;
+  this.player = player;
 };
 
 // Update the enemy's position, required method for game
@@ -19,24 +20,32 @@ Enemy.prototype.update = function (dt) {
   // all computers.
   this.x = this.x + this.speed * dt;
 
-  // **if enemy hits the player
+  // **check for collision
+  this.collision();
+
+  // **restarts enemy's running
+  this.restartRunning();
+};
+
+Enemy.prototype.collision = function () {
   if (
-    ((this.x + enemyPadding <= player.x + playerPadding &&
-      this.x + colStep - enemyPadding >= player.x + playerPadding) ||
-      (this.x + enemyPadding >= player.x + playerPadding &&
-        this.x + enemyPadding <= player.x + colStep - playerPadding)) &&
-    Math.round(this.y / 10, 0) === Math.round(player.y / 10, 0)
+    ((this.x + ENEMY_PADDING <= this.player.x + PLAYER_PADDING &&
+      this.x + COL_STEP - ENEMY_PADDING >= this.player.x + PLAYER_PADDING) ||
+      (this.x + ENEMY_PADDING >= this.player.x + PLAYER_PADDING &&
+        this.x + ENEMY_PADDING <= this.player.x + COL_STEP - PLAYER_PADDING)) &&
+    Math.round(this.y / 10, 0) === Math.round(this.player.y / 10, 0)
   ) {
     winsBalance -= 1;
     winsBalEl.innerHTML = winsBalance;
     prevTryResult.innerHTML = "<em>You lost previous time<em>";
-    player.x = pDefualtXPos;
-    player.y = pDefualtYPos;
+    this.player.x = PLAYER_CONF.initialPos.x;
+    this.player.y = PLAYER_CONF.initialPos.y;
   }
+};
 
-  // **restarts enemy's running
-  if (this.x > colStep * 6) {
-    this.x = -colStep;
+Enemy.prototype.restartRunning = function () {
+  if (this.x > COL_STEP * 6) {
+    [this.x, this.y, this.speed] = generateEnemyPosAndSpeed();
   }
 };
 
@@ -48,20 +57,24 @@ Enemy.prototype.render = function () {
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
-var Player = function (x, y) {
-  this.sprite = "images/char-boy.png";
+const Player = function (x, y, sprite) {
+  this.sprite = sprite;
   this.x = x;
   this.y = y;
-  console.log("Player position:", this.x, this.y);
 };
+
 Player.prototype.update = function () {
   // **if player reaches the water (wins)
+  this.wins();
+};
+
+Player.prototype.wins = function () {
   if (this.y === -30) {
     winsBalance += 1;
     winsBalEl.innerHTML = winsBalance;
     prevTryResult.innerHTML = "<strong>You won previous time<strong>";
-    this.x = pDefualtXPos;
-    this.y = pDefualtYPos;
+    this.x = PLAYER_CONF.initialPos.x;
+    this.y = PLAYER_CONF.initialPos.y;
   }
 };
 
@@ -70,28 +83,28 @@ Player.prototype.render = function () {
 };
 
 Player.prototype.handleInput = function (direction) {
-  var newPosX, newPosY;
-  var maxY = rowStep * 5 - 30;
-  var minY = -30;
-  var maxX = colStep * 4;
-  var minX = 0;
+  let newPosX, newPosY;
+  const MAX_Y = ROW_STEP * 5 - ROW_OFFSET;
+  const MIN_Y = -ROW_OFFSET;
+  const MAX_X = COL_STEP * 4;
+  const MIN_X = 0;
 
   switch (direction) {
     case "left":
-      newPosX = this.x - colStep;
-      this.x = newPosX < minX ? this.x : newPosX;
+      newPosX = this.x - COL_STEP;
+      this.x = newPosX < MIN_X ? this.x : newPosX;
       break;
     case "right":
-      newPosX = this.x + colStep;
-      this.x = newPosX > maxX ? this.x : newPosX;
+      newPosX = this.x + COL_STEP;
+      this.x = newPosX > MAX_X ? this.x : newPosX;
       break;
     case "up":
-      newPosY = this.y - rowStep;
-      this.y = newPosY < minY ? this.y : newPosY;
+      newPosY = this.y - ROW_STEP;
+      this.y = newPosY < MIN_Y ? this.y : newPosY;
       break;
     case "down":
-      newPosY = this.y + rowStep;
-      this.y = newPosY > maxY ? this.y : newPosY;
+      newPosY = this.y + ROW_STEP;
+      this.y = newPosY > MAX_Y ? this.y : newPosY;
       break;
     default:
       break;
@@ -101,41 +114,65 @@ Player.prototype.handleInput = function (direction) {
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-var rowStep = 83;
-var colStep = 101;
-var playerPadding = 17;
-var enemyPadding = 2;
-var pDefualtXPos = colStep * 2;
-var pDefualtYPos = rowStep * 5 - 30;
+const ROW_STEP = 83;
+const COL_STEP = 101;
+const PLAYER_PADDING = 17;
+const ENEMY_PADDING = 2;
+const ROW_OFFSET = 30;
+const PLAYER_CONF = {
+  initialPos: {
+    x: COL_STEP * 2,
+    y: ROW_STEP * 5 - ROW_OFFSET,
+  },
+  sprite: "images/char-boy.png",
+};
 
-var player = new Player(pDefualtXPos, pDefualtYPos);
+let player = new Player(
+  PLAYER_CONF.initialPos.x,
+  PLAYER_CONF.initialPos.y,
+  PLAYER_CONF.sprite
+);
+let allEnemies = [];
+const ENEMIES_QUANTITY = 10;
 
-var enemy1 = new Enemy(-colStep, rowStep * 3 - 30, 100);
-var enemy2 = new Enemy(-colStep, rowStep * 2 - 30, 200);
-var enemy3 = new Enemy(-colStep, rowStep * 1 - 30, 300);
-var enemy4 = new Enemy(-1000 - colStep, rowStep * 3 - 30, 200);
-var enemy5 = new Enemy(-1000 - colStep, rowStep * 2 - 30, 250);
-var enemy6 = new Enemy(-1000 - colStep, rowStep * 1 - 30, 300);
-var allEnemies = [enemy1, enemy2, enemy3, enemy4, enemy5, enemy6];
+const generateEnemyPosAndSpeed = () => {
+  let initialXPos = -randomInt(1, 10) * 100;
+  let initialYPos = randomInt(1, 3) * ROW_STEP - ROW_OFFSET;
+  let speed = randomInt(0, 5) * 50 + 150;
+  return [initialXPos, initialYPos, speed];
+};
+
+const randomInt = (min, max) => {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+};
+
+for (let i = 0; i < ENEMIES_QUANTITY; i++) {
+  let enemy = {};
+  [enemy.xPos, enemy.yPos, enemy.speed] = generateEnemyPosAndSpeed();
+  allEnemies.push(new Enemy(enemy.xPos, enemy.yPos, enemy.speed, player));
+}
 
 // **adding DOM elements for wins and losses balance
-var winsBalance = 0;
-var winsHeaderEl = document.createElement("h2");
-var prevTryResult = document.createElement("p");
-var winsBalEl = document.createElement("p");
+let winsBalance = 0;
+const winsHeaderEl = document.createElement("h2");
+const prevTryResult = document.createElement("p");
+const winsBalEl = document.createElement("p");
+const winsDiv = document.createElement("div");
 
 winsHeaderEl.innerHTML = "Wins and losses balance";
 prevTryResult.innerHTML = "This is your first try";
 winsBalEl.innerHTML = winsBalance;
 
-document.body.appendChild(winsHeaderEl);
-document.body.appendChild(prevTryResult);
-document.body.appendChild(winsBalEl);
+winsDiv.appendChild(winsHeaderEl);
+winsDiv.appendChild(prevTryResult);
+winsDiv.appendChild(winsBalEl);
+
+document.body.appendChild(winsDiv);
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
 document.addEventListener("keyup", function (e) {
-  var allowedKeys = {
+  const allowedKeys = {
     37: "left",
     38: "up",
     39: "right",
