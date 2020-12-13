@@ -13,11 +13,13 @@ class Inhabitant {
    }
 
    toString() {
-      const { name, species, friends, gender } = this;
-      return (
-         `Data: ${species}, ${gender}, ${name}, ${friends.size || 'no'} friend` +
-         `${friends.size == 1 ? '' : 's'}`
-      )
+      const { name, species, friends, gender, say } = this;
+
+      const friendNames = [];
+      friends.forEach((friend) => friendNames.push(friend.name));
+      const friendsNamesString = friendNames.length ? `${friendNames.join(', ')};` : '';
+
+      return `${species}; ${name}; ${gender}; ${say}; ${friendsNamesString}`;
    }
 }
 
@@ -28,7 +30,7 @@ class Animal extends Inhabitant {
    }
 
    toString() {
-      return `<b>${this.say}</b> \n${super.toString()}, ${this.paws} paws.`
+      return `${super.toString()} ${this.paws};`
    }
 }
 
@@ -57,22 +59,8 @@ class Human extends Inhabitant {
       this.hands = hands;
    }
 
-   getFriendsNamesList() {
-      if (this.friends.size) {
-         return (
-            `I\'m friends with ${[...this.friends].map(friend => friend.name).join(', ')}`
-         );
-      } else {
-         return 'I don\'t need friends';
-      }
-   }
-
    toString() {
-      return (
-         `<b>${this.say}</b>\n` +
-         `${super.toString()}, ${this.gender}, ${this.hands} hands and ${this.legs} legs.\n` +
-         `<b>${this.getFriendsNamesList()}.</b >`
-      )
+      return `${super.toString()} ${this.hands}, ${this.legs};`;
    }
 }
 
