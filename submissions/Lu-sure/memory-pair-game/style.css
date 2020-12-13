@@ -1,0 +1,133 @@
+body {
+    padding: 0;
+    margin: 0;
+    box-sizing: content-box;
+    font-family: 'Langar', cursive;
+    font-size: 18px;
+}
+
+.navig {
+    background-color:  #53709b;
+    min-height: 70px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.new-game-button {
+    font-family: 'Langar', cursive;
+    font-size: 1.5em;
+    border: solid 2px rgb(45, 19, 94);
+    border-radius: 5px;
+    color:  rgb(45, 19, 94);;
+}
+
+.board {
+    background-color: rgb(187, 196, 245);
+    max-width: 800px;
+    height: 620px;
+    margin: 0 auto;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.15);
+    display: flex;
+    justify-content: space-between;
+    align-content: space-between;
+    flex-wrap: wrap;
+    padding: 20px;
+}
+
+.card {
+    height: 190px;
+    width: 175px;
+    background-color: transparent;
+    justify-content: center;
+    border: solid 2px  rgb(140, 151, 212);
+    perspective: 1000px;
+}
+
+.card-inner {
+    background-color: white;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+.pic {
+    height: 100%;
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+}
+
+.card-back, .card-front {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden; /* Safari */
+    backface-visibility: hidden;
+}
+
+.card, .card-inner, .card-back, .card-front, .pic {
+    border-radius: 3%;
+}
+
+.card-front {
+    background-color: white;
+    transform: rotateY(180deg);
+}
+
+.flip {
+    transform: rotateY(180deg);
+}
+
+.credits {
+    max-width: 840px;
+    margin: 0 auto;
+}
+
+@media screen and (max-width: 800px) {
+    .board {
+      max-width: 700px;
+      height: auto;
+    }
+    .card {
+      height: 160px;
+      width: 145px;
+    }
+    .new-game-button {
+      font-size: 1em;
+      height: 40px;
+    }
+  }
+
+  @media (max-width: 650px) {
+    .card {
+      height: 135px;
+      width: 120px;
+    }
+  }
+  @media (max-width: 540px) {
+    .card {
+      height: 110px;
+      width: 100px;
+    }
+  }
+  @media (max-width: 455px) {
+    .card {
+      height: 90px;
+      width: 80px;
+    }
+  }
+  @media (max-width: 370px) {
+    .board {
+      height: auto;
+    }
+    .new-game-button {
+      font-size: 0.8em;
+      height: 50px;
+      width: 50px;
+    }
+  }
