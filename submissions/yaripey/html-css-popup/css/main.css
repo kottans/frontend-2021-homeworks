@@ -1,0 +1,267 @@
+/* General styles */
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  font-family: sans-serif;
+  margin: 0;
+  color: black;
+}
+
+a {
+  text-decoration: none;
+  color: rgb(168, 168, 168)
+}
+
+a:visited {
+  color: rgb(168, 168, 168);
+}
+
+/* Header styles */
+
+.header-list {
+  list-style-type: none;
+  display: flex;
+  height: 50px;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.nav-item {
+  line-height: 0;
+  padding: 10px;
+  display: block;
+  font-size: 14px;
+}
+
+.nav-item:hover {
+  color: black;
+}
+
+.menu-button img {
+  height: 25px;
+  width: 25px;
+}
+
+.menu-button {
+  cursor: pointer;
+}
+
+.notifications img {
+  height: 20px;
+  width: 15px;
+}
+
+.notifications:hover, .profile-pic:hover {
+  transform: scale(1.2);
+  transition: ease 0.2s;
+}
+
+.notifications, .profile-pic {
+  transition: ease 0.2s;
+}
+
+.profile-pic {
+  height: 30px;
+  width: 30px;
+  margin: 15px;
+  border-radius: 30px;
+  background-color: black;
+  overflow: hidden;
+}
+
+
+/* Drop-down menu */
+
+.menu-check {
+  position: absolute;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.menu {
+  position: relative;
+  margin: 10px;
+}
+
+.menu-icon {
+  display: block;
+  width: 25px;
+  height: 25px;
+  background: url(../img/menu-button.png) no-repeat;
+  transition: ease 0.1s;
+}
+
+.menu-check:checked + .menu-icon:hover {
+  transform: scale(1.2) rotate(45deg);
+}
+
+.menu-icon:checked + .menu-icon:active {
+  transform: scale(0.6) rotate(45deg);
+}
+
+.menu-check:focus + .menu-icon{
+  outline: 1px solid black;
+}
+
+.menu-check:checked + .menu-icon{
+  transform: rotate(45deg);
+  transition: ease 0.4s;
+}
+
+.menu-icon:hover {
+  transform: scale(1.2);
+}
+
+.menu-icon:active {
+  transform: scale(0.8);
+}
+
+.menu-check:checked + .menu-icon + .popupmenu-wrap {
+  visibility: visible;
+  transition: 0.5s ease;
+  opacity: 1;
+}
+
+.popupmenu-wrap {
+  visibility: hidden;
+  position: absolute;
+  opacity: 0;
+  left: -200px;
+  top: 50px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  display: block;
+  transition: 0.3s ease;
+  height: 550px;
+}
+
+.popupmenu {
+  height: 100%;
+  width: 300px;
+  overflow: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 30px;
+}
+
+
+/* Small triangle */
+.popupmenu-wrap:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: -8px;
+  left: 212px;
+  border-bottom: 10px solid white;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+}
+
+.popupmenu ul {
+  list-style-type: none;
+}
+
+.menu-item {
+  display: block;
+  outline: none;
+  min-width: 90px;
+  height: 100px;
+  text-align: center;
+  padding: 20px 10px;
+  border: 1px solid transparent;
+  transition: ease 0.2s;
+  text-decoration: none;
+}
+
+.menu-item:hover {
+  border: 1px solid grey;
+  transition: ease 0.2s;
+}
+
+.menu-item a:focus {
+  outline: 1px solid black;
+}
+
+.menu-item img{
+  width: auto;
+  height: 30px;
+}
+
+.menu-item div {
+  margin-top: 20px;
+}
+
+/* More */
+
+.more-button-checkbox {
+  -appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.more-button {
+  align-self: flex-end;
+  width: 100%;
+  background: rgb(245, 245, 245);
+  height: 30px;
+
+  text-align: center;
+  line-height: 30px;
+  color: black;
+  transition: 0.3s ease;
+}
+
+.more-button-checkbox:focus + .more-button {
+  background: rgb(121, 121, 121);
+  color: white;
+}
+
+.more-button-checkbox:checked:focus + .more-button {
+  color: rgb(121, 121, 121);
+}
+
+.more-button:hover {
+  background: rgb(121, 121, 121);
+  color: white;
+  transition: 0.2s ease;
+  cursor: pointer;
+}
+
+.more-button-checkbox:checked + .more-button{
+  height: 2px;
+  overflow: hidden;
+  line-height: 10px;
+  display: block;
+  color: rgb(245, 245, 245);
+  transition: 0.3s ease;
+}
+
+.more-button-checkbox:checked ~ .menu-item.hidden {
+  display: block;
+}
+
+.menu-item.hidden {
+  display: none;
+}
+
+.final {
+  width: 100%;
+  height: 30px;
+}
+
+.final:hover {
+  background: rgb(121, 121, 121);
+  color: white;
+  transition: 0.2s ease;
+}
+
+.final:focus {
+  background: rgb(121, 121, 121);
+  color: white;
+  transition: 0.2s ease;
+  outline: none;
+}
