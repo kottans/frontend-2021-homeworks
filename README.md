@@ -11,7 +11,7 @@ Please follow the instructions below to submit your code for review.
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+**Table of Contents**
 
 - [A. Setup the fork and local clone](#a-setup-the-fork-and-local-clone)
 - [B. Brief workflow description](#b-brief-workflow-description)
@@ -22,6 +22,7 @@ Please follow the instructions below to submit your code for review.
 - [D. Reference materials and troubleshooting](#d-reference-materials-and-troubleshooting)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+<!-- *generated with [DocToc](https://github.com/thlorenz/doctoc)* -->
 
 ## A. Setup the fork and local clone
 
