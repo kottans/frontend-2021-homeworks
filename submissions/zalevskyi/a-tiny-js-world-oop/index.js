@@ -9,23 +9,63 @@
 // Define your objects here
 
 class Species {
-   constructor(genus, sound, legs, hands) {
-      this.genus=genus; this.sound=sound; this.legs=legs; this.hands=hands
+   constructor(genus) {
+      this.genus=genus
+   }
+   descriptionArray() {
+      return [`species: ${this.genus}`]
    }
 }
+class MammalNonMarine extends Species {
+   constructor(genus) {
+      super(genus)
+      this.legs = 4
+   }
+   descriptionArray() {
+      return [...super.descriptionArray(), `legs: ${this.legs}`]
+   }
+}
+class CarnivoraNonMarine extends MammalNonMarine {
+   constructor(genus, sound) {
+      super(genus)
+      this.sound = sound
+   }
+   descriptionArray() {
+      return [...super.descriptionArray(), `sound: ${this.sound}`]
+   }
+}
+class Hominoid extends MammalNonMarine {
+   constructor(genus, sound) {
+      super(genus)
+      this.legs = 2 // overides property value of the prototype
+      this.hands = 2
+      this.sound = sound
+   }
+   descriptionArray() {
+      //this.legs is not added because it is property of the prototype, just with new value
+      return [...super.descriptionArray(), `hands: ${this.hands}`, `sound: ${this.sound}`]
+   }
+}
+
 /* This World assumption:
-   Individums has no variation (sound, legs, hands)
-   from general species of their kind*/
+ * Individum instances has no variation of properties of their Species
+*/
+
 class Individum {
+//species parameter should be instance of Species or any of its descendants
    constructor(name, gender, species) {
       this.name=name, this.gender=gender, this.species=species, this.friends = new Set()
    }
    get greeting() {
-      return this.species.genus==='human' ? `Hi, my name is ${this.name}` : this.species.sound
+      if (this.species.genus==='human') return `Hi, my name is ${this.name}`
+      else if (this.species.hasOwnProperty('sound')) return this.species.sound
+      else return '... (creepy silence)'
    }
-   get profile() {
-      return [`species: ${this.species.genus}`, `name: ${this.name}`, `gender: ${this.gender}`,
-              `legs: ${this.species.legs}`, `hands: ${this.species.hands}`].join('; ')
+   get personality() {
+      return [`name: ${this.name}`, `gender: ${this.gender}`].join('; ')
+   }
+   get biology() {
+      return this.species.descriptionArray().filter(d => d.includes('sound')==false).join('; ')
    }
    get friendsList() {
       if (this.friends.size===0) return 'none'
@@ -46,10 +86,10 @@ function friendshipIndexPairs(indexUpperBound, probability) {
    return LIST
 }
 
-const HUMAN = new Species('human', 'Bla!', 2, 2)
-const CAT = new Species('cat', 'Meow!', 4)
-const DOG = new Species('dog', 'Woof!', 4)
-const CATWOMAN = new Species('cat-woman', 'Bla!', 2, 2)
+const HUMAN = new Hominoid('human', 'Bla!')
+const CAT = new CarnivoraNonMarine('cat', 'Meow!')
+const DOG = new CarnivoraNonMarine('dog', 'Woof!')
+const CATWOMAN = new Hominoid('cat-woman', 'Bla!')
 const NAMES = [
    {
       species: HUMAN,
@@ -104,4 +144,5 @@ friendshipIndexPairs(INHABITANS.length, FRIENDSHIP_PROBABILITY).forEach(pair =>
    */
 
 INHABITANS.forEach(i =>
-   print(`<hr>${i.greeting}<br>Profile: ${i.profile}<br>Friends: ${i.friendsList}`, 'div'))
+   print(`<hr>${i.greeting}<br><em>Personality:</em> ${i.personality}
+      <br><em>Biology:</em> ${i.biology}<br><em>Friends:</em> ${i.friendsList}`, 'div'))
