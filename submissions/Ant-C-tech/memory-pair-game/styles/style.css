@@ -1,0 +1,602 @@
+/* ========================= Common styles =========================*/
+
+html {
+    overflow-x: hidden;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.85) 100%), url("../img/bg.jpg") top;
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    -webkit-user-select: none;
+    /* Chrome/Safari/Opera */
+    /* Konqueror */
+    -moz-user-select: none;
+    /* Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently not supported by any browser */
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+.body {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.body-gamefield {
+    transform: rotate(-90deg);
+    transform-origin: left top;
+    width: 320px;
+    position: absolute;
+    top: 100%;
+    left: 0;
+}
+
+a {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+figure {
+    margin: 10px;
+}
+
+p {
+    margin: 0;
+}
+
+
+/* ========================= Header =========================*/
+
+header {
+    padding: 15px 0 5px;
+    margin: 0 15px;
+    opacity: 0;
+}
+
+.header-show {
+    transition: opacity ease-in-out 4s;
+    opacity: 1;
+}
+
+.titleBlock {
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    margin: 0 auto;
+}
+
+.titleBlock__title {
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding-bottom: 15px;
+    font-family: "Kaushan Script", cursive;
+    font-size: 40px;
+    color: #ffffff;
+    border-bottom: 2px solid #616161;
+    text-shadow: 0px 0px 29px rgba(255, 255, 255, 0.75);
+}
+
+.titleBlock__subtitle {
+    margin-top: 10px;
+    margin-bottom: 30px;
+    text-align: center;
+    font-family: "Kaushan Script", cursive;
+    font-size: 28px;
+    color: #ffffff;
+}
+
+.titleBlock__text {
+    display: none;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    font-family: "Kaushan Script", cursive;
+    font-size: 28px;
+    color: #ffffff;
+}
+
+
+/* ========================= Main =========================*/
+
+.main {
+    padding: 15px 0 5px;
+    margin: 0 15px 10px;
+    transition: opacity ease-in-out 1s;
+}
+
+.main-notActive {
+    pointer-events: none;
+}
+
+.main-hide {
+    opacity: 0;
+}
+
+.startBtnIco {
+    display: block;
+    margin: 100px auto 0;
+    width: 80px;
+    margin-bottom: 20px;
+}
+
+.greeting,
+.startBtn {
+    text-align: center;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    margin: 0 auto;
+    font-family: "Kaushan Script", cursive;
+    font-size: 32px;
+    letter-spacing: 0.7em;
+    color: #ffffff;
+    -webkit-animation: text-flicker 3s linear infinite;
+    animation: text-flicker 3s linear infinite;
+    cursor: pointer;
+}
+
+.greeting {
+    text-align: center;
+    margin-top: 100px;
+}
+
+.startBtnImg {
+    position: absolute;
+    height: 1200px;
+    opacity: 0.07;
+    transform: rotate(-135deg) translateY(900px) translateX(100px);
+    z-index: -10;
+}
+
+.cardsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -15px;
+}
+
+.card {
+    position: relative;
+    margin: 15px;
+    width: calc(25% - 30px);
+    border: 2px solid #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    max-height: 220px;
+    transition: all linear 0.55s;
+    box-shadow: 7px 7px 10px 1px rgba(255, 255, 255, 0.25);
+}
+
+.card-rotate {
+    transform: rotate3d(0, 1, 0, -180deg);
+    box-shadow: -7px 7px 10px 1px rgba(255, 255, 255, 0.25);
+}
+
+.cardBack {
+    position: relative;
+    width: 100%;
+    display: block;
+    transition: transform linear 0.3s;
+}
+
+.cardBack-rotate {
+    transform: rotate3d(0, 1, 0, 90deg);
+}
+
+.cardFace {
+    position: absolute;
+    transform: rotate3d(0, 1, 0, 90deg);
+    top: 0;
+    width: 90%;
+    transition: transform linear 0.25s;
+    padding-right: 30px;
+}
+
+.cardFace-rotate {
+    transform: rotate3d(0, 1, 0, 180deg);
+}
+
+.japText {
+    margin: 10px 0;
+    font-family: "Kaushan Script", cursive;
+    font-size: 100px;
+    text-align: center;
+    color: #ffffff;
+    line-height: 1;
+}
+
+.engText {
+    margin: 0;
+    font-family: "Kaushan Script", cursive;
+    font-size: 60px;
+    text-align: center;
+    color: #ffffff;
+    line-height: 1;
+}
+
+.congratulation,
+.congratulationText {
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    margin: 0 auto;
+    font-family: "Kaushan Script", cursive;
+    font-size: 40px;
+    letter-spacing: 0.2em;
+    color: #ffffff;
+}
+
+.congratulationSubText {
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    margin: 50px auto;
+    text-align: center;
+    font-family: "Kaushan Script", cursive;
+    font-size: 32px;
+    color: #ffffff;
+}
+
+.newGame,
+.attempts {
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    margin: 0 auto;
+    font-family: "Kaushan Script", cursive;
+    font-size: 32px;
+    letter-spacing: 0.2em;
+    color: #ffffff;
+    -webkit-animation: text-flicker 3s linear infinite;
+    animation: text-flicker 3s linear infinite;
+    cursor: pointer;
+}
+
+.congratulation,
+.congratulationText {
+    margin-bottom: 10px;
+}
+
+.congratulationIco {
+    display: block;
+    margin: 20px auto 0;
+    width: 80px;
+    margin-bottom: 20px;
+}
+
+@-webkit-keyframes text-flicker {
+    0% {
+        opacity: 0.1;
+        text-shadow: 0px 0px 29px rgba(242, 22, 22, 1);
+    }
+    2% {
+        opacity: 1;
+        text-shadow: 0px 0px 29px rgba(242, 22, 22, 1);
+    }
+    8% {
+        opacity: 0.1;
+        text-shadow: 0px 0px 29px rgba(242, 22, 22, 1);
+    }
+    9% {
+        opacity: 1;
+        text-shadow: 0px 0px 29px rgba(242, 22, 22, 1);
+    }
+    12% {
+        opacity: 0.1;
+        text-shadow: 0px 0px rgba(242, 22, 22, 1);
+    }
+    20% {
+        opacity: 1;
+        text-shadow: 0px 0px 29px rgba(242, 22, 22, 1)
+    }
+    25% {
+        opacity: 0.3;
+        text-shadow: 0px 0px 29px rgba(242, 22, 22, 1)
+    }
+    30% {
+        opacity: 1;
+        text-shadow: 0px 0px 29px rgba(242, 22, 22, 1)
+    }
+    70% {
+        opacity: 0.7;
+        text-shadow: 0px 0px 29px rgba(242, 22, 22, 1)
+    }
+    72% {
+        opacity: 0.2;
+        text-shadow: 0px 0px 29px rgba(242, 22, 22, 1)
+    }
+    77% {
+        opacity: .9;
+        text-shadow: 0px 0px 29px rgba(242, 22, 22, 1)
+    }
+    100% {
+        opacity: .9;
+        text-shadow: 0px 0px 29px rgba(242, 22, 22, 1)
+    }
+}
+
+@keyframes text-flicker {
+    0% {
+        opacity: 0.1;
+        text-shadow: 0px 0px 29px rgba(242, 22, 22, 1);
+    }
+    2% {
+        opacity: 1;
+        text-shadow: 0px 0px 29px rgba(242, 22, 22, 1);
+    }
+    8% {
+        opacity: 0.1;
+        text-shadow: 0px 0px 29px rgba(242, 22, 22, 1);
+    }
+    9% {
+        opacity: 1;
+        text-shadow: 0px 0px 29px rgba(242, 22, 22, 1);
+    }
+    12% {
+        opacity: 0.1;
+        text-shadow: 0px 0px rgba(242, 22, 22, 1);
+    }
+    20% {
+        opacity: 1;
+        text-shadow: 0px 0px 29px rgba(242, 22, 22, 1)
+    }
+    25% {
+        opacity: 0.3;
+        text-shadow: 0px 0px 29px rgba(242, 22, 22, 1)
+    }
+    30% {
+        opacity: 1;
+        text-shadow: 0px 0px 29px rgba(242, 22, 22, 1)
+    }
+    70% {
+        opacity: 0.7;
+        text-shadow: 0px 0px 29px rgba(242, 22, 22, 1)
+    }
+    72% {
+        opacity: 0.2;
+        text-shadow: 0px 0px 29px rgba(242, 22, 22, 1)
+    }
+    77% {
+        opacity: .9;
+        text-shadow: 0px 0px 29px rgba(242, 22, 22, 1)
+    }
+    100% {
+        opacity: .9;
+        text-shadow: 0px 0px 29px rgba(242, 22, 22, 1)
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .cardFace {
+        top: 40px;
+        padding-right: 20px;
+    }
+    .japText {
+        font-size: 80px;
+    }
+    .engText {
+        font-size: 30px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .titleBlock__title {
+        font-size: 30px;
+    }
+    .titleBlock__subtitle {
+        font-size: 20px;
+        margin-bottom: 5px;
+    }
+    .titleBlock__text {
+        font-size: 22px;
+    }
+    .startBtnIco {
+        margin: 30px auto 20px;
+    }
+    .japText {
+        font-size: 50px;
+    }
+    .engText {
+        font-size: 30px;
+    }
+}
+
+@media screen and (max-width: 610px) {
+    .cardFace {
+        top: 25px;
+        padding-right: 15px;
+    }
+    .japText {
+        font-size: 34px;
+    }
+    .engText {
+        font-size: 22px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .cardsContainer {
+        margin: 0 -5px;
+    }
+    .card {
+        margin: 5px;
+        width: calc(25% - 10px);
+        border-radius: 8px;
+    }
+    .congratulation,
+    .congratulationText {
+        text-align: center;
+        font-size: 28px;
+    }
+    .congratulationSubText {
+        font-size: 24px;
+    }
+    .congratulationSubText {
+        font-size: 24px;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .cardFace {
+        top: 10px;
+        padding-right: 10px;
+    }
+    .japText {
+        font-size: 28px;
+    }
+    .engText {
+        font-size: 18px;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    .cardFace {
+        top: 8px;
+        padding-right: 8px;
+    }
+    .japText {
+        font-size: 24px;
+    }
+    .engText {
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 325px) {
+    .cardFace {
+        top: 4px;
+        padding-right: 4px;
+    }
+    .japText {
+        font-size: 20px;
+    }
+    .engText {
+        font-size: 14px;
+    }
+}
+
+
+/* Screen height */
+
+@media screen and (orientation: landscape) and (max-height: 768px) {
+    .titleBlock__title {
+        font-size: 30px;
+    }
+    .titleBlock__subtitle {
+        font-size: 20px;
+        margin-bottom: 5px;
+    }
+    .titleBlock__text {
+        font-size: 22px;
+    }
+    .startBtnIco {
+        margin: 30px auto 20px;
+    }
+    .cardFace {
+        top: 40px;
+        padding-right: 20px;
+    }
+    .japText {
+        font-size: 50px;
+    }
+    .engText {
+        font-size: 30px;
+    }
+}
+
+@media screen and (orientation: landscape) and (max-height: 610px) {
+    .cardFace {
+        top: 25px;
+        padding-right: 15px;
+    }
+    .japText {
+        font-size: 34px;
+    }
+    .engText {
+        font-size: 22px;
+    }
+    .startBtnIco {
+        margin: 30px auto 20px;
+    }
+}
+
+@media screen and (orientation: landscape) and (max-height: 576px) {
+    .greeting {
+        margin-top: 10px;
+    }
+    .cardsContainer {
+        margin: 0 -5px;
+    }
+    .card {
+        margin: 5px;
+        width: calc(25% - 10px);
+        border-radius: 8px;
+    }
+    .congratulation,
+    .congratulationText {
+        text-align: center;
+        font-size: 28px;
+    }
+    .congratulationSubText {
+        font-size: 24px;
+    }
+    .congratulationSubText {
+        font-size: 24px;
+    }
+}
+
+@media screen and (orientation: landscape) and (max-height: 450px) {
+    .cardFace {
+        top: 10px;
+        padding-right: 10px;
+    }
+    .japText {
+        font-size: 28px;
+    }
+    .engText {
+        font-size: 18px;
+    }
+}
+
+@media screen and (orientation: landscape) and (max-height: 380px) {
+    .titleBlock__title {
+        font-size: 30px;
+    }
+    .titleBlock__subtitle {
+        font-size: 20px;
+        margin-bottom: 5px;
+    }
+    .cardFace {
+        top: 8px;
+        padding-right: 8px;
+    }
+    .japText {
+        font-size: 24px;
+    }
+    .engText {
+        font-size: 16px;
+    }
+}
+
+@media screenand and (orientation: landscape) and (max-height: 325px) {
+    .cardFace {
+        top: 4px;
+        padding-right: 4px;
+    }
+    .japText {
+        font-size: 20px;
+    }
+    .engText {
+        font-size: 14px;
+    }
+}
