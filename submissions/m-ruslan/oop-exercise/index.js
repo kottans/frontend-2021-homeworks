@@ -8,75 +8,98 @@
 // ======== OBJECTS DEFINITIONS ========
 // Define your objects here
 
-let Inhabitant = function (name, gender, saying, friendTo) {
-  this.name = name;
-  this.gender = gender;
-  this.saying = saying;
-  this.friendTo = friendTo;
+//**ES6 classes and sub-classes
+class Inhabitant {
+  constructor(name, friendTo, gender) {
+    this.name = name;
+    this.gender = gender;
+    this.friendTo = friendTo;
+  }
+}
+
+class Human extends Inhabitant {
+  constructor(name, friendTo, gender) {
+    super(name, friendTo, gender);
+    this.hands = 2;
+    this.legs = 2;
+    this.type = "human";
+  }
+}
+
+class Man extends Human {
+  constructor(name, friendTo, gender = "male") {
+    super(name, friendTo, gender);
+  }
+
+  saying() {
+    return `Hi, I'm ${this.name}`;
+  }
+}
+
+class Woman extends Human {
+  constructor(name, friendTo, gender = "female") {
+    super(name, friendTo, gender);
+  }
+
+  saying() {
+    return `Hello, I'm ${this.name}`;
+  }
+}
+
+class Pet extends Inhabitant {
+  constructor(name, friendTo, gender) {
+    super(name, friendTo, gender);
+    this.type = "pet";
+  }
+}
+
+class Dog extends Pet {
+  constructor(name, friendTo, gender) {
+    super(name, friendTo, gender);
+    this.legs = 4;
+    this.type = this.type + ": " + "dog";
+  }
+
+  saying() {
+    return `Woof, I'm ${this.name}`;
+  }
+}
+
+//**classes built employing composition
+const sayingMoew = (state) => ({
+  saying: () => `Meow, I'm ${state.name}`,
+});
+
+const Cat = (name, friendTo, gender) => {
+  let state = {
+    name,
+    friendTo,
+    gender,
+    type: "pet: cat",
+    legs: 4,
+  };
+  return Object.assign(state, sayingMoew(state));
 };
 
-let Human = function (name, gender, saying, friendTo) {
-  Inhabitant.call(this, name, gender, saying, friendTo);
+const CatWoman = (name, friendTo, gender) => {
+  let state = {
+    name,
+    friendTo,
+    gender,
+    type: "super-hero",
+    legs: 2,
+    hands: 2,
+  };
+  return Object.assign(state, sayingMoew(state));
 };
-Human.prototype = Object.create(Inhabitant.prototype);
-Human.prototype.constructor = Human;
-Human.prototype.hands = "2 hands";
-Human.prototype.legs = "2 legs";
-Human.prototype.type = "human";
 
-let Man = function (name, saying, friendTo) {
-  Human.call(this, name, this.gender, saying, friendTo);
-};
-Man.prototype = Object.create(Human.prototype);
-Man.prototype.constructor = Man;
-Man.prototype.gender = "male";
+//**objects creation based on classes
+const dog = new Dog("Ghost", ["Monica", "Tom", "Everybody"], "male");
+const woman = new Woman("Monica", ["Chandler", "Ghost"]);
+const man = new Man("Chandler", ["Monica", "Tom"]);
 
-let Woman = function (name, saying, friendTo) {
-  Human.call(this, name, this.gender, saying, friendTo);
-};
-Woman.prototype = Object.create(Human.prototype);
-Woman.prototype.constructor = Woman;
-Woman.prototype.gender = "female";
-
-let Pet = function (name, gender, saying, friendTo) {
-  Inhabitant.call(this, name, gender, saying, friendTo);
-};
-Pet.prototype = Object.create(Inhabitant.prototype);
-Pet.prototype.constructor = Pet;
-Pet.prototype.type = "pet";
-
-let Dog = function (name, gender, friendTo) {
-  Pet.call(this, name, gender, this.saying, friendTo);
-};
-Dog.prototype = Object.create(Pet.prototype);
-Dog.prototype.constructor = Dog;
-Dog.prototype.legs = "4 legs";
-Dog.prototype.tail = "1 tail";
-Dog.prototype.type = Dog.prototype.type + ": " + "dog";
-Dog.prototype.saying = "Bark";
-
-let Cat = function (name, gender, friendTo) {
-  Pet.call(this, name, gender, this.saying, friendTo);
-};
-Cat.prototype = Object.create(Pet.prototype);
-Cat.prototype.constructor = Cat;
-Cat.prototype.legs = "4 legs";
-Cat.prototype.tail = "1 tail";
-Cat.prototype.type = Cat.prototype.type + ": " + "cat";
-Cat.prototype.saying = "Meow";
-
-let dog = new Dog("Ghost", "male", ["Monica", "Tom", "Everybody"]);
-let cat = new Cat("Tom", "male", ["Monica", "Chandler", "Everyone who feeds"]);
-let woman = new Woman("Monica", "Hello", ["Chandler", "Ghost"]);
-let man = new Man("Chandler", "Hi", ["Monica", "Tom"]);
-
-let catWoman = new Cat("Cat-woman", "female", [
-  "Chandler dressed as a Pink Bunny",
-]);
-catWoman.legs = "2 legs";
-catWoman.hands = "2 hands";
-catWoman.tail = "1 cat-woman's tail";
-catWoman.type = "super-hero";
+const cat = Cat("Tom", ["Monica", "Chandler", "Everyone who feeds"], "male");
+const catWoman = CatWoman("Cat-woman", "female", ["Chandler"]);
 
 // ======== OUTPUT ========
 /* Use print(message) for output.
@@ -87,17 +110,19 @@ catWoman.type = "super-hero";
    so code reviewers might focus on a single file that is index.js.
    */
 
-let makeMessage = (obj) => {
-  let propsArr = [];
-  for (let propName in obj) {
-    propName !== "constructor"
-      ? propsArr.push(propName)
-      : console.log("constructor found");
-  }
-  return propsArr.map((propName) => obj[propName]).join("; ");
-};
+const makeMessage = (obj) =>
+  ["type", "name", "saying", "gender", "legs", "hands", "friendTo"]
+    .map((propName) =>
+      obj[propName] === undefined
+        ? "none"
+        : typeof obj[propName] === "function"
+        ? `${propName}: ${obj[propName]()}`
+        : `${propName}: ${obj[propName]}`
+    )
+    .filter((prop) => prop !== "none")
+    .join(";\n");
 
-let world = [dog, cat, woman, man, catWoman];
+const world = [dog, cat, woman, man, catWoman];
 world.forEach((inhabitant) => print(makeMessage(inhabitant)));
 
 /* Print examples:
