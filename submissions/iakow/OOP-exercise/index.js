@@ -25,7 +25,6 @@ class Animal extends Inhabitant {
    constructor({ species, name, gender, say, paws = 4 }) {
       super({ species, name, say, gender });
       this.paws = paws;
-      this.gender = gender;
    }
 
    toString() {
@@ -56,7 +55,6 @@ class Human extends Inhabitant {
       super({ species, name, say, gender });
       this.legs = legs;
       this.hands = hands;
-      this.gender = gender;
    }
 
    getFriendsNamesList() {
