@@ -9,33 +9,37 @@
 // Define your objects here
 
 class Mammal {
-   legs = 4;
-
-   constructor(name, gender, friends) {
+   constructor(name, gender, saying, species, friends) {
       this.name = name;
       this.gender = gender;
+      this.species = species;
+      this.saying = saying;
       this.friends = friends;
+      this.legs = 4;
+   }
+   getProperties() {
+      return [this.species, this.name, this.gender, this.legs, this.friends.join(', ')];
+   }
+   [Symbol.toPrimitive](hint) {
+      if (hint == 'string') {  
+         return this.getProperties().join(';');
+      }
    }
 }
 
 class Human extends Mammal {
-   legs = 2;
-   hands = 2;
-   species = 'human';
-
    constructor(name, gender, saying, friends) {
-      super(name, gender, friends);
-      this.saying = saying;
+      super(name, gender, saying, 'human', friends);
+      this.legs = 2;
+      this.hands = 2;
+   }
+
+   getProperties() {
+      return [this.species, this.name, this.gender, this.legs, this.hands, this.friends.join(', ')];
    }
 }
 
-class Animal extends Mammal {
-   constructor(name, gender, saying, species, friends) {
-      super(name, gender, friends);
-      this.saying = saying;
-      this.species = species;
-   }
-}
+class Animal extends Mammal {}
 
 const dog = new Animal('Jhonny', 'male', 'woof-woof!', 'dog', ['Andrew', 'Anastasia']);
 const cat = new Animal('Murka', 'female', 'meow!', 'cat', ['Anastasia']);
@@ -65,12 +69,12 @@ const catwoman = new Human('CatWoman', 'female', cat.saying, []);
 
 const printList = [dog, cat, man, woman, catwoman];
 
-function tmplStr({species, name, gender, legs, hands, saying, friends}) {
-   return `${species};${name};${gender};${legs};${hands};${saying};${friends.join(', ')}`;
-}
+// function tmplStr({species, name, gender, legs, hands, saying, friends}) {
+//    return `${species};${name};${gender};${legs};${hands};${saying};${friends.join(', ')}`;
+// }
 
 printList.forEach( obj => {
-   print( tmplStr(obj) );
+   print( obj );
 } );
 
 
