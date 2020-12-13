@@ -36,6 +36,7 @@ const dog = {
    gender: 'male',
    legs: 4,
    hands: 0,
+   tail: 1,
    saying: 'woof-woof!',
    friendlyTo: ['John', 'Tereza']
 };
@@ -46,19 +47,38 @@ const cat = {
    gender: 'male',
    legs: 4,
    hands: 0,
+   tail: 1,
    saying: 'meow-meow!',
    friendlyTo: ['Tereza']
 };
 
-const world = [man, woman, dog, cat];
-
-printArrayOfObjects = arr => {
-   arr.forEach(obj =>
-      print(obj.species + '; ' + obj.name + '; ' + obj.gender + '; ' +
-         obj.legs + '; ' + obj.hands + '; ' + obj.saying + '; ' + obj.friendlyTo));
+const catWoman = {
+   species: 'human',
+   name: 'Kitty',
+   gender: 'female',
+   legs: 2,
+   hands: 2,
+   tail: 1,
+   saying: cat.saying
 };
 
-printArrayOfObjects(world);
+const world = [man, woman, catWoman, dog, cat];
+
+const listOfKeys = ['species', 'name', 'gender', 'legs', 'hands', 'tail', 'saying', 'friendlyTo'];
+
+makingString = obj => {
+   let string = '';
+   for (let i = 0; i < listOfKeys.length; i++) {
+      if (i + 1 === listOfKeys.length) {
+         string += (obj[listOfKeys[i]] + ".");
+         return string;
+      } else {
+         string += (obj[listOfKeys[i]] + "; ");
+      }
+   }
+};
+
+world.forEach(obj => print(makingString(obj)));
 
 // ======== OUTPUT ========
 /* Use print(message) for output.
