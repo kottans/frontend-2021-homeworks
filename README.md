@@ -120,7 +120,7 @@ C125. Ask for a review
  - Monitor your pull request for possible change requests
  
 When your submission gets finally merged, put your reflections on the task
-and your code review experience to your student's diary ():
+and your code review experience to your student's diary (your `kottans-frontend` repo):
  - _what was new to you_
  - _what surprised you_
  - _what you intend to use in future_
