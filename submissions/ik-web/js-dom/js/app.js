@@ -37,63 +37,93 @@ document.addEventListener("DOMContentLoaded", function (e) {
     const mainMenu = document.querySelector('.main-menu');
     const burger = document.querySelector('.burger');
 
-    //Menu burger
-    burger.addEventListener('click', function (e) {
-        e.preventDefault();
-        this.classList.toggle('active');
-        mainMenu.classList.toggle('active');
-    });
+    //Create menu burger
+    function createBurger() {
+        burger.addEventListener('click', function (e) {
+            e.preventDefault();
+            this.classList.toggle('active');
+            mainMenu.classList.toggle('active');
+        });
+    }
 
     //Create a button for main menu
-    const addButtonToMenu = function (buttonName) {
-        const li = document.createElement('li');
+    function createButton(buttonName) {
         const button = document.createElement('button');
 
-        //Add the button to main menu
-        mainMenu.appendChild(li.appendChild(button));
-
-        // Name and style for button
         button.classList.add('menu-btn');
         button.innerHTML = buttonName;
 
         return button;
-    };
-
-
-    const docFrag = document.createDocumentFragment();
-
-    for (let i = 0; i < cars.length; i++) {
-        docFrag.appendChild(addButtonToMenu(cars[i].name));
     }
 
-    mainMenu.appendChild(docFrag);
+    // Add buttons to to main menu
+    function addButtons() {
+        const docFrag = document.createDocumentFragment();
+        const li = document.createElement('li');
 
-    mainMenu.addEventListener('click', function (e) {
-        const buttonOfMainMenu = e.target.closest('.menu-btn');
-        const buttonName = buttonOfMainMenu.textContent;
+        for (let i = 0; i < cars.length; i++) {
+            li.appendChild(createButton(cars[i].name));
+            docFrag.appendChild(li);
+        }
 
-        if (!buttonOfMainMenu) return;
+        mainMenu.appendChild(docFrag);
+    }
 
-        cars.find(function (obj) {
-            if (obj.name === buttonName) {
-                const content = `
-                <section class="content-card">
-                    <h2 class="card-title" id="card-title">${obj.name}</h2>
-                    <div class="card-info">
-                        <img src="${obj.img}" alt="img" class="card-img" id="card-img">
-                        <p class="card-text" id="card-text">${obj.text}</p>
-                    </div>
-                </section>
-                `;
-                mainContent.innerHTML = content;
+    // Show content on page after button click 
+    function showContent(obj) {
+        const content = `
+            <section class="content-card">
+                <h2 class="card-title" id="card-title">${obj.name}</h2>
+                <div class="card-info">
+                    <img src="${obj.img}" alt="img" class="card-img" id="card-img">
+                    <p class="card-text" id="card-text">${obj.text}</p>
+                </div>
+            </section>
+        `;
+        mainContent.innerHTML = content;
+    }
+
+    // Hide the burger menu after button click
+    function hideBurgerMenu() {
+        if (document.querySelector('.active')) {
+            burger.classList.remove('active');
+            mainMenu.classList.remove('active');
+        }
+    }
+
+    // Add event listener to main menu for buttons 
+    function addListenerToMenu() {
+        mainMenu.addEventListener('click', function (e) {
+            const clickedButton = e.target.closest('.menu-btn');
+            const buttonName = clickedButton.textContent;
+            const buttonActive = document.querySelector('.btn-active');
+
+            if (!clickedButton || clickedButton === buttonActive) {
+                return;
             }
 
-            // Hide the menu after pressing the button
-            if (document.querySelector('.active')) {
-                burger.classList.remove('active');
-                mainMenu.classList.remove('active');
+            if (buttonActive) {
+                buttonActive.classList.remove('btn-active');
             }
+
+            clickedButton.classList.add('btn-active');
+
+            cars.find(function (obj) {
+                if (obj.name === buttonName) {
+                    showContent(obj);
+                    hideBurgerMenu();
+                }
+            });
+
         });
-    });
+    }
 
+    // Add start app.js 
+    function StartApp() {
+        createBurger();
+        addButtons();
+        addListenerToMenu();
+    }
+
+    StartApp();
 });
