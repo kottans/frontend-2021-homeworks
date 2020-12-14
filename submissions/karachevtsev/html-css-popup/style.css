@@ -18,9 +18,11 @@ details summary::-webkit-details-marker { display: none; }
 
 ul { margin: 0; padding: 0; list-style: none; }
 
-.header { display: flex; justify-content: space-between; }
+.header { display: flex; justify-content: space-between; min-width: 320px; }
 
-.header__nav { margin-left: auto; padding: 10px 20px; }
+.header__nav { margin-left: auto; padding: 10px; }
+
+@media (min-width: 576px) { .header__nav { padding-left: 20px; padding-right: 20px; } }
 
 .nav__list { display: flex; align-items: center; color: #757575; }
 
@@ -38,11 +40,11 @@ ul { margin: 0; padding: 0; list-style: none; }
 
 .nav-details__btn:hover { background-color: whitesmoke; }
 
-.nav-details__popup { position: absolute; top: 140%; right: -40px; }
+.nav-details__popup { position: absolute; top: 148%; right: -100px; }
 
-.popup { width: 320px; box-shadow: 0 10px 18px -4px rgba(0, 0, 0, 0.36); border: 1px solid whitesmoke; }
+.popup { width: 300px; box-shadow: 0 10px 18px -4px rgba(0, 0, 0, 0.36); border: 1px solid whitesmoke; }
 
-.popup:before { content: ''; position: absolute; top: -9px; right: 47px; width: 20px; height: 20px; border: 1px solid whitesmoke; border-right: none; border-bottom: none; transform: rotate(45deg); background: #fff; }
+.popup:before { content: ''; position: absolute; top: -10px; right: 107px; width: 20px; height: 20px; border: 1px solid whitesmoke; border-right: none; border-bottom: none; transform: rotate(45deg); background: #fff; }
 
 .popup__container { position: relative; max-height: 450px; overflow-y: auto; }
 
