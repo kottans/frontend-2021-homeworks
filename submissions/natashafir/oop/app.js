@@ -4,11 +4,16 @@ const BUGS_START = -100;
 const BUGS_END = 500;
 const MIN_SPEED = 5100;
 const MAX_SPEED = 8000;
+const MID_SPEED = 200;
 const INITIAL_POSITION_X = 202;
 const INITIAL_POSITION_Y = 400;
 const BUG_SIZE = 75;
 const FIELD_WIDTH = 404;
 const FIELD_HEIGHT = 400;
+const ROCK_SIZE = 85;
+const FIRST_ROCK = 60;
+const SECOND_ROCK = FIRST_ROCK + ROCK_SIZE;
+const THIRD_ROCK = SECOND_ROCK + ROCK_SIZE;
 const allEnemies = [];
 
 let Enemy = function (x, y, speed, player) {
@@ -24,17 +29,18 @@ let Enemy = function (x, y, speed, player) {
 // You should multiply any movement by the dt parameter
 // which will ensure the game runs at the same speed for
 // all computers.
+
 Enemy.prototype.update = function (dt) {
     this.x += this.speed * dt;
     if (this.x > BUGS_END) {
         this.x = BUGS_START;
         this.speed = (Math.floor(Math.random() * MIN_SPEED) + MAX_SPEED) * dt;
     }
-    if (this.Collision()) player.resetPosition();
+    if (this.checkCollision()) this.player.resetPosition();
 };
 
-Enemy.prototype.Collision = function () {
-    return (player.y == this.y && player.x < this.x + BUG_SIZE && this.x < player.x + BUG_SIZE);
+Enemy.prototype.checkCollision = function () {
+    return (this.player.y == this.y && this.player.x < this.x + BUG_SIZE && this.x < this.player.x + BUG_SIZE);
 };
 
 // Draw the enemy on the screen, required method for game
@@ -59,8 +65,8 @@ Player.prototype.update = function () {
 };
 
 Player.prototype.resetPosition = function () {
-    player.x = INITIAL_POSITION_X;
-    player.y = INITIAL_POSITION_Y;
+    this.x = INITIAL_POSITION_X;
+    this.y = INITIAL_POSITION_Y;
 };
 
 Player.prototype.render = function () {
@@ -88,20 +94,20 @@ Player.prototype.handleInput = function (key) {
     }
 };
 
-let bugLocation = [60, 145, 230];
+let player = new Player(INITIAL_POSITION_X, INITIAL_POSITION_Y);
+
+let bugLocation = [FIRST_ROCK, SECOND_ROCK, THIRD_ROCK];
 
 bugLocation.forEach(function (bugY) {
-    let enemy = new Enemy(BUGS_START, bugY, 200);
+    let enemy = new Enemy(BUGS_START, bugY, MID_SPEED, player);
     allEnemies.push(enemy);
 });
 
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-
-let player = new Player(INITIAL_POSITION_X, INITIAL_POSITION_Y);
-
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
+
 document.addEventListener('keyup', function (e) {
     let allowedKeys = {
         37: 'left',
