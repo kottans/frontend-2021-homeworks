@@ -9,9 +9,12 @@
 // Define your objects here
 
 class Creature {
-  constructor(name, gender = 'unknown') {
+  constructor(name, gender, species, legs, saying) {
     this.name = name;
     this.gender = gender;
+    this.species = species;
+    this.legs = legs;
+    this.saying = saying;
     this.friends = [];
   }
 
@@ -19,46 +22,55 @@ class Creature {
     newFriends.forEach(({ name }) => this.friends.push(name));
     return this.friends;
   }
+
+  toString() {
+    let template = [
+      `name: ${this.name}; `,
+      `gender: ${this.gender}; `,
+      `species: ${this.species}; `,
+      `saying: ${this.saying}; `,
+      `legs: ${this.legs}; `,
+    ];
+
+    if (this.friends.length > 0) {
+      template.push(`friends: ${this.friends}; `);
+    }
+    return template.join('');
+  }
 }
 
 class Dog extends Creature {
   constructor(name, gender) {
-    super(name, gender);
-    this.species = 'dog';
-    this.legs = 4;
-    this.saying = 'woof!';
+    super(name, gender, 'dog', 4, 'woof!');
   }
 }
 
 class Cat extends Creature {
   constructor(name, gender) {
-    super(name, gender);
-    this.species = 'cat';
-    this.legs = 4;
-    this.saying = 'mew-mew-mew-mew';
+    super(name, gender, 'cat', 4, 'mew-mew-mew-mew');
   }
 }
 
 class Human extends Creature {
-  constructor(name, gender) {
-    super(name, gender);
-    this.species = 'homo sapiens';
-    this.legs = 2;
+  constructor(name, gender, saying) {
+    super(name, gender, 'homo sapiens', 2, saying);
     this.hands = 2;
+  }
+
+  toString() {
+    return [super.toString(), `hands: ${this.hands}`].join('');
   }
 }
 
 class Woman extends Human {
   constructor(name) {
-    super(name, 'female');
-    this.saying = 'I am a woman.';
+    super(name, 'female', 'I am a woman.');
   }
 }
 
 class Man extends Human {
   constructor(name) {
-    super(name, 'male');
-    this.saying = 'I am a man.';
+    super(name, 'male', 'I am a man.');
   }
 }
 
@@ -81,22 +93,8 @@ const creatures = [dog, cat, woman, man];
    so code reviewers might focus on a single file that is index.js.
    */
 
-const getTemplate = (creature) => {
-  let template = '';
-  for (let key in creature) {
-    if (key === 'friends' && !creature[key].length) {
-      continue;
-    }
-    if (creature[key]) {
-      template += `${key}: ${creature[key]}; `;
-    }
-  }
-
-  return template;
-};
-
 creatures.forEach((creature) => {
-  print(getTemplate(creature));
+  print(creature);
 });
 
 /* Print examples:
