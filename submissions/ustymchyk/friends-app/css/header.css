@@ -1,0 +1,8 @@
+.header {
+  grid-area: header;
+
+  display: flex;
+
+  background: url(https://raw.githubusercontent.com/PokeAPI/media/master/logo/pokeapi_256.png)
+    var(--grey) center / auto calc(100% - 40px) no-repeat;
+}
