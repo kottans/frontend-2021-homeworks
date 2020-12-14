@@ -29,6 +29,7 @@ body {
 a {
   color: $theme-color;
   background-color: transparent;
+  text-decoration: none;
 
   &:hover {
     color: $theme-color;

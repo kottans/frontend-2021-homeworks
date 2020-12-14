@@ -8,7 +8,7 @@ html { line-height: 1.15; -webkit-text-size-adjust: 100%; }
 
 body { margin: 0; font: 16px/26px Helvetica, Helvetica Neue, Arial; color: #222; }
 
-a { color: #757575; background-color: transparent; }
+a { color: #757575; background-color: transparent; text-decoration: none; }
 
 a:hover { color: #757575; text-decoration: underline; }
 
