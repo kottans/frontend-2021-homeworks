@@ -19,7 +19,7 @@ class Inhabitant {
          ? [...friends].map(friend => friend.name).join(', ')
          : '';
 
-      return `${species}; ${name}; ${gender}; ${say}; ${friendsNamesString}`;
+      return [species, name, gender, say, friendsNames].join('; ')
    }
 }
 
