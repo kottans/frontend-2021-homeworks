@@ -117,17 +117,23 @@ function createGameField() {
         cardFace.append(japText, engText)
         card.append(cardBack, cardFace)
 
-        card.addEventListener('click', () => {
-            card.classList.add('main-notActive')
-            card.classList.add('card-rotate')
-            cardBack.classList.add('cardBack-rotate')
-            cardBack.addEventListener('transitionend', function() {
-                cardFace.classList.add('cardFace-rotate')
-            }, { once: true })
-            checkAnswer()
-        })
         gameField.appendChild(card)
     }
+
+    gameField.addEventListener('click', ({ target }) => {
+        if (target.classList.contains('cardsContainer') || target.classList.contains('card')) {
+            return false
+        } else {
+            target.parentElement.classList.add('notActive')
+            target.parentElement.classList.add('card-rotate')
+            target.classList.add('cardBack-rotate')
+            target.addEventListener('transitionend', function() {
+                target.nextSibling.classList.add('cardFace-rotate')
+            }, { once: true })
+            checkAnswer()
+        }
+    })
+
     return gameField
 }
 
@@ -208,7 +214,7 @@ function hideElem(elem, effect, delay) {
 }
 
 function checkAnswer() {
-    MAIN.classList.add('main-notActive')
+    MAIN.classList.add('notActive')
     const openCards = document.querySelectorAll('.card-rotate')
     if (openCards.length === 2) {
         if (openCards[0].getAttribute('data-value') === openCards[1].getAttribute('data-value')) {
@@ -218,8 +224,7 @@ function checkAnswer() {
                     card.classList.add(CARDS_HIDE_ANIMATION)
                     card.addEventListener('animationend', function() {
                         card.classList.remove('card-rotate')
-                        card.classList.remove('main-notActive')
-                        MAIN.classList.remove('main-notActive')
+                        MAIN.classList.remove('notActive')
                     }, { once: true })
                     clearTimeout(timeOut)
                 }, 1000);
@@ -233,8 +238,8 @@ function checkAnswer() {
                     card.children[1].classList.remove('cardFace-rotate')
                     card.children[1].addEventListener('transitionend', function() {
                         card.children[0].classList.remove('cardBack-rotate')
-                        card.classList.remove('main-notActive')
-                        MAIN.classList.remove('main-notActive')
+                        card.classList.remove('notActive')
+                        MAIN.classList.remove('notActive')
                     }, { once: true })
                     clearTimeout(timeOut)
                 }, 1000);
@@ -242,7 +247,7 @@ function checkAnswer() {
             attempts++
         }
     } else {
-        MAIN.classList.remove('main-notActive')
+        MAIN.classList.remove('notActive')
     }
 }
 

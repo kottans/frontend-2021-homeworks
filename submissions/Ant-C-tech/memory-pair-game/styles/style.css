@@ -115,7 +115,7 @@ header {
     transition: opacity ease-in-out 1s;
 }
 
-.main-notActive {
+.notActive {
     pointer-events: none;
 }
 
