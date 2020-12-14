@@ -6,8 +6,10 @@
 const cat = {
 	species: 'cat',
 	name: 'Murka',
+	surname: 'Murkovna',
 	gender: 'female',
 	legs: '4',
+	hands: '0',
 	saying: 'Hey, I\'m cat.',
 };
 
@@ -24,8 +26,10 @@ const man = {
 const dog = {
 	species: 'dog',
 	name: 'Arrow',
+	surname: 'Space',
 	gender: 'female',
 	legs: '4',
+	hands: '0',
 	saying: 'I were in space, what about you?',
 };
 
@@ -40,11 +44,12 @@ const woman = {
 }
 
 const all = [cat, man, dog, woman];
+const properties = ['species', 'name', 'surname', 'gender', 'legs', 'hands', 'saying'];
 
-const returnString = (arr) => {
-	return arr.map((person) => {
-		 return Object.values(person).join("; ");
-	}).join("\n");
+const returnString2 = (arr) => {
+	return arr.map((key) => {
+		return properties.map((value) => `${key[value]}`).join('; ')						
+	}).join('\n');	
 }
 
-print(returnString(all));
+print(returnString2(all));
