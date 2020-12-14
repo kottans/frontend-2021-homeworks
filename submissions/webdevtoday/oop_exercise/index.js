@@ -8,44 +8,60 @@
 // ======== OBJECTS DEFINITIONS ========
 // Define your objects here
 
-class Mammal {
-   constructor(name, gender, saying, species, friends) {
+class Inhabitant {
+   constructor(name, gender, saying, species, legs, friends) {
       this.name = name;
       this.gender = gender;
       this.species = species;
       this.saying = saying;
       this.friends = friends;
-      this.legs = 4;
+      this.legs = legs;
    }
    getProperties() {
-      return [this.species, this.name, this.gender, this.legs, this.friends.join(', ')];
+      return [this.species, this.name, this.gender, this.legs, this.saying, this.friends.join(', ')];
    }
-   [Symbol.toPrimitive](hint) {
-      if (hint == 'string') {  
-         return this.getProperties().join(';');
-      }
+   toString() {  
+      return this.getProperties().join('; ');
    }
 }
 
-class Human extends Mammal {
+class Human extends Inhabitant {
    constructor(name, gender, saying, friends) {
-      super(name, gender, saying, 'human', friends);
-      this.legs = 2;
+      super(name, gender, saying, 'human', 2, friends);
       this.hands = 2;
    }
 
    getProperties() {
-      return [this.species, this.name, this.gender, this.legs, this.hands, this.friends.join(', ')];
+      const props = super.getProperties();
+      props.splice(3, 0, this.hands);
+      return props;
    }
 }
 
-class Animal extends Mammal {}
+class Dog extends Inhabitant {
+   constructor(name, gender, friends) {
+      super(name, gender, 'woof-woof!', 'dog', 4, friends);
+   }
+}
 
-const dog = new Animal('Jhonny', 'male', 'woof-woof!', 'dog', ['Andrew', 'Anastasia']);
-const cat = new Animal('Murka', 'female', 'meow!', 'cat', ['Anastasia']);
+class Cat extends Inhabitant {
+   constructor(name, gender, friends) {
+      super(name, gender, 'meow!', 'cat', 4, friends);
+   }
+}
+
+class CatWoman extends Human {
+   constructor(name, saying, friends) {
+      super(name, 'female', saying, friends);
+      this.species = 'CatWoman';
+   }
+}
+
+const dog = new Dog('Jhonny', 'male', ['Andrew', 'Anastasia']);
+const cat = new Cat('Murka', 'female', ['Anastasia']);
 const woman = new Human('Anastasia', 'female', 'I\'m a woman!', ['Andrew', 'Murka', 'Jhonny']);
 const man = new Human('Andrew', 'male', 'I\'m a man!', ['Anastasia', 'Jhonny', 'Murka']);
-const catwoman = new Human('CatWoman', 'female', cat.saying, []);
+const catwoman = new CatWoman('CatWoman', cat.saying, []);
 
 // ======== OUTPUT ========
 /* Use print(message) for output.
@@ -67,13 +83,13 @@ const catwoman = new Human('CatWoman', 'female', cat.saying, []);
    */
 
 
-const printList = [dog, cat, man, woman, catwoman];
+const inhabitants = [dog, cat, man, woman, catwoman];
 
 // function tmplStr({species, name, gender, legs, hands, saying, friends}) {
 //    return `${species};${name};${gender};${legs};${hands};${saying};${friends.join(', ')}`;
 // }
 
-printList.forEach( obj => {
+inhabitants.forEach( obj => {
    print( obj );
 } );
 
