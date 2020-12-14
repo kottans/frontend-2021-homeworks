@@ -14,6 +14,7 @@ const ANIMATE_DELAY = 'animate__delay-3s'
 const DESCRIPT_HIDE_ANIMATION = 'animate__zoomOut'
 const DESCRIPT_SHOW_ANIMATION = 'animate__zoomIn'
 const CARDS_HIDE_ANIMATION = 'animate__rotateOut'
+const GAMEPLAY_DELAY = 1500
 
 let TASK = []
 let attempts = 0
@@ -31,7 +32,7 @@ function initApp() {
     const timeout = setTimeout(() => {
         changeContent(createGreeting())
         clearTimeout(timeout)
-    }, 1500);
+    }, GAMEPLAY_DELAY);
 }
 
 function setTask() {
@@ -248,10 +249,10 @@ function isWin() {
         window.removeEventListener('resize', phoneAdaptation)
         const timeout = setTimeout(() => {
             changeContent(createCongratulationScr())
-            clearTimeout(timeout)
             BODY.style.width = 'auto'
             BODY.classList.remove('body-gamefield')
-        }, 1500);
+            clearTimeout(timeout)
+        }, GAMEPLAY_DELAY);
     }
 }
 
