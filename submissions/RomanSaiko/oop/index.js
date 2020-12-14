@@ -1,28 +1,22 @@
-
 class Inhabitant {
-    constructor ({ species, name, gender, saying, friends = "No friends! One man army.", paws, hands, legs }) {
+    constructor ({ species, name, gender, saying, friends = "No friends! One man army" }) {
         this.species = species
         this.name = name
         this.gender = gender
         this.saying = saying
         this.friends = friends
-        this.paws = paws
-        this.hands = hands
-        this.legs = legs
     }
 
     toString() {
-        return `${this.species}; ${this.name}; ${this.gender}; ${this.saying}; ${this.friends}`;
+        const props = Object.entries(this).map(([key, value]) => `${key}: ${value}` )
+        return`${props.join("; ")}`
     }
 }
 
 class Animal extends Inhabitant {
     constructor ({ species, name, gender, saying, friends, paws = 4 }) {
-        super({ species, name, gender, saying, friends, paws })
-    }
-
-    toString() {
-        return super.toString() + ` ${this.paws}.`;
+        super({ species, name, gender, saying, friends })
+        this.paws = paws
     }
 }
 
@@ -40,11 +34,9 @@ class Cat extends Animal {
 
 class HomoSapiens extends Inhabitant {
     constructor ({ name, gender, saying, friends, hands = 2, legs = 2 }) {
-        super({ species: 'human', name, gender, saying, friends, hands, legs })
-    }
-
-    toString() {
-        return super.toString() + ` ${this.hands}, ${this.legs}.`;
+        super({ species: 'human', name, gender, saying, friends })
+        this.hands = hands
+        this.legs = legs
     }
 }
 
