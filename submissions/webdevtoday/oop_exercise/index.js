@@ -17,6 +17,9 @@ class Inhabitant {
       this.friends = friends;
       this.legs = legs;
    }
+   getSaying() {
+      return this.saying;
+   }
    getProperties() {
       return [this.species, this.name, this.gender, this.legs, this.saying, this.friends.join(', ')];
    }
@@ -61,7 +64,7 @@ const dog = new Dog('Jhonny', 'male', ['Andrew', 'Anastasia']);
 const cat = new Cat('Murka', 'female', ['Anastasia']);
 const woman = new Human('Anastasia', 'female', 'I\'m a woman!', ['Andrew', 'Murka', 'Jhonny']);
 const man = new Human('Andrew', 'male', 'I\'m a man!', ['Anastasia', 'Jhonny', 'Murka']);
-const catwoman = new CatWoman('CatWoman', cat.saying, []);
+const catwoman = new CatWoman('CatWoman', cat.getSaying(), []);
 
 // ======== OUTPUT ========
 /* Use print(message) for output.
