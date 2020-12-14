@@ -1,105 +1,102 @@
 * {
-	margin: 0;
-	padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
 a {
-	text-decoration: none;
+    text-decoration: none;
 }
-ol, ul {
-	list-style: none;
+
+ol,
+ul {
+    list-style: none;
 }
 
 body {
-	min-height: 100%;
-	display: grid;
-  	grid-template-rows: min-content 1fr;
-	font-family: Roboto, Arial, san-serif;
-	font-size: 1.4em;
+    min-height: 100%;
+    display: grid;
+    grid-template-rows: min-content 1fr;
+    font-family: Roboto, Arial, san-serif;
+    font-size: 1.4em;
 
 }
-
 
 .visuallyhidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  border: 0;
-  padding: 0;
-  white-space: nowrap;
-  clip-path: inset(100%);
-  clip: rect(0, 0, 0, 0);
-  overflow: hidden;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    border: 0;
+    padding: 0;
+    white-space: nowrap;
+    clip-path: inset(100%);
+    clip: rect(0, 0, 0, 0);
+    overflow: hidden;
 }
-
 
 /* Scrollbar style */
 
 div.popup::-webkit-scrollbar {
-  width: 7px;
+    width: 7px;
 }
 
-
 div.popup::-webkit-scrollbar-track {
-  margin: 20px;
-  background-color:rgb(150, 150, 150);
+    margin: 20px;
+    background-color: rgb(150, 150, 150);
 }
 
 div.popup::-webkit-scrollbar-thumb {
-  background-color: #fff;
-  border: 2px solid rgb(128, 128, 128);
-  border-radius: 5px;
+    background-color: #fff;
+    border: 2px solid rgb(128, 128, 128);
+    border-radius: 5px;
 }
 
 .header {
-	min-height: 60px;
-	padding: 10px 20px;
-	background-color: rgba(128,128,128, .7);
+    min-height: 60px;
+    padding: 10px 20px;
+    background-color: rgba(128, 128, 128, .7);
 }
 
 .navigation {
-	height: 65px;
-	display: flex;
-	justify-content: flex-end;
+    height: 65px;
+    display: flex;
+    justify-content: flex-end;
 }
 
 .navigation-list {
-	display: flex;
-	flex-flow: row nowrap;
-  	align-items: center;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
 }
 
 .navigation-list__item {
-	display: inline-block;
-	padding: 10px;
+    display: inline-block;
+    padding: 10px;
 }
 
-.navigation-list__item  .list-item_img {
-
-	height: 60px;
-	width: 60px;
+.navigation-list__item .list-item_img {
+    height: 60px;
+    width: 60px;
 }
 
-.navigation-list__item-link{
-	color: rgb(255, 255, 255);
-	display: block;
+.navigation-list__item-link {
+    color: rgb(255, 255, 255);
+    display: block;
 }
-
 
 .popup {
-	display: none;
-	position: absolute;
-	top: 90px;
-	right: 20px;
-	background-color: rgb(150,150,150);
-	padding: 20px;
-	width: 300px;
-	height: 370px;
-	border: 3px solid #BEF9F7;
-	border-radius: 15px;
-	overflow-x: hidden;
-	overflow-y: auto;
+    display: none;
+    position: absolute;
+    top: 90px;
+    right: 20px;
+    background-color: rgb(150, 150, 150);
+    padding: 20px;
+    width: 300px;
+    height: 370px;
+    border: 3px solid #BEF9F7;
+    border-radius: 15px;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 .popup__button::after {
@@ -110,97 +107,95 @@ div.popup::-webkit-scrollbar-thumb {
     right: 205px;
     height: 24px;
     width: 24px;
-    border-color: #BEF9F7 ;
+    border-color: #BEF9F7;
     border-style: solid;
     border-width: 3px 0 0 3px;
     transform: rotate(45deg);
-    background-color: rgb(150,150,150);
+    background-color: rgb(150, 150, 150);
     z-index: 5;
 }
 
-.menu_check:checked ~ .popup__button::after {
-	display: block;
+.menu_check:checked~.popup__button::after {
+    display: block;
 }
 
-.menu_check:checked ~ .popup{
-	display: block;
+.menu_check:checked~.popup {
+    display: block;
 }
 
 .popup-list {
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
 }
 
-.popup-list__item-link{
-	display: grid;
-	grid-template-columns: 1fr;
-	justify-items: center;
-	color: rgb(255, 255, 255);
-	padding:10px 5px;
-	font-size: 0.8em;  
-}
-.navigation-list__item-link{
-
+.popup-list__item-link {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    color: rgb(255, 255, 255);
+    padding: 10px 5px;
+    font-size: 0.8em;
 }
 
 .list-item_img:hover,
 .navigation-list__item-link:hover {
-	transform: scale(1.05);
+    transform: scale(1.05);
 }
 
-.more-button:hover{
-	background-color: rgb(128, 128, 128);
-	color: white;
+.more-button:hover {
+    background-color: rgb(128, 128, 128);
+    color: white;
 }
 
 .navigation-list__item-link:focus,
-.menu_check:focus + .popup__button > .list-item_img{
-	background-color: rgb(128, 128, 128);
-	border-radius: 3px;
-	outline: none;
-}
-.popup-list__item-link:focus, 
-.more_check:focus + .more-button{
-	background-color: rgb(128, 128, 128);
-	border-radius: 10px;
-	outline: none;
-	color: white;
+.menu_check:focus+.popup__button>.list-item_img {
+    background-color: rgb(128, 128, 128);
+    border-radius: 3px;
+    outline: none;
 }
 
-.more-button{
-	display: grid;
-	width: 100%;
-	justify-content: center;
-	padding:10px 0;
-	margin: 10px 0;
-	background-color: rgb(200, 200, 200);
-	border-radius: 10px;
+.popup-list__item-link:focus,
+.more_check:focus+.more-button {
+    background-color: rgb(128, 128, 128);
+    border-radius: 10px;
+    outline: none;
+    color: white;
 }
 
-.popup-list-additional{
-	display: none;    
+.more-button {
+    display: grid;
+    width: 100%;
+    justify-content: center;
+    padding: 10px 0;
+    margin: 10px 0;
+    background-color: rgb(200, 200, 200);
+    border-radius: 10px;
 }
 
-.more-button__hide{
-	display: none;
+.popup-list-additional {
+    display: none;
 }
 
-.more-button__more{
-	display: inline;
+.more-button__hide {
+    display: none;
 }
 
-.more_check:checked ~ .popup-list-additional{
-	display: grid;
+.more-button__more {
+    display: inline;
 }
 
-.more_check:checked ~label > .more-button__hide{
-	display: inline;
+.more_check:checked~.popup-list-additional {
+    display: grid;
 }
 
-.more_check:checked ~label > .more-button__more{
-	display: none;
+.more_check:checked~label>.more-button__hide {
+    display: inline;
 }
-.user-icon
-{
-	border-radius: 50%;
+
+.more_check:checked~label>.more-button__more {
+    display: none;
+}
+
+.user-icon {
+    border-radius: 50%;
 }
