@@ -15,9 +15,9 @@ class Inhabitant {
    toString() {
       const { name, species, friends, gender, say } = this;
 
-      const friendNames = [];
-      friends.forEach((friend) => friendNames.push(friend.name));
-      const friendsNamesString = friendNames.length ? `${friendNames.join(', ')};` : '';
+      const friendsNames = (friends.size)
+         ? [...friends].map(friend => friend.name).join(', ')
+         : '';
 
       return `${species}; ${name}; ${gender}; ${say}; ${friendsNamesString}`;
    }
