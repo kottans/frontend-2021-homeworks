@@ -15,15 +15,16 @@ const DIFFICULTY = 200;
 
 let counter = 0;
 
-let scoreBoard = document.createElement('div');
+let scoreBoard = document.createElement("div");
 document.body.append(scoreBoard);
-scoreBoard.style.cssText="padding-top: 10px; font-size: 30px; ";
+scoreBoard.style.cssText = "padding-top: 10px; font-size: 30px; ";
 scoreBoard.textContent = `Your score: ${counter}`;
 
-const Enemy = function (x, y, speed) {
+const Enemy = function (x, y, speed, player) {
 	this.x = x;
 	this.y = y;
 	this.speed = speed;
+	this.player = player;
 	this.sprite = "images/enemy-bug.png";
 };
 
@@ -40,7 +41,7 @@ for (let i = 0; i < ENEMIES; i++) {
 	let x = -Math.random() * FIELD_WIDTH;
 	let y = (i % 3) * ROW_STEP + FIELD_PADDING_TOP;
 	let speed = MIN_SPEED + Math.random() * DIFFICULTY;
-	let enemy = new Enemy(x, y, speed);
+	let enemy = new Enemy(x, y, speed, player);
 	allEnemies.push(enemy);
 }
 
@@ -58,17 +59,17 @@ Enemy.prototype.render = function () {
 
 Enemy.prototype.collision = function () {
 	if (
-		((this.x <= player.x + PLAYER_PADDING &&
-			this.x + COL_STEP >= player.x + PLAYER_PADDING) ||
-			(this.x >= player.x + PLAYER_PADDING &&
-				this.x <= player.x + COL_STEP - PLAYER_PADDING)) &&
-		Math.round(this.y / 10) === Math.round(player.y / 10)
+		((this.x <= this.player.x + PLAYER_PADDING &&
+			this.x + COL_STEP >= this.player.x + PLAYER_PADDING) ||
+		(this.x >= this.player.x + PLAYER_PADDING &&
+			this.x <= this.player.x + COL_STEP - PLAYER_PADDING)) &&
+				this.y === this.player.y
 	) {
-		player.loseGame();
+		this.player.loseGame();
 	}
-}
+};
 
-Player.prototype.update = function (dt) {
+Player.prototype.update = function () {
 	this.winGame();
 };
 
@@ -110,7 +111,6 @@ Player.prototype.loseGame = function () {
 	counter--;
 	scoreBoard.textContent = `Your score: ${counter}`;
 };
-
 
 document.addEventListener("keyup", function (e) {
 	var allowedKeys = {
