@@ -18,6 +18,7 @@ const CARDS_NUMBER = 12;
 const GAMEPLAY_DELAY = 1500
 
 const GAME_ICON = 'img/lucky-cat-toy-svgrepo-com.svg'
+const CARD_BACK = 'img/card-back2.jpg'
 
 let TASK = []
 let attempts = 0
@@ -36,6 +37,7 @@ function initApp() {
         changeContent(createGreeting())
         clearTimeout(timeout)
     }, GAMEPLAY_DELAY);
+    addListeners()
 }
 
 function setTask() {
@@ -55,123 +57,73 @@ function setTask() {
     TASK = TASK.concat(TASK)
 }
 
-function createGreeting() {
-    const greeting = document.createElement('h3')
-    greeting.textContent = 'Kottans present'
-    greeting.classList.add('greeting')
-
-    greeting.addEventListener('click', function() {
-        GAMEPLAY_AUDIO.play()
-        changeContent(createStartGameScr(), showHeader)
-    }, { once: true })
-
-    return greeting
-}
-
-function createStartGameScr() {
-    const startBtnWrapper = new DocumentFragment()
-
-    const startBtnIco = document.createElement('img')
-    startBtnIco.setAttribute('src', GAME_ICON)
-    startBtnIco.setAttribute('alt', 'mentor')
-    startBtnIco.classList.add('startBtnIco')
-
-    const startBtn = document.createElement('h3')
-    startBtn.textContent = 'Start Game'
-    startBtn.classList.add('startBtn')
-
-    startBtnWrapper.append(startBtnIco, startBtn)
-    startBtn.addEventListener('click', () => {
-        changeContent(createGameField(), phoneAdaptation)
-        hideElem(DESCRIPT, DESCRIPT_HIDE_ANIMATION, false)
-        window.addEventListener('resize', phoneAdaptation)
-    }, { once: true })
-
-    return startBtnWrapper
-}
-
-function createGameField() {
-    const gameField = document.createElement('div')
-    gameField.classList.add('cardsContainer')
-
-    for (let index = 0; index < CARDS_NUMBER; index++) {
-        const cardContent = TASK.splice(_getRandomIntInclusive(0, TASK.length - 1), 1)
-
-        const card = document.createElement('div')
-        card.className = `card ${ANIMATE_CSS_CLASS}`
-        card.setAttribute('data-value', cardContent[0].jap)
-
-        const cardBack = document.createElement('img')
-        cardBack.setAttribute('src', 'img/card-back2.jpg')
-        cardBack.setAttribute('alt', 'japanese ornament')
-        cardBack.classList.add('cardBack')
-
-        const cardFace = document.createElement('div')
-        cardFace.classList.add('cardFace')
-        const japText = document.createElement('p')
-        japText.innerText = cardContent[0].jap
-        japText.classList.add('japText')
-        const engText = document.createElement('p')
-        engText.innerText = cardContent[0].eng
-        engText.classList.add('engText')
-        cardFace.append(japText, engText)
-        card.append(cardBack, cardFace)
-
-        gameField.appendChild(card)
-    }
-
-    gameField.addEventListener('click', ({ target }) => {
-        if (target.classList.contains('cardsContainer') || target.classList.contains('card')) {
+function addListeners() {
+    MAIN.addEventListener('click', function({ target }) {
+        if (target.classList.contains('greeting')) {
+            GAMEPLAY_AUDIO.play()
+            changeContent(createStartGameScr(), showHeader)
+        } else if (target.classList.contains('startBtn')) {
+            changeContent(createGameField(), phoneAdaptation)
+            hideElem(DESCRIPT, DESCRIPT_HIDE_ANIMATION, false)
+            window.addEventListener('resize', phoneAdaptation)
+        } else if (target.classList.contains('cardsContainer') || target.classList.contains('card')) {
             return false
-        } else {
+        } else if (target.classList.contains('cardBack')) {
             target.parentElement.classList.add('notActive')
             target.parentElement.classList.add('card-rotate')
             target.classList.add('cardBack-rotate')
             target.addEventListener('transitionend', function() {
-                target.nextSibling.classList.add('cardFace-rotate')
+                target.nextElementSibling.classList.add('cardFace-rotate')
             }, { once: true })
             checkAnswer()
+        } else if (target.classList.contains('newGameBtn')) {
+            TASK = []
+            attempts = 0
+            setTask()
+            window.addEventListener('resize', phoneAdaptation)
+            phoneAdaptation()
+            changeContent(createGameField())
         }
     })
+}
 
+function createGreeting() {
+    const greeting = '<h3 class="greeting">Kottans present</h3>'
+    return greeting
+}
+
+function createStartGameScr() {
+    const startBtnWrapper = `<img class="startBtnIco" src="${GAME_ICON}" alt="cat">
+                            <h3 class="startBtn">Start Game</h3>`
+    return startBtnWrapper
+}
+
+function createGameField() {
+    let gameField = '<div class="cardsContainer">'
+
+    for (let index = 0; index < CARDS_NUMBER; index++) {
+        const cardContent = TASK.splice(_getRandomIntInclusive(0, TASK.length - 1), 1)
+        const card = `<div class="card ${ANIMATE_CSS_CLASS}" data-value="${cardContent[0].jap}">
+                        <img class="cardBack" src="${CARD_BACK}" alt="japanese ornament">
+                        <div class="cardFace">
+                            <p class="japText">${cardContent[0].jap}</p>
+                            <p class="engText">${cardContent[0].eng}</p>
+                        </div>
+                    </div>`
+        gameField += card
+        if (index === CARDS_NUMBER - 1) {
+            gameField += '</div>'
+        }
+    }
     return gameField
 }
 
 function createCongratulationScr() {
-    const congratulationWrapper = new DocumentFragment()
-
-    const congratulationIco = document.createElement('img')
-    congratulationIco.setAttribute('src', GAME_ICON)
-    congratulationIco.setAttribute('alt', 'mentor')
-    congratulationIco.classList.add('congratulationIco')
-
-    const congratulation = document.createElement('h3')
-    congratulation.textContent = 'Congratulation!!!'
-    congratulation.classList.add('congratulation')
-
-    const congratulationText = document.createElement('p')
-    congratulationText.innerHTML = `It took you <span class="attempts">${attempts}</span> attempts!`
-    congratulationText.classList.add('congratulationText')
-
-    const congratulationSubText = document.createElement('p')
-    congratulationSubText.textContent = `Now, you maybe feel yourself true ninja or maybe even samurai... But remember...`
-    congratulationSubText.classList.add('congratulationSubText')
-
-    const newGameBtn = document.createElement('h3')
-    newGameBtn.textContent = 'A samurai has no goal, only a path...'
-    newGameBtn.classList.add('newGame')
-
-    congratulationWrapper.append(congratulationIco, congratulation, congratulationText, congratulationSubText, newGameBtn)
-
-    newGameBtn.addEventListener('click', function() {
-        TASK = []
-        attempts = 0
-        setTask()
-        window.addEventListener('resize', phoneAdaptation)
-        phoneAdaptation()
-        changeContent(createGameField())
-    }, { once: true })
-
+    const congratulationWrapper = `<img class="congratulationIco" src="${GAME_ICON}" alt="cat">
+                                    <h3 class="congratulation">Congratulation!!!</h3>
+                                    <p class="congratulationText">It took you <span class="attempts">${attempts}</span> attempts!</p>
+                                    <p class="congratulationSubText">Now, you maybe feel yourself true ninja or maybe even samurai... But remember...</p>
+                                    <h3 class="newGameBtn">A samurai has no goal, only a path...</h3>`
     return congratulationWrapper
 }
 
@@ -179,7 +131,7 @@ function changeContent(content, callback) {
     MAIN.classList.add('main-hide')
     MAIN.addEventListener('transitionend', function() {
         MAIN.innerHTML = ''
-        MAIN.append(content)
+        MAIN.innerHTML = content
         if (callback) {
             callback()
         }

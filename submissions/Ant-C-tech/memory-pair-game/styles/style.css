@@ -247,7 +247,7 @@ header {
     color: #ffffff;
 }
 
-.newGame,
+.newGameBtn,
 .attempts {
     width: -webkit-fit-content;
     width: -moz-fit-content;
