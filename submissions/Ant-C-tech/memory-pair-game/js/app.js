@@ -16,6 +16,7 @@ const CARDS_HIDE_ANIMATION = 'animate__rotateOut'
 
 const CARDS_NUMBER = 12;
 const GAMEPLAY_DELAY = 1500
+const MOBILE_BREAKPOINT = 1025
 
 const GAME_ICON = 'img/lucky-cat-toy-svgrepo-com.svg'
 const CARD_BACK = 'img/card-back2.jpg'
@@ -221,7 +222,7 @@ function showHeader() {
 
 function phoneAdaptation() {
     const mql = window.matchMedia("(orientation: landscape)");
-    if (mql.matches && document.documentElement.clientWidth <= 1025) {
+    if (mql.matches && document.documentElement.clientWidth <= MOBILE_BREAKPOINT) {
         BODY.style.width = document.documentElement.clientHeight + 'px'
         BODY.classList.add('body-gamefield')
     } else {
