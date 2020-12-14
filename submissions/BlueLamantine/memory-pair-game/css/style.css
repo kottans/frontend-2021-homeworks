@@ -1,0 +1,132 @@
+@font-face {
+  font-family: Pawtter;
+  src: url(../fonts/PAWTTER.TTF);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: -1;
+  background: url(../img/bg.jpg) center / cover no-repeat;
+  filter: blur(5px);
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Pawtter;
+  min-height: 100%;
+  cursor: url(../img/cursor.png), auto;
+}
+p,
+footer {
+  font-family: 'Times New Roman', Times, serif;
+}
+h1,
+h5 {
+  margin: 0;
+  padding: 5px;
+  letter-spacing: 2px;
+}
+a {
+  text-decoration: none;
+  color: black;
+}
+.pawtter-font {
+  font-family: Pawtter;
+  padding: 5px;
+  letter-spacing: 2px;
+}
+
+.main-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5px;
+}
+.panel {
+  position: fixed;
+  width: 200px;
+  height: 200px;
+  top: 150px;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.main-popup {
+  position: absolute;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+.popup-active {
+  width: 500px;
+  z-index: 1;
+  flex-direction: column;
+}
+.popup {
+  width: 100%;
+  transition: width 2s ease;
+  animation: move-modal 1.3s;
+  justify-content: center;
+}
+@keyframes move-modal {
+  0% {
+    width: 500px;
+  }
+  100% {
+    width: 100%;
+  }
+}
+.btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: black;
+  color: wheat;
+  font-weight: 600;
+  border-radius: 5px;
+  border: 1px solid black;
+}
+.btn:hover {
+  background-color: transparent;
+  border: 1px solid black;
+  color: black;
+}
+a:hover, .btn:hover {
+  cursor: url(../img/cursor_pointer.png), pointer;
+}
+.main-footer {
+  padding: 7px;
+  margin-top: 30px;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+}
+.hidden {
+  display: none;
+}
+.music {
+  font-size: 25px;
+}
+.music:hover {
+  cursor: url(../img/cursor_pointer.png), pointer;
+}
+.game-over-text {
+  background-color: beige;
+    position: absolute;
+    top: 200px;
+    left: 65px;
+    font-size: 21px;
+    color: black;
+}

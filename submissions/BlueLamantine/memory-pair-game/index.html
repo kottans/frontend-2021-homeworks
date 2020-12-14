@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hairy Pawtter</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="css/map.css" />
+    <link rel="stylesheet" href="css/paws.css" />
+    <link rel="stylesheet" href="css/cards.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="shortcut icon" href="img/cursor_pointer.png" />
+  </head>
+  <body>
+    <header class="main-header">
+      <h1>Hairy Pawtter</h1>
+      <h5>Memory-pair game</h5>
+    </header>
+    <nav class="panel">
+      <div id="moves-counter" class="moves"><span id="counter">0</span> Moves</div>
+      <div id="timer">00 : 00 : 00</div>
+      <div class="music">
+        <i id="musicControl" class="fa fa-volume-up 2xl"></i>
+      </div>
+    </nav>
+    <main id="content" class="main-content">
+      <div class="container">
+        <div id="modal" class="main-popup popup-active">
+          <p class="info">
+            Someone casts a
+            <span class="pawtter-font">doppelganger spell</span> at Hogwarts !
+            On the <span class="pawtter-font">map</span> you need to
+            <span class="pawtter-font"
+              >find all the matches of the characters</span
+            >
+            to break this spell.
+          </p>
+          <button type="button" id="start-game-btn" class="btn">
+            <span class="pawtter-font">PLAY</span>
+          </button>
+        </div>
+        <div id="map" class="main-map map-preload">
+          <div class="block block-preload block-0"></div>
+          <div class="block block-preload block-1"></div>
+          <div class="block block-preload block-2"></div>
+          <div class="block block-preload block-3"></div>
+        </div>
+      </div>
+    </main>
+    <footer class="main-footer">
+      Made with &hearts; by
+      <a href="https://github.com/BlueLamantine" class="pawtter-font">
+        BlueLamantine
+      </a>
+      for
+      <a href="https://kottans.org/" class="pawtter-font">Kottans</a>
+    </footer>
+    <script src="js/index.js"></script>
+  </body>
+</html>
