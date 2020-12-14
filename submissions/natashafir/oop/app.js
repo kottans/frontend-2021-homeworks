@@ -88,8 +88,8 @@ Player.prototype.handleInput = function (key) {
     }
     if (this.y < 0) {
         setTimeout(function () {
-            player.x = INITIAL_POSITION_X;
-            player.y = INITIAL_POSITION_Y;
+            this.player.x = INITIAL_POSITION_X;
+            this.player.y = INITIAL_POSITION_Y;
         }, 200)
     }
 };
