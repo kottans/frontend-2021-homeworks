@@ -50,14 +50,14 @@ Enemy.prototype.update = function (dt) {
 	if (this.x > FIELD_WIDTH) {
 		this.x = -COL_STEP;
 	}
-	this.collision();
+	this.checkCollision();
 };
 
 Enemy.prototype.render = function () {
 	ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-Enemy.prototype.collision = function () {
+Enemy.prototype.checkCollision = function () {
 	if (
 		((this.x <= this.player.x + PLAYER_PADDING &&
 			this.x + COL_STEP >= this.player.x + PLAYER_PADDING) ||
@@ -89,7 +89,7 @@ Player.prototype.handleInput = function (direction) {
 	}
 };
 
-Player.prototype.toStartPos = function () {
+Player.prototype.goToStart = function () {
 	this.x = START_X;
 	this.y = START_Y;
 };
@@ -100,14 +100,14 @@ Player.prototype.touchWater = function () {
 
 Player.prototype.winGame = function () {
 	if (this.touchWater()) {
-		this.toStartPos();
+		this.goToStart();
 		counter++;
 		scoreBoard.textContent = `Your score: ${counter}`;
 	}
 };
 
 Player.prototype.loseGame = function () {
-	this.toStartPos();
+	this.goToStart();
 	counter--;
 	scoreBoard.textContent = `Your score: ${counter}`;
 };
