@@ -8,13 +8,16 @@ const MAIN = document.querySelector('#main')
 const HEADER = document.querySelector('#header')
 const DESCRIPT = document.querySelector('#descript')
 
-const CARDS_NUMBER = 12;
 const ANIMATE_CSS_CLASS = 'animate__animated'
 const ANIMATE_DELAY = 'animate__delay-3s'
 const DESCRIPT_HIDE_ANIMATION = 'animate__zoomOut'
 const DESCRIPT_SHOW_ANIMATION = 'animate__zoomIn'
 const CARDS_HIDE_ANIMATION = 'animate__rotateOut'
+
+const CARDS_NUMBER = 12;
 const GAMEPLAY_DELAY = 1500
+
+const GAME_ICON = 'img/lucky-cat-toy-svgrepo-com.svg'
 
 let TASK = []
 let attempts = 0
@@ -69,7 +72,7 @@ function createStartGameScr() {
     const startBtnWrapper = new DocumentFragment()
 
     const startBtnIco = document.createElement('img')
-    startBtnIco.setAttribute('src', 'img/lucky-cat-toy-svgrepo-com.svg')
+    startBtnIco.setAttribute('src', GAME_ICON)
     startBtnIco.setAttribute('alt', 'mentor')
     startBtnIco.classList.add('startBtnIco')
 
@@ -132,7 +135,7 @@ function createCongratulationScr() {
     const congratulationWrapper = new DocumentFragment()
 
     const congratulationIco = document.createElement('img')
-    congratulationIco.setAttribute('src', 'img/lucky-cat-toy-svgrepo-com.svg')
+    congratulationIco.setAttribute('src', GAME_ICON)
     congratulationIco.setAttribute('alt', 'mentor')
     congratulationIco.classList.add('congratulationIco')
 
