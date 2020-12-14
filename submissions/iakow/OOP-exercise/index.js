@@ -16,7 +16,7 @@ class Inhabitant {
       const { name, species, friends, gender, say } = this;
 
       const friendsNames = (friends.size)
-         ? [...friends].map(friend => friend.name).join(', ')
+         ? [...friends].map(friend => friend.name).join(', ') + ';'
          : '';
 
       return [species, name, gender, say, friendsNames].join('; ')
