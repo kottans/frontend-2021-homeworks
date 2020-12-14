@@ -132,9 +132,7 @@ function changeContent(content, callback) {
     MAIN.addEventListener('transitionend', function() {
         MAIN.innerHTML = ''
         MAIN.innerHTML = content
-        if (callback) {
-            callback()
-        }
+        callback && callback()
         MAIN.classList.remove('main-hide')
     }, { once: true })
 }
