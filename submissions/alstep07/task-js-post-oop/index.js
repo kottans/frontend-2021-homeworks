@@ -8,52 +8,80 @@
 // ======== OBJECTS DEFINITIONS ========
 // Define your objects here
 
-const inhabitant = {
-	toString: function () {
-		let message = `${this.saying}! I'm a ${this.species} and my gender is ${this.gender}. My name is ${this.name} and I have ${this.legs} legs`;
-		return this.hands ? (message += ` and ${this.hands} hands`) : message;
-	},
-};
+class Inhabitant {
+	constructor(species, name, gender, saying, legs, hands, friends) {
+		this.species = species;
+		this.name = name;
+		this.gender = gender;
+		this.saying = saying;
+      this.legs = legs;
+      this.hands = hands;
+		this.friends = friends;
+	}
 
-const human = Object.create(inhabitant);
-human.species = "human";
-human.legs = 2;
-human.hands = 2;
+	toString() {
+		let greating = `${this.saying}! I am a ${this.species} and my gender is ${this.gender}. My name is ${this.name}. I have ${this.legs} legs and ${this.hands} hands. `;
+		return (this.friends.length > 1)
+			? greating += `My friends are ${this.friends}.`
+			: this.friends.length === 1
+			? greating += `My friend is ${this.friends}.`
+			: greating;
+   }
+}
 
-const man = Object.create(human);
-man.gender = "male";
-man.name = "Sasha";
-man.saying = "Hello World";
+class Human extends Inhabitant {
+   constructor (name, gender, saying, friends) {
+      super('human', name, gender, saying, 2, 2, friends || []);
+   }
+}
 
-const woman = Object.create(human);
-woman.gender = "female";
-woman.name = "Julia";
-woman.saying = "Hi there";
+class Animal extends Inhabitant {
+   constructor (species, name, gender, saying, friends) {
+      super(species, name, gender, saying, 4, 'no', friends || []);
+   }
+}
 
-const animal = Object.create(inhabitant);
-animal.legs = 4;
+class Man extends Human {
+   constructor (name, saying, friends) {
+      super(name, 'male', saying, friends);
+   }
+}
 
-const cat = Object.create(animal);
-cat.species = "cat";
-cat.gender = "male";
-cat.name = "Tom";
-cat.saying = "Meow-meow";
+class Woman extends Human {
+   constructor (name, saying, friends) {
+      super(name, 'female', saying, friends);
+   }
+}
 
-const dog = Object.create(animal);
-dog.species = "dog";
-dog.name = "Jack";
-dog.gender = "male";
-dog.saying = "Bow wow";
+class Cat extends Animal {
+   constructor (name, gender, friends) {
+      super('cat', name, gender, 'Meow', friends);
+   }
+}
 
-const catWoman = Object.create(woman);
-catWoman.name = "Selina";
-catWoman.saying = cat.saying;
+class Dog extends Animal {
+   constructor (name, gender, friends) {
+      super('dog', name, gender, 'Bow wow', friends);
+   }
+}
+
+class CatWoman extends Woman {
+   constructor (name, saying, friends) {
+      super(name, saying, friends);
+   }
+}
+
+const man = new Man('Sasha', 'Hello World', ['Julia']);
+const woman = new Woman('Julia', 'Hi there', ['Sasha', 'Tom', 'Selina']);
+const cat = new Cat('Tom', 'male', ['Julia', 'Selina']);
+const dog = new Dog('Jack', 'male', ['Julia', 'Tom']);
+const catWoman = new CatWoman('Selina', cat.saying, );
 
 const inhabitants = [man, woman, cat, dog, catWoman];
 
 // ======== OUTPUT ========
 
-inhabitants.forEach((item) => print(item.toString()));
+inhabitants.forEach(individual => print(individual.toString()));
 
 /* Use print(message) for output.
    Default tag for message is <pre>. Use print(message,'div') to change containing element tag.
