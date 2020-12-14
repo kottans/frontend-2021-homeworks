@@ -54,8 +54,8 @@ class Man extends HomoSapiens {
 
 const dog = new Dog({ name: 'Spike', gender: 'male', friends: ['Dolf', 'Roman', 'Mariia'] })
 const cat = new Cat({ name: 'Dolf', gender: 'male'})
-const man = new Man({ name: 'Roman', saying: 'Hello!', friends: ['Dolf', 'Roman', 'Mariia'] })
-const woman = new Woman({ name: 'Mariia', saying: 'Hi!', friends: ['Dolf', 'Roman', 'Mariia'] })
+const man = new Man({ name: 'Roman', saying: 'Hello!', friends: ['Spike', 'Dolf', 'Mariia'] })
+const woman = new Woman({ name: 'Mariia', saying: 'Hi!', friends: ['Spile', 'Dolf', 'Roman'] })
 
 const inhabitants = [dog, cat, man, woman]
 
