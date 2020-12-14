@@ -596,14 +596,3 @@ header {
         font-size: 14px;
     }
 }
-
-
-/* ========================= Service styles =========================*/
-
-.notActive {
-    pointer-events: none;
-}
-
-.block {
-    display: block;
-}

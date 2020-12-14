@@ -143,7 +143,7 @@ function showElem(elem, effect, delay) {
     } else {
         elem.classList.remove(ANIMATE_DELAY)
     }
-    elem.classList.add('block')
+    elem.classList.add('d-block')
     elem.classList.add(effect)
     elem.addEventListener('animationend', function() {
         elem.classList.remove(effect)
@@ -158,7 +158,7 @@ function hideElem(elem, effect, delay) {
     }
     elem.classList.add(effect)
     elem.addEventListener('animationend', function() {
-        elem.style.display = 'none'
+        elem.classList.add('d-none')
         elem.classList.remove(effect)
     }, { once: true })
 }
