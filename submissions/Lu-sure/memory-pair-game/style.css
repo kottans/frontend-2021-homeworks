@@ -44,6 +44,14 @@ body {
     perspective: 1000px;
 }
 
+.hide {
+  visibility: hidden;
+}
+
+.card:hover {
+  cursor: pointer;
+}
+
 .card-inner {
     background-color: white;
     justify-content: center;
