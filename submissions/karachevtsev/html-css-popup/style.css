@@ -70,4 +70,4 @@ ul { margin: 0; padding: 0; list-style: none; }
 
 .app-item a:hover { text-decoration: none; background: #fafafa; }
 
-.app-item a img { width: 40px; height: auto; }
+.app-item a img { width: 40px; height: 40px; }
