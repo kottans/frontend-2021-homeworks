@@ -143,7 +143,7 @@ function showElem(elem, effect, delay) {
     } else {
         elem.classList.remove(ANIMATE_DELAY)
     }
-    elem.style.display = 'block'
+    elem.classList.add('block')
     elem.classList.add(effect)
     elem.addEventListener('animationend', function() {
         elem.classList.remove(effect)

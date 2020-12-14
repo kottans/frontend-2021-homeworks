@@ -115,10 +115,6 @@ header {
     transition: opacity ease-in-out 1s;
 }
 
-.notActive {
-    pointer-events: none;
-}
-
 .main-hide {
     opacity: 0;
 }
@@ -599,4 +595,15 @@ header {
     .engText {
         font-size: 14px;
     }
+}
+
+
+/* ========================= Service styles =========================*/
+
+.notActive {
+    pointer-events: none;
+}
+
+.block {
+    display: block;
 }
