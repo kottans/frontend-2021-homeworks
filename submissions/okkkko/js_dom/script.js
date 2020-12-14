@@ -65,16 +65,13 @@ const iconClick = () => {
     }
 };
 const btnClick = (event) => {
-  movies.forEach(function (obj) {
-    if (event.target.textContent === obj.name){
-      name.textContent = obj.name;
-      pic.setAttribute("src", obj.img);
-      pic.style.display="block";
-      text.innerHTML = obj.storyline;
-      year.innerHTML = "Year:" + obj.year;
-      genres.innerHTML = "Genres: " + obj.genres.join(" | ");
-    }
-  });
+  let obj = movies.find(obj => event.target.textContent === obj.name);
+  name.textContent = obj.name;
+  pic.setAttribute("src", obj.img);
+  pic.style.display="block";
+  text.innerHTML = obj.storyline;
+  year.innerHTML = "Year:" + obj.year;
+  genres.innerHTML = "Genres: " + obj.genres.join(" | ");  
 };
 sideMenu.addEventListener("click", btnClick);
 iconMenu.addEventListener('click', iconClick);
