@@ -1,0 +1,270 @@
+body {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+    color: #333333;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background-color: #f1f1f1;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.container {
+    box-sizing: border-box;
+}
+
+@media screen and (min-width: 860px) {
+    .container {
+        width: 90%;
+        margin: 0 auto;
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
+    }
+}
+
+.header {
+    background-color: #bfbdbd;
+    background-image: url("../img/banner.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 81%;
+    height: 300px;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+.header-title {
+    text-align: center;
+    font-size: 70px;
+    font-family: 'Indie Flower', sans-serif;
+    color: white;
+    line-height: 0.75;
+    padding-top: 76px;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.75);
+    width: 75%;
+    margin: 0 auto;
+}
+
+@media screen and (min-width: 478px) {
+    .header-title {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        font-size: 80px;
+        padding: 0;
+        margin: auto;
+        height: fit-content;
+    }
+}
+
+.container-main {
+    display: flex;
+    flex-direction: column;
+}
+
+.main, .aside, .card-item {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@media screen and (min-width: 478px) {
+    .container-main {
+        flex-direction: row;
+    }
+
+    .aside {
+        width: 35%;
+        background-color: rgba(0, 204, 92, 0.15)
+    }
+
+    .main {
+        width: 65%;
+    }
+}
+
+@media screen and (min-width: 860px) {
+    .aside {
+        width: 25%;
+    }
+
+    .main {
+        width: 85%;
+    }
+}
+
+.catalog-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+}
+
+.catalog-item {
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.catalog-link {
+    display: block;
+    box-sizing: border-box;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 700;
+    padding: 20px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    background-color: #00cc5c52;
+    color: rgba(51, 51, 51, 0.8);
+    text-shadow: 0 1px 3px rgba(255, 255, 255, 0.75);
+    transition: 0.3s ease-in;
+    position: relative;
+}
+
+.catalog-link::after {
+    position: absolute;
+    font: inherit;
+    display: block;
+    content: '>>';
+    right: 10%;
+    bottom: 0;
+    top: 0;
+    margin: auto;
+    width: fit-content;
+    height: fit-content;
+    opacity: 0;
+}
+
+.catalog-link__active {
+    background-color: #00cc5c73;
+    color: #333333;
+}
+
+.catalog-link__active::after {
+    opacity: 1;
+}
+
+.catalog-link:hover {
+    background-color: #00cc5c73;
+    color: #333333;
+}
+
+.catalog-link:focus {
+    background-color: #00cc5c73;
+    color: #333333;
+    border: 1px solid rgba(0, 149, 75, 0.85);
+    outline: none;
+}
+
+@media screen and (min-width: 478px) {
+    .catalog-link {
+        text-align: left;
+        padding-left: 10%;
+        font-size: 14px;
+        text-transform: capitalize;
+    }
+
+    .catalog-link::after {
+        right: 5%;
+    }
+}
+
+@media screen and (min-width: 860px) {
+    .catalog-link {
+        padding-left: 10%;
+        font-size: 16px;
+    }
+}
+
+.card-item {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+
+.card-description {
+    padding: 15px;
+}
+
+.card-header {
+    margin: 0;
+    font-size: 26px;
+    font-weight: 700;
+    text-align: center;
+    color: #119c5c;
+}
+
+.card-text {
+    line-height: 1.2;
+}
+
+.link-wiki {
+    color: #119c5c;
+    opacity: 0.85;
+    font-size: 14px;
+    text-decoration: none;
+    transition: 0.3s ease-in;
+    display: block;
+    box-sizing: border-box;
+    padding: 10px 0;
+    border-bottom: 2px solid transparent;
+    width: fit-content;
+}
+
+.link-wiki:hover {
+    opacity: 1;
+    border-bottom-color: #119c5c;
+}
+
+.link-wiki:focus {
+    opacity: 1;
+    outline: 1px solid rgba(0, 149, 75, 0.85);
+}
+
+@media screen and (min-width: 478px) {
+    .card-item {
+        padding: 1%;
+        align-items: center;
+    }
+
+    .card-image {
+        width: 300px;
+    }
+
+    .card-description {
+        padding: 0;
+        padding-top: 15px;
+    }
+}
+
+@media screen and (min-width: 860px) {
+    .card-item {
+        display: block;
+        padding: 2%;
+    }
+
+    .card-item::after {
+        content: '';
+        display: block;
+        clear: both;
+    }
+
+    .card-image {
+        float: right;
+        margin-left: 25px;
+    }
+
+    .card-description {
+        padding: 0;
+        padding-right: 20px;
+    }
+}
