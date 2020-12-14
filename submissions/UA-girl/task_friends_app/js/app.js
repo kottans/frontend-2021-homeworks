@@ -73,10 +73,9 @@ class App {
             age: {
                 toggled: false,
                 age: null,
-                prevAge: 100,
             },
         };
-        this.sortingState = {
+        this.sortingStates = {
             name: {
                 toggled: false,
                 direction: null,
@@ -104,24 +103,14 @@ class App {
                         this.genderFilter(state.gender, false);
                         break;
                     case 'age':
-                        this.ageFilter(state.age);
+                        this.ageFilter(state.age || 100);
                         break;
                 }
             }
         }
-        for (let [filter, state] of Object.entries(this.filterStates)) {
+        for (let [filter, state] of Object.entries(this.sortingStates)) {
             if (state.toggled) {
-                switch (filter) {
-                    case 'age':
-                        this.sortByAge(state.direction);
-                        break;
-                    case 'name':
-                        this.sortByName(state.direction);
-                        break;
-                    case 'registration':
-                        this.sortByRegistrationDate(state.direction);
-                        break;
-                }
+                this.sortCards(state.direction, filter);
             }
         }
     }
@@ -130,19 +119,17 @@ class App {
         this.filterStates.age = {
             toggled: false,
             age: null,
-            prevAge: 100,
         };
         if (updateGender) {
             this.filterStates.gender = {
                 toggled: false,
                 gender: null,
-                direction: null
             }
         }
     }
 
     resetSortingState() {
-        this.sortingState = {
+        this.sortingStates = {
             name: {
                 toggled: false,
                 direction: null,
@@ -158,71 +145,73 @@ class App {
         };
     }
 
-    genderFilter(gender, change = true) {
-        this.filterStates.gender.toggled = true;
-        this.filterStates.gender.gender = gender;
-        this.currentPage = 0;
-        if (change) {
-            return this.restoreFromFilter()
+    genderFilter(gender, wasToggled=true) {
+        if (wasToggled) {
+            this.filterStates.gender.gender = gender;
+            this.restoreFromFilter();
+        } else {
+            this.filterStates.gender.toggled = true;
+            this.filterStates.gender.gender = gender;
+            this.cards = this.cards.filter(person => person.gender === gender);
         }
-        this.cards = this.cards.filter(person => person.gender === gender);
     }
 
     ageFilter(maxAge) {
-        const prevAge = this.filterStates.age.prevAge;
-        const currAge = this.filterStates.age.age;
-        this.resetFilterState();
-        this.currentPage = 0;
         this.filterStates.age.toggled = true;
         document.querySelector('.label-range').innerHTML = `Max age: ${maxAge}`;
-        if (+ maxAge > prevAge) {
-            this.filterStates.age.prevAge = 100;
-            this.filterStates.age.age = + maxAge;
-            return this.restoreFromFilter();
+        if(this.filterStates.age.age < +maxAge) {
+            this.filterStates.age.age = +maxAge;
+            this.restoreFromFilter();
+        } else {
+            this.filterStates.age.age = +maxAge;
+            this.cards = this.cards.filter(person => person.age <= + maxAge);
         }
-        if (currAge) {
-            this.filterStates.age.prevAge = currAge;
+    }
+
+    sortCards(value, filterName) {
+        switch (filterName) {
+            case 'age':
+                this.sortByAge(value);
+                break;
+            case 'name':
+                this.sortByName(value);
+                break;
+            case 'registration':
+                this.sortByRegistrationDate(value)
         }
-        this.filterStates.age.age = + maxAge;
-        this.cards = this.cards.filter(person => person.age <= + maxAge);
     }
 
     nameFilter(name) {
         name = name.trim().toLowerCase();
-        this.resetFilterState();
-        this.currentPage = 0;
+        this.restoreFromFilter();
         this.cards = this.cards.filter(person => person.name.first.toLowerCase().startsWith(name));
     }
 
     sortByAge(isFromLowest) {
-        this.cards.sort((person1, person2) => person1.ageCompare(person2));
         this.resetSortingState();
-        this.sortingState.age.toggled = true;
-        this.sortingState.age.direction = isFromLowest;
-        this.currentPage = 0;
+        this.cards.sort((person1, person2) => person1.ageCompare(person2));
+        this.sortingStates.age.toggled = true;
+        this.sortingStates.age.direction = isFromLowest;
         if (isFromLowest === 'down') {
             this.cards.reverse()
         }
     }
 
-
     sortByName(isFromLowest) {
-        this.cards.sort((person1, person2) => person1.nameCompare(person2));
         this.resetSortingState();
-        this.sortingState.name.toggled = true;
-        this.sortingState.name.direction = isFromLowest;
-        this.currentPage = 0;
+        this.cards.sort((person1, person2) => person1.nameCompare(person2));
+        this.sortingStates.name.toggled = true;
+        this.sortingStates.name.direction = isFromLowest;
         if (isFromLowest === 'down') {
             this.cards.reverse()
         }
     }
 
     sortByRegistrationDate(isFromLowest) {
-        this.cards.sort((person1, person2) => person1.dateRegistrationCompare(person2));
         this.resetSortingState();
-        this.sortingState.registration.toggled = true;
-        this.sortingState.registration.direction = isFromLowest;
-        this.currentPage = 0;
+        this.cards.sort((person1, person2) => person1.dateRegistrationCompare(person2));
+        this.sortingStates.registration.toggled = true;
+        this.sortingStates.registration.direction = isFromLowest;
         if (isFromLowest === 'down') {
             this.cards.reverse()
         }
@@ -254,7 +243,6 @@ class App {
         this.resetSortingState();
         document.querySelector('.label-range').innerHTML = `Max age: 100`;
         document.querySelector('.range').value = 100;
-        this.currentPage = 0;
     }
 
     displayPeople() {
@@ -274,7 +262,7 @@ class App {
 
     addListenersFilters() {
         const app = this;
-        ['click', 'input', 'change', 'keyup'].forEach(e => filterSet.addEventListener(e, function (event) {
+        filterSet.addEventListener('input', function (event) {
             const target = event.target.closest('input');
             if (!target) {
                 return
@@ -283,32 +271,32 @@ class App {
             const value = target.value;
             switch (name) {
                 case 'search':
-                    if (event.keyCode === 8 || event.keyCode === 46) {
-                        app.restoreFromFilter()
-                    }
                     app.nameFilter(value);
                     break;
-                case 'abc':
-                    app.sortByName(value);
+                case 'sorting':
+                    app.sortCards(value, target.dataset.name);
                     break;
                 case 'gender':
-                    app.genderFilter(value);
-                    break;
-                case 'age':
-                    app.sortByAge(value);
+                    const wasToggled = app.filterStates.gender.toggled;
+                    app.genderFilter(value, wasToggled);
                     break;
                 case 'range':
                     app.ageFilter(value);
                     break;
-                case 'registration':
-                    app.sortByRegistrationDate(value);
-                    break;
-                case 'reset':
-                    app.resetApp();
-                    break
             }
+            app.currentPage = 0;
             app.displayPeople();
-        }))
+        });
+
+        filterSet.addEventListener('click', function ({target}) {
+            target = target.closest('input.button-reset');
+            if (!target) {
+                return
+            }
+            app.currentPage = 0;
+            app.resetApp();
+            app.displayPeople();
+        })
     }
 
     addEventListenersPages() {
