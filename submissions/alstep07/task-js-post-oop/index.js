@@ -9,18 +9,16 @@
 // Define your objects here
 
 class Inhabitant {
-	constructor(species, name, gender, saying, legs, hands, friends) {
+	constructor(species, name, gender, saying, friends = []) {
 		this.species = species;
 		this.name = name;
 		this.gender = gender;
 		this.saying = saying;
-      this.legs = legs;
-      this.hands = hands;
 		this.friends = friends;
 	}
 
 	toString() {
-		let greating = `${this.saying}! I am a ${this.species} and my gender is ${this.gender}. My name is ${this.name}. I have ${this.legs} legs and ${this.hands} hands. `;
+		let greating = `${this.saying}! I am a ${this.species} and my gender is ${this.gender}. My name is ${this.name}. `;
 		return (this.friends.length > 1)
 			? greating += `My friends are ${this.friends}.`
 			: this.friends.length === 1
@@ -31,13 +29,12 @@ class Inhabitant {
 
 class Human extends Inhabitant {
    constructor (name, gender, saying, friends) {
-      super('human', name, gender, saying, 2, 2, friends || []);
+      super('human', name, gender, saying, friends);
+      this.legs = 2;
+      this.hands = 2;
    }
-}
-
-class Animal extends Inhabitant {
-   constructor (species, name, gender, saying, friends) {
-      super(species, name, gender, saying, 4, 'no', friends || []);
+   toString() {
+      return super.toString() + `I have ${this.legs} legs and ${this.hands} hands. `
    }
 }
 
@@ -53,20 +50,30 @@ class Woman extends Human {
    }
 }
 
-class Cat extends Animal {
-   constructor (name, gender, friends) {
+class Pets extends Inhabitant {
+   constructor (species, name, gender, saying, friends) {
+      super(species, name, gender, saying, friends);
+      this.legs = 4;
+   }
+   toString (){
+      return super.toString() + `I have ${this.legs} legs.`
+   }
+}
+
+class Cat extends Pets {
+   constructor (name, gender, friends ) {
       super('cat', name, gender, 'Meow', friends);
    }
 }
 
-class Dog extends Animal {
+class Dog extends Pets {
    constructor (name, gender, friends) {
       super('dog', name, gender, 'Bow wow', friends);
    }
 }
 
 class CatWoman extends Woman {
-   constructor (name, saying, friends) {
+   constructor (name, saying = cat.saying, friends) {
       super(name, saying, friends);
    }
 }
@@ -75,7 +82,7 @@ const man = new Man('Sasha', 'Hello World', ['Julia']);
 const woman = new Woman('Julia', 'Hi there', ['Sasha', 'Tom', 'Selina']);
 const cat = new Cat('Tom', 'male', ['Julia', 'Selina']);
 const dog = new Dog('Jack', 'male', ['Julia', 'Tom']);
-const catWoman = new CatWoman('Selina', cat.saying, );
+const catWoman = new CatWoman('Selina');
 
 const inhabitants = [man, woman, cat, dog, catWoman];
 
