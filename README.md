@@ -70,8 +70,8 @@ you are in doubt.
 
 C11. Make sure that the app you develop to complete the task:
 
-- [ ] has its own dedicated project/repository (task repo)
-- [ ] is [published on GitHub pages](./publish-your-app.md)
+- has its own dedicated project/repository (task repo)
+- lis [published on GitHub pages](./publish-your-app.md)
 
 C12. In your local clone of this repo do the following:
 
