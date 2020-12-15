@@ -64,9 +64,11 @@ let catVoice = "Meow-meow!"
 const cat = new Cat("Murzik", "cat", "male",  catVoice, ["Sonya", "Garfild", "Carapka"]);
 const catwoman = new CatWoman ("Selina Kyle", "humicat", "female", catVoice, ); 
 
-print(man.say());
-print(woman.say());
-print(dog.say());
-print(cat.say());
-print(catwoman.say());
-
+let inhabitantsList = [ new Human("Boris", "human", "male", "HI!", ["Vladimir", "Innokentiy", "Fedor"]),
+                        new Human("Larisa", "human", "female", "Hello!", ["Diana","Laura","Svetlana"]),
+                        new Dog("Sharikk", "dog", "male", "Woof-woof", ["Bublik"]),
+                        new Cat("Murzik", "cat", "male",  catVoice, ["Sonya", "Garfild", "Carapka"]),
+                        new CatWoman ("Selina Kyle", "humicat", "female", catVoice, )
+                    ];
+                    
+inhabitantsList.forEach(unit => print(unit.say()));
