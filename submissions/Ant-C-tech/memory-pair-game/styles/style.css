@@ -162,6 +162,7 @@ header {
 }
 
 .card {
+    cursor: pointer;
     position: relative;
     margin: 15px;
     width: calc(25% - 30px);
