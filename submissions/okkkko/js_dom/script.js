@@ -68,7 +68,7 @@ const btnClick = (event) => {
   let obj = movies.find(obj => event.target.textContent === obj.name);
   name.textContent = obj.name;
   pic.setAttribute("src", obj.img);
-  pic.style.display="block";
+  pic.classList.add("show");
   text.innerHTML = obj.storyline;
   year.innerHTML = "Year:" + obj.year;
   genres.innerHTML = "Genres: " + obj.genres.join(" | ");  

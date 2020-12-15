@@ -67,7 +67,7 @@
   display: grid;
   grid-template-columns: 1fr 3fr;
 }
-.pic {
+.pic.show {
   height: 450px;
   width: 300px;
   display: none;
@@ -105,7 +105,7 @@
   .header_title {
     font-size: 2em;
   }
-  .pic {
+  .pic.show {
     width: 200px;
     height: 290px;
   }
@@ -158,7 +158,7 @@
     margin-left: 0;
     grid-template-columns: 1fr;
   }
-  .pic {
+  .pic.show {
     justify-self: center;
   }
   .name {
