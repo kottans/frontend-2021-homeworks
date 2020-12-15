@@ -1,0 +1,217 @@
+body {
+    font-family: 'Nanum Myeongjo', serif;
+    font-size: 20px;
+    line-height: 1.2;
+    font-weight: normal;
+    font-style: normal;
+    color: #F4E3B2; 
+    background-color: #050517;
+}
+
+.header {
+    padding: 35px; 
+    background-image: url(/img/bg.png); 
+    background-repeat: no-repeat;
+    background-position: bottom 0 left 30px;
+    background-size: 120px; 
+    border-bottom: 2px solid #D3D5D7; 
+    position: relative; 
+}
+
+.header__name {
+    font-size: 60px;
+    font-weight: 700;
+    text-align: center;  
+}
+
+.header__btn {
+    display: none; 
+    position: absolute; 
+    padding: 5px; 
+    top: 50%; 
+    transform: translateY(-50%); 
+    right: 20px;  
+    border: none; 
+    background: none;
+    cursor: pointer; 
+}
+
+.header__line {
+    width: 20px; 
+    height: 1px; 
+    background-color:  #D3D5D7; 
+    margin-bottom: 3px;
+    display: block; 
+}
+
+.wrap {
+    display: flex; 
+}
+
+.nav {
+    flex: 0 0 350px;  
+}
+
+.mobile {
+    width: 100%; 
+    height: 100vh; 
+    position: fixed;
+    background:  #050517;  
+}
+
+.nav__item {
+    border-bottom: 1px solid #D3D5D7;
+    border-right: 1px solid #D3D5D7;
+}
+
+.nav__btn {
+    width: 100%;
+    padding: 30px 20px;
+    background-color:  #050517; 
+    color: #F4E3B2;
+    text-align: center;
+    font-size: 24px; 
+    text-transform: uppercase;
+    cursor: pointer;
+    border:none;  
+    outline: none;
+    transition: .1s opacity;
+}
+
+.nav__btn:hover {
+    opacity: 0.7; 
+}
+
+.nav__btn:active {
+    background-color: #F4E3B2; 
+    color: #050517;
+}
+
+main {
+    margin: 0 20px; 
+}
+
+.content {
+    padding: 20px; 
+    display: flex; 
+}
+
+
+.content__img {
+    width: 300px; 
+    object-fit: contain;
+    border-radius: 30px; 
+    margin-right: 30px;
+}
+
+.content__title {
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.content__desc {
+    text-align: center;
+}
+
+.overview {
+    border: 1px dotted #D3D5D7;
+    border-radius: 50px;
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px; 
+}
+
+.overview__title {
+    margin-bottom: 15px;
+}
+
+.overview__list {
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+}
+
+.overview__item {
+    margin-bottom: 5px;
+    font-size: 18px;
+    text-align: center;
+}
+
+@media (max-width: 1200px) {
+    body {
+         font-size: 16px;
+    }
+
+    .content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .content__img {
+        margin: 0 0 20px 0;
+    }
+}
+
+@media (max-width: 955px) {
+    .nav {
+        flex: 0 0 250px;  
+    }
+
+    .nav__btn {
+        padding: 20px 10px;
+        font-size: 18px; 
+    }
+
+    .overview__item {
+        font-size: 16px; 
+    }
+}
+
+@media (max-width: 768px) {
+    .header {
+        padding: 15px; 
+        background-position: bottom 0 left 15px;
+        background-size: 80px;
+    }
+
+    .header__name {
+        font-size: 30px;
+    }
+
+    .header__btn {
+        display: block; 
+    }
+
+    .nav:not(.mobile) {
+        display: none; 
+    }
+
+    .nav__item {
+        border-right: none; 
+    }
+
+    .nav__btn:hover {
+        color: #D3D5D7; 
+        opacity: 1; 
+    }
+    
+    main {
+        margin: 0 10px;
+    }
+    
+    .content__img {
+       width: 255px;
+    }
+    
+    .overview {
+        border-radius: 20px;
+        padding: 10px;
+    }
+
+    .overview__item {
+        font-size: 14px; 
+    }
+}
