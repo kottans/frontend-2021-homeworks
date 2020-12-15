@@ -13,7 +13,7 @@ Please follow the instructions below to submit your code for review.
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**
 
-- [General guides for you as a contributor](#general-guides-for-you-as-a-contributor)
+- [Overview of contribution flow](#overview-of-contribution-flow)
 - [Glossary](#glossary)
 - [Contribution stage A. Setup the fork and local clone](#contribution-stage-a-setup-the-fork-and-local-clone)
 - [Contribution stage B. Adding new code and updating submissions](#contribution-stage-b-adding-new-code-and-updating-submissions)
@@ -25,7 +25,7 @@ Please follow the instructions below to submit your code for review.
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 <!-- *generated with [DocToc](https://github.com/thlorenz/doctoc)* -->
 
-## General guides for you as a contributor
+## Overview of contribution flow
 
 Now you are a contributor to an educational open source project.
 
@@ -51,6 +51,7 @@ _app repo_             | a repository that contains your application code
 You need to do this only once.
 
 A1. Fork _homeworks main repo_ via GitHub web interface
+
 A2. Clone _homeworks fork_ on your local machine:
    - `git clone https://github.com/YOUR_USERNAME/frontend-2021-homeworks.git`
 
@@ -58,6 +59,7 @@ A2. Clone _homeworks fork_ on your local machine:
 
 A3. Add _homeworks main repo_ as an upstream:
    - `git remote add upstream https://github.com/kottans/frontend-2021-homeworks.git`
+
 A4. In _homeworks local repo_, add a folder with your github username under `submissions` directory
 
 You will add code from your every task (app) in its individual directory under
@@ -78,8 +80,8 @@ B11. Make sure that the app you develop to complete the task:
 
 B12. In your _homeworks local repo_ do the following:
 
-B121. Sync up `main` branch of your _homeworks local repo_ and _homeworks fork_ (origin)
-with the `main` branch of _homeworks main repo_ (upstream)
+B121. Sync up `main` branch of your _homeworks local repo_ and _homeworks fork_ (`origin`)
+with the `main` branch of _homeworks main repo_ (`upstream`):
  - `git checkout main`
  - `git pull upstream main`
  - `git push origin main`
@@ -93,7 +95,7 @@ B122. Create a dedicated branch for your new task (app) code base while on the `
   - `git checkout main`
   - `git branch <task-branch-name>` (`<task-branch-name>` can be e.g. `dom-api-task`)
    
-B123. Add required files
+B123. Add required files:
  - `git checkout <task-branch-name>`
  - create a directory for your task (app) code base under `./submissions/YOUR_USERNAME` so
    that the path to your task is `./submissions/YOUR_USERNAME/TASK_NAME`
@@ -108,17 +110,21 @@ B123. Add required files
 
  - stage files with `git add` command and commit changes
 
-B124. Open a Pull Request (PR)
+B124. Open a Pull Request (PR):
  - push to _homeworks fork_: `git push --set-upstream origin <task-branch-name>`
+ - wait until push operation completes successfully
  - navigate to your _homeworks fork_ on GitHub
  - GitHub will offer to open a Pull Request from your new task branch; Just do it
+
+![github-pr-opening](./img/github-pr-opening.png)
+ 
  - you will be offered a PR template message with instructions; read them and fulfil as prescribed
  - once PR is open, check **Files changed** to see what's being submitted
    
 > Make sure your PR **doesn't contain any unrelated files or commits** from any other tasks,
 > and no files from other your tasks or from other authors are being deleted
 
-B125. Ask for a review
+B125. Ask for a review:
  - post a link to your PR in the
    [FE Questionarium chat](https://t.me/joinchat/DmX0JAl-mh5W0jrWli8Ycw)
    and ask mentors and peers for a code review
@@ -128,7 +134,7 @@ B125. Ask for a review
 
 Whenever you want or are requested to make any changes do the following:
 
-B21. Update your app (in the relevant _app repo_)
+B21. Update your app (in the relevant _app repo_):
  - implement changes
  - make sure your app publication is updated
 
@@ -139,8 +145,8 @@ B22. Update your submission PR - in your _homeworks local repo_:
 
 Your PR will be updated automagically.
 
-B23. Check your PR and summon a mentor
- - navigate to your PR
+B23. Check your PR and summon a mentor:
+ - navigate to your PR in _homeworks main repo_
  - check your submitted files under **Files changed**;
    you will want to see your latest changes in the files
  - click **Re-request review** icon in the list of your PR reviewers
