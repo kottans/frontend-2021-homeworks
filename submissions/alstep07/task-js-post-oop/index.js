@@ -18,77 +18,84 @@ class Inhabitant {
 	}
 
 	toString() {
-		let greating = `${this.saying}! I am a ${this.species} and my gender is ${this.gender}. My name is ${this.name}. `;
-		return (this.friends.length > 1)
-			? greating += `My friends are ${this.friends}.`
-			: this.friends.length === 1
-			? greating += `My friend is ${this.friends}.`
-			: greating;
-   }
+		let greating = `${this.saying}! I am a ${this.species}
+      and my gender is ${this.gender}. My name is ${this.name}. `;
+
+		if (this.friends.length > 1) {
+			return (greating += `My friends are ${this.friends}.`);
+		} else if (this.friends.length === 1) {
+			return (greating += `My friend is ${this.friends}.`);
+		} else {
+			return greating;
+		}
+	}
 }
 
 class Human extends Inhabitant {
-   constructor (name, gender, saying, friends) {
-      super('human', name, gender, saying, friends);
-      this.legs = 2;
-      this.hands = 2;
-   }
-   toString() {
-      return super.toString() + `I have ${this.legs} legs and ${this.hands} hands. `
-   }
+	constructor(name, gender, saying, friends) {
+		super("human", name, gender, saying, friends);
+		this.legs = 2;
+		this.hands = 2;
+	}
+	toString() {
+		return (
+			super.toString() +
+			`I have ${this.legs} legs and ${this.hands} hands. `
+		);
+	}
 }
 
 class Man extends Human {
-   constructor (name, saying, friends) {
-      super(name, 'male', saying, friends);
-   }
+	constructor(name, saying, friends) {
+		super(name, "male", saying, friends);
+	}
 }
 
 class Woman extends Human {
-   constructor (name, saying, friends) {
-      super(name, 'female', saying, friends);
-   }
+	constructor(name, saying, friends) {
+		super(name, "female", saying, friends);
+	}
 }
 
 class Pets extends Inhabitant {
-   constructor (species, name, gender, saying, friends) {
-      super(species, name, gender, saying, friends);
-      this.legs = 4;
-   }
-   toString (){
-      return super.toString() + `I have ${this.legs} legs.`
-   }
+	constructor(species, name, gender, saying, friends) {
+		super(species, name, gender, saying, friends);
+		this.legs = 4;
+	}
+	toString() {
+		return super.toString() + `I have ${this.legs} legs.`;
+	}
 }
 
 class Cat extends Pets {
-   constructor (name, gender, friends ) {
-      super('cat', name, gender, 'Meow', friends);
-   }
+	constructor(name, gender, friends) {
+		super("cat", name, gender, "Meow", friends);
+	}
 }
 
 class Dog extends Pets {
-   constructor (name, gender, friends) {
-      super('dog', name, gender, 'Bow wow', friends);
-   }
+	constructor(name, gender, friends) {
+		super("dog", name, gender, "Bow wow", friends);
+	}
 }
 
 class CatWoman extends Woman {
-   constructor (name, saying = cat.saying, friends) {
-      super(name, saying, friends);
-   }
+	constructor(name, saying = cat.saying, friends) {
+		super(name, saying, friends);
+	}
 }
 
-const man = new Man('Sasha', 'Hello World', ['Julia']);
-const woman = new Woman('Julia', 'Hi there', ['Sasha', 'Tom', 'Selina']);
-const cat = new Cat('Tom', 'male', ['Julia', 'Selina']);
-const dog = new Dog('Jack', 'male', ['Julia', 'Tom']);
-const catWoman = new CatWoman('Selina');
+const man = new Man("Sasha", "Hello World", ["Julia"]);
+const woman = new Woman("Julia", "Hi there", ["Sasha", "Tom", "Selina"]);
+const cat = new Cat("Tom", "male", ["Julia", "Selina"]);
+const dog = new Dog("Jack", "male", ["Julia", "Tom"]);
+const catWoman = new CatWoman("Selina");
 
 const inhabitants = [man, woman, cat, dog, catWoman];
 
 // ======== OUTPUT ========
 
-inhabitants.forEach(individual => print(individual.toString()));
+inhabitants.forEach((item) => print(item.toString()));
 
 /* Use print(message) for output.
    Default tag for message is <pre>. Use print(message,'div') to change containing element tag.
