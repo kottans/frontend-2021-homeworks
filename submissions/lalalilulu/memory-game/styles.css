@@ -7,7 +7,7 @@
 }
 
 body {
-    height: 95vh;
+    height: 90vh;
     background-color: linen;
     font-family: Manrope;
     color: #314455;
@@ -56,8 +56,56 @@ img {
     position: relative;
     margin: 5px;
     transform: scale(1);
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    -o-transform-style: preserve-3d;
     transform-style: preserve-3d;
     transition: transform .5s;
+}
+
+
+@media only screen and (max-width: 320px) {
+    .memory-game {
+        width: 80%;
+    }
+    .memory-card {
+        width: calc(25% - 10px);
+        height: calc(20% - 10px);
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+    .memory-game {
+        width: 80%;
+        height: 75%;
+    }
+    .memory-card {
+        width: calc(25% - 10px);
+        height: calc(20% - 10px);
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    .memory-game {
+        width: 50%;
+        height: 75%;
+    }
+    .memory-card {
+        width: calc(25% - 10px);
+        height: calc(20% - 10px);
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+    .memory-game {
+        width: 80%;
+        height: 75%;
+    }
+    .memory-card {
+        width: calc(25% - 10px);
+        height: calc(20% - 10px);
+    }
 }
 
 .memory-card:active {
@@ -72,11 +120,25 @@ img {
     position: absolute;
     background: lightpink;
     border-radius: 10px;
+    -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
+    -ms-backface-visibility: visible;
 }
 
 .front {
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -ms-transform: rotateY(180deg);
+    -o-transform: rotateY(180deg);
     transform: rotateY(180deg);
+}
+
+.back {
+    -webkit-transform: rotateY(0deg);
+    -moz-transform: rotateY(0deg);
+    -ms-transform: rotateY(0deg);
+    -o-transform: rotateY(0deg);
+    transform: rotateY(0deg);
 }
 
 .memory-card.flip {
