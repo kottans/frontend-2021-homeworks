@@ -15,7 +15,7 @@ const dog = {
    hands: 0,
    gender: "male",
    friends: ["Bublik", "Beem"],
-   saying: "Woof woof!",
+   saying: "Woof woof!"
 };
 
 const cat = {
@@ -25,7 +25,7 @@ const cat = {
    hands: 0,
    gender: "female",
    friends: ["Barsik", "Murzik", "Felix"],
-   saying: "Meow meow!",
+   saying: "Meow meow!"
 };
 
 const woman = {
@@ -35,7 +35,7 @@ const woman = {
    hands: 2,
    gender: "female",
    friends: ["Irina", "Vlad", "Marina"],
-   saying: "Hi!",
+   saying: "Hi!"
 };
 
 const catWoman = {
@@ -45,7 +45,7 @@ const catWoman = {
    hands: 2,
    gender: "female",
    friends: ["Batman", "all cats in the world"],
-   saying: cat.saying,
+   saying: cat.saying
 };
 
 const man = {
@@ -55,11 +55,23 @@ const man = {
    hands: 2,
    gender: "male",
    friends: ["Vladimir", "Mariya", "Oksana"],
-   saying: "Hello!",
+   saying: "Hello!"
 };
 
 const message = function(inhabitant) {
-   return `I'm a ${inhabitant.species}. My name is ${inhabitant.name}. My gender is ${inhabitant.gender}. ` + ((inhabitant.hands !== 0)? `I have ${inhabitant.hands} hands and ${inhabitant.legs} legs. ` : `I have ${inhabitant.legs} paws. `) + `Also I have a friends: ${inhabitant.friends.join(", ")}. ${inhabitant.saying}`;
+   
+   const {species, name, gender, hands, legs, friends, saying} = inhabitant;
+   
+   return [
+      `${saying}`,
+      `I'm a ${species}`,
+      `My name is ${name}`,
+      `My gender is ${gender}`,
+       hands 
+        ? `${hands} hands and ${legs} legs`
+        : `${legs} paws`,
+      `Also I have a friends: ${friends.join(", ")}`
+      ].join('. ');
 };
 
 const inhabitants = [dog, cat, man, woman, catWoman];
