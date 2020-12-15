@@ -1,24 +1,37 @@
+const field = document.querySelector('.game');
 const cards = document.querySelectorAll('.card');
 const win = document.querySelector('.win');
 
-let isRolledCard = false;
-let lockRoll = false;
-let firstCard, secondCard;
-let winCondition = 0;
+const  cardMaxPositions = 12;
 
-function rollCard() {
+let isRolledCard = false,
+    lockRoll = false,
+    firstCard, secondCard,
+    winCondition = 6,
+    currentMatches = 0;
+
+window.onload = resetOrderCards();
+
+field.onclick = function(event) {
+    if (event.target.className != 'back') return;
+    
+    let card = event.target.closest('.card');
+    rollCard(card);
+}
+
+function rollCard(card) {
     if (lockRoll) return;
-    if (this === firstCard) return;
-    this.classList.add('roll');
+    if (card === firstCard) return;
+    card.classList.add('roll');
 
     if (!isRolledCard) {
         //first clicked Card!
         isRolledCard = true;
-        firstCard = this;
+        firstCard = card;
     } else {
          //second clicked Card!
         isRolledCard = false;
-        secondCard = this;
+        secondCard = card;
         //check cards for match!
         checkCardMatch();
     }
@@ -40,7 +53,7 @@ function freezeCards() {
         firstCard.removeEventListener('click', rollCard);
         secondCard.classList.add('clear');
         secondCard.removeEventListener('click', rollCard);
-        winCondition++;  
+        currentMatches++;  
         resetCards();
 }
 
@@ -61,21 +74,16 @@ function resetCards() {
 }
 
 function checkWinCondition() {
-    if (winCondition === 6) {
+    if (currentMatches === winCondition) {
         setTimeout(function() {
             win.classList.add('win_open');
         }, 500)
     };
 }
 
-(function resetOrderCards() {
+function resetOrderCards() {
     cards.forEach(function(card) {
-        let position = Math.floor(Math.random() * 12);
+        let position = Math.floor(Math.random() * cardMaxPositions);
         card.style.order = position;
     })
-})();
-
-cards.forEach(function(card) {
-    card.addEventListener('click', rollCard);
-})
-
+};

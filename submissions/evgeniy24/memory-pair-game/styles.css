@@ -30,6 +30,7 @@ h1 {
   position: relative;
   transform-style: preserve-3d;
   transition: transform 0.7s;
+  cursor: pointer;
 }
 
 .roll {
@@ -47,6 +48,10 @@ h1 {
 
 .front {
   transform: rotateY(180deg);
+}
+
+.clear {
+  cursor: auto;
 }
 
 .clear > .front {
