@@ -15,8 +15,6 @@ function hideSideBar(e) {
     deBar.classList.toggle('hide__sidebar');
     clickContent.classList.toggle('move_content');
     clickBurger.classList.toggle('burger__stop');
-    console.log(e.type)
-
 };
 
 clickBurger.addEventListener('click', hideSideBar);
