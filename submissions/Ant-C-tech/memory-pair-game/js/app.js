@@ -55,7 +55,6 @@ function setTask() {
     for (let index = 0; index < hiragana.length; index++) {
         taskElemIndexInHiragana.push(index)
     }
-    console.log(taskElemIndexInHiragana);
     while (taskElemIndexInHiragana.length > CARDS_NUMBER / 2) {
         taskElemIndexInHiragana.splice(_getRandomIntInclusive(0, taskElemIndexInHiragana.length - 1), 1)
     }
@@ -63,7 +62,6 @@ function setTask() {
         _task.push(hiragana[index])
         _task.unshift(hiragana[index])
     }
-
 }
 
 function addListeners() {
@@ -216,7 +214,7 @@ function isWin() {
         window.removeEventListener('resize', phoneAdaptation)
         const timeout = setTimeout(() => {
             changeContent(createCongratulationScr())
-            BODY.style.width = 'auto'
+            BODY.classList.add('w-auto')
             BODY.classList.remove('body-gamefield')
             clearTimeout(timeout)
         }, GAMEPLAY_DELAY);
@@ -234,7 +232,7 @@ function phoneAdaptation() {
         BODY.style.width = document.documentElement.clientHeight + 'px'
         BODY.classList.add('body-gamefield')
     } else {
-        BODY.style.width = 'auto'
+        BODY.classList.add('w-auto')
         BODY.classList.remove('body-gamefield')
     }
 }

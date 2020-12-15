@@ -9,3 +9,7 @@
 .d-none {
     display: none;
 }
+
+.w-auto {
+    width: auto;
+}
