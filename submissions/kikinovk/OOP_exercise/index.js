@@ -8,44 +8,85 @@
 // ======== OBJECTS DEFINITIONS ========
 // Define your objects here
 class Being {
-  constructor(species, name, gender, legs, hands, saying) {
-     this.species = species;
+  constructor(name, gender, saying) {
+
      this.name = name;
      this.gender = gender;
-     this.legs = legs;
-     this.hfnds = hands;
      this.saying = saying;
      this.friends = [];
+     this.species = '';
   };
   addFriends(arr) {
      arr.forEach(item => this.friends.push(item));
+  };
+  description() {
+     return `${this.saying} my name is ${this.name}, I am a ${this.species}, I am ${this.gender}, ${this.friends.length > 0 ? `My friends is ${ this.friends.map(item => item.name).join(' and ')}` : 'I have not got friends'},`
   }
 };
 
-const dog = new Being ('dog', 'Charlie', 'male', 4, 0, 'woof-woof!');
-const cat = new Being ('cat', 'Taffy', 'female', 4, 0, 'meow!');
-const man = new Being ('man', 'Bruce', 'male', 2, 2, 'Hi!');
-const woman = new Being ('woman', 'Emma', 'female', 2, 2, 'Hello!');
-const catWoman = new Being ('cat-woman', 'Patience', 'female', 2, 2, cat.saying);
+class Animal extends Being {
+  constructor(name, gender, saying) {
+     super(name, gender, saying);
+     this.paws = 4;
+
+  };
+  description() {
+     return `${super.description()},  I have ${this.paws} paws`
+  }
+};
+
+class Human extends Being {
+  constructor(name, gender = 'male', saying) {
+     super(name, gender, saying);
+     this.legs = 2;
+     this.hands = 2;
+     this.species = 'human';
+
+  };
+  description() {
+     return `${super.description()}, I have ${this.hands} hands and ${this.legs} legs`
+  }
+};
+
+class Dog extends Animal {
+  constructor(name, gender, saying) {
+     super(name, gender, saying);
+     this.species = 'dog';
+  }
+};
+
+class Cat extends Animal {
+  constructor(name, gender, saying) {
+     super(name, gender, saying);
+     this.species = 'cat';
+  }
+};
+
+class SuperHero extends Human {
+  constructor(name, gender, saying, species = 'cat-woman') {
+     super(name, gender, saying);
+     this.species = species;
+  };
+}
+
+const dog = new Dog ('Charlie', 'male', 'woof-woof!');
+const cat = new Cat ('Taffy', 'female', 'meow!');
+const man = new Human ('Bruce', 'male', 'Hi!');
+const woman = new Human ('Emma', 'female', 'Hello!');
+const catWoman = new SuperHero ('Patience', 'female', cat.saying);
 
 
 dog.addFriends([man, woman]);
 cat.addFriends([man, woman, catWoman]);
 man.addFriends([woman, dog, cat, catWoman]);
 woman.addFriends([dog, cat, man]);
-catWoman.addFriends([cat, man]);
 
-const inhabitants = [dog, cat, man, woman, catWoman];
-
-const description = obj => {
-  const keys = Object.keys(obj);
-  return keys.map(key => key === 'friends' ? obj[key].map(item => item.name).join('; ') : obj[key]).join('; ');
-};
+const   inhabitants = [dog, cat, man, woman, catWoman];
 
 
-// ======== OUTPUT ========
+// // ======== OUTPUT ========
 
-inhabitants.forEach(obj => print(description(obj)));
+inhabitants.forEach(obj => print(obj.description()));
 
 
 /* Use print(message) for output.
