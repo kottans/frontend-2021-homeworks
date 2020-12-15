@@ -41,7 +41,6 @@ GAMEPLAY_AUDIO.volume = 0.3
 
 initApp()
 
-
 function initApp() {
     setTask()
     const timeout = setTimeout(() => {
@@ -53,9 +52,10 @@ function initApp() {
 
 function setTask() {
     const taskElemIndexInHiragana = []
-    for (let index = 0; index < hiragana.length - 1; index++) {
+    for (let index = 0; index < hiragana.length; index++) {
         taskElemIndexInHiragana.push(index)
     }
+    console.log(taskElemIndexInHiragana);
     while (taskElemIndexInHiragana.length > CARDS_NUMBER / 2) {
         taskElemIndexInHiragana.splice(_getRandomIntInclusive(0, taskElemIndexInHiragana.length - 1), 1)
     }
@@ -63,6 +63,7 @@ function setTask() {
         _task.push(hiragana[index])
         _task.unshift(hiragana[index])
     }
+
 }
 
 function addListeners() {
