@@ -42,20 +42,17 @@ function initApp() {
 }
 
 function setTask() {
-    TASK.push(hiragana[_getRandomIntInclusive(0, hiragana.length - 1)])
-    while (TASK.length < CARDS_NUMBER / 2) {
-        const currentItem = hiragana[_getRandomIntInclusive(0, hiragana.length - 1)]
-        let flag = false
-        for (const item of TASK) {
-            if (item.jap === currentItem.jap) {
-                flag = true
-            }
-        }
-        if (flag === false) {
-            TASK.push(currentItem)
-        }
+    const taskElemIndexInHiragana = []
+    for (let index = 0; index < hiragana.length - 1; index++) {
+        taskElemIndexInHiragana.push(index)
     }
-    TASK = TASK.concat(TASK)
+    while (taskElemIndexInHiragana.length > CARDS_NUMBER / 2) {
+        taskElemIndexInHiragana.splice(_getRandomIntInclusive(0, taskElemIndexInHiragana.length - 1), 1)
+    }
+    for (const index of taskElemIndexInHiragana) {
+        TASK.push(hiragana[index])
+        TASK.unshift(hiragana[index])
+    }
 }
 
 function addListeners() {
