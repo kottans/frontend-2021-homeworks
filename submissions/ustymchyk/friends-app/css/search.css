@@ -1,0 +1,31 @@
+.search {
+  display: flex;
+  flex-direction: column;
+
+  color: #fff;
+}
+
+.search__input {
+  flex-grow: 1;
+
+  height: 40px;
+  margin-top: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  min-width: 0;
+
+  font-family: inherit;
+  color: inherit;
+
+  border: 3px solid var(--yellow);
+  background: transparent;
+}
+
+.search__input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.search__input:focus {
+  outline: none;
+  border-color: var(--blue);
+}
