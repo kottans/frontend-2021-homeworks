@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Kottans friends app</title>
+</head>
+<body>
+
+<div class="wrapper">
+    <div class="app">
+        <div class="app__sidebar">
+            <div class="filter">
+                <form action="">
+                    <div class="filter__item">
+                        <h2 class="filter__title">Поиск</h2>
+                        <label for="searchFriend"></label>
+                        <input type="text" class="filter__search js-search" placeholder="Введите имя и/или фамилию"
+                               id="searchFriend">
+                    </div>
+                    <div class="filter__item">
+                        <h2 class="filter__title">По имени</h2>
+                        <div class="filter__choices js-name">
+                            <label class="filter__choice" for="fromLowerToHigh">
+                                От а до я
+                                <input type="radio" name="filter" id="fromLowerToHigh" value="abc">
+                            </label>
+                            <label class="filter__choice" for="fromHighToLower">
+                                С я до а
+                                <input type="radio" name="filter" id="fromHighToLower" value="cba">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="filter__item">
+                        <h2 class="filter__title">По возрасту</h2>
+                        <div class="filter__choices js-age">
+                            <label class="filter__choice" for="fromOldToYoung">
+                                От младших к старшим
+                                <input type="radio" name="filter" id="fromOldToYoung" value="asc">
+                            </label>
+                            <label class="filter__choice" for="fromYoungToOld">
+                                От старших к младшим
+                                <input type="radio" name="filter" id="fromYoungToOld" value="des">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="filter__item">
+                        <h2 class="filter__title">По полу</h2>
+                        <div class="filter__choices js-gender">
+                            <label class="filter__choice" for="allChose">
+                                Все
+                                <input type="radio" name="filterSex" id="allChose" value="all" checked>
+                            </label>
+                            <label class="filter__choice" for="femaleChose">
+                                Женский пол
+                                <input type="radio" name="filterSex" id="femaleChose" value="female">
+                            </label>
+                            <label class="filter__choice" for="maleChose">
+                                Мужской пол
+                                <input type="radio" name="filterSex" id="maleChose" value="male">
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="filter__item">
+                        <input class="reset js-reset" type="reset" value="Сбросить">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="app__main js-main">
+
+        </div>
+    </div>
+</div>
+
+<script src="js/main.js"></script>
+</body>
+</html>

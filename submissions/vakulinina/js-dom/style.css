@@ -1,0 +1,167 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+body {
+  font-family: 'Quicksand', sans-serif;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  height: 6vh;
+  min-width: 360px;
+  min-height: 40px;
+  text-align: center;
+}
+
+main {
+  display: flex;
+  height: 94vh;
+  background-color: #f6f4f3;
+  max-width: 1000px;
+  min-width: 360px;
+  margin: 0 auto 0;
+}
+
+h1 {
+  text-transform: uppercase;
+  color: rgb(70, 58, 58);
+}
+
+h2 {
+  display: none;
+  width: 100%;
+  margin: 20px 0 20px 0;
+}
+
+nav {
+  width: 20%;
+  height: 100%;
+  min-width: 155px;
+  font-size: 18px;
+  padding: 3% 0 0 5%;
+}
+
+ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100%;
+  width: 100%;
+}
+
+li {
+  min-height: 50px;
+}
+
+p {
+  margin-top: 20px;
+}
+
+button:hover,
+button:focus,
+button:active {
+  cursor: pointer;
+  text-shadow: 0 0 7px rgb(102, 85, 85);
+  outline: none;
+}
+
+.nav-button {
+  font-family: inherit;
+  font-weight: bold;
+  height: 100%;
+  width: 100%;
+  font-size: 18px;
+  padding: 5%;
+  text-align: left;
+  color: rgb(70, 58, 58);
+  text-transform: uppercase;
+  border: none;
+  background: none;
+}
+
+.item-card {
+  display: flex;
+  flex-flow: row wrap;
+  align-content: flex-start;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  padding: 5%;
+}
+
+.item-image {
+  width: 50%;
+  min-width: 150px;
+}
+
+.menu-button {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: transparent;
+  border: none;
+}
+
+.menu-button img {
+  width: 60%;
+}
+
+.recipe {
+  width: 50%;
+  margin-top: 20px;
+}
+
+.visible {
+  display: block;
+}
+
+@media screen and (max-width: 780px) {
+  .description {
+    width: 100%;
+  }
+
+  .recipe {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  nav {
+    display: none;
+    position: absolute;
+    width: 100%;
+    min-width: 360px;
+    padding: 0;
+    height: auto;
+  }
+
+  ul {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+  }
+
+  li {
+    width: 50%;
+    height: 50px;
+    background-color: white;
+  }
+
+  .menu-button {
+    display: block;
+    width: 40px;
+  }
+
+  .nav-button {
+    padding-left: 10%;
+  }
+}
