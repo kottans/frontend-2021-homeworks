@@ -72,6 +72,20 @@ your named directory. So, the file structure will be similar to the following
 
 ### B1. Submitting new task (app) code base
 
+> IMPORTANT things to remember at all times.
+>
+> 1. Do not commit to `main`.
+>
+> 2. `checkout main` before creating a new branch, i.e. do not create a new branch while
+> on any branch that is not `main`.
+>
+> 3. Do not merge your branches into `main`. You can merge `main` into your branch if you
+> realize why you need this. In current workflow you normally do not need this.
+>
+> And don't panic if some code seems to be gone when you switch between branches.
+> It will be available to you once you switch back to a specific branch.
+> The point is to submit tasks in isolation from each other.
+
 B11. Make sure that the app you develop to complete the task:
 
 (a) has its own dedicated project/repository on GitHub (_app repo_)
