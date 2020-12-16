@@ -14,10 +14,46 @@ class Inhabitants {
     }
 }
 
-const woman = new Inhabitants('human', 'Emilia', 'female', 2, 2, 'Hello, World!');
-const man = new Inhabitants('human', 'Efrain', 'male', 2, 2, 'Nice to meet you!');
-const cat = new Inhabitants('cat', 'Fluffy', 'female', 4, 0, 'Meow!');
-const dog = new Inhabitants('dog', 'Buddy', 'male', 4, 0, 'Woof-woof!');
+class Human extends Inhabitants {
+    constructor(name, gender, saying) {
+        super('human', name, gender, 2, 2, saying)
+    }
+}
+
+class Woman extends Human {
+    constructor(name, saying) {
+        super(name, 'female', saying)
+    }
+}
+
+class Man extends Human {
+    constructor(name, saying) {
+        super(name, 'male', saying)
+    }
+}
+
+class Animal extends Inhabitants {
+    constructor(species, name, gender, saying) {
+        super(species, name, gender, 4, 0, saying)
+    }
+}
+
+class Cat extends Animal {
+    constructor(name, gender, saying) {
+        super('cat', name, gender, saying)
+    }
+}
+
+class Dog extends Animal {
+    constructor(name, gender, saying) {
+        super('dog', name, gender, saying)
+    }
+}
+
+const woman = new Woman('Emilia', 'Hello, World!');
+const man = new Man('Efrain', 'Hola! Mucho gusto!');
+const cat = new Cat('Fluffy', 'female', 'Meow!');
+const dog = new Dog('Buddy', 'male', 'Woof-woof!');
 
 let inhabitants = [woman, man, cat, dog];
 
