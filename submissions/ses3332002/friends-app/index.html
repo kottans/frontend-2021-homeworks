@@ -11,46 +11,48 @@
   <h1>Найди друзей в Интернете</h1>
   <aside>
     <div class="hamburger_menu"></div>
-    <form name="sorting_n_filtering" class="sorting_n_filtering_options">
-      <div class="filter_caption">Сортировка:</div>
-      <div class="input_option">
-        <input type="radio" name="sorting" id="as_is" class="sort_radio" checked/><label for="as_is">как есть</label>
-      </div>
-      <div class="input_option">
-        <input type="radio" name="sorting" id="nameAZ" class="sort_radio"/><label for="nameAZ">по имени A-Z</label>
-      </div>
-      <div class="input_option">
-        <input type="radio" name="sorting" id="nameZA" class="sort_radio"/><label for="nameZA">по имени Z-A</label>
-      </div>
-      <div class="input_option">
-        <input type="radio" name="sorting" id="age19" class="sort_radio"/><label for="age19">по возрасту 1-9</label>
-      </div>
-      <div class="input_option">
-        <input type="radio" name="sorting" id="age91" class="sort_radio"/><label for="age91">по возрасту 9-1</label>
-      </div>
-      <hr>
-      <div class="filter_caption">Фильтр:</div>
-      <div class="filter_caption">по полу</div>
-      <div class="input_option">
-        <input type="radio" name="sex" id="all" class="filter_radio" checked/><label for="all">все</label>
-      </div>
-      <div class="input_option">
-        <input type="radio" name="sex" id="man" class="filter_radio"/><label for="man">мужчины</label>
-      </div>
-      <div class="input_option">
-        <input type="radio" name="sex" id="woman" class="filter_radio"/><label for="woman">женщины</label>
-      </div>
-      <div class="filter_caption">по возрасту</div>
-      <div class="input_option">
-        <label for="age_from">от</label><input type="number" name="age_from" id="age_from" class="filter_age"/>
-        <label for="age_to">до</label><input type="number" name="age_to" id="age_to" class="filter_age"/>
-      </div>
-      <div class="filter_caption">Поиск по имени</div>
-      <div class="input_option">
-        <input type="text" name="search_name" id="search_name" class="filter_name"/>
-      </div>
+    <div class="sorting_n_filtering_options">
+      <form name="sorting_n_filtering" autocomplete="off">
+        <div class="filter_caption">Сортировка:</div>
+        <div class="input_option">
+          <input type="radio" name="sorting" id="as_is" class="sort_radio" checked/><label for="as_is">как есть</label>
+        </div>
+        <div class="input_option">
+          <input type="radio" name="sorting" id="nameAZ" class="sort_radio"/><label for="nameAZ">по имени A-Z</label>
+        </div>
+        <div class="input_option">
+          <input type="radio" name="sorting" id="nameZA" class="sort_radio"/><label for="nameZA">по имени Z-A</label>
+        </div>
+        <div class="input_option">
+          <input type="radio" name="sorting" id="age19" class="sort_radio"/><label for="age19">по возрасту 1-9</label>
+        </div>
+        <div class="input_option">
+          <input type="radio" name="sorting" id="age91" class="sort_radio"/><label for="age91">по возрасту 9-1</label>
+        </div>
+        <hr>
+        <div class="filter_caption">Фильтр:</div>
+        <div class="filter_caption">по полу</div>
+        <div class="input_option">
+          <input type="radio" name="sex" id="all" class="filter_radio" checked/><label for="all">все</label>
+        </div>
+        <div class="input_option">
+          <input type="radio" name="sex" id="man" class="filter_radio"/><label for="man">мужчины</label>
+        </div>
+        <div class="input_option">
+          <input type="radio" name="sex" id="woman" class="filter_radio"/><label for="woman">женщины</label>
+        </div>
+        <div class="filter_caption">по возрасту</div>
+        <div class="input_option">
+          <label for="age_from">от</label><input type="number" name="age_from" id="age_from" class="filter_age"/>
+          <label for="age_to">до</label><input type="number" name="age_to" id="age_to" class="filter_age"/>
+        </div>
+        <div class="filter_caption">Поиск по имени</div>
+        <div class="input_option">
+          <input type="text" name="search_name" id="search_name" class="filter_name"/>
+        </div>
+      </form>
       <button class="reset_button">Обновить список</button>
-    </form>
+    </div>
   </aside>
   <main>
   </main>
