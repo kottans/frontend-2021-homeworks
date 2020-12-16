@@ -10,7 +10,7 @@ body {
 
 .header {
     padding: 35px; 
-    background-image: url(/img/bg.png); 
+    background-image: url(./img/bg.png); 
     background-repeat: no-repeat;
     background-position: bottom 0 left 30px;
     background-size: 120px; 
