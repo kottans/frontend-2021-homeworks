@@ -3,7 +3,9 @@
 const burger = document.querySelector(".burger");
 const content = document.querySelector(".content");
 const deBar = document.querySelector(".aside");
-const ulElement = document.querySelector(".nav__list");
+const navListOfElements = document.querySelector(".nav__list");
+
+const defaultContent = "This demo site contains several articles on various topics. Choose any of them. I hope you find it interesting.";
 
 const contentStorage = {
     "highway": {
@@ -39,25 +41,57 @@ const contentStorage = {
 };
 
 
-// MOVE ASIDE & CONTENT
+// CREATE NAV
+
+let dynamicNav = function (e) {
+    e.preventDefault();
+    let fragment = document.createDocumentFragment();
+
+    for (let i of Object.keys(contentStorage)) {
+        let navItem = document.createElement("li");
+        let navLink = document.createElement("a");
+        let linkText = document.createElement("span");
+
+        navItem.className = "nav__item";
+        navLink.className = "nav__link";
+        navLink.href = "#top";
+        linkText.innerText = i;
+
+        navLink.appendChild(linkText);
+        navItem.appendChild(navLink);
+        fragment.appendChild(navItem);
+    }
+    navListOfElements.appendChild(fragment);
+}
+
+document.addEventListener('DOMContentLoaded', dynamicNav);
+
+// ADD CONTENT ON PAGE DOWNLOAD
+
+let addContentOnPageDownload = function (e) {
+    e.preventDefault();
+    content.innerHTML = defaultContent;
+}
+
+document.addEventListener("DOMContentLoaded", addContentOnPageDownload)
+
+// MOVE NAV & CONTENT
 
 function hideSideBar(e) {
     e.preventDefault();
     console.log(e);
     deBar.classList.toggle('hide__sidebar');
-    content.classList.toggle('move_content');
     burger.classList.toggle('burger__stop');
 };
 
 burger.addEventListener('click', hideSideBar);
 
-// Enter-key event show-hide aside
+// ENTER-KEY EVENT SHOW-HIDE ".aside"
 
 burger.addEventListener('keydown', function (e) {
     e.preventDefault();
     if (e.keyCode == "13") {
         deBar.classList.toggle('hide__sidebar');
-        content.classList.toggle('move_content');
         burger.classList.toggle('burger__stop');
     }
 }
@@ -71,20 +105,19 @@ function hideSideBarClickAway(e) {
         if (deBar.classList.contains('hide__sidebar')) {
             deBar.classList.toggle('hide__sidebar');
             burger.classList.toggle('burger__stop');
-            content.classList.toggle('move_content');
         };
     };
 };
 
 document.addEventListener('click', hideSideBarClickAway);
 
-// ADD CONTENT IN .content
+// ADD CONTENT IN ".content"
 
 function addContentOnClick(e) {
 
     if (e.target && e.target.nodeName == 'A' || e.target.nodeName == 'SPAN') {
         content.innerHTML = "";
-        let contentRaw = contentStorage[e.target.innerText.toLowerCase()];
+        let contentRaw = contentStorage[e.target.textContent];
         let makeContent = `<div class="content__header">
         <h1 name="top">
         ${contentRaw.title}
@@ -102,4 +135,4 @@ function addContentOnClick(e) {
     };
 };
 
-ulElement.addEventListener('click', addContentOnClick);
+navListOfElements.addEventListener('click', addContentOnClick);

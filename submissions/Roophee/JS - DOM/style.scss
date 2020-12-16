@@ -72,7 +72,7 @@ $content-backg: #d4a56a;
 }
 
 .aside {
-    position: absolute;
+    position: relative;
     z-index: 4;
     padding-top: 11px;
     display: flex;
@@ -164,7 +164,6 @@ $content-backg: #d4a56a;
     overflow-y: auto;
     top: 0;
     font-size: 1.1rem;
-    transition-delay: 0.5s;
 
     & > p {
         text-align: justify;
@@ -353,9 +352,6 @@ $content-backg: #d4a56a;
     visibility: visible;
 }
 
-.move_content {
-    transition-delay: 0.5s;
-}
 .burger__stop {
     right: 155px;
 }
