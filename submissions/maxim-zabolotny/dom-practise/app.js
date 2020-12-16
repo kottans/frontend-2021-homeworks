@@ -117,7 +117,6 @@ const menuItemClickListener = (event)=>{
   
   };
   
-  // start App when DOM is loaded
   document.addEventListener('DOMContentLoaded', (event)=>{
     
     renderPage(state);
