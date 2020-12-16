@@ -1,0 +1,208 @@
+* {
+    padding: 0;
+    margin: 0;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+}
+body {
+    font-family: Arial, sans-serif;
+}
+.nav__wrap {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: end;
+        -ms-flex-pack: end;
+            justify-content: flex-end;
+}
+.main__menu {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    list-style: none;
+    padding: 25px 25px 0 25px;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    width: 350px;
+}
+
+.main__menu__item {
+    color: #000;
+    text-decoration: none;
+}
+
+.menu-toggle,
+.sub-menu__toggle {
+    position: relative;
+}
+
+.menu-toggle__icon {
+    width: 30px;
+    height: 33px;
+}
+
+.menu-toggle__input:hover,
+.main__menu__item:hover,
+.footer__drop__item a:hover{
+     border-bottom: 1px solid #000;
+}
+
+.menu-toggle__input {
+     cursor: pointer;
+     position: absolute;
+     appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+     height: 33px;
+     width: 30px;
+     right: 0;
+    top: 0;
+}
+
+.main__menu__item:focus,
+.drop__items:focus,
+.menu-toggle__input:focus,
+a:focus {
+    border-bottom: none;
+    outline: 1px solid #663399;
+}
+
+.menu-toggle__input:checked + .sub-menu {
+    display: block;
+}
+
+.sub-menu {
+    display: none;
+    position: absolute;
+    width: 320px;
+    top: 50px;
+    right: -80px;
+    border: #d3d3d3 solid thin;
+    -webkit-box-shadow: 5px 5px 10px 0 #808080;
+            box-shadow: 5px 5px 10px 0 #808080;
+}
+
+.sub-menu::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    right: 85px;
+    height: 18px;
+    width: 18px;
+    background-color: white;
+    border-color: lightgray;
+    border-style: solid;
+    border-width: thin 0 0 thin;
+    -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+}
+
+.sub-menu__container {
+    height: 400px;
+    overflow-y: auto;
+}
+
+.sub-menu__list  {
+    list-style: none;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    padding-left: 20px;
+    padding-top: 25px;
+}
+
+.sub-menu__item {
+    height: 70px;
+    padding: 7px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    width: 90px;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    font-size: 14px;
+    text-decoration: none;
+    color: #808080;
+    margin: 0 3px 15px 0;
+}
+
+.sub-menu__item:hover {
+    outline: 1px solid #000;
+}
+
+.sub-menu__item img {
+    max-width: 50px;
+    max-height: 45px;
+}
+
+.sub-menu__input {
+    position: absolute;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}
+
+.sub-menu__input:focus + .sub-menu__more-btn {
+    background-color: #1e79a7;
+}
+
+.sub-menu__more-btn {
+    display: block;
+    height: 35px;
+    background-color: #78909C;
+    color: #fff;
+    text-align: center;
+    padding-top: 9px;
+    cursor: pointer;
+}
+
+.sub-menu__more-btn:hover {
+    background-color: #1e79a7;
+}
+
+.sub-menu__input:checked + .sub-menu__more-btn {
+    display: none;
+}
+
+.sub-menu__list-more {
+     display: none;
+     border-top: solid 1px #eceef0;
+}
+
+.sub-menu__input:checked ~ .sub-menu__list-more {
+    list-style: none;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    padding-left: 23px;
+    padding-top: 25px;
+}
+
+.sub-menu__footer {
+    width: 100%;
+    text-align: center;
+    padding: 15px 0;
+}
+
+.sub-menu__footer a {
+    font-size: 14px;
+    text-decoration: none;
+    color: #808080;
+}
