@@ -17,6 +17,10 @@
   border-radius: 5px;
 }
 /*Nav-Menu*/
+.main-menu{
+  display: flex;
+  width: 250px;
+}
 .menu {
   display: flex;
   list-style: none;
@@ -30,11 +34,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  text-decoration: none;
-  width: 30px;
-  height: 30px;
 }
-/*DropDown Btn*/
+.menu-item-icon{
+  text-decoration: none;
+}
+/*drop-down Btn*/
 .drop-down-input {
   -webkit-appearance: none;
   position: absolute;
@@ -42,8 +46,8 @@
   width: 30px;
   height: 30px;
 }
-/*DropDownMenu*/
-.dropdown-container {
+/*drop-downMenu*/
+.drop-down-container {
   display: none;
   position: absolute;
   top: 67px;
@@ -73,7 +77,13 @@
   padding-top: 5px;
   text-decoration: none;
 }
-.drop-down-input:checked ~ .dropdown-container {
+.drop-down-icon{
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+  text-decoration:none;
+}
+.drop-down-input:checked ~ .drop-down-container {
   display: flex;
 }
 /*btn-more*/
