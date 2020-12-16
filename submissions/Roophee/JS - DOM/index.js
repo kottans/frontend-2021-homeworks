@@ -6,7 +6,7 @@ const deBar = document.querySelector(".aside");
 const ulElement = document.querySelector(".nav__list");
 
 const contentStorage = {
-    highway: {
+    "highway": {
         "title": " Highway Design and Road Safety",
         "imgurl": "img/road.jpg",
         "alt": "road",
