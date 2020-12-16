@@ -71,13 +71,13 @@ const iconClick = () => {
     }
 };
 const btnClick = (event) => {
-  let obj = movies.find(obj => event.target.textContent === obj.name);
+  const obj = movies.find(obj => event.target.textContent === obj.name);
   name.textContent = obj.name;
   pic.setAttribute("src", obj.img);
   pic.classList.add("show");
   text.innerHTML = '';
   obj.storyline.forEach(function(par){
-    let paragraph = document.createElement("p");
+    const paragraph = document.createElement("p");
     paragraph.innerHTML = par;
     text.appendChild(paragraph);
   })
