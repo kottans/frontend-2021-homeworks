@@ -1,84 +1,12 @@
 "use strict";
 
-const clickBurger = document.querySelector(".burger");
-const clickContent = document.querySelector(".content");
-const clickHeader = document.querySelector(".header");
-const clickfooter = document.querySelector(".footer");
-
+const burger = document.querySelector(".burger");
+const content = document.querySelector(".content");
 const deBar = document.querySelector(".aside");
-
-
-// MOVE ASIDE & CONTENT
-
-function hideSideBar(e) { 
-    e.preventDefault();
-    deBar.classList.toggle('hide__sidebar');
-    clickContent.classList.toggle('move_content');
-    clickBurger.classList.toggle('burger__stop');
-    console.log(e.type)
-
-};
-
-clickBurger.addEventListener('click', hideSideBar);
-
-// Enter-key event show-hide aside
-
-clickBurger.addEventListener('keydown', function (e) {
-    e.preventDefault();
-    if (e.keyCode == "13") {
-        deBar.classList.toggle('hide__sidebar');
-        clickContent.classList.toggle('move_content');
-        clickBurger.classList.toggle('burger__stop');
-    }
-}
-);
-
-// CLOSE ASIDE WHEN MOUSE CLICK OUT
-
-function hideSideBarClickAway(e) {
-    e.preventDefault();
-    for (let i = 0; i < deBar.classList.length; i++) {
-        if (deBar.classList[i] === 'hide__sidebar') {
-            deBar.classList.toggle('hide__sidebar');
-            clickBurger.classList.toggle('burger__stop');
-            clickContent.classList.toggle('move_content');
-        };
-    };
-};
-
-clickContent.addEventListener('click', hideSideBarClickAway);
-clickHeader.addEventListener('click', hideSideBarClickAway);
-clickfooter.addEventListener('click', hideSideBarClickAway);
-
-// ADD CONTENT IN .content
-
-function addContentOnClick() {
-    clickContent.innerHTML = "";
-
-    let contentRaw = contentStorage[this.innerText.toLowerCase()];
-    let makeContent = `<div class="content__header">
-    <h1 name="top">
-    ${contentRaw.title.toUpperCase()}
-    </h1>
-</div>
-<div class="content__body">
-    <img src="${contentRaw.imgurl}" alt="${contentRaw.alt}" class="content__img">
-    <p>
-        <span class="content__text">
-            ${contentRaw.text}
-        </span>
-    </p>
-</div>`;
-    clickContent.innerHTML = makeContent;
-};
-
-const navLinks = document.querySelectorAll(".nav__link");
-
-navLinks.forEach(item => item.addEventListener('click', addContentOnClick));
-
+const ulElement = document.querySelector(".nav__list");
 
 const contentStorage = {
-    "highway": {
+    highway: {
         "title": " Highway Design and Road Safety",
         "imgurl": "img/road.jpg",
         "alt": "road",
@@ -109,3 +37,69 @@ const contentStorage = {
         "text": " When visitors walk into the Pantheon in Rome and encounter its colossal dome, they may experience the same theatricality as its guests nearly 2,000 years ago.\"Anyone who steps inside the Pantheon immediately feels the crushing weight of human history, but also the incredible lightness of human creativity,\" said John Ochsendorf, professor of architecture at MIT and former director of the American Academy in Rome. \"You come into this grand space and you look up and you see the sky or a passing cloud. And you think: \'How could they have done this nearly two millennia ago?\'\" The Pantheon is the oldest building in the world that's still in use today. Since the 7th century, it has been a Roman Catholic church. Built around 125 A.D. by the Roman emperor Publius Aelius Hadrianus, it was actually the third iteration of the structure. The first Pantheon caught fire around 80 A.D. and was rebuilt shortly after, but it was struck by lightning and burned down again around 110 A.D. The buildings' ill fate led to rumors that the Pantheon was cursed. The facade of the completed structure riffed on ancient Greek motifs, with a portico entrance featuring a pediment -- a triangular top -- and two rows of Corinthian columns. The interior was sweeping and airy, capped by a dome that to this day -- is still the largest unsupported concrete dome in the world."
     },
 };
+
+
+// MOVE ASIDE & CONTENT
+
+function hideSideBar(e) {
+    e.preventDefault();
+    console.log(e);
+    deBar.classList.toggle('hide__sidebar');
+    content.classList.toggle('move_content');
+    burger.classList.toggle('burger__stop');
+};
+
+burger.addEventListener('click', hideSideBar);
+
+// Enter-key event show-hide aside
+
+burger.addEventListener('keydown', function (e) {
+    e.preventDefault();
+    if (e.keyCode == "13") {
+        deBar.classList.toggle('hide__sidebar');
+        content.classList.toggle('move_content');
+        burger.classList.toggle('burger__stop');
+    }
+}
+);
+
+// CLOSE ASIDE WHEN MOUSE CLICK OUT
+
+function hideSideBarClickAway(e) {
+    e.preventDefault();
+    if (!e.target.classList.contains('burger') && !deBar.contains(e.target)) {
+        if (deBar.classList.contains('hide__sidebar')) {
+            deBar.classList.toggle('hide__sidebar');
+            burger.classList.toggle('burger__stop');
+            content.classList.toggle('move_content');
+        };
+    };
+};
+
+document.addEventListener('click', hideSideBarClickAway);
+
+// ADD CONTENT IN .content
+
+function addContentOnClick(e) {
+
+    if (e.target && e.target.nodeName == 'A' || e.target.nodeName == 'SPAN') {
+        content.innerHTML = "";
+        let contentRaw = contentStorage[e.target.innerText.toLowerCase()];
+        let makeContent = `<div class="content__header">
+        <h1 name="top">
+        ${contentRaw.title}
+        </h1>
+    </div>
+    <div class="content__body">
+        <img src="${contentRaw.imgurl}" alt="${contentRaw.alt}" class="content__img">
+        <p>
+            <span class="content__text">
+                ${contentRaw.text}
+            </span>
+        </p>
+    </div>`;
+        content.innerHTML = makeContent;
+    };
+};
+
+ulElement.addEventListener('click', addContentOnClick);
