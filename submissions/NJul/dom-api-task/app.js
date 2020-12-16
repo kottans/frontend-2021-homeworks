@@ -3,19 +3,19 @@ const advices = [
     id: 1,
     title: `Designate a study area`,
     content: `The best study spot is one that is quiet, well-lit, and in a low-traffic area. Make sure there is a clear workspace to study and write on. Everyone’s needs are different, so it is important you find a spot that works for you.`,
-    source: ``,
+    source: `<a href="https://www.oxfordlearning.com/how-to-study-effectively/" target="_blank">Source</a>`,
   },
   {
     id: 2,
     title: `Talk to teachers`,
     content: `Teachers are there to help you do your best. Talk to your teacher and ask for clarification or extra help if you need it before your test. Taking the initiative to ask for help goes a long way with teachers!`,
-    source: ``,
+    source: `<a href="https://www.oxfordlearning.com/how-to-study-effectively/" target="_blank">Source</a>`,
   },
   {
     id: 3,
     title: `Study with a group`,
     content: `Working with classmates encourages an interactive environment to keep you engaged. This gives you a chance to test your knowledge with others, quiz each other on the content, and help boost each other’s confidence.`,
-    source: ``,
+    source: `<a href="https://www.oxfordlearning.com/how-to-study-effectively/" target="_blank">Source</a>`,
   },
   {
     id: 4,
@@ -29,8 +29,25 @@ document.addEventListener('DOMContentLoaded', () => {
   const hamburgerBtn = document.getElementById('hamburgerBtn');
   const navBar = document.getElementById('navBar');
 
+  const hasNavBarClass = function () {
+    if (navBar.classList.contains('open')) {
+      navBar.classList.remove('open');
+      let navBarLength = navBar.classList.length;
+      if (navBarLength === 0) {
+        navBar.removeAttribute('class');
+      }
+    } else {
+      navBar.classList.add('open');
+    }
+  };
+
+  const hamburgerIcon = function () {
+    hamburgerBtn.textContent = hamburgerBtn.textContent === '☰' ? '☓' : '☰';
+  };
+
   hamburgerBtn.addEventListener('click', () => {
-    navBar.classList.toggle('open');
+    hasNavBarClass();
+    hamburgerIcon();
   });
 
   const navList = document.getElementById('navList');
@@ -70,10 +87,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const panels = document.querySelectorAll('.panel');
   panels[0].classList.add('active');
 
-  ul.addEventListener('click', (e) => {
+  ul.addEventListener('click', function (e) {
     if (e.target.tagName == 'LI') {
       const targetPanel = document.querySelector(e.target.dataset.target);
-
       Array.from(panels).forEach((panel) => {
         if (panel == targetPanel) {
           panel.classList.add('active');
@@ -82,17 +98,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
     }
-    navBar.classList.toggle('open');
   });
 
-  let links = ul.getElementsByClassName('nav-item');
+  let links = document.querySelectorAll('.nav-item');
   links[0].classList.add('active-item');
 
   for (let i = 0; i < links.length; i++) {
     links[i].addEventListener('click', function () {
-      let current = document.getElementsByClassName('active-item');
+      let current = document.querySelectorAll('.active-item');
       current[0].className = current[0].className.replace(' active-item', '');
       this.className += ' active-item';
+      hasNavBarClass();
+      hamburgerIcon();
     });
   }
 });

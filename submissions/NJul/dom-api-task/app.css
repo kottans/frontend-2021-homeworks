@@ -16,7 +16,7 @@ html {
 }
 
 body {
-  font-family: sans-serif;
+  font-family: 'Roboto', sans-serif;
   margin-left: 250px;
   position: relative;
 }
@@ -43,6 +43,7 @@ h2 {
 
 .container h1 {
   text-align: center;
+  color: #cc3c3e;
 }
 
 #navBar {
@@ -102,7 +103,7 @@ h2 {
 
 .active-item {
   color: black;
-  background: #ffffffb3;
+  background: #ffffffb3 url(./img/bg.jpg);
 }
 
 a {
@@ -182,11 +183,12 @@ a:visited {
   #navBar {
     width: 100vw;
     transform: translateX(-1000px);
-    transition: 500ms transform;
+    transition: transform 2s ease-out 1s;
   }
 
   #navBar.open {
     transform: translateX(0);
+    transition: transform 2s ease-out;
   }
 
   .nav-item {
