@@ -1,0 +1,599 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Condiment&family=Revalia&display=swap");
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+button,
+input {
+  outline: none;
+  border: transparent;
+  background-color: rgba(255, 255, 255, 0);
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+li {
+  list-style-type: none;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background-color: #f4f7f7;
+  background-image: url(../img/bgc.png);
+  background-size: cover;
+  background-repeat: repeat;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  color: #f4f7f7;
+}
+
+header {
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+}
+
+header .container {
+  background-color: #f4f7f7;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+}
+
+.left-gr {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.logo-group {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: bottom;
+      -ms-flex-align: bottom;
+          align-items: bottom;
+  background-color: #1f4e5f;
+  padding: 0.3rem 1rem 0.3rem 0.7rem;
+  position: relative;
+}
+
+.logo-group:after {
+  content: '';
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 100%;
+  border-left: 1.8rem solid #1f4e5f;
+  border-top: 2.1rem solid transparent;
+  border-bottom: 2.1rem solid transparent;
+}
+
+.logo-group img {
+  width: 2.7rem;
+}
+
+h1 {
+  color: #1f4e5f;
+  margin-left: 3rem;
+  font-family: "Bebas Neue", cursive;
+  font-weight: 400;
+}
+
+h1 span {
+  border-bottom: 2px solid #1f4e5f;
+}
+
+p.logo-text {
+  font-size: 2rem;
+  margin-left: 0.5rem;
+  font-family: "Condiment", cursive;
+  font-weight: 400;
+  margin-top: 0.5rem;
+}
+
+.search-btn {
+  background-color: #1f4e5f;
+  width: 4rem;
+  display: none;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+}
+
+.search-btn img {
+  width: 2.5rem;
+  padding: 0.2rem;
+}
+
+.meow-link {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #1f4e5f;
+  text-decoration: none;
+}
+
+.meow-link p {
+  font-family: "Revalia", cursive;
+  margin-top: -1.2rem;
+  color: #f4f7f7;
+  text-decoration: none;
+  font-size: 2rem;
+  padding: 1rem;
+  -webkit-transition: background-color 300ms ease;
+  transition: background-color 300ms ease;
+}
+
+.center-content {
+  margin-top: 4rem;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 0 auto;
+          flex: 1 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+}
+
+.left-pane {
+  -webkit-box-flex: 2;
+      -ms-flex: 2 0 0px;
+          flex: 2 0 0;
+  background-color: #79a8a9;
+}
+
+.left-pane h2 {
+  font-family: "Bebas Neue", cursive;
+  font-weight: 400;
+  color: #1f4e5f;
+  padding: 0.8rem 1rem 0.5rem;
+  border-bottom: 2px solid #f4f7f7;
+}
+
+.left-pane h2 span {
+  color: #f4f7f7;
+}
+
+.error-notice {
+  font-family: "Revalia", cursive;
+  line-height: 1.3rem;
+  color: #c40000;
+  text-align: center;
+}
+
+.loader {
+  width: 50px;
+  height: 50px;
+  position: relative;
+  margin: 0 auto;
+  -webkit-animation: loader 1.5s linear infinite;
+          animation: loader 1.5s linear infinite;
+  margin-top: 3rem;
+}
+
+.loader.hide {
+  display: none;
+}
+
+.loader div {
+  position: absolute;
+  border: 8px solid transparent;
+  border-top-color: #1f4e5f;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.loader div:nth-child(2) {
+  border-color: transparent;
+  border-bottom-color: #1f4e5f;
+}
+
+@-webkit-keyframes loader {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  50% {
+    -webkit-transform: rotate(180deg);
+            transform: rotate(180deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@keyframes loader {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  50% {
+    -webkit-transform: rotate(180deg);
+            transform: rotate(180deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+.cards-holder {
+  padding: 1rem;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[3];
+      grid-template-columns: repeat(3, 1fr);
+  grid-gap: 1rem 1rem;
+  justify-items: center;
+}
+
+.card {
+  background-color: #1f4e5f;
+  position: relative;
+  padding: 0.6rem 0.6rem 0.6rem 0.6rem;
+  border-radius: 10px;
+  border: 2px solid #f4f7f7;
+}
+
+.u-name {
+  font-family: "Revalia", cursive;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.splitter {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.splitter img {
+  margin-top: 0.3rem;
+  border-radius: 10px;
+  border: 2px solid #f4f7f7;
+}
+
+.data-group {
+  margin-left: 0.5rem;
+}
+
+.label,
+.data {
+  font-family: "Revalia", cursive;
+  font-size: 0.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.label {
+  text-transform: uppercase;
+  color: #79a8a9;
+}
+
+.data {
+  text-transform: capitalize;
+}
+
+.right-pane {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 0 0px;
+          flex: 1 0 0;
+}
+
+.search {
+  background-color: #1f4e5f;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.search label {
+  font-family: "Bebas Neue", cursive;
+  font-weight: 400;
+  font-size: 1.7rem;
+  padding: 0.3rem 1rem 0.3rem 1rem;
+  margin-top: 0.3rem;
+}
+
+.search input {
+  width: 100%;
+  background-color: #aacfd0;
+  font-family: "Bebas Neue", cursive;
+  font-weight: 400;
+  font-size: 1.5rem;
+  text-indent: 0.5rem;
+  color: #1f4e5f;
+}
+
+.filter-sorting {
+  background-color: #1f4e5f;
+  padding: 1rem;
+  position: relative;
+}
+
+.filter-sorting-lable {
+  font-family: "Bebas Neue", cursive;
+  font-weight: 400;
+  font-size: 1.7rem;
+  position: absolute;
+  -webkit-transform: rotateZ(-90deg);
+          transform: rotateZ(-90deg);
+  margin-left: 0.2rem;
+  left: -6%;
+  top: 35%;
+  text-align: center;
+}
+
+.option-group {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-left: 2.5rem;
+}
+
+.option {
+  background-color: #1f4e5f;
+  border: 2px solid #f4f7f7;
+  font-family: "Bebas Neue", cursive;
+  font-weight: 400;
+  font-size: 1.7rem;
+  border-radius: 10px;
+  overflow: hidden;
+  min-width: 90px;
+  margin-right: 0.5rem;
+}
+
+.option:last-child {
+  margin-right: 0;
+}
+
+.option p {
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.option button {
+  background-color: #aacfd0;
+  display: block;
+  width: 100%;
+  color: #1f4e5f;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.option button.active {
+  color: #f4f7f7;
+  background-color: #79a8a9;
+}
+
+.reviews {
+  border: 3px solid #1f4e5f;
+  max-width: 17rem;
+  margin: 2rem auto 0;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #f4f7f7;
+}
+
+.reviews h2 {
+  font-family: "Bebas Neue", cursive;
+  font-weight: 400;
+  color: #f4f7f7;
+  background-color: #1f4e5f;
+  text-align: center;
+  font-size: 1.8rem;
+  padding: 0.5rem 0;
+}
+
+.reviews img {
+  width: 11rem;
+  margin: 0 auto;
+  margin-top: 1.5rem;
+  border: 6px solid #79a8a9;
+  border-radius: 50%;
+}
+
+.reviews p {
+  color: #1f4e5f;
+  font-family: "Revalia", cursive;
+  padding: 1rem;
+  text-align: center;
+  line-height: 1.3rem;
+}
+
+footer {
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+}
+
+footer .container {
+  background-color: #1f4e5f;
+}
+
+.credits {
+  text-align: center;
+  padding: 0.5rem;
+  color: #fff;
+  font-size: 1.1rem;
+  width: 100%;
+  font-family: "Bebas Neue", cursive;
+  font-weight: 400;
+}
+
+.credits a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.credits a:active {
+  color: #c40000;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .meow-link:hover {
+    background-color: #79a8a9;
+  }
+  .credits a:hover {
+    color: #79a8a9;
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  .cards-holder {
+    -ms-grid-columns: (1fr)[2];
+        grid-template-columns: repeat(2, 1fr);
+    grid-gap: 1rem 1rem;
+  }
+  .card {
+    width: 100%;
+    min-width: 240px;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .meow-link {
+    display: none;
+  }
+  .search-btn {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  .reviews {
+    display: none;
+  }
+  .right-pane {
+    position: fixed;
+    width: 100%;
+    display: block;
+    border-bottom: 2px solid #f4f7f7;
+    top: -100%;
+    -webkit-transition: top 200ms cubic-bezier(1, 0, 0.07, 1);
+    transition: top 200ms cubic-bezier(1, 0, 0.07, 1);
+  }
+  .right-pane.visible {
+    top: 65px;
+  }
+  .filter-sorting {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  .filter-sorting-lable {
+    position: static;
+    -webkit-transform: rotateZ(0deg);
+            transform: rotateZ(0deg);
+    margin-left: 0rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  h1 {
+    font-size: 1.5rem;
+    text-align: center;
+    margin-left: 2.2rem;
+  }
+}
+
+@media screen and (max-width: 625px) {
+  .logo-group {
+    min-width: 170px;
+    padding-right: 2rem;
+  }
+  .logo-group:after {
+    display: none;
+  }
+  .logo-group img {
+    width: 2.7rem;
+  }
+  h1 {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
+  h1 span {
+    border-bottom: none;
+  }
+  .cards-holder {
+    -ms-grid-columns: (1fr)[1];
+        grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+@media screen and (max-width: 435px) {
+  .center-content {
+    margin-top: 3.2rem;
+  }
+  .left-pane h2 {
+    font-size: 1.2rem;
+  }
+  .logo-group {
+    min-width: 140px;
+    height: 100%;
+  }
+  .logo-group img {
+    width: 2.5rem;
+  }
+  p.logo-text {
+    font-size: 1.5rem;
+  }
+  h1 {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    font-size: 1rem;
+  }
+  h1 span {
+    border-bottom: none;
+  }
+  .right-pane.visible {
+    top: 50px;
+  }
+  .search label {
+    font-size: 1.2rem;
+  }
+  .search input {
+    font-size: 1.2rem;
+  }
+  .filter-sorting-lable {
+    font-size: 1.2rem;
+  }
+  .option-group {
+    margin-left: 1rem;
+  }
+  .option {
+    font-size: 1.2rem;
+    min-width: 70px;
+  }
+}

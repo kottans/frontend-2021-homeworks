@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;&display=swap" rel="stylesheet"> 
+	<title>HTML & CSS popup</title>
+</head>
+<body class="column">
+	<header>
+		<nav class="nav">
+			<ul class="nav__list">
+				<li class="nav__item box flex-center"><a href="#mail" class="item__link flex-center column box">Mail</a></li>
+				<li class="nav__item box flex-center"><a href="#pictures" class="item__link flex-center column box">Pictures</a></li>
+				<li class="nav__item box flex-center popup-btn">
+					<input type="checkbox" class="checkbox__input" id="check">
+					<label class="checkbox flex-center full" for="check">
+						<img src="assets/list.svg" alt="List of other applications" class="checkbox__image">
+					</label>					
+					<ul class="popup">
+						<li class="popup__item ">
+							<a href="#" class="item__link flex-center column box">
+								<div class="item__icon mail"></div>
+								<p>Mail</p>
+							</a>
+						</li>
+						<li class="popup__item ">
+							<a href="#" class="item__link flex-center column box">
+								<div class="item__icon calendar"></div>
+								<p>Calendar</p>
+							</a>
+						</li>
+						<li class="popup__item ">
+							<a href="#" class="item__link flex-center column box">
+								<div class="item__icon news"></div>
+								<p>News</p>
+							</a>
+						</li>
+						<li class="popup__item ">
+							<a href="#" class="item__link flex-center column box">
+								<div class="item__icon files"></div>
+								<p>Files</p>
+							</a>
+						</li>
+						<li class="popup__item ">
+							<a href="#" class="item__link flex-center column box">
+								<div class="item__icon maps"></div>
+								<p>Map</p>
+							</a>
+						</li>
+						<li class="popup__item ">
+							<a href="#" class="item__link flex-center column box">
+								<div class="item__icon contacts"></div>
+								<p>Contacts</p>
+							</a>
+						</li>
+						<li class="popup__item ">
+							<a href="#" class="item__link flex-center column box">
+								<div class="item__icon pictures"></div>
+								<p>Pictures</p>
+							</a>
+						</li>
+						<li class="popup__item ">
+							<a href="#" class="item__link flex-center column box">
+								<div class="item__icon video"></div>
+								<p>Video</p>
+							</a>
+						</li>
+						<li class="popup__item ">
+							<a href="#" class="item__link flex-center column box">
+								<div class="item__icon docs"></div>
+								<p>Documents</p>
+							</a>
+						</li>
+						<li class="more-btn flex-center column full">
+							<input type="checkbox" class="checkbox__input" id="check_more">
+							<ul class="popup__more">
+								<li class="popup__item">
+									<a href="#" class="item__link flex-center column box">
+										<div class="item__icon apps"></div>
+										<p>Apps</p>
+									</a>
+								</li>
+								<li class="popup__item">
+									<a href="#" class="item__link flex-center column box">
+										<div class="item__icon planet"></div>
+										<p>Planet</p>
+									</a>
+								</li>
+								<li class="popup__item">
+									<a href="#" class="item__link flex-center column box">
+										<div class="item__icon translator"></div>
+										<p>Translator</p>
+									</a>
+								</li>
+							</ul>
+							<label class="more full" for="check_more">
+							</label>
+						</li>
+					</ul>
+				</li>
+
+				<li class="nav__item box flex-center">
+					<input type="checkbox" class="checkbox__input bell_input" id="bell">
+					<label class="checkbox flex-center full" for="bell">
+						<img src="assets/bell.svg" alt="Allow notifications" class="checkbox__image bell">
+					</label>
+				</li>
+
+				<li class="nav__item box flex-center">
+					<a class="item__link flex-center column box no-padding" href="https://github.com/kt-std/kottans-frontend">
+						<div class="user-icon"></div>
+					</a>
+				</li>
+
+			</ul>
+		</nav>
+	</header>
+	<main class="search-container flex-center column full">
+		<div class="logo full">
+			<img class="logo__image" src="assets/logo.svg" alt="Search engine logo">
+		</div>
+		<div class="search-field full">
+			<input type="text" class="search-field__input box full" placeholder="Search for something!">
+			<button class="search-field__button button">
+				<svg class="button__image" width="512" height="512" x="0" y="0" viewBox="0 0 511.999 511.999" xml:space="preserve"><g>
+					<path d="M508.874,478.708L360.142,329.976c28.21-34.827,45.191-79.103,45.191-127.309c0-111.75-90.917-202.667-202.667-202.667    S0,90.917,0,202.667s90.917,202.667,202.667,202.667c48.206,0,92.482-16.982,127.309-45.191l148.732,148.732    c4.167,4.165,10.919,4.165,15.086,0l15.081-15.082C513.04,489.627,513.04,482.873,508.874,478.708z M202.667,362.667    c-88.229,0-160-71.771-160-160s71.771-160,160-160s160,71.771,160,160S290.896,362.667,202.667,362.667z"/></g>
+				</svg>
+			</button>
+		</div>
+	</main>
+</body>
+</html>

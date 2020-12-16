@@ -1,0 +1,33 @@
+@import "./cards.css";
+@import "./header.css";
+@import "./sidebar.css";
+@import "./search.css";
+@import "./btn-list.css";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --grey: #263238;
+  --yellow: rgb(247, 202, 75);
+  --blue: rgb(64, 98, 163);
+}
+
+.body {
+  display: grid;
+  grid-template-areas:
+    "header header"
+    "sidebar cards";
+  grid-template-columns: minmax(350px, 20%) 1fr;
+  grid-template-rows: 140px 1fr;
+
+  margin: 0;
+  min-height: 100vh;
+
+  font-family: "Press Start 2P", cursive;
+
+  background-color: var(--grey);
+}
