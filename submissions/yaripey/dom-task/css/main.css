@@ -1,0 +1,247 @@
+/* General */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  width: 100%;
+  height: 100%;
+}
+
+html {
+  background: url('../img/backgroundtile.png') repeat;
+  background-size: 75%;
+}
+
+@font-face {
+  font-family: 'AdventureTime';
+  src: url('../additional/adv_time_font.ttf');
+}
+
+
+
+/* Header properties */
+
+header {
+  background: red;
+  height: 30%;
+  background: url('../img/tree_background.jpeg') center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  max-height: 60%;
+}
+
+/* Aside properties */
+
+aside {
+  position: absolute;
+  float: left;
+  text-align: right;
+  left: -200px;
+  overflow: hidden;
+}
+
+aside ul {
+  list-style: none;
+}
+
+aside button {
+  text-align: right;
+  min-width: 200px;
+  margin: 5px;
+  padding: 10px;
+  font-family: "AdventureTime";
+  cursor: pointer;
+  border: 0;
+  padding-right: 40px;
+  position: relative;
+  right: -30px;
+  transition: right ease 0.3s;
+}
+
+aside button:hover {
+  right: -15px;   
+  transition: right ease 0.3s;
+}
+
+aside button:focus {
+  outline: none;
+  right: -15px;
+  transition: right ease 0.3s;
+}
+
+.focused {
+  background: red;
+  right: -15px;
+  color: white;
+  transition: 0.3s ease;
+}
+
+.middle {
+  margin: auto;
+  width: 900px;
+  position: relative;
+}
+
+/* Main properties */
+
+.container {
+  width: 100%;
+  height: 600px;
+}
+
+main {
+  position: relative;
+  padding: 30px;
+  text-align: justify;
+  margin: auto;
+  width: 900px;
+  font-size: 20px;
+  background: rgb(253, 252, 166);
+}
+
+.picture {
+  float: left;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  max-width: 30%;
+  height: auto;
+}
+
+
+@media(max-width: 1300px) {
+  main {
+    margin: 0;
+    width: 80%;
+    display: inline-block;
+  }
+
+
+  aside {
+    display: inline-block;
+    position: static;
+    left: 0px;
+    width: 20%;
+  }
+
+  aside button {
+    width: 100%;
+  }
+
+  .middle {
+    width: 100%;
+  }
+}
+
+@media(max-width: 1000px) {
+  html, body {
+    overflow: hidden;
+    height: 100%;
+  }
+  header {
+    height: 10%;
+    border-bottom: 5px solid rgb(255, 187, 28);
+    justify-content: flex-start;
+  }
+  aside {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: -100%;
+    z-index: 10;
+    background: black;
+    transition: 0.3s ease;
+    background: rgb(255, 187, 28);
+  }
+
+  .middle {
+    height: 90%;
+  }
+  main {
+    z-index: 1;
+    width: 100%;
+    height: 100%;;
+    overflow: auto;
+  }
+
+  .toggle {
+    display: block;
+    margin: 20px;
+    width: 30px;
+    height: 5px;
+    top: 20px;
+    left: 10px;
+    background: white;
+    z-index: 5;
+  }
+
+  .toggle:before, .toggle:after {
+    display: block;
+    content: '';
+    height: 5px;
+    width: 30px;
+    background: white;
+    position: relative;
+  }
+
+  .toggle:before {
+    top: 10px;
+  }
+  .toggle:after {
+    top: -15px;
+  }
+
+  .toggled {
+    left: 0;
+  }
+
+  aside button {
+    height: 60px;
+    width: 400px;
+    border-radius: 10px;
+    right: 0;
+    padding: 10px;
+    text-align: center;
+    border-bottom: 4px red white;
+    border-top: none;
+  }
+
+  aside button:hover {
+    right: 0;
+  }
+
+  .focused {
+    border-top: 4px solid red;
+    border-bottom: none;
+    right: 0;
+  }
+
+  aside nav, aside ul {
+    height: 100%;
+  }
+
+  aside ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 50px;
+  }
+}
+
+@media (max-width: 700px) {
+  .picture {
+    margin: 0 auto 20px auto;
+    display: block;
+    max-width: 100%;
+    /* height: auto; */
+    float: none;
+  }
+}
