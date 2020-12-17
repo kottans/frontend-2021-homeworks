@@ -2,8 +2,6 @@
 const hamburgerMenu = document.querySelector(".hamburger_menu");
 const mainArea = document.querySelector("main");
 const optionForm = document.forms.sorting_n_filtering;
-// const asIsOption = document.querySelector("#as_is");
-// const allOption = document.querySelector("#all");
 const ageFromOption = document.querySelector("#age_from");
 const ageToOption = document.querySelector("#age_to");
 const searchNameOption = document.querySelector(".filter_name");
@@ -11,15 +9,23 @@ const resetButton = document.querySelector(".reset_button");
 const requestString = "https://randomuser.me/api/?nat=gb,us,fr&results=60&inc=gender,name,location,email,picture,dob";
 let receivedData = [];
 let dataToRender = [];
-let filterCriterionSex = () => true;
-let filterCriterionAge = () => true;
-let filterCriterionName = () => true;
-let sortCriterion = () => false;
+let filterCriterionSex;
+let filterCriterionAge
+let filterCriterionName;
+let sortCriterion;
 hamburgerMenu.addEventListener("click", () => hamburgerMenu.classList.toggle("hamburger_menu-opened"));
-resetButton.addEventListener("click", () => document.location.reload());
+resetButton.addEventListener("click", resetApp);
 optionForm.addEventListener("input", changeData);
-
-fetch(requestString)
+resetApp();
+  
+function resetApp() {
+  filterCriterionSex = () => true;
+  filterCriterionAge = () => true;
+  filterCriterionName = () => true;
+  sortCriterion = () => false;
+  optionForm.reset();
+  
+  fetch(requestString)
   .then((response) => {
     return response.json();
   })
@@ -32,6 +38,7 @@ fetch(requestString)
     mainArea.innerHTML = "There was some error, try again!";
     console.error("there was some error:", err);
   });
+};
 
 function render() {
   mainArea.innerHTML = "";
@@ -40,9 +47,9 @@ function render() {
     let card = document.createElement("div");
     function sexString(age) {
       const lastNumberOfAge = age.toString().slice(-1);
-      const numberForGod = "1";
-      const numbersForGoda = ["2", "3", "4"];
-      return (lastNumberOfAge == numberForGod) ? "год" : (numbersForGoda.includes(lastNumberOfAge)) ? "года" : "лет";
+      const numberForYearWord = "1";
+      const numbersForYearsWord = ["2", "3", "4"];
+      return (lastNumberOfAge == numberForYearWord) ? "год" : (numbersForYearsWord.includes(lastNumberOfAge)) ? "года" : "лет";
     };
     card.classList.add("friend_card");
     card.innerHTML = `<img src=${item.picture.large} alt="photo" class="friend_card__photo">\
