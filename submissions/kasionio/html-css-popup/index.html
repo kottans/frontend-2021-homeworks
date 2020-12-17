@@ -9,133 +9,134 @@
    </head>
    <body>
       <nav>
-         <div class="nav-bar">
-            <a href="#mail">Mail</a>
-            <a href ="#images" id='nav-link__images'>Images</a>
-            <input id="popup-menu__button" type="checkbox" />
-            <div class="popup-menu">
-               <ul class="popup-menu-top">
-                  <li class="popup-menu__item">
-                     <a href="#calendar">
-                        <img class='images' src="./popup-icons/calendar.png" alt="calendar">
-                        <div class='popup-menu__item-title'>Calendar</div>
-                     </a>
-                  </li>
-                  <li class="popup-menu__item">
-                     <a href="#mail">
-                        <img class='images' src="./popup-icons/mail.png" alt="mail"> 
-                        <div class='popup-menu__item-title'>Mail</div>
-                     </a>
-                  </li>
-                  <li class="popup-menu__item">
-                     <a href="#news">
-                        <img class='images' src="./popup-icons/news.png" alt="map">
-                        <div class='popup-menu__item-title'>News</div>
-                     </a>
-                  </li>
-                  <li class="popup-menu__item">
-                     <a href="#maps">
-                        <img class='images' src="./popup-icons/maps.png" alt="map">
-                        <div class='popup-menu__item-title'>Map</div>
-                     </a>
-                  </li>
-                  <li class="popup-menu__item">
-                     <a href="#files">
-                        <img class='images' src="./popup-icons/files.png" alt="files">
-                        <div class='popup-menu__item-title'>Files</div>
-                     </a>
-                  </li>
-                  <li class="popup-menu__item">
-                     <a href="#contacts">
-                        <img class='images' src="./popup-icons/contacts.png" alt="contacts">
-                        <div class='popup-menu__item-title'>Contacts</div>
-                     </a>
-                  </li>
-                  <li class="popup-menu__item">
-                     <a href="#translate">
-                        <img class='images' src="./popup-icons/tanslation.png" alt="translate">
-                        <div class='popup-menu__item-title'>Translate</div>
-                     </a>
-                  </li>
-                  <li class="popup-menu__item">
-                     <a href="#videos">
-                        <img class='images' src="./popup-icons/videos.png" alt="videos">
-                        <div class='popup-menu__item-title'>Videos</div>
-                     </a>
-                  </li>
-                  <li class="popup-menu__item">
-                     <a href="#search">
-                        <img class='images' src="./popup-icons/search.png" alt="search">
-                        <div class='popup-menu__item-title'>Search</div>
-                     </a>
-                  </li>
-                  <li class="popup-menu__item">
-                     <a href="#photos">
-                        <img class='images' src="./popup-icons/photos.png" alt="photos">
-                        <div class='popup-menu__item-title'>Photo</div>
-                     </a>
-                  </li>
-                  <li class="popup-menu__item">
-                     <a href="#apps">
-                        <img class='images' src="./popup-icons/apps.png" alt="apps">
-                        <div class='popup-menu__item-title'>Apps</div>
-                     </a>
-                  </li>
-                  <li class="popup-menu__item">
-                     <a href="#documents">
-                        <img class='images' src="./popup-icons/documents.png" alt="documents">
-                        <div class='popup-menu__item-title'>Document</div>
-                     </a>
-                  </li>
-               </ul>
-               <input id="popup-menu-more__button" type="checkbox"/>
-               <label class="popup-menu-more__text" for="popup-menu-more__button">More</label>
-               <div id="divide-line"></div>
-               <ul class="popup-menu-more">
-                  <li class="popup-menu__item">
-                     <a href="#chat">
-                        <img class='images' src="./popup-icons/chat.png" alt="chat">
-                        <div class='popup-menu__item-title'>Chat</div>
-                     </a>
-                  </li>
-                  <li class="popup-menu__item">
-                     <a href="#classroom">
-                        <img class='images' src="./popup-icons/classroom.png" alt="classroom">
-                        <div class='popup-menu__item-title'>Classroom</div>
-                     </a>
-                  </li>
-                  <li class="popup-menu__item">
-                     <a href="#collection">
-                        <img class='images' src="./popup-icons/collection.png" alt="collection">
-                        <div class='popup-menu__item-title'>Collection</div>
-                     </a>
-                  </li>
-                  <li class="popup-menu__item">
-                     <a href="#mars">
-                        <img class='images' src="./popup-icons/mars.png" alt="mars">
-                        <div class='popup-menu__item-title'>Mars</div>
-                     </a>
-                  </li>
-                  <li class="popup-menu__item">
-                     <a href="#blogs">
-                        <img class='images' src="./popup-icons/blogs.png" alt="blogs">
-                        <div class='popup-menu__item-title'>Blogs</div>
-                     </a>
-                  </li>
-                  <li class="popup-menu__item">
-                     <a href="#promos">
-                        <img class='images' src="./popup-icons/promo.png" alt="promo">
-                        <div class='popup-menu__item-title'>Promos</div>
-                     </a>
-                  </li>
-                  <li class="nav-footer">
-                     <a href='https://github.com/kottans' target="_blank">Even more from Kottans</a>
-                  </li>
-               </ul>
-            </div>
-            <a href ="#bell"><img id='bell__image' src="popup-icons/bell.png" alt="bell"/></a>
-            <a href ="#user"><img id='user-photo__image' src="popup-icons/user_photo.png" alt="user-photo"/></a>
-         </div>
+         <ul class="nav-bar">
+            <li><a href="#mail">Mail</a></li>
+            <li><a href ="#images">Images</a></li>
+            <li>
+               <input class="popup-menu__button" type="checkbox" />
+               <div class="popup-menu">
+                  <ul class="popup-menu-top">
+                     <li class="popup-menu__item">
+                        <a href="#calendar">
+                           <img class='images' src="./popup-icons/calendar.png" alt="calendar">
+                           <div class='popup-menu__item-title'>Calendar</div>
+                        </a>
+                     </li>
+                     <li class="popup-menu__item">
+                        <a href="#mail">
+                           <img class='images' src="./popup-icons/mail.png" alt="mail"> 
+                           <div class='popup-menu__item-title'>Mail</div>
+                        </a>
+                     </li>
+                     <li class="popup-menu__item">
+                        <a href="#news">
+                           <img class='images' src="./popup-icons/news.png" alt="map">
+                           <div class='popup-menu__item-title'>News</div>
+                        </a>
+                     </li>
+                     <li class="popup-menu__item">
+                        <a href="#maps">
+                           <img class='images' src="./popup-icons/maps.png" alt="map">
+                           <div class='popup-menu__item-title'>Map</div>
+                        </a>
+                     </li>
+                     <li class="popup-menu__item">
+                        <a href="#files">
+                           <img class='images' src="./popup-icons/files.png" alt="files">
+                           <div class='popup-menu__item-title'>Files</div>
+                        </a>
+                     </li>
+                     <li class="popup-menu__item">
+                        <a href="#contacts">
+                           <img class='images' src="./popup-icons/contacts.png" alt="contacts">
+                           <div class='popup-menu__item-title'>Contacts</div>
+                        </a>
+                     </li>
+                     <li class="popup-menu__item">
+                        <a href="#translate">
+                           <img class='images' src="./popup-icons/tanslation.png" alt="translate">
+                           <div class='popup-menu__item-title'>Translate</div>
+                        </a>
+                     </li>
+                     <li class="popup-menu__item">
+                        <a href="#videos">
+                           <img class='images' src="./popup-icons/videos.png" alt="videos">
+                           <div class='popup-menu__item-title'>Videos</div>
+                        </a>
+                     </li>
+                     <li class="popup-menu__item">
+                        <a href="#search">
+                           <img class='images' src="./popup-icons/search.png" alt="search">
+                           <div class='popup-menu__item-title'>Search</div>
+                        </a>
+                     </li>
+                     <li class="popup-menu__item">
+                        <a href="#photos">
+                           <img class='images' src="./popup-icons/photos.png" alt="photos">
+                           <div class='popup-menu__item-title'>Photo</div>
+                        </a>
+                     </li>
+                     <li class="popup-menu__item">
+                        <a href="#apps">
+                           <img class='images' src="./popup-icons/apps.png" alt="apps">
+                           <div class='popup-menu__item-title'>Apps</div>
+                        </a>
+                     </li>
+                     <li class="popup-menu__item">
+                        <a href="#documents">
+                           <img class='images' src="./popup-icons/documents.png" alt="documents">
+                           <div class='popup-menu__item-title'>Document</div>
+                        </a>
+                     </li>
+                  </ul>
+                  <input name="popup-menu-more__button" class="popup-menu-more__button" type="checkbox" value="More">
+                  <span class="popup-menu-more__text">More</span>
+                  <ul class="popup-menu-more">
+                     <li class="popup-menu__item">
+                        <a href="#chat">
+                           <img class='images' src="./popup-icons/chat.png" alt="chat">
+                           <div class='popup-menu__item-title'>Chat</div>
+                        </a>
+                     </li>
+                     <li class="popup-menu__item">
+                        <a href="#classroom">
+                           <img class='images' src="./popup-icons/classroom.png" alt="classroom">
+                           <div class='popup-menu__item-title'>Classroom</div>
+                        </a>
+                     </li>
+                     <li class="popup-menu__item">
+                        <a href="#collection">
+                           <img class='images' src="./popup-icons/collection.png" alt="collection">
+                           <div class='popup-menu__item-title'>Collection</div>
+                        </a>
+                     </li>
+                     <li class="popup-menu__item">
+                        <a href="#mars">
+                           <img class='images' src="./popup-icons/mars.png" alt="mars">
+                           <div class='popup-menu__item-title'>Mars</div>
+                        </a>
+                     </li>
+                     <li class="popup-menu__item">
+                        <a href="#blogs">
+                           <img class='images' src="./popup-icons/blogs.png" alt="blogs">
+                           <div class='popup-menu__item-title'>Blogs</div>
+                        </a>
+                     </li>
+                     <li class="popup-menu__item">
+                        <a href="#promos">
+                           <img class='images' src="./popup-icons/promo.png" alt="promo">
+                           <div class='popup-menu__item-title'>Promos</div>
+                        </a>
+                     </li>
+                     <li class="nav-footer">
+                        <a href='https://github.com/kottans' target="_blank">Even more from Kottans</a>
+                     </li>
+                  </ul>
+               </div>
+            </li>
+            <li><a href ="#bell"><img class='bell__image' src="popup-icons/bell.png" alt="bell"/></a></li>
+            <li><a href ="#user"><img class='user-photo__image' src="popup-icons/user_photo.png" alt="user-photo"/></a></li>
+         </ul>
       </nav>
    </body>
 </html>
