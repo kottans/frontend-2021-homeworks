@@ -45,10 +45,9 @@ class Animal extends Inhabitant {
 }
 
 class Human extends Animal {
-	constructor(name, gender, saying, friends) {
-		super("human", name, gender, saying, friends);
-		this.legs = 2;
-		this.hands = 2;
+	constructor(name, gender, saying, friends, hands = 2) {
+		super("human", name, gender, saying, friends, 2);
+		this.hands = hands;
 	}
 	toString() {
 		return [super.toString(), `I have ${this.hands} hands`].join(". ");
