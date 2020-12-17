@@ -8,65 +8,77 @@
 // ======== OBJECTS DEFINITIONS ========
 // Define your objects here
 class Being {
-  constructor(name, gender, saying) {
+   constructor(name, gender, saying) {
 
-     this.name = name;
-     this.gender = gender;
-     this.saying = saying;
-     this.friends = [];
-     this.species = '';
-  };
-  addFriends(arr) {
-     arr.forEach(item => this.friends.push(item));
-  };
-  description() {
-     return `${this.saying} my name is ${this.name}, I am a ${this.species}, I am ${this.gender}, ${this.friends.length > 0 ? `My friends is ${ this.friends.map(item => item.name).join(' and ')}` : 'I have not got friends'},`
-  }
+      this.name = name;
+      this.gender = gender;
+      this.saying = saying;
+      this.friends = [];
+   };
+
+   addFriends(arr) {
+      arr.forEach(item => this.friends.push(item));
+   };
+
+   description() {
+      let descriptions = [this.saying,
+         `my name is ${this.name}`,
+         `I am ${this.gender}`,
+         `${this.friends.length > 0
+            ? `My friends is ${ this.friends.map(item => item.name).join(' and ')}`
+            : 'I have not got friends'}`
+      ];
+      return  descriptions.join(', ')
+   };
 };
 
 class Animal extends Being {
-  constructor(name, gender, saying) {
-     super(name, gender, saying);
-     this.paws = 4;
-
-  };
-  description() {
-     return `${super.description()},  I have ${this.paws} paws`
-  }
+   constructor(name, gender, saying) {
+      super(name, gender, saying);
+      this.paws = 4;
+   };
+   description() {
+      return `${super.description()}, I have ${this.paws} paws`
+   }
 };
 
 class Human extends Being {
-  constructor(name, gender = 'male', saying) {
-     super(name, gender, saying);
-     this.legs = 2;
-     this.hands = 2;
-     this.species = 'human';
-
-  };
-  description() {
-     return `${super.description()}, I have ${this.hands} hands and ${this.legs} legs`
-  }
+   constructor(name, gender = 'male', saying) {
+      super(name, gender, saying);
+      this.legs = 2;
+      this.hands = 2;
+      this.species = 'human';
+   };
+   description() {
+      return `${super.description()}, I have ${this.hands} hands and ${this.legs} legs, I am a ${this.species}`
+   };
 };
 
 class Dog extends Animal {
-  constructor(name, gender, saying) {
-     super(name, gender, saying);
-     this.species = 'dog';
-  }
+   constructor(name, gender, saying) {
+      super(name, gender, saying);
+      this.species = 'dog';
+   };
+   description() {
+      return `${super.description()}, I am a ${this.species}`
+   };
 };
 
 class Cat extends Animal {
-  constructor(name, gender, saying) {
-     super(name, gender, saying);
-     this.species = 'cat';
-  }
+   constructor(name, gender, saying) {
+      super(name, gender, saying);
+      this.species = 'cat';
+   };
+   description() {
+      return `${super.description()}, I am a ${this.species}`
+   };
 };
 
 class SuperHero extends Human {
-  constructor(name, gender, saying, species = 'cat-woman') {
-     super(name, gender, saying);
-     this.species = species;
-  };
+   constructor(name, gender, saying, species = 'cat-woman') {
+      super(name, gender, saying);
+      this.species = species;
+   };
 }
 
 const dog = new Dog ('Charlie', 'male', 'woof-woof!');
@@ -90,19 +102,19 @@ inhabitants.forEach(obj => print(obj.description()));
 
 
 /* Use print(message) for output.
-  Default tag for message is <pre>. Use print(message,'div') to change containing element tag.
+   Default tag for message is <pre>. Use print(message,'div') to change containing element tag.
 
-  Message can contain HTML markup. You may also tweak index.html and/or styles.css.
-  However, please, REFRAIN from improving visuals at least until your code is reviewed
-  so code reviewers might focus on a single file that is index.js.
-  */
+   Message can contain HTML markup. You may also tweak index.html and/or styles.css.
+   However, please, REFRAIN from improving visuals at least until your code is reviewed
+   so code reviewers might focus on a single file that is index.js.
+   */
 
 /* Print examples:
-  print('ABC');
-  print('<strong>ABC</strong>');
-  print('<strong>ABC</strong>', 'div');
+   print('ABC');
+   print('<strong>ABC</strong>');
+   print('<strong>ABC</strong>', 'div');
 
-  print('human; John; male; 2; 2; Hello world!; Rex, Tom, Jenny');
-  print('human; <strong>John</strong>; male; 2; 2; <em>Hello world!</em>; Rex, Tom, Jenny');
-  print('human; <strong>John</strong>; male; 2; 2; <em>Hello world!</em>; Rex, Tom, Jenny', 'div');
-  */
+   print('human; John; male; 2; 2; Hello world!; Rex, Tom, Jenny');
+   print('human; <strong>John</strong>; male; 2; 2; <em>Hello world!</em>; Rex, Tom, Jenny');
+   print('human; <strong>John</strong>; male; 2; 2; <em>Hello world!</em>; Rex, Tom, Jenny', 'div');
+   */
