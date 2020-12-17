@@ -20,7 +20,7 @@ class Being {
       arr.forEach(item => this.friends.push(item));
    };
 
-   description() {
+   toString() {
       let descriptions = [this.saying,
          `my name is ${this.name}`,
          `I am ${this.gender}`,
@@ -37,8 +37,8 @@ class Animal extends Being {
       super(name, gender, saying);
       this.paws = 4;
    };
-   description() {
-      return `${super.description()}, I have ${this.paws} paws`
+   toString() {
+      return `${super.toString()}, I have ${this.paws} paws`
    }
 };
 
@@ -49,8 +49,8 @@ class Human extends Being {
       this.hands = 2;
       this.species = 'human';
    };
-   description() {
-      return `${super.description()}, I have ${this.hands} hands and ${this.legs} legs, I am a ${this.species}`
+   toString() {
+      return `${super.toString()}, I have ${this.hands} hands and ${this.legs} legs, I am a ${this.species}`
    };
 };
 
@@ -59,8 +59,8 @@ class Dog extends Animal {
       super(name, gender, saying);
       this.species = 'dog';
    };
-   description() {
-      return `${super.description()}, I am a ${this.species}`
+   toString() {
+      return `${super.toString()}, I am a ${this.species}`
    };
 };
 
@@ -69,8 +69,8 @@ class Cat extends Animal {
       super(name, gender, saying);
       this.species = 'cat';
    };
-   description() {
-      return `${super.description()}, I am a ${this.species}`
+   toString() {
+      return `${super.toString()}, I am a ${this.species}`
    };
 };
 
@@ -98,7 +98,7 @@ const   inhabitants = [dog, cat, man, woman, catWoman];
 
 // // ======== OUTPUT ========
 
-inhabitants.forEach(obj => print(obj.description()));
+inhabitants.forEach(obj => print(obj.toString()));
 
 
 /* Use print(message) for output.
