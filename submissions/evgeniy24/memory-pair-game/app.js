@@ -2,22 +2,22 @@ const field = document.querySelector('.game');
 const cards = document.querySelectorAll('.card');
 const win = document.querySelector('.win');
 
-const  cardMaxPositions = 12;
+const winCondition = 6,
+      cardMaxPositions = 12;
+
 
 let isRolledCard = false,
     lockRoll = false,
     firstCard, secondCard,
-    winCondition = 6,
     currentMatches = 0;
 
 window.onload = resetOrderCards();
 
-field.onclick = function(event) {
-    if (event.target.className != 'back') return;
-    
-    let card = event.target.closest('.card');
+field.addEventListener('click', function(event) {
+    if (event.target.classList.contains('back')) {
+    const card = event.target.closest('.card');
     rollCard(card);
-}
+}});
 
 function rollCard(card) {
     if (lockRoll) return;
@@ -83,7 +83,7 @@ function checkWinCondition() {
 
 function resetOrderCards() {
     cards.forEach(function(card) {
-        let position = Math.floor(Math.random() * cardMaxPositions);
+        const position = Math.floor(Math.random() * cardMaxPositions);
         card.style.order = position;
     })
 };
