@@ -1,0 +1,160 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+li {
+	list-style: none;
+}
+
+body {
+	background-color: #111;
+	min-height: 100vh;
+	color: #888;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 300;
+	font-size: 15px;
+	line-height: 1.5;
+}
+
+.flex {
+	display: flex;
+	width: 100%;
+}
+
+.full {
+	width: 100%;
+}
+
+.box {
+	box-sizing: border-box;
+}
+
+.center {
+	justify-content: center;
+	align-items: center;
+}
+
+.number {
+	font-weight: 600;
+	font-size: .9em;
+}
+
+.header {
+	justify-content: flex-start;
+	position: relative;
+	height: auto;
+	min-height: 100vh;
+	max-width: 350px;
+	background-position: center;
+	background-size: cover;
+}
+
+.nav {
+	padding: 0 40px;
+	width: 100%;
+	min-width: 200px;
+	height: 100%;
+	background-color: rgba(0, 0, 0, .6);
+}
+
+.menu__btn {
+	display: none;
+	padding: 15px;
+}
+
+.menu__item:hover,
+.menu__btn:hover {
+	cursor: pointer;
+}
+
+.menu__item:focus,
+.menu__item:hover {
+	outline: none;
+	color: white;
+	text-shadow: 0 0 7px white;
+}
+
+.menu__item {
+	font-size: .8em;
+	color: white;
+	box-sizing: border-box;
+	text-transform: uppercase;
+	letter-spacing: 0.5em;
+	justify-content: flex-start;
+	height: 30px;
+	transition: .5s;
+	margin: 0;
+}
+
+.tab__image {
+	order: 1;
+	background-position: left;
+	background-size: cover;
+	background-repeat: no-repeat;
+	width: 100%;
+}
+
+.menu__item::before {
+	content: attr(data-content);
+	margin-right: 10px;
+}
+
+.menu__item:last-of-type {
+	border: none;
+}
+
+.column {
+	flex-direction: column;
+}
+
+.separator {
+	height: 0;
+	width: 30px;
+	margin: 0 10px;
+	border-bottom: 1px solid white;
+}
+
+.tab__number {
+	font-size: 0.75em;
+	margin-top: 20%;
+	align-items: center;
+}
+
+.tab__header {
+	font-size: 3em;
+	font-weight: 300;
+	text-transform: uppercase;
+	color: white;
+	font-family: 'Playfair Display', serif;
+}
+
+.tab__header::first-letter {
+	font-size: 1.5em;
+}
+
+.tab__info-container {
+	border-left: 1px solid #222;
+	border-right: 1px solid #222;
+	box-sizing: border-box;
+	min-width: 350px;
+	padding: 30px;
+	margin: 0;
+	justify-content: space-between;
+	max-width: 400px;
+}
+
+.tab__paragraph {
+	width: 100%;
+}
+
+.statistics__header {
+	letter-spacing: 2px;
+	font-size: 1em;
+	text-transform: uppercase;
+}
+
+.tab__statistics {
+	flex-direction: column;
+}
+
