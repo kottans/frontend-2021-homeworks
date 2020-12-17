@@ -8,8 +8,8 @@ class Inhabitant {
     }
 
     toString() {
-        const props = Object.entries(this).map(([key, value]) => `${key}: ${value}` )
-        return`${props.join("; ")}`
+        let inhabitantProps = ["species", "name", "gender", "saying", "friends"].map(prop => this[prop]).join('; ');
+        return inhabitantProps;
     }
 }
 
@@ -17,6 +17,11 @@ class Animal extends Inhabitant {
     constructor ({ species, name, gender, saying, friends, paws = 4 }) {
         super({ species, name, gender, saying, friends })
         this.paws = paws
+    }
+
+    toString() {
+        let animalProps = ["paws"].map(prop => this[prop]).join("; ");
+        return super.toString() +`; ${animalProps}.`;
     }
 }
 
@@ -37,6 +42,11 @@ class HomoSapiens extends Inhabitant {
         super({ species: 'human', name, gender, saying, friends })
         this.hands = hands
         this.legs = legs
+    }
+
+    toString() {
+        let homoSapiensProps = ["hands", "legs"].map(prop => this[prop]).join("; ");
+        return super.toString() +`; ${homoSapiensProps}.`;
     }
 }
 
@@ -60,5 +70,5 @@ const woman = new Woman({ name: 'Mariia', saying: 'Hi!', friends: ['Spile', 'Dol
 const inhabitants = [dog, cat, man, woman]
 
 inhabitants.forEach((item) => {
-    print(item.toString())
+    print(item)
 })
