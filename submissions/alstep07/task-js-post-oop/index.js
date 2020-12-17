@@ -35,9 +35,9 @@ class Inhabitant {
 }
 
 class Animal extends Inhabitant {
-	constructor(species, name, gender, saying, friends) {
+	constructor(species, name, gender, saying, friends, legs) {
 		super(species, name, gender, saying, friends);
-		this.legs = 4;
+		this.legs = legs;
 	}
 	toString() {
 		return [super.toString(), `I have ${this.legs} legs`].join(". ");
@@ -69,13 +69,13 @@ class Woman extends Human {
 
 class Cat extends Animal {
 	constructor(name, gender, friends) {
-		super("cat", name, gender, "Meow", friends);
+		super("cat", name, gender, "Meow", friends, 4);
 	}
 }
 
-class Dog extends Animalmal {
+class Dog extends Animal {
 	constructor(name, gender, friends) {
-		super("dog", name, gender, "Bow wow", friends);
+		super("dog", name, gender, "Bow wow", friends, 4);
 	}
 }
 
