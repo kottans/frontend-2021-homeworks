@@ -18,30 +18,40 @@ class Inhabitant {
 	}
 
 	toString() {
-		let greating = `${this.saying}! I am a ${this.species}
-      and my gender is ${this.gender}. My name is ${this.name}. `;
+		let greating = [
+			`${this.saying}`,
+			`I am a ${this.species}`,
+			`My gender is ${this.gender}`,
+			`My name is ${this.name}`,
+		];
 
 		if (this.friends.length > 1) {
-			return (greating += `My friends are ${this.friends}.`);
+			greating.push(`My friends are ${this.friends.join(", ")}`);
 		} else if (this.friends.length === 1) {
-			return (greating += `My friend is ${this.friends}.`);
-		} else {
-			return greating;
+			greating.push(`My friend is ${this.friends}`);
 		}
+		return greating.join(". ");
 	}
 }
 
-class Human extends Inhabitant {
+class Animal extends Inhabitant {
+	constructor(species, name, gender, saying, friends) {
+		super(species, name, gender, saying, friends);
+		this.legs = 4;
+	}
+	toString() {
+		return [super.toString(), `I have ${this.legs} legs`].join(". ");
+	}
+}
+
+class Human extends Animal {
 	constructor(name, gender, saying, friends) {
 		super("human", name, gender, saying, friends);
 		this.legs = 2;
 		this.hands = 2;
 	}
 	toString() {
-		return (
-			super.toString() +
-			`I have ${this.legs} legs and ${this.hands} hands. `
-		);
+		return [super.toString(), `I have ${this.hands} hands`].join(". ");
 	}
 }
 
@@ -57,23 +67,13 @@ class Woman extends Human {
 	}
 }
 
-class Pets extends Inhabitant {
-	constructor(species, name, gender, saying, friends) {
-		super(species, name, gender, saying, friends);
-		this.legs = 4;
-	}
-	toString() {
-		return super.toString() + `I have ${this.legs} legs.`;
-	}
-}
-
-class Cat extends Pets {
+class Cat extends Animal {
 	constructor(name, gender, friends) {
 		super("cat", name, gender, "Meow", friends);
 	}
 }
 
-class Dog extends Pets {
+class Dog extends Animalmal {
 	constructor(name, gender, friends) {
 		super("dog", name, gender, "Bow wow", friends);
 	}
