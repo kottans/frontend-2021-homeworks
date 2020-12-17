@@ -66,19 +66,12 @@ const world = [man, woman, catWoman, dog, cat];
 
 const listOfKeys = ['species', 'name', 'gender', 'legs', 'hands', 'tail', 'saying', 'friendlyTo'];
 
-makingString = obj => {
-   let string = '';
-   for (let i = 0; i < listOfKeys.length; i++) {
-      if (i + 1 === listOfKeys.length) {
-         string += (obj[listOfKeys[i]] + ".");
-         return string;
-      } else {
-         string += (obj[listOfKeys[i]] + "; ");
-      }
-   }
-};
+let output = world.map(inhabitant =>
+   listOfKeys.map(property => inhabitant[property]
+   ).join('; ')
+).join('.\n');
 
-world.forEach(obj => print(makingString(obj)));
+print(output + '.');
 
 // ======== OUTPUT ========
 /* Use print(message) for output.
