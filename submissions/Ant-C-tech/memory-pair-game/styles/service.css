@@ -1,0 +1,15 @@
+.notActive {
+    pointer-events: none;
+}
+
+.d-block {
+    display: block;
+}
+
+.d-none {
+    display: none;
+}
+
+.w-auto {
+    width: auto;
+}
