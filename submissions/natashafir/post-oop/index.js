@@ -1,22 +1,34 @@
 class Inhabitants {
-    constructor(species, name, gender, legs, hands, saying) {
+    constructor(species, name, gender, legs, saying) {
         this.species = species;
         this.name = name;
         this.gender = gender;
         this.legs = legs;
-        this.hands = hands;
         this.saying = saying;
     }
 
     sayHi() {
-        return "My name is " + this.name + ". I'm " + this.species + ". My gender is " + this.gender +
-            ". I have " + this.legs + " legs and " + this.hands + " hands. " + this.saying
+        let template = [
+            `${this.saying}`,
+            `My name is ${this.name}.`,
+            `I am a ${this.species}.`,
+            `My gender is ${this.gender}.`,
+            `I have ${this.legs} legs`
+        ];
+        return template.join(' ');
     }
 }
 
 class Human extends Inhabitants {
     constructor(name, gender, saying) {
-        super('human', name, gender, 2, 2, saying)
+        super('human', name, gender, 2, saying);
+        this.hands = 2;
+    }
+
+    sayHi() {
+        return (
+            super.sayHi() + ` and ${this.hands} hands.`
+        )
     }
 }
 
@@ -34,7 +46,7 @@ class Man extends Human {
 
 class Animal extends Inhabitants {
     constructor(species, name, gender, saying) {
-        super(species, name, gender, 4, 0, saying)
+        super(species, name, gender, 4, saying)
     }
 }
 
