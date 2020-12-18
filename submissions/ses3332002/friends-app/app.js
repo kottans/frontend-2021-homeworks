@@ -6,33 +6,36 @@ const ageFromOption = document.querySelector("#age_from");
 const ageToOption = document.querySelector("#age_to");
 const searchNameOption = document.querySelector(".filter_name");
 const resetButton = document.querySelector(".reset_button");
+const renewButton = document.querySelector(".renew_button");
 const requestString = "https://randomuser.me/api/?nat=gb,us,fr&results=60&inc=gender,name,location,email,picture,dob";
 let receivedData = [];
-let dataToRender = [];
 let filterCriterionSex;
 let filterCriterionAge
 let filterCriterionName;
 let sortCriterion;
 hamburgerMenu.addEventListener("click", () => hamburgerMenu.classList.toggle("hamburger_menu-opened"));
-resetButton.addEventListener("click", resetApp);
+resetButton.addEventListener("click", prepareForm);
+renewButton.addEventListener("click", prepareList);
 optionForm.addEventListener("input", changeData);
-resetApp();
+prepareList();
   
-function resetApp() {
+function prepareForm() {
   filterCriterionSex = () => true;
   filterCriterionAge = () => true;
   filterCriterionName = () => true;
   sortCriterion = () => false;
   optionForm.reset();
-  
+  render(receivedData.slice(), sortCriterion, filterCriterionSex, filterCriterionAge, filterCriterionName);
+};
+
+function prepareList() {
   fetch(requestString)
   .then((response) => {
     return response.json();
   })
   .then((data) => {
     receivedData = data.results;
-    dataToRender = receivedData.slice();
-    render();
+    prepareForm();
   })
   .catch((err) => {
     mainArea.innerHTML = "There was some error, try again!";
@@ -40,17 +43,18 @@ function resetApp() {
   });
 };
 
-function render() {
+function sexString(age) {
+  const lastNumberOfAge = age.toString().slice(-1);
+  const numberForYearWord = "1";
+  const numbersForYearsWord = ["2", "3", "4"];
+  return (lastNumberOfAge == numberForYearWord) ? "год" : (numbersForYearsWord.includes(lastNumberOfAge)) ? "года" : "лет";
+};
+
+function render(arrayToShow, sortingFunction, filterFunction1, filterFunction2, filterFunction3) {
   mainArea.innerHTML = "";
   const contentToRender = document.createDocumentFragment();
-  dataToRender.forEach((item) => {
+  arrayToShow.filter(filterFunction1).filter(filterFunction2).filter(filterFunction3).sort(sortingFunction).forEach((item) => {
     let card = document.createElement("div");
-    function sexString(age) {
-      const lastNumberOfAge = age.toString().slice(-1);
-      const numberForYearWord = "1";
-      const numbersForYearsWord = ["2", "3", "4"];
-      return (lastNumberOfAge == numberForYearWord) ? "год" : (numbersForYearsWord.includes(lastNumberOfAge)) ? "года" : "лет";
-    };
     card.classList.add("friend_card");
     card.innerHTML = `<img src=${item.picture.large} alt="photo" class="friend_card__photo">\
     <div class="friend_card__text friend_card__name">${item.name.first} ${item.name.last}</div>\
@@ -101,6 +105,5 @@ function changeData({target}) {
     case "search_name":
       filterCriterionName = (item) => (item.name.first.toLowerCase().includes(searchNameOption.value.toLowerCase()))||(item.name.last.toLowerCase().includes(searchNameOption.value.toLowerCase()));
   };
-  dataToRender = receivedData.slice().filter(filterCriterionSex).filter(filterCriterionAge).filter(filterCriterionName).sort(sortCriterion);
-  render();
+  render(receivedData.slice(), sortCriterion, filterCriterionSex, filterCriterionAge, filterCriterionName);
 };

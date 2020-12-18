@@ -57,14 +57,15 @@ aside {
   width: 40px;
 }
 
-.filter_name, .reset_button {
+.filter_name, .reset_button, .renew_button {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   width: 100%;
   height: 30px;
+  margin: 5px 0;
 }
 
-input, label {
+input, label, button {
   cursor: pointer;
 }
 
