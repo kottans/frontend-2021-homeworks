@@ -1,63 +1,94 @@
 /* Refer to https://github.com/OleksiyRudenko/a-tiny-JS-world for the task details
   Complete the below for code reviewers' convenience:
 
-  Code repository: _put repo URL here_
-  Web app: _put project's github pages URL here_
+  Code repository: https://github.com/kt-std/kottans-frontend/tree/main/task_tiny_js_world
+  Web app: https://kt-std.github.io/a-tiny-JS-world/
   */
 
 // ======== OBJECTS DEFINITIONS ========
 // Define your objects here
 
-/**
- * Represents an inhabitant
- * @constructor
- * @param {string} species - The species of the inhabitant.
- * @param {string} name - The name of the inhabitant.
- * @param {string} gender - The gender of the inhabitant.
- * @param {number} hands - The amount of hands of the inhabitant.
- * @param {number} legs - The amount of legs of the inhabitant.
- * @param {string} sayings - The text of inhabitant greetings.
- * @param {[]} friends - The list of inhabitant friends.
- */
-function Inhabitant(species, name, gender, hands, legs, sayings, friends) {
-  this.species = species;
-  this.name = name;
-  this.gender = gender;
-  this.hands = hands === 0 ?
-   `${this.species}s don't have hands! They have paws` : hands;
-  this.legs = legs;
-  this.friends = Array.isArray(friends) && friends.length ?
-    friends.join(', ') :
-    'Forever alone...';
-  this.saySomething = sayings;
+/** Class representing an inhabitant. */
+class Inhabitant {
+  /**
+   * Create an inhabitant
+   * @param {string} species - The species of the inhabitant.
+   * @param {string} name - The name of the inhabitant.
+   * @param {string} gender - The gender of the inhabitant.
+   * @param {number} legs - The amount of legs of the inhabitant.
+   * @param {string} sayings - The text of inhabitant greetings.
+   * @param {[]} friends - The list of inhabitant friends.
+   */
+  constructor(species, name, gender, legs, sayings, friends) {
+    this.species = species;
+    this.name = name;
+    this.gender = gender;
+    this.legs = legs;
+    this.sayings = sayings;
+    this.friends = this.haveFriends(friends);
+  }
+
+  /**
+   * Check if an inhabitant has friends
+   * @param {[]} friends - The list of inhabitant friends
+   * @return {string} List of friends or sad quote
+   */
+  haveFriends(friends) {
+    return Array.isArray(friends) && friends.length ?
+      friends.join(', ') :
+      'Forever alone...';
+  }
+
+  /**
+   * Stringifies an inhabitant properties
+   * @return {string} String consistings of an inhabitant
+properties separated with semicolon
+   */
+  stringify() {
+    return [this.species, this.name, this.gender, this.sayings,
+      this.friends, this.legs].join('; ');
+  }
 }
 
-const dog = new Inhabitant('dog', 'Rex', 'male', 0, 4, 'Woof!',
+/** Class representing a human inhabitant. */
+class Human extends Inhabitant {
+  /**
+   * Create a human
+   * @param {string} species - The species of the inhabitant.
+   * @param {string} name - The name of the inhabitant.
+   * @param {string} gender - The gender of the inhabitant.
+   * @param {number} hands - The amount of hands of the inhabitant.
+   * @param {number} legs - The amount of legs of the inhabitant.
+   * @param {string} sayings - The text of inhabitant greetings.
+   * @param {[]} friends - The list of inhabitant friends.
+   */
+  constructor(species, name, gender, hands, legs, sayings, friends) {
+    super(species, name, gender, legs, sayings, friends);
+    this.hands = hands;
+  }
+  /**
+   * Stringifies a human properties
+   * @return {string} String consistings of a human
+properties separated with semicolon
+   */
+  stringify() {
+    return `${super.stringify()}; ${this.hands}`;
+  }
+}
+
+
+const dog = new Inhabitant('dog', 'Rex', 'male', 4, 'Woof!',
     ['Mukhtar', 'Sharik', 'Thunder']);
-const cat = new Inhabitant('cat', 'Murka', 'female', 0, 4, 'Meow!',
+const cat = new Inhabitant('cat', 'Murka', 'female', 4, 'Meow!',
     ['Murchik', 'Anna']);
-const woman = new Inhabitant('woman', 'Anna', 'female', 2, 2, 'Hi, folks!',
+const woman = new Human('woman', 'Anna', 'female', 2, 2, 'Hi, folks!',
     ['John', 'Tom']);
-const man = new Inhabitant('man', 'John', 'male', 2, 2, 'Ahoy!');
-const catWoman = new Inhabitant('superhero', 'Selina', 'female?', 2, 2,
-    cat.saySomething, ['Alice', 'Arizona']);
+const man = new Human('man', 'John', 'male', 2, 2, 'Ahoy!');
+const catWoman = new Human('superhero', 'Selina', 'female?', 2, 2,
+    cat.sayings, ['Alice', 'Arizona']);
 
-/**
- * This is a function.
- *
- * @param {Object} inhabitant - An object to stringify
- * @return {string} A joint string with project properties values
- *
- * @example
- *
- *     getString(dog)
- */
-function getString(inhabitant) {
-  return ['species', 'name', 'gender', 'hands', 'legs', 'sayings', 'friends']
-      .map((property) => inhabitant[property]).join('; ');
-}
 
-[dog, cat, woman, man, catWoman].forEach((obj) => print(getString(obj)));
+[dog, cat, woman, man, catWoman].forEach((obj) => print(obj.stringify()));
 
 // ======== OUTPUT ========
 /* Use print(message) for output.
