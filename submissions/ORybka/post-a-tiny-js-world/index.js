@@ -20,8 +20,8 @@ class Inhabitant {
     return this.friends.join(', ');
   }
 
-  getValues(addition) {
-    return [this.species, `<strong>${this.name}</strong>`, this.gender, this.legs, addition, `<em>${this.saying}</em>`, this.callFriends()];
+  getValues(addValue) {
+    return [this.species, `<strong>${this.name}</strong>`, this.gender, this.legs, addValue, `<em>${this.saying}</em>`, this.callFriends()];
   }
 
   printValues() {
