@@ -25,7 +25,7 @@ class Inhabitant {
     this.gender = gender;
     this.legs = legs;
     this.sayings = sayings;
-    this.friends = this.haveFriends(friends);
+    this.friends = friends;
   }
 
   /**
@@ -44,9 +44,9 @@ class Inhabitant {
    * @return {string} String consistings of an inhabitant
 properties separated with semicolon
    */
-  stringify() {
+  toString() {
     return [this.species, this.name, this.gender, this.sayings,
-      this.friends, this.legs].join('; ');
+      this.haveFriends(this.friends), this.legs].join('; ');
   }
 }
 
@@ -88,7 +88,7 @@ const catWoman = new Human('superhero', 'Selina', 'female?', 2, 2,
     cat.sayings, ['Alice', 'Arizona']);
 
 
-[dog, cat, woman, man, catWoman].forEach((obj) => print(obj.stringify()));
+[dog, cat, woman, man, catWoman].forEach((obj) => print(obj));
 
 // ======== OUTPUT ========
 /* Use print(message) for output.
