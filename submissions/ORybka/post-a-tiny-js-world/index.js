@@ -7,12 +7,11 @@
 
 // ======== OBJECTS DEFINITIONS ========
 class Inhabitant {
-  constructor(species, name, gender, legs, hands, saying, friends) {
+  constructor(species, name, gender, legs, saying, friends) {
     this.species = species;
     this.name = name;
     this.gender = gender;
     this.legs = legs;
-    this.hands = hands;
     this.saying = saying;
     this.friends = friends;
   }
@@ -21,8 +20,8 @@ class Inhabitant {
     return this.friends.join(', ');
   }
 
-  getValues() {
-    return [this.species, `<strong>${this.name}</strong>`, this.gender, this.legs, this.hands, `<em>${this.saying}</em>`, this.callFriends()];
+  getValues(addition) {
+    return [this.species, `<strong>${this.name}</strong>`, this.gender, this.legs, addition, `<em>${this.saying}</em>`, this.callFriends()];
   }
 
   printValues() {
@@ -32,7 +31,12 @@ class Inhabitant {
 
 class Human extends Inhabitant {
   constructor(name, gender, saying, friends) {
-    super('human', name, gender, 2, 2, saying, friends);
+    super('human', name, gender, 2, saying, friends);
+    this.hands = 2;
+  }
+
+  getValues() {
+    return super.getValues(this.hands);
   }
 }
 
@@ -41,7 +45,7 @@ const woman = new Human('Mary', 'female', 'Hey there!', ['John', 'Marley', 'Tish
 
 class Animal extends Inhabitant {
   constructor(species, name, gender, saying, friends) {
-    super(species, name, gender, 4, 0, saying, friends);
+    super(species, name, gender, 4, saying, friends);
   }
 }
 
@@ -50,7 +54,7 @@ const cat = new Animal('cat', 'Tisha', 'male', 'meow-purr!', []);
 
 class CatWoman extends Inhabitant {
   constructor(name, gender, friends) {
-    super('catWoman', name, gender, 2, 2, cat.saying, friends);
+    super('catWoman', name, gender, 2, cat.saying, friends);
   }
 }
 
