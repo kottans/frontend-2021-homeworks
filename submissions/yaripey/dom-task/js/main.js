@@ -13,11 +13,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const toggler = document.querySelector('.toggle')
 
   const changeText = ({ target }) => {
-    if (target.id !== '') {
+    if (target.id) {
       if (target.id !== currentTab.id) {
         currentTab.classList.toggle('focused')
         mainElem.innerHTML = texts[target.id]
-        currentTab = document.querySelector(`#${target.id}`)
+        currentTab = target
         currentTab.classList.toggle('focused')
         document.querySelector('aside').classList.toggle('toggled')
       }
