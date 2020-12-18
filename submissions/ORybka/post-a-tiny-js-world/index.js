@@ -20,8 +20,8 @@ class Inhabitant {
     return this.friends.join(', ');
   }
 
-  getValues(addValue) {
-    return [this.species, `<strong>${this.name}</strong>`, this.gender, this.legs, addValue, `<em>${this.saying}</em>`, this.callFriends()];
+  getValues() {
+    return [this.species, `<strong>${this.name}</strong>`, this.gender, this.legs, `<em>${this.saying}</em>`, this.callFriends()];
   }
 
   printValues() {
@@ -36,7 +36,7 @@ class Human extends Inhabitant {
   }
 
   getValues() {
-    return super.getValues(this.hands);
+    return [...super.getValues(), this.hands];
   }
 }
 
