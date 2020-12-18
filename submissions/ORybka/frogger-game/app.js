@@ -36,7 +36,7 @@ Enemy.prototype.render = function () {
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-const Player = function (x, y) {
+const Player = function (x, y, enemies) {
   this.sprite = 'images/char-cat-girl.png';
   this.x = x;
   this.y = y;
@@ -46,11 +46,11 @@ const Player = function (x, y) {
   this.endFieldX = param.fieldBorderX[1];
   this.startFieldY = param.fieldBorderY[0];
   this.endFieldY = param.fieldBorderY[1];
-  this.enemies = allEnemies;
+  this.enemies = enemies;
   this.enemySize = param.enemySize;
 };
 
-const player = new Player(param.initialX, param.initialY);
+const player = new Player(param.initialX, param.initialY, allEnemies);
 
 Player.prototype.update = function () {
   this.checkCollision();
@@ -86,17 +86,18 @@ Player.prototype.handleInput = function (position) {
         this.y = this.endFieldY;
       }
       break;
-    default:
-      break;
   }
 };
 
 Player.prototype.checkCollision = function () {
-  for (let i = 0; i < this.enemies.length; i++) {
-    if (this.y <= this.enemies[i].y + this.enemySize && this.y >= this.enemies[i].y - this.enemySize && this.x <= this.enemies[i].x + this.enemySize && this.x >= this.enemies[i].x - this.enemySize) {
+  this.enemies.forEach((enemy) => {
+    if (this.y <= enemy.y + this.enemySize && 
+      this.y >= enemy.y - this.enemySize && 
+      this.x <= enemy.x + this.enemySize && 
+      this.x >= enemy.x - this.enemySize) {
       this.loseMessage();
     }
-  }
+  });
 };
 
 Player.prototype.winMessage = function () {
@@ -114,8 +115,8 @@ Player.prototype.loseMessage = function () {
 };
 
 Player.prototype.resetGame = function () {
-  this.x = 200;
-  this.y = 380;
+  this.x = param.initialX;
+  this.y = param.initialY;
 };
 
 document.addEventListener('keyup', function (e) {
