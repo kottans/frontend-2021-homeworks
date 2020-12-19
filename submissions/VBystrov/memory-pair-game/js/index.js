@@ -7,57 +7,122 @@ const showCardsTime = 1500;
 const delayCardShow = 300;
 
 class Game {
-  constructor(field) {
-    this.field = field;
-    this.allCards = [];
-    this.reversedCards = [];
+  constructor(cardsContainer, newGameButton) {
+    this.cardsContainer = cardsContainer;
+    this.newGameButton = newGameButton;
+    this.allCardCodes = [];
+    this.pairedCards = [];
     this.fieldLocked = false;
 
-    for (let i = 0; i < amountCards; i++) {
-      this.allCards.push(i.toString(10).padStart(3, '0'));
-    }
+    this.addAllCardCodes();
+
+    this.newGameButton.addEventListener('click', () => {
+      this.start();
+    });
+
+    this.cardsContainer.addEventListener('click', (e) => {
+      const card = e.target.closest('.card');
+
+      if (this.pairedCards.includes(card) || !card || this.fieldLocked) {
+        return;
+      }
+      this.reverseCards(card);
+
+      if (!(this.pairedCards.length & 1)) {
+        this.pairedCards.push(card);
+        return;
+      } else {
+        if (
+          this.isCardsPair(card, this.pairedCards[this.pairedCards.length - 1])
+        ) {
+          this.pairedCards.push(card);
+          this.pairedCards.slice(-2).forEach((newPairCard) => {
+            newPairCard.classList.add('pair');
+          });
+
+          if (this.pairedCards.length >= cardsInGame * 2) {
+            this.newGameButton.disabled = false;
+          }
+        } else {
+          this.reverseNotPairedCards(card);
+        }
+      }
+    });
   }
 
   start() {
-    this.field.innerHTML = '';
+    this.newGameButton.disabled = true;
     this.pickCards();
     this.shuffleCards();
     this.placeCards();
     this.revealAllCards();
   }
 
+  addAllCardCodes() {
+    for (let i = 0; i < amountCards; i++) {
+      this.allCardCodes.push(i.toString(10).padStart(3, '0'));
+    }
+  }
+
   pickCards() {
-    for (let i = this.allCards.length - 1; i > 0; i--) {
+    for (let i = this.allCardCodes.length - 1; i > 0; i--) {
       let j = Math.floor(Math.random() * (i + 1));
-      [this.allCards[i], this.allCards[j]] = [
-        this.allCards[j],
-        this.allCards[i],
+      [this.allCardCodes[i], this.allCardCodes[j]] = [
+        this.allCardCodes[j],
+        this.allCardCodes[i],
       ];
     }
-    this.pickedCards = this.allCards.slice(0, cardsInGame);
+    this.pickedCardCodes = this.allCardCodes.slice(0, cardsInGame);
   }
 
   shuffleCards() {
-    this.cards = [];
-    for (let i = 0; i < this.pickedCards.length; i++) {
-      this.cards.push(this.pickedCards[i], this.pickedCards[i]);
+    this.shuffledCardCodes = [];
+    for (let i = 0; i < this.pickedCardCodes.length; i++) {
+      this.shuffledCardCodes.push(
+        this.pickedCardCodes[i],
+        this.pickedCardCodes[i]
+      );
     }
 
-    for (let i = this.cards.length - 1; i > 0; i--) {
+    for (let i = this.shuffledCardCodes.length - 1; i > 0; i--) {
       let j = Math.floor(Math.random() * (i + 1));
-      [this.cards[i], this.cards[j]] = [this.cards[j], this.cards[i]];
+      [this.shuffledCardCodes[i], this.shuffledCardCodes[j]] = [
+        this.shuffledCardCodes[j],
+        this.shuffledCardCodes[i],
+      ];
     }
   }
 
+  isCardsPair(card1, card2) {
+    return card1.attributes.cardCode.value === card2.attributes.cardCode.value;
+  }
+
+  reverseCards(...cards) {
+    cards.forEach((card) => {
+      card.classList.toggle('reverse');
+    });
+  }
+
+  reverseNotPairedCards(card) {
+    this.fieldLocked = true;
+    setTimeout(() => {
+      this.reverseCards(card, this.pairedCards.pop());
+      this.fieldLocked = false;
+    }, showCardsTime);
+  }
+
   placeCards() {
-    for (let i = 0; i < this.cards.length; i++) {
-      this.field.innerHTML += this.createCardElement(this.cards[i]);
+    this.cardsContainer.innerHTML = '';
+    for (let i = 0; i < this.shuffledCardCodes.length; i++) {
+      this.cardsContainer.innerHTML += this.createCardElement(
+        this.shuffledCardCodes[i]
+      );
     }
   }
 
   *reverseAllCards() {
-    for (let i = 0; i < this.field.children.length; i++) {
-      this.field.children[i].classList.toggle('reverse');
+    for (let i = 0; i < this.cardsContainer.children.length; i++) {
+      this.reverseCards(this.cardsContainer.children[i]);
       yield;
     }
     return;
@@ -96,40 +161,6 @@ class Game {
 
 document.addEventListener('DOMContentLoaded', () => {
   const field = document.getElementById('field');
-  const game = new Game(field);
-  game.start();
-
-  field.addEventListener('click', (e) => {
-    const card = e.target.closest('.card');
-
-    if (game.reversedCards.includes(card) || !card || game.fieldLocked) {
-      return;
-    }
-    card.classList.toggle('reverse');
-
-    if (!(game.reversedCards.length & 1)) {
-      game.reversedCards.push(card);
-      return;
-    } else {
-      if (
-        card.attributes.cardCode.value ===
-        game.reversedCards[game.reversedCards.length - 1].attributes.cardCode
-          .value
-      ) {
-        card.classList.add('pair');
-        game.reversedCards[game.reversedCards.length - 1].classList.add('pair');
-        game.reversedCards.push(card);
-        if (game.reversedCards.length >= cardsInGame * 2) {
-          setTimeout(game.start.bind(game), 3000);
-        }
-      } else {
-        game.fieldLocked = true;
-        setTimeout(() => {
-          card.classList.toggle('reverse');
-          game.reversedCards.pop().classList.toggle('reverse');
-          game.fieldLocked = false;
-        }, showCardsTime);
-      }
-    }
-  });
+  const newGameButton = document.getElementById('btn-new_game');
+  const game = new Game(field, newGameButton);
 });
