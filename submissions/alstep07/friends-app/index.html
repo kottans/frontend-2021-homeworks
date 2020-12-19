@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="./app.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="popup">
+            <span class="popup__top-line"></span>
+            <span class="popup__mid-line"></span>
+            <span class="popup__bottom-line"></span>
+        </div>
+        <h1 class="header__title">
+            Friends App
+        </h1>
+        <ul class="header__social">
+            <li class="header__social__item">
+                <a href="https://github.com/alstep07?tab=repositories" class="header__social__link">
+                    Alexandr Stepanenko
+                </a>
+            </li>
+            <li class="header__social__item">
+                <a href="https://github.com/kottans/frontend" class="header__social__link">
+                    Kottans - frontend
+                </a>
+            </li>
+        </ul>
+    </header>
+
+    <nav class="navbar">
+        <form class="search-panel">
+            <div class="search__by-name">
+                <input type="text" id="search" placeholder="name or location" class="input__search" name="search-name">
+            </div>
+            <hr>
+            <div class="search__by-gender">
+                <label class="search__by-gender__label" for="male">
+                    <input type="radio" id="male" name="gender" value="male">
+                    male
+                </label>
+                <label class="search__by-gender__label" for="female">
+                    <input type="radio" id="female" name="gender" value="female">
+                    female
+                </label>
+                <label class="search__by-gender__label" for="all">
+                    <input type="radio" id="all" name="gender" value="all">
+                    all
+                </label>
+            </div>
+            <hr>
+            <div class="search__by-alphabet" for="by-alphabet">
+                name
+                <div class="search__arrows">
+                    <input type="button" name="alphabetical" id="name_a-z" class="input__btn input__btn-down">
+                    <input type="button" name="alphabetical" id="name_z-a" class="input__btn input__btn-up">
+                </div>
+            </div>
+            <hr>
+            <div class="search__by-age" for="by-age">
+                age
+                <div class="search__arrows">
+                    <input type="button" name="by-age" id="age_down" class="input__btn input__btn-down">
+                    <input type="button" name="by-age" id="age_up" class="input__btn input__btn-up">
+                </div>
+            </div>
+            <hr>
+            <div class="search__by-date" for="by-date">
+                new
+                <div class="search__arrows">
+                    <input type="button" name="by-date" id="date_down" class="input__btn input__btn-down">
+                    <input type="button" name="by-date" id="date_up" class="input__btn input__btn-up">
+                </div>
+            </div>
+            <hr>
+            <div class="search__reset">
+                <input type="reset" value="reset" class="search__reset__btn">
+            </div>
+        </form>
+    </nav>
+
+    <main class="main">
+
+    </main>
+
+    <script src="./script.js"></script>
+</body>
+
+</html>
