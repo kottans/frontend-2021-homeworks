@@ -76,6 +76,10 @@ body {
 	-o-transform: rotateY(180deg);
 }
 
+.card-active .card__back .card__img {
+	z-index: 2;
+}
+
 .card__front,
 .card__back {
 	width: 100%;

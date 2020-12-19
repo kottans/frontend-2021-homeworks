@@ -26,7 +26,9 @@ const game = {
 	startNewGame() {
 		main.innerHTML = "";
 		this.resetGame();
-		this.getRandomIds().forEach((id) => createCard(this, id));
+		const container = document.createDocumentFragment();
+		this.getRandomIds().forEach((id) => container.append(createCard(this, id)));
+		main.append(container);
 	},
 };
 
@@ -120,5 +122,5 @@ function createCard(game, id) {
 		turnCards(game.currentPair, card);
 	});
 
-	main.append(card);
+	return card;
 }
