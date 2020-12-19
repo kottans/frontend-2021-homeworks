@@ -58,7 +58,7 @@ class CatWoman extends Human {
    }
 }
 
-let catVoice = "Meow-meow!"
+let catVoice = "Meow-meow!";
 
 const inhabitantsList = [ new Human("Boris", "human", "male", "HI!", ["Vladimir", "Innokentiy", "Fedor"]),
                        new Human("Larisa", "human", "female", "Hello!", ["Diana","Laura","Svetlana"]),
