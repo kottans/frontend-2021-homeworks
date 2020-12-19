@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Friends App</title>
+  </head>
+  <body>
+    <h1 class="title">Friends App</h1>
+    <main class="app-wrapper">
+      <aside class="sidebar">
+        <form class="sidebar-form">
+          <fieldset class="sidebar-form__block">
+            <span class="sidebar-form__title">Search by name</span>
+            <div class="sidebar-form__input-block">
+              <label class="sidebar-form__label">
+                <input
+                  class="sidebar-form__input search-input"
+                  id="search-input"
+                  type="search"
+                  name="search"
+                  placeholder="First name"
+                />
+              </label>
+            </div>
+          </fieldset>
+
+          <fieldset class="sidebar-form__block">
+            <span class="sidebar-form__title">Sort by age</span>
+            <div class="sidebar-form__input-block" id="age-sort">
+              <label class="sidebar-form__label" for="sort-ascending"
+                >Age ↓</label
+              >
+              <input
+                class="sidebar-form__input"
+                id="sort-ascending"
+                type="radio"
+                name="sorting"
+                value="ascending"
+              />
+              <label class="sidebar-form__label" for="sort-descending"
+                >Age ↑</label
+              >
+              <input
+                class="sidebar-form__input"
+                id="sort-descending"
+                type="radio"
+                name="sorting"
+                value="descending"
+              />
+            </div>
+          </fieldset>
+
+          <fieldset class="sidebar-form__block">
+            <span class="sidebar-form__title">Sort by name</span>
+            <div class="sidebar-form__input-block" id="name-sort">
+              <label class="sidebar-form__label" for="sort-az">A-Z</label>
+              <input
+                class="sidebar-form__input"
+                id="sort-az"
+                type="radio"
+                name="sorting"
+                value="a"
+              />
+              <label class="sidebar-form__label" for="sort-za">Z-A</label>
+              <input
+                class="sidebar-form__input"
+                id="sort-za"
+                type="radio"
+                name="sorting"
+                value="z"
+              />
+            </div>
+          </fieldset>
+
+          <fieldset class="sidebar-form__block">
+            <span class="sidebar-form__title">Filter by gender</span>
+            <div class="sidebar-form__input-block" id="gender-block">
+              <label class="sidebar-form__label" for="gender-male">Male</label>
+              <input
+                class="sidebar-form__input"
+                id="gender-male"
+                type="radio"
+                name="gender"
+                value="male"
+              />
+              <label class="sidebar-form__label" for="gender-female"
+                >Female</label
+              >
+              <input
+                class="sidebar-form__input"
+                id="gender-female"
+                type="radio"
+                name="gender"
+                value="female"
+              />
+              <label class="sidebar-form__label" for="gender-all">All</label>
+              <input
+                class="sidebar-form__input"
+                id="gender-all"
+                type="radio"
+                name="gender"
+                value="all"
+                checked
+              />
+            </div>
+          </fieldset>
+          <button class="sidebar-form__reset" type="reset" id="reset-btn">
+            Reset form
+          </button>
+        </form>
+      </aside>
+      <section class="content">
+        <div class="users-container"></div>
+      </section>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
