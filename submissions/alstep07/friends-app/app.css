@@ -50,7 +50,7 @@ body {
 
 
 .navbar {
-    display: flex;
+    display: block;
     position: fixed;
     margin-top: 4rem;
     width: 220px;
@@ -58,8 +58,7 @@ body {
     padding: 1rem;
     background-color: #e6e1a1;
     box-shadow: 0 0 7px #999;
-    flex-direction: column;
-    transition: left .7s;
+    transition: left .4s;
 }
 
 .input__search {
@@ -72,6 +71,7 @@ body {
     background: #fff no-repeat .6rem/1.1rem url(./img/search.png);
     margin-bottom: 1rem;
     box-shadow: 0 0 6px #999;
+    grid-area: s;
 }
 
 .input__btn {
@@ -96,6 +96,7 @@ body {
     flex-direction: column;
     justify-content: space-between;
     margin: .7rem 0;
+    grid-area: g;
 }
 
 .search__by-gender__label {
@@ -114,6 +115,18 @@ body {
     margin: .7rem 0;
 }
 
+.search__by-alphabet{
+    grid-area: n;
+}
+
+.search__by-age{
+    grid-area: a;
+}
+
+.search__by-date{
+    grid-area: d;
+}
+
 .search__arrows {
     width: 45%;
     display: flex;
@@ -122,6 +135,7 @@ body {
 
 .search__reset {
     width: 100%;
+    grid-area: r;
 }
 
 .search__reset__btn {
@@ -146,8 +160,8 @@ body {
 }
 
 .card {
-    width: 200px;
-    height: 390px;
+    width: 220px;
+    min-height: 380px;
     display: flex;
     flex-direction: column;
     justify-content: start;
@@ -228,7 +242,65 @@ body {
     line-height: 3rem;
 }
 
-@media screen and (max-width: 745px) {
+@media screen and (orientation: landscape) and (max-height: 480px){
+    .navbar {
+        height: 120px;
+        width: 100vw;
+    }
+
+    hr {
+        display: none;
+    }
+
+    .main {
+        margin-left: 0;
+    }
+
+    .navbar {
+        top: -200px;
+        left: -100px;
+        transition: top .3s;
+    }
+
+    .navbar-active {
+        top: 0;
+    }
+
+    .search-panel {
+        display: grid;
+        height: 88px;
+        grid-template: repeat(2, 1fr) / 1fr repeat(3, 1.2fr) 2fr;
+        grid-template-areas: "g n a d s"
+                             "g n a d r";
+    }
+
+    .search__by-name {
+        max-width: 180px;
+        margin: auto;
+    }
+
+    .search__arrows {
+        width: 5rem;
+    }
+
+    .search__by-alphabet,
+    .search__by-age,
+    .search__by-date {
+        flex-direction: column;
+    }
+
+    .search__reset {
+        height: 2.3rem;
+        padding: 0;
+    }
+    .search__reset__btn {
+        height: 100%;
+        margin: 0 auto;
+    }
+
+}
+
+@media screen and (max-width: 880px) {
 
     .popup {
         width: 30px;
@@ -285,7 +357,7 @@ body {
     }
 
     .navbar {
-        left: -220px;
+        left: -860px;
     }
 
     .navbar-active {

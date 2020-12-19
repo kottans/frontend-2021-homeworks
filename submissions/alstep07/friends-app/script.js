@@ -37,8 +37,6 @@ const fetchFriends = async (url) => {
 
 const init = (results) => {
 	render(results);
-	console.log(results);
-
 	data = results.slice();
 
 	searchInput.addEventListener("keyup", ({ target }) => {
