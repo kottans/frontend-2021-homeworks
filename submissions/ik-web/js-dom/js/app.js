@@ -37,8 +37,8 @@ document.addEventListener("DOMContentLoaded", function (e) {
     const mainMenu = document.querySelector('.main-menu');
     const burger = document.querySelector('.burger');
 
-    //Create menu burger
-    function createBurger() {
+    //Add listener to burger menu
+    function addListenerToBurger() {
         burger.addEventListener('click', function (e) {
             e.preventDefault();
             this.classList.toggle('active');
@@ -108,7 +108,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
             clickedButton.classList.add('btn-active');
 
-            cars.find(function (obj) {
+            cars.forEach(function (obj) {
                 if (obj.name === buttonName) {
                     showContent(obj);
                     hideBurgerMenu();
@@ -120,7 +120,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
     // Add start app.js 
     function StartApp() {
-        createBurger();
+        addListenerToBurger();
         addButtons();
         addListenerToMenu();
     }
