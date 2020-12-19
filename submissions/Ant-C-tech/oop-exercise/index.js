@@ -9,36 +9,76 @@
 // Define your objects here
 
 class Inhabitant {
-    constructor(name, gender, friends) {
-        //At the moment I can't imagine what the creatures will inhabit our world, that is why I assumed that these will be some people and different kinds of their pets. In this way I can assume that they all would have these common properties and one method to perform the task.
+    constructor(name, friends) {
         this.name = name;
-        this.gender = gender;
         this.friends = friends;
-        this.templete = ` My name is ${this.name}. My gender is ${this.gender}.`;
+        this.templete = `My name is ${this.name}`;
     };
 
     getVoice() {
         let pluralEnding;
         (this.friends && this.friends.length > 1) ? pluralEnding = 's': pluralEnding = '';
-        return (this.friends) ? this.templete + `I have friend${pluralEnding}: ${this.friends.join(', ')}.` : this.templete + ' I am looking for friends.';
+        return (this.friends) ? [
+            this.templete,
+            `I have friend${pluralEnding}: ${this.friends.join(', ')}`
+        ].join('. ') : [
+            this.templete,
+            'I am looking for friends'
+        ].join('. ');
     };
 };
 
 class Animal extends Inhabitant {
-    constructor(...args) {
-        super(...args);
+    constructor(gender, name, friends) {
+        super(name, friends);
+        this.gender = gender;
+    };
+
+    getVoice() {
+        return [
+            super.getVoice(),
+            `My gender is ${ this.gender }`
+        ].join('. ');
+    };
+}
+
+class Dog extends Animal {
+    constructor(gender, name, friends) {
+        super(gender, name, friends);
+        this.species = 'dog';
+        this.saying = 'Woof-Woof!';
         this.legs = 4;
     };
 
     getVoice() {
-        return super.getVoice() + ` I have ${this.legs} legs.`;
+        return [`I am a ${this.species}`,
+            super.getVoice(),
+            `I have ${this.legs} legs`,
+            `I want to say you: "${this.saying}".`
+        ].join('. ');
     };
 }
 
-class Human extends Inhabitant {
-    constructor(saying, ...args) {
-        super(...args);
-        //I assumed that people can say different phrases
+class Cat extends Animal {
+    constructor(gender, name, friends) {
+        super(gender, name, friends);
+        this.species = 'cat';
+        this.saying = 'Meow-Meow!';
+        this.legs = 4;
+    };
+
+    getVoice() {
+        return [`I am a ${this.species}`,
+            super.getVoice(),
+            `I have ${this.legs} legs`,
+            `I want to say you: "${this.saying}".`
+        ].join('. ');
+    };
+}
+
+class Human extends Animal {
+    constructor(saying, gender, name, friends) {
+        super(gender, name, friends);
         this.saying = saying;
         this.species = 'human';
         this.hands = 2;
@@ -46,38 +86,19 @@ class Human extends Inhabitant {
     };
 
     getVoice() {
-        return `I am a ${this.species}. ` + super.getVoice() + ` I have ${this.legs} legs and ${this.hands} hands. I want to say you: "${this.saying}".`;
+        return [
+            `I am a ${this.species}`,
+            super.getVoice(),
+            `I have ${this.legs} legs and ${this.hands} hands`,
+            `I want to say you: "${this.saying}".`
+        ].join('. ');
     };
 }
 
-class Dog extends Animal {
-    constructor(...args) {
-        super(...args);
-        this.species = 'dog';
-        this.saying = 'Woof-Woof!'; //I assumed that all dogs say the same
-    };
-
-    getVoice() {
-        return `I am a ${this.species}. ` + super.getVoice() + ` I want to say you: "${this.saying}".`;
-    };
-}
-
-class Cat extends Animal {
-    constructor(...args) {
-        super(...args);
-        this.species = 'cat';
-        this.saying = 'Meow-Meow!'; //I assumed that all cats say the same
-    };
-
-    getVoice() {
-        return `I am a ${this.species}. ` + super.getVoice() + ` I want to say you: "${this.saying}".`;
-    };
-}
-
-const dog = new Dog('Spike', 'male', ['John']);
-const cat = new Cat('Tom', 'male', ['John']);
-const woman = new Human('Nice to meet you!', 'Jane', 'female');
-const man = new Human('Hi, how are you?', 'John', 'male', ['Spike', 'Tom']);
+const dog = new Dog('male', 'Spike', ['John']);
+const cat = new Cat('male', 'Tom', ['John']);
+const woman = new Human('Nice to meet you!', 'female', 'Jane');
+const man = new Human('Hi, how are you?', 'male', 'John', ['Spike', 'Tom']);
 
 const inhabitants = [dog, cat, woman, man];
 
