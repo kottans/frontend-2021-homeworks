@@ -4,7 +4,7 @@
 	--buttons-color: rgba(255,255,255,0.2);
 	--buttons-active-color: rgba(255,255,255,0.5);
 }
-  
+
 html {
 	height: 100%;
 }
@@ -136,13 +136,13 @@ body {
 	max-width: 80%;
 	margin: 0 auto 40px;
 }
-	
+
 }
 
 @media (min-width: 900px) {
 	.main__content{
 		display: grid;
-		grid-template-columns: 1fr 1fr;	
+		grid-template-columns: 1fr 1fr;
 		grid-template-rows: max-content;
 		grid-column-gap: 40px;
 	}
@@ -155,7 +155,7 @@ body {
 	.content__list-title {
 		margin-bottom: 16px;
 	}
-} 
+}
 
 @media (min-width: 1200px) {
 	.main {
@@ -169,7 +169,7 @@ body {
 	}
 
 	.main__content{
-		grid-template-columns: 1fr 1fr;	
+		grid-template-columns: 1fr 1fr;
 	}
 
 	.menu__tab-list {
