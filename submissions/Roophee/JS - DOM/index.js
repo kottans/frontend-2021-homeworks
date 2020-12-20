@@ -45,23 +45,13 @@ const contentStorage = {
 
 let dynamicNav = function (e) {
     e.preventDefault();
-    let fragment = document.createDocumentFragment();
+    let insertNav = '';
 
     for (let i of Object.keys(contentStorage)) {
-        let navItem = document.createElement("li");
-        let navLink = document.createElement("a");
-        let linkText = document.createElement("span");
-
-        navItem.className = "nav__item";
-        navLink.className = "nav__link";
-        navLink.href = "#top";
-        linkText.innerText = i;
-
-        navLink.appendChild(linkText);
-        navItem.appendChild(navLink);
-        fragment.appendChild(navItem);
+        let insetNavItem = `<li class="nav__item"><a href="#top" class="nav__link"><span>${i}</span></a></li> \n`;
+        insertNav += insetNavItem;
     }
-    navListOfElements.appendChild(fragment);
+    navListOfElements.innerHTML = insertNav;
 }
 
 document.addEventListener('DOMContentLoaded', dynamicNav);
@@ -115,7 +105,7 @@ document.addEventListener('click', hideSideBarClickAway);
 
 function addContentOnClick(e) {
 
-    if (e.target && e.target.nodeName == 'A' || e.target.nodeName == 'SPAN') {
+    if (e.target && e.target.nodeName === 'A' || e.target.nodeName === 'SPAN') {
         content.innerHTML = "";
         let contentRaw = contentStorage[e.target.textContent];
         let makeContent = `<div class="content__header">
