@@ -16,9 +16,10 @@ const superheroes = [
 const menuButtonTemplate = (name) => {
   return `
   <li class ="nav-item">
-     <button id="${name}-btn" class="nav-btn">${name}</button>
+     <button id="${name}-btn" class="nav-btn" data-hero-name="${name}">${name}</button>
   </li>`;
 };
+
 
 function createMenu(superheroes) {
   let menuItems = superheroes.map(
@@ -27,29 +28,27 @@ function createMenu(superheroes) {
   let navMenu = document.querySelector(".nav-list");
   navMenu.innerHTML = menuItems.join('');
 }
+createMenu(superheroes);
+
+
+const logo = document.querySelector(".logo");
+const desciption = document.querySelector(".description");
+const heroImg = document.querySelector(".hero");
 
 const fillContent = (item) => {
-  let logo = document.querySelector(".logo");
   logo.innerHTML = `<img class="logo-img" src="${item.logo}" alt="${item.name}-logo" />`;
-
-  let desciption = document.querySelector(".description");
   desciption.innerHTML = `<p class="description-content">${item.description}</p>`;
-
-  let heroImg = document.querySelector(".hero");
   heroImg.innerHTML = `<img class="hero-img" src="${item.img}" alt="${item.name}" />`;
 
-  let heroBtn = document.getElementById(item.name + "-btn");
+  const heroBtn = document.getElementById(item.name + "-btn");
   heroBtn.classList.add('active');
 };
-
-
-createMenu(superheroes);
 fillContent(superheroes[0]);
 
 
 document.querySelector('.nav-list').addEventListener('click', (event) => {
   if (event.target.tagName === 'BUTTON') {
-    let heroName = event.target.textContent;
+    let heroName = event.target.dataset.heroName;
     let heroItem = superheroes.find(item => item.name === heroName);
     document.querySelector(".nav-btn.active").classList.remove("active");
     fillContent(heroItem);
