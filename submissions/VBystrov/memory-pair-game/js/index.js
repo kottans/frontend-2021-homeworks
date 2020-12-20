@@ -59,8 +59,8 @@ class Game {
   }
 
   addAllCardCodes() {
-    for (let i = 0; i < amountCards; i++) {
-      this.allCardCodes.push(i.toString(10).padStart(3, '0'));
+    for (let code = 0; code < amountCards; code++) {
+      this.allCardCodes.push(code.toString().padStart(3, '0'));
     }
   }
 
@@ -112,12 +112,11 @@ class Game {
   }
 
   placeCards() {
-    this.cardsContainer.innerHTML = '';
+    let rawCardElements = '';
     for (let i = 0; i < this.shuffledCardCodes.length; i++) {
-      this.cardsContainer.innerHTML += this.createCardElement(
-        this.shuffledCardCodes[i]
-      );
+      rawCardElements += this.createCardElement(this.shuffledCardCodes[i]);
     }
+    this.cardsContainer.innerHTML = rawCardElements;
   }
 
   *reverseAllCards() {
