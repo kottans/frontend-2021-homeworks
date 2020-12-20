@@ -1,9 +1,9 @@
 /* Refer to https://github.com/OleksiyRudenko/a-tiny-JS-world for the task details
-Complete the below for code reviewers' convenience:
+   Complete the below for code reviewers' convenience:
 
-Code repository: _put repo URL here_
-Web app: _put project's github pages URL here_
-*/
+   Code repository: _put repo URL here_
+   Web app: _put project's github pages URL here_
+   */
 
 // ======== OBJECTS DEFINITIONS ========
 // Define your objects here
@@ -44,8 +44,7 @@ const inhabitants = [
 
 // ======== OUTPUT ========
 /* Use print(message) for output.
-Default tag for message is
-<pre>. Use print(message,'div') to change containing element tag.
+   Default tag for message is <pre>. Use print(message,'div') to change containing element tag.
 
    Message can contain HTML markup. You may also tweak index.html and/or styles.css.
    However, please, REFRAIN from improving visuals at least until your code is reviewed
@@ -62,4 +61,6 @@ Default tag for message is
    print('human; <strong>John</strong>; male; 2; 2; <em>Hello world!</em>; Rex, Tom, Jenny', 'div');
    */
 
-inhabitants.forEach(elem => print(`${elem.species}; ${elem.name}; ${elem.gender}; ${elem.legs}; ${elem.hands}; ${elem.message}`))
+inhabitants.forEach(elem => {
+  print(Object.keys(elem).map(property => elem[property]).join('; '))
+})
