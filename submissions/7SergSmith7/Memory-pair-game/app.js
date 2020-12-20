@@ -11,7 +11,8 @@ const images = [
   "splittingSoul",
   "manaBurn",
 ];
-
+const pairCounter = 8;
+const winMsg = "You Win Bro! Play again?";
 const cards = [...images, ...images];
 const gameField = document.querySelector(".game-field");
 let firstCard = "";
@@ -30,15 +31,15 @@ function cardTemplate(image) {
  </div>
 </div>`;
 }
-function shuffleCards(ArrayCards) {
-  ArrayCards.sort(() => {
+function shuffleCards(cardsArray) {
+  cardsArray.sort(() => {
     return 0.5 - Math.random();
   });
 }
-function renderNewField(ArrayCards) {
-  shuffleCards(ArrayCards);
+function renderNewField(cardsArray) {
+  shuffleCards(cardsArray);
   let field = "";
-  ArrayCards.forEach((img) => {
+  cardsArray.forEach((img) => {
     return (field += cardTemplate(img));
   });
   gameField.innerHTML = field;
@@ -47,8 +48,11 @@ function renderNewField(ArrayCards) {
 gameField.addEventListener("click", onCardClick);
 
 function onCardClick(e) {
-  let selectedCard = e.target.parentElement.parentElement.parentElement;
-  spinCard(selectedCard);
+  if (secondCard == "") {
+    let selectedCard = e.target.closest(".card");
+
+    spinCard(selectedCard);
+  }
 }
 function spinCard(element) {
   if (
@@ -69,11 +73,11 @@ function spinCard(element) {
 }
 
 function checkTwo(first, second) {
-  if (first === second) rigthChoise();
-  else wrongChoise();
+  if (first === second) choiseRigth();
+  else choiseWrong();
   clearChoises();
 }
-function rigthChoise() {
+function choiseRigth() {
   document.querySelectorAll(".spined").forEach((element) => {
     element.classList.add("bloked");
     element.classList.remove("spined");
@@ -82,7 +86,7 @@ function rigthChoise() {
 
   checkWin();
 }
-function wrongChoise() {
+function choiseWrong() {
   document.querySelectorAll(".spined").forEach((element) => {
     element.classList.remove("spined");
   });
@@ -93,7 +97,6 @@ function clearChoises() {
   secondCard = "";
 }
 function checkWin() {
-  if (pairsCounter == 8)
-    if (confirm("You Win Bro! Play again?")) renderNewField(cards);
+  if (pairsCounter == pairCounter) if (confirm(winMsg)) renderNewField(cards);
 }
 renderNewField(cards);

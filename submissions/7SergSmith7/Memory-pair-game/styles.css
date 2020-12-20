@@ -47,6 +47,9 @@ img {
 .card {
   margin: 0 5px;
 }
+.card:hover {
+  cursor: pointer;
+}
 
 @media (max-width: 600px) {
   .container {
