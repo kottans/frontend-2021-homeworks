@@ -43,7 +43,7 @@ const places = [
 const header = document.querySelector(".header");
 
 const headerTitle = document.createElement("h1");
-headerTitle.className = "header__title";
+headerTitle.classList = "header__title";
 headerTitle.innerText = "Top 5 places to visit in Barcelona";
 header.appendChild(headerTitle);
 
@@ -65,16 +65,15 @@ function createContent(place) {
   contentItem.innerHTML = "";
 
   const itemTitle = document.createElement("h2");
-  itemTitle.className = "content-title";
+  itemTitle.classList = "content-title";
   itemTitle.innerText = place.title;
 
   const itemParagraph = document.createElement("p");
-  itemParagraph.className = "content-text";
+  itemParagraph.classList = "content-text";
   itemParagraph.innerText = place.text;
 
   const itemImage = document.createElement("img");
-  itemImage.className = "content-image";
-  itemImage.innerText = place.src;
+  itemImage.classList = "content-image";
   itemImage.setAttribute("src", place.src);
   itemImage.setAttribute("alt", place.title);
   fragment.append(itemTitle, itemImage, itemParagraph);
@@ -96,9 +95,9 @@ document
     placeArray.forEach((place) => container.appendChild(place));
   });
 
-document.getElementById("trigger").onclick = function () {
+document.getElementById("trigger").addEventListener( 'click', function () {
   open();
-};
+});
 
 function open() {
   document.querySelector(".navigation__menu").classList.toggle("show");
