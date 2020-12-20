@@ -8,59 +8,46 @@
 // ======== OBJECTS DEFINITIONS ========
 // Define your objects here
 
-class Being {
-  constructor (name, friends, species) {
-    this.species = species;
+
+class Animal {
+  constructor (name, friends, gender, saying, species) {
     this.name = name;
     this.friends = friends;
-  }
-  
-  getDescription() {
-    return Object.entries(this)
-    .filter(([key]) => propsToPrint.includes(key))
-    .map(([,value]) => Array.isArray(value) ? value.join(', ') : value)
-    .join('; ');
-  }
-};
-
-class Animal extends Being {
-  constructor (name, friends, gender, saying, species) {
-    super(name, friends, species);
     this.gender = gender;
     this.saying = saying;
+    this.species = species;
     this.legs = 4;
     this.hands = 0;
+  }
+    
+  getDescription() {
+    return `<strong>${this.species}</strong>; <strong>${this.name}</strong>; ${this.gender}; ${this.friends.join(', ')}; <em>${this.saying}</em>; ${this.legs}; ${this.hands}`;
   }
 };
 
 class Dog extends Animal {
   constructor (name, friends, gender) {
-    super(name, friends, gender);
-    this.species = "dog";
-    this.saying = "Woof-woof!";
+    super(name, friends, gender, "Woof-woof!", "dog");
   }
 };
 
 class Cat extends Animal {
   constructor (name, friends, gender) {
-    super(name, friends, gender);
-    this.species = "cat";
-    this.saying = "Meow!";
+    super(name, friends, gender, "Meow!", "cat");
   }
 };
 
 class Human extends Animal {
   constructor (name, friends, gender, saying) {
-    super(name, friends, gender, saying);
-    this.species = "human";
-    this.legs = 2;
+    super(name, friends, gender, saying, "human");
     this.hands = 2;
+    this.legs = 2;
   }
 };
 
 class Superhero extends Human {
   constructor (name, friends, gender, saying) {
-    super(name, friends, gender);
+    super(name, friends, gender, saying);
     this.species = "super-hero";
   }
 };
@@ -69,12 +56,9 @@ const dog = new Dog ("Toby", ["Puss"], "male");
 const cat = new Cat ("Puss", ["Toby", "Halley"], "male");
 const man = new Human ("Jack", ["Jennie", "Halley"], "male", "Hey baby!");
 const woman = new Human ("Jennie", ["Jack", "Toby"], "female", "Hi darling!");
-const catWoman = new Superhero ("Halley", ["Puss"], "female");
-catWoman.saying = new Cat().saying;
+const catWoman = new Superhero ("Halley", ["Puss"], "female", new Cat().saying);
 
 const inhabitants = [dog, cat, man, woman, catWoman];
-const propsToPrint = ["species", "name", "gender", "legs", "hands", "friends", "saying"];
-
 inhabitants.forEach(item => print(item.getDescription()));
 
 // ======== OUTPUT ========
