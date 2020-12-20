@@ -37,37 +37,37 @@ const fetchFriends = async (url) => {
 
 const init = (results) => {
 	render(results);
-	data = results.slice();
+	const data = results.slice();
 
 	searchInput.addEventListener("keyup", ({ target }) => {
 		filters.search = target.value;
-		filterCards();
+		filterCards(data);
 	});
 
 	filterGender.addEventListener("click", ({ target }) => {
 		filters.gender = target.id;
-		filterCards();
+		filterCards(data);
 	});
 
 	filterName.addEventListener("click", ({ target }) => {
 		filters.name = target.id;
 		filters.age = null;
 		filters.date = null;
-		filterCards();
+		filterCards(data);
 	});
 
 	filterAge.addEventListener("click", ({ target }) => {
 		filters.age = target.id;
 		filters.name = null;
 		filters.date = null;
-		filterCards();
+		filterCards(data);
 	});
 
 	filterDate.addEventListener("click", ({ target }) => {
 		filters.date = target.id;
 		filters.age = null;
 		filters.name = null;
-		filterCards();
+		filterCards(data);
 	});
 
 	resetBtn.addEventListener("click", () => {
@@ -79,7 +79,7 @@ const init = (results) => {
 	});
 };
 
-function filterCards() {
+function filterCards(data) {
 	let filteredArr = data;
 	if (filters.search) filteredArr = sortBySearch(filteredArr, filters.search);
 	if (filters.gender) filteredArr = sortByGender(filteredArr, filters.gender);
@@ -89,48 +89,48 @@ function filterCards() {
 	render(filteredArr);
 }
 
-function sortBySearch(arr, str) {
-	return arr.filter((elem) =>
+function sortBySearch(dataToFilter, searchValue) {
+	return dataToFilter.filter((elem) =>
 		`${elem.name.first}${elem.name.last}${elem.location.country}${elem.location.city}`
 			.toLowerCase()
-			.includes(str.toLowerCase())
+			.includes(searchValue.toLowerCase())
 	);
 }
 
-function sortByGender(arr, type) {
-	if (type === "all") {
-		return arr;
+function sortByGender(dataToFilter, gender) {
+	if (gender === "all") {
+		return dataToFilter;
 	}
-	return arr.filter((elem) => elem.gender === type);
+	return dataToFilter.filter((elem) => elem.gender === gender);
 }
 
-function sortByName(arr, type) {
-	if (type === "name_a-z") {
-		return arr.sort((a, b) => a.name.first.localeCompare(b.name.first));
-	} else if (type === "name_z-a")
-		return arr.sort((a, b) => b.name.first.localeCompare(a.name.first));
+function sortByName(dataToFilter, direction) {
+	if (direction === "name_a-z") {
+		return dataToFilter.sort((a, b) => a.name.first.localeCompare(b.name.first));
+	} else if (direction === "name_z-a")
+		return dataToFilter.sort((a, b) => b.name.first.localeCompare(a.name.first));
 }
 
-function sortByAge(arr, type) {
-	if (type === "age_up") {
-		return arr.sort((a, b) => a.dob.age - b.dob.age);
-	} else if (type === "age_down") {
-		return arr.sort((a, b) => b.dob.age - a.dob.age);
-	}
-}
-
-function sortByDate(arr, type) {
-	if (type === "date_up") {
-		return arr.sort((a, b) => a.registered.age - b.registered.age);
-	} else if (type === "date_down") {
-		return arr.sort((a, b) => b.registered.age - a.registered.age);
+function sortByAge(dataToFilter, direction) {
+	if (direction === "age_up") {
+		return dataToFilter.sort((a, b) => a.dob.age - b.dob.age);
+	} else if (direction === "age_down") {
+		return dataToFilter.sort((a, b) => b.dob.age - a.dob.age);
 	}
 }
 
-function render(arr) {
+function sortByDate(dataToFilter, direction) {
+	if (direction === "date_up") {
+		return dataToFilter.sort((a, b) => a.registered.age - b.registered.age);
+	} else if (direction === "date_down") {
+		return dataToFilter.sort((a, b) => b.registered.age - a.registered.age);
+	}
+}
+
+function render(dataToRender) {
 	main.innerHTML = "";
 	const container = document.createDocumentFragment();
-	arr.forEach((elem) => container.append(createCard(elem)));
+	dataToRender.forEach((elem) => container.append(createCard(elem)));
 	main.append(container);
 }
 
@@ -155,5 +155,5 @@ function createCard(friend) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-	fetchFriends(url).then((results) => init(results));
+	fetchFriends(url).then(init);
 });

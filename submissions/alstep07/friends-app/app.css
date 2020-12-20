@@ -368,4 +368,8 @@ body {
         margin: 0;
         justify-content: center;
     }
+
+    .card__link:hover {
+        background: none;
+    }
 }
