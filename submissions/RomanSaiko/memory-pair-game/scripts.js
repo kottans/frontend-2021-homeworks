@@ -44,64 +44,71 @@ cards = cards.concat(cards)
 const cardsWrapper = document.getElementById('cards-wrapper')
 let amountOfMatches = 0
 let firstCard = null
-let cardItems = null
+const MILLISECONDS = 1000
+const MAX_MATCH_COUNT = 8
+let blockCardFlip = false
 
 const initCards = () => {
     let cardsWrapperContent = ''
-    const cardsContent = cards.sort(() => 0.5 - Math.random())
-    cardsContent.forEach(item => {
+    const sortedCards = cards.sort(() => 0.5 - Math.random())
+    sortedCards.forEach(({id, name, path}) => {
         cardsWrapperContent += `
-            <div class="flip-card" data-card="${item.id}">
+            <div class="flip-card" data-card="${id}">
                 <div class="flip-card-inner">
                     <div class="flip-card-front"></div>
                     <div class="flip-card-back">
-                        <img src="${item.path}" alt="${item.name}">
+                        <img src="${path}" alt="${name}">
                     </div>
                 </div>
             </div>
         `
     })
     cardsWrapper.innerHTML = cardsWrapperContent
-    cardItems = document.querySelectorAll('.flip-item')
 }
 
-const cardsWrapperHandler = ({target}) => {
+const onCardsWrapperClick = ({target}) => {
     if (target.closest('.flip-card') && !target.closest('.flip-card').classList.contains('flipped')) {
-        flipCard(target)
+        if (!blockCardFlip) {
+            flipCard(target)
+        }
     }
 }
 
 const flipCard = (target) => {
     if (!firstCard) {
         firstCard = target
-    }
-    else {
+    } else {
         checkMatching(target)
-        isGameOver()
+        checkGameOver()
     }
     target.closest('.flip-card').classList.add('flipped')
 }
 
 const checkMatching = (target) => {
-    if (target.closest('.flip-card').dataset.card === firstCard.closest('.flip-card').dataset.card) {
+    blockCardFlip = true
+    const firstSelectedCard = firstCard.closest('.flip-card')
+    const secondSelectedCard = target.closest('.flip-card')
+    if (secondSelectedCard.dataset.card === firstSelectedCard.dataset.card) {
         setTimeout(() => {
-            firstCard.closest('.flip-card').classList.add('matched')
-            target.closest('.flip-card').classList.add('matched')
+            firstSelectedCard.classList.add('matched')
+            secondSelectedCard.classList.add('matched')
             firstCard = null
-        }, 1000)
+            blockCardFlip = false
+        }, MILLISECONDS)
         amountOfMatches++
     }
     else {
         setTimeout(() => {
-            firstCard.closest('.flip-card').classList.remove('flipped')
-            target.closest('.flip-card').classList.remove('flipped')
+            firstSelectedCard.classList.remove('flipped')
+            secondSelectedCard.classList.remove('flipped')
             firstCard = null
-        },1000)
+            blockCardFlip = false
+        },MILLISECONDS)
     }
 }
 
-const isGameOver = () => {
-    if(amountOfMatches === 8) {
+const checkGameOver = () => {
+    if(amountOfMatches === MAX_MATCH_COUNT) {
         setTimeout(() => {
             firstCard = null
             amountOfMatches = 0
@@ -112,4 +119,4 @@ const isGameOver = () => {
 }
 
 document.addEventListener('DOMContentLoaded', initCards)
-cardsWrapper.addEventListener('click', cardsWrapperHandler)
+cardsWrapper.addEventListener('click', onCardsWrapperClick)
