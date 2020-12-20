@@ -43,7 +43,7 @@ const places = [
 const header = document.querySelector(".header");
 
 const headerTitle = document.createElement("h1");
-headerTitle.classList = "header__title";
+headerTitle.classList.add("header__title");
 headerTitle.innerText = "Top 5 places to visit in Barcelona";
 header.appendChild(headerTitle);
 
