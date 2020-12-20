@@ -65,15 +65,15 @@ function createContent(place) {
   contentItem.innerHTML = "";
 
   const itemTitle = document.createElement("h2");
-  itemTitle.classList = "content-title";
+  itemTitle.classList.add("content-title");
   itemTitle.innerText = place.title;
 
   const itemParagraph = document.createElement("p");
-  itemParagraph.classList = "content-text";
+  itemParagraph.classList.add("content-text");
   itemParagraph.innerText = place.text;
 
   const itemImage = document.createElement("img");
-  itemImage.classList = "content-image";
+  itemImage.classList.add("content-image");
   itemImage.setAttribute("src", place.src);
   itemImage.setAttribute("alt", place.title);
   fragment.append(itemTitle, itemImage, itemParagraph);
