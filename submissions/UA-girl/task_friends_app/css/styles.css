@@ -295,7 +295,7 @@ body {
 }
 
 .radio:checked + .ico {
-    fill: #1a798a;
+    fill: #1a5c6d;
 }
 
 .filter__gender, .filter__age {
@@ -319,15 +319,15 @@ body {
     fill: #ebcfd9;
 }
 .radio-gender__female:checked + .ico-radio__female {
-    fill: #e2c6d0;
+    fill: #c895a8;
 }
 
-.radio-gender__female:hover + .ico-radio__male,
-.radio-gender__female:focus + .ico-radio__male {
+.radio-gender__male:hover + .ico-radio__male,
+.radio-gender__male:focus + .ico-radio__male {
     fill: #1a8e9f;
 }
-.radio-gender__female:checked + .ico-radio__male {
-    fill: #187a8a;
+.radio-gender__male:checked + .ico-radio__male {
+    fill: #1a5c6d;
 }
 
 .filter__registration {
@@ -575,6 +575,25 @@ body {
 .age, .location, .gender, .email, .phone {
     margin: 0;
     margin-bottom: 7px;
+}
+
+.email, .phone {
+    font: inherit;
+    display: block;
+    color: inherit;
+    transition: 0.3s ease-in;
+}
+
+.male .email:hover, .male .email:focus,
+.male .phone:hover, .male .phone:focus {
+    color: #1aa6b7;
+    outline: none;
+}
+
+.female .email:hover, .female .email:focus,
+.female .phone:hover, .female .phone:focus {
+    color: #d9a5b9;
+    outline: none;
 }
 
 @media screen and (min-width: 960px) {
