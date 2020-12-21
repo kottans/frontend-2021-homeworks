@@ -118,9 +118,13 @@ a:hover, .btn:hover {
 }
 .music {
   font-size: 25px;
+  background: transparent;
+  outline: none;
+  border: none;
 }
 .music:hover {
   cursor: url(../img/cursor_pointer.png), pointer;
+  outline: none;
 }
 .game-over-text {
   background-color: beige;
