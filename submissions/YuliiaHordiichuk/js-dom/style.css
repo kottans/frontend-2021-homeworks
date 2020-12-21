@@ -82,7 +82,8 @@ body {
     opacity: 0.7; 
 }
 
-.nav__btn:active {
+.nav__btn:active, 
+.nav__btn.active {
     background-color: #F4E3B2; 
     color: #050517;
 }
