@@ -19,57 +19,47 @@ const tabContent = [
         tabName : "Electro",
         audio: `<iframe width="100%" height="450" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/819362814&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/digitalstreams" title="Westcoast Radio (EDM)" target="_blank" style="color: #cccccc; text-decoration: none;">Westcoast Radio (EDM)</a> · <a href="https://soundcloud.com/digitalstreams/sets/electroworkout" title="Best Electro of All-Time (Vol. 01)" target="_blank" style="color: #cccccc; text-decoration: none;">Best Electro of All-Time (Vol. 01)</a></div>`
     },
-]
+];
 
 const buttonList = document.querySelector(".menu__tab-list");
 const contentWrapper = document.querySelector(".content__wrapper");
 const contentList = document.querySelector(".content__list");
 
-
-
 function initApp() {
     generateHTMLButtons();
-    buttonList.addEventListener("click", contentToggle);
-    layoutSetup();
+    buttonList.addEventListener("click", toggleContent);
+    setupLayout();
 }
 initApp();
 
 function generateHTMLButtons() {
-    let HTMLstring = "";
+    let htmlString = "";
 
-    for (let i = 0; i < tabContent.length; i++) {
-        const tabItem = tabContent[i];
-        const tabName = tabItem["tabName"];
-        HTMLstring += `<li class="menu__tab-item"><button data-id="${i}" class="menu__tab-button">${tabName}</button></li>`;
-    }
-    buttonList.insertAdjacentHTML("beforeend", HTMLstring);
+    tabContent.map(({tabName} = curEl, i) => {
+        htmlString += `<li class="menu__tab-item"><button data-id="${i}" class="menu__tab-button">${tabName}</button></li>`;
+    });
+
+    buttonList.insertAdjacentHTML("beforeend", htmlString);
 }
 
-function layoutSetup() {
+function setupLayout() {
     document.querySelector(".menu__tab-button").classList.add("menu__tab-button--active");
-    contentWrapper.insertAdjacentHTML("beforeend", tabContent[0]["text"]);
-    contentList.insertAdjacentHTML("beforeend", tabContent[0]["audio"]);
+    contentWrapper.insertAdjacentHTML("beforeend", tabContent[0].text);
+    contentList.insertAdjacentHTML("beforeend", tabContent[0].audio);
 }
 
-function contentToggle(evt) {
+function toggleContent(evt) {
     if (!evt.target.matches(".menu__tab-button")) {
         return;
     };
 
     const currentBtn = evt.target;
     const currentBtnId = currentBtn.dataset.id;
-    const currentText = tabContent[currentBtnId]["text"];
-    const currentAudio = tabContent[currentBtnId]["audio"];
-
-    resetContent();
+    const currentText = tabContent[currentBtnId].text;
+    const currentAudio = tabContent[currentBtnId].audio;
 
     currentBtn.classList.add("menu__tab-button--active");
-    contentWrapper.insertAdjacentHTML("beforeend", currentText);
-    contentList.insertAdjacentHTML("beforeend", currentAudio);
-}
-
-function resetContent() {
-    contentWrapper.innerHTML = "";
-    contentList.innerHTML = "";
+    contentWrapper.innerHTML = currentText;
+    contentList.innerHTML = currentAudio;
     document.getElementsByClassName("menu__tab-button--active")[0].classList.remove("menu__tab-button--active");
 }
