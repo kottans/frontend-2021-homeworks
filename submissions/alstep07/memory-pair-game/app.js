@@ -1,12 +1,16 @@
 const main = document.querySelector(".main");
+const CARD_DELAY = 500;
+const PAIRS_QUANTITY = 6;
 const game = {
 	count: 0,
 	moves: 0,
 	currentPair: [],
 	frontImgSrc: "./img/front.png",
+	cardIds: [0, 1, 2, 3, 4, 5],
 	getRandomIds() {
-		let ids = [0, 1, 2, 3, 4, 5];
-		return [...ids, ...ids].sort(() => 0.5 - Math.random());
+		return [...this.cardIds, ...this.cardIds].sort(
+			() => 0.5 - Math.random()
+		);
 	},
 	addCount() {
 		this.count++;
@@ -18,8 +22,8 @@ const game = {
 	addMove() {
 		this.moves++;
 	},
-	winGame() {
-		if (this.count === 6) {
+	endGame() {
+		if (this.count === PAIRS_QUANTITY) {
 			createMenu(`You won in ${this.moves} moves!`);
 		}
 	},
@@ -27,51 +31,61 @@ const game = {
 		main.innerHTML = "";
 		this.resetGame();
 		const container = document.createDocumentFragment();
-		this.getRandomIds().forEach((id) => container.append(createCard(this, id)));
+		this.getRandomIds().forEach((id) =>
+			container.append(createCard(this, id))
+		);
 		main.append(container);
 	},
 };
 
 createMenu("Memory Pairs Game");
 
-function turnCards(arr, card) {
-	if (checkTurn(arr, card)) {
-		arr.push(card);
-		if (arr.length === 2) {
-			checkMatch(arr);
+function turnPair(openedCards, card) {
+	if (checkTurn(openedCards, card)) {
+		openedCards.push(card);
+		if (openedCards.length === 2) {
+			checkMatch(openedCards);
 			game.addMove();
 		}
 	} else {
-		card.classList.toggle("card-active");
+		turnCard(card);
 	}
 }
 
-function checkMatch(arr) {
-	if (arr[0].id === arr[1].id) {
-		removePair(arr);
+function checkTurn(openedCards, card) {
+	return !openedCards.includes(card) && openedCards.length < 2;
+}
+
+function checkMatch(openedCards) {
+	if (openedCards[0].id === openedCards[1].id) {
+		removePair(openedCards);
 	} else {
-		closePair(arr);
+		closePair(openedCards);
 	}
 }
 
-function checkTurn(arr, card) {
-	return arr.indexOf(card) === -1 && arr.length < 2;
+function closePair(openedCards) {
+	setTimeout(function () {
+		openedCards.forEach((card) => turnCard(card));
+		openedCards.length = 0;
+	}, CARD_DELAY);
 }
 
-function closePair(arr) {
+function removePair(openedCards) {
 	setTimeout(function () {
-		arr.forEach((item) => item.classList.toggle("card-active"));
-		arr.length = 0;
-	}, 500);
-}
-
-function removePair(arr) {
-	setTimeout(function () {
-		arr.forEach((item) => (item.style.visibility = "hidden"));
-		arr.length = 0;
-	}, 500);
+		openedCards.forEach(card => removeCard(card));
+		openedCards.length = 0;
+	}, CARD_DELAY);
 	game.addCount();
-	game.winGame();
+	game.endGame();
+}
+
+function turnCard(card) {
+	card.classList.toggle("card-active");
+}
+
+function removeCard(card) {
+	card.style.visibility = "hidden";
 }
 
 function createMenu(title) {
@@ -118,8 +132,8 @@ function createCard(game, id) {
 	cardFlipper.classList.add("card__flipper");
 
 	card.addEventListener("click", function () {
-		card.classList.toggle("card-active");
-		turnCards(game.currentPair, card);
+		turnCard(card);
+		turnPair(game.currentPair, card);
 	});
 
 	return card;
