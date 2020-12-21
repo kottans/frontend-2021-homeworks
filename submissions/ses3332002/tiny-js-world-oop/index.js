@@ -10,38 +10,40 @@
 
 
 class Animal {
-  constructor (name, friends, gender, saying, species) {
+  constructor (name, friends, gender, saying, species, legs) {
     this.name = name;
     this.friends = friends;
     this.gender = gender;
     this.saying = saying;
     this.species = species;
-    this.legs = 4;
-    this.hands = 0;
+    this.legs = legs;
   }
     
   getDescription() {
-    return `<strong>${this.species}</strong>; <strong>${this.name}</strong>; ${this.gender}; ${this.friends.join(', ')}; <em>${this.saying}</em>; ${this.legs}; ${this.hands}`;
+    return `<strong>${this.species}</strong>; <strong>${this.name}</strong>; ${this.gender}; ${this.friends.join(', ')}; <em>${this.saying}</em>; ${this.legs}`;
   }
 };
 
 class Dog extends Animal {
   constructor (name, friends, gender) {
-    super(name, friends, gender, "Woof-woof!", "dog");
+    super(name, friends, gender, "Woof-woof!", "dog", 4);
   }
 };
 
 class Cat extends Animal {
   constructor (name, friends, gender) {
-    super(name, friends, gender, "Meow!", "cat");
+    super(name, friends, gender, "Meow!", "cat", 4);
   }
 };
 
 class Human extends Animal {
   constructor (name, friends, gender, saying) {
-    super(name, friends, gender, saying, "human");
+    super(name, friends, gender, saying, "human", 2);
     this.hands = 2;
-    this.legs = 2;
+  }
+  
+  getDescription() {
+    return super.getDescription() + `; ${this.hands}`;
   }
 };
 
