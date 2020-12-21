@@ -53,6 +53,7 @@ const womanCat = {
     friends: ['Sam', 'Hanna', 'Kitty', 'Milo']
 }
 
+
 let toStringTask = function (item) {
     let string = '';
     for (let i in item) {
