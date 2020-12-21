@@ -22,7 +22,7 @@ const game = {
 	addMove() {
 		this.moves++;
 	},
-	endGame() {
+	showMenu() {
 		if (this.count === PAIRS_QUANTITY) {
 			createMenu(`You won in ${this.moves} moves!`);
 		}
@@ -77,7 +77,7 @@ function removePair(openedCards) {
 		openedCards.length = 0;
 	}, CARD_DELAY);
 	game.addCount();
-	game.endGame();
+	game.showMenu();
 }
 
 function turnCard(card) {
