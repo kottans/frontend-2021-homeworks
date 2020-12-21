@@ -1,0 +1,80 @@
+nav { font: 20px Copperplate; }
+span { font: 13px Monaco; }
+.navList {
+  list-style-type: none; 
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+.inscription {
+  padding: 0px 40px;
+  position: relative;
+}
+.inscriptionDeviate { background-color: aquamarine; }
+.imgStyle {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  padding: 13px;
+}
+.ref {
+  text-decoration: none;
+  color: darkblue;
+}
+.holder {
+  display: inline-block;
+  background-image: url("images/popup-button.png");
+  background-size: contain;
+}
+.face > img, .bell > img, .holder {
+  height: 32px;
+  width: 32px;
+}
+.more {
+  display: block;
+  width: 250px;
+  background: lightgray;
+  text-align: center;
+  cursor: pointer;
+  border: dotted;
+}
+.more:hover { color: red; }
+.menu {
+  display: none;
+  position: absolute;
+  right: -80px;
+  top: 50px;
+  box-shadow: 0 2px 15px #d6d2d2;
+  width: 330px;
+  height: auto;
+  padding: 15px 0px; 
+}
+.icons {
+  display: inline-block;
+  height: 67px;
+  width: 64px;
+  text-align: center;
+  padding: 0;
+  margin: 9px;
+}
+.icons:hover { outline: 1px solid #2e7c2e; }
+.ext { display: none; }
+.dropDown:checked ~ .menu { display: block; }
+.dropDown:focus ~ .holder { outline: 2px solid blue; }
+.button:checked ~ .more { display: none; }
+.button:checked ~ .ext { display: inline-block; }
+.icon {
+  display: inline-block;
+  width: 64px;
+  height: 58px;
+}
+.ref:hover, .bell:hover, .face:hover, .holder:hover {
+  opacity: 0.4;
+  cursor: pointer;
+}
+.dropDown, .button {
+  position: absolute;
+  overflow-y: auto;
+  clip: rect(0 0 0 0);
+}
