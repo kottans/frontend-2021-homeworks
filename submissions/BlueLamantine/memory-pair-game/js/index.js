@@ -143,7 +143,7 @@ class Game {
   }
 
   gameOver () {
-    document.querySelector('#timer').classList.add('hidden');
+    this.gameTime.classList.add('hidden');
     document.querySelector('#moves-counter').classList.add('hidden');
     const gameOver = document.createElement('div');
     gameOver.classList.add('game-over-text');
