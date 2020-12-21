@@ -9,38 +9,54 @@ const resetButton = document.querySelector(".reset_button");
 const renewButton = document.querySelector(".renew_button");
 const requestString = "https://randomuser.me/api/?nat=gb,us,fr&results=60&inc=gender,name,location,email,picture,dob";
 let receivedData = [];
-let filterCriterionSex;
-let filterCriterionAge
-let filterCriterionName;
-let sortCriterion;
+let dataToShow = [];
+let filterCriterionSex = () => true;
+let filterCriterionAge = () => true;
+let filterCriterionName = () => true;
+let sortCriterion = () => false;
 hamburgerMenu.addEventListener("click", () => hamburgerMenu.classList.toggle("hamburger_menu-opened"));
-resetButton.addEventListener("click", prepareForm);
-renewButton.addEventListener("click", prepareList);
-optionForm.addEventListener("input", changeData);
-prepareList();
-  
-function prepareForm() {
-  filterCriterionSex = () => true;
-  filterCriterionAge = () => true;
-  filterCriterionName = () => true;
-  sortCriterion = () => false;
-  optionForm.reset();
-  render(receivedData.slice(), sortCriterion, filterCriterionSex, filterCriterionAge, filterCriterionName);
-};
+resetButton.addEventListener("click", resetApp);
+renewButton.addEventListener("click", renewApp);
+optionForm.addEventListener("input", filterCards);
+prepareData();
 
-function prepareList() {
+function prepareData() {
   fetch(requestString)
   .then((response) => {
     return response.json();
   })
   .then((data) => {
     receivedData = data.results;
-    prepareForm();
+    prepareCardsArea(receivedData);
   })
   .catch((err) => {
     mainArea.innerHTML = "There was some error, try again!";
     console.error("there was some error:", err);
   });
+};
+
+function resetApp() {
+  prepareForm();
+  prepareCardsArea(receivedData);
+};
+  
+function prepareForm() {
+  optionForm.reset();
+  filterCriterionSex = () => true;
+  filterCriterionAge = () => true;
+  filterCriterionName = () => true;
+  sortCriterion = () => false;
+};
+
+function renewApp() {
+  prepareForm();
+  prepareData();
+};
+
+function filterCards({target}) {
+  changeFilters(target);
+  dataToShow = receivedData.slice().filter(filterCriterionAge).filter(filterCriterionName).filter(filterCriterionSex).sort(sortCriterion);
+  prepareCardsArea(dataToShow);
 };
 
 function sexString(age) {
@@ -50,10 +66,10 @@ function sexString(age) {
   return (lastNumberOfAge == numberForYearWord) ? "год" : (numbersForYearsWord.includes(lastNumberOfAge)) ? "года" : "лет";
 };
 
-function render(arrayToShow, sortingFunction, filterFunction1, filterFunction2, filterFunction3) {
+function prepareCardsArea(arrayToShow) {
   mainArea.innerHTML = "";
   const contentToRender = document.createDocumentFragment();
-  arrayToShow.filter(filterFunction1).filter(filterFunction2).filter(filterFunction3).sort(sortingFunction).forEach((item) => {
+  arrayToShow.forEach((item) => {
     let card = document.createElement("div");
     card.classList.add("friend_card");
     card.innerHTML = `<img src=${item.picture.large} alt="photo" class="friend_card__photo">\
@@ -67,7 +83,7 @@ function render(arrayToShow, sortingFunction, filterFunction1, filterFunction2, 
   mainArea.append(contentToRender);
 };
 
-function changeData({target}) {
+function changeFilters(target) {
   if (target.tagName != "INPUT") {
     return;
   };
@@ -105,5 +121,4 @@ function changeData({target}) {
     case "search_name":
       filterCriterionName = (item) => (item.name.first.toLowerCase().includes(searchNameOption.value.toLowerCase()))||(item.name.last.toLowerCase().includes(searchNameOption.value.toLowerCase()));
   };
-  render(receivedData.slice(), sortCriterion, filterCriterionSex, filterCriterionAge, filterCriterionName);
 };
