@@ -15,21 +15,22 @@ const pairCounter = 8;
 const winMsg = "You Win Bro! Play again?";
 const cards = [...images, ...images];
 const gameField = document.querySelector(".game-field");
+
 let firstCard = "";
 let secondCard = "";
 let pairsCounter = 0;
 
 function cardTemplate(image) {
   return `<div class="card" data-name="${image}">
- <div class="spin-card">
-   <div class="card-front">
-      <img src="./img/cardFront.png" class="front-img"/>
-    </div>
-    <div class="card-back">
-      <img class="back-img" src="./img/${image}.png" />
-   </div>
- </div>
-</div>`;
+            <div class="spin-card">
+              <div class="card-front">
+                <img src="./img/cardFront.png" class="front-img"/>
+              </div>
+              <div class="card-back">
+                <img class="back-img" src="./img/${image}.png" />
+              </div>
+            </div>
+          </div>`;
 }
 function shuffleCards(cardsArray) {
   cardsArray.sort(() => {
@@ -49,7 +50,7 @@ gameField.addEventListener("click", onCardClick);
 
 function onCardClick(e) {
   if (secondCard == "") {
-    let selectedCard = e.target.closest(".card");
+    const selectedCard = e.target.closest(".card");
 
     spinCard(selectedCard);
   }
@@ -73,12 +74,13 @@ function spinCard(element) {
 }
 
 function checkTwo(first, second) {
-  if (first === second) choiseRigth();
-  else choiseWrong();
+  if (first === second) chooseRigth();
+  else chooseWrong();
   clearChoises();
 }
-function choiseRigth() {
-  document.querySelectorAll(".spined").forEach((element) => {
+function chooseRigth() {
+  const spinedCards = document.querySelectorAll(".spined");
+  spinedCards.forEach((element) => {
     element.classList.add("bloked");
     element.classList.remove("spined");
   });
@@ -86,8 +88,9 @@ function choiseRigth() {
 
   checkWin();
 }
-function choiseWrong() {
-  document.querySelectorAll(".spined").forEach((element) => {
+function chooseWrong() {
+  const spinedCards = document.querySelectorAll(".spined");
+  spinedCards.forEach((element) => {
     element.classList.remove("spined");
   });
 }
