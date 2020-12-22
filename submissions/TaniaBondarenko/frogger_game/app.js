@@ -104,10 +104,10 @@ Player.prototype.handleInput = function (direction) {
 const player = new Player();
 
 const allEnemies = [
-    enemy1=new Enemy(5,60),
-    enemy2=new Enemy(50,145),
-    enemy3=new Enemy(280,145),
-    enemy4=new Enemy(25,230)
+    new Enemy(5,60),
+    new Enemy(50,145),
+    new Enemy(280,145),
+    new Enemy(25,230)
 ];
 
 // This listens for key presses and sends the keys to your
