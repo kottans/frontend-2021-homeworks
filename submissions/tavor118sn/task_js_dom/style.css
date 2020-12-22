@@ -1,0 +1,154 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  font-family: 'Arimo', sans-serif;
+  font-size: 16px;
+  line-height: 20px;
+  background-color: #485461;
+}
+
+.header, .footer {
+  height: 20%;
+  display: flex;
+  background: #000000 linear-gradient(147deg, #000000 0%, #434343 74%);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  font-size: 4em;
+  line-height: 4em;
+  color: white;
+}
+
+.main {
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  height: 60%;
+}
+
+.side-menu {
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  box-sizing: border-box;
+}
+
+.nav-list .nav-btn {
+  color: white;
+  background-color: black;
+  border: 3px solid white;
+  border-radius: 3px;
+  padding: 15px 30px;
+  text-align: center;
+  font-size: 1em;
+  width: 100%;
+  cursor: pointer;
+}
+
+.nav-list .nav-btn:hover {
+  background-color: #090033;
+}
+
+.nav-list .nav-btn.active {
+  background: #110066;
+}
+
+
+.main-container {
+  width: 75%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.column {
+  flex: 1;
+  flex-direction: column;
+}
+
+.logo, .hero {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.logo-img {
+  height: 100px;
+  padding: 15px;
+}
+
+.description-content {
+  color: white;
+  text-align: center;
+  padding: 15px 35px;
+}
+
+.hero-img {
+  height: 400px;
+  width: 350px;
+}
+
+@media only screen and (max-width: 800px) {
+  .footer {
+    display: none;
+  }
+
+  .main {
+    min-height: min-content;
+  }
+
+  .side-menu {
+    width: 40%;
+  }
+
+  .main-container {
+    width: 60%;
+  }
+
+  .column {
+    flex: 1 1 auto;
+  }
+
+  .logo, .hero {
+    min-height: min-content;
+  }
+}
+
+@media (max-width: 600px) {
+
+  .title {
+    font-size: 2.5em;
+  }
+
+  .main {
+    height: min-content;
+  }
+
+  .footer {
+    display: none;
+  }
+
+  .side-menu {
+    width: 100%;
+  }
+
+  .main-container {
+    width: 100%;
+  }
+
+  .column {
+    flex-basis: 100%;
+  }
+
+}
