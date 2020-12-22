@@ -11,7 +11,7 @@ class Program {
     constructor(){
         this.imgService = new ImgService();
         this.initPageElement = document.querySelector('.init-page');
-        this.errorMessage = 'Error occured whilte trying to fetch users. Please reload the page.'
+        this.errorMessage = 'Error occured while trying to fetch users. Please reload the page.'
     }
 
     removeInitPage(){
