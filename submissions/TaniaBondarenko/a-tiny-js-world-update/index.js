@@ -1,25 +1,24 @@
 class Inhabitant {
-  constructor(name, gender, saying, friends,legs, hands) {
+  constructor(name, gender, saying, friends,legs) {
     this.name = name;
     this.gender = gender;
     this.saying = saying;
     this.friends = friends;
     this.legs = legs;
-    this.hands = hands;
   }
   toString() {
-    return (` I\'m <b>${this.name}</b>, a ${this.gender}. To my friend ${this.friends} I always say: "${this.saying}"`);
+    return (` ${this.legs} legs. I\'m <b>${this.name}</b>, a ${this.gender}. To my friend ${this.friends} I always say: "${this.saying}"`);
   }
 };
 
 class Person extends Inhabitant {
   constructor(name, gender, saying, friends, species='human', legs=2, hands=2) {
-    super(name, gender, saying, friends,legs,hands)
+    super(name, gender, saying, friends,legs)
     this.species = species;
-
+    this.hands = hands;
   }
   toString() {
-    return `Since I'm <em>${this.species}</em>,I have ${this.legs} legs and ${this.hands} hands.` + super.toString();
+    return `I'm a <em>${this.species}</em> and I have ${this.hands} hands and` + super.toString();
   } 
 };
 
@@ -27,10 +26,9 @@ class Animal extends Inhabitant {
   constructor(name, gender, saying, species, friends, legs=4) {
     super(name, gender, saying, friends,legs )
     this.species = species;
-
   }
   toString() {
-    return `Since I'm <em>${this.species}</em>, I have ${this.legs} legs.` + super.toString();
+    return `Since I'm a <em>${this.species}</em> I have only` + super.toString();
   } 
 };
 
