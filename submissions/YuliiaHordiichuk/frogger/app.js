@@ -9,9 +9,10 @@ const minY = -25;
 const maxY = startY;  
 const startEnemyX = -110 + Math.floor((Math.random()) * (-50));
 
-const Enemy = function(x, y) {
+const Enemy = function(x, y, player) {
     this.x = x; 
     this.y = y; 
+    this.player = player; 
     this.sprite = 'images/enemy-bug.png';
 };
 
@@ -32,10 +33,10 @@ Enemy.prototype.checkEnemyLocation = function() {
 }; 
 
 Enemy.prototype.checkCollision = function() {
-    if(Math.abs(player.x - this.x) < 80 && this.y === player.y) {
+    if(Math.abs(this.player.x - this.x) < 80 && this.y === this.player.y) {
         setTimeout(() => {
             alert ('You lost'); 
-            player.restart();
+            this.player.restart();
         },0) 
     };
 }; 
@@ -119,10 +120,7 @@ document.addEventListener('keyup', function(e) {
 
 const getEnemyY = (row) => startY - row * stepY; 
 
-const allEnemies = [
-    new Enemy(-150, getEnemyY(2)), 
-    new Enemy (-300, getEnemyY(3)), 
-    new Enemy (-50, getEnemyY(4))
-]; 
+const allEnemies = 
+    [-150, -300, -50].map((enemyLoc, index) => new Enemy(enemyLoc, getEnemyY(index + 2), player));
 
 const player = new Player(startX, startY); 
