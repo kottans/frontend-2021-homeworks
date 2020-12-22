@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Friends App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="header">
+        <h1 class="header_title">Friends App</h1>
+        <h2 class="header_description">Created in order to fint out your friends!</h2>
+    </header>
+    <aside class="menu-wrapper">
+        <ul class="menu">
+            <li class="menu_item menu_item-name">
+                Name
+                <div class="menu_item_btns">
+                    <button class="btn name name-alphabetically">A-Z</button>
+                    <button class="btn name name-nonalphabetically">Z-A</button>
+                </div>
+            </li>
+            <li class="menu_item menu_item-age">
+                Age
+                <div class="menu_item_btns">
+                    <button class="btn age_btn">&#8645;</button>
+                </div>
+            </li>
+            <li class="menu_item menu_item-gender">
+                Gender
+                <div class="check-gender">
+                    <input class='checkbox-input man' type="checkbox" name="gender" id="man">
+                    <label class='check-label' for="man">&#9794;</label>
+                    <input class='checkbox-input woman' type="checkbox" name="gender" id="woman">
+                    <label class='check-label' for="woman">&#9792;</label>
+                </div>
+            </li>
+            <li class="menu_item menu_item-city">
+                City
+                <input type="text" name="city" class="menu_item_text-input text-input--city" placeholder="Enter city">
+            </li>
+            <li class="menu_item menu_item-email">
+                Email
+                <input type="text" name="email" class="menu_item_text-input text-input--email"
+                    placeholder="Enter email">
+            </li>
+        </ul>
+    </aside>
+    <main>
+        <div class="result">
+    </main>
+    <script src="index.js"></script>
+</body>
+
+</html>
