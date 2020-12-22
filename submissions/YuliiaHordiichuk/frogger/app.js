@@ -120,7 +120,7 @@ document.addEventListener('keyup', function(e) {
 
 const getEnemyY = (row) => startY - row * stepY; 
 
+const player = new Player(startX, startY); 
+
 const allEnemies = 
     [-150, -300, -50].map((enemyLoc, index) => new Enemy(enemyLoc, getEnemyY(index + 2), player));
-
-const player = new Player(startX, startY); 
