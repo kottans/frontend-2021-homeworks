@@ -1,0 +1,115 @@
+.menu{
+    display: flex;
+    justify-content: flex-end;
+    padding: 14px;
+}
+
+.menu-item{
+    align-self: center;
+    padding-left: 15px;
+}
+
+.menu-button-img{
+    max-width: 24px;
+    max-height: 24px;
+    vertical-align: middle;
+}
+
+.popup{
+    display: none;
+    border: 1px solid #828282;
+    border-radius: 3px;
+    width: 307px;
+    max-height: 410px;
+    top: 70px;
+    right: 20px;
+    position: absolute;
+    overflow-x: hidden;  
+    box-shadow: 0 0 10px rgb(160 160 160 / 50%);
+}
+
+.popup-ul{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;   
+}
+
+.popup-button{
+    display: flex;
+    width: 86px;
+    height: 86px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border: 2px solid transparent;
+    border-radius: 3px;
+}
+
+.popup-button:hover{
+    background-color: aliceblue;
+}
+
+.popup-button:focus{
+    border: 2px solid lightblue;
+}
+
+.popup-button-img{
+    max-width: 70%;
+    max-height: 55px;
+}
+
+.popup-check, .more{
+    display: none;
+}
+
+.popup-check:checked~.popup{ 
+    display: block;
+}
+
+.more-div{
+    text-align: center;
+    padding: 7px;
+    width: 285px;
+}
+
+details summary::-webkit-details-marker { 
+    display: none; 
+}
+
+.more-dtl[open]{
+    border-top: 1px solid #dbdbdb;
+}
+
+.more-dtl[open] .more-btn{
+    display: none;
+}
+
+.more-dtl[open] .more{
+    display: flex;
+}
+
+.more-btn:hover{
+    background-color: #dbdbdb;
+}
+
+.more-btn:focus{
+    outline: none;
+}
+
+.more-btn{
+    width: 100%;
+    border: none;
+    background-color: #f5f5f5;
+    cursor: pointer;
+}
+
+ul{
+    list-style: none;
+    padding: 0;
+}
+
+*{
+    font-family: Sans-Serif;
+    font-size: 14px;
+    text-decoration: none; 
+}
