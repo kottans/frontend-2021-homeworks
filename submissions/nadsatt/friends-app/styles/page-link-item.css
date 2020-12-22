@@ -1,0 +1,38 @@
+.page-link-item {
+    width: 7%;
+}
+
+.corner-page-link-item {
+    width: 14.5%;
+}
+
+.page-link-item,
+.corner-page-link-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3px 5px;
+    font-size: 14px;
+    color: white;
+    border: 1.5px solid var(--gold-color);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.page-link-item:hover,
+.corner-page-link-item:not(.corner-page-link-item--disabled):hover {
+    color: var(--gold-color);
+    border-color: var(--gold-color);
+}
+
+.page-link-item--current {
+    background-color: var(--green-color);
+    color: var(--gold-color);
+    border-color: var(--gold-color);
+}
+
+.corner-page-link-item--disabled {
+    border-color: rgb(156, 156, 156);
+    color: rgb(156, 156, 156);
+    pointer-events: none;
+}

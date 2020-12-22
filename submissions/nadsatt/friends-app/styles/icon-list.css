@@ -1,0 +1,7 @@
+.icon-list {
+    height: 70px;
+    margin-left: -1px;
+    display: flex;
+    position: relative;
+    z-index: 1;
+}

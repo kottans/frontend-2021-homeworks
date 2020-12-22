@@ -1,0 +1,57 @@
+@media screen and (min-width: 800px){
+    body .filter-group-wrapper {
+        width: 35vw;
+    }
+    body .content-wrapper {
+        width: calc(65vw - 45px);
+        margin-left: 15px;
+    }
+    body .page-link-list-wrapper {
+        margin: 0;
+    }
+    body .user-card-list-wrapper {
+        min-height: calc(100vh - 45px - 33px - 60px);
+    }
+}
+
+@media screen and (min-width: 1000px){
+    body .filter-group-wrapper {
+        width: 30vw;
+    }
+    body .content-wrapper {
+        width: calc(70vw - 45px);
+    }
+}
+
+@media screen and (min-width: 1100px){
+    body .filter-group-wrapper {
+        width: 25vw;
+    }
+    body .content-wrapper {
+        width: calc(75vw - 45px);
+    }
+}
+
+@media screen and (min-width: 1110px){
+    body .user-card-list {
+        padding: 10px 9%;
+    }
+}
+
+@media screen and (min-width: 1320px){
+    body .user-card-list {
+        padding: 10px 11%;
+    }
+}
+
+@media screen and (min-width: 1400px){
+    body .user-card-list {
+        padding: 10px 15%;
+    }
+}
+
+@media screen and (min-width: 1550px){
+    body .user-card-list {
+        padding: 10px 20%;
+    }
+}

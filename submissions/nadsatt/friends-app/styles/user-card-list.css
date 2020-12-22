@@ -1,0 +1,16 @@
+.user-card-list {
+    height: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-content: space-evenly;
+    justify-content: space-evenly;
+    padding: 10px 0;
+    border-image: url('./../images/user-card-list-imgs/user-card-list-border.png');
+    border-image-slice: 24;
+    border-image-outset: 0;
+    border-image-repeat: round;
+    border-width: 24px;
+    border-style: solid;
+    border-radius: 0px;
+}
