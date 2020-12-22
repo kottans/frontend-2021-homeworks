@@ -11,6 +11,7 @@ class Program {
     constructor(){
         this.imgService = new ImgService();
         this.initPageElement = document.querySelector('.init-page');
+        this.errorMessage = 'Error occured whilte trying to fetch users. Please reload the page.'
     }
 
     removeInitPage(){
@@ -40,9 +41,9 @@ class Program {
                 this.pageLinkList.performPagination();
                 this.removeInitPage();
             })
-            .catch(message => {
+            .catch(() => {
                 this.initPageElement.lastElementChild.remove();
-                this.initPageElement.firstElementChild.textContent = message
+                this.initPageElement.firstElementChild.textContent = this.errorMessage;
             });
     }
 }

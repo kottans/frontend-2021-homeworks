@@ -22,7 +22,7 @@ export class ApiService {
         else if(retries > 0){
             return this.getUsers(--retries);
         }
-        else throw new Error(`Error occured while trying to get users. Please reload the page`);
+        else throw new Error();
     }
 
     createUsers(...users){
