@@ -12,7 +12,7 @@ class GameSprite {
         this.x = x;
         this.y = y;
     }
-    render = function () {
+    render() {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     };
 }
