@@ -12,7 +12,8 @@ export class Header {
     defineElement(){
         const HTML =
             `<h2 class="header__heading">Friends App</h2>
-             <span class="header__sound-icon">${svgs.play}</span>`;
+             <span class="header__sound-icon">${svgs.play}</span>
+             <span class="header__text">Play audio</span>`;
 
         this.element = document.createElement('header');
         this.element.classList.add('header');

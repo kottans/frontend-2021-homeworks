@@ -41,3 +41,14 @@
     fill: white;
     pointer-events: none;
 }
+
+.header__text {
+    margin-left: 5px;
+    color: white;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.header__text:hover {
+    color: var(--gold-color);
+}
