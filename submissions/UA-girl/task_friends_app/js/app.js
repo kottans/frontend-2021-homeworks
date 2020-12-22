@@ -3,7 +3,7 @@ const CARDS_PER_PAGE = 10;
 const MAX_AGE = 100;
 const BREAK_POINT_WIDTH = 467;
 const filterSet = document.querySelector('.container-filters');
-const pages = document.querySelector('.pages');
+const pagesWrap = document.querySelector('.pages');
 let cards = [];
 
 
@@ -79,6 +79,10 @@ class App {
         };
         this.cards = [];
         this.currentPage = 0;
+        this.rangeAgeLabel = document.querySelector('.label-range');
+        this.rangeAgeInput = document.querySelector('.range');
+        this.searchNameInput = document.querySelector('.search');
+        this.filterInputs = document.querySelectorAll('.radio');
     }
 
     restoreFromFilter() {
@@ -128,7 +132,7 @@ class App {
     }
 
     ageFilter(maxAge) {
-        document.querySelector('.label-range').innerHTML = `Max age: ${maxAge}`;
+        this.rangeAgeLabel.innerHTML = `Max age: ${maxAge}`;
         if (this.filterStates.age < +maxAge) {
             this.filterStates.age = +maxAge;
             this.restoreFromFilter();
@@ -157,10 +161,10 @@ class App {
     }
 
     nameFilter(name) {
-        name = name.trim().toLowerCase();
+        const nameQuery = name.trim().toLowerCase();
         this.restoreFromFilter();
         this.cards = this.cards.filter(person => person.name.first.toLowerCase()
-            .startsWith(name) || person.name.last.toLowerCase().startsWith(name));
+            .startsWith(nameQuery) || person.name.last.toLowerCase().startsWith(nameQuery));
     }
 
     disableEnablePageToggler() {
@@ -187,10 +191,10 @@ class App {
         this.cards = cards.slice();
         this.resetFilterState(true);
         this.resetSortingState();
-        document.querySelector('.label-range').innerHTML = `Max age: ${MAX_AGE}`;
-        document.querySelector('.range').value = MAX_AGE;
-        document.querySelector('.search').value = '';
-        document.querySelectorAll('.radio').forEach(input => input.checked = false)
+        this.rangeAgeLabel.innerHTML = `Max age: ${MAX_AGE}`;
+        this.rangeAgeInput.value = MAX_AGE;
+        this.searchNameInput.value = '';
+        this.filterInputs.forEach(input => input.checked = false)
     }
 
     displayPeople() {
@@ -208,7 +212,7 @@ class App {
         this.disableEnablePageToggler();
     }
 
-    toggleFilters() {
+    setupFilters() {
         const app = this;
         filterSet.addEventListener('input', function (event) {
             const target = event.target.closest('input');
@@ -249,7 +253,7 @@ class App {
 
     togglePages() {
         const app = this;
-        pages.addEventListener('click', function ({target}) {
+        pagesWrap.addEventListener('click', function ({target}) {
             const pageToggler = target.closest('button.button-page');
             if (!pageToggler) {
                 return
@@ -272,7 +276,7 @@ function startApp(peopleData) {
     app.cards = cards.slice();
     removeOverlay();
     app.displayPeople();
-    app.toggleFilters();
+    app.setupFilters();
     app.togglePages();
 }
 
