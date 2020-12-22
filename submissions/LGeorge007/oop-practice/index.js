@@ -1,10 +1,10 @@
 class Inhabitant {
-   constructor(name, species, gender, greeting, friends) {
-       this.species = species;
+   constructor(name, gender, greeting, friends, species) {
        this.name = name;
        this.gender = gender;
        this.greeting = greeting;
        this.friends = friends;
+       this.species = species;
    }
 
    say() {
@@ -18,8 +18,8 @@ class Inhabitant {
 }
 
 class Animal extends Inhabitant {
-   constructor( name, species, gender, greeting, friends) {
-      super( name, species, gender, greeting, friends)
+   constructor(name, gender, greeting, friends, species) {
+      super( name, gender, greeting, friends, species)
       this.paws = 4;
    }
 
@@ -29,8 +29,8 @@ class Animal extends Inhabitant {
 }
 
 class Human extends Inhabitant {
-   constructor(name, species, gender,  greeting, friends) {
-      super(name, species, gender, greeting, friends);
+   constructor(name, gender,  greeting, friends) {
+      super(name, gender, greeting, friends, "human");
       this.legs = 2;
       this.hands = 2;
    }
@@ -41,30 +41,31 @@ class Human extends Inhabitant {
 }
 
 class Dog extends Animal {
-   constructor(name, species, gender, greeting, friends) {
-       super(name, species, gender, greeting, friends)
+   constructor(name, gender, greeting, friends) {
+       super(name, gender, greeting, friends, "dog")
    }
 }
 
 class Cat extends Animal {
-   constructor(name, species, gender, greeting, friends) {
-       super(name, species, gender, greeting, friends);
+   constructor(name, gender, greeting, friends) {
+       super(name, gender, greeting, friends, "cat");
    }
 }
 
 class CatWoman extends Human {
-   constructor(name, species, gender, greeting, friends) {
-       super(name, species, gender, greeting, friends);
+   constructor(name, gender, greeting, friends) {
+       super(name, gender, greeting, friends);
+       this.species = "humicat";
    }
 }
 
 let catVoice = "Meow-meow!";
 
-const inhabitantsList = [ new Human("Boris", "human", "male", "HI!", ["Vladimir", "Innokentiy", "Fedor"]),
-                       new Human("Larisa", "human", "female", "Hello!", ["Diana","Laura","Svetlana"]),
-                       new Dog("Sharikk", "dog", "male", "Woof-woof!", ["Bublik"]),
-                       new Cat("Murzik", "cat", "male",  catVoice, ["Sonya", "Garfild", "Carapka"]),
-                       new CatWoman ("Selina Kyle", "humicat", "female", catVoice, )
+const inhabitantsList = [ new Human("Boris", "male", "HI!", ["Vladimir", "Innokentiy", "Fedor"]),
+                       new Human("Larisa", "female", "Hello!", ["Diana","Laura","Svetlana"]),
+                       new Dog("Sharikk", "male", "Woof-woof!", ["Bublik"]),
+                       new Cat("Murzik", "male",  catVoice, ["Sonya", "Garfild", "Carapka"]),
+                       new CatWoman ("Selina Kyle", "female", catVoice, )
                      ];
 
 inhabitantsList.forEach(unit => print(unit.say()));
