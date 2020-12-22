@@ -48,7 +48,7 @@ class Human extends Creature {
   }
 
   toString() {
-    return [super.toString(), `hands: ${this.hands}`].join('');
+    return [super.toString(), `hands: ${this.hands}`].join('; ');
   }
 }
 
