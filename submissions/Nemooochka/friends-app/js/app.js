@@ -29,7 +29,6 @@ document.addEventListener("DOMContentLoaded", function () {
     new Url().onPopStepUrl();
 
     document.querySelector('.filter-name').addEventListener('keyup', (event) => filter.filterByName(event));
-    document.querySelector('.sort-by_name').addEventListener('click', (event) => filter.sortByName(event));
-    document.querySelector('.sort-by_age').addEventListener('click', (event) => filter.sortByAge(event));
+    document.querySelector('.sorting-field').addEventListener('click', (event) => filter.sortBy(event));
     document.querySelector('.wrap-filter').addEventListener('click', (event) => filter.clickFilterByGender(event));
 });

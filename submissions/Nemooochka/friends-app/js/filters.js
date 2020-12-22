@@ -5,25 +5,24 @@ export class Filters {
         this.users = users;
         this.node = node;
         this.filterByGenderText = 'filterByGender';
+
+        this.activateFilterByGenderIcon = function(filterValue) {
+            document.querySelector(`[filter-gender='${filterValue}']`).checked = true;
+        }
     }
 
     getCardsChildNodesArr() {
-        let cardsChildNodes = this.node.childNodes;
+        const cardsChildNodes = this.node.childNodes;
         return [...cardsChildNodes];
     }
 
-    activateFilterByGenderIcon(filterValue) {
-        document.querySelector(`[filter-gender='${filterValue}']`).checked = true;
-    }
-
     filterByName({target}) {
-        let inputNameValue = target.value.toLowerCase();
+        const inputNameValue = target.value.toLowerCase();
 
         if (inputNameValue.length > 1) {
             this.users.map((elem, index) => {
-                let userName = elem.name.first + ' ' + elem.name.last;
-                userName = userName.toLowerCase();
-                let currentCard = document.querySelector("[card-number='" + index + "']");
+                const userName = `${elem.name.first} ${elem.name.last}`.toLowerCase();
+                const currentCard = document.querySelector("[data-card-number='" + index + "']");
                 if (!userName.includes(inputNameValue)) {
                     currentCard.classList.add('hidden-by-name');
                 } else {
@@ -43,7 +42,7 @@ export class Filters {
             cardsChildNodesArr.map(elem => elem.classList.remove('hidden'));
         } else {
             this.users.map((elem, index) => {
-                let currentCard = document.querySelector("[card-number='" + index + "']");
+                const currentCard = document.querySelector("[data-card-number='" + index + "']");
                 if (elem.gender !== filterValue) {
                     currentCard.classList.add('hidden');
                 } else {
@@ -55,7 +54,7 @@ export class Filters {
 
     clickFilterByGender({target}) {
         if (target.classList.contains('filter-gender')) {
-            let filterValue = target.getAttribute('filter-gender');
+            const filterValue = target.getAttribute('filter-gender');
 
             new Url().updUrl(this.filterByGenderText, filterValue);
 
@@ -63,49 +62,51 @@ export class Filters {
         }
     }
 
-    sortByName({currentTarget}) {
-        let cardsChildNodesArr = this.getCardsChildNodesArr();
+    sortBy({target}) {
+        const sortByToggle = target.parentElement;
+        if (sortByToggle.classList.contains('sort-by')) {
+            const cardsChildNodesArr = this.getCardsChildNodesArr();
+            const sortedByName = sortByToggle.classList.contains('sort-by_name');
+            let sortedArr;
 
-        let sortedArr = cardsChildNodesArr.sort((a, b) => {
-            let first = a.querySelector('.name-first').textContent;
-            let second = b.querySelector('.name-first').textContent;
+            if (sortedByName) {
+                sortedArr = cardsChildNodesArr.sort((a, b) => {
+                    let first = a.querySelector('.name-first').textContent;
+                    let second = b.querySelector('.name-first').textContent;
 
-            if (currentTarget.classList.contains('down')) {
-                if (first < second) return -1;
-                else if (first > second) return 1;
-                return 0;
+                    if (sortByToggle.classList.contains('down')) {
+                        if (first < second) return -1;
+                        else if (first > second) return 1;
+                        return 0;
+                    } else {
+                        if (first > second) return -1;
+                        else if (first < second) return 1;
+                        return 0;
+                    }
+                });
             } else {
-                if (first > second) return -1;
-                else if (first < second) return 1;
-                return 0;
+                sortedArr = cardsChildNodesArr.sort((a, b) => {
+                    let first = a.querySelector('.age').textContent;
+                    let second = b.querySelector('.age').textContent;
+
+                    if (sortByToggle.classList.contains('down')) {
+                        return first - second;
+                    } else {
+                        return second - first;
+                    }
+                });
             }
-        });
 
-        sortedArr.map((elem, index) => elem.style.order = index);
+            sortedArr.map((elem, index) => elem.style.order = index);
 
-        currentTarget.classList.toggle('down');
-        currentTarget.classList.add('active');
-        document.querySelector('.sort-by_age').classList.remove('active');
-    }
+            sortByToggle.classList.toggle('down');
+            sortByToggle.classList.add('active');
 
-    sortByAge({currentTarget}) {
-        let cardsChildNodesArr = this.getCardsChildNodesArr();
-
-        let sortedArr = cardsChildNodesArr.sort((a, b) => {
-            let first = a.querySelector('.age').textContent;
-            let second = b.querySelector('.age').textContent;
-
-            if (currentTarget.classList.contains('down')) {
-                return first - second;
+            if (sortedByName) {
+                document.querySelector('.sort-by_age').classList.remove('active');
             } else {
-                return second - first;
+                document.querySelector('.sort-by_name').classList.remove('active');
             }
-        });
-
-        sortedArr.map((elem, index) => elem.style.order = index);
-
-        currentTarget.classList.toggle('down');
-        currentTarget.classList.add('active');
-        document.querySelector('.sort-by_name').classList.remove('active');
+        }
     }
 }

@@ -14,7 +14,9 @@ export class Cards {
                         <span class="name-first">${name.first}</span>
                         <span class="name-last">${name.last}</span>
                     </div>
-                    <div>${email}</div>
+                    <div>
+                        <a href="mailto: ${email}">${email}</a>
+                    </div>
                 </div>
                 <div class="card-bottom">
                     <div class="card__block">
@@ -41,7 +43,7 @@ export class Cards {
         this.arrayCards.map((elem, index) => {
             const card = document.createElement('div');
             card.classList.add('card');
-            card.setAttribute('card-number', index);
+            card.dataset.cardNumber = index;
             card.innerHTML = this.constructor.generateCard(elem);
             cards.appendChild(card);
         });
