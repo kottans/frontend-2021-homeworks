@@ -17,38 +17,47 @@
     font-family: 'Megrim', cursive;
 }
 
-.header__sound-icon {
-    width: 34px;
-    height: 34px;
+.header__sound-button {
     display: flex;
+    flex-flow: column nowrap;
     justify-content: center;
     align-items: center;
     margin-left: 10px;
+    padding: 3px 5px;
     border: 1px solid var(--gold-color);
     border-radius: 5px;
     background-color: black;
     cursor: pointer;
-    margin-left: 10px;
 }
 
-.header__sound-icon:hover svg {
-    fill: var(--gold-color);
+.header__sound-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .header__sound-icon svg {
     width: 20px;
     height: 20px;
     fill: white;
-    pointer-events: none;
 }
 
 .header__text {
-    margin-left: 5px;
     color: white;
-    cursor: pointer;
-    font-size: 12px;
+    font-size: 10px;
 }
 
-.header__text:hover {
+.header__sound-button:hover .header__text {
     color: var(--gold-color);
+}
+
+.header__sound-button:hover .header__sound-icon svg {
+    fill: var(--gold-color);
+}
+
+.header__text,
+.header__sound-icon,
+.header__sound-icon svg,
+.header__sound-icon svg * {
+    pointer-events: none;
 }

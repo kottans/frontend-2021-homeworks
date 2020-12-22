@@ -5,15 +5,17 @@ export class Header {
         this.defineElement();
         this.insertElement();
 
-        this.defineIconElement();
-        this.defineIconElementClickHandler();
+        this.defineSoundButton();
+        this.defineSoundButtonClickHandler();
     }
 
     defineElement(){
         const HTML =
             `<h2 class="header__heading">Friends App</h2>
-             <span class="header__sound-icon">${svgs.play}</span>
-             <span class="header__text">Play audio</span>`;
+             <div class="header__sound-button">
+                <span class="header__sound-icon">${svgs.play}</span>
+                <span class="header__text">Play audio</span>
+             </div>`;
 
         this.element = document.createElement('header');
         this.element.classList.add('header');
@@ -24,27 +26,31 @@ export class Header {
         document.querySelector('.header-wrapper').append(this.element);
     }
 
-    defineIconElement(){
-        this.iconElement = this.element.querySelector('.header__sound-icon');
+    defineSoundButton(){
+        this.soundButton = this.element.querySelector('.header__sound-button');
 
         const sound = new Audio('sounds/audio.mp3');
         sound.loop = true;
-        this.iconElement.sound = sound;
+        this.soundButton.sound = sound;
     }
 
-    defineIconElementClickHandler(){
-        this.iconElement.onclick = this.handleIconElementClick;
+    defineSoundButtonClickHandler(){
+        this.soundButton.onclick = this.handleSoundButtonClick;
     }
 
-    handleIconElementClick({target}){
-        if(target.firstElementChild.classList.contains('play')){
-            target.textContent = '';
-            target.insertAdjacentHTML(`afterbegin`, svgs.pause);
+    handleSoundButtonClick({target}){
+        const soundIcon = target.querySelector('.header__sound-icon');
+        
+        if(soundIcon.querySelector('svg').classList.contains('play')){
+            soundIcon.textContent = '';
+            soundIcon.insertAdjacentHTML(`afterbegin`, svgs.pause);
+
             target.sound.play();
         }
-        else if(target.firstElementChild.classList.contains('pause')){
-            target.textContent = '';
-            target.insertAdjacentHTML(`afterbegin`, svgs.play);
+        else if(soundIcon.querySelector('svg').classList.contains('pause')){
+            soundIcon.textContent = '';
+            soundIcon.insertAdjacentHTML(`afterbegin`, svgs.play);
+
             target.sound.pause();
         }
     }
