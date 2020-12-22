@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=Ho, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hooly-style Popup</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">    </head>
@@ -17,14 +17,14 @@
             <a href="#" class="nav-text-item">Images</a>
           </li>
 
-          <li class="nav-img-item" tabindex="0">
-            <input type="checkbox" id="hoogle-menu" class="hide-checkbox" tabindex="2">
-            <label for="hoogle-menu"> 
-              <img class="menu-img" src="navigation-icons/apps.jpg" alt="">
+          <li>
+            <input type="checkbox" id="hoogle-menu" class="hide-checkbox">
+            <label for="hoogle-menu">
+              <img class="menu-img nav-img-item" src="navigation-icons/apps.jpg" alt="">
             </label>
             <div class="popup-wrapper">
               <div class="popup">
-                
+
                 <ul class="popup-list">
                   <li>
                     <a href="#" class="popup-item">
@@ -99,11 +99,11 @@
                     </a>
                   </li>
                 </ul>
-                
-                <input type="checkbox" id="more-button" class="hide-checkbox more" tabindex="1">
-                <label for="more-button" class="more-bt-label" tabindex="0"><span class="more-bt-text">More</span></label>
 
-                <hr class="popup-divider">
+                <input type="checkbox" id="more-button" class="hide-checkbox more" >
+                <label for="more-button" class="more-bt-label" ><span class="more-bt-text">More</span></label>
+
+                <div class="popup-divider"></div>
 
                 <ul class="popup-list add-popup">
                   <li>
@@ -143,21 +143,21 @@
                     </a>
                   </li>
 
-                  <li>
-                    <a class="popup-bottom" href="#">Even more from Kottans</a>
+                  <li class="popup-bottom">
+                    <a href="#" class="a">Even more from Kottans</a>
                   </li>
                 </ul>
               </div>
             </div>
           </li>
 
-          <li class="nav-img-item bell-item" tabindex="0">
-            <a href="#" tabindex="-1" class="a">
+          <li>
+            <a href="#" class="a nav-img-item bell-item">
               <img class="bell-img" src="navigation-icons/bell.png" alt="">
             </a>
           </li>
-          <li class="nav-img-item" tabindex="0">
-            <a href="#" tabindex="-1" class="a">
+          <li>
+            <a href="#" class="a nav-img-item">
               <img class="menu-img round-img" src="navigation-icons/user.jpg" alt="">
             </a>
           </li>
