@@ -63,14 +63,16 @@ export class Filters {
     }
 
     sortBy({target}) {
-        const sortByToggle = target.parentElement;
+        const sortByToggle = target.closest('.sort-by');
         if (sortByToggle.classList.contains('sort-by')) {
             const cardsChildNodesArr = this.getCardsChildNodesArr();
             const sortedByName = sortByToggle.classList.contains('sort-by_name');
+            const elemSortByAge = document.querySelector('.sort-by_age');
+            const elemSortByName = document.querySelector('.sort-by_name');
             let sortedArr;
 
-            if (sortedByName) {
-                sortedArr = cardsChildNodesArr.sort((a, b) => {
+            sortedArr = cardsChildNodesArr.sort((a, b) => {
+                if (sortedByName) {
                     let first = a.querySelector('.name-first').textContent;
                     let second = b.querySelector('.name-first').textContent;
 
@@ -83,9 +85,7 @@ export class Filters {
                         else if (first < second) return 1;
                         return 0;
                     }
-                });
-            } else {
-                sortedArr = cardsChildNodesArr.sort((a, b) => {
+                } else {
                     let first = a.querySelector('.age').textContent;
                     let second = b.querySelector('.age').textContent;
 
@@ -94,8 +94,8 @@ export class Filters {
                     } else {
                         return second - first;
                     }
-                });
-            }
+                }
+            });
 
             sortedArr.map((elem, index) => elem.style.order = index);
 
@@ -103,9 +103,9 @@ export class Filters {
             sortByToggle.classList.add('active');
 
             if (sortedByName) {
-                document.querySelector('.sort-by_age').classList.remove('active');
+                elemSortByAge.classList.remove('active');
             } else {
-                document.querySelector('.sort-by_name').classList.remove('active');
+                elemSortByName.classList.remove('active');
             }
         }
     }
