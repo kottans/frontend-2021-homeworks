@@ -49,13 +49,13 @@ Enemy.prototype.getSpeed = function(min, max) {
 };
 
 Enemy.prototype.update = function(dt) {
-    
+
     this.x += this.speed * dt;
 
-    //x>510 means that Enemy left the field 
+    //x>510 means that Enemy left the field
     //folowing x=-100 for Enemy was hidden in its appearing point.
     if (this.x > enemyBordersX.end) {
-        this.x = enemyBordersX.start; 
+        this.x = enemyBordersX.start;
         this.getSpeed(minSpeed, maxSpeed);
     };
 
@@ -93,7 +93,7 @@ Player.prototype.setStartPosition = function() {
 };
 
 Player.prototype.handleInput = function(keyPressed, stepX, stepY) {
- 
+
     if (keyPressed == "left" && (this.x-stepX) > playerBorders.x.start) {
         this.x -= stepX;
     };
@@ -114,7 +114,7 @@ Player.prototype.handleInput = function(keyPressed, stepX, stepY) {
 };
 
 const player = new Player(xStartPositionPlayer, yStartPositionPlayer);
-const allEnemies = [new Enemy(0,280,25,player), new Enemy(0,200,25,player), new Enemy(0,130,25,player)];
+const allEnemies = [225,145,60].map(yAxis => new Enemy(0, yAxis, minSpeed, player));
 
 document.addEventListener('keyup', function(e) {
     var allowedKeys = {
