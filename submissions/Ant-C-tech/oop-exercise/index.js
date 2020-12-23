@@ -29,22 +29,24 @@ class Inhabitant {
 };
 
 class Animal extends Inhabitant {
-    constructor(gender, name, friends) {
+    constructor(gender, legs, name, friends) {
         super(name, friends);
         this.gender = gender;
+        this.legs = legs;
     };
 
     getVoice() {
         return [
+            `I have ${this.legs} legs`,
+            `My gender is ${this.gender}`,
             super.getVoice(),
-            `My gender is ${ this.gender }`
         ].join('. ');
     };
 }
 
 class Dog extends Animal {
-    constructor(gender, name, friends) {
-        super(gender, name, friends);
+    constructor(gender, legs, name, friends) {
+        super(gender, legs, name, friends);
         this.species = 'dog';
         this.saying = 'Woof-Woof!';
         this.legs = 4;
@@ -53,15 +55,14 @@ class Dog extends Animal {
     getVoice() {
         return [`I am a ${this.species}`,
             super.getVoice(),
-            `I have ${this.legs} legs`,
             `I want to say you: "${this.saying}".`
         ].join('. ');
     };
 }
 
 class Cat extends Animal {
-    constructor(gender, name, friends) {
-        super(gender, name, friends);
+    constructor(gender, legs, name, friends) {
+        super(gender, legs, name, friends);
         this.species = 'cat';
         this.saying = 'Meow-Meow!';
         this.legs = 4;
@@ -70,15 +71,14 @@ class Cat extends Animal {
     getVoice() {
         return [`I am a ${this.species}`,
             super.getVoice(),
-            `I have ${this.legs} legs`,
             `I want to say you: "${this.saying}".`
         ].join('. ');
     };
 }
 
 class Human extends Animal {
-    constructor(saying, gender, name, friends) {
-        super(gender, name, friends);
+    constructor(saying, gender, legs, name, friends) {
+        super(gender, legs, name, friends);
         this.saying = saying;
         this.species = 'human';
         this.hands = 2;
@@ -88,8 +88,8 @@ class Human extends Animal {
     getVoice() {
         return [
             `I am a ${this.species}`,
+            `I have ${this.hands} hands`,
             super.getVoice(),
-            `I have ${this.legs} legs and ${this.hands} hands`,
             `I want to say you: "${this.saying}".`
         ].join('. ');
     };
