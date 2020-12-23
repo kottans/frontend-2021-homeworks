@@ -54,6 +54,7 @@ const getButtons = () => {
 const insertNav = () => {
     const ul = document.querySelector('.nav__list'); 
     ul.innerHTML = getButtons().join('');
+    document.querySelector('.nav__btn').classList.add('active'); 
 };
 
 
@@ -81,22 +82,6 @@ const insertData = (title) => {
     `; 
 }
 
-const removeActiveClasses = () => {
-    document
-       .querySelectorAll('.nav__btn')
-       .forEach(btn => {
-            btn.classList.remove('active');
-       });
-}
-
-const addActiveClass = (button) => {
-    button.classList.add('active');
-}
-
-const closeMenu = (menu) => {
-    menu.classList.remove('mobile');
-}
-
 insertNav(); 
 insertData(data[0].title);
 
@@ -108,10 +93,9 @@ navElement
             const catTitle = button.textContent;
 
             insertData(catTitle);
-            closeMenu(menu);
-
-            removeActiveClasses();
-            addActiveClass(button);
+            menu.classList.remove('mobile');
+            document.querySelector('.nav__btn.active').classList.remove('active');    
+            button.classList.add('active');
         }
     });
 
