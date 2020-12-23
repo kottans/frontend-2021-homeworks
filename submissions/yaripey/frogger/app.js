@@ -106,19 +106,19 @@ document.addEventListener('keyup', function (e) {
 });
 
 const checkCollisions = () => {
-    if (player.y < 0 ||
-        allEnemies.some(enemy => {
-            if (
-                Math.abs(Math.abs(enemy.x) - Math.abs(player.x)) < 60
-                && Math.abs(Math.abs(enemy.y) - Math.abs(player.y)) < 60
-            ) {
-                console.log('player', player.x, player.y, 'enemy', enemy.x, enemy.y)
-                return true;
-            }
-        })
-    ) {
-        console.log
+    if (player.y < 0) {
+        alert('You\'ve made it to the water! Congratulations!')
         player.resetPosition()
-        console.log('reseted')
+    }
+    if (allEnemies.some(enemy => {
+        if (
+            Math.abs(Math.abs(enemy.x) - Math.abs(player.x)) < 60
+            && Math.abs(Math.abs(enemy.y) - Math.abs(player.y)) < 60
+        ) {
+            return true;
+        }
+    })) {
+        alert('You\'ve been struck by a bug! (What an irony)')
+        player.resetPosition()
     }
 }
