@@ -42,6 +42,8 @@ const inhabitants = [
   }
 ]
 
+const properties = ['species', 'name', 'legs', 'hands', 'gender', 'message']
+
 // ======== OUTPUT ========
 /* Use print(message) for output.
    Default tag for message is <pre>. Use print(message,'div') to change containing element tag.
@@ -62,5 +64,5 @@ const inhabitants = [
    */
 
 inhabitants.forEach(elem => {
-  print(Object.keys(elem).map(property => elem[property]).join('; '))
+  print(properties.map(prop => elem[prop]).join('; '))
 })
