@@ -199,6 +199,12 @@ body {
     border-radius: 7px;
 }
 
+.game-card__front,
+.game-card__back,
+.game-card__img {
+    pointer-events: none;
+}
+
 .first-game-card--abs-positioned,
 .second-game-card--abs-positioned {
     position: absolute;

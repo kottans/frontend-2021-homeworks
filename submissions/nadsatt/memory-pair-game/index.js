@@ -149,9 +149,9 @@ const renderFailsNumber = function(failsNumber){
     failsNumberSpan.textContent = failsNumber;
 };
 
-const handleGameCardsGroupClick = function({target: {parentElement: {parentElement: el}}}){
-    if(el.classList.contains('game-card') && !twoGameCardsOpened()){
-        const card = el;
+const handleGameCardsGroupClick = function({target}){
+    if(target.classList.contains('game-card') && !twoGameCardsOpened()){
+        const card = target;
 
         if(!firstGameCard){
             openGameCard(card);
