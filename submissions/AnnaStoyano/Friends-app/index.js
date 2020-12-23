@@ -6,8 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
     fetch(URL_FOR_SEARCH)
         .then(resolve => resolve.json())
         .then(data => {
-            const users = data.results;
-            const friendsApp = new FriendsApp(users);
+            const friendsApp = new FriendsApp(data.results);
             friendsApp.start();
         });
 });
@@ -17,7 +16,7 @@ class FriendsApp {
         this.resultsWrapper = document.querySelector('.result');
         this.cards = users.map(item => new UserCard(item));
         this.dipslayCards = this.cards;
-        this.prevDisplay = this.dipslayCards;
+        this.previouseDisplay = this.dipslayCards;
         this.filterByName();
         this.filterByAge();
         this.filterByGender();
@@ -31,146 +30,121 @@ class FriendsApp {
 
     render() {
         this.resultsWrapper.innerHTML = '';
-        this.dipslayCards.forEach(card => this.resultsWrapper.insertAdjacentElement('afterbegin', card.card));
+        this.dipslayCards.forEach(({card}) => this.resultsWrapper.insertAdjacentElement('afterbegin', card));
     }
 
     filterByName() {
-        this.filterByNameAlphabetically();
-        this.filterByNameNonAlphabetically();
+        this.filterByNameAlphabet();
+        this.filterByNameNonAlphabet();
     }
 
-    filterByNameAlphabetically() {
-        const app = this;
-        const nameAlphabeticallyBtn = document.querySelector('.name-alphabetically');
-        nameAlphabeticallyBtn.addEventListener('click', function () {
-            app.dipslayCards = app.dipslayCards.sort((a, b) => a.name > b.name ? -1 : 1);
-            app.render();
+    filterByNameAlphabet() {
+        const alphabetBtn = document.querySelector('.name-alphabetically');
+        alphabetBtn.addEventListener('click', () => {
+            this.dipslayCards = this.dipslayCards.sort((a, b) => a.name > b.name ? -1 : 1);
+            this.render();
         });
     }
 
-    filterByNameNonAlphabetically() {
-        const app = this;
-        const nameNonAlphabeticallyBtn = document.querySelector('.name-nonalphabetically');
-        nameNonAlphabeticallyBtn.addEventListener('click', function () {
-            app.dipslayCards = app.dipslayCards.sort((a, b) => a.name > b.name ? 1 : -1);
-            app.render();
+    filterByNameNonAlphabet() {
+        const nonAlphabetBtn = document.querySelector('.name-nonalphabetically');
+        nonAlphabetBtn.addEventListener('click', () => {
+            this.dipslayCards = this.dipslayCards.sort((a, b) => a.name > b.name ? 1 : -1);
+            this.render();
         });
     }
 
     filterByAge() {
-        const app = this;
         const ageBtn = document.querySelector('.age_btn');
-        ageBtn.addEventListener('click', function () {
-            if (!ageBtn.classList.contains('LowToHigh')) {
-                app.dipslayCards = app.dipslayCards.sort((a, b) => a.age > b.age ? -1 : 1);
-                ageBtn.classList.add('LowToHigh');
+        ageBtn.addEventListener('click', () => {
+            if (!ageBtn.classList.contains('LowToHigh')) { // if button is clicked show from low to high
+                this.dipslayCards = this.dipslayCards.sort((a, b) => a.age > b.age ? -1 : 1);
+                ageBtn.classList.add('LowToHigh'); // adding class helps to find out clicking on button
             } else {
-                app.dipslayCards = app.dipslayCards.sort((a, b) => a.age > b.age ? 1 : -1);
+                this.dipslayCards = this.dipslayCards.sort((a, b) => a.age > b.age ? 1 : -1); // if button isn't clicked show from high to low
                 ageBtn.classList.remove('LowToHigh');
             }
-            app.render();
+            this.render();
         });
     }
 
     filterByGender() {
-        const app = this;
-        const manCheckbox = document.querySelector('.checkbox-input.man');
-        const womanCheckbox = document.querySelector('.checkbox-input.woman');
+        const manRadio = document.querySelector('.radio-input.man');
+        const womanRadio = document.querySelector('.radio-input.woman');
+        const allRadio = document.querySelector('.radio-input.all');
         const genderWrapper = document.querySelector('.menu_item-gender');
-        genderWrapper.addEventListener('click', function () {
-            if (womanCheckbox.checked && manCheckbox.checked) {
-                app.dipslayCards = app.cards;
+        genderWrapper.addEventListener('click', () => {
+            if (womanRadio.checked) {
+                this.dipslayCards = this.dipslayCards.filter(card => card.user.gender == 'female');
             }
-            if (manCheckbox.checked && !womanCheckbox.checked) {
-                app.dipslayCards = app.dipslayCards.filter(card => card.user.gender == 'male');
+            if (manRadio.checked) {
+                this.dipslayCards = this.dipslayCards.filter(card => card.user.gender == 'male');
             }
-            if (womanCheckbox.checked && !manCheckbox.checked) {
-                app.dipslayCards = app.dipslayCards.filter(card => card.user.gender == 'female');
+            if (allRadio.checked) {
+                this.dipslayCards = this.cards;
             }
-            if (!womanCheckbox.checked && !manCheckbox.checked) {
-                app.dipslayCards = app.cards;
-            }
-            app.render();
+            this.render();
         });
     }
 
     filterByCity() {
-        const app = this;
         const cityInput = document.querySelector('.text-input--city');
         const cityWrapper = document.querySelector('.menu_item-city');
-        cityWrapper.addEventListener('click', function () {
-            app.prevDisplay = app.dipslayCards;
+        cityWrapper.addEventListener('click', () => {
+            this.previouseDisplay = this.dipslayCards;
         });
-        cityInput.addEventListener('input', function ({target}) {
-            app.dipslayCards = app.dipslayCards.filter(card => card.user['location']['city'].includes(target.value));
-            if (app.dipslayCards.length == 0 || target.value == '') {
-                app.dipslayCards = app.prevDisplay;
+        cityInput.addEventListener('input', ({target}) => {
+            this.dipslayCards = this.dipslayCards.filter(card => card.user.location.city.startsWith(target.value));
+            if (this.dipslayCards.length == 0 || target.value == '') {
+                this.dipslayCards = this.previouseDisplay;
             }
-            app.render();
+            this.render();
         });
     }
 
     filterByEmail() {
-        const app = this;
         const emailInput = document.querySelector('.text-input--email');
         const emailWrapper = document.querySelector('.menu_item-email');
-        emailWrapper.addEventListener('click', function () {
-            app.prevDisplay = app.dipslayCards;
+        emailWrapper.addEventListener('click', () => {
+            this.previouseDisplay = this.dipslayCards;
         });
-        emailInput.addEventListener('input', function ({target}) {
-            app.dipslayCards = app.dipslayCards.filter(card => card.user.email.includes(target.value));
-            if (app.dipslayCards.length == 0 || target.value == '') {
-                app.dipslayCards = app.prevDisplay;
+        emailInput.addEventListener('input', ({target}) => {
+            this.dipslayCards = this.dipslayCards.filter(card => card.user.email.includes(target.value));
+            if (this.dipslayCards.length == 0 || target.value == '') {
+                this.dipslayCards = this.previouseDisplay;
             }
-            app.render();
+            this.render();
         });
     }
 }
 
 class UserCard {
-    constructor(data) {
+    constructor(userInfo) {
         this.card = this.createUserCard();
-        this.name = `${data.name.first} ${data.name.last}`;
-        this.age = `${data['dob'].age} years old`;
-        this.city = data['location'].city.capitalizeFirstLetter();
-        this.email = data.email;
-        this.user = data;
-        this.fillUserCard(data);
+        this.name = `${userInfo.name.first} ${userInfo.name.last}`;
+        this.age = `${userInfo['dob'].age} years old`;
+        this.city = userInfo['location'].city;
+        this.email = userInfo.email;
+        this.user = userInfo;
+        this.fillUserCard(userInfo);
     }
 
     createUserCard() {
         const card = document.createElement('div');
         card.classList.add('card');
-        const picture = document.createElement('picture');
-        picture.classList.add('user-photo');
-        const imgBig = document.createElement('source');
-        imgBig.media = "(min-width: 600px)";
-        imgBig.classList.add('big-user-img');
-        imgBig.classList.add('user-img');
-        const imgMed = document.createElement('img');
-        imgMed.classList.add('med-user-img');
-        imgMed.classList.add('user-img');
-        const name = document.createElement('h3');
-        name.classList.add("name");
-        const age = document.createElement('span');
-        age.classList.add("age");
-        const city = document.createElement('span');
-        city.classList.add("city");
-        const email = document.createElement('span');
-        email.classList.add("email");
-
-        picture.insertAdjacentElement('afterbegin', imgBig);
-        picture.insertAdjacentElement('beforeend', imgMed);
-        card.insertAdjacentElement('afterbegin', picture);
-        card.insertAdjacentElement('beforeend', name);
-        card.insertAdjacentElement('beforeend', age);
-        card.insertAdjacentElement('beforeend', city);
-        card.insertAdjacentElement('beforeend', email);
-
+        card.innerHTML =
+            "<picture class='user-photo'>" +
+            "<source  class='big-user-img user-img' media='(min-width: 600px)'>" +
+            "<img class='med-user-img user-img'>" +
+            "</picture>" +
+            "<h3 class='name'></h3>" +
+            "<span class='age'></span>" +
+            "<span class='city'></span>" +
+            "<span class='email'></span>";
         return card;
     }
 
-    fillUserCard(data) {
+    fillUserCard(userInfo) {
         const name = this.card.querySelector('.name');
         const age = this.card.querySelector('.age');
         const city = this.card.querySelector('.city');
@@ -180,15 +154,10 @@ class UserCard {
 
         name.innerHTML = this.name;
         age.innerHTML = this.age;
-        city.innerHTML = this.city.capitalizeFirstLetter();
+        city.innerHTML = this.city;
         email.innerHTML = this.email;
-        bigImg.srcset = data.picture.large;
-        medImg.src = data.picture.medium;
+        bigImg.srcset = userInfo.picture.large;
+        medImg.src = userInfo.picture.medium;
 
     }
-
-}
-
-String.prototype.capitalizeFirstLetter = function () {
-    return this.charAt(0).toUpperCase() + this.slice(1);
 }

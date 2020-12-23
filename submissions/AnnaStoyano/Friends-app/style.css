@@ -104,7 +104,7 @@ a {
     margin: -2px;
 }
 
-.checkbox-input:checked+.check-label {
+.radio-input:checked+.check-label {
     border-radius: 5px;
     background-color: #689864;
     color: white;
@@ -159,6 +159,7 @@ a {
     border-radius: 10px;
     padding: 10px;
     transition: 0.3s;
+    font-size: 16px;
 }
 
 .card:hover {
@@ -168,6 +169,14 @@ a {
 .email {
     border-top: 1px solid #405E00;
     padding: 10px;
+}
+
+.city {
+    text-transform: capitalize;
+}
+
+.age {
+    margin: 5px auto;
 }
 
 .user-img {
@@ -191,12 +200,17 @@ a {
     }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 520px) {
     .menu {
-        max-width: 300px;
+        max-width: 450px;
     }
 
     .menu_item {
-        width: 38%;
+        width: 33%;
+    }
+
+    .menu_item.menu_item-city,
+    .menu_item.menu_item-email {
+        width: 40%;
     }
 }
