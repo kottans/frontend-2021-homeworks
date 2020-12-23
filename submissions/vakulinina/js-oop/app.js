@@ -36,9 +36,10 @@ Enemy.prototype.render = function () {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-const Player = function (x, y) {
+const Player = function (x, y, enemies) {
     this.x = x;
     this.y = y;
+    this.enemies = enemies;
     this.sprite = 'images/char-princess-girl.png';
 };
 
@@ -47,7 +48,7 @@ Player.prototype.update = function () {
 };
 
 Player.prototype.checkCollisions = function () {
-    allEnemies.forEach(enemy => {
+    this.enemies.forEach(enemy => {
         if (this.y === enemy.y && this.x >= (enemy.x - enemySize * 0.7) && this.x <= enemy.x + enemySize) {
             this.x = playerStartX;
             this.y = playerStartY;
@@ -84,14 +85,14 @@ Player.prototype.handleInput = function (key) {
     }
 };
 
-let player = new Player(playerStartX, playerStartY);
-
 const allEnemies = [];
 for (let i = 1; i <= numberOfEnemies; i++) {
     let enemyStartY = fieldTopPadding + (i % 3) * stepY;
     let enemy = new Enemy(enemyStartY, getRandomIntInclusive(enemyMinSpeed, enemyMaxSpeed));
     allEnemies.push(enemy);
 }
+
+let player = new Player(playerStartX, playerStartY, allEnemies);
 
 function getRandomIntInclusive(min, max) {
     min = Math.ceil(min);
