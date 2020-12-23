@@ -1,0 +1,130 @@
+body {
+    background: url(../img/wallpapers.jpg) no-repeat center center fixed;
+    background-size: cover;
+    min-width: 1000px;
+    min-height: 800px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.game {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 80vw;
+    min-width: 850px;
+    height: 80vh;
+    min-height: 700px;
+    background-color: rgba(2, 2, 2, 0.315);
+    transition: 1s 0.5s;
+
+    &__card-place {
+        position: relative;
+        width: 90%;
+        min-width: 600px;
+        height: 90%;
+        min-height: 600px;
+        transition: 1s 0.5s;
+
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        justify-items: center;
+        align-items:center;
+        align-content: space-between;
+        justify-content: space-between;
+    }
+
+    &__card-holder {
+        perspective: 1000px;
+        background-color: rgba(0, 0, 0, 0.027);
+        width: 10vw;
+        height: 14vw;
+        min-width: 145px;
+        min-height: 200px;
+
+        &.active .game__card {
+            transform: rotateY(180deg);
+        }
+    }
+
+    &__card {
+        visibility: inherit;
+        transition: 0.6s;
+        transform-style: preserve-3d;
+        position: relative;
+        width: 10vw;
+        height: 14vw;
+        min-width: 145px;
+        min-height: 200px;
+    }
+}
+
+.audio {
+    &__play {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        z-index: 5;
+        right: 15px;
+        top: 15px;
+        background-image: url("https://api.iconify.design/uil:volume-mute.svg?color=rgba(2%2C2%2C2%2C0.615)");
+        background-repeat: no-repeat;
+        background-size: 50px;
+    }
+
+    &__pause {
+        background-image: url("https://api.iconify.design/uil:volume.svg?color=rgba(2%2C2%2C2%2C0.615)");
+    }
+}
+
+.cards__front,
+.cards__back {
+    width: 10vw;
+    height: 14vw;
+    min-width: 145px;
+    min-height: 200px;
+    backface-visibility: hidden;
+    position: absolute;
+    visibility: inherit;
+    top: 0;
+    left: 0;
+}
+
+.cards__front {
+    border: 2px solid black;
+    z-index: 2;
+    transform: rotateY(180deg);
+    border-radius: 5px;
+}
+
+.cards__back {
+    transform: rotateY(0deg);
+}
+
+.card__back,
+.card__front {
+    visibility: inherit;
+    width: 10vw;
+    height: 14vw;
+    min-width: 145px;
+    min-height: 200px;
+    border-radius: 5px;
+}
+
+.hide {
+    visibility: hidden;
+}
