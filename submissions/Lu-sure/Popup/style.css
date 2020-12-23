@@ -34,7 +34,6 @@ body {
   padding: 3px;
 }
 
-
 .nav-img-item, .menu-img {
   display: block;
   height: 32px;
@@ -46,10 +45,6 @@ body {
   border: 2px solid transparent;
   border-radius: 8%;
   padding: 2px;
-}
-
-.a {
-  outline: none;
 }
 
 .bell-item {
@@ -178,16 +173,12 @@ body {
   padding-left: 165px;
 }
 
-.popup-divider {
-  display: none;
-  width: 100%;
-  border-top: solid 2px #dcdcdc;
-  height: 3px;
-  margin: 30px 10px;
-}
-
 .add-popup {
   display: none;
+  width: 100%;
+  border-top: solid 1.5px #dcdcdc;
+  margin-top: 20px;
+  padding-top: 15px;
 }
 
 .more:checked ~ .add-popup {
