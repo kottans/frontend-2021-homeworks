@@ -48,7 +48,8 @@ body {
   visibility: hidden;
 }
 
-.card:hover {
+.card:hover,
+.new-game-button:hover {
   cursor: pointer;
 }
 
