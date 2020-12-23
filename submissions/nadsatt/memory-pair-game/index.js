@@ -152,7 +152,7 @@ const renderFailsNumber = function(failsNumber){
 };
 
 const handleGameCardsGroupClick = function({target}){
-    if(target.classList.contains('game-card') && !twoGameCardsOpened()){
+    if(target.classList.contains('game-card') && !checkIfMaxGameCardsNumberOpened()){
         const card = target;
 
         if(!firstGameCard){
@@ -167,7 +167,7 @@ const handleGameCardsGroupClick = function({target}){
     }
 };
 
-const twoGameCardsOpened = function(){
+const checkIfMaxGameCardsNumberOpened = function(){
     return openedGameCardsNumber === maxOpenedGameCardsNumber;
 };
 
@@ -177,7 +177,7 @@ const openGameCard = function(card){
 };
 
 const handleOpeningSecondGameCard = function(){
-    if(!sameGameCardsOpened()){
+    if(!checkIfSameCardsOpened()){
         handleOpeningDiffGameCards();
     }
     else {
@@ -185,7 +185,7 @@ const handleOpeningSecondGameCard = function(){
     }
 };
 
-const sameGameCardsOpened = function(){
+const checkIfSameCardsOpened = function(){
     return secondGameCard.dataset.backImgId === firstGameCard.dataset.backImgId;
 };
 
