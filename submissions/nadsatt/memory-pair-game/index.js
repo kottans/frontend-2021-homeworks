@@ -166,7 +166,7 @@ const handleGameCardsGroupClick = function({target}){
 };
 
 const twoGameCardsOpened = function(){
-    return openedGameCardsNumber === 2;
+    return openedGameCardsNumber === maxOpenedGameCardsNumber;
 };
 
 const openGameCard = function(card){
