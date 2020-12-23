@@ -1,0 +1,83 @@
+@media (max-width: 900px) {
+
+  .warning-main-text, .greetings-main-text, .congratulations-main-text {
+    font-size: 15px;
+    margin-bottom: 20px;
+  }
+
+  .warning-close-button, .greetings-close-button {
+    font-size: 15px;
+  }
+
+  .warning-background, .greetings-background, .congratulations-background {
+    width: 70%;
+    overflow: auto;
+  }
+  
+  .greetings-paimon, .congratulations-paimon {
+    height: 300px;
+  }
+
+  .greetings-paimon {
+    left: -80px;
+  }
+}
+
+@media(max-width: 500px) {
+  .greetings-paimon, .congratulations-paimon {
+    position: relative;
+    top: 0;
+    left: 0;
+    margin: auto;
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  .warning-background, .greetings-background, .congratulations-background {
+    height: 80%;
+  }
+
+  .greetings-main-text, .congratulations-main-text {
+    margin: 0;
+  }
+
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .game {
+    display: flex;
+    height: 400px;
+    width: 400px;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .element {
+    width: 70px;
+    height: 70px;
+    margin: 10px;
+    padding: 0px;
+  }
+
+  .element img {
+    width: 50px;
+    height: 50px;
+    margin: 10px;
+  }
+
+  .flip-container, .front, .back {
+    width: 70px;
+    height: 70px;
+  }
+
+  .game-block {
+    max-height: 400px;
+  }
+
+  .greetings-close-button {
+    margin-top: 20px;
+  }
+}

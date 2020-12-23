@@ -33,7 +33,7 @@
   transition: 0.3s ease;
 }
 
-.greetings-paimon, .congratulations-paimon, .congratulations-paimon {
+.greetings-paimon, .congratulations-paimon {
   height: 500px;
   width: auto;
   position: absolute;

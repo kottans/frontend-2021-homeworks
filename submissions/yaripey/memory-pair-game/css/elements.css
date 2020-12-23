@@ -23,7 +23,7 @@
   height: 100px;
 }
 
-html {
+body {
   background: url(../images/background.jpg) center no-repeat;
   background-size: cover;
 }

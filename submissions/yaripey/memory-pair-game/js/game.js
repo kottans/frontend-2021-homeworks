@@ -15,7 +15,7 @@ const Game = function () {
   this.currentScene = -1;
 
   this.mainContainer = document.querySelector('.container')
-
+  this.stop = false;
   this.musicMuted = false;
 }
 
@@ -48,6 +48,7 @@ Game.prototype.startGame = function (scenesArray) {
   mainGame.container.appendChild(mainGame.mainBlock)
 
   this.mainContainer.addEventListener('click', ({ target }) => {
+    if (this.stop) { return }
     if (!(target.classList.contains('game') || target.classList.contains('game-block'))) {
       target = selectProperTarget(target)
       if (target) {
@@ -138,6 +139,7 @@ Game.prototype.nextScene = function () {
 Game.prototype.checkWin = function () {
   if (!this.elements.some(elem => elem.present)) {
     this.nextScene()
+    this.stop = true
   }
 }
 
