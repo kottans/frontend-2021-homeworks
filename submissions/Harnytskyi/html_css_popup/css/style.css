@@ -1,21 +1,21 @@
-.menu{
+.menu {
     display: flex;
     justify-content: flex-end;
     padding: 14px;
 }
 
-.menu-item{
+.menu-item {
     align-self: center;
     padding-left: 15px;
 }
 
-.menu-button-img{
+.menu-button-img {
     max-width: 24px;
     max-height: 24px;
     vertical-align: middle;
 }
 
-.popup{
+.popup {
     display: none;
     border: 1px solid #828282;
     border-radius: 3px;
@@ -24,17 +24,17 @@
     top: 70px;
     right: 20px;
     position: absolute;
-    overflow-x: hidden;  
+    overflow-x: hidden;
     box-shadow: 0 0 10px rgb(160 160 160 / 50%);
 }
 
-.popup-ul{
+.popup-ul {
     display: flex;
     flex-wrap: wrap;
-    padding: 10px;   
+    padding: 10px;
 }
 
-.popup-button{
+.popup-button {
     display: flex;
     width: 86px;
     height: 86px;
@@ -45,71 +45,94 @@
     border-radius: 3px;
 }
 
-.popup-button:hover{
+.popup-button:hover {
     background-color: aliceblue;
 }
 
-.popup-button:focus{
-    border: 2px solid lightblue;
+.popup-button:focus {
+    border-color: lightblue;
 }
 
-.popup-button-img{
+.popup-button-img {
     max-width: 70%;
     max-height: 55px;
 }
 
-.popup-check, .more{
+.button-bell {
+    width: 18px;
+}
+
+.button-profile {
+    max-width: 32px;
+    max-height: 32px;
+}
+
+.popup-check {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    opacity: 0;
+}
+
+.more {
     display: none;
 }
 
-.popup-check:checked~.popup{ 
+.popup-check:checked~.popup {
     display: block;
 }
 
-.more-div{
+input:focus~label {
+    outline-style: auto;
+    outline-color: lightblue;
+}
+
+.more-div {
+    display: block;
     text-align: center;
-    padding: 7px;
+    padding: 7px 0;
     width: 285px;
 }
 
-details summary::-webkit-details-marker { 
-    display: none; 
-}
-
-.more-dtl[open]{
-    border-top: 1px solid #dbdbdb;
-}
-
-.more-dtl[open] .more-btn{
+details summary::-webkit-details-marker {
     display: none;
 }
 
-.more-dtl[open] .more{
+.more-dtl[open] {
+    border-top: 1px solid #dbdbdb;
+}
+
+.more-dtl[open] .more-btn {
+    display: none;
+}
+
+.more-dtl[open] .more {
     display: flex;
 }
 
-.more-btn:hover{
+.more-btn:hover {
     background-color: #dbdbdb;
 }
 
-.more-btn:focus{
-    outline: none;
+a, .more-btn:focus {
+    outline-color: lightblue;
 }
 
-.more-btn{
+.more-btn {
     width: 100%;
     border: none;
     background-color: #f5f5f5;
     cursor: pointer;
 }
 
-ul{
+ul {
     list-style: none;
     padding: 0;
 }
 
-*{
+* {
     font-family: Sans-Serif;
     font-size: 14px;
-    text-decoration: none; 
+    text-decoration: none;
 }
