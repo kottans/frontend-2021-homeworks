@@ -13,14 +13,13 @@ class General {
     this.gameTheme.muted = false;
     this.gameTheme.play();
 
-    document.querySelector('#musicControl').addEventListener('click', e => {
-      const volume = e.target.classList;
+    document.querySelector('#musicControl').addEventListener('click', ({target}) => {
       if (this.gameTheme.muted) {
         this.gameTheme.muted = false;
-        volume.replace('fa-volume-off', 'fa-volume-up');
+        target.classList.replace('fa-volume-off', 'fa-volume-up');
       } else {
         this.gameTheme.muted = true;
-        volume.replace('fa-volume-up', 'fa-volume-off');
+        target.classList.replace('fa-volume-up', 'fa-volume-off');
       }
     });
   }
@@ -197,16 +196,16 @@ class Game {
 
   startGame() {
     this.timerControl();
-    this.map.addEventListener('click', e => {
-      if(e.target.classList.contains('front')){
+    this.map.addEventListener('click', ({target}) => {
+      if(target.classList.contains('front')){
         this.movesCount++;
-        const currentCard = e.target;
+        const currentCard = target;
         this.openCardsCount++;
 
         if (this.openCardsCount <= this.maxOpenCards) {
           this.getFlip(currentCard);
 
-          if (this.openCardsCount == this.maxOpenCards) {
+          if (this.openCardsCount === this.maxOpenCards) {
             this.getMatching();
           }
         } else {
