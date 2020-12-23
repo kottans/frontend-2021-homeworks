@@ -14,7 +14,7 @@ export class Header {
             `<h2 class="header__heading">Friends App</h2>
              <div class="header__sound-button">
                 <span class="header__sound-icon">${svgs.play}</span>
-                <span class="header__text">Play audio</span>
+                <span class="header__text">play</span>
              </div>`;
 
         this.element = document.createElement('header');
@@ -31,6 +31,7 @@ export class Header {
 
         const sound = new Audio('sounds/audio.mp3');
         sound.loop = true;
+        sound.volume = 0.1;
         this.soundButton.sound = sound;
     }
 
@@ -40,15 +41,18 @@ export class Header {
 
     handleSoundButtonClick({target}){
         const soundIcon = target.querySelector('.header__sound-icon');
-        
+        const soundText = target.querySelector('.header__text');
+
         if(soundIcon.querySelector('svg').classList.contains('play')){
             soundIcon.textContent = '';
+            soundText.textContent = 'pause';
             soundIcon.insertAdjacentHTML(`afterbegin`, svgs.pause);
 
             target.sound.play();
         }
         else if(soundIcon.querySelector('svg').classList.contains('pause')){
             soundIcon.textContent = '';
+            soundText.textContent = 'play';
             soundIcon.insertAdjacentHTML(`afterbegin`, svgs.play);
 
             target.sound.pause();

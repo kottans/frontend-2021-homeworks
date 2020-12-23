@@ -29,19 +29,19 @@ export class UserCard {
                         <div class="user-card__back-prop user-card__back-age">
                             <span class="user-card__back-prop-name">Age:</span>
                             <span class="user-card__back-prop-value">${this.user.age}</span>
-                        <div>
+                        </div>
                         <div class="user-card__back-prop user-card__back-email">
                             <span class="user-card__back-prop-name">Email:</span>
                             <span class="user-card__back-prop-value">${this.user.email}</span>
-                        <div>
+                        </div>
                         <div class="user-card__back-prop user-card__back-location">
                             <span class="user-card__back-prop-name">Location:</span>
                             <span class="user-card__back-prop-value">${this.user.location}</span>
-                        <div>
+                        </div>
                         <div class="user-card__back-prop user-card__back-registration">
                             <span class="user-card__back-prop-name">Registered:</span>
                             <span class="user-card__back-prop-value">${this.user.formattedRegistration}</span>
-                        <div>
+                        </div>
                     </main>
                 </div>
             </div>`;

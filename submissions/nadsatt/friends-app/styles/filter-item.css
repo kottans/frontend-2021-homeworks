@@ -41,7 +41,6 @@
 
 input.filter-item__option {
     flex-grow: 1;
-    color: white;
     background-color: white;
     border: 1px solid white;
     border-radius: 5px;

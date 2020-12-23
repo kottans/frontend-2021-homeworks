@@ -151,9 +151,12 @@
     letter-spacing: .07em;
 }
 
-.user-card__front-email,
-.user-card__back-prop-value {
+.user-card__front-email {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+}
+
+.user-card__back-prop-value {
+    word-break: break-all;
 }

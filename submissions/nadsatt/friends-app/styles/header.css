@@ -18,12 +18,13 @@
 }
 
 .header__sound-button {
+    width: 41px;
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
     align-items: center;
     margin-left: 10px;
-    padding: 3px 5px;
+    padding: 5px;
     border: 1px solid var(--gold-color);
     border-radius: 5px;
     background-color: black;
@@ -34,11 +35,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 2px;
 }
 
 .header__sound-icon svg {
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
     fill: white;
 }
 
