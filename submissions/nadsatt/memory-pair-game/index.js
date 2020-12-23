@@ -51,6 +51,8 @@ const infoMessages = [
     'Ouch, this cat ate too much..'
 ];
 
+const flippedCardClass = 'card--flipped';
+
 const createGameCards = function(){
     for(let i = 0; i < uniqueGameCardsNumber; i++){
         let card1 = createGameCard(i + 1);
@@ -116,7 +118,7 @@ const positionOpenedGameCardsRelatively = function(cards){
 
 const closeOpenedGameCards = function(...cards){
     cards.forEach(card =>
-        card.classList.remove('card--flipped')
+        card.classList.remove(flippedCardClass)
     );
 };
 
@@ -170,7 +172,7 @@ const twoGameCardsOpened = function(){
 };
 
 const openGameCard = function(card){
-    card.classList.add('card--flipped');
+    card.classList.add(flippedCardClass);
     openedGameCardsNumber++;
 };
 
@@ -219,7 +221,7 @@ const handleOpeningSameGameCards = function(){
 };
 
 const openGameboardCard = function(){
-    gameboardCard.classList.add('card--flipped');
+    gameboardCard.classList.add(flippedCardClass);
 };
 
 const positionOpenedGameCardsAbsolutely = function(){
@@ -270,7 +272,7 @@ const handleResetButtonClick = function(){
 }
 
 const closeGameboardCard = function(){
-    gameboardCard.classList.remove('card--flipped');
+    gameboardCard.classList.remove(flippedCardClass);
 };
 
 document.addEventListener("DOMContentLoaded", () => {
