@@ -9,57 +9,71 @@
 // Define your objects here
 
 class Inhabitant {
-   constructor(name, gender, saying, species) {
+   constructor(name, gender, saying, species, legs) {
       this.name = name; 
       this.gender = gender; 
       this.saying = saying; 
       this.species = species; 
+      this.legs = legs; 
    };
 
-   getMessage() {
+   toString() {
       const messageText = [
-      this.saying,
-      `I am a ${this.species}.`, 
-      `My name is ${this.name}.`,
-      `Nice to meet you!`,
-      `My gender is ${this.gender}.`
-   ]; 
+         this.saying,
+         `I am a ${this.species}.`, 
+         `My name is ${this.name}.`,
+         `Nice to meet you!`,
+         `My gender is ${this.gender}.`,
+         `I have ${this.legs} legs.` 
+      ]; 
 
-   return messageText.join(' ');  
+      return messageText.join(' ');  
    }
-}
+};
 
 class Human extends Inhabitant {
-   constructor(name, gender, saying, species) {
-      super(name, gender, saying, species); 
+   constructor(name, gender, saying) {
+      super(name, gender, saying, 'human', 2); 
       this.hands = 2; 
-      this.legs = 2; 
    }
 
-   getMessage () {
-      return `${super.getMessage()} I have ${this.legs} legs and ${this.hands} hands.` 
+   toString () {
+      return `${super.toString()} Also I have ${this.hands} hands.` 
    }
-}
+};
 
-class Animal extends Inhabitant {
-   constructor(name, gender, saying, species) {
-      super(name, gender, saying, species); 
-      this.legs = 4; 
+class Man extends Human {
+   constructor(name, saying) {
+      super(name, 'male', saying); 
    }
+};
 
-   getMessage () {
-      return `${super.getMessage()} I have ${this.legs} legs.`
+class Woman extends Human {
+   constructor(name, saying) {
+      super(name, 'female', saying); 
    }
-}
+};
 
-const man = new Human('Mark', 'male', 'Hi, there!', 'human'); 
-const woman = new Human('Jane', 'female', 'Hello, darling!', 'human'); 
-const dog = new Animal('Donny', 'male', 'Woof!', 'dog'); 
-const cat = new Animal('Beniia', 'male', 'Mrrrr!','cat')
+class Dog extends Inhabitant {
+   constructor(name, gender) {
+      super(name, gender, 'Woof!', 'dog', 4);    
+   }   
+}; 
+
+class Cat extends Inhabitant {
+   constructor(name, gender) {
+      super(name, gender, 'Mrrrr!', 'cat', 4);     
+   }
+};
+
+const man = new Man('Mark', 'Hi, there!'); 
+const woman = new Woman('Jane', 'Hello, darling!'); 
+const dog = new Dog('Donny', 'male'); 
+const cat = new Cat('Beniia', 'male');
 
 const inhabitants = [man, woman, dog, cat]; 
 
-inhabitants.forEach(inhabitant => print(inhabitant.getMessage())); 
+inhabitants.forEach(inhabitant => print(inhabitant)); 
 
 /* Use print(message) for output.
    Default tag for message is <pre>. Use print(message,'div') to change containing element tag.
