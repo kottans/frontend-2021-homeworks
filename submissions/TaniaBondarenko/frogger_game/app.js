@@ -2,7 +2,7 @@ const borders = {
     rightBorder: 400,
     leftBorder: 5,
     upBorder: 410,
-    downBorder: 5
+    downBorder: 70
 };
 
 const someGap = 10;
@@ -22,10 +22,10 @@ class GameSprite {
 class Enemy extends GameSprite {
     constructor(x, y, sprite = "images/enemy-bug.png", speed = "75") {
         super(x, y, sprite);
-        this.speed = speed; 
+        this.speed = speed;
     }
  
-    update (dt) {
+    update(dt) {
         this.x += this.speed * dt;
         const addSpeed = 40;
         const pointHideEnemy = 500;
@@ -33,24 +33,25 @@ class Enemy extends GameSprite {
             this.x = -someGap;
             this.speed = Math.floor(addSpeed + Math.random() * 100);
         }
+        this.checkCollisions();
     };
-};
 
-let checkCollisions = function () {
-    allEnemies.forEach(function (enemy) {
-        const collision_distance = 50;
-        let diffX = Math.abs(enemy.x - player.x);
-        let diffY = Math.abs(enemy.y - player.y);
-        let distance = Math.sqrt(Math.pow(diffX, 2) + Math.pow(diffY, 2));
-        if (distance <= collision_distance) {
-            alert(`Oops... \uD83D\uDE3F Try Again`);
-            player.initialCoordinates();
-        } else if (player.y === borders.downBorder) {
-            player.y = someGap;
-            setTimeout(function () { alert(`\uD83D\uDE38 Congratulations! You won! \uD83D\uDE38 `); }, 100);
-            setTimeout(function () { player.initialCoordinates(); }, 200);
-        };
-    });
+    checkCollisions() {
+        allEnemies.forEach(function (enemy) {
+            const collision_distance = 50;
+            let diffX = Math.abs(enemy.x - player.x);
+            let diffY = Math.abs(enemy.y - player.y);
+            let distance = Math.sqrt(Math.pow(diffX, 2) + Math.pow(diffY, 2));
+            if (distance <= collision_distance) {
+                alert(`Oops... \uD83D\uDE3F Try Again`);
+                player.initialCoordinates();
+            } else if (player.y === borders.downBorder) {
+                player.y = someGap;
+                setTimeout(function () { alert(`\uD83D\uDE38 Congratulations! You won! \uD83D\uDE38 `); }, 100);
+                setTimeout(function () { player.initialCoordinates(); }, 200);
+            };
+        });
+    };
 };
 
 class Player extends GameSprite {
@@ -85,9 +86,9 @@ class Player extends GameSprite {
                 break;
         }
         if (this.x >= borders.rightBorder) {
-            this.x = borders.rightBorder;
+            this.x = borders.rightBorder-someGap;
         } else if (this.x <= borders.leftBorder) {
-            this.x = borders.leftBorder;
+            this.x = borders.leftBorder + someGap;
         } else if (this.y >= borders.upBorder) {
             this.y = borders.upBorder - someGap;
         } else if (this.y <= borders.downBorder) {
