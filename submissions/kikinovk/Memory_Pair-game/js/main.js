@@ -70,18 +70,20 @@ const openedCard = (card) => {
 
 const closedCard = (card) => {
   if (card.classList.contains('card--open')) {
-    card.classList.remove('card--open');
+    setTimeout(() => {
+      card.classList.remove('card--open')
+    }, delay);
     card.open = false;
   };
 };
 
 const disappearCard = (card) => {
   setTimeout(() => {
-    card.classList.add('card--disappear');
+    card.classList.add('card--disappear')
     setTimeout(() => {
       card.classList.add('card--disable')
     }, delay);
-  }, delay*2);
+  },  delay*2);
 };
 
 const eventCard = () => {
@@ -97,11 +99,9 @@ const eventCard = () => {
         disappearCard(openCard);
         openCard = undefined;
       } else {
-        setTimeout(() => {
           closedCard(card);
           closedCard(openCard);
           openCard = undefined;
-        }, delay);
       };
     });
   });
