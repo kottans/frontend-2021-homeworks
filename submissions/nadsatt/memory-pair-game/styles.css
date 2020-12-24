@@ -1,0 +1,345 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root{
+    --header-height: 140px;
+    --header-padding: 15px 10px;
+
+    --game-cards-group-width: 90vw;
+    --game-card-width: calc((90vw - 30px)/4);
+
+    --card-flipping-time: .4s;
+    --game-card-moving-time: 1s;
+    --cat-img-resizing-time: 1s;
+
+    --first-game-card-abs-left: 0;
+    --first-game-card-abs-top: 0;
+
+    --second-game-card-abs-left: 0;
+    --second-game-card-abs-top: 0;
+
+    --first-game-card-corner-left: 0;
+    --first-game-card-corner-top: 0;
+
+    --second-game-card-corner-left: 0;
+    --second-game-card-corner-top: 0;
+}
+
+body {
+    height: 100vh;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    line-height: 1.4;
+    text-align: justify;
+}
+
+/* HEADER STYLES */
+.header {
+    height: var(--header-height);
+    padding: var(--header-padding);
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+}
+
+.header__block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px;
+    background-color: white;
+    border: 3px solid black;
+    border-radius: 10px;
+}
+
+.header__info-block {
+    flex-grow: 1;
+}
+
+.header__scores {
+    display: flex;
+    flex-direction: column;
+}
+
+.header__wins-block,
+.header__fails-block {
+    width: 90px;
+    height: 50%;
+    margin-left: 10px;
+    color: white;
+    background-color: black;
+}
+
+.header__wins-block {
+    margin-top: 5px;
+}
+
+.header__fails-number,
+.header__wins-number {
+    margin-left: 5px;
+}
+
+/* SHARED FLIPPING FUNCTIONALITY */
+.card {
+    position: relative;
+    perspective: 1000px;
+}
+
+.card__front,
+.card__back {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: transform var(--card-flipping-time) linear;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+.card__front {
+    transform: rotateY(0deg);
+}
+
+.card__back {
+    transform: rotateY(-180deg);
+}
+
+.card--flipped .card__front {
+    transform: rotateY(180deg);
+}
+.card--flipped .card__back {
+    transform: rotateY(0deg);
+}
+
+/* GAMEBOARD STYLES */
+.gameboard-card {
+    width: var(--game-cards-group-width);
+    min-height: var(--game-cards-group-width);
+    margin: 0 auto;
+}
+
+.game-cards-group {
+    width: var(--game-cards-group-width);
+    height: var(--game-cards-group-width);
+    display: grid;
+    grid-template-columns: repeat(4, var(--game-card-width));
+    grid-template-rows: repeat(4, var(--game-card-width));
+    gap: 10px;
+}
+
+.gameboard-card__back {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.gameboard-card__cat-gif {
+    width: 100%;
+    height: var(--game-cards-group-width);
+    border-radius: 10px;
+}
+
+.gameboard-card__reset-button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    font-size: inherit;
+    letter-spacing: .04em;
+    background-color: white;
+    border: 3px solid black;
+    border-radius: 10px;
+    box-shadow: 0px 5px 1px 0px #cccccc;
+    cursor: pointer;
+}
+
+.gameboard-card__reset-button:hover {
+    color: white;
+}
+
+.gameboard-card__reset-button:hover,
+.gameboard-card__reset-button:active {
+    background-color: black;
+}
+
+.gameboard-card__reset-button:active {
+    box-shadow: none;
+    border-color: #cccccc;
+    transform: translateY(5px);
+}
+
+/* GAME CARD STYLES */
+.game-card {
+    width: var(--game-card-width);
+    height: var(--game-card-width);
+    cursor: pointer;
+    transition: left var(--game-card-moving-time) linear,
+                top var(--game-card-moving-time) linear,
+                opacity var(--game-card-moving-time) linear;
+}
+
+.game-card__front,
+.game-card__back {
+    height: 100%;
+    border: 3px solid black;
+    border-radius: 10px;
+}
+
+.game-card__back {
+    display: flex;
+    align-items: center;
+    background-color: white;
+}
+
+.game-card__img {
+    width: 100%;
+    border-radius: 7px;
+}
+
+.game-card__front,
+.game-card__back,
+.game-card__img {
+    pointer-events: none;
+}
+
+.first-game-card--abs-positioned,
+.second-game-card--abs-positioned {
+    position: absolute;
+    pointer-events: none;
+    opacity: 1;
+    z-index: 1;
+}
+
+.first-game-card--abs-positioned {
+    left: var(--first-game-card-abs-left);
+    top: var(--first-game-card-abs-top);
+}
+
+.second-game-card--abs-positioned {
+    left: var(--second-game-card-abs-left);
+    top: var(--second-game-card-abs-top);
+}
+
+.first-game-card--in-corner,
+.second-game-card--in-corner {
+    opacity: 0;
+}
+
+.first-game-card--in-corner {
+    left: var(--first-game-card-corner-left);
+    top: var(--first-game-card-corner-top);
+}
+
+.second-game-card--in-corner {
+    left: var(--second-game-card-corner-left);
+    top: var(--second-game-card-corner-top);
+}
+
+.game-card[data-grid-cell="1"] {
+    grid-area: 1/1/2/2;
+}
+.game-card[data-grid-cell="2"] {
+    grid-area: 1/2/2/3;
+}
+.game-card[data-grid-cell="3"] {
+    grid-area: 1/3/2/4;
+}
+.game-card[data-grid-cell="4"] {
+    grid-area: 1/4/2/4;
+}
+.game-card[data-grid-cell="5"] {
+    grid-area: 2/1/3/2;
+}
+.game-card[data-grid-cell="6"] {
+    grid-area: 2/2/3/3;
+}
+.game-card[data-grid-cell="7"] {
+    grid-area: 2/3/3/4;
+}
+.game-card[data-grid-cell="8"] {
+    grid-area: 2/4/3/4;
+}
+.game-card[data-grid-cell="9"] {
+    grid-area: 3/1/4/2;
+}
+.game-card[data-grid-cell="10"] {
+    grid-area: 3/2/4/3;
+}
+.game-card[data-grid-cell="11"] {
+    grid-area: 3/3/4/4;
+}
+.game-card[data-grid-cell="12"] {
+    grid-area: 3/4/4/4;
+}
+.game-card[data-grid-cell="13"] {
+    grid-area: 4/1/4/2;
+}
+.game-card[data-grid-cell="14"] {
+    grid-area: 4/2/4/3;
+}
+.game-card[data-grid-cell="15"] {
+    grid-area: 4/3/4/4;
+}
+.game-card[data-grid-cell="16"] {
+    grid-area: 4/4/4/4;
+}
+
+/* FOOTER STYLES */
+.footer__cat-img {
+    width: 30vw;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: -1;
+    transition: all var(--cat-img-resizing-time) linear;
+}
+
+/* ADAPTIVE STYLES */
+@media screen and (min-width: 480px){
+    body {
+        font-size: 14px;
+    }
+}
+
+@media screen and (min-width: 580px){
+    :root {
+        --game-cards-group-width: 60vh;
+        --game-card-width: calc((60vh - 30px)/4);
+        --header-height: 150px;
+        --header-padding: 25px 5%;
+    }
+    .header__scores {
+        flex-direction: row;
+    }
+    .header__wins-block {
+        margin-top: 0;
+    }
+    .header__wins-block,
+    .header__fails-block {
+        width: 100px;
+        height: 100%;
+    }
+}
+
+@media screen and (min-width: 750px){
+    :root {
+        --header-padding: 25px 10%;
+    }
+    body {
+        font-size: 16px;
+    }
+}
+
+@media screen and (min-width: 1200px){
+    :root {
+        --game-cards-group-width: 70vh;
+        --game-card-width: calc((70vh - 30px)/4);
+        --header-padding: 25px 15%;
+    }
+    body {
+        font-size: 18px;
+    }
+}
