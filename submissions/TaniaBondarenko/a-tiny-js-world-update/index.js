@@ -1,51 +1,46 @@
 class Inhabitant {
-  constructor(name, gender, saying, friends,legs) {
+  constructor(name, gender, saying, friends,species,legs) {
     this.name = name;
     this.gender = gender;
     this.saying = saying;
     this.friends = friends;
+    this.species = species;
     this.legs = legs;
   }
+
   toString() {
-    return (` ${this.legs} legs. I\'m <b>${this.name}</b>, a ${this.gender}. To my friend ${this.friends} I always say: "${this.saying}"`);
+    return (`I'm a <em>${this.species}</em> and I have ${this.legs} legs. I\'m <b>${this.name}</b>, a ${this.gender}. To my friend ${this.friends} I always say: "${this.saying}"`);
   }
 };
 
 class Person extends Inhabitant {
   constructor(name, gender, saying, friends, species='human', legs=2, hands=2) {
-    super(name, gender, saying, friends,legs)
-    this.species = species;
+    super(name, gender, saying, friends, species, legs)
     this.hands = hands;
   }
+  
   toString() {
-    return `I'm a <em>${this.species}</em> and I have ${this.hands} hands and` + super.toString();
+    return ` I have ${this.hands} hands because ` + super.toString();
   } 
 };
 
 class Animal extends Inhabitant {
-  constructor(name, gender, saying, species, friends, legs=4) {
-    super(name, gender, saying, friends,legs )
-    this.species = species;
+  constructor(name, gender, saying, friends,species, legs=4) {
+    super(name, gender, saying, friends,species, legs)
   }
-  toString() {
-    return `Since I'm a <em>${this.species}</em> I have only` + super.toString();
-  } 
 };
 
 class Creature extends Person{
   constructor(name, gender, saying, friends, species = 'half-human', legs = 2, hands = 2) {
-    super (name, gender, saying, friends, species, legs=2, hands=2) 
+    super (name, gender, saying, friends, species, legs, hands) 
   }
-  toString() {
-    return super.toString();
-  } 
 };
 
-const cat = new Animal("Toby", "male","Meow! Feed me!","cat", "some human");
-const man = new Person("Bill", "male","Hi!", "Beverly");
-const woman = new Person("Beverly", "female","What a nice day!",man.name);
-const dog = new Animal("Rex", "male", "Woof-woof!","dog", woman.name);
-const catWoman = new Creature("Maggie", "female",cat.saying,cat.name);
+const cat = new Animal("Toby", "male", "Meow! Feed me!", "some human", "cat");
+const man = new Person("Bill", "male", "Hi!", "Beverly");
+const woman = new Person("Beverly", "female", "What a nice day!", man.name);
+const dog = new Animal("Rex", "male", "Woof-woof!", woman.name, "dog");
+const catWoman = new Creature("Maggie", "female", cat.saying, cat.name);
 
 const arrOfInhabitants = [man, woman, dog, cat, catWoman];
 
