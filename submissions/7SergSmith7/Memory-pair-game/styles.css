@@ -1,0 +1,78 @@
+h1 {
+  text-align: center;
+  color: #464241;
+}
+img {
+  width: 125px;
+}
+
+.container {
+  width: 540px;
+  margin: 0 auto;
+}
+.card-back {
+  backface-visibility: hidden;
+  overflow: hidden;
+  transform: rotateY(180deg);
+  position: relative;
+}
+.card-front {
+  z-index: 2;
+  transform: rotateY(0deg);
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.game-field {
+  display: flex;
+  flex-wrap: wrap;
+}
+.spin-card {
+  transition: 0.6s;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+.spined .spin-card {
+  transform: rotateY(180deg);
+}
+.spined .card-front {
+  transition: 1s;
+  opacity: 0;
+}
+.bloked {
+  transition: 1s;
+  opacity: 0;
+}
+.card {
+  margin: 0 5px;
+}
+.card:hover {
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .container {
+    width: 440px;
+  }
+  img {
+    width: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    width: 380px;
+  }
+  img {
+    width: 80px;
+  }
+}
+@media (max-width: 380px) {
+  .container {
+    width: 240px;
+  }
+  img {
+    width: 50px;
+  }
+}
