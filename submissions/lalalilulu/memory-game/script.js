@@ -1,10 +1,21 @@
-//start the game
-(function launchApp() {
+const PAIR = 2;
+const CARDS_AMOUNT = 20;
+const TIMEOUT_1000 = 1000;
+const TIMEOUT_1500 = 1500;
+const WIN_CONFIRMATION = "Congratulations, you won!\nRestart the game";
+
+let lockBoard = false;
+let hasFlipped = false;
+let firstCard, secondCard;
+let openCards = 0;
+
+function launchApp() {
     const gameBoard = document.querySelector(".memory-game");
-    const fragment = document.createElement("div");
-    createImgArray().map(img => createCard(img)).forEach(card => fragment.appendChild(card));
-    gameBoard.innerHTML = fragment.innerHTML;
-})();
+    let cards = "";
+    createImgArray().forEach(img => cards += createCard(img));
+    gameBoard.innerHTML = cards;
+    gameBoard.addEventListener("click", flipCard);
+}
 
 function createImgArray() {
     const imgArray = [];
@@ -12,52 +23,38 @@ function createImgArray() {
         imgArray.push("kitty-" + i);
     }
     imgArray.push(...imgArray);
-    return imgArray;
+
+    //shuffle an array with images
+    return imgArray.map((a) => ({sort: Math.random(), value: a}))
+        .sort((a, b) => a.sort - b.sort)
+        .map((a) => a.value);
 }
 
 function createCard(image) {
-    const divCard = createElementWithClass("div", "memory-card");
-    divCard.dataset.image = image;
-    const imgFrontCard = createElementWithClass("img", "front");
-    imgFrontCard.setAttribute("src", "img/" + image + ".png");
-    const imgBackCard = createElementWithClass("img", "back");
-    imgBackCard.setAttribute("src", "img/back.png");
-    divCard.append(imgFrontCard, imgBackCard);
-    divCard.style.order = Math.floor(Math.random() * 100);
-    return divCard;
+    return `<div class="memory-card" data-image="${image}">
+                <img class="front" src="./img/${image}.png"/>
+                <img class="back" src="./img/back.png" />
+            </div>`;
 }
 
-function createElementWithClass(tagName, cssClass) {
-    const element = document.createElement(tagName);
-    element.classList.add(cssClass);
-    return element;
-}
+function flipCard(event) {
+    const card = event.target.closest(".memory-card");
+    if (lockBoard || card === firstCard) return;
 
-const cards = document.querySelectorAll(".memory-card");
-cards.forEach(card => card.addEventListener("click", flipCard));
-
-let lockBoard = false;
-let hasFlipped = false;
-let firstCard, secondCard;
-let openCards = 0;
-
-function flipCard() {
-    if (lockBoard || this === firstCard) return;
-
-    this.classList.toggle('flip');
+    card.classList.toggle('flip');
 
     if (!hasFlipped) {
         hasFlipped = true;
-        firstCard = this;
+        firstCard = card;
         return;
     }
-    secondCard = this;
+    secondCard = card;
 
     checkMatch();
 }
 
 function checkMatch() {
-    let isMatch = firstCard.dataset.image === secondCard.dataset.image
+    const isMatch = firstCard.dataset.image === secondCard.dataset.image
     if (isMatch) {
         disableCards();
         checkWin();
@@ -69,7 +66,7 @@ function checkMatch() {
 function disableCards() {
     firstCard.removeEventListener("click", flipCard);
     secondCard.removeEventListener("click", flipCard);
-    openCards += 2;
+    openCards += PAIR;
     resetBoard();
 }
 
@@ -79,7 +76,7 @@ function unflipCards() {
         firstCard.classList.remove("flip");
         secondCard.classList.remove("flip");
         resetBoard();
-    }, 1000)
+    }, TIMEOUT_1000)
 }
 
 function resetBoard() {
@@ -88,15 +85,14 @@ function resetBoard() {
 }
 
 function checkWin() {
-    console.log(openCards);
-    if (openCards === 20) {
+    if (openCards === CARDS_AMOUNT) {
         setTimeout(() => window.requestAnimationFrame(() => {
-            if (confirm('Congratulations, you won!\nRestart the game')) {
+            if (confirm(WIN_CONFIRMATION)) {
                 location.reload();
             }
-        }), 1500);
+        }), TIMEOUT_1500);
     }
 }
 
-
-
+//start the game
+launchApp();

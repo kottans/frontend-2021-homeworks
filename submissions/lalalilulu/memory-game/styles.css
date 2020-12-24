@@ -64,6 +64,9 @@ img {
     transition: transform .5s;
 }
 
+.memory-card:hover {
+    cursor: pointer;
+}
 
 @media only screen and (max-width: 320px) {
     .memory-game {
