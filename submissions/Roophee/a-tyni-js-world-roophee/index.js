@@ -53,14 +53,11 @@ const womanCat = {
     friends: ['Sam', 'Hanna', 'Kitty', 'Milo']
 }
 
-let toStringTask = function (item) {
-    let string = '';
-    for (let i in item) {
-        string += item[i] + ';';
-    }
+let messageString = function (item) {
+    let string = `${item.species};${item.name};${item.saying};${item.gender};${item.legs};${item.hands};${item.tail};${item.friends}`;
     return string;
 }
 
 let population = [man, woman, cat, dog, womanCat];
 
-population.map(i => print(toStringTask(i)));
+population.map(i => print(messageString(i)));
