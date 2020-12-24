@@ -10,7 +10,7 @@ main {
   justify-content: space-between;
 }
 
-nav {
+.navigation-bar {
   width: 10%;
   margin-left: 10px;
   margin-right: 10px;
@@ -37,7 +37,7 @@ figure {
   justify-content: space-between;
 }
 
-li {
+.list-item {
   list-style-type: none;
   max-width: 100%;
 }
