@@ -18,6 +18,11 @@ body {
     height: 100vh;
 }
 
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
 .side {
     min-width: 300px;
     background-color: rgb(37, 49, 116);
@@ -50,7 +55,7 @@ body {
     background-color: rgb(225, 242, 250);
 }
 
-.side-button-wrapper {
+.burger-button-wrapper {
     width: 100%;
     height: 60px;
     background-image: url(img/bang.jpg);
@@ -58,7 +63,7 @@ body {
     display: none;
 }
 
-.side-button {
+.burger-button {
     margin: 10px;
     fill: lavender;
 }
@@ -88,7 +93,7 @@ body {
 }
 
 @media screen and (max-width: 480px) {
-    .side-button-wrapper {
+    .burger-button-wrapper {
         display: block;
     }
 
