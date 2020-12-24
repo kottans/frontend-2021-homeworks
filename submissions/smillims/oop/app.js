@@ -1,22 +1,28 @@
 const block = {
 	width: 101,
 	height: 85
-}
+};
+const positionEnemyY = [60, 140, 220];
+const positionPlayer = {
+	playerX: 200,
+	playerY: 400,
+};
+
+const widthEnemies = [80];
 
 // Enemies our player must avoid
-const Enemy = function(x, y, player) {
+const Enemy = function(x, y) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
 
 	 this.x = x;
 	 this.y = y;
-	 this.player = player;
-	 this.speed = 150 + (Math.random() * 100); //speed between 100 and 250;
+	 this.speed = (block.width * 1.5) + (Math.random() * block.width); //speed between 100 and 250;
 
     // The image/sprite for our enemies, this uses
 	 // a helper we've provided to easily load images
 	 
-    this.sprite = 'images/enemy-bug.png';
+	 this.sprite = 'images/enemy-bug.png';
 };
 
 // Update the enemy's position, required method for game
@@ -27,7 +33,7 @@ Enemy.prototype.update = function(dt) {
 	 // all computers.
 	 this.x += this.speed * dt;
 	 if (this.x > ctx.canvas.width + block.width){
-		 this.x = -101 * 2;
+		 this.x = -block.width * 2;
 	 }
 };
 
@@ -36,24 +42,22 @@ Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-const checkCollisions = () => {
-	allEnemies.forEach(enemy => {
-		if(Math.abs(enemy.x - player.x) < 50 &&
-			Math.abs(enemy.y - player.y) < 50 ||
-			player.y < block.height - 85){
-			player.startOver();
-		}
-	})
-}
+Enemy.prototype.checkCollisions = function() {
+	if(Math.abs(this.x - player.x) < widthEnemies &&
+		Math.abs(this.y - player.y) < widthEnemies ||
+		player.y < 0){
+			setTimeout(() => player.startOver(), 120);
+	};
+};
+
 
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
 
-const Player = function(x, y, player) {
+const Player = function(x, y) {
 	this.x = x;
 	this.y = y;
-	this.player = player;
 	this.sprite = 'images/char-boy.png';
 };
 
@@ -91,23 +95,17 @@ Player.prototype.handleInput = function(key) {
 };
 
 Player.prototype.startOver = function() {
-	this.x = 200;
-	this.y = 400;
+	this.x = positionPlayer.playerX;
+	this.y = positionPlayer.playerY;
 };
+
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-const player = new Player(200, 400);
+const player = new Player(positionPlayer.playerX, positionPlayer.playerY);
 
-const enemy1 = new Enemy(0, 60);
-const enemy2 = new Enemy(0, 140);
-const enemy3 = new Enemy(0, 220);
-const allEnemies = [
-	enemy1,
-	enemy2,
-	enemy3
-];
+const allEnemies = positionEnemyY.map(pos => new Enemy(0, pos));
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
