@@ -59,15 +59,23 @@ const catWoman = {
 };
 
 const inhabitants = [cat, dog, woman, man, catWoman];
+const keys = ['species', 'name', 'gender', 'legs', 'hands', 'speech', 'friends'];
 
-const getValues = function(obj) {
-   obj.friends = obj.friends.join(', ') || '0';
-   const string = Object.values(obj).join('; ');
-   return string;
+const getValues = function(obj, arr) {
+   const stringArr = [];
+   arr.forEach(key => {
+      const value = obj[key];
+      if (typeof value === 'object') {
+         stringArr.push(value.join(', '))
+      } else
+      stringArr.push(value);
+   });
+   return stringArr.join('; ');
 }
 
-inhabitants.forEach(el => print(getValues(el), 'div'));
-
+inhabitants.map(inhabitant => {
+   print(getValues(inhabitant, keys))
+})
 
 
 
