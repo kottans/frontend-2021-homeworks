@@ -1,15 +1,18 @@
+@import "_misc/normalize.scss";
+
 body {
+    margin: 0;
+    padding: 0;
     background: url(../img/wallpapers.jpg) no-repeat center center fixed;
     background-size: cover;
-    min-width: 1000px;
-    min-height: 800px;
     display: flex;
     justify-content: center;
     flex-direction: column;
-    overflow-x: hidden;
 }
 
 .container {
+    margin: 0;
+    padding: 0;
     width: 100vw;
     height: 100vh;
     display: flex;
@@ -43,7 +46,7 @@ body {
         grid-template-columns: repeat(4, 1fr);
         grid-template-rows: repeat(3, 1fr);
         justify-items: center;
-        align-items:center;
+        align-items: center;
         align-content: space-between;
         justify-content: space-between;
     }
@@ -117,12 +120,19 @@ body {
 
 .card__back,
 .card__front {
+    cursor: pointer;
     visibility: inherit;
     width: 10vw;
     height: 14vw;
     min-width: 145px;
     min-height: 200px;
     border-radius: 5px;
+    user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
 }
 
 .hide {
