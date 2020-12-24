@@ -1,0 +1,74 @@
+body {
+  width: 640px;
+  margin: auto;
+}
+
+h1 {
+  text-align: center;
+}
+
+main {
+  background-color: rgb(146, 144, 144);
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.flip-container {
+  margin: 5px;
+  transition: opacity 1s;
+}
+
+.flip-container,
+.front,
+.back {
+  width: 150px;
+  height: 200px;
+}
+
+.front {
+  background-color: rgb(245, 243, 228);
+}
+
+.back {
+  background-color: rgb(208, 223, 243);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+}
+
+/*flipper logic */
+.flip-container {
+  perspective: 1000px;
+}
+
+.flip-container.flip .flipper {
+  transform: rotateY(180deg);
+}
+
+.flipper {
+  transition: 0.6s;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+.front,
+.back {
+  backface-visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.front {
+  z-index: 2;
+  transform: rotateY(0deg);
+}
+
+.back {
+  transform: rotateY(180deg);
+}
