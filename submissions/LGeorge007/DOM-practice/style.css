@@ -1,0 +1,163 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: url("img/background.jpg");
+    background-size: cover;
+    font-family: 'Kelly Slab', cursive;
+    overflow-x: hidden;
+}
+
+article {
+    margin: 2em 1em;
+    padding: 0 2em;
+    -webkit-transition: -webkit-transform .3s;
+    -moz-transition: : -moz-transform .3s;
+    transition: transform .3s;
+}
+
+article h1{
+    font-size: 1.6em;
+    font-style: italic;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 0.1em;
+    color: #caad00;
+}
+
+article h2{
+    font-size: 1.4em;
+    font-style: italic;
+    text-align: left;
+    font-weight: bold;
+    padding-left: 2em;
+    margin-bottom: 0.1em;
+    margin-top: 0.3em;
+    color: #caad00;
+}
+
+article p{
+    text-indent: 3.0em;
+    margin-bottom: 1em;
+    text-align: left;
+    color: #FFD700;
+}
+
+.heroImg{
+    display: block;
+    padding: 20px;
+    float: right;
+    max-width: 100%;
+    height: auto;
+}
+
+.nav {
+    width: 320px;
+    height: 100%;
+
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    margin: 0;
+
+
+    left: -320px;
+    padding: 15px 20px;
+
+    z-index: 2000;
+    /*
+    -webkit-transition: left 0.3s;
+    -moz-transition: left 0.3s;*/
+    transition: left 0.3s;
+}
+
+.nav-toggle {
+    position: absolute;
+
+    left: 320px;
+    top: 1em;
+
+    margin: 0em 0.5em;
+    cursor: pointer;
+    font-size: 2em;
+    line-height: 1;
+    z-index: 2001;
+    color: white;
+}
+
+[id='nav-toggle'] {
+    position: absolute;
+    display: none;
+}
+
+[id='nav-toggle']:checked ~ .nav > .nav-toggle {
+    left: auto;
+    right: 2px;
+    top: 1em;
+}
+
+[id='nav-toggle']:checked ~ .nav {
+    left: 0;
+    overflow-y: auto;
+
+    box-shadow:4px 0px 20px 0px rgba(0,0,0, 0.5);
+    /*-moz-box-shadow:4px 0px 20px 0px rgba(0,0,0, 0.5);
+    -webkit-box-shadow:4px 0px 20px 0px rgba(0,0,0, 0.5);*/
+}
+
+[id='nav-toggle']:checked ~ main > article {
+    /*-webkit-transform: translateX(320px);
+    -moz-transform: translateX(320px);*/
+    transform: translateX(320px);
+}
+
+[id='nav-toggle']:checked ~ .nav > .nav-toggle:after {
+    content: '\2715';
+}
+
+.nav-toggle:after {
+    content: '\2630';
+}
+
+.nav-toggle:hover {
+    color: #ff2400;
+}
+
+.nav > ul {
+    display: block;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.nav > ul> li {
+    line-height: 2.5;
+    cursor: pointer;
+    list-style-type: none;
+    padding: 5px;
+}
+
+.nav > ul> li:hover{
+    padding-left: 15px;
+}
+
+.nav > ul> li{
+    font-size: 1.4em;
+    color: #caad00;
+}
+
+.nav > ul> li::selection {
+    background: transparent;
+}
+
+/*
+.nav > ul> li::-moz-selection {
+    background: transparent;
+}*/
+
+.nav .selectedItem{
+    color: red;
+}
