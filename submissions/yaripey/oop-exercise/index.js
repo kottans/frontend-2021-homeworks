@@ -11,26 +11,24 @@ const male = 'male'
 const female = 'female'
 
 class Inhabitant {
-  constructor(species, name, legs, hands, gender, message) {
+  constructor(species, name, legs, gender, message) {
     this.species = species
     this.name = name
     this.legs = legs
     this.gender = gender
     this.message = message
     this.friendship = null
-    this.hands = hands
   }
 
   get aboutMe() {
-    console.log(this.friendship ? true : false)
-    return `I'm a ${this.species}. I'm a ${this.gender === male ? 'boy' : 'girl'}. I say: ${this.message} `
+    return `I'm a ${this.species}. My name is ${this.name}. I'm a ${this.gender === male ? 'boy' : 'girl'}. I say: ${this.message} `
       + (this.friendship ? "I'm friends with " + this.friendship.map(elem => elem.name).join(', ') + '. ' : "I don't have friends. ")
   }
 }
 
 class Animal extends Inhabitant {
   constructor(species, name, gender, message) {
-    super(species, name, 4, 0, gender, message)
+    super(species, name, 4, gender, message)
   }
   get aboutMe() {
     return super.aboutMe
@@ -59,11 +57,12 @@ class Cat extends Animal {
 
 class Human extends Inhabitant {
   constructor(name, gender, message) {
-    super('human', name, 2, 2, gender, message)
+    super('human', name, 2, gender, message)
+    this.hands = 2
   }
 
   get aboutMe() {
-    return super.aboutMe
+    return super.aboutMe + `I have ${this.hands} hands.`
   }
 }
 
@@ -97,7 +96,6 @@ girl.friendship = [boy, dog]
    print('human; <strong>John</strong>; male; 2; 2; <em>Hello world!</em>; Rex, Tom, Jenny', 'div');
    */
 
-print(dog.aboutMe)
-print(girl.aboutMe)
-print(cat.aboutMe)
-print(boy.aboutMe)
+const inhabitants = [dog, girl, cat, boy]
+
+inhabitants.forEach(elem => print(elem.aboutMe))
