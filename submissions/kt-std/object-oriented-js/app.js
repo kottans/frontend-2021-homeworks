@@ -73,10 +73,12 @@ class Enemy extends Entity {
 }
 
 class Player extends Entity {
-	constructor(x, y, sprite) {
+	constructor(x, y, sprite, enemies) {
 		super(x, y, sprite);
 		this.lives = LIVES_AMOUNT;
+		this.enemies = enemies;
 	}
+	
 	/* This function resets Player lives to the initial state
 	 * and calls the function to append lives to the LIVES_CONTAINER
 	 */
@@ -85,27 +87,31 @@ class Player extends Entity {
 		appendLivesToContainer(this.lives);
 	}
 
+	
+	checkCollisions() {
+		this.enemies.forEach((enemy) => {
+			if (
+				Math.abs(this.x - enemy.x) < X_GAP &&
+				Math.abs(this.y - enemy.y) < Y_GAP
+			) {
+				this.lives--;
+				removeItemFromContainer(LIVES_CONTAINER);
+				this.setPosition(INITIAL_X, INITIAL_Y);
+			}	
+		});		
+	}
+
 	/* This function checks if there are left any Player lives.
 	 * If there remain no lives, display a loss message.
 	 * If Player still left lives and it has crossed the border of any Enemy,
 	 * then decrease Player lives amount, delete live item from the LIVES_CONTAINER
 	 * and reset Player position to the initial state.
 	 */
-
 	update() {
 		if (!this.lives) {
 			displayMessage("lose", "flex", messages);
 		} else {
-			allEnemies.forEach((enemy) => {
-				if (
-					Math.abs(this.x - enemy.x) < X_GAP &&
-					Math.abs(this.y - enemy.y) < Y_GAP
-				) {
-					this.lives--;
-					removeItemFromContainer(LIVES_CONTAINER);
-					this.setPosition(INITIAL_X, INITIAL_Y);
-				}
-			});
+			this.checkCollisions();
 		}
 	}
 	/* This function handles user input and moves Player to the
@@ -245,10 +251,10 @@ function createMessageBlock(id, displayStyle, messages) {
 	document.body.appendChild(div);
 }
 
-const player = new Player(INITIAL_X, INITIAL_Y, "images/santa.png");
-
 for (let i = 0; i < ENEMIES_AMOUNT; i++) {
 	allEnemies.push(
 		new Enemy(CANVAS_START, Y_STEP * (i + 1), "images/yeti.png")
 	);
 }
+
+const player = new Player(INITIAL_X, INITIAL_Y, "images/santa.png", allEnemies);
