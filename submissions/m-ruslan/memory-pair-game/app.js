@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelector("main").addEventListener("click", (event) => {
     let aEl = event.target.closest(".flip-container");
     if (!aEl) return;
+    if (aEl.id === prevCardId) return;
 
     if (qOfOpenCards < 2) {
       qOfOpenCards++;
