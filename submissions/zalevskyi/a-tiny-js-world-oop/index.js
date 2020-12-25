@@ -8,6 +8,7 @@
 // ======== OBJECTS DEFINITIONS ========
 // Define your objects here
 
+//This class has no instances. Works like Interface for all its possible children
 class Species {
    constructor(genus) {
       this.genus=genus
@@ -17,33 +18,25 @@ class Species {
    }
 }
 class MammalNonMarine extends Species {
-   constructor(genus) {
+   constructor(genus, sound, legs) {
       super(genus)
-      this.legs = 4
-   }
-   descriptionArray() {
-      return [...super.descriptionArray(), `legs: ${this.legs}`]
-   }
-}
-class CarnivoraNonMarine extends MammalNonMarine {
-   constructor(genus, sound) {
-      super(genus)
+      this.legs = legs
       this.sound = sound
    }
    descriptionArray() {
-      return [...super.descriptionArray(), `sound: ${this.sound}`]
+      return [...super.descriptionArray(), `legs: ${this.legs}`, `sound: ${this.sound}`]
    }
 }
+//Hominoid is the only child of MammalNonMarine
+//But can not be merged with its parent as both have distinctive intstances
 class Hominoid extends MammalNonMarine {
-   constructor(genus, sound) {
-      super(genus)
-      this.legs = 2 // overides property value of the prototype
-      this.hands = 2
-      this.sound = sound
+   constructor(genus, sound, legs, hands) {
+      super(genus, sound, legs)
+      this.hands = hands
    }
    descriptionArray() {
       //this.legs is not added because it is property of the prototype, just with new value
-      return [...super.descriptionArray(), `hands: ${this.hands}`, `sound: ${this.sound}`]
+      return [...super.descriptionArray(), `hands: ${this.hands}`]
    }
 }
 
@@ -86,10 +79,10 @@ function friendshipIndexPairs(indexUpperBound, probability) {
    return LIST
 }
 
-const HUMAN = new Hominoid('human', 'Bla!')
-const CAT = new CarnivoraNonMarine('cat', 'Meow!')
-const DOG = new CarnivoraNonMarine('dog', 'Woof!')
-const CATWOMAN = new Hominoid('cat-woman', 'Bla!')
+const CAT = new MammalNonMarine('cat', 'Meow!', 4)
+const DOG = new MammalNonMarine('dog', 'Woof!', 4)
+const HUMAN = new Hominoid('human', 'Bla!', 2, 2)
+const CATWOMAN = new Hominoid('cat-woman', 'Bla!', 2, 2)
 const NAMES = [
    {
       species: HUMAN,
