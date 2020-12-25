@@ -49,6 +49,10 @@ Character.prototype.render = function () {
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
+Character.prototype.update = function () {
+};
+
+
 // Enemy
 let Enemy = function (counter, player) {
   Character.call(
@@ -68,7 +72,10 @@ Enemy.prototype.update = function (dt) {
     this.x = ENEMY_INFO.START_X_POSITION;
     this.speed = generateSpeed();
   }
+  this.checkIntersectionWithPlayer();
+};
 
+Enemy.prototype.checkIntersectionWithPlayer = function () {
   if (
     this.x < this.player.x + PLAYER_INFO.WIDTH &&
     this.x > this.player.x - ENEMY_INFO.WIDTH &&
@@ -79,6 +86,7 @@ Enemy.prototype.update = function (dt) {
     this.player.reset();
   }
 };
+
 
 // Player
 let Player = function () {
@@ -91,10 +99,6 @@ let Player = function () {
 };
 
 Player.prototype = Object.create(Character.prototype);
-
-Player.prototype.update = function () {
-
-};
 
 Player.prototype.handleInput = function (keyCode) {
 
