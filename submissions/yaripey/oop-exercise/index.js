@@ -62,7 +62,7 @@ class Human extends Inhabitant {
   }
 
   get aboutMe() {
-    return super.aboutMe + `I have ${this.hands} hands.`
+    return super.aboutMe + `I have ${this.hands} hands, and ${this.legs} legs.`
   }
 }
 
