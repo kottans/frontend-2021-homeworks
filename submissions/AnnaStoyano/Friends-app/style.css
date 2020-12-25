@@ -56,13 +56,20 @@ a {
 }
 
 .menu_item {
+    border: none;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 10px 0;
+    padding: 10px 0px;
     transition: 0.3s;
     color: #405E00;
+}
+
+.field-name {
+    transform: translateY(10px);
+    display: block;
+    margin: 0 auto;
 }
 
 .menu_item:hover {
@@ -91,6 +98,7 @@ a {
 
 .check-label {
     padding: 3px 5px;
+    border: 2px solid transparent;
     border-radius: 5px;
     font-size: 18px;
 }
@@ -101,7 +109,6 @@ a {
 
 .check-label:hover {
     border: 2px solid #689864;
-    margin: -2px;
 }
 
 .radio-input:checked+.check-label {
@@ -184,6 +191,21 @@ a {
     object-position: center;
 }
 
+.menu_item-gender {
+    min-width: 150px;
+}
+
+.menu_item-name {
+    min-width: 120px;
+}
+
+.reset.btn {
+    height: fit-content;
+    padding: 7px 9px;
+    align-self: center;
+    margin-left: 10px;
+}
+
 @media screen and (max-width: 700px) {
     .menu {
         flex-wrap: wrap;
@@ -198,6 +220,24 @@ a {
     .result {
         justify-content: space-around;
     }
+
+    .btn {
+        padding: 9px 11px;
+    }
+
+    .check-label {
+        padding: 5px 7px;
+    }
+
+    .menu_item_text-input {
+        margin-left: 0px;
+    }
+
+    .menu_item-city,
+    .menu_item-email {
+        padding: 10px;
+    }
+
 }
 
 @media screen and (max-width: 520px) {
@@ -206,11 +246,12 @@ a {
     }
 
     .menu_item {
-        width: 33%;
+        width: 35%;
     }
 
     .menu_item.menu_item-city,
     .menu_item.menu_item-email {
         width: 40%;
     }
+
 }

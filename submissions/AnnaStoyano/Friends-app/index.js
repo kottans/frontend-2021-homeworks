@@ -8,7 +8,10 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(data => {
             const friendsApp = new FriendsApp(data.results);
             friendsApp.start();
-        });
+        })
+        .catch(() => {
+            document.location.reload();
+        })
 });
 
 class FriendsApp {
@@ -22,10 +25,11 @@ class FriendsApp {
         this.filterByGender();
         this.filterByCity();
         this.filterByEmail();
+        this.reset();
     }
 
     start() {
-        this.render(this.dipslayCards);
+        this.render();
     }
 
     render() {
@@ -34,54 +38,37 @@ class FriendsApp {
     }
 
     filterByName() {
-        this.filterByNameAlphabet();
-        this.filterByNameNonAlphabet();
-    }
-
-    filterByNameAlphabet() {
-        const alphabetBtn = document.querySelector('.name-alphabetically');
-        alphabetBtn.addEventListener('click', () => {
-            this.dipslayCards = this.dipslayCards.sort((a, b) => a.name > b.name ? -1 : 1);
-            this.render();
-        });
-    }
-
-    filterByNameNonAlphabet() {
-        const nonAlphabetBtn = document.querySelector('.name-nonalphabetically');
-        nonAlphabetBtn.addEventListener('click', () => {
-            this.dipslayCards = this.dipslayCards.sort((a, b) => a.name > b.name ? 1 : -1);
+        const nameWrapper = document.querySelector('.menu_item-name');
+        nameWrapper.addEventListener('click', ({target}) => {
+            if (target.classList.contains('name-alphabetically')) {
+                this.dipslayCards = this.dipslayCards.sort((a, b) => a.name > b.name ? -1 : 1);
+            }
+            if (target.classList.contains('name-nonalphabetically')) {
+                this.dipslayCards = this.dipslayCards.sort((a, b) => a.name < b.name ? -1 : 1);
+            }
             this.render();
         });
     }
 
     filterByAge() {
-        const ageBtn = document.querySelector('.age_btn');
-        ageBtn.addEventListener('click', () => {
-            if (!ageBtn.classList.contains('LowToHigh')) { // if button is clicked show from low to high
-                this.dipslayCards = this.dipslayCards.sort((a, b) => a.age > b.age ? -1 : 1);
-                ageBtn.classList.add('LowToHigh'); // adding class helps to find out clicking on button
+        const ageButton = document.querySelector('.age_btn');
+        ageButton.addEventListener('click', () => {
+            if (ageButton.classList.contains('clicked')) {
+                this.dipslayCards = this.dipslayCards.sort((a, b) => a.age < b.age ? -1 : 1);
+                ageButton.classList.remove('clicked');
             } else {
-                this.dipslayCards = this.dipslayCards.sort((a, b) => a.age > b.age ? 1 : -1); // if button isn't clicked show from high to low
-                ageBtn.classList.remove('LowToHigh');
+                this.dipslayCards = this.dipslayCards.sort((a, b) => a.age > b.age ? -1 : 1);
+                ageButton.classList.add('clicked');
             }
             this.render();
         });
     }
 
     filterByGender() {
-        const manRadio = document.querySelector('.radio-input.man');
-        const womanRadio = document.querySelector('.radio-input.woman');
-        const allRadio = document.querySelector('.radio-input.all');
         const genderWrapper = document.querySelector('.menu_item-gender');
-        genderWrapper.addEventListener('click', () => {
-            if (womanRadio.checked) {
-                this.dipslayCards = this.dipslayCards.filter(card => card.user.gender == 'female');
-            }
-            if (manRadio.checked) {
-                this.dipslayCards = this.dipslayCards.filter(card => card.user.gender == 'male');
-            }
-            if (allRadio.checked) {
-                this.dipslayCards = this.cards;
+        genderWrapper.addEventListener('click', ({target}) => {
+            if (target.value != 'all' && target.value) {
+                this.dipslayCards = this.dipslayCards.filter(card => card.user.gender == target.value);
             }
             this.render();
         });
@@ -91,14 +78,7 @@ class FriendsApp {
         const cityInput = document.querySelector('.text-input--city');
         const cityWrapper = document.querySelector('.menu_item-city');
         cityWrapper.addEventListener('click', () => {
-            this.previouseDisplay = this.dipslayCards;
-        });
-        cityInput.addEventListener('input', ({target}) => {
-            this.dipslayCards = this.dipslayCards.filter(card => card.user.location.city.startsWith(target.value));
-            if (this.dipslayCards.length == 0 || target.value == '') {
-                this.dipslayCards = this.previouseDisplay;
-            }
-            this.render();
+            filterByInputText.bind(this)(cityInput, cityWrapper);
         });
     }
 
@@ -106,16 +86,37 @@ class FriendsApp {
         const emailInput = document.querySelector('.text-input--email');
         const emailWrapper = document.querySelector('.menu_item-email');
         emailWrapper.addEventListener('click', () => {
-            this.previouseDisplay = this.dipslayCards;
+            filterByInputText.bind(this)(emailInput, emailWrapper);
         });
-        emailInput.addEventListener('input', ({target}) => {
-            this.dipslayCards = this.dipslayCards.filter(card => card.user.email.includes(target.value));
-            if (this.dipslayCards.length == 0 || target.value == '') {
-                this.dipslayCards = this.previouseDisplay;
-            }
+    }
+
+    reset() {
+        const resetButton = document.querySelector('.btn.reset');
+        const inputs = document.querySelectorAll('.menu_item_text-input');
+        const genderAll = document.querySelector('.radio-input.all');
+        resetButton.addEventListener('click', () => {
+            this.dipslayCards = this.cards;
+            inputs.forEach(input => input.value = '');
+            genderAll.checked = true;
             this.render();
         });
     }
+}
+
+const filterByInputText = function (input, inputWrapper) {
+    inputWrapper.addEventListener('click', () => {
+        this.previouseDisplay = this.dipslayCards;
+    });
+    input.addEventListener('input', ({
+        target
+    }) => {
+        if (input.dataset.value == 'city') {
+            this.dipslayCards = this.dipslayCards.filter(card => card.user.location[input.dataset.value].startsWith(target.value));
+        } else {
+            this.dipslayCards = this.dipslayCards.filter(card => card.user[input.dataset.value].startsWith(target.value));
+        }
+        this.render();
+    });
 }
 
 class UserCard {
@@ -132,15 +133,14 @@ class UserCard {
     createUserCard() {
         const card = document.createElement('div');
         card.classList.add('card');
-        card.innerHTML =
-            "<picture class='user-photo'>" +
-            "<source  class='big-user-img user-img' media='(min-width: 600px)'>" +
-            "<img class='med-user-img user-img'>" +
-            "</picture>" +
-            "<h3 class='name'></h3>" +
-            "<span class='age'></span>" +
-            "<span class='city'></span>" +
-            "<span class='email'></span>";
+        card.innerHTML = `<picture class='user-photo'>\n
+                            <source  class='big-user-img user-img' media='(min-width: 600px)'>\n
+                            <img class='med-user-img user-img'>\n
+                          </picture>\n
+                          <h3 class='name'></h3>\n
+                          <span class='age'></span>\n
+                          <span class='city'></span>\n
+                          <span class='email'></span>`;
         return card;
     }
 
