@@ -147,6 +147,7 @@ const handle = function(event) {
         lastChoice = event.target;
         lastChoice.classList.add("selectedItem");
         render(target.id);
+        window.scrollTo(0, 0);
     };
 }
 
