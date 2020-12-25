@@ -1,0 +1,553 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Arial", "Helvetica", sans-serif;
+  border: 0;
+}
+
+ul {
+  list-style: none;
+}
+
+.header {
+  display: flex;
+  grid-area: header;
+  align-items: center;
+  padding-left: 20px;
+
+  color: white;
+  font-weight: 400;
+  font-size: 11px;
+  text-transform: uppercase;
+
+  background-color: rgb(34 77 101);
+}
+
+main {
+  overflow-y: auto;
+}
+
+.app-container {
+  display: grid;
+  grid-template-areas: "header header" "aside main";
+  grid-template-rows: 60px 1fr;
+  grid-template-columns: 250px 1fr;
+  height: 100vh;
+}
+
+.user-list {
+  display: grid;
+  grid-area: main;
+  grid-auto-rows: auto;
+  grid-gap: 3vw;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  justify-items: center;
+  height: 100vh;
+  padding: 20px;
+}
+
+.user-card {
+  position: relative;
+
+  display: grid;
+  flex-direction: column;
+  grid-template-areas: "photo" "name" "address" "phone" "email";
+  grid-template-rows: 136px 40px 1fr 40px 40px;
+  grid-template-columns: 1fr;
+  align-items: center;
+  justify-items: center;
+  width: 250px;
+  height: 300px;
+  overflow: hidden;
+
+  color: white;
+  font-size: 12px;
+
+  background-color: #4e646d;
+  border-radius: 4px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.placeholder {
+  background: linear-gradient(
+    90deg,
+    rgba(158, 158, 158, 1) 0%,
+    rgba(78, 100, 109, 1) 33%,
+    rgba(158, 158, 158, 1) 66%,
+    rgba(78, 100, 109, 1) 100%
+  );
+  background-position: right center;
+  background-size: 300%;
+  animation: go-left-right 2s infinite;
+}
+
+@keyframes go-left-right {
+  to {
+    background-position: left center;
+  }
+}
+
+.user-card__cover {
+  position: absolute;
+  top: 0;
+  z-index: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-position-y: -84px;
+  background-size: 120%;
+  filter: blur(5px) brightness(40%);
+}
+
+.user-card__photo {
+  z-index: 1;
+
+  grid-area: photo;
+  align-self: end;
+  width: 100px;
+  height: 100px;
+  background-color: #a6bec8;
+
+  border: 4px solid whitesmoke;
+  border-radius: 50%;
+}
+
+.user-card__name {
+  z-index: 1;
+
+  grid-area: name;
+  align-self: end;
+
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.user-card__email,
+.user-card__phone {
+  z-index: 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  width: 100%;
+  height: 100%;
+  padding-left: 50px;
+
+  color: rgb(68, 68, 68);
+  font-weight: bold;
+  font-size: 16px;
+  text-align: left;
+
+  background-color: #f9f9f9;
+  background-repeat: no-repeat;
+  background-position-x: 5%;
+  background-position-y: center;
+  background-size: 20px;
+}
+
+.user-card__addr {
+  z-index: 1;
+
+  display: flex;
+  grid-area: address;
+  align-items: center;
+  align-self: start;
+  height: 24px;
+}
+
+.user-card__flag {
+  margin-right: 4px;
+}
+
+.user-card__phone {
+  grid-area: phone;
+
+  letter-spacing: 1px;
+
+  background-image: url("../img/phone-48.png");
+}
+
+.user-card__email {
+  grid-area: email;
+
+  font-size: 12px;
+
+  background-image: url("../img/email-48.png");
+}
+
+.filters-block {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  grid-area: aside;
+  gap: 20px;
+  align-items: center;
+  padding: 20px 14px;
+
+  background-color: rgb(53 113 155);
+}
+
+.button {
+  width: 100%;
+  height: 30px;
+  background-color: rgb(182, 196, 197);
+  border-radius: 4px;
+}
+
+.button:hover {
+  background-color: #b7b7b7;
+  cursor: pointer;
+}
+
+.button:disabled {
+  cursor: auto;
+}
+
+.button:active {
+  background-color: #939393;
+}
+
+.filter-name,
+.filter-sex,
+.sort-age,
+.sort-name {
+  width: 100%;
+}
+
+.filter-name__input {
+  width: 100%;
+  height: 36px;
+  text-align: center;
+  text-transform: uppercase;
+
+  background-image: url("../img/search-48.png");
+  background-repeat: no-repeat;
+  background-position-x: 5%;
+  background-position-y: center;
+  background-size: 18px;
+  border: 1px solid grey;
+  border-radius: 4px;
+}
+
+.filter-age {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+
+  color: white;
+  font-size: 15px;
+}
+
+.filter-age::before {
+  content: "AGE:";
+}
+
+.filter-age__input {
+  width: 20%;
+  height: 30px;
+  color: rgb(36, 36, 36);
+
+  font-size: 16px;
+  text-align: center;
+
+  border: 1px solid grey;
+  border-radius: 4px;
+}
+
+.filter-age__divider::before {
+  content: "--";
+}
+
+.filter-sex__input::before {
+  content: "FILTER BY SEX";
+}
+
+.sort-name__input::before {
+  content: "SORT BY NAME";
+}
+
+.sort-age__input::before {
+  content: "SORT BY AGE";
+}
+
+.reset-filters {
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  background-color: transparent;
+  border: 1px solid rgb(251, 251, 251);
+}
+
+.reset-filters:disabled {
+  color: rgb(184, 184, 184);
+  font-weight: normal;
+  border-color: rgb(184, 184, 184);
+  border-width: 1px;
+}
+
+.reset-filters:hover {
+  background-color: #336b92;
+}
+
+.reset-filters::before {
+  content: "Reset";
+}
+
+.filter[value="down"] {
+  background-color: white;
+  background-image: url("../img/arrow-down-48.png");
+  background-position-x: 95%;
+  background-size: 14px;
+}
+
+.filter {
+  background-repeat: no-repeat;
+  background-position-y: center;
+}
+
+.filter[value="down"]:hover,
+.filter[value="up"]:hover,
+.filter[value="male"]:hover,
+.filter[value="female"]:hover {
+  background-color: #b7b7b7;
+}
+
+.filter[value="female"] {
+  background-color: white;
+  background-image: url("../img/female-48.png");
+  background-position-x: 95%;
+  background-size: 18px;
+}
+
+.filter[value="male"] {
+  background-color: white;
+  background-image: url("../img/male-48.png");
+  background-position-x: 95%;
+  background-size: 18px;
+}
+
+.filter[value="up"] {
+  background-color: white;
+  background-image: url("../img/arrow-up-48.png");
+  background-position-x: 95%;
+  background-size: 14px;
+}
+
+@media (max-width: 830px) {
+  .header {
+    justify-content: center;
+    padding: 0;
+
+    font-size: 9px;
+  }
+
+  .app-container {
+    display: grid;
+    grid-template-areas: "header" "aside" "main";
+    grid-template-rows: 60px 60px 1fr;
+    grid-template-columns: 1fr;
+    height: 100vh;
+  }
+
+  .filters-block {
+    flex-direction: row;
+    gap: 6px;
+    justify-content: space-between;
+    padding: 0 4px;
+  }
+
+  .filter {
+    font-size: 10px;
+  }
+
+  .filter-age {
+    justify-content: center;
+    width: 25%;
+
+    color: whitesmoke;
+    content: "Age:";
+  }
+
+  .filter-age__input {
+    width: 34px;
+    margin: 0 2px;
+
+    font-size: 13px;
+  }
+
+  .filter-age__divider::before {
+    content: "-";
+  }
+
+  .filter-name {
+    flex-basis: 40%;
+    flex-shrink: 0;
+  }
+
+  .sort-age__input::before {
+    content: "AGE";
+  }
+
+  .sort-name__input::before {
+    content: "NAME";
+  }
+
+  .filter-sex__input::before {
+    content: "SEX";
+  }
+
+  .reset-filters {
+    position: absolute;
+    top: -14px;
+    right: 2px;
+
+    width: 20px;
+    height: 20px;
+
+    background-color: #bf186a;
+    border-width: 0px;
+    border-radius: 50%;
+  }
+
+  .reset-filters:hover {
+    background-color: #bf186a;
+    transform: scale(2) translateX(-5px);
+  }
+
+  .reset-filters:disabled {
+    display: none;
+  }
+
+  .reset-filters::before {
+    content: "x";
+  }
+}
+
+@media (max-width: 575px) {
+  .app-container {
+    grid-template-areas: "header" "aside" "main";
+    grid-template-rows: 60px 40px 1fr;
+  }
+
+  .user-list {
+    grid-template-columns: 1fr;
+
+    padding: 10px 4px;
+  }
+
+  .user-card {
+    grid-template-areas: "photo name" "photo address" "photo phone" "photo email";
+    grid-template-rows: repeat(4, 1fr);
+    grid-template-columns: 30% 1fr;
+    width: 100%;
+    height: 30vw;
+  }
+
+  .user-card__photo {
+    align-self: center;
+    width: 90px;
+    height: 90px;
+
+    border-width: 2px;
+  }
+
+  .user-card__cover {
+    display: none;
+  }
+
+  .user-card__name {
+    font-size: 16px;
+  }
+
+  .user-card__name,
+  .user-card__addr {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+
+    color: #2e59a8;
+
+    background-color: #f9f9f9;
+  }
+
+  .user-card__flag {
+    width: 14px;
+    height: 14px;
+  }
+
+  .user-card__phone {
+    letter-spacing: 0.4px;
+  }
+
+  .user-card__email,
+  .user-card__phone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+
+    background-color: #e8e8e8;
+  }
+
+  .user-card__email {
+    font-weight: 400;
+    letter-spacing: 0.4px;
+  }
+
+  .filters-block {
+    gap: 0;
+  }
+
+  .filter-age {
+    width: auto;
+    padding: 2px 2px;
+  }
+
+  .filter-age::before,
+  .filter-age__divider {
+    font-size: 10px;
+  }
+
+  .filter-name {
+    flex-basis: 30%;
+  }
+
+  .filter-sex,
+  .sort-age,
+  .sort-name {
+    padding: 2px;
+  }
+
+  .filter-age__input {
+    width: 24px;
+    margin: 0;
+  }
+
+  .filter-age__input::-webkit-inner-spin-button,
+  .filter-age__input::-webkit-outer-spin-button {
+    margin: 0;
+    -webkit-appearance: none;
+  }
+  .filter-name__input {
+    height: 30px;
+  }
+
+  .filter[value="down"],
+  .filter[value="up"],
+  .filter[value="male"],
+  .filter[value="female"] {
+    background-position-x: 100%;
+  }
+
+  .reset-filters {
+    z-index: 2;
+  }
+}
