@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Friends App</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<main class="friends-app">
+    <div class="filter-sorting">
+        <div class="container">
+            <div class="search-field">
+                <input type="text" class="filter-name" id="name" placeholder="Search by name">
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="wrap-actions">
+            <div class="filter-field">
+                <span class="title">
+                    Filter by gender:
+                </span>
+                <div class="wrap-filter">
+                    <label>
+                        <input type="radio" class="filter-gender" filter-gender="male" name="filter-gender" >
+                        <i class="fas fa-male"></i>
+                    </label>
+                    <label>
+                        <input type="radio" class="filter-gender" filter-gender="female" name="filter-gender">
+                        <i class="fas fa-female"></i>
+                    </label>
+                    <label>
+                        <input type="radio" class="filter-gender" filter-gender="all" name="filter-gender">
+                        <i class="fas fa-restroom"></i>
+                    </label>
+                </div>
+            </div>
+            <div class="sorting-field">
+                <div class="sort-by sort-by_name down">
+                    <i class="fas"></i>
+                </div>
+                <div class="sort-by sort-by_age down">
+                    <i class="fas"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="wrap-cards container">
+        <div class="loading"><i class="fas fa-spinner"></i></div>
+    </div>
+</main>
+
+<script src="js/app.js" type="module"></script>
+</body>

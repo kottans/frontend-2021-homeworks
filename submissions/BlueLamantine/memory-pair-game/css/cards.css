@@ -1,0 +1,224 @@
+.card-img,
+.card {
+  width: 60px;
+  height: 60px;
+}
+.card {
+  position: absolute;
+  opacity: 0;
+  animation-duration: 9.5s;
+  animation-delay: 5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  transform-style: preserve-3d;
+}
+.card .face .card-text {
+  font-size: 10px;
+  transform: perspective(120px) translateZ(14px);
+}
+.card .face {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60px;
+  height: 60px;
+  transform-style: preserve-3d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backface-visibility: hidden;
+  transition: 0.3s ease-in-out;
+  transform: perspective(120px) rotateY(0deg);
+}
+
+.card .face.front, .card .face.back  {
+  background: url(../img/card_bcg.png) center / cover no-repeat;
+}
+.card .face.front.open {
+  transform: perspective(120px) rotateY(180deg);
+}
+.card .face.back {
+  transform: perspective(120px) rotateY(180deg);
+}
+
+.card:hover .face.front {
+  cursor: url(../img/cursor_pointer.png), pointer;
+}
+.face.back .card-img {
+  backface-visibility: hidden;
+  transform: perspective(120px) translateZ(7px);
+}
+.card .face.back.open {
+  transform: perspective(120px) rotateY(360deg);
+}
+.block-0 .wrap:nth-child(1) .card {
+  animation-name: move-block-0-card-1, arise;
+}
+
+@keyframes move-block-0-card-1 {
+  0% {
+    top: 88px;
+    left: 88px;
+  }
+  100% {
+    top: 50px;
+    left: 120px;
+  }
+}
+.block-0 .wrap:nth-child(2) .card {
+  animation-name: move-block-0-card-2, arise;
+}
+
+@keyframes move-block-0-card-2 {
+  0% {
+    top: 167px;
+    left: 80px;
+  }
+  100% {
+    top: 175px;
+    left: 18px;
+  }
+}
+.block-0 .wrap:nth-child(3) .card {
+  animation-name: move-block-0-card-3, arise;
+}
+
+@keyframes move-block-0-card-3 {
+  0% {
+    top: 258px;
+    left: 44px;
+  }
+  100% {
+    top: 346px;
+    left: 67px;
+  }
+}
+.block-1 .wrap:nth-child(1) .card {
+  animation-name: move-block-1-card-1, arise;
+}
+@keyframes move-block-1-card-1 {
+  0% {
+    top: 38px;
+    left: 48px;
+  }
+  100% {
+    top: 15px;
+    left: 105px;
+  }
+}
+.block-1 .wrap:nth-child(2) .card {
+  animation-name: move-block-1-card-2, arise;
+}
+@keyframes move-block-1-card-2 {
+  0% {
+    top: 111px;
+    left: 139px;
+  }
+  100% {
+    top: 133px;
+    left: 79px;
+  }
+}
+.block-1 .wrap:nth-child(3) .card {
+  animation-name: move-block-1-card-3, arise;
+}
+@keyframes move-block-1-card-3 {
+  0% {
+    top: 284px;
+    left: 62px;
+  }
+  100% {
+    top: 334px;
+    left: 96px;
+  }
+}
+.block-2 .wrap:nth-child(1) .card {
+  animation-name: move-block-2-card-1, arise;
+}
+@keyframes move-block-2-card-1 {
+  0% {
+    top: 25px;
+    left: 51px;
+  }
+  100% {
+    top: 74px;
+    left: 85px;
+  }
+}
+.block-2 .wrap:nth-child(2) .card {
+  animation-name: move-block-2-card-2, arise;
+}
+@keyframes move-block-2-card-2 {
+  0% {
+    top: 148px;
+    left: 4px;
+  }
+  100% {
+    top: 121px;
+    left: 42px;
+  }
+}
+.block-2 .wrap:nth-child(3) .card {
+ animation-name: move-block-2-card-3, arise;
+}
+@keyframes move-block-2-card-3 {
+  0% {
+    top: 289px;
+    left: 88px;
+  }
+  100% {
+    top: 254px;
+    left: 129px;
+  }
+}
+.block-3 .wrap:nth-child(1) .card {
+  animation-name: move-block-3-card-1, arise;
+}
+@keyframes move-block-3-card-1 {
+  0% {
+    top: 49px;
+    left: 63px;
+  }
+  100% {
+    top: 105px;
+    left: 35px;
+  }
+}
+.block-3 .wrap:nth-child(2) .card {
+  animation-name: move-block-3-card-2, arise;
+}
+@keyframes move-block-3-card-2 {
+  0% {
+    top: 180px;
+    left: 134px;
+  }
+  100% {
+    top: 143px;
+    left: 82px;
+  }
+}
+.block-3 .wrap:nth-child(3) .card {
+  animation-name: move-block-3-card-3, arise;
+}
+@keyframes move-block-3-card-3 {
+  0% {
+    top: 300px;
+    left: 26px;
+  }
+  100% {
+    top: 255px;
+    left: 63px;
+  }
+}
+@keyframes arise {
+  0% {
+    opacity: 0;
+  }
+  15%,
+  85% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
