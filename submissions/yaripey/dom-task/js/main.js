@@ -45,33 +45,23 @@ const texts = {
 document.addEventListener('DOMContentLoaded', () => {
   const toggler = document.querySelector('.toggle')
 
-  // Function for changing text in main
   const changeText = (target) => {
     const currentMain = document.querySelector('main');
 
-    if (currentMain.classList[0] !== target.id) { // if this page isn't open already
-
-      const newText = texts[target.id].text.map(paragraph => `<p>${[paragraph]}</p>`)
-      currentMain.innerHTML = `
+    const newText = texts[target.id].text.map(paragraph => `<p>${[paragraph]}</p>`)
+    currentMain.innerHTML = `
           <img class="picture" src="${texts[target.id].img}">
           ${newText.join('\n')}
       `
+    const currentButton = document.querySelector('.focused')
+    currentButton.classList.toggle('focused')
+    target.classList.toggle('focused')
 
-      // Changing styles of the corresponding button
-      const currentButton = document.querySelector('.focused')
-      currentButton.classList.toggle('focused')
-      target.classList.toggle('focused')
-
-      // For mobile, closing the menu after button tap
-      if (document.querySelector('aside').classList.contains('toggled')) {
-        document.querySelector('aside').classList.toggle('toggled')
-      }
-    }
+    document.querySelector('aside').classList.remove('toggled')
   }
 
-  // Function for handling the menu button click
   const handleChangeText = ({ target }) => {
-    if (target.id) { // only if user hit the button
+    if (target.id) {
       changeText(target)
     }
   }
@@ -83,6 +73,5 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('aside').classList.toggle('toggled')
   })
 
-  // This imitates click for the content on page when first opened.
   document.querySelector('#about').click()
 })
