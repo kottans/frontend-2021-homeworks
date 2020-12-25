@@ -78,8 +78,8 @@ Player.prototype.goStartPosition = function () {
 
 const player = new Player(X_START_POSITION_PLAYER, Y_START_POSITION_PLAYER);
 
-const countEmemies = 3;
-const allEnemies = Array(countEmemies)
+const countEnemies = 3;
+const allEnemies = Array(countEnemies)
   .fill()
   .map(function (enemy, index) {
     return new Enemy(
