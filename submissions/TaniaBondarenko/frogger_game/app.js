@@ -23,8 +23,9 @@ class Enemy extends GameSprite {
     constructor(x, y, sprite = "images/enemy-bug.png", speed = "75") {
         super(x, y, sprite);
         this.speed = speed;
+        this.player = player;
     }
- 
+    
     update(dt) {
         this.x += this.speed * dt;
         const addSpeed = 40;
@@ -34,23 +35,21 @@ class Enemy extends GameSprite {
             this.speed = Math.floor(addSpeed + Math.random() * 100);
         }
         this.checkCollisions();
-    };
+    }
 
     checkCollisions() {
-        allEnemies.forEach(function (enemy) {
             const collision_distance = 50;
-            let diffX = Math.abs(enemy.x - player.x);
-            let diffY = Math.abs(enemy.y - player.y);
+            let diffX = Math.abs(this.x - this.player.x);
+            let diffY = Math.abs(this.y - this.player.y);
             let distance = Math.sqrt(Math.pow(diffX, 2) + Math.pow(diffY, 2));
             if (distance <= collision_distance) {
                 alert(`Oops... \uD83D\uDE3F Try Again`);
-                player.initialCoordinates();
-            } else if (player.y === borders.downBorder) {
-                player.y = someGap;
+               this.player.initialCoordinates();
+            } else if (this.player.y === borders.downBorder) {
+                this.player.y = someGap; 
                 setTimeout(function () { alert(`\uD83D\uDE38 Congratulations! You won! \uD83D\uDE38 `); }, 100);
-                setTimeout(function () { player.initialCoordinates(); }, 200);
+                setTimeout(this.player.initialCoordinates.bind(this.player),200);
             };
-        });
     };
 };
 
@@ -63,9 +62,10 @@ class Player extends GameSprite {
     
     initialCoordinates() {
         this.x = 200; this.y = 400;
-    };
+    }
     
-    update() { };
+    update() {
+     }
 
     handleInput  (direction) {
         switch (direction) {
@@ -95,6 +95,7 @@ class Player extends GameSprite {
             this.y = borders.downBorder;
         }
     };
+
 };
 
 const player = new Player();
