@@ -1,83 +1,40 @@
 'use strict'
 
 const MAIN = document.querySelector('#main')
-const HEADER = document.querySelector('#nav')
+const MUSIC_BTN = document.querySelector('#musicBtn')
 const SEARCH = document.querySelector('.search')
-const SEARCH_HINT = document.querySelector('.search__hint')
-const ASIDE = document.querySelector('#slide-out')
-const RESET = document.querySelector('.resetBtn')
-const FILTER = document.querySelector('.filterBtn')
 const SEARCH_INPUT = document.querySelector('#icon_prefix')
-const GENDER_RADIO = document.querySelectorAll('.aside__radioGender')
-const SLIDER = document.getElementById('test-slider')
-const SLIDER_MIN_MAX = [20, 80]
-const SLIDER_SETTINGS = {
-    start: SLIDER_MIN_MAX,
-    connect: true,
-    step: 1,
-    orientation: 'horizontal',
-    range: {
-        'min': 0,
-        'max': 100
-    },
-    format: wNumb({
-        decimals: 0
-    })
-}
-const SORT_RADIO = document.querySelectorAll('.aside__sort')
-const MAX_AGE_HINT = document.querySelectorAll('.maxAge')
-const MIN_AGE_HINT = document.querySelectorAll('.minAge')
+const RESET_BTN = document.querySelector('.resetBtn')
 
 const API_LINK = 'https://randomuser.me/api/'
 
-const APP_LONG_DELAY = 3000
-const APP_DELAY = 1000
-const NUM_FRIENDS_MIN = 30
-const NUM_FRIENDS_MAX = 50
+const APP_DELAY = 3000
+const FRIENDS_MIN = 30
+const FRIENDS_MAX = 50
 
-const ANIM_IN_0 = 'animate__zoomIn'
-const ANIM_OUT_0 = 'animate__zoomOut'
-const ANIM_IN_1 = 'animate__fadeIn'
-const ANIM_OUT_1 = 'animate__fadeOut'
-const ANIM_TIME = 'animate__faster'
-
-const ERROR_MESSAGE = 'Something went wrong, we are so sorry: (Please, reload the page!'
-const GREETING_CONTENT = ` <h4>Wow!!!</h4>
-                        <h4 class="greeting__text" > We found so many people, who want to meet YOU!!!</h4>
-                        <a id="startBtn" class="waves-effect waves-light btn-large hoverable startBtn">
-                            <i class="material-icons right">announcement</i>
-                            Show me them all!
-                        </a>`
-const CARD_INTRO_TEXT0 = 'Hi, I am '
-const CARD_INTRO_TEXT1 = ' years old and I live in '
-const CARD_INTRO_TEXT2 = 'Call me, I want to be your friend.'
-
-//Music
 const APP_AUDIO = new Audio('./audio/you_ve_got_a_friend_in_me.mp3')
 APP_AUDIO.loop = true
 APP_AUDIO.volume = 0.3
 
-const BASE = []
-let FILTERED_BASE = []
+//Classes by AnimateCSS (default speed is 1s)
+const SHOW_ELEM_PRIMARY_ANIMATION = 'animate__zoomIn'
+const HIDE_ELEM_PRIMARY_ANIMATION = 'animate__zoomOut'
+const SHOW_ELEM_SECONDARY_ANIMATION = 'animate__fadeIn'
+const HIDE_ELEM_SECONDARY_ANIMATION = 'animate__fadeOut'
+const ANIMATION_SPEED = 'animate__faster' //500ms
+
+let FRIENDS_SOURCE
+let CURRENT_FRIENDS = []
+let isMusicStoppedByUser = false
 
 
 initApp()
 
 
 function initApp() {
-    getFriends(_getRandomIntInclusive(NUM_FRIENDS_MIN, NUM_FRIENDS_MAX))
+    getFriends(getRandomIntInclusive(FRIENDS_MIN, FRIENDS_MAX))
     addListeners()
-
-    noUiSlider.create(SLIDER, SLIDER_SETTINGS)
-    setSliderHintDefault()
-    SLIDER.noUiSlider.on('change', function() {
-        for (const point of MAX_AGE_HINT) {
-            point.innerHTML = SLIDER.noUiSlider.get()[0]
-        }
-        for (const point of MIN_AGE_HINT) {
-            point.innerHTML = SLIDER.noUiSlider.get()[1]
-        }
-    })
+    createRangeSlider()
 }
 
 function getFriends(num) {
@@ -85,260 +42,181 @@ function getFriends(num) {
         .then(function(resp) {
             return resp.json()
         }).then(function(data) {
-            for (let index = 0; index < data.results.length; index++) {
-                BASE.push(data.results[index])
-            }
+            FRIENDS_SOURCE = data.results
         }).then(function() {
             const timeout = setTimeout(() => {
-                changeContent(createStartScreen(), ANIM_IN_0, ANIM_OUT_0)
+                changeContent(createStartScreen(), SHOW_ELEM_PRIMARY_ANIMATION, HIDE_ELEM_PRIMARY_ANIMATION)
                 clearTimeout(timeout)
-            }, APP_LONG_DELAY)
+            }, APP_DELAY)
         })
         .catch(function(error) {
             console.log(error.message)
-            changeContent(`<h1 class="container h-100 flexContainerCol errorMes">${ERROR_MESSAGE}</h1>`, ANIM_IN_0, ANIM_OUT_0)
+            changeContent(`<h1 class="container h-100 flexContainerCol errorMes">Something went wrong, we are so sorry :( Please, reload the page!</h1>`, SHOW_ELEM_PRIMARY_ANIMATION, HIDE_ELEM_PRIMARY_ANIMATION)
         })
 }
 
 function addListeners() {
     document.addEventListener('DOMContentLoaded', activateSideNav)
-    FILTER.addEventListener('click', filter)
-    RESET.addEventListener('click', resetFilter)
+    document.querySelector('.filterBtn').addEventListener('click', toFilter)
+    RESET_BTN.addEventListener('click', resetFilter)
     MAIN.addEventListener('click', function({ target }) {
         if (target.classList.contains('startBtn')) {
-            changeContent(createFriendsScreen(BASE), ANIM_IN_0, ANIM_OUT_0)
+            changeContent(createFriendsScreen(FRIENDS_SOURCE), SHOW_ELEM_PRIMARY_ANIMATION, HIDE_ELEM_PRIMARY_ANIMATION)
             showSearchBar()
-            APP_AUDIO.play()
+            playMusic()
         }
-    }, { once: true })
+    })
 }
 
 function createStartScreen() {
-    const greeting = `<div class="container greeting__container flexContainerCol">${GREETING_CONTENT}</div>`
-    return greeting
+    return `<div class="container greeting__container flexContainerCol">
+                <h4> Wow!!!</h4 >
+                <h4 class="greeting__text" > We found so many people, who want to meet YOU!!!</h4>
+                <a id="startBtn" class="waves-effect waves-light btn-large hoverable startBtn">
+                    <i class="material-icons right">announcement</i>
+                    Show me them all!
+                </a>
+            </div>`
 }
 
-function createFriendsScreen(array) {
-    let friends = '<div class="container friends__container"><div class="flexContainerRow">'
-    for (const friend of array) {
-        const genderStyle = (friend.gender === 'male') ? 'card__title-male' : 'card__title-female'
+function createFriendsScreen(friends) {
+    let FriendsScreen = '<div class="container friends__container"><div class="flexContainerRow">'
+    friends.forEach(friend => {
         const card = `<div class="card">
                             <div class="card-image">
                                 <img class="card__img" src="${friend.picture.large}" alt="person photo">
-                                <span class="card-title card__title ${genderStyle}">${friend.name.first} ${friend.name.last}</span>
+                                <span class="card-title card__title card__title-${friend.gender}">${friend.name.first} ${friend.name.last}</span>
                             </div>
                             <div class="card-content card__content">
-                                <p>${CARD_INTRO_TEXT0}<span class="card__contentData">${friend.dob.age}</span>${CARD_INTRO_TEXT1}<span class="card__contentData">${friend.location.city}, ${friend.location.country}</span>.</p>
-                                <p>${CARD_INTRO_TEXT2}</p>
-                                <a href="${friend.phone}" class="card__contentData">${friend.phone}</a>
+                                <p>Hi, I am <span class="card__contentData">${friend.dob.age}</span> years old and I live in <span class="card__contentData">${friend.location.city}, ${friend.location.country}</span>.</p>
+                                <p>Call me, I want to be your friend.</p>
+                                <a href="tel:${friend.phone}" class="card__contentData">${friend.phone}</a>
                             </div>
                                 <div class="card-action">
                                 <a class="card__contentData card__contentData-mail href="mailto:${friend.email}">${friend.email}</a>
                             </div>
                         </div>`
-        friends += card
-    }
-    friends += '</div></div>'
-    return friends
+        FriendsScreen += card
+    })
+    FriendsScreen += '</div></div>'
+    return FriendsScreen
 }
 
 function showSearchBar() {
-    SEARCH.classList.add(ANIM_IN_0)
+    SEARCH.classList.add(SHOW_ELEM_PRIMARY_ANIMATION)
     SEARCH.classList.add('showElem')
-    SEARCH_INPUT.addEventListener('input', search), { once: true }
+    SEARCH_INPUT.addEventListener('input', toSearch)
 }
 
-function changeContent(content, show, hide, time) {
-    MAIN.classList.remove('scroll')
-    if (time) {
-        MAIN.classList.add(time)
+//Function is waiting to get content for display and some classes of AnimateCSS to animation including animation speed (optional)
+function changeContent(content, show, hide, speed) {
+
+    //Preparation displayed content for animation of hiding
+    MAIN.classList.remove('scroll') //Hide scrollbar (for esthetic purpose)
+    if (speed) {
+        MAIN.classList.add(speed) // Adding class that will define speed of animation(optional)
     }
+
+    //Hiding displayed content using AnimateCSS class
     MAIN.classList.add(hide)
+
+    //Waiting for end of animation of hiding content...
     MAIN.addEventListener('animationend', function() {
-        MAIN.innerHTML = ''
-        MAIN.innerHTML = content
-        MAIN.classList.remove(hide)
-        MAIN.classList.add(show)
-        MAIN.addEventListener('animationend', function() {
-            MAIN.classList.add('scroll')
-            MAIN.classList.remove(show)
-            if (time) {
-                MAIN.classList.remove(time)
-            }
-        }, { once: true })
-    }, { once: true })
+            //...and then...
+            MAIN.innerHTML = '' //Clear content
+            MAIN.innerHTML = content //Add new content
+            MAIN.classList.remove(hide) //Clean up unnecessary class
+
+            //Start animation of showing new content
+            MAIN.classList.add(show)
+
+            //Waiting for end of animation of showing content...
+            MAIN.addEventListener('animationend', function() {
+                    //...and then...
+                    MAIN.classList.add('scroll') //Show scrollbar back
+                    MAIN.classList.remove(show) //Clean up unnecessary class
+                    if (speed) {
+                        MAIN.classList.remove(speed) //Clean up unnecessary class
+                    }
+
+                }, { once: true }) // Use listeners once and automatically removing after invoke
+        }, { once: true }) //in order not to accumulate listeners after each function's call
+
 }
 
-function search() {
-    const input = SEARCH_INPUT.value
-    const tempFilteredBase = []
-    if (FILTERED_BASE.length === 0) {
-        for (const friend of BASE) {
-            const firstName = friend.name.first
-            const lastName = friend.name.last
+function toSearch() {
+    const input = SEARCH_INPUT.value.toLowerCase()
 
-            const template = new RegExp(`^${input}`, "i")
-            if (template.test(firstName) || template.test(lastName)) {
-                tempFilteredBase.push(friend)
-            }
-        }
-        changeContent(createFriendsScreen(tempFilteredBase), ANIM_IN_1, ANIM_OUT_1, ANIM_TIME)
-        SEARCH_INPUT.addEventListener('input', search), { once: true }
-    } else {
+    let foundFriends = (CURRENT_FRIENDS.length === 0) ?
+        FRIENDS_SOURCE.filter(friend => (friend.name.first.toLowerCase().startsWith(input) || friend.name.last.toLowerCase().startsWith(input))) :
+        CURRENT_FRIENDS.filter(friend => (friend.name.first.toLowerCase().startsWith(input) || friend.name.last.toLowerCase().startsWith(input)))
 
-        for (const friend of FILTERED_BASE) {
-            const firstName = friend.name.first
-            const lastName = friend.name.last
-            const template = new RegExp(`^${input}`, "i")
+    changeContent(createFriendsScreen(foundFriends), SHOW_ELEM_SECONDARY_ANIMATION, HIDE_ELEM_SECONDARY_ANIMATION, ANIMATION_SPEED)
+}
 
-            if (template.test(firstName) || template.test(lastName)) {
-                tempFilteredBase.push(friend)
-            }
-        }
-        changeContent(createFriendsScreen(tempFilteredBase), ANIM_IN_1, ANIM_OUT_1, ANIM_TIME)
-        SEARCH_INPUT.addEventListener('input', search), { once: true }
+function toFilter() {
+    //In case user enter to app through sidenav (not using startBtn)
+    if (!isMusicStoppedByUser) {
+        playMusic()
     }
-}
-
-function filter() {
-    APP_AUDIO.play()
     showSearchBar()
     closeSideNav()
-    FILTERED_BASE = []
 
-    let userChooseGender = ['male', 'female']
-    for (const item of GENDER_RADIO) {
-        if (item.checked) {
-            userChooseGender = []
-            userChooseGender.push(item.getAttribute("data-gender"))
-        }
-    }
+    let userChooseGender = (document.querySelector("input[type='radio'][name='gender']:checked")) ? [document.querySelector("input[type='radio'][name='gender']:checked").getAttribute("data-gender")] : ['male', 'female']
+    const [userChooseMinAge, userChooseMaxAge] = document.getElementById('test-slider').noUiSlider.get()
+        //Filter
+    CURRENT_FRIENDS = FRIENDS_SOURCE.filter(friend => (userChooseGender.includes(friend.gender) && friend.dob.age >= userChooseMinAge && friend.dob.age <= userChooseMaxAge))
 
-    const userChooseMinAge = SLIDER.noUiSlider.get()[0]
-    const userChooseMaxAge = SLIDER.noUiSlider.get()[1]
-
-    for (const friend of BASE) {
-        if ((userChooseGender[0] === friend.gender || userChooseGender[1] === friend.gender) &&
-            friend.dob.age >= userChooseMinAge &&
-            friend.dob.age <= userChooseMaxAge) {
-            FILTERED_BASE.push(friend)
-        }
-    }
-
-    let sortParameter = false
-    for (const item of SORT_RADIO) {
-        if (item.checked) {
-            sortParameter = item.getAttribute("data-sortAge")
-        }
-    }
+    let sortParameter = (document.querySelector("input[type='radio'][name='sort']:checked")) ? document.querySelector("input[type='radio'][name='sort']:checked").getAttribute("data-sort") : false
+        //Sort
     switch (sortParameter) {
         case '0-100':
-            FILTERED_BASE.sort(function(a, b) {
-                if (a.dob.age > b.dob.age) {
-                    return 1
-                }
-                if (a.dob.age < b.dob.age) {
-                    return -1
-                }
-                return 0
-            })
+            CURRENT_FRIENDS.sort(byField('dob', 'age'))
             break
         case '100-0':
-            FILTERED_BASE.sort(function(a, b) {
-                if (a.dob.age < b.dob.age) {
-                    return 1
-                }
-                if (a.dob.age > b.dob.age) {
-                    return -1
-                }
-                return 0
-            })
+            CURRENT_FRIENDS.sort(byField('dob', 'age')).reverse()
             break
         case 'name_a-z':
-            FILTERED_BASE.sort(function(a, b) {
-                if (a.name.first > b.name.first) {
-                    return 1
-                }
-                if (a.name.first < b.name.first) {
-                    return -1
-                }
-                return 0
-            })
+            CURRENT_FRIENDS.sort(byField('name', 'first'))
             break
         case 'name_z-a':
-            FILTERED_BASE.sort(function(a, b) {
-                if (a.name.first < b.name.first) {
-                    return 1
-                }
-                if (a.name.first > b.name.first) {
-                    return -1
-                }
-                return 0
-            })
+            CURRENT_FRIENDS.sort(byField('name', 'first')).reverse()
             break
         case 'lastName_a-z':
-            FILTERED_BASE.sort(function(a, b) {
-                if (a.name.last > b.name.last) {
-                    return 1
-                }
-                if (a.name.last < b.name.last) {
-                    return -1
-                }
-                return 0
-            })
+            CURRENT_FRIENDS.sort(byField('name', 'last'))
             break
         case 'lastName_z-a':
-            FILTERED_BASE.sort(function(a, b) {
-                if (a.name.last < b.name.last) {
-                    return 1
-                }
-                if (a.name.last > b.name.last) {
-                    return -1
-                }
-                return 0
-            })
+            CURRENT_FRIENDS.sort(byField('name', 'last')).reverse()
             break
 
         default:
             break
     }
 
-    changeContent(createFriendsScreen(FILTERED_BASE), ANIM_IN_0, ANIM_OUT_0)
+    changeContent(createFriendsScreen(CURRENT_FRIENDS), SHOW_ELEM_PRIMARY_ANIMATION, HIDE_ELEM_PRIMARY_ANIMATION)
 }
 
 function resetFilter() {
-    APP_AUDIO.play()
+    //In case user enter to app through sidenav (not using startBtn)
+    if (!isMusicStoppedByUser) {
+        playMusic()
+    }
     showSearchBar()
     closeSideNav()
-    FILTERED_BASE = []
-    for (const item of GENDER_RADIO) {
-        if (item.checked) {
-            item.checked = false
-        }
+
+    CURRENT_FRIENDS = []
+    if (document.querySelector("input[type='radio'][name='gender']:checked")) {
+        document.querySelector("input[type='radio'][name='gender']:checked").checked = false
     }
-    SLIDER.noUiSlider.set(SLIDER_MIN_MAX)
-    setSliderHintDefault()
-    for (const item of SORT_RADIO) {
-        if (item.checked) {
-            item.checked = false
-        }
+    if (document.querySelector("input[type='radio'][name='sort']:checked")) {
+        document.querySelector("input[type='radio'][name='sort']:checked").checked = false
     }
-    changeContent(createFriendsScreen(BASE), ANIM_IN_0, ANIM_OUT_0)
+    changeContent(createFriendsScreen(FRIENDS_SOURCE), SHOW_ELEM_PRIMARY_ANIMATION, HIDE_ELEM_PRIMARY_ANIMATION)
 }
 
 function closeSideNav() {
     SEARCH_INPUT.value = ''
-    SEARCH_HINT.classList.remove('active')
-    document.querySelector('.sidenav-overlay').click()
-}
-
-function setSliderHintDefault() {
-    for (const point of MAX_AGE_HINT) {
-        point.innerHTML = SLIDER.noUiSlider.get()[0]
-    }
-    for (const point of MIN_AGE_HINT) {
-        point.innerHTML = SLIDER.noUiSlider.get()[1]
-    }
+    document.querySelector('.search__hint').classList.remove('active')
 }
 
 function activateSideNav() {
@@ -346,8 +224,65 @@ function activateSideNav() {
     M.Sidenav.init(sideNavIco, {})
 }
 
-function _getRandomIntInclusive(min, max) {
+function playMusic() {
+    APP_AUDIO.play()
+    MUSIC_BTN.classList.add('musicBtn-active')
+    MUSIC_BTN.classList.add('musicBtn-animation')
+    MUSIC_BTN.addEventListener('click', stopMusic, { once: true })
+}
+
+function stopMusic() {
+    APP_AUDIO.pause()
+    MUSIC_BTN.classList.remove('musicBtn-animation')
+    MUSIC_BTN.addEventListener('click', playMusic, { once: true })
+    isMusicStoppedByUser = true
+}
+
+function getRandomIntInclusive(min, max) {
     min = Math.ceil(min)
     max = Math.floor(max)
     return Math.floor(Math.random() * (max - min + 1) + min)
+}
+
+function byField(fieldName, subFieldName) {
+    return (a, b) => a[fieldName][subFieldName] > b[fieldName][subFieldName] ? 1 : a[fieldName][subFieldName] < b[fieldName][subFieldName] ? -1 : 0;
+}
+
+//noUiSlider
+function createRangeSlider() {
+    const rangeSlider = document.getElementById('test-slider')
+    const rangeSliderSettings = {
+        start: [20, 80],
+        connect: true,
+        step: 1,
+        orientation: 'horizontal',
+        range: {
+            'min': 0,
+            'max': 100
+        },
+        format: wNumb({
+            decimals: 0
+        })
+    }
+
+    const maxAgeHint = document.querySelectorAll('.maxAge')
+    const minAgeHint = document.querySelectorAll('.minAge')
+
+    noUiSlider.create(rangeSlider, rangeSliderSettings)
+    setValueOfSortByAgeHint()
+    rangeSlider.noUiSlider.on('change', setValueOfSortByAgeHint)
+    RESET_BTN.addEventListener('click', resetRangeSlider)
+
+    function resetRangeSlider() {
+        rangeSlider.noUiSlider.updateOptions(
+            rangeSliderSettings
+        )
+        setValueOfSortByAgeHint()
+    }
+
+    function setValueOfSortByAgeHint() {
+        //get max and min value of range slider and set them to hints
+        maxAgeHint.forEach(point => point.innerHTML = rangeSlider.noUiSlider.get()[1])
+        minAgeHint.forEach(point => point.innerHTML = rangeSlider.noUiSlider.get()[0])
+    }
 }

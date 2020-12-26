@@ -1,5 +1,5 @@
 html {
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 *,
@@ -10,40 +10,72 @@ html {
     margin: 0;
 }
 
-.body {
+body {
     width: 100vw;
     max-width: 1980px;
     margin: 0 auto;
     height: 100vh;
     background-color: #dee3e5;
-    overflow-x: hidden;
     color: #1e4d79 !important;
+    overflow: hidden;
+}
+
+.flexContainerRow {
+    display: flex;
+    flex-wrap: wrap !important;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: stretch;
+    margin: 0 -15px;
+}
+
+
+/* SCROLLBAR STYLES */
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    margin: 10px;
+    background-color: #dee3e5;
+    border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #1e4d79;
+    border: 1px solid #dee3e5;
+    border-radius: 2px;
 }
 
 
 /* =================  Header  ================= */
 
-.nav {
+header {
     background-color: #1e4d79;
     height: auto;
     margin-bottom: 1vh;
-    padding: 1rem 0;
+    padding: 1rem 3rem;
+    position: relative;
 }
 
-.nav__logoWrapper {
+.header__logoWrapper {
     display: flex;
+    align-items: center;
 }
 
-.nav__title {
+.header__title {
     color: #b6c0cb !important;
     position: initial !important;
+    font-size: 3.0rem;
+    margin-left: 1.3rem;
 }
 
-.nav__icon {
+.header__icon {
     color: #b6c0cb !important;
 }
 
-.pulse1 {
+.pulse1-animation {
     position: absolute;
     width: 60px;
     height: 60px;
@@ -62,7 +94,7 @@ html {
     box-sizing: border-box;
 }
 
-.pulse2 {
+.pulse2-animation {
     position: absolute;
     width: 60px;
     height: 60px;
@@ -189,17 +221,53 @@ html {
     }
 }
 
+.musicBtn {
+    opacity: 0;
+    cursor: auto;
+    transition: opacity ease-in-out 0.5s;
+}
+
+.musicBtn__icon {
+    position: relative;
+    bottom: 15px;
+    margin-left: 10px;
+    width: 30px;
+}
+
+@keyframes pulsejg3 {
+    0% {
+        transform: scale(.7);
+        opacity: 0.7;
+    }
+    40% {
+        transform: scale(.85);
+        opacity: 0.9;
+    }
+    50% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    80% {
+        transform: scale(.85);
+        opacity: 0.9;
+    }
+    100% {
+        transform: scale(.7);
+        opacity: 0.7;
+    }
+}
+
 .search {
     opacity: 0;
     color: #b6c0cb;
 }
 
-.search__text {
+.search__input {
     color: #dee3e5 !important;
 }
 
-.search__text:focus {
-    border-bottom: 3px solid #b6c0cb !important;
+.search__input:focus {
+    border-bottom: 1px solid #b6c0cb !important;
 }
 
 .active {
@@ -213,7 +281,7 @@ html {
 
 /* =================  Aside  ================= */
 
-.aside {
+.sidenav {
     background-color: #1d88b6;
     height: 100vh;
     overflow: hidden;
@@ -223,21 +291,21 @@ html {
     user-select: none;
 }
 
-.aside__title {
+.nav__title {
     text-align: center;
     color: #dee3e5;
-    margin: 20px 0;
+    margin: 20px 20px;
 }
 
-.aside__title-age {
+.nav__title-age {
     margin-bottom: 60px;
 }
 
-.aside__hint {
+.nav__hint {
     color: #dee3e5;
 }
 
-.aside__hint:before {
+.nav__hint:before {
     border: 2px solid #dee3e5 !important;
 }
 
@@ -245,17 +313,17 @@ html {
     background-color: #dee3e5 !important;
 }
 
-.aside__genderIco {
+.nav__genderIco {
     width: 40px;
 }
 
-.aside__sortIco {
+.nav__sortIco {
     width: 40px;
     height: 40px;
     transform: rotateZ(-90deg);
 }
 
-.aside__uiSlider {
+.nav__uiSlider {
     margin: 0 15px 30px;
 }
 
@@ -285,6 +353,7 @@ html {
 
 .sidenav-trigger {
     display: block !important;
+    position: relative;
 }
 
 .sidenav-trigger i {
@@ -295,13 +364,13 @@ html {
 /* =================  Main  ================= */
 
 .main {
-    overflow: hidden;
+    min-height: 80vh;
     opacity: 1;
     transition: all ease-in-out 1s;
-    min-height: 75vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
 }
 
 .blockquote-wrapper {
@@ -406,6 +475,7 @@ html {
 
 .friends__container {
     margin-top: 40px;
+    height: 86vh;
 }
 
 
@@ -496,6 +566,9 @@ html {
 }
 
 @media screen and (max-width: 450px) {
+    .header__title {
+        font-size: 2.2rem;
+    }
     .card {
         margin: 30px;
     }
@@ -520,27 +593,27 @@ html {
         height: 30px !important;
         line-height: 30px !important;
     }
-    .aside__title {
+    .nav__title {
         font-size: 22px;
         margin: 5px;
     }
-    .aside__genderIco {
+    .nav__genderIco {
         width: 30px;
     }
-    .aside__sortIco {
+    .nav__sortIco {
         width: 25px;
     }
-    .aside__uiSlider {
+    .nav__uiSlider {
         margin: 50px 15px 5px;
     }
 }
 
 @media screen and (max-height: 670px) {
-    .aside__title {
+    .nav__title {
         font-size: 18px;
         margin: 5px;
     }
-    .aside__genderIco {
+    .nav__genderIco {
         width: 25px;
     }
     .sidenav li {
@@ -553,7 +626,7 @@ html {
         font-size: 2.7rem !important;
         text-align: center;
     }
-    .aside__genderIco {
+    .nav__genderIco {
         width: 20px;
     }
     .sidenav li {
@@ -562,15 +635,64 @@ html {
 }
 
 @media screen and (max-height: 415px) {
-    .nav {
+    .sidenav {
         margin-bottom: 0;
         padding: 0.3rem 0;
+        overflow-y: scroll;
     }
     .blockquote h1 {
         font-size: 2rem !important;
         text-align: center;
     }
-    .aside {
-        overflow-y: scroll;
+}
+
+@media screen and (max-height: 350px) {
+    .header__title {
+        font-size: 1.8rem;
     }
+    .search {
+        margin-bottom: 0;
+    }
+    .card {
+        margin: 30px 150px;
+    }
+}
+
+
+/* Styles using by JS */
+
+.scroll {
+    overflow-y: auto;
+}
+
+.flexContainerCol {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.h-100 {
+    height: 100%;
+}
+
+.d-none {
+    display: none;
+}
+
+.d-block {
+    display: block;
+}
+
+.showElem {
+    opacity: 1;
+}
+
+.musicBtn-active {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.musicBtn-animation {
+    animation: pulsejg3 2.1s linear infinite;
 }
