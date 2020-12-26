@@ -20,6 +20,7 @@ class FriendsApp {
         this.cards = users.map(item => new UserCard(item));
         this.dipslayCards = this.cards;
         this.previouseDisplay = this.dipslayCards;
+        this.clickedCount = 0;
         this.filterByName();
         this.filterByAge();
         this.filterByGender();
@@ -67,8 +68,14 @@ class FriendsApp {
     filterByGender() {
         const genderWrapper = document.querySelector('.menu_item-gender');
         genderWrapper.addEventListener('click', ({target}) => {
+            if (this.clickedCount == 0) {
+                this.previouseDisplay = this.dipslayCards;
+            }
             if (target.value != 'all' && target.value) {
-                this.dipslayCards = this.dipslayCards.filter(card => card.user.gender == target.value);
+                this.dipslayCards = this.previouseDisplay.filter(card => card.user.gender == target.value);
+                this.clickedCount++;
+            } else {
+                this.dipslayCards = this.previouseDisplay;
             }
             this.render();
         });
@@ -105,11 +112,10 @@ class FriendsApp {
 
 const filterByInputText = function (input, inputWrapper) {
     inputWrapper.addEventListener('click', () => {
+        this.clickedCount = 0;
         this.previouseDisplay = this.dipslayCards;
     });
-    input.addEventListener('input', ({
-        target
-    }) => {
+    input.addEventListener('input', ({target}) => {
         if (input.dataset.value == 'city') {
             this.dipslayCards = this.dipslayCards.filter(card => card.user.location[input.dataset.value].startsWith(target.value));
         } else {
