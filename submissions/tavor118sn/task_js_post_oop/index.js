@@ -21,11 +21,7 @@ class Creature {
   }
 
   get friends() {
-    let friendsRepresentation = '';
-    if (this._friends && this._friends.length > 0) {
-      friendsRepresentation = this._friends.join(', ');
-    }
-    return friendsRepresentation;
+    return (this._friends && this._friends.length) ? this._friends.join(', ') : '';
   }
 
   getAllCharacteristics() {
@@ -46,11 +42,11 @@ class Creature {
 }
 
 class Human extends Creature {
-  constructor(name, age, gender, saying, friends) {
-    let species = 'human';
-    let legs = 2;
+  constructor(
+    name, age, gender, saying, friends, hands, legs, species = 'human'
+  ) {
     super(species, name, age, gender, legs, saying, friends);
-    this.hands = 2;
+    this.hands = hands;
   }
 
   getAllCharacteristics() {
@@ -61,22 +57,19 @@ class Human extends Creature {
 }
 
 class Man extends Human {
-  constructor(name, age, saying, friends) {
-    let gender = 'male';
-    super(name, age, gender, saying, friends);
+  constructor(name, age, saying, friends, hands = 2, legs = 2, gender = 'male') {
+    super(name, age, gender, saying, friends, hands, legs);
   }
 }
 
 class Woman extends Human {
-  constructor(name, age, saying, friends) {
-    let gender = 'female';
-    super(name, age, gender, saying, friends);
+  constructor(name, age, saying, friends, hands = 2, legs = 2, gender = 'female') {
+    super(name, age, gender, saying, friends, hands, legs);
   }
 }
 
 class Animal extends Creature {
-  constructor(species, name, age, gender, say, friends) {
-    let legs = 4;
+  constructor(species, name, age, gender, say, friends, legs = 4) {
     super(species, name, age, gender, legs, say, friends);
   }
 }
