@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Friends App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Oleo+Script:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<svg version="1.1" style="display: none">
+    <symbol id="search" viewBox="0 0 17.6 17.6">
+        <path class="cls-1"
+              d="M16.47,14.93l-3.42-3.42A7.62,7.62,0,0,0,14.6,6.9a7.74,7.74,0,1,0-3.09,6.15l3.42,3.42a1,1,0,0,0,.77.33,1.1,1.1,0,0,0,1.1-1.1A1,1,0,0,0,16.47,14.93ZM1.4,6.9a5.5,5.5,0,1,1,5.5,5.5A5.5,5.5,0,0,1,1.4,6.9Z"
+              transform="translate(0.8 0.8)"/>
+    </symbol>
+    <symbol id="arrow-up" viewBox="0 0 11 10">
+        <polyline points="5.5,0 0,10 11,10 "/>
+    </symbol>
+    <symbol id="arrow-down" viewBox="0 0 11 10">
+        <polyline points="5.5,10 0,0 11,0 "/>
+    </symbol>
+    <symbol id="male" viewBox="0 0 502.496 502.497">
+        <g>
+            <path d="M251.249,127.907c17.7,0,32.781-6.232,45.254-18.7c12.467-12.467,18.699-27.554,18.699-45.253
+			c0-17.705-6.232-32.783-18.699-45.255C284.029,6.233,268.948,0,251.249,0c-17.705,0-32.79,6.23-45.254,18.699
+			c-12.465,12.469-18.699,27.55-18.699,45.255c0,17.703,6.23,32.789,18.699,45.253C218.462,121.671,233.549,127.907,251.249,127.907
+			z"/>
+            <path d="M381.438,153.029c-10.663-10.657-23.599-15.987-38.827-15.987H159.889c-15.23,0-28.171,5.327-38.831,15.987
+			c-10.657,10.66-15.987,23.604-15.987,38.831v118.776c0,7.611,2.663,14.079,7.993,19.407s11.803,7.994,19.414,7.994
+			c7.614,0,14.087-2.666,19.417-7.994c5.327-5.328,7.994-11.796,7.994-19.407V210.134h18.271v260.379
+			c0,8.754,3.144,16.275,9.423,22.559c6.28,6.276,13.796,9.418,22.554,9.418s16.278-3.142,22.557-9.418
+			c6.28-6.283,9.42-13.802,9.42-22.559V338.038h18.27V470.52c0,8.75,3.141,16.275,9.421,22.552
+			c6.279,6.283,13.802,9.425,22.556,9.425c8.76,0,16.279-3.142,22.559-9.425c6.283-6.283,9.418-13.798,9.418-22.552V210.134h18.274
+			v100.495c0,7.618,2.665,14.086,7.994,19.411c5.328,5.331,11.799,7.994,19.41,7.994c7.61,0,14.093-2.663,19.417-7.994
+			c5.328-5.325,7.994-11.793,7.994-19.411V191.86C397.43,176.63,392.095,163.689,381.438,153.029z"/>
+        </g>
+    </symbol>
+    <symbol id="female" viewBox="0 0 502.479 502.479">
+        <g>
+            <path d="M251.239,127.907c17.705,0,32.783-6.232,45.253-18.7c12.474-12.467,18.699-27.554,18.699-45.253
+			c0-17.705-6.226-32.783-18.699-45.255C284.022,6.233,268.938,0,251.239,0c-17.704,0-32.789,6.23-45.254,18.699
+			s-18.699,27.55-18.699,45.255c0,17.703,6.23,32.789,18.699,45.253C218.454,121.671,233.535,127.907,251.239,127.907z"/>
+            <path d="M429.396,277.222l-73.087-109.634c-13.895-20.367-30.643-30.55-50.251-30.55H196.422
+			c-19.603,0-36.354,10.183-50.248,30.55L73.085,277.222c-3.046,4.565-4.57,9.616-4.57,15.133c0,7.611,2.664,14.086,7.994,19.411
+			c5.33,5.331,11.801,7.994,19.414,7.994c9.706,0,17.321-4.093,22.84-12.279l64.809-97.354h12.851v37.685l-70.521,117.339
+			c-1.713,2.854-2.568,5.995-2.568,9.421c0,4.952,1.809,9.229,5.424,12.851c3.617,3.613,7.898,5.42,12.847,5.42h54.814v77.659
+			c0,8.758,3.137,16.279,9.42,22.556c6.283,6.283,13.8,9.421,22.557,9.421h45.679c8.761,0,16.278-3.138,22.562-9.421
+			c6.276-6.283,9.418-13.798,9.418-22.556v-77.659h54.823c4.945,0,9.227-1.807,12.847-5.42c3.614-3.621,5.421-7.898,5.421-12.851
+			c0-3.426-0.855-6.567-2.563-9.421l-70.523-117.339v-37.685h12.854l64.809,97.36c5.521,8.18,13.131,12.272,22.843,12.272
+			c7.611,0,14.079-2.663,19.407-7.991s7.994-11.796,7.994-19.41C433.964,286.838,432.441,281.794,429.396,277.222z"/>
+        </g>
+    </symbol>
+    <symbol id="thumb" viewBox="0 0 20 23">
+        <path opacity="0.3" fill="#ABABAB" d="M10,20C4.477,20,0,15.522,0,10v2c0,5.522,4.477,10,10,10c5.522,0,10-4.478,10-10v-2
+	C20,15.522,15.522,20,10,20z"/>
+        <circle fill="#FFFFFF" cx="10" cy="10" r="10"/>
+        <circle fill="#ABABAB" cx="10" cy="10" r="2"/>
+    </symbol>
+</svg>
+<header class="header">
+    <div class="container container-heading">
+        <h1 class="heading-title">Smile App</h1>
+        <p class="heading-text">Smile to your new friends!</p>
+    </div>
+</header>
+<div class="wrapper">
+    <aside class="section-filters">
+        <div class="container container-filters">
+            <label class="label label-search">
+                <input type="text" class="search" placeholder="Type a name..." name="search">
+                <svg width="18" height="18" class="ico ico-search">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                         xlink:href="#search"></use>
+                </svg>
+                <span class="visually-hidden">Search by name</span>
+            </label>
+            <div class="arrows-group">
+                <h3 class="field-title">Sort by name</h3>
+                <label class="label label-name">
+                    <span class="visually-hidden">A-Z</span>
+                    <input type="radio" class="radio radio-name radio-name__up visually-hidden" name="sorting"
+                           value="up" data-name="name">
+                    <svg width="11" height="10" class="ico ico-arrow ico-arrow__up">
+                        <use xlink:href="#arrow-up"></use>
+                    </svg>
+                </label>
+                <label class="label label-name">
+                    <span class="visually-hidden">Z-A</span>
+                    <input type="radio" class="radio radio-name radio-name__down visually-hidden" name="sorting"
+                           value="down" data-name="name">
+                    <svg width="11" height="10" class="ico ico-arrow ico-arrow__down">
+                        <use xlink:href="#arrow-down"></use>
+                    </svg>
+                </label>
+            </div>
+            <div class="arrows-group">
+                <h3 class="field-title">Filter by gender</h3>
+                <label class="label label-gender">
+                    <span class="visually-hidden">Men</span>
+                    <input type="radio" class="radio radio-gender radio-gender__male visually-hidden" name="gender"
+                           value="male">
+                    <svg width="30" height="30" class="ico ico-radio ico-radio__male">
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                             xlink:href="#male"></use>
+                    </svg>
+
+                </label>
+                <label class="label label-gender">
+                    <span class="visually-hidden">Women</span>
+                    <input type="radio" class="radio radio-gender radio-gender__female visually-hidden"
+                           name="gender" value="female">
+                    <svg width="30" height="30" class="ico ico-radio ico-radio__female">
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                             xlink:href="#female"></use>
+                    </svg>
+                </label>
+            </div>
+            <div class="arrows-group">
+                <h3 class="field-title">Sort by age</h3>
+                <label class="label label-age">
+                    <input type="radio" class="radio radio-age radio-age__up visually-hidden" name="sorting"
+                           value="up" data-name="age">
+                    <svg width="11" height="10" class="ico ico-arrow ico-arrow__up">
+                        <use xlink:href="#arrow-up"></use>
+                    </svg>
+                    <span class="visually-hidden">Age up sort</span>
+                </label>
+                <label class="label label-age">
+                    <span class="visually-hidden">Older first</span>
+                    <input type="radio" class="radio radio-age radio-age__up visually-hidden" name="sorting" value="down"
+                           data-name="age">
+                    <svg width="11" height="10" class="ico ico-arrow ico-arrow__down">
+                        <use xlink:href="#arrow-down"></use>
+                    </svg>
+                </label>
+            </div>
+            <div class="filter filter-range-container">
+                <h3 class="field-title">Filter by age</h3>
+                <input type="range" class="range range__max" id="r-max" value="100" min="10" max="100" step="5"
+                       name="range">
+                <label class="label label-range" for="r-max">Max age: 100</label>
+            </div>
+            <div class="arrows-group">
+                <h3 class="field-title">Sort by registration date</h3>
+                <label class="label label-registration">
+                    <span class="visually-hidden">Older member</span>
+                    <input type="radio" class="radio radio-registration radio-registration__up visually-hidden"
+                           data-name="registration"
+                           value="up" name="sorting">
+                    <svg width="11" height="10" class="ico ico-arrow ico-arrow__up">
+                        <use xlink:href="#arrow-up"></use>
+                    </svg>
+                </label>
+                <label class="label label-registration">
+                    <span class="visually-hidden">Newer member</span>
+                    <input type="radio" class="radio radio-registration radio-registration__down visually-hidden"
+                           data-name="registration"
+                           value="down" name="sorting">
+                    <svg width="11" height="10" class="ico ico-arrow ico-arrow__down">
+                        <use xlink:href="#arrow-down"></use>
+                    </svg>
+                </label>
+            </div>
+            <div class="filter filter-reset">
+                <label class="label label-reset">
+                    <input type="button" class="button button-reset" name="reset" value="Reset">
+                </label>
+            </div>
+        </div>
+    </aside>
+    <main class="main">
+        <section class="section-cards">
+            <div class="cards"></div>
+        </section>
+        <section class="pages">
+            <button class="button button-page button-page__back"><<</button>
+            <span class="page"></span>
+            <button class="button button-page button-page__forward">>></button>
+        </section>
+    </main>
+</div>
+<footer class="footer">
+    <div class="container">
+        <h3 class="footer-title">Friendship is Smiling =)</h3>
+    </div>
+</footer>
+<div class="overlay">
+    <h1 class="smile">=)</h1>
+</div>
+<script src="js/app.js" async></script>
+</body>
+</html>

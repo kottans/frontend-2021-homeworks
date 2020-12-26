@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">  
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"/>
+    <link rel="stylesheet" href="css/style.css"> 
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <title>HTML&CSS Popup</title>
+</head>
+
+<body>
+    <header class="header"> 
+        <nav class="header__nav nav">
+            <ul class="nav__list">
+
+                <li class="nav__item">
+                    <a class="nav__link" href="#">Mail</a>
+                </li>
+
+                <li class="nav__item">
+                    <a class="nav__link" href="#">Images</a>
+                </li>
+
+                <li class="nav__item">
+                    <input class="nav__checkbox" type="checkbox" id="menu-checkbox">
+                    
+                    <div class="nav__popup popup">
+                        <ul class="popup__list popup__list_main">
+                            <li class="popup__item">
+                                <a class="popup__link" href="#">
+                                    <figure class="popup__fig">
+                                        <img class="popup__icon" src="icons/calendar.png" alt="Calendar">
+                                        <figcaption class="popup__text">Calendar</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                            <li class="popup__item">
+                                <a class="popup__link" href="#">
+                                    <figure class="popup__fig">
+                                        <img class="popup__icon" src="icons/mail.png" alt="Mail">
+                                        <figcaption class="popup__text">Mail</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                            <li class="popup__item">
+                                <a class="popup__link" href="#">
+                                    <figure class="popup__fig">
+                                        <img class="popup__icon" src="icons/news.png" alt="News">
+                                        <figcaption class="popup__text">News</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                            <li class="popup__item">
+                                <a class="popup__link" href="#">
+                                    <figure class="popup__fig">
+                                        <img class="popup__icon" src="icons/maps.png" alt="Maps">
+                                        <figcaption class="popup__text">Maps</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                            <li class="popup__item">
+                                <a class="popup__link" href="#">
+                                    <figure class="popup__fig">
+                                        <img class="popup__icon" src="icons/files.png" alt="Files">
+                                        <figcaption class="popup__text">Files</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                            <li class="popup__item">
+                                <a class="popup__link" href="#">
+                                    <figure class="popup__fig">
+                                        <img class="popup__icon" src="icons/contacts.png" alt="Contacts">
+                                        <figcaption class="popup__text">Contacts</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                            <li class="popup__item">
+                                <a class="popup__link" href="#">
+                                    <figure class="popup__fig">
+                                        <img class="popup__icon" src="icons/tanslation.png" alt="Translate">
+                                        <figcaption class="popup__text">Translate</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                            <li class="popup__item">
+                                <a class="popup__link" href="#">
+                                    <figure class="popup__fig">
+                                        <img class="popup__icon" src="icons/videos.png" alt="Videos">
+                                        <figcaption class="popup__text">Videos</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                            <li class="popup__item">
+                                <a class="popup__link" href="#">
+                                    <figure class="popup__fig">
+                                        <img class="popup__icon" src="icons/search.png" alt="Search">
+                                        <figcaption class="popup__text">Search</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                            <li class="popup__item">
+                                <a class="popup__link" href="#">
+                                    <figure class="popup__fig">
+                                        <img class="popup__icon" src="icons/photos.png" alt="Photos">
+                                        <figcaption class="popup__text">Photos</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                            <li class="popup__item">
+                                <a class="popup__link" href="#">
+                                    <figure class="popup__fig">
+                                        <img class="popup__icon" src="icons/apps.png" alt="Apps">
+                                        <figcaption class="popup__text">Apps</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                            <li class="popup__item">
+                                <a class="popup__link" href="#">
+                                    <figure class="popup__fig">
+                                        <img class="popup__icon" src="icons/documents.png" alt="Documents">
+                                        <figcaption class="popup__text">Documents</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                        </ul>
+                    
+                        <input class='popup__checkbox' type="checkbox" id="popup-checkbox"> 
+                        <label class="popup__label" for="popup-checkbox" tabindex="0">More</label>
+
+                        <ul class="popup__list popup__list_sub">
+                            <li class="popup__item">
+                                <a class="popup__link" href="#">
+                                    <figure class="popup__fig">
+                                        <img class="popup__icon" src="icons/chat.png" alt="Chat">
+                                        <figcaption class="popup__text">Chat</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                            <li class="popup__item">
+                                <a class="popup__link" href="#">
+                                    <figure class="popup__fig">
+                                        <img class="popup__icon" src="icons/classroom.png" alt="Classroom">
+                                        <figcaption class="popup__text">Classroom</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                            <li class="popup__item">
+                                <a class="popup__link" href="#">
+                                    <figure class="popup__fig">
+                                        <img class="popup__icon" src="icons/collection.png" alt="Collection">
+                                        <figcaption class="popup__text">Collection</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                            <li class="popup__item">
+                                <a class="popup__link" href="#">
+                                    <figure class="popup__fig">
+                                        <img class="popup__icon" src="icons/mars.png" alt="Mars">
+                                        <figcaption class="popup__text">Mars</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                            <li class="popup__item">
+                                <a class="popup__link" href="#">
+                                    <figure class="popup__fig">
+                                        <img class="popup__icon" src="icons/blogs.png" alt="Blogs">
+                                        <figcaption class="popup__text">Blogs</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                            <li class="popup__item">
+                                <a class="popup__link" href="#">
+                                    <figure class="popup__fig">
+                                        <img class="popup__icon" src="icons/promo.png" alt="Promo">
+                                        <figcaption class="popup__text">Promo</figcaption>
+                                    </figure>
+                                </a>
+                            </li>
+                        </ul>
+
+                        <a class="popup__footer" href="https://kottans.org/" target="_blank">Even more from Kottans</a>
+                    </div>
+                
+                </li>
+
+                <li class="nav__item">
+                    <a class="nav__link" href="#">
+                        <img class="nav__icon" alt="bell" src="icons/bell.png">
+                    </a>
+                </li>
+
+                <li class="nav__item">
+                    <a class="nav__link" href="https://kottans.org/" target="_blank">
+                        <img class="nav__icon" alt="Kottans website" src="icons/favicon.png">
+                    </a>
+                </li>
+
+            </ul>
+        </nav>
+    </header>
+
+</body>
+</html>

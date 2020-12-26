@@ -1,0 +1,141 @@
+.paws {
+  width: 80px;
+  height: 80px;
+  position: absolute;
+}
+.paw {
+  opacity: 1;
+  transform: rotate(35deg);
+  opacity: 0;
+  font-size: 7px;
+  position: absolute;
+  -webkit-animation: fade 10s linear infinite;
+  animation: fade 10s linear infinite;
+}
+
+.block-0 .wrap:nth-child(1) .paws {
+  top: 75px;
+  left: 85px;
+}
+.block-0 .wrap:nth-child(2) .paws {
+  top: 195px;
+  left: 40px;
+  transform: rotate(215deg);
+}
+.block-0 .wrap:nth-child(3) .paws {
+  top: 290px;
+  left: 46px;
+  transform: rotate(-238deg);
+}
+.block-1 .wrap:nth-child(1) .paws {
+  top: 42px;
+  left: 77px;
+  transform: rotate(22deg);
+}
+.block-1 .wrap:nth-child(2) .paws {
+  top: 144px;
+  left: 111px;
+  transform: rotate(-157deg);
+}
+.block-1 .wrap:nth-child(3) .paws {
+  top: 323px;
+  left: 44px;
+  transform: rotate(112deg);
+}
+.block-2 .wrap:nth-child(1) .paws {
+  top: 49px;
+  left: 28px;
+  transform: rotate(101deg);
+}
+.block-2 .wrap:nth-child(2) .paws {
+  top: 148px;
+  left: 8px;
+  transform: rotate(10deg);
+}
+.block-2 .wrap:nth-child(3) .paws {
+  top: 287px;
+  left: 112px;
+  transform: rotate(5deg);
+}
+.block-3 .wrap:nth-child(1) .paws {
+  top: 87px;
+  left: 40px;
+  transform: rotate(164deg);
+}
+.block-3 .wrap:nth-child(2) .paws {
+  top: 179px;
+  left: 71px;
+  transform: rotate(-95deg);
+}
+.block-3 .wrap:nth-child(3) .paws {
+  top: 285px;
+  left: 26px;
+  transform: rotate(-361deg);
+}
+.paw:nth-child(1) {
+  top: 65px;
+  left: 20px;
+  animation-delay: 5s;
+}
+.paw:nth-child(2) {
+  top: 55px;
+  left: 20px;
+  animation-delay: 5.5s;
+}
+.paw:nth-child(3) {
+  top: 55px;
+  left: 30px;
+  animation-delay: 6s;
+}
+.paw:nth-child(4) {
+  top: 45px;
+  left: 30px;
+  animation-delay: 6.5s;
+}
+.paw:nth-child(5) {
+  top: 45px;
+  left: 40px;
+  animation-delay: 7s;
+}
+.paw:nth-child(6) {
+  top: 35px;
+  left: 40px;
+  animation-delay: 7.5s;
+}
+.paw:nth-child(7) {
+  top: 35px;
+  left: 50px;
+  animation-delay: 8s;
+}
+.paw:nth-child(8) {
+  top: 25px;
+  left: 50px;
+  animation-delay: 8.5s;
+}
+.paw:nth-child(9) {
+  top: 25px;
+  left: 60px;
+  animation-delay: 9s;
+}
+.paw:nth-child(10) {
+  top: 15px;
+  left: 60px;
+  animation-delay: 9.5s;
+}
+@-webkit-keyframes fade {
+  25% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes fade {
+  25% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
