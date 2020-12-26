@@ -5,9 +5,9 @@
 
 @import './styles/reset.css';
 @import './styles/responsive.css';
-@import './styles/loader.css';
 
 @import './styles/header.css';
+@import './styles/loading-roller.css';
 
 @import './styles/user-card-list.css';
 @import './styles/user-card-item.css';
@@ -51,7 +51,7 @@ body {
     z-index:2;
 }
 
-.init-page__heading {
+.loading-info {
     position: absolute;
     left: 50%;
     top: 40%;

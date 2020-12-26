@@ -1,4 +1,4 @@
-.init-page__lds-roller {
+.loading-roller {
   display: inline-block;
   position: relative;
   width: 80px;
@@ -9,12 +9,12 @@
   transform: translate(-50%, -50%);
 }
 
-.init-page__lds-roller div {
+.loading-roller__point {
   animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
   transform-origin: 40px 40px;
 }
 
-.init-page__lds-roller div:after {
+.loading-roller__point:after {
   content: " ";
   display: block;
   position: absolute;
@@ -25,74 +25,74 @@
   margin: -4px 0 0 -4px;
 }
 
-.init-page__lds-roller div:nth-child(1) {
+.loading-roller__point:nth-child(1) {
   animation-delay: -0.036s;
 }
 
-.init-page__lds-roller div:nth-child(1):after {
+.loading-roller__point:nth-child(1):after {
   top: 63px;
   left: 63px;
 }
 
-.init-page__lds-roller div:nth-child(2) {
+.loading-roller__point:nth-child(2) {
   animation-delay: -0.072s;
 }
 
-.init-page__lds-roller div:nth-child(2):after {
+.loading-roller__point:nth-child(2):after {
   top: 68px;
   left: 56px;
 }
 
-.init-page__lds-roller div:nth-child(3) {
+.loading-roller__point:nth-child(3) {
   animation-delay: -0.108s;
 }
 
-.init-page__lds-roller div:nth-child(3):after {
+.loading-roller__point:nth-child(3):after {
   top: 71px;
   left: 48px;
 }
 
-.init-page__lds-roller div:nth-child(4) {
+.loading-roller__point:nth-child(4) {
   animation-delay: -0.144s;
 }
 
-.init-page__lds-roller div:nth-child(4):after {
+.loading-roller__point:nth-child(4):after {
   top: 72px;
   left: 40px;
 }
 
-.init-page__lds-roller div:nth-child(5) {
+.loading-roller__point:nth-child(5) {
   animation-delay: -0.18s;
 }
 
-.init-page__lds-roller div:nth-child(5):after {
+.loading-roller__point:nth-child(5):after {
   top: 71px;
   left: 32px;
 }
 
-.init-page__lds-roller div:nth-child(6) {
+.loading-roller__point:nth-child(6) {
   animation-delay: -0.216s;
 }
 
-.init-page__lds-roller div:nth-child(6):after {
+.loading-roller__point:nth-child(6):after {
   top: 68px;
   left: 24px;
 }
 
-.init-page__lds-roller div:nth-child(7) {
+.loading-roller__point:nth-child(7) {
   animation-delay: -0.252s;
 }
 
-.init-page__lds-roller div:nth-child(7):after {
+.loading-roller__point:nth-child(7):after {
   top: 63px;
   left: 17px;
 }
 
-.init-page__lds-roller div:nth-child(8) {
+.loading-roller__point:nth-child(8) {
   animation-delay: -0.288s;
 }
 
-.init-page__lds-roller div:nth-child(8):after {
+.loading-roller__point:nth-child(8):after {
   top: 56px;
   left: 12px;
 }
