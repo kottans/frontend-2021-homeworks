@@ -12,12 +12,16 @@ class Inhabitant {
       this.friends = [...friends];
    }
 
+   getProperties() {
+      return [this.species, this.name, this.gender, this.legs, this.saying, this.getFriendsList(this.friends)];
+   }
+
    getFriendsList(friends) {
       return friends.length > 0 ? friends.map(friend => friend.name).join(', ') : 'no friends';
    }
 
    introduce() {
-      return [this.species, this.name, this.gender, this.legs, this.saying, this.getFriendsList(this.friends)].join('; ');
+      return this.getProperties().join('; ');
    }
 }
 
@@ -27,8 +31,10 @@ class Human extends Inhabitant {
       this.hands = 2;
    }
 
-   introduce() {
-      return [this.species, this.name, this.gender, this.legs, this.hands, this.saying, this.getFriendsList(this.friends)].join('; ');
+   getProperties() {
+      let properties = super.getProperties();
+      properties.splice(3, 0, this.hands);
+      return properties;
    }
 }
 
