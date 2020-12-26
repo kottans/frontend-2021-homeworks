@@ -83,7 +83,7 @@ body {
 }
 
 .user-card-list-wrapper {
-    min-height: calc(100vh - 15px - 60px - 15px - 218px - 10px - 40px - 10px);
+    min-height: calc(100vh - 368px);
     margin-bottom: 10px;
     background-repeat: no-repeat;
     background-size: cover;

@@ -10,7 +10,7 @@
         margin: 0;
     }
     body .user-card-list-wrapper {
-        min-height: calc(100vh - 45px - 33px - 60px);
+        min-height: calc(100vh - 138px);
     }
 }
 
