@@ -46,10 +46,12 @@ Enemy.prototype.checkCollisions = function() {
 	if(Math.abs(this.x - player.x) < widthEnemies &&
 		Math.abs(this.y - player.y) < widthEnemies ||
 		player.y < 0){
-			setTimeout(() => player.startOver(), 120);
+			setTimeout(() => {
+				player.x = positionPlayer.playerX;
+				player.y = positionPlayer.playerY;
+			}, 120);
 	};
 };
-
 
 // Now write your own player class
 // This class requires an update(), render() and
@@ -93,12 +95,6 @@ Player.prototype.handleInput = function(key) {
 			break;
 	}
 };
-
-Player.prototype.startOver = function() {
-	this.x = positionPlayer.playerX;
-	this.y = positionPlayer.playerY;
-};
-
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
