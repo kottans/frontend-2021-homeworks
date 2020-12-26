@@ -89,7 +89,7 @@ renderCards();
 
 cardBoard.addEventListener('click', function (evt) {
   let card = evt.target.closest('.card');
-  if (!card.classList.contains('flip')) flipCard(card);
+  if (card && !(firstFlip && secondFlip) && !card.classList.contains('flip')) flipCard(card);
 })
 
 newGameButton.addEventListener('click', function () {
