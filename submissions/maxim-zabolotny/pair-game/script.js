@@ -80,6 +80,7 @@ back.style.backgroundImage = `url(${img})`;
 grid.appendChild(card);
 card.appendChild(front);
 card.appendChild(back);
+
 });
 
 const match = () => {
@@ -99,14 +100,13 @@ var selected = document.querySelectorAll('.selected');
 selected.forEach(card => {
   card.classList.remove('selected');
 });
-if(isFinish().every(el => el == 1)) {
+if (isFinish().every(el => el == 1)) {
   alert('You Win!!!')
   location.reload()
 }
 };
 
 grid.addEventListener('click', event => {
-
 const clicked = event.target;
 if (
   clicked.nodeName === 'SECTION' ||
@@ -116,19 +116,15 @@ if (
 ) {
   return;
 }
-
 if (count < 2) {
   count++;
   if (count === 1) {
     firstGuess = clicked.parentNode.dataset.name;
-    console.log(firstGuess);
     clicked.parentNode.classList.add('selected');
   } else {
     secondGuess = clicked.parentNode.dataset.name;
-    console.log(secondGuess);
     clicked.parentNode.classList.add('selected');
   }
-
   if (firstGuess && secondGuess) {
     if (firstGuess === secondGuess) {
       setTimeout(match, delay);
@@ -137,9 +133,7 @@ if (count < 2) {
   }
   previousTarget = clicked;
 }
-
 });
-
 
 function isFinish() {
 let val = []
@@ -147,4 +141,3 @@ let cards = document.querySelectorAll('.card')
 cards.forEach(el => val = [...val, el.classList.contains('match')])
 return val
 }
-console.log(isFinish().every(el => el == 1))
