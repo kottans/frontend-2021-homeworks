@@ -1,0 +1,86 @@
+/* Google Fonts */
+
+@import url(https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap);
+@import url(https://fonts.googleapis.com/css?family=Lato:300,400);
+* {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	font-family: 'Lato', 'sans-serif';
+	line-height: 1.6;
+	color: #333;
+}
+
+h2 {
+	text-align: center
+}
+
+p {
+	text-indent: 1.5em;
+	text-align: justify;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+.container {
+	max-width: 1170px;
+	margin: 0 auto;
+}
+
+.header {
+	background-image: url(../img/merry-christmas2.jpg);
+	height: 278px;
+	background-color: #cccccc;
+}
+
+.main {
+	display: flex;
+}
+
+.country-img {
+	width: 100%;
+	height: auto;
+}
+
+/* Main Menu */
+
+ul.main-menu {
+	font-family: 'Lato', sans-serif;
+	font-family: 13px;
+	font-weight: 300;
+	list-style: none;
+	/*position: absolute;*/
+	cursor: pointer;
+}
+
+ul.main-menu>ul {
+	list-style: none;
+	opacity: 0;
+}
+
+ul.main-menu li {
+	background: #006bb6;
+	padding: 15px 50px 15px 10px;
+	border-bottom: 1px solid #fff;
+}
+
+ul.main-menu li:hover {
+	background: #9eccb3;
+}
+
+ul.main-menu li:last-child {
+	border-radius: 0 0 5px 5px;
+}
+
+ul.main-menu li a {
+	color: #fff;
+	text-decoration: none;
+}
+
+ul.main-menu i {
+	padding-right: 15px;
+	padding-left: 5px;
+}
