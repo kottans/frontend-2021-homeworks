@@ -223,9 +223,7 @@ function mountUserList(usercardsArr) {
   const userList = document.querySelector("#user-list");
   const fragment = document.createDocumentFragment();
 
-  usercardsArr.forEach((card) => {
-    fragment.append(card);
-  });
+  fragment.append(...usercardsArr);
 
   userList.innerHTML = "";
   userList.append(fragment);
