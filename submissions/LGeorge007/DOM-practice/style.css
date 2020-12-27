@@ -96,23 +96,20 @@ body {
     list-style: none;
 }
 
-.nav > ul> li {
+.itemLi {
     line-height: 2.5;
     cursor: pointer;
     list-style-type: none;
     padding: 5px;
-}
-
-.nav > ul> li:hover{
-    padding-left: 15px;
-}
-
-.nav > ul> li{
     font-size: 1.4em;
     color: #caad00;
 }
 
-.nav > ul> li::selection {
+.itemLi:hover{
+    padding-left: 15px;
+}
+
+.itemLi::selection {
     background: transparent;
 }
 

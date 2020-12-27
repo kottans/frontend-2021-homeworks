@@ -212,8 +212,6 @@ const slideMenu = function() {
 
 }
 
-
-
 const attachClickOnMenu = function(event) {
 
     let target = event.target;
@@ -228,17 +226,12 @@ const attachClickOnMenu = function(event) {
 
 }
 
-const attachClickOnButton = function(event) {
-
-    slideMenu();
-
-}
-
 const loadMenu = function () {
 
     for (let unit of listOfUnits) {
         let item = document.createElement("li");
         item.setAttribute("id", unit.id);
+        item.classList.add("itemLi");
         item.textContent = unit.description.titleRus;
         menu.appendChild(item);
     }
@@ -248,13 +241,12 @@ const loadMenu = function () {
 
 };
 
-
 const init = function () {
 
     loadMenu();
     render(lastChoice.id);
     menu.addEventListener("click", attachClickOnMenu);
-    button.addEventListener("click", attachClickOnButton);
+    button.addEventListener("click", slideMenu);
 
 };
 
