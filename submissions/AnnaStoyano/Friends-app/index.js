@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const URL_FOR_SEARCH = `${API_PATH}?results=${USER_COUNT}`;
 
     fetch(URL_FOR_SEARCH)
+        .then(handleError)
         .then(resolve => resolve.json())
         .then(data => {
             const friendsApp = new FriendsApp(data.results);
@@ -13,6 +14,13 @@ document.addEventListener('DOMContentLoaded', function () {
             document.location.reload();
         })
 });
+
+function handleError(response) {
+    if(!response.ok){
+        throw Error(response.statusText);
+    }
+    return response;
+}
 
 class FriendsApp {
     constructor(users) {
