@@ -93,7 +93,7 @@ class FriendsApp {
         const cityInput = document.querySelector('.text-input--city');
         const cityWrapper = document.querySelector('.menu_item-city');
         cityWrapper.addEventListener('click', () => {
-            filterByInputText.bind(this)(cityInput, cityWrapper);
+            this.filterByInputText(cityInput, cityWrapper);
         });
     }
 
@@ -101,7 +101,7 @@ class FriendsApp {
         const emailInput = document.querySelector('.text-input--email');
         const emailWrapper = document.querySelector('.menu_item-email');
         emailWrapper.addEventListener('click', () => {
-            filterByInputText.bind(this)(emailInput, emailWrapper);
+            this.filterByInputText.bind(this)(emailInput, emailWrapper);
         });
     }
 
@@ -116,21 +116,21 @@ class FriendsApp {
             this.render();
         });
     }
-}
 
-const filterByInputText = function (input, inputWrapper) {
-    inputWrapper.addEventListener('click', () => {
-        this.clickedCount = 0;
-        this.previouseDisplay = this.dipslayCards;
-    });
-    input.addEventListener('input', ({target}) => {
-        if (input.dataset.value == 'city') {
-            this.dipslayCards = this.dipslayCards.filter(card => card.user.location[input.dataset.value].startsWith(target.value));
-        } else {
-            this.dipslayCards = this.dipslayCards.filter(card => card.user[input.dataset.value].startsWith(target.value));
-        }
-        this.render();
-    });
+    filterByInputText (input, inputWrapper) {
+        inputWrapper.addEventListener('click', () => {
+            this.clickedCount = 0;
+            this.previouseDisplay = this.dipslayCards;
+        });
+        input.addEventListener('input', ({target}) => {
+            if (input.dataset.value == 'city') {
+                this.dipslayCards = this.dipslayCards.filter(card => card.user.location[input.dataset.value].startsWith(target.value));
+            } else {
+                this.dipslayCards = this.dipslayCards.filter(card => card.user[input.dataset.value].startsWith(target.value));
+            }
+            this.render();
+        });
+    }
 }
 
 class UserCard {
