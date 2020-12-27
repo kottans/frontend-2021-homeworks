@@ -1,8 +1,8 @@
 /* Refer to https://github.com/OleksiyRudenko/a-tiny-JS-world for the task details
    Complete the below for code reviewers' convenience:
 
-   Code repository: https://github.com/kasionio/pre-oop
-   Web app: https://kasionio.github.io/pre-oop
+   Code repository: https://github.com/kasionio/a-tiny-JS-world/tree/gh-pages
+   Web app: https://kasionio.github.io/a-tiny-JS-world
    */
 
 // ======== OBJECTS DEFINITIONS ========
