@@ -1,86 +1,80 @@
 class Mammal {
-  constructor(name, gender, saying) {
+  constructor(name, gender, friend, saying, species) {
     this.name = name;
     this.gender = gender;
+    this.friend = friend;
     this.saying = saying;
+    this.species = species;
   }
   toString() {
-    return [this.name, this.gender, this.saying].join(";");
-  }
-}
-
-class Animal extends Mammal {
-  constructor(name, gender, saying, legs = 4) {
-    super(name, gender, saying);
-    this.species = "animal";
-    this.legs = legs;
-  }
-  toString() {
-    return [super.toString(), this.species, this.legs].join(";");
+    return [
+      this.name,
+      this.gender,
+      this.friend,
+      this.saying,
+      this.species,
+    ].join(';');
   }
 }
 
 class Human extends Mammal {
-  constructor(name, gender, saying, friend, legs = 2, hands = 2) {
-    super(name, gender, saying);
-    this.species = "human";
-    this.friend = friend;
+  constructor(
+    name,
+    gender,
+    friend,
+    saying,
+    species = 'human',
+    legs = 2,
+    hands = 2
+  ) {
+    super(name, gender, friend, saying, species);
     this.legs = legs;
     this.hands = hands;
   }
   toString() {
-    return [
-      super.toString(),
-      this.species,
-      this.legs,
-      this.hands,
-      this.friend,
-    ].join(";");
+    return [super.toString(), this.legs, this.hands].join(';');
   }
 }
 
-class Cat extends Animal {
-  constructor(name, gender, saying, friend) {
-    super(name, gender, saying);
-    this.species = "cat";
-    this.friend = friend;
+class Cat extends Mammal {
+  constructor(name, gender, saying, friend, species = 'cat', legs = 4) {
+    super(name, gender, friend, saying, species);
+    this.legs = legs;
   }
   toString() {
-    return [super.toString(), this.friend].join(";");
+    return [super.toString(), this.legs].join(';');
   }
 }
-class Dog extends Animal {
-  constructor(name, gender, saying, friend) {
-    super(name, gender, saying);
-    this.species = "dog";
-    this.friend = friend;
+class Dog extends Mammal {
+  constructor(name, gender, saying, species = 'dog', friend, legs = 4) {
+    super(name, gender, friend, saying, species);
+    this.legs = legs;
   }
   toString() {
-    return [super.toString(), this.friend].join(";");
+    return [super.toString(), this.legs].join(';');
   }
 }
 class Werewolf extends Human {
-  constructor(name, gender, saying, friend, transforms) {
-    super(name, gender, saying);
-    this.species = "werewolf";
-    this.friend = friend;
+  constructor(name, gender, saying, friend, species, transforms) {
+    super(name, gender, friend, saying, species);
     this.transforms = transforms;
   }
   toString() {
-    return [super.toString(), this.transforms].join(";");
+    return [super.toString(), this.transforms].join(';');
   }
 }
 
-const man = new Human("Bob", "male", "Hi!", "Bobik");
-const woman = new Human("Lara", "female", "Hello!", "Zarina");
-const dog = new Dog("Bobik", "male", "Woof-Woof", "Bob");
-const cat = new Cat("Zarina", "female", `Meow-Meow`, "Lara");
+const man = new Human('Bob', 'male', 'Bobik', 'Hi!');
+const woman = new Human('Lara', 'female', 'Zarina', 'Hello!');
+const dog = new Dog('Bobik', 'male', 'Woof-Woof', 'Bob');
+const cat = new Cat('Zarina', 'female', `Meow-Meow`, 'Lara');
 const werewolf = new Werewolf(
-  "Dorian",
-  "male",
+  'Dorian',
+  'male',
   `Lingering howl!`,
-  "Bobik",
-  "full moon"
+  'Bobik',
+  'werewolf',
+  'full moon'
 );
 
 const inhabitants = [man, woman, dog, cat, werewolf];
