@@ -36,6 +36,3 @@ const inhabitantsArray = [dog, cat, man, woman];
 const message = (elem) => `Species: ${elem.species}. Name: ${elem.name}. Gender: ${elem.gender}. ${elem.legs} legs and ${elem.hands} hands. Phrase: ${elem.saying}`;
 
 inhabitantsArray.forEach( inh => print(message(inh)) );
-
-
-
