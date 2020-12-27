@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Friends App</title>
+</head>
+
+<body class="body">
+    <header class="header">Friends App</header>
+    <aside class="aside">
+        <div class="outer-container outer-container__sort">
+            <h2 class="aside__h2">Sort</h2>
+            <div class="inner-container">
+                <p class="aside__p">name</p>
+                <div class="aside__buttons-container">
+                    <button class="aside__button aside__button--AZ" id="name_AZ"></button>
+                    <button class="aside__button aside__button--ZA" id="name_ZA"></button>
+                </div>
+            </div>
+            <div class="inner-container">
+                <p class="aside__p">age</p>
+                <div class="aside__buttons-container">
+                    <button class="aside__button aside__button--19" id="age_19"></button>
+                    <button class="aside__button aside__button--91" id="age_91"></button>
+                </div>
+            </div>
+            <div class="inner-container">
+                <p class="aside__p">registration<br>date</p>
+                <div class="aside__buttons-container">
+                    <button class="aside__button aside__button--OLD" id="registrationDate_OLD"></button>
+                    <button class="aside__button aside__button--NEW" id="registrationDate_NEW"></button>
+                </div>
+            </div>
+        </div>
+        <div class="outer-container outer-container__filter">
+            <h2 class="aside__h2">Filter</h2>
+            <div class="inner-container inner-container--radiobuttons">
+                <p class="aside__p">sex</p>
+                <div class="inner-container inner-container--column">
+                    <div class="inner-container">
+                        <input class="aside__radio aside__radio--male" type="radio" name="sex" id="male" value='male'>
+                        <label for="male">male</label>
+                    </div>
+                    <div class="inner-container">
+                        <input class="aside__radio aside__radio--female" type="radio" name="sex" id="female"
+                            value='female'>
+                        <label for="female">female</label>
+                    </div>
+                </div>
+            </div>
+            <div class="inner-container inner-container--range">
+                <label for="rangeAge">max age</label>
+                <div class="inner-container inner-container--column inner-container--column-range">
+                    <input class="aside__range" max='120' type="range" name="age" id="rangeAge">
+                    <div class="aside__range-output">100</div>
+                </div>
+            </div>
+            <div class="inner-container inner-container--select">
+                <label for="countries">countries</label>
+                <select class="aside__select" name="countries" id="countries">
+                    <option value="Australia">Australia</option>
+                    <option value="Brazil">Brazil</option>
+                    <option value="Canada">Canada</option>
+                    <option value="Denmark">Denmark</option>
+                    <option value="Finland">Finland</option>
+                    <option value="France">France</option>
+                    <option value="Germany">France</option>
+                    <option value="Iran">Iran</option>
+                    <option value="Ireland">Ireland</option>
+                    <option value="Netherlands">Netherlands</option>
+                    <option value="New Zealand">New Zealand</option>
+                    <option value="Norway">Norway</option>
+                    <option value="Spain">Spain</option>
+                    <option value="Switzerland">Switzerland</option>
+                    <option value="Turkey">Turkey</option>
+                    <option value="United Kingdom">United Kingdom</option>
+                    <option value="United States">United States</option>
+                </select>
+            </div>
+            <div class="inner-container inner-container--reset">
+                <button class="aside__button aside__button--reset">RESET ALL</button>
+            </div>
+
+        </div>
+    </aside>
+    <main class="main">
+        <div class="card__search-container">
+            <input class="main__search" type="search" name="users" id="search" placeholder="🔎 search your users">
+        </div>
+        <div class="cards-container">
+
+        </div>
+    </main>
+    <script src="./app.js"></script>
+</body>
+
+</html>
