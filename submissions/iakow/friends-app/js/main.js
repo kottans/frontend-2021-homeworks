@@ -176,7 +176,7 @@ function enableFilters() {
 function getPlaceholders() {
   function getPlaceholder() {
     const fakeUserCard = document.createElement("div");
-    fakeUserCard.className = "user-card placeholder";
+    fakeUserCard.classList.add("user-card", "placeholder");
 
     fakeUserCard.innerHTML = [
       `<img class="user-card__photo" height="100" width="100">`,
@@ -200,7 +200,7 @@ function getPlaceholders() {
 
 function getUserCard(fetchedUserData) {
   const card = document.createElement("li");
-  card.className = "user-card";
+  card.classList.add("user-card");
   card.userData = fetchedUserData;
 
   const {nat, picture, name, dob, location, phone, email} = fetchedUserData;
