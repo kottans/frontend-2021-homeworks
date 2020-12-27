@@ -221,13 +221,13 @@ header {
     }
 }
 
-.musicBtn {
+.musicButton {
     opacity: 0;
     cursor: auto;
     transition: opacity ease-in-out 0.5s;
 }
 
-.musicBtn__icon {
+.musicButton__icon {
     position: relative;
     bottom: 15px;
     margin-left: 10px;
@@ -327,26 +327,26 @@ header {
     margin: 0 15px 30px;
 }
 
-.filterBtn {
+.filterButton {
     background: #1e4d79;
     text-align: center;
     color: #dee3e5 !important;
     font-weight: 500;
 }
 
-.filterBtn:hover {
+.filterButton:hover {
     background: #dee3e5 !important;
     color: #1e4d79 !important;
 }
 
-.resetBtn {
+.resetButton {
     background: #dee3e5;
     text-align: center;
     color: #1e4d79 !important;
     font-weight: 500;
 }
 
-.resetBtn:hover {
+.resetButton:hover {
     background: #1e4d79 !important;
     color: #dee3e5 !important;
 }
@@ -462,14 +462,14 @@ header {
     margin-bottom: 25px;
 }
 
-.startBtn {
+.startButton {
     background: #1e4d79;
     text-align: center;
     color: #dee3e5 !important;
     font-weight: 500;
 }
 
-.startBtn:hover {
+.startButton:hover {
     background: #1d88b6;
 }
 
@@ -588,8 +588,8 @@ header {
 /* Height */
 
 @media screen and (max-height: 768px) {
-    .resetBtn,
-    .filterBtn {
+    .resetButton,
+    .filterButton {
         height: 30px !important;
         line-height: 30px !important;
     }
@@ -688,11 +688,11 @@ header {
     opacity: 1;
 }
 
-.musicBtn-active {
+.musicButton-active {
     opacity: 1;
     cursor: pointer;
 }
 
-.musicBtn-animation {
+.musicButton-animation {
     animation: pulsejg3 2.1s linear infinite;
 }
