@@ -66,7 +66,7 @@ Player.prototype.resetPosution = function(){
     this.x = PLAYER_START_POSITION.x;
 };
 
-let player = new Player(PLAYER_START_POSITION.x,PLAYER_START_POSITION.y);
+const player = new Player(PLAYER_START_POSITION.x,PLAYER_START_POSITION.y);
 BUGS_START_POSITION.y.forEach(function(y){
     allEnemies.push(new Enemy(BUGS_START_POSITION.x, y, getRandomSpeed(MIN_SPEED,MAX_SPEED),player))
  });
