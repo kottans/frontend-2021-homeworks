@@ -3,7 +3,6 @@ const STEP_Y = 80;
 const STEP_X = 100;
 const FIRST_ROW = 60;
 const BUGS_START_POSITION = {x:-200, y: [FIRST_ROW, FIRST_ROW + STEP_Y, FIRST_ROW + STEP_Y*2, FIRST_ROW + STEP_Y*3]};
-const allEnemies = [];
 const MIN_SPEED = 100;
 const MAX_SPEED = 700;
 const CANVAS_WIDTH = 500;
@@ -67,9 +66,7 @@ Player.prototype.resetPosution = function(){
 };
 
 const player = new Player(PLAYER_START_POSITION.x,PLAYER_START_POSITION.y);
-BUGS_START_POSITION.y.forEach(function(y){
-    allEnemies.push(new Enemy(BUGS_START_POSITION.x, y, getRandomSpeed(MIN_SPEED,MAX_SPEED),player))
- });
+const allEnemies = BUGS_START_POSITION.y.map(y => new Enemy(BUGS_START_POSITION.x, y, getRandomSpeed(MIN_SPEED,MAX_SPEED),player));
 
 function getRandomSpeed(min, max) {
     return Math.random() * (max - min) + min;
