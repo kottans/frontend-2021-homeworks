@@ -1,0 +1,213 @@
+@import url('./reset.css');
+
+@font-face {
+  font-family: "site_font";
+  src: url('./fonts/MontserratAlternates-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  font-family: "site_font";
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  min-height: 100vh;
+  font-size: 14px;
+}
+
+@media screen and (max-width: 500px) {
+  body {
+    grid-template-columns: 1fr;
+    grid-template-rows: 40px 1fr;
+  }
+}
+
+h1 {
+  height: 1px;
+  width: 1px;
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+aside {
+  background-color: #443d2a;
+  color: #d79551;
+}
+
+@media screen and (max-width: 500px) {
+  aside {
+    position: sticky;
+    top: 0;
+  }
+}
+
+.filter_caption {
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+.input_option {
+  margin: 5px 0;
+}
+
+.filter_age {
+  width: 40px;
+}
+
+.filter_name, .reset_button, .renew_button {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
+  height: 30px;
+  margin: 5px 0;
+}
+
+input, label, button {
+  cursor: pointer;
+}
+
+label {
+  margin: 0 5px;
+}
+
+.sorting_n_filtering_options {
+  padding: 10px 10px;
+  background-color: inherit;
+}
+
+@media screen and (max-width: 500px) {
+  .sorting_n_filtering_options {
+    display: none;
+  }
+}  
+
+.hamburger_menu {
+  display: none;
+  position: relative;
+}
+
+@media screen and (max-width: 500px) {
+  .hamburger_menu {
+    top: 3px;
+    left: 6px;
+    display: inline-block;
+    background-color: inherit;
+    line-height: 0;
+    width: 34px;
+    height: 30px;
+    margin: 0;
+    margin-top: 2px;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+  }
+
+  .hamburger_menu::before {
+    content: "";
+    width: 30px;
+    height: 4px;
+    position: absolute;
+    top: 4px;
+    left: 2px;
+    background-color: #e4cccb;
+    box-shadow: 0 9px 0px #e4cccb;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+
+  .hamburger_menu::after {
+    content: "";
+    width: 30px;
+    height: 4px;
+    position: absolute;
+    top: 22px;
+    left: 2px;
+    background-color: #e4cccb;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }  
+  
+  .hamburger_menu-opened::before {
+    transform: rotate(41deg);
+    transform-origin: top left;
+    box-shadow: none;
+    width: 35px;
+    left: 4px;
+  }
+  
+  .hamburger_menu-opened::after {
+    transform: rotate(-41deg);
+    transform-origin: bottom left;
+    width: 35px;
+    left: 4px;
+    top: 26px;
+  }
+  
+  .hamburger_menu-opened + .sorting_n_filtering_options {
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 40px;
+  }
+  
+  .hamburger_menu-opened + .sorting_n_filtering_options .input_option {
+    margin: 10px 0;
+  }
+}
+
+main {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-auto-rows: min-content;
+  padding: 10px;
+  grid-gap: 10px;
+  background-color: #e4cccb;
+}
+
+.friend_card {
+  padding: 16px 6px;
+  flex-direction: column;
+  border: 2px solid #443d2a;
+  border-radius: 5px;
+  background-color: #c4c0c2;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.friend_card__photo {
+  border-radius: 50%;
+  border: 2px solid #443d2a;
+  margin-bottom: 8px;
+}
+
+.friend_card__text {
+  margin: 4px;
+  font-size: 14px;
+  word-break: break-all;
+  text-align: center;
+}
+
+.friend_card__name {
+  font-size: 18px;
+  font-weight: bold;
+  color: #443d2a;
+}
+
+.friend_card__sex {
+  font-size: 16px;
+  font-style: italic;
+  color: #443d2a;
+}
+
+.friend_card__email {
+  color: #443d2a;
+}
+
+.friend_card__address {
+  word-break: normal;
+}

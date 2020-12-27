@@ -1,0 +1,81 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.wrapper {
+  background-color: #cce6ff;
+  min-height: 100vh;
+  padding: 15px 0;
+}
+
+.header {
+  text-align: center;
+  text-transform: uppercase;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.field {
+  max-width: 50%;
+  margin: 20px auto;
+  display: grid;
+  grid-auto-rows: 1fr;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 20px;
+}
+
+.card {
+  perspective: 1000px;
+}
+
+.card.reverse .flipper {
+  transform: rotateY(180deg);
+}
+
+.flipper {
+  transition: 0.6s;
+  transform-style: preserve-3d;
+  position: relative;
+  box-shadow: 0 0 5px 5px #298ff0;
+}
+
+.card.pair .flipper {
+  box-shadow: 0 0 5px 5px #29f051;
+}
+
+.image {
+  background-position: center;
+  background-size: cover;
+
+  position: relative;
+
+  transform: rotateY(180deg);
+}
+
+.side {
+  width: 100%;
+  backface-visibility: hidden;
+  top: 0;
+  left: 0;
+}
+
+.back {
+  background-color: #99ceff;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: absolute;
+  z-index: 2;
+  transform: rotateY(0deg);
+}
+
+.placeholder {
+  display: block;
+}
+
+.btn-new_game {
+  padding: 5px 15px;
+  margin: 10px auto;
+  width: 80px;
+  display: block;
+}
