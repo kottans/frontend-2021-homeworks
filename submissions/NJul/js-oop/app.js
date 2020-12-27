@@ -46,6 +46,7 @@ Enemy.prototype.update = function (dt) {
   ) {
     player.x = 202;
     player.y = 405;
+    score.updateMisses();
   }
 };
 
@@ -92,7 +93,23 @@ Player.prototype.handleInput = function (keyPress) {
   if (this.y < 1) {
     this.x = 202;
     this.y = 405;
+    score.updateSuccess();
   }
+};
+
+const Score = function () {
+  this.success = 0;
+  this.misses = 0;
+};
+
+Score.prototype.updateSuccess = function () {
+  this.success += 1;
+  document.getElementById('scoreSuccess').innerHTML = this.success;
+};
+
+Score.prototype.updateMisses = function () {
+  this.misses += 1;
+  document.getElementById('scoreMisses').innerHTML = this.misses;
 };
 
 // All enemies are placed in an array
@@ -110,6 +127,8 @@ enemyLocation.forEach(function (locationY) {
 
 // The starting location of the player is located at x = 202, y = 405
 const player = new Player(202, 405);
+
+const score = new Score();
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method.
