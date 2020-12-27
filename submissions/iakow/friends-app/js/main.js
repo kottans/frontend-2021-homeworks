@@ -80,7 +80,7 @@ function addHandlers() {
   document.querySelector("#reset-filters").addEventListener("click", (e) => {
     e.target.disabled = true;
 
-    document.querySelectorAll(".filter").forEach((ctrl) => (ctrl.value = ""));
+    document.querySelectorAll(".filter").forEach((filter) => (filter.value = ""));
 
     mountUserList(ALL_USER_CARDS);
   });
@@ -96,9 +96,9 @@ function applyFilters() {
 
   mountUserList(filteredArr);
 
-  const ctrls = document.querySelectorAll(".filter");
-  document.querySelector("#reset-filters").disabled = [...ctrls].every(
-    (ctrl) => ctrl.value === ""
+  const filters = document.querySelectorAll(".filter");
+  document.querySelector("#reset-filters").disabled = [...filters].every(
+    (filter) => filter.value === ""
   );
 
   function filterByName(user) {
