@@ -25,7 +25,7 @@ body {
 .menu-toggle {
   color: #fff;
   position: absolute;
-  right: 50px;
+  left: 10px;
   font-size: 30px;
   cursor: pointer;
   display: none;
@@ -340,6 +340,7 @@ input[type='radio']:checked + .radio-lable {
 }
 .wrapper {
   width: 100%;
+  overflow-x: hidden;
 }
 
 @keyframes scaleImage {
