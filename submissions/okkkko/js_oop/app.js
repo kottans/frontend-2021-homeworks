@@ -1,8 +1,8 @@
 const PLAYER_START_POSITION = {x: 200, y: 380};
 const STEP_Y = 80;
 const STEP_X = 102;
-const FIRST_ROW = 60;
-const BUGS_START_POSITION = {x:-200, y: [FIRST_ROW, FIRST_ROW + STEP_Y, FIRST_ROW + STEP_Y*2, FIRST_ROW + STEP_Y*3]};
+const BUGS_PADDING = 18;
+const BUGS_START_POSITION = {x:-200, y: [1,3,4].map(rowNumber => rowNumber * STEP_Y-BUGS_PADDING)};
 const MIN_SPEED = 100;
 const MAX_SPEED = 700;
 const CANVAS_WIDTH = 505;
