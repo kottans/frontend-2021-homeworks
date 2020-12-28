@@ -7,9 +7,8 @@ const dog = {
     tail: 1,
     saying: 'Woof-Woof!',
     friends: ['Sam', 'Hanna', 'Kitty']
-}
-
-const cat = {
+},
+    cat = {
     species: 'cat',
     name: 'Kitty',
     gender: 'female',
@@ -18,9 +17,8 @@ const cat = {
     tail: 1,
     saying: 'Meow!',
     friends: []
-}
-
-const man = {
+},
+    man = {
     species: 'human',
     name: 'Sam',
     gender: 'male',
@@ -29,9 +27,8 @@ const man = {
     tail: 0,
     saying: 'Hello, my friend!',
     friends: ['Hanna',]
-}
-
-const woman = {
+},
+    woman = {
     species: 'human',
     name: 'Hanna',
     gender: 'female',
@@ -40,9 +37,8 @@ const woman = {
     tail: 0,
     saying: 'Hi, I\`m Hanna!',
     friends: ['Sam', 'Kitty', 'Milo']
-}
-
-const womanCat = {
+},
+    womanCat = {
     species: 'human',
     name: 'Sara',
     gender: 'female',
@@ -53,11 +49,13 @@ const womanCat = {
     friends: ['Sam', 'Hanna', 'Kitty', 'Milo']
 }
 
-let messageString = function (item) {
-    let string = `${item.species};${item.name};${item.saying};${item.gender};${item.legs};${item.hands};${item.tail};${item.friends}`;
-    return string;
+let population = [man, woman, cat, dog, womanCat],
+    paramsOfItem = ['species', 'name', 'saying', 'gender', 'legs', 'hands', 'tail','friends'];
+
+let makeOutputString = item => {
+    return paramsOfItem.map(param => item[param]).join(';');
 }
 
-let population = [man, woman, cat, dog, womanCat];
-
-population.map(i => print(messageString(i)));
+population.forEach(anyAnimal => {
+    print(makeOutputString(anyAnimal));
+});
