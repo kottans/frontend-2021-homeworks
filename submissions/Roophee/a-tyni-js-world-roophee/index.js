@@ -49,7 +49,7 @@ const dog = {
     friends: ['Sam', 'Hanna', 'Kitty', 'Milo']
 }
 
-let population = [man, woman, cat, dog, womanCat],
+const population = [man, woman, cat, dog, womanCat],
     paramsOfItem = ['species', 'name', 'saying', 'gender', 'legs', 'hands', 'tail','friends'];
 
 let makeOutputString = item => {
