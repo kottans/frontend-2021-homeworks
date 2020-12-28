@@ -116,6 +116,12 @@ body {
     .header-image {
         height: 100%;
     }
+    .header-title {
+        font-size: 6vw;
+    }
+    .nav-button{
+        height: fit-content;
+    }
     .aside {
         display: none;
         top: 50px;
