@@ -45,9 +45,9 @@ const texts = {
 document.addEventListener('DOMContentLoaded', () => {
   const toggler = document.querySelector('.toggle')
   const aside = document.querySelector('aside')
+  const currentMain = document.querySelector('main');
 
   const changeText = (id) => {
-    const currentMain = document.querySelector('main');
     const newText = texts[id].text.map(paragraph => `<p>${[paragraph]}</p>`)
     currentMain.innerHTML = `
           <img class="picture" src="${texts[id].img}">
@@ -56,10 +56,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const handleChangeText = ({ target }) => {
-    if (target.id) {
+    const requestedID = target.id
+    if (requestedID) {
       const currentButton = document.querySelector('.focused')
-      if (currentButton.id !== target.id) {
-        changeText(target.id)
+      if (currentButton.id !== requestedID) {
+        changeText(requestedID)
         currentButton.classList.toggle('focused')
         target.classList.toggle('focused')
       }

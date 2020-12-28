@@ -84,7 +84,7 @@ aside button:focus {
   transition: 0.3s ease;
 }
 
-.middle {
+.middle-content-block {
   margin: auto;
   width: 900px;
   position: relative;
@@ -135,7 +135,7 @@ main {
     width: 100%;
   }
 
-  .middle {
+  .middle-content-block {
     width: 100%;
   }
 }
@@ -161,7 +161,7 @@ main {
     background: rgb(255, 187, 28);
   }
 
-  .middle {
+  .middle-content-block {
     height: 90%;
   }
   main {
@@ -180,6 +180,12 @@ main {
     left: 10px;
     background: white;
     z-index: 5;
+    border: none;
+    cursor: pointer;
+  }
+
+  .toggle:focus {
+    outline: none;
   }
 
   .toggle:before, .toggle:after {
