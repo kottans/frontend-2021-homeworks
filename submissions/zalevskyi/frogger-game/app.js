@@ -139,6 +139,7 @@ class Player extends Actor {
     update(dt) {
         super.update(dt)
         this.adjustPositionWithinLimits()
+        this.checkWin()
         this.checkCollectablesCollision()
         this.checkEnemiesCollision()
     }
@@ -161,11 +162,15 @@ class Player extends Actor {
         else if (this.position.x > PLAYER_POSITION_LIMITS.x_right) {
             this.changePosition(PLAYER_POSITION_LIMITS.x_right - this.position.x, 0)
         }
-        if (this.position.y < PLAYER_POSITION_LIMITS.y_top) {
-            this.changePosition(0, PLAYER_POSITION_LIMITS.y_top - this.position.y)
-        }
-        else if (this.position.y > PLAYER_POSITION_LIMITS.y_bottom) {
+        if (this.position.y > PLAYER_POSITION_LIMITS.y_bottom) {
             this.changePosition(0, PLAYER_POSITION_LIMITS.y_bottom - this.position.y)
+        }
+    }
+    checkWin() {
+        if (this.position.y < PLAYER_POSITION_LIMITS.y_top) {
+            this.score += 1
+            this.changePosition(PLAYER_POSITION_START.x - this.position.x,
+                                PLAYER_POSITION_START.y - this.position.y)
         }
     }
     checkCollectablesCollision() {
@@ -184,7 +189,15 @@ class Player extends Actor {
         })
     }
     endGame() {
-        this.allEnemies.forEach(e => e.moveStatus['right']=false)
+        this.allEnemies.forEach(e => {
+            e.moveStatus['right']=false
+            //prevent rare case when some enemy reached right edge
+            //and will restart movement from the left
+            //but game is already over due to player collision with other enemy instance
+            if (e.position.x > ENEMY_POSITION_LIMITS['x_right']) {
+                e.changePosition(OFF_SCREEN_X - e.position.x, 0)
+            }
+        })
         this.allCollectables.forEach(c => {
             c.timeToAppear=false
             c.timeToDisappear=false
@@ -199,8 +212,8 @@ class Player extends Actor {
         ctx.font = '25px san-serif'
         ctx.fillStyle = 'navy'
         ctx.textAlign = 'center'
-        ctx.fillText('Collect stars before they disappear', 252, 185)
-        ctx.fillText('You can move only on grass and stone', 252, 215)
+        ctx.fillText('Gain one point for reaching water', 252, 185)
+        ctx.fillText('Collect stars for additional points', 252, 215)
         ctx.fillText('Use arrows to move', 252, 245)
         ctx.fillStyle = 'red'
         ctx.fillText('Game ends when a bug hits you', 252, 275)
