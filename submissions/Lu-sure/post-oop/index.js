@@ -7,10 +7,10 @@
 
   // ======== OBJECTS DEFINITIONS ========
   class Inhabitant {
-    constructor(name, age, spesies) {
+    constructor(name, age, species) {
       this.name = name;
       this.age = age;
-      this.species = spesies;
+      this.species = species;
     }
 
     getName() {
@@ -31,7 +31,7 @@
     }
 
     getName() {
-      return `${this.name} ${this.lastName}`;
+      return `${super.getName()} ${this.lastName}`;
     }
 
     introduce() {
@@ -73,8 +73,8 @@
   }
 
   class Pet extends Inhabitant {
-    constructor(name, age, spesies, sex) {
-      super(name, age, spesies);
+    constructor(name, age, species, sex) {
+      super(name, age, species);
       this.sex = sex;
     }
 
@@ -115,7 +115,7 @@
     }
   }
 
-  function add_prop_value(o, S, prop) { o[prop] += ` & ${S[prop]}` };
+  function add_prop_value(object1, object2, property) { object1[property] += ` & ${object2[property]}` };
 
   class CatWoman extends Woman {
     constructor(name, lastName, age, saying) {
