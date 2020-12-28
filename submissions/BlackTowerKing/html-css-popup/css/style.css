@@ -1,6 +1,5 @@
 /*Start Reset css*/
 
-
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -22,6 +21,7 @@ time, mark, audio, video {
 	vertical-align: baseline;
 }
 
+/* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
 	display: block;
@@ -76,6 +76,10 @@ a {
 
 .menu-link:hover {
     text-decoration: underline;
+}
+
+.menu-link:focus { 
+    outline: 1px solid #000;
 }
 
 .menu-button {
@@ -177,11 +181,19 @@ a {
     animation: collorBattle 5s infinite;
 }
 
+.btn:focus {
+    background-image: linear-gradient(to right, rgb(0, 255, 34), rgb(255, 0, 0));
+}
+
     /* Start section submenu popup*/
 
 .show__sub-submenu-popup {
     appearance: none;
     position: absolute;
+}
+
+.show__submenu-popup:focus ~ .show-popup__label {
+    outline: 1px solid #000;
 }
 
 .show__sub-submenu-popup:checked ~ .btn{
