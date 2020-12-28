@@ -44,34 +44,35 @@ const texts = {
 
 document.addEventListener('DOMContentLoaded', () => {
   const toggler = document.querySelector('.toggle')
+  const aside = document.querySelector('aside')
 
-  const changeText = (target) => {
+  const changeText = (id) => {
     const currentMain = document.querySelector('main');
-
-    const newText = texts[target.id].text.map(paragraph => `<p>${[paragraph]}</p>`)
+    const newText = texts[id].text.map(paragraph => `<p>${[paragraph]}</p>`)
     currentMain.innerHTML = `
-          <img class="picture" src="${texts[target.id].img}">
+          <img class="picture" src="${texts[id].img}">
           ${newText.join('\n')}
       `
-    const currentButton = document.querySelector('.focused')
-    currentButton.classList.toggle('focused')
-    target.classList.toggle('focused')
-
-    document.querySelector('aside').classList.remove('toggled')
   }
 
   const handleChangeText = ({ target }) => {
     if (target.id) {
-      changeText(target)
+      const currentButton = document.querySelector('.focused')
+      if (currentButton.id !== target.id) {
+        changeText(target.id)
+        currentButton.classList.toggle('focused')
+        target.classList.toggle('focused')
+      }
     }
+    aside.classList.remove('toggled')
   }
 
   const menu = document.querySelector('.main-navigation')
   menu.addEventListener('click', handleChangeText)
 
   toggler.addEventListener('click', () => {
-    document.querySelector('aside').classList.toggle('toggled')
+    aside.classList.toggle('toggled')
   })
 
-  document.querySelector('#about').click()
+  changeText('about')
 })
