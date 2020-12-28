@@ -25,6 +25,10 @@ const ANIMATION_SPEED = 'animate__faster' //500ms
 let FRIENDS_SOURCE
 let CURRENT_FRIENDS = []
 let IS_MUSIC_STOPPED_BY_USER = false
+let CURRENT_CONTENT
+let CURRENT_ANIMATION_HIDE
+let CURRENT_ANIMATION_SHOW
+let CURRENT_ANIMATION_SPEED
 
 
 initApp()
@@ -65,6 +69,10 @@ function addListeners() {
             showSearchBar()
             playMusic()
         }
+    })
+    MAIN.addEventListener('animationend', function() {
+        showCurrentContent()
+        MAIN.addEventListener('animationend', clearAfterAnimation, { once: true })
     })
 }
 
@@ -108,37 +116,17 @@ function showSearchBar() {
     SEARCH_INPUT.addEventListener('input', toSearch)
 }
 
-//Function is waiting to get content for display and some classes of AnimateCSS to animation including animation speed (optional)
 function changeContent(content, show, hide, speed) {
+    CURRENT_CONTENT = content
+    CURRENT_ANIMATION_HIDE = hide
+    CURRENT_ANIMATION_SHOW = show
 
-    //Preparation displayed content for animation of hiding
-    MAIN.classList.remove('scroll') //Hide scrollbar (for esthetic purpose)
+    MAIN.classList.remove('scroll')
     if (speed) {
-        MAIN.classList.add(speed) // Adding class that will define speed of animation(optional)
+        MAIN.classList.add(speed)
+        CURRENT_ANIMATION_SPEED = speed
     }
-
-    //Hiding displayed content using AnimateCSS class
     MAIN.classList.add(hide)
-
-    //Waiting for end of animation of hiding content...
-    MAIN.addEventListener('animationend', function() {
-            //...and then...
-            MAIN.innerHTML = '' //Clear content
-            MAIN.innerHTML = content //Add new content
-            MAIN.classList.remove(hide) //Clean up unnecessary class
-
-            //Start animation of showing new content
-            MAIN.classList.add(show)
-
-            //Waiting for end of animation of showing content...
-            MAIN.addEventListener('animationend', function() {
-                    //...and then...
-                    MAIN.classList.remove(show) //Clean up unnecessary class
-                    MAIN.classList.remove(speed) //Clean up unnecessary class
-                    MAIN.classList.add('scroll') //Show scrollbar back
-                }, { once: true }) // Use listeners once and automatically removing after invoke
-        }, { once: true }) //in order not to accumulate listeners after each function's call
-
 }
 
 function toSearch() {
@@ -266,6 +254,27 @@ function handleErrors(response) {
         throw Error(response.statusText)
     }
     return response
+}
+
+function showCurrentContent() {
+    MAIN.innerHTML = ''
+    MAIN.innerHTML = CURRENT_CONTENT
+    MAIN.classList.remove(CURRENT_ANIMATION_HIDE)
+    MAIN.classList.add(CURRENT_ANIMATION_SHOW)
+}
+
+function clearAfterAnimation() {
+    MAIN.classList.remove(CURRENT_ANIMATION_SHOW)
+    MAIN.classList.remove(CURRENT_ANIMATION_SPEED)
+    MAIN.classList.add('scroll')
+}
+
+function raf(fn) {
+    window.requestAnimationFrame(function() {
+        window.requestAnimationFrame(function() {
+            fn()
+        })
+    })
 }
 
 //noUiSlider
