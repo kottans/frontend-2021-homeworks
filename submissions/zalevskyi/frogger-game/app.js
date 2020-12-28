@@ -87,6 +87,7 @@ class Actor extends Sprite {
     update(dt) {
         let move_x = this.moveStatus['right']-this.moveStatus['left']
         let move_y = this.moveStatus['down']-this.moveStatus['up']
+        //in case of diagonal movement adjust distance to go
         if (move_x!==0 && move_y!==0) {
             move_x = move_x / Math.sqrt(2)
             move_y = move_y / Math.sqrt(2)
