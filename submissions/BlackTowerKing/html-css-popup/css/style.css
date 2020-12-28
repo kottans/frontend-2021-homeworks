@@ -1,0 +1,233 @@
+/*Start Reset css*/
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+a {
+    text-decoration: none;
+}
+
+/* End Reset css*/
+
+/* Start Menu*/
+
+.header {
+    width: 90%;
+    margin: 20px auto;
+}
+
+.top-menu {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.top-menu__item {
+    margin: 0 10px;
+}
+
+.menu-link, .popup-link {
+    font-family: Arial, Helvetica, sans-serif;
+    color: grey;
+    font-size: 1em;
+    text-decoration: none;
+}
+
+.menu-link:hover {
+    text-decoration: underline;
+}
+
+.menu-button {
+    height: 25px;
+    border-radius: 50%;
+    padding: 5px;
+}
+
+.menu-button:hover {
+    background-color: lightgrey;
+}
+
+.profile {
+    height: 40px;
+}
+
+/*End Menu*/
+
+/*Start Popup*/
+
+.popup {
+    position: relative;
+}
+
+.show__submenu-popup {
+    appearance: none;
+    position: absolute;
+}
+
+.submenu-popup {
+    display: none;
+}
+
+.show__submenu-popup:checked ~ .submenu-popup {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    position: absolute;
+    top: 50px;
+    z-index: 1;
+    width: 15vw;
+    height: 50vh;
+    overflow: auto;
+    transform: translateX(-50%);
+    padding: 10px;
+    border: 2px solid whitesmoke;
+    border-radius: 10px;
+    background-color: rgba( 0, 0, 0, 0.2);
+    box-shadow: 5px 5px 10px  rgb(129, 128, 128);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.popup-item {
+    text-align: center;
+    width: 33%;
+    margin-bottom: 10px;
+    transform: perspective(70px) translateZ(-30px) rotateX(50deg);
+    transition: all 0.8s ease-out;
+}
+
+.popup-item:hover {
+    outline: 1px solid dimgray;
+    transform: perspective(0px) translateZ(0px) rotateX(0deg);
+}
+
+.popup-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    outline: none;
+}
+
+.popup-link:focus { 
+    outline: 1px solid #fff;
+}
+
+.popup-link__icon {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 15px;
+}
+
+.popup-btn {
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+}
+
+.btn {
+    width: 100%;
+    padding: 5px 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    text-align: center;
+    background-color: #fff;
+    outline: none;
+    border-radius: 5px;
+    animation: collorBattle 5s infinite;
+}
+
+    /* Start section submenu popup*/
+
+.show__sub-submenu-popup {
+    appearance: none;
+    position: absolute;
+}
+
+.show__sub-submenu-popup:checked ~ .btn{
+    display: none;
+}
+
+.show__sub-submenu-popup:focus ~ .btn {
+    background-image: linear-gradient(to right, rgb(0, 255, 34), rgb(255, 0, 0));
+}
+
+.sub-submenu-popup {
+    display: none;
+}
+
+.show__sub-submenu-popup:checked ~ .sub-submenu-popup {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    border-top: 1px solid #FFF;
+    padding-bottom: 10px;
+}
+
+    /* End section submenu popup*/
+
+/*End Popup*/
+
+/*Start Animation */
+
+@keyframes collorBattle {
+    0% {
+        box-shadow: rgb(255, 255, 255) 0px 0px 5px, rgb(255, 255, 255) 0px 0px 8px, rgb(255, 255, 255) 0px 0px 12px, rgb(0, 255, 34) 0px 0px 15px, rgb(0, 255, 34) 0px 0px 20px;
+        color: rgba(0, 255, 34, 0.5);
+    }
+
+    50% {
+        box-shadow: rgb(255, 255, 255) 0px 0px 5px 0px, rgb(255, 255, 255) 0px 0px 8px 0px, rgb(255, 255, 255) 0px 0px 12px 0px, rgb(255, 0, 0) 0px 0px 15px 0px, rgb(255, 0, 0) 0px 0px 20px 0px;
+        color: rgba(255, 0, 0, 0.5);
+    }
+    100% {
+        box-shadow: rgb(255, 255, 255) 0px 0px 5px, rgb(255, 255, 255) 0px 0px 8px, rgb(255, 255, 255) 0px 0px 12px, rgb(0, 255, 34) 0px 0px 15px, rgb(0, 255, 34) 0px 0px 20px;
+        color: rgba(0, 255, 34, 0.5);
+    }
+}
+
+/*End Animation*/
