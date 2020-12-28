@@ -5,104 +5,122 @@
    Web app: _put project's github pages URL here_
    */
 
-// ======== OBJECTS DEFINITIONS ========
-class Inhabitant {
-    constructor(name, age) {
+  // ======== OBJECTS DEFINITIONS ========
+  class Inhabitant {
+    constructor(name, age, spesies) {
       this.name = name;
       this.age = age;
-      this.species;
+      this.species = spesies;
+    }
+
+    getName() {
+      return this.name;
     }
 
     introduce() {
-      return `I\'ve existed for ${this.age} years`
+      return `I'm ${this.age} years old ${this.species}.`
     }
   }
 
   class Human extends Inhabitant {
-    constructor(options) {
-      super(options.name, options.age);
-      this.name = `${options.name} ${options.lastName}`;
-      this.species = 'human';
-      this.saying = options.saying;
+    constructor(name, lastName, age, gender, saying) {
+      super(name, age, 'human');
+      this.gender = gender;
+      this.lastName = lastName;
+      this.saying = saying;
+    }
+
+    getName() {
+      return `${this.name} ${this.lastName}`;
     }
 
     introduce() {
-      return `${super.introduce()} as a ${this.species}. What I can say, \"${this.saying}\"`;
+      return `${super.introduce()} I feel I'm ${this.gender}. My message is "${this.saying}" `;
     }
   }
 
   class Woman extends Human {
-    constructor(options) {
-      super(options);
-      this.gender = 'female';
+    constructor(name, lastName, age, saying) {
+      super(name, lastName, age, 'woman', saying);
       this.lovedBy;
     }
 
+    getOneLovedBy(lovedBy) {
+      this.lovedBy = lovedBy;
+    }
+
     beLoved() {
-      return `\"I\'m loved by ${this.lovedBy == this.name ? 'myself' : this.lovedBy}.\"`;
+      return `I'm happy to be loved by ${this.lovedBy === this.getName() ? 'myself' : this.lovedBy}.`;
     }
 
     introduce() {
-      return `${super.introduce()} I\'m ${this.gender}. ${this.beLoved()}`;
+      return super.introduce()+this.beLoved();
     }
   }
 
   class Man extends Human {
-    constructor(options) {
-      super(options);
-      this.gender = 'male';
+    constructor(name, lastName, age, saying) {
+      super(name, lastName, age, 'man', saying);
     }
 
     beGentleman() {
-      return `\"Every woman is beautiful!\"`;
+      return `Anyway I believe, every woman is beautiful!`;
     }
 
     introduce() {
-      return `${super.introduce()}, but I\'m ${this.gender}, so ${this.beGentleman()}`;
+      return super.introduce() + this.beGentleman();
     }
   }
 
   class Pet extends Inhabitant {
-    constructor(options) {
-      super(options.name, options.age);
+    constructor(name, age, spesies, sex) {
+      super(name, age, spesies);
+      this.sex = sex;
     }
 
     beTooMuchNice() {
-      return `...sleeping softly on the knees.`;
+      return ` ..sleeping softly on the knees. `;
+    }
+
+    introduce() {
+      return super.introduce() + this.beTooMuchNice();
     }
   }
 
   class Cat extends Pet {
-    constructor(options) {
-      super(options);
-      this.saying = 'meow!';
-      this.species = 'cat';
+    constructor(name, age, sex) {
+      super(name, age, 'cat', sex);
+    }
+
+    sayMeow() {
+      return `meow!..`
     }
 
     introduce() {
-      return `${super.introduce()}. I'm just ${this.species}. So, ${this.saying} ${super.beTooMuchNice()}`
+      return super.introduce() + this.sayMeow();
     }
   }
 
   class Dog extends Pet {
-    constructor(options) {
-      super(options);
-      this.saying = 'woof-woof!';
-      this.species = 'dog';
+    constructor(name, age, sex) {
+      super(name, age, 'dog', sex);
+    }
+
+    defendMyLord() {
+      return `Go away, strangers! woof-woof..`
     }
 
     introduce() {
-      return `${super.introduce()} as a ${this.species}. I\'m cute, ${this.saying} ${super.beTooMuchNice()}`
+      return super.introduce() + this.defendMyLord();
     }
   }
 
-  function replace_with(o, S, prop) { o[prop] = S[prop] };
   function add_prop_value(o, S, prop) { o[prop] += ` & ${S[prop]}` };
 
   class CatWoman extends Woman {
-    constructor(options) {
-      super(options);
-      replace_with(this, new Cat({}), 'saying');
+    constructor(name, lastName, age, saying) {
+      const halfCat = new Cat();
+      super(name, lastName, age, halfCat.sayMeow());
       add_prop_value(this, new Cat({}), 'species');
     }
   }
@@ -113,28 +131,32 @@ class Inhabitant {
       this.inhabitants = [];
     }
 
-    gotNewInhabitants() {
+    getNewInhabitants() {
       this.inhabitants.push(...arguments);
     }
 
-    randomInhabitant() {
-      return this.inhabitants[Math.floor(Math.random() * (this.inhabitants.length))].name;
+    getRandomInhabitantName() {
+      return this.inhabitants[Math.floor(Math.random() * (this.inhabitants.length))].getName();
     }
 
-    worldOverview() {
-      print(`Welcome to my hidden universe ${this.name} ! \nIt\'s not empty. Here are its creatures.`);
-      this.inhabitants.forEach(inhabitant => print(`Hey you, ${inhabitant.name}, your turn: ${inhabitant.introduce()}`));
+    overview() {
+      print(`Welcome to my hidden universe ${this.name}!
+  It's not empty. Here are its creatures.`);
+      this.inhabitants.forEach(inhabitant => print(`${inhabitant.getName()}: ${inhabitant.introduce()}`));
     }
   }
 
-  const johnny = new Man({ name: 'Johnny', lastName: 'Depp', age: 57, saying: 'Hate my ex!' });
-  const love = new Woman({ name: 'Love', lastName: 'Beautiful', age: 26, saying: 'Love everyone!' });
-  const roxy = new Cat({ name: 'Roxolana', age: 1});
-  const easy = new Dog({ name: 'Easy', age: 2 });
-  const catWoman = new CatWoman({ name: 'Selina', lastName: 'Kyle', age: 21, saying: 'I\'m cat!' });
+  const alien = new Inhabitant('Eva', 'one billion', 'alien');
+  const alex = new Human('Alex', 'Flash', 18, 'agender', 'Let\'s be king to each other!')
+  const johnny = new Man('Johnny', 'Depp', 57, 'Hate my ex!');
+  const love = new Woman('Love', 'Beautiful', 26, 'Love each other!');
+  const ratatouille = new Pet('Ratatouille', 1.5, 'rat', 'male');
+  const roxy = new Cat('Roxolana', 1, 'female');
+  const easy = new Dog('Easy', 2, 'female');
+  const catWoman = new CatWoman('Selina', 'Kyle', 21, 'I\'m cat!');
 
   const notEarth = new World('KindaEarth');
-  notEarth.gotNewInhabitants(johnny, love, roxy, easy, catWoman);
-  love.lovedBy = notEarth.randomInhabitant();
-  catWoman.lovedBy = notEarth.randomInhabitant();
-  notEarth.worldOverview();
+  notEarth.getNewInhabitants(alien, alex, johnny, love, ratatouille, roxy, easy, catWoman);
+  love.getOneLovedBy(notEarth.getRandomInhabitantName());
+  catWoman.getOneLovedBy(notEarth.getRandomInhabitantName());
+  notEarth.overview();
