@@ -32,7 +32,8 @@ const woman = {
 };
 
 const inhabitantsArray = [dog, cat, man, woman];
+const properties = ['species', 'name', 'gender', 'legs', 'hands', 'saying']
+const capitalizeString = (string) => string.charAt(0).toUpperCase() + string.slice(1);
 
-const message = (elem) => `Species: ${elem.species}. Name: ${elem.name}. Gender: ${elem.gender}. ${elem.legs} legs and ${elem.hands} hands. Phrase: ${elem.saying}`;
-
-inhabitantsArray.forEach( inh => print(message(inh)) );
+const makeMessage = (inhabitant) => properties.map(property => `${capitalizeString(property)}: ${inhabitant[property]}.`).join(' ');
+inhabitantsArray.forEach(inhabitant => print(makeMessage(inhabitant)));
