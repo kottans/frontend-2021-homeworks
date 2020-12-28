@@ -20,7 +20,7 @@ class GameSprite {
 }
 
 class Enemy extends GameSprite {
-    constructor(x, y, sprite = "images/enemy-bug.png", speed = "75") {
+    constructor(x, y, player,sprite = "images/enemy-bug.png", speed = "75") {
         super(x, y, sprite);
         this.speed = speed;
         this.player = player;
@@ -101,10 +101,10 @@ class Player extends GameSprite {
 const player = new Player();
 
 const allEnemies = [
-    new Enemy(5,60),
-    new Enemy(50,145),
-    new Enemy(280,145),
-    new Enemy(25,230)
+    new Enemy(5,60,player),
+    new Enemy(50,145,player),
+    new Enemy(280,145,player),
+    new Enemy(25,230,player)
 ];
 
 // This listens for key presses and sends the keys to your
