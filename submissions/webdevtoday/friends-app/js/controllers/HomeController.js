@@ -93,7 +93,7 @@ export default class {
                     return acc;
                 }, {})[v];
             }
-            return this.makeInput('text', 'filter', `Sort by ${v}`, v, textValue, 'form__input');
+            return this.makeInput('text', 'filter', `Filter by ${v}`, v, textValue, 'form__input');
         });
         form.append(...radioButtons);
         form.append(...textInputs);
