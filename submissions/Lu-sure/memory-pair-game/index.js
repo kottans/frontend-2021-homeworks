@@ -111,8 +111,8 @@ const render = function () {
         if (cards.filter(card => card.isOpen).length === 2) return;
         if (target == htmlBoard) return;
 
-        const id = target.closest(".card").getAttribute("data-idx");
-        const card = cards.find(x => x.id == id);
+        const targetCardId = target.closest(".card").getAttribute("data-idx");
+        const card = cards.find(card => card.id.toString() === targetCardId);
         if (card.isMatched) return;
 
         card.openCard();
@@ -125,7 +125,7 @@ const render = function () {
 const checkMatch = function() {
     const openCards = cards.filter(card => card.isOpen);
 
-    if (openCards.length == 1) return;
+    if (openCards.length === 1) return;
 
     setTimeout(() => {
         if (openCards[0].frontPic === openCards[1].frontPic) {
