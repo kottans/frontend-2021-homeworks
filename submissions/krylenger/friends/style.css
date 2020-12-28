@@ -88,19 +88,19 @@
 }
 
 .aside__button--19 {
-    background-image: url(./icons/sorting19.png);
+    background-image: url(./icons/sorting19.PNG);
 }
 
 .aside__button--91 {
-    background-image: url(./icons/sorting91.png);
+    background-image: url(./icons/sorting91.PNG);
 }
 
 .aside__button--OLD {
-    background-image: url(./icons/sortingOLD.png);
+    background-image: url(./icons/sortingOLD.PNG);
 }
 
 .aside__button--NEW {
-    background-image: url(./icons/sortingNEW.png);
+    background-image: url(./icons/sortingNEW.PNG);
 }
 
 .aside__button--reset {

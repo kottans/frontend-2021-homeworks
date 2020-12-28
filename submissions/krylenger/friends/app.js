@@ -189,7 +189,8 @@ const addEventListeners = (usersData) => {
 		filterCards(usersData);
   });
 
-  asideFilterAge.addEventListener("change", ({ target }) => {
+  asideFilterAge.addEventListener("input", ({ target }) => {
+    asideRangeAgeOutput.textContent = target.value;
 		filtersState.age = target.value;
 		filterCards(usersData);
   });
