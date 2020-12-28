@@ -26,13 +26,13 @@ class Creature {
 
   getAllCharacteristics() {
     return [
-      `${this.species}`,
+      this.species,
       `<strong>${this.name}</strong>`,
-      `${this.age}`,
-      `${this.gender}`,
-      `${this.legs}`,
-      `${this.saying}`,
-      `${this.friends}`,
+      this.age,
+      this.gender,
+      this.legs,
+      this.saying,
+      this.friends,
     ]
   }
 
