@@ -269,14 +269,6 @@ function clearAfterAnimation() {
     MAIN.classList.add('scroll')
 }
 
-function raf(fn) {
-    window.requestAnimationFrame(function() {
-        window.requestAnimationFrame(function() {
-            fn()
-        })
-    })
-}
-
 //noUiSlider
 function createRangeSlider() {
     const rangeSlider = document.getElementById('test-slider')
