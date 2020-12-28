@@ -47,14 +47,14 @@ const dog = {
     tail: 1,
     saying: cat.saying,
     friends: ['Sam', 'Hanna', 'Kitty', 'Milo']
-}
+};
 
 const population = [man, woman, cat, dog, womanCat],
     paramsOfItem = ['species', 'name', 'saying', 'gender', 'legs', 'hands', 'tail','friends'];
 
 let makeOutputString = item => {
     return paramsOfItem.map(param => item[param]).join(';');
-}
+};
 
 population.forEach(anyAnimal => {
     print(makeOutputString(anyAnimal));
