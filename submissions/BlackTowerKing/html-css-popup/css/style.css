@@ -1,4 +1,4 @@
-/*Start Reset css*/
+/*Reset css*/
 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -21,36 +21,15 @@ time, mark, audio, video {
 	vertical-align: baseline;
 }
 
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-	display: block;
-}
-body {
-	line-height: 1;
-}
 ol, ul {
 	list-style: none;
 }
-blockquote, q {
-	quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
-}
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
-}
+
 a {
     text-decoration: none;
 }
 
-/* End Reset css*/
-
-/* Start Menu*/
+/* Header*/
 
 .header {
     width: 90%;
@@ -96,9 +75,7 @@ a {
     height: 40px;
 }
 
-/*End Menu*/
-
-/*Start Popup*/
+/*Popup*/
 
 .popup {
     position: relative;
@@ -136,11 +113,10 @@ a {
     text-align: center;
     width: 33%;
     margin-bottom: 10px;
-    transform: perspective(70px) translateZ(-30px) rotateX(50deg);
-    transition: all 0.8s ease-out;
+    
 }
 
-.popup-item:hover {
+.popup-link:hover {
     outline: 1px solid dimgray;
     transform: perspective(0px) translateZ(0px) rotateX(0deg);
 }
@@ -151,10 +127,13 @@ a {
     align-items: center;
     padding: 10px;
     outline: none;
+    transform: perspective(70px) translateZ(-30px) rotateX(50deg);
+    transition: all 0.8s ease-out;
 }
 
 .popup-link:focus { 
     outline: 1px solid #fff;
+    background-image: linear-gradient(to right, rgb(0, 255, 34), rgb(255, 0, 0));
 }
 
 .popup-link__icon {
@@ -185,8 +164,6 @@ a {
     background-image: linear-gradient(to right, rgb(0, 255, 34), rgb(255, 0, 0));
 }
 
-    /* Start section submenu popup*/
-
 .show__sub-submenu-popup {
     appearance: none;
     position: absolute;
@@ -216,11 +193,7 @@ a {
     padding-bottom: 10px;
 }
 
-    /* End section submenu popup*/
-
-/*End Popup*/
-
-/*Start Animation */
+/* Animation */
 
 @keyframes collorBattle {
     0% {
@@ -238,4 +211,3 @@ a {
     }
 }
 
-/*End Animation*/
