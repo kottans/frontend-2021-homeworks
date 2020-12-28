@@ -13,6 +13,9 @@ h1 {
 
 body {
   height: 100vh;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
 }
 
 main {
@@ -34,7 +37,7 @@ img {
 footer {
   height: 10%;
   padding-top: 3%;
-  margin-top: 5%;
+  margin-top: auto;
 }
 
 .card-board {
@@ -50,7 +53,6 @@ footer {
 .card {
   display: block;
   position: relative;
-  border: 1px solid lightgrey;
   border-radius: 4px;
   width: 140px;
   height: 140px;
@@ -71,6 +73,8 @@ footer {
   left: 0;
   width: 100%;
   height: 100%;
+  border: 1px solid lightgrey;
+  border-radius: 4px;
   backface-visibility: hidden;
 }
 
@@ -82,7 +86,7 @@ footer {
 }
 
 .card-front:hover {
-  opacity: 0.6;
+  filter: brightness(107%);
 }
 
 .card-back {
