@@ -28,7 +28,7 @@ const cat = {
     species: 'cat',
     name: 'Tom',
     gender: 'male',
-    legs: 4,
+    paws: 4,
     saying: 'Meow!'
 };
 
@@ -36,33 +36,27 @@ const dog = {
     species: 'dog',
     name: 'Jerry',
     gender: 'female',
-    legs: 4,
+    paws: 4,
     saying: 'Gav!'
 };
 
 const inhabitants = [man, woman, cat, dog];
 
-function message(obj) {
-    const infoMessage = [
+function showMessage(obj) {
+    return [
         obj.saying,
-        'I am a',
-        obj.species + '.',
-        'My name is',
-        obj.name + '.',
-        'My gender is',
-        obj.gender + '.',
-        `I have`,
-
-        definitionExtremities(obj)
-    ];
-    return infoMessage.join(' ');
+        `I am a ${obj.species}.`,
+        `My name is ${obj.name}.`,
+        `My gender is ${obj.gender}.`,
+        `I have ${determineExtremities(obj)}`
+    ].join(' ');
 };
 
-function definitionExtremities(obj) {
+function determineExtremities(obj) {
     if (obj.species == 'human')
         return obj.legs + ' legs and ' + obj.hands + ' hands.';
     else
-        return obj.legs + ' paws.';
+        return obj.paws + ' paws.';
 };
 
 // ======== OUTPUT ========
@@ -74,4 +68,4 @@ function definitionExtremities(obj) {
    so code reviewers might focus on a single file that is index.js.
    */
 
-inhabitants.forEach(key => print(message(key)));
+inhabitants.forEach(key => print(showMessage(key)));
