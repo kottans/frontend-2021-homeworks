@@ -8,86 +8,72 @@
 // ======== OBJECTS DEFINITIONS ========
 // Define your objects here
 class Resident {
-  constructor(species, name, gender) {
+  constructor(species, name, gender, saying, friends) {
     this.species = species;
     this.name = name;
     this.gender = gender;
+    this.friends = friends;
+    this.saying = saying;
   }
   toString() {
-    return `Wonderful creature - <b>${
-      this.species
-    }</b>, whose name is <b>${
-      this.name
-    }</b> gender is <b>${
-      this.gender
-    }</b>!`;
+    return `Wonderful creature - <b>${this.species}</b>, 
+      whose name is <b>${this.name}</b>, 
+      the gender is <b>${this.gender}</b>! 
+      Usually the greeting is <b>${this.saying}</b> 
+      The friends of this inhabitant are <b>${this.friends.join(', ')}</b>. `;
   }
 }
 
 class Human extends Resident {
-  constructor(name, gender, saying, friends = 'no one') {
-    super('human', name, gender);
-    this.legs = 2;
-    this.hands = 2;
-    this.saying = saying;
-    this.friends = friends;
+  constructor(name, gender, saying, friends, legs = 2, hands = 2) {
+    super('human', name, gender, saying, friends);
+    this.legs = legs;
+    this.hands = hands;
   }
   toString() {
     return (
-      super.toString() + `</b> Usually the greeting is <b>${
-        this.saying
-      }</b> The friends of this inhabitant are <b>${
-        this.friends.join(', ')
-      }</b>. By the wat, this member is owner of <b>${
-        this.legs
-      } legs</b> and <b>${
-        this.hands
-      } hands</b>!`
+      super.toString() +
+      `By the wat, this member is owner of <b>${this.legs} legs</b> and <b>${this.hands} hands</b>!`
     );
   }
 }
 
 class Animal extends Resident {
-  constructor(species, name, gender, saying, friends = 'no one') {
-    super(species, name, gender);
-    this.paws = 4;
-    this.saying = saying;
-    this.friends = friends;
+  constructor(species, name, gender, saying, friends, paws = 4) {
+    super(species, name, gender, saying, friends);
+    this.paws = paws;
   }
   toString() {
-    return super.toString() + `</b> Usually the greeting is <b>${
-      this.saying
-    }</b> The friends of this inhabitant are <b>${
-      this.friends.join(', ')
-    }</b>. By the wat, this member is owner of <b>${
-     this.paws
-    } paws</b>!`;
+    return (
+      super.toString() +
+      `By the wat, this member is owner of <By>${this.paws} paws</By>!`
+    );
   }
 }
 
 class Dog extends Animal {
   constructor(name, gender, saying, friends) {
     super('dog', name, gender, saying, friends);
-    this.saying =  'woof-woof!';
-    this.friends = ['Tom', 'Jenny'];
   }
 }
 
 class Cat extends Animal {
   constructor(name, gender, saying, friends) {
     super('cat', name, gender, saying, friends);
-    this.saying = 'meow!';
-    this.friends =  ['Tom', 'Jenny', 'Selina'];
   }
 }
 
 class CatWoman extends Human {
-  constructor(name, gender, saying) {
-    super(name, gender, saying);
-    this.friends = ['Tom', 'Felix'];
-    this.saying = new Cat().saying;
+  constructor(name, saying, friends = ['Tom', 'Felix']) {
+    super(name, 'female', saying, friends);
+    this.saying = CatWoman.saying();
+  }
+
+  static saying() {
+    return 'meow!';
   }
 }
+
 // ======== OUTPUT ========
 /* Use print(message) for output.
 Default tag for message is <pre>. Use print(message,'div') to change containing element tag.
@@ -96,14 +82,15 @@ Message can contain HTML markup. You may also tweak index.html and/or styles.css
 However, please, REFRAIN from improving visuals at least until your code is reviewed
 so code reviewers might focus on a single file that is index.js.
 */
-const man = new Human('Tom', 'male', 'Hello Jenny!', ['Tom','Jenny','Rex', 'Selina']),
+const man = new Human('Tom', 'male', 'Hello Jenny!', ['Tom', 'Jenny', 'Rex', 'Selina']),
   women = new Human('Jenny', 'female', 'Hello Tom!', ['Tom', 'Rex', 'Felix']),
-  dog = new Dog('Rex', 'male'),
-  cat = new Cat('Felix', 'male'),
-  catWoman = new CatWoman('Selina', 'female'),
+  dog = new Dog('Rex', 'male', 'woof-woof!', ['Tom', 'Jenny']),
+  cat = new Cat('Felix', 'male', 'meow!', ['Tom', 'Jenny', 'Selina']),
+  catWoman = new CatWoman('Selina'),
   residents = [man, women, cat, dog, catWoman];
 
-residents.forEach((resident) => print((resident), 'p'));
+residents.forEach((resident) => print(resident, 'p'));
+
 /* Print examples:
 print('ABC');
 print('<strong>ABC</strong>');
