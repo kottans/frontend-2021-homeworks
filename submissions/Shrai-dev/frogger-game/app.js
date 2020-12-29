@@ -1,8 +1,22 @@
+const canvas = {
+  width: 505,
+  height: 450,
+};
+const stepX = 102;
+const stepY = 83;
+const spriteSize = 80;
+const playerStartX = 202;
+const playerStartY = 404;
+const enemyStartX = -30;
+const enemyEndX = 530;
+const enemyMinSpeed = 100;
+const enemyMaxSpeed = 250;
+
 // Enemies our player must avoid
-const Enemy = function (x, y, speed) {
+const Enemy = function (enemyStartX, y, speed) {
   // Variables applied to each of our instances go here,
   // we've provided one for you to get started
-  this.x = x;
+  this.x = enemyStartX;
   this.y = y;
   this.speed = speed;
   // The image/sprite for our enemies, this uses
@@ -18,19 +32,8 @@ Enemy.prototype.update = function (dt) {
   // all computers.
   this.x += this.speed * dt;
 
-  if (this.x > 510) {
-    this.x = -50;
-    this.speed = Math.floor(Math.random() * 190) + 150;
-  }
-
-  if (
-    player.x < this.x + 80 &&
-    player.x + 80 > this.x &&
-    player.y < this.y + 60 &&
-    player.y + 60 > this.y
-  ) {
-    player.x = 202;
-    player.y = 404;
+  if (this.x > enemyEndX) {
+    this.x = enemyStartX;
   }
 };
 
@@ -41,56 +44,75 @@ Enemy.prototype.render = function () {
 
 // Now write your own player class
 
-const Player = function (x, y) {
-  this.x = x;
-  this.y = y;
+const Player = function (playerStartX, playerStartY) {
+  this.x = playerStartX;
+  this.y = playerStartY;
   this.sprite = "images/char-boy.png";
 };
 
 // This class requires an update(), render() and
 // a handleInput() method.
 
-Player.prototype.update = function (dt) {
-  
+Player.prototype.update = function () {
+  this.checkCollisions();
 };
 
 Player.prototype.render = function () {
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
+Player.prototype.checkCollisions = function () {
+  allEnemies.forEach((enemy) => {
+    if (
+      this.x < enemy.x + spriteSize &&
+      this.x + spriteSize > enemy.x &&
+      this.y < enemy.y + spriteSize * 0.75 &&
+      this.y + spriteSize * 0.75 > enemy.y
+    ) {
+      this.x = playerStartX;
+      this.y = playerStartY;
+    }
+  });
+};
+
 Player.prototype.handleInput = function (keyPress) {
-    if (keyPress == 'left' && this.x > 0) {
-        this.x -= 102;
-    };
-    if (keyPress == 'right' && this.x < 404) {
-        this.x += 102;
-    };
-    if (keyPress == 'up' && this.y > 0) {
-        this.y -= 83;
-    };
-    if (keyPress == 'down' && this.y < 404) {
-        this.y += 83;
-    };
-    if (this.y < -10) {
-      setTimeout ( () => {
-          this.x = 202;
-          this.y = 404;
-      }, 800);
-  };
+  if (keyPress == "left" && this.x > 0) {
+    this.x -= stepX;
+  }
+  if (keyPress == "right" && this.x < canvas.width - stepX) {
+    this.x += stepX;
+  }
+  if (keyPress == "up" && this.y > 0) {
+    this.y -= stepY;
+  }
+  if (keyPress == "down" && this.y < canvas.height - stepY) {
+    this.y += stepY;
+  }
+  if (this.y < -10) {
+    setTimeout(() => {
+      this.x = playerStartX;
+      this.y = playerStartY;
+    }, 800);
+  }
 };
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 
 const allEnemies = [];
-const enemyLocation = [63, 147, 230];
-enemyLocation.forEach(function (locationY) {
-  enemy = new Enemy(0, locationY, 150);
+
+const enemyLocationY = [63, 147, 230];
+enemyLocationY.forEach(function (locationY) {
+  enemy = new Enemy(0, locationY, getEnemySpeed(enemyMinSpeed, enemyMaxSpeed));
   allEnemies.push(enemy);
 });
+
+function getEnemySpeed(min, max) {
+  return Math.floor(Math.random() * max) + min;
+}
 // Place the player object in a variable called player
 
-const player = new Player(202, 404);
+const player = new Player(playerStartX, playerStartY);
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
