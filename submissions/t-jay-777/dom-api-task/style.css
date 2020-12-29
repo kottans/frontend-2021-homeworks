@@ -1,0 +1,124 @@
+/* https://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/*/
+/* resetting box-sizing to border-box */
+html {
+    box-sizing: border-box;
+} 
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+body {
+    /* padding: 0; */
+    font-size: 1.5em;
+    line-height: normal;
+    font-family: "Open Sans", Consolas, sans-serif;
+}
+
+.burgers {
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.burgers .title::before {
+    content: '▶ ';
+    /* font-size: 80%; */
+    color: #df8130e0;
+}
+
+span:hover {
+    box-shadow: 1em 0 1em #995922e0;
+}
+
+.burgers .title:focus {
+    outline: none;
+}
+
+.burgers.open .title::before {
+    content: '▼ ';
+}
+
+/* images*/
+img {
+    max-width: 100%;
+    /* min-height: 25%; */
+    margin-left: 2vw;
+    display: block;
+    height: auto;
+}
+
+.main {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    
+}
+
+.main::after {
+    content: "";
+    background: url(https://i.postimg.cc/bNDQ2H2T/fast-food-menu-sample-usage-clipart-lg.png) #704d2ef2 no-repeat;
+    background-position: center;
+    opacity: 0.07;
+    background-size: 100vh;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: fixed;
+    z-index: -1;   
+}
+
+.content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.burger-list {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    padding: 0;
+}
+
+.content img {
+    max-height: 90vh;
+}
+
+.hidden img {
+    display: none;
+}
+
+.burger-list li {
+    margin-bottom: 3%;
+}
+
+.button {
+    padding: 10px 20px;
+    background-color: #091127bf;
+    color: #df8130e0;
+    border: 1px solid #000000;
+    border-radius: 15%;
+    box-shadow: 2px 2px 3px rgb(75 72 73 / 64%);
+    outline: 0;
+    font-weight: 700;
+    width: 100%;
+    user-select: none;
+}
+
+button:hover {
+    color: #f5bc8ae0;
+}
+
+.button.active {
+    color: #ff5200;
+    background: #010f35bf;
+    border-color: #ff5200;
+}
+
+/* .button:focus {
+    color: #fff;
+    background: #40a9ff;
+    border-color: #40a9ff;
+} */
