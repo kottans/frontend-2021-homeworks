@@ -86,11 +86,7 @@ const houses = [
   },
 ];
 
-let button;
-let buttonLi;
-let image;
-let imageId;
-let imageCollection = [];
+let id = 0;
 let previousId = 0;
 const number = 3;
 const time = 1450;
@@ -107,8 +103,8 @@ const header = document.querySelector('.header-container');
 
 function createList() {
   houses.forEach(({ id, name }) => {
-    buttonLi = document.createElement('li');
-    button = document.createElement('button');
+    const buttonLi = document.createElement('li');
+    const button = document.createElement('button');
     button.className = 'menu-item';
     button.id = id;
     button.innerHTML = `
@@ -118,14 +114,10 @@ function createList() {
   });
 }
 
-function changeContent(e) {
-  let target = e.target;
-  if (!target.matches('button')) {
-    target = target.parentNode;
-  }
+function changeContent({ target }) {
   const btn = target.closest('.menu-item');
   if (btn) {
-    id = target.getAttribute('id');
+    id = btn.getAttribute('id');
     createElements(houses[id]);
     addImages(houses[id]);
     animateMap(houses[id]);
@@ -153,15 +145,11 @@ function addImages(item) {
 
 function createImage({ name }) {
   for (let i = 0; i < number; i++) {
-    image = document.createElement('div');
+    const image = document.createElement('div');
     image.className = 'content-img';
     image.id = i;
     images.appendChild(image);
     image.style.backgroundImage = `url("assets/members/member-${name}-${i}.jpg")`;
-    if (imageCollection.length >= 3) {
-      imageCollection = [];
-    }
-    imageCollection.push(image);
   }
 }
 
@@ -204,10 +192,9 @@ function showDead(el) {
   }, time);
 }
 
-function addImageAnimation(e) {
-  const target = e.target;
+function addImageAnimation({ target }) {
   const img = target.closest('.content-img');
-  imageId = target.getAttribute('id');
+  const imageId = target.getAttribute('id');
   if (img) {
     changeImageBackground(target, imageId);
   }
