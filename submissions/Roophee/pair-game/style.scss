@@ -41,7 +41,6 @@ body {
         height: 90%;
         min-height: 600px;
         transition: 1s 0.5s;
-
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         grid-template-rows: repeat(3, 1fr);
@@ -59,12 +58,12 @@ body {
         min-width: 145px;
         min-height: 200px;
 
-        &.active .game__card {
+        &.active .game__card-item {
             transform: rotateY(180deg);
         }
     }
 
-    &__card {
+    &__card-item {
         visibility: inherit;
         transition: 0.6s;
         transform-style: preserve-3d;
@@ -74,29 +73,10 @@ body {
         min-width: 145px;
         min-height: 200px;
     }
-}
 
-.audio {
-    &__play {
-        position: absolute;
-        width: 50px;
-        height: 50px;
-        z-index: 5;
-        right: 15px;
-        top: 15px;
-        background-image: url("https://api.iconify.design/uil:volume-mute.svg?color=rgba(2%2C2%2C2%2C0.615)");
-        background-repeat: no-repeat;
-        background-size: 50px;
-    }
-
-    &__pause {
-        background-image: url("https://api.iconify.design/uil:volume.svg?color=rgba(2%2C2%2C2%2C0.615)");
-    }
-}
-
-.cards__front,
-.cards__back {
-    width: 10vw;
+    &__card-front,
+    &__card-back {
+        width: 10vw;
     height: 14vw;
     min-width: 145px;
     min-height: 200px;
@@ -105,21 +85,21 @@ body {
     visibility: inherit;
     top: 0;
     left: 0;
-}
+    }
 
-.cards__front {
-    border: 2px solid black;
-    z-index: 2;
-    transform: rotateY(180deg);
-    border-radius: 5px;
-}
+    &__card-front {
+        border: 2px solid black;
+        z-index: 2;
+        transform: rotateY(180deg);
+        border-radius: 5px;
+    }
 
-.cards__back {
-    transform: rotateY(0deg);
-}
+    &__card-back {
+        transform: rotateY(0deg);
+    }
 
-.card__back,
-.card__front {
+    &__card-img,
+    &__card-cardback {
     cursor: pointer;
     visibility: inherit;
     width: 10vw;
@@ -133,7 +113,26 @@ body {
     -webkit-user-drag: none;
     -webkit-user-select: none;
     -ms-user-select: none;
+    }
 }
+
+.audio__button {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        z-index: 5;
+        right: 15px;
+        top: 15px;
+        background-image: url("https://api.iconify.design/uil:volume-mute.svg?color=rgba(2%2C2%2C2%2C0.615)");
+        background-repeat: no-repeat;
+        background-size: 50px;
+    }
+
+.pause {
+    background-image: url("https://api.iconify.design/uil:volume.svg?color=rgba(2%2C2%2C2%2C0.615)");
+}
+
+
 
 .hide {
     visibility: hidden;
