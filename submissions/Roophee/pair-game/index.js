@@ -10,14 +10,15 @@ const heroesArray = ['luke', 'vader', 'solo', 'ob1', 'palpatine', 'leia', 'r2d2-
     audioItem = document.querySelector('audio'),
     audioButton = document.querySelector('.audio__button'),
     quantityOfUniqueCards = 17,
-    quantityOfPairsOnTheScreen = 6;
+    quantityOfCardsOnTheScreen = 12,
+    maxQuantityOfPairsOnTheScreen = 6;
 
 
 // TAKE RANDOM CARDS FROM POOL OF CARDS
 const cardsForPlay = function () {
     while (true) {
         let randomIndex = Math.floor(Math.random() * quantityOfUniqueCards);
-        if (indexInUse.length === quantityOfPairsOnTheScreen) {
+        if (indexInUse.length === maxQuantityOfPairsOnTheScreen) {
             break
         } else if (indexInUse.indexOf(randomIndex) < 0) {
             indexInUse.push(randomIndex);
@@ -43,7 +44,7 @@ const imageCounter = function (indx) {
 // TAKE RANDOM IMAGE FROM POOL OF IMAGES FOR THIS GAME
 const getRandomImage = function () {
     while (true) {
-        let randomIndex = Math.floor(Math.random() * quantityOfPairsOnTheScreen);
+        let randomIndex = Math.floor(Math.random() * maxQuantityOfPairsOnTheScreen);
         if (imageCounter(randomIndex) >= -1) {
             return randomIndex;
         }
@@ -62,16 +63,13 @@ const animateOnStart = function(){
 
 document.addEventListener('DOMContentLoaded', animateOnStart);
 
-
 // ADD CARDS ON DOCUMENT
 let addCardsOnPage = function () {
     let cardsContainerOnDynamicGeneration = document.createDocumentFragment();
-    for (let i = 0; i < 12; i++) {
+    for (let i = 0; i < quantityOfCardsOnTheScreen; i++) {
         let cardNameInsertOnDynamicGeneration = heroesArray[indexInUse[getRandomImage()]],
-            idForCardOnCheckIsTheSameOrNot = i+1,
             cardItem = document.createElement('div');
         cardItem.classList.add('game__card-holder');
-        cardItem.setAttribute('data-id', idForCardOnCheckIsTheSameOrNot.toString());
         cardItem.innerHTML = `<div class="game__card-item">
                             <div class="game__card-front">
                                 <img src="img/${cardNameInsertOnDynamicGeneration}.jpg" alt="${cardNameInsertOnDynamicGeneration}"  class="game__card-img">
@@ -87,11 +85,12 @@ let addCardsOnPage = function () {
 
 addCardsOnPage();
 
+//  CLEAR ARRAYS AND OBJECTS, PICK NEW CARDS FOR THE GAME
 let clearAllOperationObjectsAndCreateNewGame = function() {
-    if (pairs.length === quantityOfPairsOnTheScreen) {
+    if (pairs.length === maxQuantityOfPairsOnTheScreen) {
         let playAgain = window.confirm('Congratulations. You have matched all pairs and won the game. Want to play again?');
                 if (playAgain) {
-                    document.querySelector('.game__card-place').innerHTML = "";
+                    cardPlace.innerHTML = "";
                     for (const prop of Object.keys(imagesCountForTwo)) {
                         delete imagesCountForTwo[prop];
                         };
@@ -108,24 +107,28 @@ let clearAllOperationObjectsAndCreateNewGame = function() {
 const checkGameIsOverOrNot = function () {
     setTimeout(function () {
             clearAllOperationObjectsAndCreateNewGame();
-    }, 2000)
+    }, 2100)
 }
 
+// ADD HIDE CLASS ON CARD-HOLDER ITEM IF TWO CARD ARE PAIR
 let hidePair = function(){
+    if (prePair[0] && prePair[1]){
     prePair[0][1].classList.add('hide');
     prePair[1][1].classList.add('hide');
     prePair.splice(0, 2);
+    }
 }
 
+// REMOVE ACTIVE CLASS FROM CARD-HOLDER ITEM IF TWO CARD ARE NOT A PAIR
 let clearPair = function() {
     prePair[0][1].classList.remove('active');
     prePair[1][1].classList.remove('active');
     prePair.splice(0, 2);
 }
 
-// CHECK IS TWO CARDS PAIR OR NOT
+// CHECK IS TWO CARDS A PAIR OR NOT
 let checkPairOrNot = function () {
-    if (prePair.length === 2 && prePair[0][0] === prePair[1][0] && prePair[0][2] !== prePair[1][2]) {
+    if (prePair.length === 2 && prePair[0][0] === prePair[1][0]) {
         pairs.push('1');
         setTimeout(function () {
             hidePair();
@@ -138,10 +141,10 @@ let checkPairOrNot = function () {
         }, 800);
 }}
 
+// GET PICTURE NAME FROM ALT AND PARENT ELEMENT
 let createCardInfoAndAddItInCheckPlace = (cardBack, cardHolderElement) => {
-    let cardNameHolder = cardBack.closest('.game__card-holder').querySelector('.game__card-img').src.split('/');
-    let cardName = cardNameHolder[cardNameHolder.length - 1].split(".")[0];
-    prePair.push([cardName, cardHolderElement, cardHolderElement.getAttribute('data-id')]);
+    let cardName = cardBack.closest('.game__card-holder').querySelector('.game__card-img').alt;
+    prePair.push([cardName, cardHolderElement]);
 }
 
 //  CLICK ON CARD EVENT
