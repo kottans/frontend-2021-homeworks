@@ -1,15 +1,12 @@
 const PLAYER_START_POSITION = { x: 200, y: 380 };
 const STEP_Y = 80;
 const STEP_X = 102;
-const BUGS_PADDING = 18;
-const BUGS_START_POSITION = {
-  x: -200
-};
+const BUG_PADDING = 18;
+const BUG_START_X = -200;
 const MIN_SPEED = 100;
 const MAX_SPEED = 700;
-const CANVAS_WIDTH = 505;
 const BUG_SIZE = 70;
-const NUMBER_OF_ROWS = 3;
+const NUMBER_OF_ENEMY_ROWS = 3;
 
 const Character = function (x, y) {
   this.x = x;
@@ -28,8 +25,8 @@ const Enemy = function (x, y, speed, player) {
 Enemy.prototype = Object.create(Character.prototype);
 Enemy.prototype.update = function (dt) {
   this.x += this.speed * dt;
-  if (this.x > CANVAS_WIDTH) {
-    this.x = BUGS_START_POSITION.x;
+  if (this.x > ctx.canvas.width) {
+    this.x = BUG_START_X;
   }
   this.handleCollision();
 };
@@ -60,7 +57,7 @@ Player.prototype.handleInput = function (key) {
   if (key === "left" && this.x > 0) {
     this.x -= STEP_X;
   }
-  if (key === "right" && this.x < CANVAS_WIDTH - STEP_X) {
+  if (key === "right" && this.x < ctx.canvas.width - STEP_X) {
     this.x += STEP_X;
   }
   if (key === "down" && this.y < PLAYER_START_POSITION.y) {
@@ -78,9 +75,9 @@ Player.prototype.resetPosution = function () {
 const player = new Player(PLAYER_START_POSITION.x, PLAYER_START_POSITION.y);
 const enemyRows = (numberOfRows) =>
   Array.from({ length: numberOfRows }, (_, i) => i + 1);
-const allEnemies = enemyRows(NUMBER_OF_ROWS).map((row) => {
+const allEnemies = enemyRows(NUMBER_OF_ENEMY_ROWS).map((row) => {
   return new Enemy(
-    BUGS_START_POSITION.x,
+    BUG_START_X,
     getBugsY(row),
     getRandomSpeed(MIN_SPEED, MAX_SPEED),
     player
@@ -88,7 +85,7 @@ const allEnemies = enemyRows(NUMBER_OF_ROWS).map((row) => {
 });
 
 function getBugsY(row) {
-  return row * STEP_Y - BUGS_PADDING;
+  return row * STEP_Y - BUG_PADDING;
 }
 
 function getRandomSpeed(min, max) {
