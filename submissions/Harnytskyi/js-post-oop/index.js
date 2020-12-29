@@ -7,18 +7,36 @@
 
 // ======== OBJECTS DEFINITIONS ========
 class Inhabitant {
-    constructor(species, name, gender, saying) {
+    constructor(species, name, gender, saying, friends = []) {
         this.species = species;
         this.name = name;
         this.gender = gender;
         this.saying = saying;
+        this.friends = friends;
     };
+    getListFriends(){
+        if (this.friends.length == 0){
+            return "I have not a friends."
+        }
+        else{
+            var listFriends = [];
+            this.friends.map(element => {
+                listFriends.push(element.name);
+            })
+            return `My friends: ${listFriends.join(', ')}.`;
+        }
+    }
+    addFriends(friends){
+        this.friends = friends;
+    }
+
     toString() {
         return [
             this.saying,
             `I am a ${this.species}.`,
             `My name is ${this.name}.`,
-            `My gender is ${this.gender}.`
+            `My gender is ${this.gender}.`,
+            this.getListFriends()
         ].join(' ');
     }
 }
@@ -29,7 +47,7 @@ class Human extends Inhabitant {
         this.hands = 2;
     };
     toString(){
-        return `{${super.toString()} I have ${this.legs} legs and ${this.hands} hands.`;
+        return super.toString() + `I have ${this.legs} legs and ${this.hands} hands.`;
     }
 }
 class Man extends Human {
@@ -49,7 +67,7 @@ class Mammal extends Inhabitant{
         this.paws = 4;
     };
     toString(){
-        return `{${super.toString()} I have ${this.paws} paws.`;
+        return super.toString() + ` I have ${this.paws} paws.`;
     }
 }
 
@@ -69,6 +87,9 @@ const woman = new Woman('Jessica', 'Good morning, gays!');
 const cat = new Cat('Tom', 'male');
 const dog = new Dog('Jerry', 'female');
 
+man.addFriends([woman, dog]);
+woman.addFriends([cat]);
+dog.addFriends([man]);
 // ======== OUTPUT ========
 /* Use print(message) for output.
    Default tag for message is <pre>. Use print(message,'div') to change containing element tag.
