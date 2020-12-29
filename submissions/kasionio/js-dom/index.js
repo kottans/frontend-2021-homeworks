@@ -45,14 +45,9 @@ const planets = [{
 const main = document.querySelector('#main');
 const nav = document.querySelector('#nav');
 
-planets.map(item => item.name)
-    .forEach(planet => {
-        let li = document.createElement('li');
-        li.className = 'nav_item';
-        li.innerHTML = `<a href='#'>${planet}</a>`;
-        const nav = document.getElementById('nav');
-        nav.appendChild(li);
-});
+let navLinks = planets.map(planet => `<li class ='nav_item'><a href='#'>${planet.name}</a></li>`)
+.join('');
+nav.innerHTML = navLinks;
 
 function createArticle(item) {
     const article = document.createElement('article');
@@ -70,10 +65,10 @@ function createArticle(item) {
     </figure>
     </div>
     <p>${item.description}</p>`;
-    return article;
+    return article;   
 }
 
-nav.addEventListener('click', (event) => {
-    main.appendChild(createArticle(planets.find(item => item.name === event.target.innerText)));
-    main.removeChild(main.childNodes[0]);
+nav.addEventListener('click', ({target}) => {
+   main.textContent = '';
+   main.appendChild(createArticle(planets.find(item => item.name === target.innerText)));   
 });
