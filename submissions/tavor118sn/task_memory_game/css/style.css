@@ -1,0 +1,136 @@
+
+body {
+  font-family: 'Arimo', sans-serif;
+}
+
+html,
+body {
+  height: 100%;
+
+}
+
+.wrapper {
+  height: 100vh;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas: 'header' 'main' 'footer';
+}
+
+.header, .footer {
+  color: white;
+  background-color: #052a32;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5em;
+}
+
+.header {
+  grid-area: header;
+}
+
+.footer {
+  grid-area: footer;
+}
+
+.header .title {
+  font-size: 2em;
+}
+
+.main {
+  grid-area: main;
+
+  background-color: #04b4ff;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.game-board {
+  width: 320px;
+  height: 400px;
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  grid-gap: 0.2em 0.2em;
+
+  justify-items: center;
+}
+
+.flip-card {
+  cursor: pointer;
+
+  width: 8em;
+  height: 5em;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.front-img {
+  width: auto;
+  height: 100%;
+}
+
+/*
+
+  ***********
+  FLIP STYLES
+  ***********
+
+ */
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 500ms;
+  transform-style: preserve-3d;
+}
+
+.flip-card.opened .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.front, .back {
+  background-color: lightskyblue;
+  border-radius: 1em;
+  border: 2px solid #fff;
+
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+
+}
+
+.back {
+  transform: rotateY(180deg);
+}
+
+/*
+
+  **********
+  RESPONSIVE
+  **********
+
+ */
+
+@media screen and (min-width: 600px) {
+  .game-board {
+    width: 480px;
+    height: 480px;
+  }
+
+  .flip-card {
+    width: 10em;
+    height: 6em;
+
+  }
+}
