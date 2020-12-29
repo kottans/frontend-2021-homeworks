@@ -185,7 +185,6 @@ const resetRadioButtons = () => {
     DOM_NODES.radioButtons[0].checked = true;
 };
 
-
 const sortingCards = (e) => {
     const target = e.target.type;
     if(!state.sortedUsers.length) state.sortedUsers = [...state.filteredUsers];
@@ -213,6 +212,4 @@ DOM_NODES.target.addEventListener('click', e => {
     }
 });
 
-
 buildCardList()
-
