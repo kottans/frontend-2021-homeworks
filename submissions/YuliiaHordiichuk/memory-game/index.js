@@ -36,7 +36,6 @@ class Game {
 
     addClickHendler () {
         this.cardsContainer.addEventListener('click', ({ target: button }) => {
-            console.log('listener');
             const buttonId = button.dataset.id;
 
             if(buttonId) {
