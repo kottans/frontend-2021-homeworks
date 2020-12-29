@@ -1,0 +1,150 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: url("img/background.jpg");
+    background-size: cover;
+    font-family: 'Kelly Slab', 'Play', cursive;
+    overflow-x: hidden;
+}
+
+.menu-button {
+    position: absolute;
+    left: 320px;
+    top: 1em;
+    margin: 0em 0.5em;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    font-size: 2em;
+    line-height: 1;
+    z-index: 2001;
+    background-color: transparent;
+}
+
+.menu-button:hover {
+    border: 1px solid #b8860b;
+    border-radius: 5px;
+    background-color: #b8860b;
+}
+
+.menu-button::after {
+    content: "\2630";
+    color: whitesmoke;
+}
+
+.content {
+    margin: 2em 1em;
+    padding: 0 2em;
+    transition: transform .3s;
+}
+
+.content h1{
+    font-size: 1.6em;
+    font-style: italic;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 0.1em;
+    color: #caad00;
+}
+
+.content h2{
+    font-size: 1.4em;
+    font-style: italic;
+    text-align: left;
+    font-weight: bold;
+    padding-left: 2em;
+    margin-bottom: 0.1em;
+    margin-top: 0.3em;
+    color: #caad00;
+}
+
+.content p{
+    text-indent: 3.0em;
+    margin-bottom: 1em;
+    text-align: justify;
+    color: #FFD700;
+}
+
+.heroImg{
+    display: block;
+    float: right;
+    margin: 20px;
+    border-radius: 5px;
+}
+
+.nav {
+    width: 320px;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    margin: 0;
+    left: -320px;
+    padding: 15px 20px;
+    z-index: 2000;
+    transition: left 0.3s;
+}
+
+.nav > ul {
+    display: block;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.itemLi {
+    line-height: 2.5;
+    cursor: pointer;
+    list-style-type: none;
+    padding: 5px;
+    font-size: 1.4em;
+    color: #caad00;
+}
+
+.itemLi:hover{
+    padding-left: 15px;
+}
+
+.itemLi::selection {
+    background: transparent;
+}
+
+.nav .selectedItem{
+    color: red;
+}
+
+.nav-toggle{
+    left: 0;
+    overflow-y: auto;
+    box-shadow:4px 0px 20px 0px rgba(0,0,0, 0.5);
+}
+
+.content-toggle{
+    transform: translateX(320px);
+}
+
+.menu-button-toggle {
+    left: auto;
+    right: 2px;
+    top: 1em;
+}
+
+.menu-button-toggle::after {
+    content: "\2716";
+    color: whitesmoke;
+}
+
+@media screen and (max-width: 720px) {
+    .heroImg{
+        float: none;
+        margin: 20px auto;
+    }
+    .menu-button:hover {
+        border: none;
+        background-color: inherit;
+    }
+}

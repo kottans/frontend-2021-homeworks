@@ -1,0 +1,213 @@
+body {
+  margin: 0;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  color: rgb(173, 189, 196);
+}
+
+li {
+  list-style-type: none; 
+}
+
+label:hover {
+  cursor: pointer;
+}
+
+a:focus {
+  outline: 2px solid lightblue;
+}
+
+a {
+  color: rgb(173, 189, 196);
+}
+
+
+                                                  /* HTML + CSS Logic of Popup menu */
+
+/*hide the inputs/checkmarks and submenu*/
+input, .sub_menu, .more_sub_menu {
+  display: none;
+}
+
+/*show the submenu when input is checked*/
+input:checked~.sub_menu {
+  display: block;
+}
+
+                                      /* more Popup menu CSS logic */
+
+/*show the more_sub_menu when input is checked*/
+.more_button:checked ~ .more_sub_menu {
+  display: block;
+}
+
+.more_button:checked ~ .more_button_label {
+  display: none;
+}
+
+                                                      /* Styling of Popup menu */
+
+.head_nav {
+  position: absolute;
+  width: 100%;
+  top: 20px;
+  background-color: ghostwhite;
+}
+
+.container {
+  width: 90%;
+}
+
+.nav_menu {
+  display: flex;
+  float: right;
+  flex-direction: row;
+  align-items: center;
+}
+
+ul.nav_menu {
+  margin: 5px 0;
+}
+
+.nav_item {
+  padding: 0.75em;
+  text-align: center;
+}
+
+.menu_button {
+  display: block;
+  position: absolute;
+  z-index: -1;
+}
+
+.popup_png {
+  padding: 7.5px;
+  width: 2em;
+}
+
+.bell_png {
+  width: 50%;
+}
+                        /*position and style main sub_menu, sub_container */
+
+.sub_menu {
+  position: absolute;
+  width: 300px;
+  height: 500px;
+  background-color: white;
+  top: 90px;
+  right: 15%;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 5px 10px 18px lightgrey;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.sub_menu ul {
+  padding: 0;
+}
+
+.sub_container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  height: 450px;
+}
+
+.sub_menu img {
+  display: block;
+  max-width: 45px;
+  max-height: 45px;
+  padding: auto;
+}
+
+a:link {
+  text-decoration: none;
+}
+
+.nav_menu > li > a:hover,
+img.popup_png:hover,
+.more_button_label:hover,
+.more_sub_menu_footer:hover {
+  background-color: rgb(219, 243, 250);
+  border-radius: 5px;
+}
+
+.nav_menu .nav_item .nav_item_a {
+  display: block;
+  padding: 7px;
+}
+
+.sub_menu .align_self:hover {
+  background-color: ghostwhite;
+}
+
+.align_self {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  width: 60px;
+  padding: 0.9em;
+  margin: 2.5px;
+}
+
+.align_self p {
+  margin: 0;
+}
+
+input:focus + label {
+  outline: 2px solid lightblue;
+}
+
+                        /*position and style more_sub_menu, more_sub_container */
+
+.more_sub_menu hr {
+  background-color: lightblue;
+  height: 1px;
+  border: none;
+  margin: 2.5em -15px;
+}
+
+.more_sub_container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  height: 230px;
+}
+
+.more_sub_menu p {
+  text-align: center;
+  padding: 5px;
+}
+
+.more_button {
+  display: block;
+  position: absolute;
+  z-index: -1;
+}
+
+.more_button:focus {
+  outline: none;
+}
+
+.more_button_label {
+  display: block;
+  text-align: center;
+  border-radius: 5px;
+  background-color: ghostwhite;
+  margin: 1em 0 0 0;
+  padding: 7.5px;
+}
+
+@media screen and (min-width: 700px) {
+  .nav_item {
+    padding: 1em;
+  }
+}

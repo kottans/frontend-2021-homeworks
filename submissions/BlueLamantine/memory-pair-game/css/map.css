@@ -1,0 +1,94 @@
+:root {
+  --time: 5s;
+}
+.main-map {
+  width: 800px;
+  height: 400px;
+  position: relative;
+  border-radius: 10px;
+  padding: 30px;
+  margin-top: 80px;
+}
+.map-preload {
+  transform: scale(1);
+}
+.map-load {
+  transform: scale(1.3);
+  animation: open-map var(--time);
+}
+.block {
+  width: 200px;
+  height: 400px;
+  float: left;
+  box-shadow: 1px 24px 13px 0px rgba(50, 50, 50, 0.71);
+  position: relative;
+}
+.block-preload {
+  filter: blur(5px);
+}
+.block-load {
+  transition: transform 2s;
+  transform: skewY(0);
+}
+.block:nth-child(1) {
+  border-right: 0;
+  border-radius: 4px 0 0 4px;
+  background: url(../img/block_4.jpg) center / cover no-repeat;
+}
+.block:nth-child(2) {
+  border-width: 4px 0;
+  background: url(../img/block_1.jpg) center / cover no-repeat;
+}
+.block:nth-child(3) {
+  border-width: 4px 0;
+  background: url(../img/block_3.jpg) center / cover no-repeat;
+}
+.block:nth-child(4) {
+  border-left: 0;
+  border-radius: 0 10px 10px 0;
+  background: url(../img/block_2.jpg) center / cover no-repeat;
+}
+.block.block-preload:nth-child(odd) {
+  transform: skewY(15deg);
+}
+.block.block-load:nth-child(odd) {
+  transition: transform 2s;
+  animation: open-block-odd var(--time);
+  transform: skewY(0deg);
+  filter: blur(0px);
+}
+.block.block-preload:nth-child(even) {
+  transform: skewY(-15deg);
+}
+.block.block-load:nth-child(even) {
+  transition: transform 2s;
+  animation: open-block-even var(--time);
+  transform: skewY(0deg);
+}
+@keyframes open-map {
+  0% {
+    transform: scale(1) rotateY(30deg);
+  }
+  100% {
+    transition: transform 2s ease;
+    transform: scale(1.3);
+  }
+}
+@keyframes open-block-odd {
+  0% {
+    transform: skewY(15deg);
+  }
+  100% {
+    transition: transform 2s;
+    transform: skewY(0);
+  }
+}
+@keyframes open-block-even {
+  0% {
+    transform: skewY(-15deg);
+  }
+  100% {
+    transition: transform 2s;
+    transform: skewY(0);
+  }
+}

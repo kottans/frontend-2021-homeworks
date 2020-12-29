@@ -1,0 +1,245 @@
+@import url("https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@700&display=swap");
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+button,
+a {
+  outline: none;
+  border: transparent;
+  background-color: rgba(255, 255, 255, 0);
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+li {
+  list-style-type: none;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background-color: #003154;
+  font-family: "Bai Jamjuree", sans-serif;
+  text-transform: uppercase;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  color: #fff;
+}
+
+header {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 1;
+          flex: 0 1;
+  background-color: #001c31;
+  padding: 0.5rem;
+}
+
+header h1 {
+  font-size: 1.3rem;
+  text-align: center;
+}
+
+main {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 0 auto;
+          flex: 1 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.game {
+  position: relative;
+  overflow: hidden;
+}
+
+.game p {
+  margin-left: 1rem;
+}
+
+.game p:first-child {
+  margin-top: 1rem;
+}
+
+.game span {
+  color: #ff0000;
+}
+
+.new-game {
+  position: absolute;
+  top: 150%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  padding: 1.5rem;
+  background-color: #003154;
+  border-radius: 10px;
+  border: 3px solid #fff;
+  color: #fff;
+  text-transform: uppercase;
+  display: block;
+  font-size: 1.2rem;
+  -webkit-transition: top 300ms ease, background-color 300ms ease;
+  transition: top 300ms ease, background-color 300ms ease;
+}
+
+.new-game.visible {
+  top: 50%;
+}
+
+.new-game:active {
+  background-color: #2d5c7d;
+}
+
+.game-board {
+  width: 320px;
+  height: 400px;
+  padding: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.card {
+  width: calc(33.3333% - 10px);
+  height: calc(25% - 10px);
+  position: relative;
+  margin: 5px;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+  -webkit-transition: -webkit-transform 400ms ease;
+  transition: -webkit-transform 400ms ease;
+  transition: transform 400ms ease;
+  transition: transform 400ms ease, -webkit-transform 400ms ease;
+}
+
+.card.flip {
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
+}
+
+.card.block .grid {
+  display: block;
+  top: 0;
+}
+
+.front,
+.back {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  border: 2px solid #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+}
+
+.front img,
+.back img {
+  width: 100%;
+  height: 100%;
+}
+
+.grid {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 100%;
+  left: 0;
+  display: block;
+  -webkit-transition: top 400ms ease;
+  transition: top 400ms ease;
+}
+
+.back {
+  background-color: #003154;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0.5rem;
+  -webkit-transition: background-color 300ms ease;
+  transition: background-color 300ms ease;
+}
+
+.back img {
+  width: 4rem;
+}
+
+.front {
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
+}
+
+footer {
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  background-color: #001c31;
+}
+
+.credits {
+  text-align: center;
+  padding: 0.8rem;
+  color: #fff;
+  font-size: 0.9rem;
+  width: 100%;
+}
+
+.credits a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.credits a:active {
+  color: #ff0000;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .credits a:hover {
+    color: #ff0000;
+  }
+  .new-game:hover {
+    background-color: #2d5c7d;
+  }
+  .back:hover {
+    background-color: #2d5c7d;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .game-board {
+    width: 480px;
+    height: 600px;
+  }
+  header h1 {
+    font-size: 2rem;
+  }
+  .back img {
+    width: 6rem;
+  }
+}
