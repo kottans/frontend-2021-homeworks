@@ -85,8 +85,12 @@ class Actor extends Sprite {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for all computers
     update(dt) {
-        let move_x = this.moveStatus['right']-this.moveStatus['left']
-        let move_y = this.moveStatus['down']-this.moveStatus['up']
+        let move_x = 0
+        let move_y = 0
+        if (this.moveStatus['right']) move_x++
+        if (this.moveStatus['left']) move_x--
+        if (this.moveStatus['down']) move_y++
+        if (this.moveStatus['up']) move_y--
         //in case of diagonal movement adjust distance to go
         if (move_x!==0 && move_y!==0) {
             move_x = move_x / Math.sqrt(2)
@@ -248,6 +252,7 @@ class Player extends Actor {
     }
 }
 //Returns array of new collision circles instances for an image
+//Values are based on pixel art specification (images with collision circles on them)
 function collisionCirclesFactory(image) {
     const RESULT = []
     switch(image) {
@@ -276,8 +281,8 @@ function collisionCirclesFactory(image) {
 }
 function startGame() {
     gameIsOn = true
-    allCollectables.forEach(c => c.appear())
-    allEnemies.forEach(e => e.restart())
+    allCollectables.forEach(collectable => collectable.appear())
+    allEnemies.forEach(enemy => enemy.restart())
     player.score = 0
 }
 function clearPlayground() {
