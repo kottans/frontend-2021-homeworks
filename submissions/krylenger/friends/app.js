@@ -1,15 +1,15 @@
 const url = "https://randomuser.me/api/?results=100";
 
 const cardsContainer = document.querySelector(".cards-container");
-const search = document.querySelector('.main__search');
-const buttonSortContainerName = document.querySelector('.aside__buttons-container--name');
-const buttonSortContainerAge = document.querySelector('.aside__buttons-container--age');
-const buttonSortContainerRegistrationDate = document.querySelector('.aside__buttons-container--registrationDate');
-const asideFilterGenderContainer = document.querySelector('.inner-container--column-sex');
-const buttonReset = document.querySelector('.aside__button--reset');
-const asideFilterCountry = document.querySelector('.aside__select');
-const asideFilterAge = document.querySelector('.aside__range');
-const asideRangeAgeOutput = document.querySelector('.aside__range-output');
+const search = document.querySelector(".main__search");
+const buttonSortContainerName = document.querySelector(".aside__buttons-container--name");
+const buttonSortContainerAge = document.querySelector(".aside__buttons-container--age");
+const buttonSortContainerRegistrationDate = document.querySelector(".aside__buttons-container--registrationDate");
+const asideFilterGenderContainer = document.querySelector(".inner-container--column-sex");
+const buttonReset = document.querySelector(".aside__button--reset");
+const asideFilterCountry = document.querySelector(".aside__select");
+const asideFilterAge = document.querySelector(".aside__range");
+const asideRangeAgeOutput = document.querySelector(".aside__range-output");
 
 const filtersState = {
   search: null,
@@ -18,9 +18,8 @@ const filtersState = {
   countries: null,
   sortName: null,
   sortAge: null,
-  sortRegistrationDate: null
-}
-
+  sortRegistrationDate: null,
+};
 
 const fetchUsers = async () => {
   try {
@@ -33,7 +32,7 @@ const fetchUsers = async () => {
   }
 };
 
-const createFullName = (firstName, lastName) => `${firstName} ${lastName}`
+const createFullName = (firstName, lastName) => `${firstName} ${lastName}`;
 
 const createCard = (user) => {
   const card = document.createElement("div");
@@ -70,8 +69,8 @@ const createCard = (user) => {
 };
 
 const emptyCardsContainer = () => {
-  cardsContainer.innerHTML = '';
-}
+  cardsContainer.innerHTML = "";
+};
 
 const renderUserCards = (usersData) => {
   emptyCardsContainer();
@@ -86,45 +85,52 @@ const renderUserCards = (usersData) => {
 const sortByParam = (usersData, sortingCriteria, direction) => {
   return usersData.sort((firstElem, secondElem) => {
     let a, b;
-    
+
     switch (sortingCriteria) {
-      case 'name':
+      case "name":
         a = firstElem.name.first;
         b = secondElem.name.first;
         break;
-      case 'age':
+      case "age":
         a = firstElem.dob.age;
         b = secondElem.dob.age;
         break;
-      case 'registrationDate':
+      case "registrationDate":
         a = firstElem.registered.date;
         b = secondElem.registered.date;
         break;
     }
 
-     if (a < b) {
-       return direction === 'ascending' ? -1 : 1;
-     }
-     if (a > b) {
-      return direction === 'ascending' ? 1 : -1;
-     }
+    if (a < b) {
+      return direction === "ascending" ? -1 : 1;
+    }
+    if (a > b) {
+      return direction === "ascending" ? 1 : -1;
+    }
     return 0;
   });
-}
+};
 
 const doSearch = (usersData, searchedValue) => {
   return usersData.filter((user) => {
     const fullName = createFullName(user.name.first, user.name.last);
     return fullName.toLocaleLowerCase().includes(searchedValue);
-  })
+  });
+};
+
+const doFilterByGender = (usersData, gender) => {
+  if (gender === 'genders-all') {
+    return usersData;
+  } else {
+    return usersData.filter((user) => user.gender === gender);
+  }
 }
 
-const doFilterByGender = (usersData, gender) => usersData.filter(user => user.gender === gender);
+const doFilterByCountry = (usersData, country) =>
+  usersData.filter((user) => user.location.country === country);
 
-const doFilterByCountry = (usersData, country) => usersData.filter(user => user.location.country === country);
-
-const doFilterByAge = (usersData, age) => usersData.filter(user => user.dob.age <= age);
-
+const doFilterByAge = (usersData, age) =>
+  usersData.filter((user) => user.dob.age <= age);
 
 const filterCards = (usersData) => {
   let filteredUsersData = usersData;
@@ -141,86 +147,85 @@ const filterCards = (usersData) => {
   if (filtersState.age) {
     filteredUsersData = doFilterByAge(filteredUsersData, filtersState.age);
   }
-  if (filtersState.sortName === 'name_AZ') {
-    filteredUsersData = sortByParam(filteredUsersData, 'name', 'ascending');
+  if (filtersState.sortName === "name_AZ") {
+    filteredUsersData = sortByParam(filteredUsersData, "name", "ascending");
   }
-  if (filtersState.sortName === 'name_ZA') {
-    filteredUsersData = sortByParam(filteredUsersData, 'name', 'descending');
+  if (filtersState.sortName === "name_ZA") {
+    filteredUsersData = sortByParam(filteredUsersData, "name", "descending");
   }
-  if (filtersState.sortAge === 'age_19') {
-    filteredUsersData = sortByParam(filteredUsersData, 'age', 'ascending');
+  if (filtersState.sortAge === "age_19") {
+    filteredUsersData = sortByParam(filteredUsersData, "age", "ascending");
   }
-  if (filtersState.sortAge === 'age_91') {
-    filteredUsersData = sortByParam(filteredUsersData, 'age', 'descending');
+  if (filtersState.sortAge === "age_91") {
+    filteredUsersData = sortByParam(filteredUsersData, "age", "descending");
   }
-  if (filtersState.sortRegistrationDate === 'registrationDate_NEW') {
-    filteredUsersData = sortByParam(filteredUsersData, 'registrationDate', 'ascending');
+  if (filtersState.sortRegistrationDate === "registrationDate_NEW") {
+    filteredUsersData = sortByParam(filteredUsersData, "registrationDate", "ascending");
   }
-  if (filtersState.sortRegistrationDate === 'registrationDate_OLD') {
-    filteredUsersData = sortByParam(filteredUsersData, 'registrationDate', 'descending');
-  } 
+  if (filtersState.sortRegistrationDate === "registrationDate_OLD") {
+    filteredUsersData = sortByParam(filteredUsersData, "registrationDate", "descending");
+  }
 
   renderUserCards(filteredUsersData);
-}
+};
 
 const addEventListeners = (usersData) => {
-
-  search.addEventListener('keyup', ({target}) => {
+  search.addEventListener("keyup", ({ target }) => {
     filtersState.search = target.value;
     filterCards(usersData);
-  })
+  });
 
   asideFilterGenderContainer.addEventListener("click", ({ target }) => {
     filtersState.gender = target.id;
-		filterCards(usersData);
+    filterCards(usersData);
   });
 
   asideFilterCountry.addEventListener("change", ({ target }) => {
-		filtersState.country = target.value;
-		filterCards(usersData);
+    filtersState.country = target.value;
+    filterCards(usersData);
   });
 
   asideFilterAge.addEventListener("input", ({ target }) => {
     asideRangeAgeOutput.textContent = target.value;
-		filtersState.age = target.value;
-		filterCards(usersData);
+    filtersState.age = target.value;
+    filterCards(usersData);
   });
 
   buttonSortContainerName.addEventListener("click", ({ target }) => {
-		filtersState.sortName = target.id;
-		filtersState.sortAge = null;
-		filtersState.sortRegistrationDate = null;
-		filterCards(usersData);
+    filtersState.sortName = target.id;
+    filtersState.sortAge, filtersState.sortRegistrationDate = null;
+    filterCards(usersData);
   });
 
   buttonSortContainerAge.addEventListener("click", ({ target }) => {
-		filtersState.sortAge = target.id;
-		filtersState.sortName = null;
-		filtersState.sortRegistrationDate = null;
-		filterCards(usersData);
+    filtersState.sortAge = target.id;
+    filtersState.sortName, filtersState.sortRegistrationDate = null;
+    filterCards(usersData);
   });
 
-  buttonSortContainerRegistrationDate.addEventListener("click", ({ target }) => {
-		filtersState.sortRegistrationDate = target.id;
-		filtersState.sortAge = null;
-		filtersState.sortName = null;
-		filterCards(usersData);
-  });
+  buttonSortContainerRegistrationDate.addEventListener(
+    "click",
+    ({ target }) => {
+      filtersState.sortRegistrationDate = target.id;
+      filtersState.sortAge, filtersState.sortName = null;
+      filterCards(usersData);
+    }
+  );
 
   buttonReset.addEventListener("click", () => {
-		filtersState.sortName = null;
-		filtersState.sortAge = null;
-    filtersState.sortRegistrationDate = null;
-    filtersState.search = null;
-    filtersState.age = null;
-    filtersState.gender = null;
-    filtersState.countries = null;
-    search.value = '';
-		renderUserCards(usersData);
+    filtersState.sortName,
+      filtersState.sortAge,
+      filtersState.sortRegistrationDate,
+      filtersState.search,
+      filtersState.age,
+      filtersState.gender,
+      filtersState.countries = null;
+    search.value = "";
+    renderUserCards(usersData);
   });
-  
+
   renderUserCards(usersData);
-}
+};
 
 const initApp = async () => {
   const usersData = await fetchUsers();
