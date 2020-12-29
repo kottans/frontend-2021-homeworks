@@ -113,7 +113,6 @@ a {
     text-align: center;
     width: 33%;
     margin-bottom: 10px;
-    
 }
 
 .popup-link:hover {
@@ -158,6 +157,7 @@ a {
     outline: none;
     border-radius: 5px;
     animation: collorBattle 5s infinite;
+    cursor: pointer;
 }
 
 .btn:focus {
@@ -210,4 +210,3 @@ a {
         color: rgba(0, 255, 34, 0.5);
     }
 }
-
