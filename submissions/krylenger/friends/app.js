@@ -2,15 +2,11 @@ const url = "https://randomuser.me/api/?results=100";
 
 const cardsContainer = document.querySelector(".cards-container");
 const search = document.querySelector('.main__search');
-const buttonSortAZ = document.querySelector('.aside__button--AZ');
-const buttonSortZA = document.querySelector('.aside__button--ZA');
-const buttonSort19 = document.querySelector('.aside__button--19');
-const buttonSort91 = document.querySelector('.aside__button--91');
-const buttonSortOLD = document.querySelector('.aside__button--OLD');
-const buttonSortNEW = document.querySelector('.aside__button--NEW');
+const buttonSortContainerName = document.querySelector('.aside__buttons-container--name');
+const buttonSortContainerAge = document.querySelector('.aside__buttons-container--age');
+const buttonSortContainerRegistrationDate = document.querySelector('.aside__buttons-container--registrationDate');
+const asideFilterGenderContainer = document.querySelector('.inner-container--column-sex');
 const buttonReset = document.querySelector('.aside__button--reset');
-const asideFilterMale = document.querySelector('.aside__radio--male');
-const asideFilterFemale = document.querySelector('.aside__radio--female');
 const asideFilterCountry = document.querySelector('.aside__select');
 const asideFilterAge = document.querySelector('.aside__range');
 const asideRangeAgeOutput = document.querySelector('.aside__range-output');
@@ -174,13 +170,8 @@ const addEventListeners = (usersData) => {
     filterCards(usersData);
   })
 
-  asideFilterMale.addEventListener("click", ({ target }) => {
+  asideFilterGenderContainer.addEventListener("click", ({ target }) => {
     filtersState.gender = target.id;
-		filterCards(usersData);
-  });
-  
-  asideFilterFemale.addEventListener("click", ({ target }) => {
-		filtersState.gender = target.id;
 		filterCards(usersData);
   });
 
@@ -195,42 +186,21 @@ const addEventListeners = (usersData) => {
 		filterCards(usersData);
   });
 
-	buttonSortAZ.addEventListener("click", ({ target }) => {
+  buttonSortContainerName.addEventListener("click", ({ target }) => {
 		filtersState.sortName = target.id;
 		filtersState.sortAge = null;
 		filtersState.sortRegistrationDate = null;
 		filterCards(usersData);
   });
-  
-  buttonSortZA.addEventListener("click", ({ target }) => {
-		filtersState.sortName = target.id;
-		filtersState.sortAge = null;
-		filtersState.sortRegistrationDate = null;
-		filterCards(usersData);
-	});
 
-	buttonSort19.addEventListener("click", ({ target }) => {
+  buttonSortContainerAge.addEventListener("click", ({ target }) => {
 		filtersState.sortAge = target.id;
 		filtersState.sortName = null;
 		filtersState.sortRegistrationDate = null;
 		filterCards(usersData);
   });
-  
-  buttonSort91.addEventListener("click", ({ target }) => {
-		filtersState.sortAge = target.id;
-		filtersState.sortName = null;
-		filtersState.sortRegistrationDate = null;
-		filterCards(usersData);
-	});
 
-	buttonSortOLD.addEventListener("click", ({ target }) => {
-		filtersState.sortRegistrationDate = target.id;
-		filtersState.sortAge = null;
-		filtersState.sortName = null;
-		filterCards(usersData);
-  });
-  
-  buttonSortNEW.addEventListener("click", ({ target }) => {
+  buttonSortContainerRegistrationDate.addEventListener("click", ({ target }) => {
 		filtersState.sortRegistrationDate = target.id;
 		filtersState.sortAge = null;
 		filtersState.sortName = null;
