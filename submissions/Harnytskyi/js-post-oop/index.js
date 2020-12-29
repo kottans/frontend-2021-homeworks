@@ -7,27 +7,22 @@
 
 // ======== OBJECTS DEFINITIONS ========
 class Inhabitant {
-    constructor(species, name, gender, saying, friends = []) {
+    constructor(species, name, gender, saying) {
         this.species = species;
         this.name = name;
         this.gender = gender;
         this.saying = saying;
-        this.friends = friends;
+        this.addFriends = function (friends){
+            this.friends = friends;
+        };
     };
     getListFriends(){
-        if (this.friends.length == 0){
-            return "I have not a friends."
+        if (this.friends == null){
+            return "I have not a friends. "
         }
         else{
-            var listFriends = [];
-            this.friends.map(element => {
-                listFriends.push(element.name);
-            })
-            return `My friends: ${listFriends.join(', ')}.`;
+            return `My friends: ${this.friends.map(element => element.name).join(', ')}. `;
         }
-    }
-    addFriends(friends){
-        this.friends = friends;
     }
 
     toString() {
@@ -67,7 +62,7 @@ class Mammal extends Inhabitant{
         this.paws = 4;
     };
     toString(){
-        return super.toString() + ` I have ${this.paws} paws.`;
+        return super.toString() + `I have ${this.paws} paws.`;
     }
 }
 
@@ -100,5 +95,5 @@ dog.addFriends([man]);
    */
 
 const inhabitants = [man, woman, cat, dog];
-inhabitants.forEach(key => print(key));
+inhabitants.forEach(inhabitant => print(inhabitant));
 
