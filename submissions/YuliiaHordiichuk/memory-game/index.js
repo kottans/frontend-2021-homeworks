@@ -10,12 +10,12 @@ class Game {
         this.delayToHideCards = 400; 
         this.delayToAlertWin = 600;
 
-        this.play();
+        this.fillCards();
+        this.addClickHendler();
     }
 
-    play () {
+    fillCards () {
         this.cardsContainer.innerHTML = this.createCards();
-        this.clickHandler(); 
     }
 
     mixCards () {
@@ -34,8 +34,9 @@ class Game {
         }).join(''); 
     }; 
 
-    clickHandler () {
+    addClickHendler () {
         this.cardsContainer.addEventListener('click', ({ target: button }) => {
+            console.log('listener');
             const buttonId = button.dataset.id;
 
             if(buttonId) {
@@ -78,7 +79,7 @@ class Game {
         if (this.matchCards === this.winMatchCards) {
             setTimeout(() => {
                 alert('Congratulations!')
-                this.play();
+                this.fillCards();
             }, this.delayToAlertWin);  
         };
     }
