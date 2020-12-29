@@ -8,8 +8,7 @@ const RESET_BUTTON = document.querySelector('.resetButton')
 
 const API_LINK = 'https://randomuser.me/api/'
 
-const FRIENDS_MIN = 30
-const FRIENDS_MAX = 50
+const FRIENDS = 50
 
 const APP_AUDIO = new Audio('./audio/you_ve_got_a_friend_in_me.mp3')
 APP_AUDIO.loop = true
@@ -22,20 +21,18 @@ const SHOW_ELEM_SECONDARY_ANIMATION = 'animate__fadeIn'
 const HIDE_ELEM_SECONDARY_ANIMATION = 'animate__fadeOut'
 const ANIMATION_SPEED = 'animate__faster' //500ms
 
-let FRIENDS_SOURCE
-let CURRENT_FRIENDS = []
-let IS_MUSIC_STOPPED_BY_USER = false
-let CURRENT_CONTENT
-let CURRENT_ANIMATION_HIDE
-let CURRENT_ANIMATION_SHOW
-let CURRENT_ANIMATION_SPEED
-
+let friendsSource
+let currentFriends = []
+let isMusicStoppedByUser = false
+let currentContent
+let currentAnimationHide
+let currentAnimationShow
+let currentAnimationSpeed
 
 initApp()
 
-
 function initApp() {
-    getFriends(getRandomIntInclusive(FRIENDS_MIN, FRIENDS_MAX))
+    getFriends(FRIENDS)
     addListeners()
     createRangeSlider()
 }
@@ -46,7 +43,7 @@ function getFriends(num) {
         .then(function(response) {
             return response.json()
         }).then(function(data) {
-            FRIENDS_SOURCE = data.results
+            friendsSource = data.results
         }).then(function() {
             const timeout = setTimeout(() => {
                 changeContent(createStartScreen(), SHOW_ELEM_PRIMARY_ANIMATION, HIDE_ELEM_PRIMARY_ANIMATION)
@@ -54,7 +51,7 @@ function getFriends(num) {
             }, 2000)
         })
         .catch(function(error) {
-            console.log(error.message)
+            console.error(error.message)
             changeContent(`<h1 class="container h-100 flexContainerCol errorMes">Something went wrong, we are so sorry :( Please, try to reload the page!</h1>`, SHOW_ELEM_PRIMARY_ANIMATION, HIDE_ELEM_PRIMARY_ANIMATION)
         })
 }
@@ -65,9 +62,9 @@ function addListeners() {
     RESET_BUTTON.addEventListener('click', resetFilter)
     MAIN.addEventListener('click', function({ target }) {
         if (target.classList.contains('startButton')) {
-            changeContent(createFriendsScreen(FRIENDS_SOURCE), SHOW_ELEM_PRIMARY_ANIMATION, HIDE_ELEM_PRIMARY_ANIMATION)
+            changeContent(createFriendsScreen(friendsSource), SHOW_ELEM_PRIMARY_ANIMATION, HIDE_ELEM_PRIMARY_ANIMATION)
             showSearchBar()
-            playMusic()
+            activeMusic()
         }
     })
     MAIN.addEventListener('animationend', function() {
@@ -88,7 +85,7 @@ function createStartScreen() {
 }
 
 function createFriendsScreen(friends) {
-    let FriendsScreen = '<div class="container friends__container"><div class="flexContainerRow">'
+    let friendsScreen = '<div class="container friends__container"><div class="flexContainerRow">'
     friends.forEach(friend => {
         const card = `<div class="card">
                             <div class="card-image">
@@ -104,107 +101,103 @@ function createFriendsScreen(friends) {
                                 <a class="card__contentData card__contentData-mail href="mailto:${friend.email}">${friend.email}</a>
                             </div>
                         </div>`
-        FriendsScreen += card
+        friendsScreen += card
     })
-    FriendsScreen += '</div></div>'
-    return FriendsScreen
+    friendsScreen += '</div></div>'
+    return friendsScreen
 }
 
 function showSearchBar() {
     SEARCH.classList.add(SHOW_ELEM_PRIMARY_ANIMATION)
     SEARCH.classList.add('showElem')
-    SEARCH_INPUT.addEventListener('input', toSearch)
+    SEARCH_INPUT.addEventListener('input', lookForFriendByName)
 }
 
 function changeContent(content, show, hide, speed) {
-    CURRENT_CONTENT = content
-    CURRENT_ANIMATION_HIDE = hide
-    CURRENT_ANIMATION_SHOW = show
+    currentContent = content
+    currentAnimationHide = hide
+    currentAnimationShow = show
 
     MAIN.classList.remove('scroll')
     if (speed) {
         MAIN.classList.add(speed)
-        CURRENT_ANIMATION_SPEED = speed
+        currentAnimationSpeed = speed
     }
     MAIN.classList.add(hide)
 }
 
-function toSearch() {
+function lookForFriendByName() {
     const input = SEARCH_INPUT.value.toLowerCase()
 
-    let foundFriends = (CURRENT_FRIENDS.length === 0) ?
-        FRIENDS_SOURCE.filter(friend => (friend.name.first.toLowerCase().startsWith(input) || friend.name.last.toLowerCase().startsWith(input))) :
-        CURRENT_FRIENDS.filter(friend => (friend.name.first.toLowerCase().startsWith(input) || friend.name.last.toLowerCase().startsWith(input)))
+    let foundFriends = currentFriends.length === 0 ?
+        friendsSource.filter(defineFilterOrder(input)) :
+        currentFriends.filter(defineFilterOrder(input))
 
     changeContent(createFriendsScreen(foundFriends), SHOW_ELEM_SECONDARY_ANIMATION, HIDE_ELEM_SECONDARY_ANIMATION, ANIMATION_SPEED)
 }
 
 function toFilter() {
     //In case user enter to app through sidenav (not using startButton)
-    if (!IS_MUSIC_STOPPED_BY_USER) {
-        playMusic()
-    }
+    checkMusic()
     showSearchBar()
     closeSideNav()
 
     const checkedGenderInput = document.querySelector("input[type='radio'][name='gender']:checked")
-    let userChooseGender = (checkedGenderInput) ? [checkedGenderInput.getAttribute("data-gender")] : ['male', 'female']
+    let userChooseGender = checkedGenderInput ? [checkedGenderInput.getAttribute("data-gender")] : ['male', 'female']
 
     const [userChooseMinAge, userChooseMaxAge] = document.getElementById('test-slider').noUiSlider.get()
 
-    //Filter
-    CURRENT_FRIENDS = FRIENDS_SOURCE.filter(friend => (
+    currentFriends = friendsSource.filter(friend => (
         userChooseGender.includes(friend.gender) &&
         friend.dob.age >= userChooseMinAge &&
         friend.dob.age <= userChooseMaxAge))
 
     const checkedSortParameterInput = document.querySelector("input[type='radio'][name='sort']:checked")
-    let sortParameter = (checkedSortParameterInput) ? checkedSortParameterInput.getAttribute("data-sort") : false
+    let sortParameter = checkedSortParameterInput ? checkedSortParameterInput.getAttribute("data-sort") : false
 
-    //Sort
     switch (sortParameter) {
         case '0-100':
-            CURRENT_FRIENDS.sort(byField('dob', 'age'))
+            currentFriends.sort(defineSortOrder('dob', 'age'))
             break
         case '100-0':
-            CURRENT_FRIENDS.sort(byField('dob', 'age')).reverse()
+            currentFriends.sort(defineSortOrder('dob', 'age')).reverse()
             break
         case 'name_a-z':
-            CURRENT_FRIENDS.sort(byField('name', 'first'))
+            currentFriends.sort(defineSortOrder('name', 'first'))
             break
         case 'name_z-a':
-            CURRENT_FRIENDS.sort(byField('name', 'first')).reverse()
+            currentFriends.sort(defineSortOrder('name', 'first')).reverse()
             break
         case 'lastName_a-z':
-            CURRENT_FRIENDS.sort(byField('name', 'last'))
+            currentFriends.sort(defineSortOrder('name', 'last'))
             break
         case 'lastName_z-a':
-            CURRENT_FRIENDS.sort(byField('name', 'last')).reverse()
+            currentFriends.sort(defineSortOrder('name', 'last')).reverse()
             break
 
         default:
             break
     }
 
-    changeContent(createFriendsScreen(CURRENT_FRIENDS), SHOW_ELEM_PRIMARY_ANIMATION, HIDE_ELEM_PRIMARY_ANIMATION)
+    changeContent(createFriendsScreen(currentFriends), SHOW_ELEM_PRIMARY_ANIMATION, HIDE_ELEM_PRIMARY_ANIMATION)
 }
 
 function resetFilter() {
     //In case user enter to app through sidenav (not using startButton)
-    if (!IS_MUSIC_STOPPED_BY_USER) {
-        playMusic()
-    }
+    checkMusic()
     showSearchBar()
     closeSideNav()
 
-    CURRENT_FRIENDS = []
-    if (document.querySelector("input[type='radio'][name='gender']:checked")) {
-        document.querySelector("input[type='radio'][name='gender']:checked").checked = false
+    currentFriends = []
+    const checkedGenderInput = document.querySelector("input[type='radio'][name='gender']:checked")
+    const checkedSortParameterInput = document.querySelector("input[type='radio'][name='sort']:checked")
+    if (checkedGenderInput) {
+        checkedGenderInput.checked = false
     }
-    if (document.querySelector("input[type='radio'][name='sort']:checked")) {
-        document.querySelector("input[type='radio'][name='sort']:checked").checked = false
+    if (checkedSortParameterInput) {
+        checkedSortParameterInput.checked = false
     }
-    changeContent(createFriendsScreen(FRIENDS_SOURCE), SHOW_ELEM_PRIMARY_ANIMATION, HIDE_ELEM_PRIMARY_ANIMATION)
+    changeContent(createFriendsScreen(friendsSource), SHOW_ELEM_PRIMARY_ANIMATION, HIDE_ELEM_PRIMARY_ANIMATION)
 }
 
 function closeSideNav() {
@@ -217,27 +210,25 @@ function activateSideNav() {
     M.Sidenav.init(sideNavIco, {})
 }
 
-function playMusic() {
-    APP_AUDIO.play()
+function activeMusic() {
     MUSIC_BUTTON.classList.add('musicButton-active')
-    MUSIC_BUTTON.classList.add('musicButton-animation')
-    MUSIC_BUTTON.addEventListener('click', stopMusic, { once: true })
+    MUSIC_BUTTON.classList.toggle('musicButton-animation')
+    APP_AUDIO.play()
+    MUSIC_BUTTON.addEventListener('click', toggleMusic)
 }
 
-function stopMusic() {
-    APP_AUDIO.pause()
-    MUSIC_BUTTON.classList.remove('musicButton-animation')
-    MUSIC_BUTTON.addEventListener('click', playMusic, { once: true })
-    IS_MUSIC_STOPPED_BY_USER = true
+function toggleMusic() {
+    MUSIC_BUTTON.classList.contains('musicButton-animation') ? APP_AUDIO.pause() : APP_AUDIO.play()
+    MUSIC_BUTTON.classList.toggle('musicButton-animation')
 }
 
-function getRandomIntInclusive(min, max) {
-    min = Math.ceil(min)
-    max = Math.floor(max)
-    return Math.floor(Math.random() * (max - min + 1) + min)
+function checkMusic() {
+    if (!isMusicStoppedByUser && !MUSIC_BUTTON.classList.contains('musicButton-active')) {
+        activeMusic()
+    }
 }
 
-function byField(fieldName, subFieldName) {
+function defineSortOrder(fieldName, subFieldName) {
     return (a, b) => {
         if (a[fieldName][subFieldName] > b[fieldName][subFieldName]) {
             return 1
@@ -249,6 +240,10 @@ function byField(fieldName, subFieldName) {
     }
 }
 
+function defineFilterOrder(input) {
+    return (friend) => friend.name.first.toLowerCase().startsWith(input) || friend.name.last.toLowerCase().startsWith(input)
+}
+
 function handleErrors(response) {
     if (!response.ok) {
         throw Error(response.statusText)
@@ -258,14 +253,14 @@ function handleErrors(response) {
 
 function showCurrentContent() {
     MAIN.innerHTML = ''
-    MAIN.innerHTML = CURRENT_CONTENT
-    MAIN.classList.remove(CURRENT_ANIMATION_HIDE)
-    MAIN.classList.add(CURRENT_ANIMATION_SHOW)
+    MAIN.innerHTML = currentContent
+    MAIN.classList.remove(currentAnimationHide)
+    MAIN.classList.add(currentAnimationShow)
 }
 
 function clearAfterAnimation() {
-    MAIN.classList.remove(CURRENT_ANIMATION_SHOW)
-    MAIN.classList.remove(CURRENT_ANIMATION_SPEED)
+    MAIN.classList.remove(currentAnimationShow)
+    MAIN.classList.remove(currentAnimationSpeed)
     MAIN.classList.add('scroll')
 }
 
@@ -288,7 +283,7 @@ function createRangeSlider() {
             from: function(value) {
                 return Number(value);
             }
-        } // Receives a string, should return a number.
+        }
     }
 
     const maxAgeHint = document.querySelectorAll('.maxAge')
@@ -307,8 +302,9 @@ function createRangeSlider() {
     }
 
     function setValueOfSortByAgeHint() {
-        //get max and min value of range slider and set them to hints
-        maxAgeHint.forEach(point => point.innerHTML = rangeSlider.noUiSlider.get()[1])
-        minAgeHint.forEach(point => point.innerHTML = rangeSlider.noUiSlider.get()[0])
+        const maxCurrentValueOfRangeSlider = rangeSlider.noUiSlider.get()[1]
+        const minCurrentValueOfRangeSlider = rangeSlider.noUiSlider.get()[0]
+        maxAgeHint.forEach(point => point.innerHTML = maxCurrentValueOfRangeSlider)
+        minAgeHint.forEach(point => point.innerHTML = minCurrentValueOfRangeSlider)
     }
 }
