@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    fetchContent().then((response) => startApp(response.results));
+    fetchContent().then((response) => startApp(response.results)).catch(error => console.log(error.message));
 })
 
 const startApp = (response) => {
@@ -7,45 +7,46 @@ const startApp = (response) => {
     const friendsArray = response;
 
     document.getElementById("search").addEventListener("keyup", ({target}) => {
-        renderContent(searchByName(friendsArray, target.value));
+        renderContent(searchByValue(friendsArray, target.value));
     });
 
-    document.getElementById("name-ascending").addEventListener("change", () => {
-        renderContent(sortByNameAscending(friendsArray));
-    });
-
-    document.getElementById("name-descending").addEventListener("change", () => {
-        renderContent(sortByNameDescending(friendsArray));
-    });
-
-    document.getElementById("age-ascending").addEventListener("change", () => {
-        renderContent(sortByAgeAscending(friendsArray));
-    });
-
-    document.getElementById("age-descending").addEventListener("change", () => {
-        renderContent(sortByAgeDescending(friendsArray));
-    });
-
-    document.getElementById("female").addEventListener("change", () => {
-        renderContent(sortByGenderFemale(friendsArray));
-    });
-
-    document.getElementById("male").addEventListener("change", () => {
-        renderContent(sortByGenderMale(friendsArray));
-    });
-
-    document.getElementById("all").addEventListener("change", () => {
-        renderContent(friendsArray);
+    document.querySelector(".filter-items").addEventListener("change", ({target}) => {
+        let sortedArray = [];
+        switch (target.id) {
+            case "name-ascending":
+                sortedArray = sortByName(friendsArray, true);
+                break;
+            case "name-descending":
+                sortedArray = sortByName(friendsArray, false);
+                break;
+            case "age-ascending":
+                sortedArray = sortByAge(friendsArray, true);
+                break;
+            case "age-descending":
+                sortedArray = sortByAge(friendsArray, false);
+                break;
+            case "female":
+                sortedArray = sortByGender(friendsArray, "female");
+                break;
+            case "male":
+                sortedArray = sortByGender(friendsArray, "male");
+                break;
+            case "all":
+                sortedArray = sortByGender(friendsArray, null);
+                break;
+        }
+        renderContent(sortedArray);
     });
 }
 
 const fetchContent = function() {
     const jsonHeader = {dataType: "json"};
-    return fetch('https://randomuser.me/api/?inc=name,gender,phone,picture,dob&results=24', jsonHeader).then(response => response.json());
+    return fetch('https://randomuser.me/api/?inc=name,gender,phone,picture,dob&results=24', jsonHeader)
+        .then(response => response.json())
+        .catch(error => console.log(error.message));
 }
 
 const createPersonCard = (friend) => {
-    console.log(friend);
     const card = document.createElement("div");
     card.classList.add("card");
     card.innerHTML =
@@ -76,41 +77,33 @@ const renderContent = (friends) => {
     content.append(fragment);
 }
 
-const searchByName = (array, value) => {
-    return array.filter(friend => {
+const searchByValue = (array, value) => {
+    let sortedArray = [...array];
+    if(document.getElementById("female").checked) {
+         sortedArray = sortByGender(array, "female");
+    } else if(document.getElementById("male").checked) {
+        sortedArray = sortByGender(array, "male");
+    }
+    return sortedArray.filter(friend => {
         const firstLastName = `${friend.name.first} ${friend.name.last}`;
         return firstLastName.includes(value);
     })
 }
 
-const sortByNameAscending = (array) => {
-    return array.sort((prev, next) => {
+const sortByName = (array, isAscending) => {
+    const sortedArray = array.sort((prev, next) => {
         if (prev.name.first < next.name.first) return -1;
         if (prev.name.first > next.name.first) return 1;
         if (prev.name.first === next.name.first) return 0;
     });
+    return isAscending ? sortedArray : sortedArray.reverse();
 }
 
-const sortByNameDescending = (array) => {
-    return array.sort((prev, next) => {
-        if (prev.name.first < next.name.first) return 1;
-        if (prev.name.first > next.name.first) return -1;
-        if (prev.name.first === next.name.first) return 0;
-    });
+const sortByAge = (array, isAscending) => {
+    const sortedArray =  array.sort((prev, next) => prev.dob.age - next.dob.age);
+    return isAscending ? sortedArray : sortedArray.reverse();
 }
 
-const sortByAgeAscending = (array) => {
-    return array.sort((prev, next) => prev.dob.age - next.dob.age);
-}
-
-const sortByAgeDescending = (array) => {
-    return array.sort((prev, next) => next.dob.age - prev.dob.age);
-}
-
-const sortByGenderMale = (array) => {
-    return array.filter(friend => friend.gender === "male");
-}
-
-const sortByGenderFemale = (array) => {
-    return array.filter(friend => friend.gender === "female");
+const sortByGender = (array, gender) => {
+    return gender !== null ? array.filter(friend => friend.gender === gender) : array;
 }
