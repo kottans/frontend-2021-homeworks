@@ -40,18 +40,13 @@ class Human extends Mammal {
 class Cat extends Mammal {
   constructor(name, gender, saying, friend, species = "cat", legs = 4) {
     super(name, gender, friend, saying, species, legs);
-  }
-  toString() {
-    return super.toString();
+    toString();
   }
 }
 class Dog extends Mammal {
-  constructor(name, gender, saying, species = "dog", friend, legs = 4) {
-    super(name, gender, friend, saying, species);
-    this.legs = legs;
-  }
-  toString() {
-    return super.toString();
+  constructor(name, gender, saying, friend, species = "dog", legs = 4) {
+    super(name, gender, friend, saying, species, legs);
+    toString();
   }
 }
 class Werewolf extends Human {
