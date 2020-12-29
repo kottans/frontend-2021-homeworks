@@ -115,7 +115,7 @@ const handleHeaderClick = ({target}) => {
     if (target.classList.contains("header__link")) {
         const sectionName = target.textContent;
         const section = backpacks.find(
-            (item) => item.name.toLowerCase() === sectionName.toLowerCase()
+            ({name: backpackName}) => backpackName.toLowerCase() === sectionName.toLowerCase()
         );
         mainHeader.textContent = section.name;
         mainImage.setAttribute("src", section.img);
