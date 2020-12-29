@@ -6,6 +6,9 @@ const buttonSortContainerName = document.querySelector(".aside__buttons-containe
 const buttonSortContainerAge = document.querySelector(".aside__buttons-container--age");
 const buttonSortContainerRegistrationDate = document.querySelector(".aside__buttons-container--registrationDate");
 const asideFilterGenderContainer = document.querySelector(".inner-container--column-sex");
+const asideRadioGendersAll = document.querySelector('.aside__radio--genders-all');
+const asideRadioGenderMale = document.querySelector('.aside__radio--male');
+const asideRadioGenderFemale = document.querySelector('.aside__radio--female');
 const buttonReset = document.querySelector(".aside__button--reset");
 const asideFilterCountry = document.querySelector(".aside__select");
 const asideFilterAge = document.querySelector(".aside__range");
@@ -221,6 +224,11 @@ const addEventListeners = (usersData) => {
       filtersState.gender,
       filtersState.countries = null;
     search.value = "";
+    asideFilterAge.value = null;
+    asideRangeAgeOutput.textContent = '0 --> 120';
+    asideRadioGendersAll.checked = true;
+    asideRadioGenderMale.checked, 
+      asideRadioGenderFemale.checked = false;
     renderUserCards(usersData);
   });
 
