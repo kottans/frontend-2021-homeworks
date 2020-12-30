@@ -28,6 +28,10 @@
     color: black;
 }
 
+.aside__buttons-container {
+    display: flex;
+}
+
 .outer-container {
     padding: 20px;
     border-bottom: 2px solid white;
@@ -67,7 +71,13 @@
     color:black;
 }
 
-.aside__button {
+.aside__radio-input {
+    width: 35px;
+    visibility: hidden;
+    cursor: pointer;
+}
+
+/* .aside__button {
     height: 25px;
     width: 25px;
     border-radius: 5px;
@@ -77,6 +87,18 @@
     background-repeat: no-repeat;
     background-size: 25px;
     background-color: white;
+} */
+
+.aside__label {
+    width: 25px;
+    height: 25px;
+    border-radius: 3px;
+    background-size: 25px 25px;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    background-color: white;
+    cursor: pointer;
 }
 
 .aside__button--AZ {

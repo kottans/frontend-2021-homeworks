@@ -2,6 +2,7 @@ const url = "https://randomuser.me/api/?results=100";
 
 const cardsContainer = document.querySelector(".cards-container");
 const search = document.querySelector(".main__search");
+const asideSortForm = document.querySelector('.aside__form');
 const buttonSortContainerName = document.querySelector(".aside__buttons-container--name");
 const buttonSortContainerAge = document.querySelector(".aside__buttons-container--age");
 const buttonSortContainerRegistrationDate = document.querySelector(".aside__buttons-container--registrationDate");
@@ -194,26 +195,26 @@ const addEventListeners = (usersData) => {
     filterCards(usersData);
   });
 
-  buttonSortContainerName.addEventListener("click", ({ target }) => {
-    filtersState.sortName = target.id;
-    filtersState.sortAge, filtersState.sortRegistrationDate = null;
-    filterCards(usersData);
-  });
-
-  buttonSortContainerAge.addEventListener("click", ({ target }) => {
-    filtersState.sortAge = target.id;
-    filtersState.sortName, filtersState.sortRegistrationDate = null;
-    filterCards(usersData);
-  });
-
-  buttonSortContainerRegistrationDate.addEventListener(
-    "click",
-    ({ target }) => {
-      filtersState.sortRegistrationDate = target.id;
-      filtersState.sortAge, filtersState.sortName = null;
-      filterCards(usersData);
+  asideSortForm.addEventListener("click", ({ target }) => {
+    switch (target.id) {
+      case "name_AZ":
+      case "name_ZA":
+        filtersState.sortName = target.id;
+        filtersState.sortAge, (filtersState.sortRegistrationDate = null);
+        break;
+      case "age_19":
+      case "age_91":
+        filtersState.sortAge = target.id;
+        filtersState.sortName, (filtersState.sortRegistrationDate = null);
+        break;
+      case "registrationDate_OLD":
+      case "registrationDate_NEW":
+        filtersState.sortRegistrationDate = target.id;
+        filtersState.sortAge, (filtersState.sortName = null);
+        break;
     }
-  );
+    filterCards(usersData);
+  });
 
   buttonReset.addEventListener("click", () => {
     for (let key in filtersState) {
