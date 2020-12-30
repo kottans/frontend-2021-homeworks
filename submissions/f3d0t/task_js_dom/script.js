@@ -71,7 +71,8 @@ document.addEventListener("DOMContentLoaded", () => {
 		if (target.nodeName === "LI" && oldId !== currentId) {
 			nav.querySelector(".active")?.classList.toggle("active");
 			target.classList.toggle("active");
-			main.replaceChild(getMainContent(currentId, pokemons), main.firstElementChild);
+			main.innerHTML = "";
+			main.appendChild(getMainContent(currentId, pokemons));
 		}
 	});
 	document.getElementById("nav_switch").addEventListener("click", function () {
