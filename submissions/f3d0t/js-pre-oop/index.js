@@ -57,7 +57,7 @@ const inhabitants = [dog, cat, man, woman, catWoman];
    so code reviewers might focus on a single file that is index.js.
    */
 inhabitants.forEach((being) => {
-	print([being.species, being.name, being.jender, being.legs, being.hands, being.saying].join("; ") + "\n");
+	print([being.species, being.name, being.gender, being.legs, being.hands, being.saying].join("; ") + "\n");
 });
 /* Print examples:
    print('ABC');
