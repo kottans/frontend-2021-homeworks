@@ -9,10 +9,8 @@
 }
 
 body {
-
-
-    background: rgb(208, 250, 208) url(img/main_background.jpg) fixed no-repeat center/100% 100%;
-
+    background: rgb(208, 250, 208) url(../img/main_background.jpg) fixed no-repeat center;
+    background-size: cover;
 }
 
 ul {
@@ -46,7 +44,7 @@ a {
     display: flex;
     width: 24px;
     height: 24px;
-    background: url(img/popup-button.png) center no-repeat;
+    background: url(../img/popup-button.png) center no-repeat;
 }
 
 .popup-icon {
@@ -54,9 +52,6 @@ a {
     margin-right: 20px;
     border: 1px solid transparent;
 }
-
-
-
 
 .avatar {
     margin-right: 20px;
@@ -125,16 +120,17 @@ a {
     flex-wrap: nowrap;
     margin-left: -10px;
     margin-bottom: 20px;
+    cursor: pointer;
 }
 
 .popup-icon:hover,
 .icon:hover,
 .avatar:hover {
-    border: 1px solid #95d0ed;
+    outline: 1px solid #95d0ed;
 }
 
-.more-popup:focus+.more-open {
-    border: 1px solid #95d0ed;
+.more-popup:focus.more-open {
+    outline: 1px solid #95d0ed;
 }
 
 .more-popup {
@@ -153,10 +149,6 @@ a {
     width: 100%;
 }
 
-.more-popup:focus+.more-open {
-    border: 1px solid #95d0ed;
-}
-
 .popup-container>input:checked~.more-hidden {
     display: block;
 }
@@ -166,13 +158,12 @@ a {
 }
 
 .more-popup:checked~.more-hidden {
-    border-top: 1px solid #c6cccf;
+    outline: 1px solid #95d0ed;
 }
 
 a:focus,
 a:hover {
-    border: 1px solid #c6cccf;
-    outline-style: none;
+    outline: 1px solid #95d0ed;
 }
 
 .icon img {
@@ -191,4 +182,8 @@ a:hover {
 .icon {
     margin-right: 20px;
     border: 1px solid transparent;
+}
+
+.popup-menu:focus~.popup_open {
+    outline: 1px solid #95d0ed;
 }
