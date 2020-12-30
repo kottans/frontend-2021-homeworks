@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Friends App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="header">
+        <h1 class="header_title">Friends App</h1>
+        <h2 class="header_description">Created in order to fint out your friends!</h2>
+    </header>
+    <aside class="menu-wrapper">
+        <ul class="menu">
+            <fieldset class="menu_item menu_item-name">
+                <legend class="field-name">Name</legend>
+                <div class="menu_item_btns">
+                    <button class="btn name name-alphabetically">A-Z</button>
+                    <button class="btn name name-nonalphabetically">Z-A</button>
+                </div>
+            </fieldset>
+            <fieldset class="menu_item menu_item-age">
+                <legend class="field-name">Age</legend>
+                <div class="menu_item_btns">
+                    <button class="btn age_btn">&#8645;</button>
+                </div>
+            </fieldset>
+            <fieldset class="menu_item menu_item-gender">
+                <legend class="field-name">Gender</legend>
+                <div class="check-gender">
+                    <input class='radio-input man' type="radio" name="gender" value="male" id="man">
+                    <label class='check-label' for="man">&#9794;</label>
+                    <input class='radio-input woman' type="radio" name="gender" value="female" id="woman">
+                    <label class='check-label' for="woman">&#9792;</label>
+                    <input class='radio-input all' type="radio" name="gender" checked value="all" id="all">
+                    <label class='check-label' for="all">&#9792; + &#9794;</label>
+                </div>
+            </fieldset>
+            <fieldset class="menu_item menu_item-city">
+                <legend class="field-name">City</legend>
+                <input type="text" name="city" data-value="city" class="menu_item_text-input text-input--city"
+                    placeholder="Enter city">
+            </fieldset>
+            <fieldset class="menu_item menu_item-email">
+                <legend class="field-name">Email</legend>
+                <input type="text" name="email" data-value="email" class="menu_item_text-input text-input--email"
+                    placeholder="Enter email">
+            </fieldset>
+            <input type="button" class="btn reset" value="Reset">
+        </ul>
+    </aside>
+    <main>
+        <div class="result">
+    </main>
+    <script src="index.js"></script>
+</body>
+
+</html>
