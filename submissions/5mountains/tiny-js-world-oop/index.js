@@ -64,9 +64,8 @@ class Cat extends Animal {
 }
 
 class CatWoman extends Human {
-  constructor(name, saying, friends = ['Tom', 'Felix']) {
-    super(name, 'female', saying, friends);
-    this.saying = CatWoman.saying();
+  constructor(name, friends = ['Tom', 'Felix']) {
+    super(name, 'female', CatWoman.saying(), friends);
   }
 
   static saying() {
