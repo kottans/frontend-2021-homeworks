@@ -44,6 +44,7 @@ const planets = [{
 
 const main = document.querySelector('#main');
 const nav = document.querySelector('#nav');
+let currentLink;
 
 let navLinks = planets.map(planet => `<li class ='nav_item'><a href='#'>${planet.name}</a></li>`)
 .join('');
@@ -69,6 +70,9 @@ function createArticle(item) {
 }
 
 nav.addEventListener('click', ({target}) => {
-   main.textContent = '';
-   main.appendChild(createArticle(planets.find(item => item.name === target.innerText)));   
+    if (target.innerText !== currentLink) {
+        currentLink = target.innerText;
+        main.innerHTML = '';
+        main.appendChild(createArticle(planets.find(item => item.name === target.innerText)));
+   }
 });
