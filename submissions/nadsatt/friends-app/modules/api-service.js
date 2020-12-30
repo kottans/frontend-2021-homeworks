@@ -1,36 +1,27 @@
+import { ImageService } from './image-service.js';
 import { User } from './user.js';
 
 export class ApiService {
-    constructor(imageService){
-        this.imageService = imageService;
+    constructor(){
+        this.imageService = new ImageService();
         this.endpoint = 'https://randomuser.me/api/';
         this.page = 1;
-        this.manResults = 40;
-        this.womanResults = 60;
         this.propertiesToFetch = ['gender', 'name', 'email', 'dob', 'location', 'registered'];
     }
 
-    async getUsers(retries = 3){
-        let malesResponse = await fetch(`${this.endpoint}?gender=male&page=${this.page}&results=${this.manResults}&inc=${this.propertiesToFetch.join(',')}`);
-        let femalesResponse = await fetch(`${this.endpoint}?gender=female&page=${this.page}&results=${this.womanResults}&inc=${this.propertiesToFetch.join(',')}`);
+    async getUsers(usersCount, retries = 3){
+        const response = await fetch(`${this.endpoint}?page=${this.page}&results=${usersCount}&inc=${this.propertiesToFetch.join(',')}`);
 
-        if(malesResponse.status === 200 && femalesResponse.status === 200){
-            const males = await malesResponse.json();
-            const females = await femalesResponse.json();
-            return this.createUsers(...females.results, ...males.results);
+        if(response.status === 200){
+            const json = await response.json();
+            let users = json.results.map(user => new User(user));
+
+            let usersWithImages = await this.imageService.loadImages(users);
+            return usersWithImages;
         }
         else if(retries > 0){
-            return this.getUsers(--retries);
+            return this.getUsers(usersCount, --retries);
         }
         else throw new Error();
-    }
-
-    createUsers(...users){
-        return users.map((user, i) =>
-            new User(user, this.imageService.frontImages[i],
-                     this.imageService.frontBorderImages[i],
-                     this.imageService.backBorderImages[i],
-                     this.imageService.backImages[i])
-        );
     }
 }

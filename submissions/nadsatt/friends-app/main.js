@@ -1,4 +1,3 @@
-import { ImageService } from './modules/image-service.js';
 import { ApiService } from './modules/api-service.js';
 import { UserService } from './modules/user-service.js';
 
@@ -9,14 +8,14 @@ import { PageLinkList } from './modules/page-link-list.js';
 import { FilterGroup } from './modules/filter-group.js';
 
 class Program {
+
     constructor(){
         this.defineServices();
         this.defineComponents();
     }
 
     defineServices(){
-        this.imageService = new ImageService();
-        this.apiService = new ApiService(this.imageService);
+        this.apiService = new ApiService();
         this.userService = new UserService(this.apiService);
     }
 
@@ -37,12 +36,8 @@ class Program {
         document.body.querySelector('.filter-group-wrapper').append(this.filterGroup);
     }
 
-    loadImages(){
-        return this.imageService.loadImages();
-    }
-
-    getUsers(){
-        this.userService.getUsers()
+    getUsers(usersCount = 150){
+        this.userService.getUsers(usersCount)
             .then(() => {
                 this.pageLinkList.performPagination();
                 this.loadingPage.remove();
@@ -53,5 +48,4 @@ class Program {
     }
 }
 
-const program = new Program();
-program.loadImages().then(() => program.getUsers());
+new Program().getUsers();

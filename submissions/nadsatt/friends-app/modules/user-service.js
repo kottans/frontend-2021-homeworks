@@ -7,8 +7,8 @@ export class UserService {
         this.currentPageUsers;
     }
 
-    async getUsers(){
-        this.originalUsers = await this.apiService.getUsers();
+    async getUsers(usersCount){
+        this.originalUsers = await this.apiService.getUsers(usersCount);
         this.users = [...this.originalUsers];
     }
 

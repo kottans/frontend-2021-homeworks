@@ -1,40 +1,59 @@
 export class ImageService {
     constructor(){
+        this.totalImagesCount = 0;
         this.imagesLoadedCount = 0;
-        this.totalImages = 400;
-        const femaleNumber = 60;
-        const maleNumber = 40;
-        const usersNumber = 100;
+        this.uniqueFemaleImagesCount = 60;
+        this.uniqueMaleImagesCount = 50;
+        this.images = [];
 
-        this.femaleImagePaths = [...Array(femaleNumber).keys()].map(i => `images/female-images/female${++i}.jpeg`);
-        this.maleImagePaths = [...Array(maleNumber).keys()].map(i => `images/male-images/male${++i}.jpeg`);
-        this.borderImagePaths = [...Array(usersNumber).keys()].map(() => 'images/user-card-images/user-card-border.png');
-        this.backImagePaths = [...Array(usersNumber).keys()].map(() => 'images/user-card-images/user-card-back-background.jpg');
+        this.borderImagePath = 'images/user-card-images/user-card-border.png';
+        this.backImagePath = 'images/user-card-images/user-card-back-background.jpg';
     }
 
-    loadImages(){
-        return new Promise((resolve) => {
-            this.frontImages = this.femaleImagePaths.concat(this.maleImagePaths)
-                .map(imagePath => this.createImage(imagePath, 'user-image',
-                                               'user-card__front-background-image', 'background-image'));
+    get femaleImagePath(){
+        const imageNumber = this.defineImageNumber(this.uniqueFemaleImagesCount);
+        return `images/female-images/female${imageNumber}.jpeg`;
+    }
+    get maleImagePath(){
+        const imageNumber = this.defineImageNumber(this.uniqueMaleImagesCount);
+        return `images/male-images/male${imageNumber}.jpeg`;
+    }
 
-            this.frontBorderImages = this.borderImagePaths
-                .map(imagePath => this.createImage(imagePath, 'old-gold-border-image',
-                                               'user-card__front-border-image', 'border-image'));
+    defineImageNumber(max, min = 1){
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
 
-            this.backBorderImages = this.borderImagePaths
-                .map(imagePath => this.createImage(imagePath, 'old-gold-border-image',
-                                               'user-card__back-border-image', 'border-image'));
+    loadImages(users){
+        return new Promise((resolve, reject) => {
+            users = users.map(user => {
+                user.frontImage = this.createImage(this[`${user.gender}ImagePath`],
+                    'user-image', 'user-card__front-background-image', 'background-image');
 
-            this.backImages = this.backImagePaths
-                .map(imagePath => this.createImage(imagePath, 'old-texture-image',
-                                               'user-card__back-background-image', 'background-image'));
+                user.frontBorderImage = this.createImage(this.borderImagePath,
+                    'old-gold-border-image', 'user-card__front-border-image', 'border-image');
 
-            [...this.frontImages, ...this.frontBorderImages, ...this.backBorderImages, ...this.backImages]
-                .forEach(image => image.onload = () => {
+                user.backBorderImage = this.createImage(this.borderImagePath,
+                    'old-gold-border-image', 'user-card__back-border-image', 'border-image');
+
+                user.backImage = this.createImage(this.backImagePath,
+                    'old-texture-image', 'user-card__back-background-image', 'background-image');
+
+                this.images.push(
+                    user.frontImage, user.frontBorderImage,
+                    user.backBorderImage, user.backImage
+                );
+
+                return user;
+            });
+
+            this.images.forEach(image => {
+                image.onload = () => {
                     this.imagesLoadedCount++;
-                    if(this.imagesLoadedCount === this.totalImages) resolve();
-                });
+                    if(this.imagesLoadedCount === this.totalImagesCount) resolve(users)
+                };
+
+                image.onloadError = e => reject(e);
+            });
         });
     }
 
@@ -44,6 +63,7 @@ export class ImageService {
         image.setAttribute('alt', alt);
         image.classList.add(...classList);
 
+        this.totalImagesCount++;
         return image;
     }
 }
