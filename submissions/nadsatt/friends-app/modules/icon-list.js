@@ -72,4 +72,3 @@ export class IconList{
     }
 }
 
-window.IconList = IconList;

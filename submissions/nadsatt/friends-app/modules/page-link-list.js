@@ -28,11 +28,11 @@ export class PageLinkList {
 
     defineElementMethods(){
         this.element.onclick = function({target, target:{textContent: value}}){
-            if(this.checkIfMiddlePageLinkClicked(target)){
+            if(this.isMiddlePageLinkClicked(target)){
                 let currentPageNumber = +value;
                 this.performPagination(currentPageNumber);
             }
-            else if(this.checkIfCornerPageLinkClicked(target)){
+            else if(this.isCornerPageLinkClicked(target)){
                 let currentPageNumber = value === 'First' ? 1 :
                                         value === 'Prev' ? --this.currentPageNumber :
                                         value === 'Next' ? ++this.currentPageNumber :
@@ -41,11 +41,11 @@ export class PageLinkList {
             }
         };
 
-        this.element.checkIfMiddlePageLinkClicked = function(target){
+        this.element.isMiddlePageLinkClicked = function(target){
             return target.classList.contains('page-link-item');
         };
 
-        this.element.checkIfCornerPageLinkClicked = function(target){
+        this.element.isCornerPageLinkClicked = function(target){
             return target.classList.contains('corner-page-link-item');
         };
 

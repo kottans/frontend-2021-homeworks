@@ -41,7 +41,7 @@ export class FilterGroup {
             if(target.classList.contains('filter-item__option')){
                 const filter = target.closest('.filter-item');
 
-                if(this.checkIfSortFilterIsSelected(filter)) this.resetSortFiltersStates();
+                if(this.isSortFilterSelected(filter)) this.resetSortFiltersStates();
                 this.changeFilterState(target, filter);
                 this.userService.resetUsers();
                 this.filterUsers();
@@ -52,7 +52,7 @@ export class FilterGroup {
         this.element.addEventListener('click', this.element.performFiltering);
         this.element.addEventListener('input', this.element.performFiltering);
 
-        this.element.checkIfSortFilterIsSelected = function(filter){
+        this.element.isSortFilterSelected = function(filter){
             return filter.classList.contains('sort-filter-item')
         };
 
