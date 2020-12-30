@@ -216,13 +216,9 @@ const addEventListeners = (usersData) => {
   );
 
   buttonReset.addEventListener("click", () => {
-    filtersState.sortName,
-      filtersState.sortAge,
-      filtersState.sortRegistrationDate,
-      filtersState.search,
-      filtersState.age,
-      filtersState.gender,
-      filtersState.countries = null;
+    for (let key in filtersState) {
+      filtersState[key] = null;
+    }
     search.value = "";
     asideFilterAge.value = null;
     asideRangeAgeOutput.textContent = '0 --> 120';
