@@ -8,7 +8,7 @@ const positionPlayer = {
 	playerY: 400,
 };
 
-const widthEnemies = [80];
+const widthEnemies = 50;
 
 // Enemies our player must avoid
 const Enemy = function(x, y, player) {
