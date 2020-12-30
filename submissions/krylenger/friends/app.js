@@ -221,11 +221,7 @@ const addEventListeners = (usersData) => {
       filtersState[key] = null;
     }
     search.value = "";
-    asideFilterAge.value = null;
     asideRangeAgeOutput.textContent = '0 --> 120';
-    asideRadioGendersAll.checked = true;
-    asideRadioGenderMale.checked, 
-      asideRadioGenderFemale.checked = false;
     renderUserCards(usersData);
   });
 

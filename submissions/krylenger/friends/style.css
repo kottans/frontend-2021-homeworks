@@ -28,7 +28,7 @@
     color: black;
 }
 
-.aside__buttons-container {
+.aside__radios-container {
     display: flex;
 }
 
@@ -76,18 +76,6 @@
     visibility: hidden;
     cursor: pointer;
 }
-
-/* .aside__button {
-    height: 25px;
-    width: 25px;
-    border-radius: 5px;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    background-repeat: no-repeat;
-    background-size: 25px;
-    background-color: white;
-} */
 
 .aside__label {
     width: 25px;
