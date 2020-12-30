@@ -12,7 +12,7 @@ class Inhabitant {
         this.name = name;
         this.gender = gender;
         this.saying = saying;
-        this.friends = friends;
+        this.addFriends(friends);
     };
     getListFriends(){
         if (this.friends == null){
