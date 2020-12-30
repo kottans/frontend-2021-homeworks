@@ -32,29 +32,28 @@ const pokemons = [
 ];
 
 const createMenuLinks = (array, container) => {
-	let wrapper = document.createElement("ul");
+	const wrapper = document.createElement("ul");
 	array.forEach((element) => {
-		let li = document.createElement("li");
+		const li = document.createElement("li");
 		li.textContent = element.name;
 		li.dataset.id = element.id;
-		li.classList = "";
 		wrapper.appendChild(li);
 	});
 	container.appendChild(wrapper);
 };
 
-const getMainContent = (id, arr) => {
-	let wrapper = document.createElement("div");
-	let item = arr.find((item) => item.id == id);
-	let h2 = document.createElement("h2");
-	h2.classList = "main__name";
+const getPokemonContent = (id) => {
+	const wrapper = document.createElement("div");
+	const item = pokemons.find((item) => item.id == id);
+	const h2 = document.createElement("h2");
+	h2.classList.add("main__name");
 	h2.innerText = item.name;
-	let img = document.createElement("img");
-	img.classList = "main__img";
+	const img = document.createElement("img");
+	img.classList.add("main__img");
 	img.src = item.imagePath;
 	img.alt = item.name;
-	let p = document.createElement("p");
-	p.classList = "main__text";
+	const p = document.createElement("p");
+	p.classList.add("main__text");
 	p.innerText = item.description;
 	wrapper.append(h2, img, p);
 	return wrapper;
@@ -66,13 +65,13 @@ document.addEventListener("DOMContentLoaded", () => {
 	createMenuLinks(pokemons, nav);
 
 	nav.addEventListener("click", function ({ target }) {
-		let currentId = target.dataset.id;
-		let oldId = nav.querySelector(".active")?.dataset.id;
+		const currentId = target.dataset.id;
+		const oldId = nav.querySelector(".active")?.dataset.id;
 		if (target.nodeName === "LI" && oldId !== currentId) {
 			nav.querySelector(".active")?.classList.toggle("active");
 			target.classList.toggle("active");
 			main.innerHTML = "";
-			main.appendChild(getMainContent(currentId, pokemons));
+			main.appendChild(getPokemonContent(currentId));
 		}
 	});
 	document.getElementById("nav_switch").addEventListener("click", function () {
