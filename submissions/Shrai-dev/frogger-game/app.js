@@ -35,6 +35,7 @@ Enemy.prototype.update = function (dt) {
   if (this.x > enemyEndX) {
     this.x = enemyStartX;
   }
+  this.checkCollisions();
 };
 
 Enemy.prototype.checkCollisions = function () {
