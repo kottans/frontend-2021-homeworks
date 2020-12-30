@@ -102,6 +102,7 @@ const hiddenIcon = document.querySelector('.icon');
 const header = document.querySelector('.header-container');
 
 function createList() {
+  const fragment = document.createDocumentFragment();
   houses.forEach(({ id, name }) => {
     const buttonLi = document.createElement('li');
     const button = document.createElement('button');
@@ -110,8 +111,9 @@ function createList() {
     button.innerHTML = `
     <img class="menu-item-img" src="assets/shields/${name}.png"><span>house ${name}</span>`;
     buttonLi.appendChild(button);
-    menu.appendChild(buttonLi);
+    fragment.appendChild(buttonLi);
   });
+  menu.appendChild(fragment);
 }
 
 function changeContent({ target }) {
@@ -144,13 +146,15 @@ function addImages(item) {
 }
 
 function createImage({ name }) {
+  const imagesFragment = document.createDocumentFragment();
   for (let i = 0; i < number; i++) {
     const image = document.createElement('div');
     image.className = 'content-img';
     image.id = i;
-    images.appendChild(image);
     image.style.backgroundImage = `url("assets/members/member-${name}-${i}.jpg")`;
+    imagesFragment.appendChild(image);
   }
+  images.appendChild(imagesFragment);
 }
 
 function animateMap(item) {
