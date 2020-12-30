@@ -40,6 +40,7 @@ class Game {
 
             if(buttonId) {
                 button.classList.add('active');
+                button.setAttribute("disabled", "disabled"); 
 
                 if (this.openCards.length < this.oneMatchCards) {
                     this.openCards.push(button);
@@ -70,7 +71,10 @@ class Game {
         const cardsToClose = [].concat(this.openCards);
         this.openCards = [];  
         setTimeout(() => {
-            cardsToClose.forEach(card => card.classList.remove('active'));
+            cardsToClose.forEach(card => {
+                card.classList.remove('active'); 
+                card.removeAttribute('disabled'); 
+            });
         }, this.delayToCloseCards);
     }
 
