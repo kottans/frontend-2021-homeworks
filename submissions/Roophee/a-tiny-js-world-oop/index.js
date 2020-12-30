@@ -1,85 +1,65 @@
 "use strict";
 
-class Animalia {
-    alive = true;
-    canSaying = false;
-    constructor(gender, legs, tail) {
-        this.legs = legs;
-        this.tail = tail;
+class Organism {
+    constructor(name, gender, saying, legs,hands, tail ){
+        this.name = name;
         this.gender = gender;
+        this.species = this.constructor.name.toLowerCase();
+        this.saying = saying;
+        this.legs = legs;
+        this.hands = hands;
+        this.tail = tail;
+        this.friends = [];
+    }
+
+    addFriends(...arrayOfFriends) {
+        arrayOfFriends.forEach(({name}) => this.friends.push(name));
+    }
+
+    description(){
+        let descriptionArray = [this.name, this.gender,this.species, this.saying, this.legs, this.hands, this.tail];
+        this.friends.length === 0? descriptionArray.push('none'):descriptionArray.push(this.friends);
+        return descriptionArray;
     }
 }
 
-class Mammalia extends Animalia {
-    canSaying = true;
-    gregarious = true;
-    description (arrayOfProperties) {
-        return arrayOfProperties.map(property =>this[property]).join(';')
-    }
-    constructor(gender, friends, legs, tail) {
-        super(gender, legs, tail);
-        this.friends = friends.split(',');
-
+class Dog extends Organism {
+    static saying = 'Woof-Woof!';
+    constructor(name, gender){
+        super(name, gender, Dog.saying, 4,0,1);
     }
 }
 
-class HomoSapiens extends Mammalia {
-    species = "human";
-    hasName = true;
-    constructor(name, gender, friends, sayingText) {
-        super(gender, friends);
-        this.name = name;
-        this.legs = 2;
-        this.hands = 2;
-        this.tail = 'none';
-        this.saying = sayingText;
+class Cat extends Organism {
+    static saying = 'Meow!';
+    constructor(name, gender){
+        super(name, gender, Cat.saying, 4,0,1);
     }
 }
 
-class Dog extends Mammalia {
-    species = "dog";
-    hasName = true;
-    static saying = "Woof-Woof!";
-    constructor(name, gender, friends) {
-        super(gender, friends);
-        this.legs = 4;
-        this.hands = 'none';
-        this.tail = 1;
-        this.name = name;
-        this.saying = Dog.saying;
+class Human extends Organism {
+    static saying = 'Cogito ergo sum!';
+    constructor(name, gender,saying){
+        saying? super(name, gender, saying, 2,2,0):super(name, gender, Human.saying, 2,2,0);
     }
 }
 
-class Cat extends Mammalia {
-    species = "cat";
-    hasName = true;
-    static saying = "Meow!";
-    constructor(name, gender, friends) {
-        super(gender, friends);
-        this.legs = 4;
-        this.hands = 'none';
-        this.tail = 1;
-        this.name = name;
-        this.saying = Cat.saying;
+class WomanCat extends Organism {
+    constructor(name, gender){
+        super(name, gender, Cat.saying, 2,2,0);
     }
 }
 
-class CatWoman extends HomoSapiens {
-    species = "cat-woman";
-    catSaying() {
-        return Cat.saying;
-    }
-    constructor(name, gender, friends) {
-        super(name, gender, friends);
-        this.saying = this.catSaying();
-    }
-}
-const properties = ['species', 'name', 'gender', 'legs', 'hands', 'tail', 'saying', 'friends'],
-    man = new HomoSapiens('Sam', 'male', 'Hanna, Milo', 'Honey, I\'m home'),
-    woman = new HomoSapiens('Hanna', 'female', 'Sam, Milo, Kitty', "I\'m traveling down the river."),
-    dog = new Dog('Milo', 'male', 'Sam, Hanna'),
-    cat = new Cat("Kitty", 'female', ''),
-    catWoman = new CatWoman('Susanna', 'female', 'Sam, Hanna, Milo, Kitty'),
-    tinyWorld = [man, woman, dog, cat, catWoman];
+const dog = new Dog('Milo','male'),
+    cat = new Cat('Kitty','female'),
+    man = new Human('Michael', 'male'),
+    woman = new Human('Helga', 'female', 'Per aspera ad astra!'),
+    hero = new WomanCat('Sara', 'female'),
+    population = [man, woman, dog, cat, hero];
 
-print(tinyWorld.map(item => item.description(properties)).join('\n'))
+dog.addFriends(man, woman);
+man.addFriends(woman);
+woman.addFriends(man, cat, dog);
+hero.addFriends(man, woman, cat, dog);
+
+population.forEach(item =>print(item.description().join(';')));
