@@ -1,0 +1,121 @@
+[33mcommit 076065d419321e25cbd025d275531a72054363cd[m[33m ([m[1;36mHEAD -> [m[1;32mjs-pre-oop[m[33m, [m[1;31mupstream/main[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m
+Author: Vlad Piatyhor <V.Piatyhor@gmail.com>
+Date:   Wed Dec 30 10:02:31 2020 +0200
+
+    added a tiny-js-world-opp my versions of the task (#98)
+    
+    * added a tiny-js-world-opp my versions of the task
+    
+    * JS OOP approach improvements
+    
+    * updated solution
+    
+    * updated CatWoman properties
+
+[1mdiff --git a/submissions/5mountains/tiny-js-world-oop/index.js b/submissions/5mountains/tiny-js-world-oop/index.js[m
+[1mnew file mode 100644[m
+[1mindex 0000000..6505eb2[m
+[1m--- /dev/null[m
+[1m+++ b/submissions/5mountains/tiny-js-world-oop/index.js[m
+[36m@@ -0,0 +1,101 @@[m
+[32m+[m[32m/* Refer to https://github.com/OleksiyRudenko/a-tiny-JS-world for the task details[m[41m[m
+[32m+[m[32m   Complete the below for code reviewers' convenience:[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m   Code repository: _put repo URL here_[m[41m[m
+[32m+[m[32m   Web app: _put project's github pages URL here_[m[41m[m
+[32m+[m[32m   */[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m// ======== OBJECTS DEFINITIONS ========[m[41m[m
+[32m+[m[32m// Define your objects here[m[41m[m
+[32m+[m[32mclass Resident {[m[41m[m
+[32m+[m[32m  constructor(species, name, gender, saying, friends) {[m[41m[m
+[32m+[m[32m    this.species = species;[m[41m[m
+[32m+[m[32m    this.name = name;[m[41m[m
+[32m+[m[32m    this.gender = gender;[m[41m[m
+[32m+[m[32m    this.friends = friends;[m[41m[m
+[32m+[m[32m    this.saying = saying;[m[41m[m
+[32m+[m[32m  }[m[41m[m
+[32m+[m[32m  toString() {[m[41m[m
+[32m+[m[32m    return `Wonderful creature - <b>${this.species}</b>,[m[41m [m
+[32m+[m[32m      whose name is <b>${this.name}</b>,[m[41m [m
+[32m+[m[32m      the gender is <b>${this.gender}</b>![m[41m [m
+[32m+[m[32m      Usually the greeting is <b>${this.saying}</b>[m[41m [m
+[32m+[m[32m      The friends of this inhabitant are <b>${this.friends.join(', ')}</b>. `;[m[41m[m
+[32m+[m[32m  }[m[41m[m
+[32m+[m[32m}[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32mclass Human extends Resident {[m[41m[m
+[32m+[m[32m  constructor(name, gender, saying, friends, legs = 2, hands = 2) {[m[41m[m
+[32m+[m[32m    super('human', name, gender, saying, friends);[m[41m[m
+[32m+[m[32m    this.legs = legs;[m[41m[m
+[32m+[m[32m    this.hands = hands;[m[41m[m
+[32m+[m[32m  }[m[41m[m
+[32m+[m[32m  toString() {[m[41m[m
+[32m+[m[32m    return ([m[41m[m
+[32m+[m[32m      super.toString() +[m[41m[m
+[32m+[m[32m      `By the wat, this member is owner of <b>${this.legs} legs</b> and <b>${this.hands} hands</b>!`[m[41m[m
+[32m+[m[32m    );[m[41m[m
+[32m+[m[32m  }[m[41m[m
+[32m+[m[32m}[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32mclass Animal extends Resident {[m[41m[m
+[32m+[m[32m  constructor(species, name, gender, saying, friends, paws = 4) {[m[41m[m
+[32m+[m[32m    super(species, name, gender, saying, friends);[m[41m[m
+[32m+[m[32m    this.paws = paws;[m[41m[m
+[32m+[m[32m  }[m[41m[m
+[32m+[m[32m  toString() {[m[41m[m
+[32m+[m[32m    return ([m[41m[m
+[32m+[m[32m      super.toString() +[m[41m[m
+[32m+[m[32m      `By the wat, this member is owner of <By>${this.paws} paws</By>!`[m[41m[m
+[32m+[m[32m    );[m[41m[m
+[32m+[m[32m  }[m[41m[m
+[32m+[m[32m}[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32mclass Dog extends Animal {[m[41m[m
+[32m+[m[32m  constructor(name, gender, saying, friends) {[m[41m[m
+[32m+[m[32m    super('dog', name, gender, saying, friends);[m[41m[m
+[32m+[m[32m  }[m[41m[m
+[32m+[m[32m}[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32mclass Cat extends Animal {[m[41m[m
+[32m+[m[32m  constructor(name, gender, saying, friends) {[m[41m[m
+[32m+[m[32m    super('cat', name, gender, saying, friends);[m[41m[m
+[32m+[m[32m  }[m[41m[m
+[32m+[m[32m}[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32mclass CatWoman extends Human {[m[41m[m
+[32m+[m[32m  constructor(name, friends = ['Tom', 'Felix']) {[m[41m[m
+[32m+[m[32m    super(name, 'female', CatWoman.saying(), friends);[m[41m[m
+[32m+[m[32m  }[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m  static saying() {[m[41m[m
+[32m+[m[32m    return 'meow!';[m[41m[m
+[32m+[m[32m  }[m[41m[m
+[32m+[m[32m}[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m// ======== OUTPUT ========[m[41m[m
+[32m+[m[32m/* Use print(message) for output.[m[41m[m
+[32m+[m[32mDefault tag for message is <pre>. Use print(message,'div') to change containing element tag.[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32mMessage can contain HTML markup. You may also tweak index.html and/or styles.css.[m[41m[m
+[32m+[m[32mHowever, please, REFRAIN from improving visuals at least until your code is reviewed[m[41m[m
+[32m+[m[32mso code reviewers might focus on a single file that is index.js.[m[41m[m
+[32m+[m[32m*/[m[41m[m
+[32m+[m[32mconst man = new Human('Tom', 'male', 'Hello Jenny!', ['Tom', 'Jenny', 'Rex', 'Selina']),[m[41m[m
+[32m+[m[32m  women = new Human('Jenny', 'female', 'Hello Tom!', ['Tom', 'Rex', 'Felix']),[m[41m[m
+[32m+[m[32m  dog = new Dog('Rex', 'male', 'woof-woof!', ['Tom', 'Jenny']),[m[41m[m
+[32m+[m[32m  cat = new Cat('Felix', 'male', 'meow!', ['Tom', 'Jenny', 'Selina']),[m[41m[m
+[32m+[m[32m  catWoman = new CatWoman('Selina'),[m[41m[m
+[32m+[m[32m  residents = [man, women, cat, dog, catWoman];[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32mresidents.forEach((resident) => print(resident, 'p'));[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m/* Print examples:[m[41m[m
+[32m+[m[32mprint('ABC');[m[41m[m
+[32m+[m[32mprint('<strong>ABC</strong>');[m[41m[m
+[32m+[m[32mprint('<strong>ABC</strong>', 'div');[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32mprint('human; John; male; 2; 2; Hello world!; Rex, Tom, Jenny');[m[41m[m
+[32m+[m[32mprint('human; <strong>John</strong>; male; 2; 2; <em>Hello world!</em>; Rex, Tom, Jenny');[m[41m[m
+[32m+[m[32mprint('human; <strong>John</strong>; male; 2; 2; <em>Hello world!</em>; Rex, Tom, Jenny', 'div');[m[41m[m
+[32m+[m[32m*/[m[41m[m
