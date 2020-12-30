@@ -1,0 +1,236 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  margin: 0;
+  height: 100vh;
+  font-family: Snell Roundhand, cursive;
+  background-color: #f5f5f5;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+nav {
+  /* flex-basis: 33%; */
+  padding: 20px;
+  min-width: 250px;
+  padding-bottom: 20px;
+  background-color: #0d461b;
+  /* border-radius: 5%; */
+}
+
+.nav-link {
+  display: block;
+  padding: 30px;
+  font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+
+}
+
+.nav-link:hover {
+  background-color: black;
+  box-shadow: 7px 5px 7px rgb(100, 97, 97);
+
+}
+
+.nav-link:active {
+  background-color: black;
+  transform: scale(1.2);
+  transition: ease-in-out 0.4ms;
+}
+
+main {
+  padding: 20px;
+  overflow-y: auto;
+  position: relative;
+  background-color: goldenrod;
+  /* border-radius: 5%; */
+
+}
+
+.photo {
+  width: 100%;
+  max-width: 600px;
+  margin: 20px;
+  float: right;
+  border-radius: 11%;
+
+}
+
+.text-block {
+  font-size: 19px;
+  color: #292828;
+  letter-spacing: -0.5px;
+  line-height: 23.2px;
+}
+
+.text-block>p {
+  font-weight: bold;
+  color: black;
+
+}
+
+.born,
+.CurrentRanking,
+.CareerWinnings {
+  color: #292828;
+}
+
+.active,
+.player-name {
+  color: #b33b3b;
+}
+
+a,
+a:active {
+  color: gray;
+  text-decoration: none;
+}
+
+.born,
+.CurrentRanking,
+.CareerWinnings {
+  font-weight: normal;
+}
+
+.hidden,
+.player-name {
+  display: none;
+}
+
+#menuGamburger {
+  position: absolute;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 0;
+  border: 0;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+}
+
+/* #menuGamburger {
+  position: absolute;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 0;
+  border: 0;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+} */
+
+
+@media (max-width: 1310px) {
+
+  nav,
+  .close-bg {
+    z-index: 1;
+    height: 100%;
+    overflow: auto;
+  }
+
+  .photo {
+    margin: 0;
+    max-width: none;
+    float: none;
+    border-radius: 5%;
+
+  }
+
+  .text-block {
+    font-size: 16px;
+    letter-spacing: -0.1px;
+    line-height: 19.2px;
+  }
+}
+
+
+@media (max-width: 765px) {
+  nav {
+    display: none;
+  }
+
+  .close {
+    position: absolute;
+    padding: 23px;
+    right: 0;
+    top: 0;
+    background-image: url(./img/close_24px.png);
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+
+  .hidden {
+    display: block;
+  }
+
+  .close-bg {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: none;
+    background-color: black;
+    opacity: 0.5;
+  }
+
+  .open {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: 23px;
+    left: 26px;
+    background-image: url(./img/menu_24px.png);
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+
+  #menuGamburger:checked~nav {
+    display: block;
+    position: fixed;
+    top: 0;
+  }
+
+  #menuGamburger:focus~.open {
+    outline: 1px solid red;
+  }
+
+  .open:hover,
+  .close:hover {
+    cursor: pointer;
+  }
+
+  #menuGamburger:checked~.close-bg {
+    display: block;
+    position: fixed;
+    top: 0;
+  }
+
+  .nav-link {
+    display: block;
+    padding: 19px 39px;
+  }
+
+  .player-name {
+    display: block;
+    margin: 0;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+}
+
+
+@media (max-width: 530px) {
+  .player-name {
+    font-size: 20px;
+  }
+
+  .open {
+    top: 16px;
+  }
+}
