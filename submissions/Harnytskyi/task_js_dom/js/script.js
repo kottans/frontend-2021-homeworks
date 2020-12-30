@@ -1,4 +1,4 @@
-const data = [
+const memes = [
     {
         title: "Awkward half-cat",
         about: "This meme began with a photoshop battle in Reddit. On May 12, 2016, a user with the nickname catcatdogcat posted a photo of a cat and invited users to take pictures with him.",
@@ -39,19 +39,16 @@ const data = [
 const nav_ul = document.querySelector(".nav_ul");
 const aside = document.querySelector("aside");
 const main = document.querySelector("main");
-let openbtn = document.querySelector(".nav-open-button");
+const openbtn = document.querySelector(".nav-open-button");
 let navButtonListArray;
-let selectedNav;
 
 function createNavButtons() {
-    let navLi;
-    let navButtonList = document.createDocumentFragment();
-    let navButtonItem;
+    const navButtonList = document.createDocumentFragment();
 
     nav_ul.innerHTML = "";
-    data.forEach(function (element) {
-        navLi = document.createElement("li");
-        navButtonItem = document.createElement("button");
+    memes.forEach(function (element) {
+        const navLi = document.createElement("li");
+        const navButtonItem = document.createElement("button");
         navButtonItem.classList.add("nav-button");
         navButtonItem.innerHTML = element.title;
         navLi.append(navButtonItem);
@@ -62,38 +59,36 @@ function createNavButtons() {
 }
 
 function displayMain({ target }) {
-    if (target.classList == 'nav-button') {
-        highlight(target);
+    if (target.classList.contains('nav-button')) {
+        highlightSelectedItem(target);
     }
     const selectedButtonIndex = navButtonListArray.indexOf(target);
-    let element;
     main.innerHTML = "";
+    const memeInfo = document.createDocumentFragment();
+    let memeInfoitem;
 
-    element = document.createElement("div");
-    element.classList.add("mainItem-title");
-    element.innerHTML = data[selectedButtonIndex].title;
-    main.append(element);
-    element = document.createElement("img");
-    element.classList.add("mainItem-image");
-    element.src = data[selectedButtonIndex].img;
-    main.append(element);
-    element = document.createElement("div");
-    element.classList.add("mainItem-about");
-    element.innerHTML = "About:<br>" + data[selectedButtonIndex].about;
-    main.append(element);
-
-
+    const memeInfoTitle = document.createElement("div");
+    memeInfoTitle.classList.add("mainItem-title");
+    memeInfoTitle.innerHTML = memes[selectedButtonIndex].title;
+    memeInfo.append(memeInfoTitle);
+    const memeInfoImage = document.createElement("img");
+    memeInfoImage.classList.add("mainItem-image");
+    memeInfoImage.src = memes[selectedButtonIndex].img;
+    memeInfo.append(memeInfoImage);
+    const memeInfoAbout = document.createElement("div");
+    memeInfoAbout.classList.add("mainItem-about");
+    memeInfoAbout.innerHTML = "About:<br>" + memes[selectedButtonIndex].about;
+    memeInfo.append(memeInfoAbout);
+    main.append(memeInfo);
 }
 function hideMenu(target) {
     aside.classList.toggle('hidden');
 }
 
-function highlight(target) {
-    if (selectedNav) {
-        selectedNav.classList.remove('highlight');
-    }
-    selectedNav = target;
-    selectedNav.classList.add('highlight');
+function highlightSelectedItem(target) {
+    if (document.querySelector('.nav-button.highlight') !== null)
+        document.querySelector('.nav-button.highlight').classList.remove('highlight');
+    target.classList.add('highlight');
 }
 
 createNavButtons();

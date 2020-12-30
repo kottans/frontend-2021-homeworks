@@ -47,6 +47,7 @@
     background-color: rgb(203, 199, 207);
     border: 5px solid transparent;
     font-size: 20px;
+    cursor: pointer;
 }
 
 .nav-button:hover {
