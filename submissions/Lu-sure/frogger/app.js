@@ -28,7 +28,7 @@ const DELAY_OF_WIN = 200;
 
 function getRandomInteger(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
+}
 
 const Hero = function(sprite) {
     this.sprite = sprite;
@@ -38,21 +38,29 @@ Hero.prototype.render = function () {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-const Enemy = function (y, speed, sprite) {
+const Enemy = function (y, speed, sprite, player) {
     Hero.call(this, sprite);
     this.x = ENEMY_CONFIG.startPointX;
     this.y = y;
     this.speed = speed;
+    this.player = player;
 };
 
 Enemy.prototype = Object.create(Hero.prototype);
 Enemy.prototype.constructor = Enemy;
 
+Enemy.prototype.checkCollision = function () {
+    if (this.player.y === this.y && Math.abs(this.player.x - this.x) < PLAYER_CONFIG.thickness) {
+        this.player.move = false;
+        setTimeout(() => this.player.goToStart(), DELAY_OF_COLLISION);
+    }
+}
+
 Enemy.prototype.update = function (dt) {
     this.x += this.speed * dt;
     if (this.x > MOVE_AREA.width.end)
         this.x = ENEMY_CONFIG.startPointX;
-    checkCollision();
+    this.checkCollision();
 };
 
 const Player = function (sprite) {
@@ -93,7 +101,6 @@ Player.prototype.handleInput = function (direction) {
             }
             break;
     }
-    checkCollision();
 };
 
 Player.prototype.goToStart = function () {
@@ -102,22 +109,13 @@ Player.prototype.goToStart = function () {
     this.move = true;
 };
 
-const allEnemies = [
-    new Enemy(ENEMY_CONFIG.linesToGo.first, getRandomInteger(ENEMY_CONFIG.minSpeed, ENEMY_CONFIG.maxSpeed), ENEMY_CONFIG.sprite),
-    new Enemy(ENEMY_CONFIG.linesToGo.second, getRandomInteger(ENEMY_CONFIG.minSpeed, ENEMY_CONFIG.maxSpeed), ENEMY_CONFIG.sprite),
-    new Enemy(ENEMY_CONFIG.linesToGo.third, getRandomInteger(ENEMY_CONFIG.minSpeed, ENEMY_CONFIG.maxSpeed), ENEMY_CONFIG.sprite),
-];
-
 const player = new Player(PLAYER_CONFIG.sprite);
 
-const checkCollision = function () {
-    for (let i = 0; i < allEnemies.length; i++) {
-        if (Math.abs(player.x - allEnemies[i].x) < PLAYER_CONFIG.thickness && player.y === allEnemies[i].y) {
-            player.move = false;
-            setTimeout(() => player.goToStart(), DELAY_OF_COLLISION);
-        };
-    };
-};
+const allEnemies = [
+    new Enemy(ENEMY_CONFIG.linesToGo.first, getRandomInteger(ENEMY_CONFIG.minSpeed, ENEMY_CONFIG.maxSpeed), ENEMY_CONFIG.sprite, player),
+    new Enemy(ENEMY_CONFIG.linesToGo.second, getRandomInteger(ENEMY_CONFIG.minSpeed, ENEMY_CONFIG.maxSpeed), ENEMY_CONFIG.sprite, player),
+    new Enemy(ENEMY_CONFIG.linesToGo.third, getRandomInteger(ENEMY_CONFIG.minSpeed, ENEMY_CONFIG.maxSpeed), ENEMY_CONFIG.sprite, player),
+];
 
 document.addEventListener('keyup', function (e) {
     const allowedKeys = {
