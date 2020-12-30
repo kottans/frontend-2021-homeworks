@@ -43,8 +43,8 @@ export class UserCard {
         element.classList.add('user-card-item');
         element.innerHTML = innerHTML;
 
-        element.querySelector('.user-card__front').prepend(user.imgElement, user.frontBorderImgElement);
-        element.querySelector('.user-card__back').prepend(user.backImgElement, user.backBorderImgElement);
+        element.querySelector('.user-card__front').prepend(user.frontImage, user.frontBorderImage);
+        element.querySelector('.user-card__back').prepend(user.backImage, user.backBorderImage);
 
         return element;
     }

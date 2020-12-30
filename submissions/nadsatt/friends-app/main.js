@@ -1,4 +1,4 @@
-import { ImgService } from './modules/img-service.js';
+import { ImageService } from './modules/image-service.js';
 import { ApiService } from './modules/api-service.js';
 import { UserService } from './modules/user-service.js';
 
@@ -15,8 +15,8 @@ class Program {
     }
 
     defineServices(){
-        this.imgService = new ImgService();
-        this.apiService = new ApiService(this.imgService);
+        this.imageService = new ImageService();
+        this.apiService = new ApiService(this.imageService);
         this.userService = new UserService(this.apiService);
     }
 
@@ -37,8 +37,8 @@ class Program {
         document.body.querySelector('.filter-group-wrapper').append(this.filterGroup);
     }
 
-    loadImgs(){
-        return this.imgService.loadImgs();
+    loadImages(){
+        return this.imageService.loadImages();
     }
 
     getUsers(){
@@ -54,4 +54,4 @@ class Program {
 }
 
 const program = new Program();
-program.loadImgs().then(() => program.getUsers());
+program.loadImages().then(() => program.getUsers());

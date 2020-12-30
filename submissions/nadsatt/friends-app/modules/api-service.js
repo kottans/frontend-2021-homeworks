@@ -1,8 +1,8 @@
 import { User } from './user.js';
 
 export class ApiService {
-    constructor(imgService){
-        this.imgService = imgService;
+    constructor(imageService){
+        this.imageService = imageService;
         this.endpoint = 'https://randomuser.me/api/';
         this.page = 1;
         this.manResults = 40;
@@ -27,10 +27,10 @@ export class ApiService {
 
     createUsers(...users){
         return users.map((user, i) =>
-            new User(user, this.imgService.userImgs[i],
-                     this.imgService.frontBorderImgs[i],
-                     this.imgService.backBorderImgs[i],
-                     this.imgService.backImgs[i])
+            new User(user, this.imageService.frontImages[i],
+                     this.imageService.frontBorderImages[i],
+                     this.imageService.backBorderImages[i],
+                     this.imageService.backImages[i])
         );
     }
 }

@@ -41,15 +41,15 @@
     transform: rotateY(0deg);
 }
 
-.bg-img,
-.border-img {
+.background-image,
+.border-image {
     width: 100%;
     height: 100%;
     position: absolute;
     border-radius: 5px;
 }
 
-.border-img {
+.border-image {
     z-index: 1;
     box-shadow: 5px 6px 15px -1px rgba(0,0,0,0.6);
 }
@@ -88,16 +88,16 @@
 }
 
 .user-card-item:nth-of-type(n) .user-card__front-header {
-    background-image:  url('./../images/user-card-imgs/user-card-header-brown.jpg');
+    background-image:  url('./../images/user-card-images/user-card-header-brown.jpg');
 }
 .user-card-item:nth-of-type(2n) .user-card__front-header {
-    background-image:  url('./../images/user-card-imgs/user-card-header-green.jpg');
+    background-image:  url('./../images/user-card-images/user-card-header-green.jpg');
 }
 .user-card-item:nth-of-type(n) .user-card__back-header {
-    background-image:  url('./../images/user-card-imgs/user-card-header-brown.jpg');
+    background-image:  url('./../images/user-card-images/user-card-header-brown.jpg');
 }
 .user-card-item:nth-of-type(2n) .user-card__back-header {
-    background-image:  url('./../images/user-card-imgs/user-card-header-green.jpg');
+    background-image:  url('./../images/user-card-images/user-card-header-green.jpg');
 }
 
 .user-card__front-heading {

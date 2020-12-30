@@ -73,24 +73,24 @@ body {
     background-position: center center;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
-    background-image: url('images/user-card-list-bgs/bg1.jpg');
+    background-image: url('images/user-card-list-backgrounds/background1.jpg');
     animation: bgSlider 30s ease-in-out infinite;
 }
 
 @keyframes bgSlider {
     0%,100% {
-        background-image: url('images/user-card-list-bgs/bg1.jpg');
+        background-image: url('images/user-card-list-backgrounds/background1.jpg');
     }
     20% {
-        background-image: url('images/user-card-list-bgs/bg2.jpg');
+        background-image: url('images/user-card-list-backgrounds/background2.jpg');
     }
     40% {
-        background-image: url('images/user-card-list-bgs/bg3.png');
+        background-image: url('images/user-card-list-backgrounds/background3.png');
     }
     60% {
-        background-image: url('images/user-card-list-bgs/bg4.jpg');
+        background-image: url('images/user-card-list-backgrounds/background4.jpg');
     }
     80% {
-        background-image: url('images/user-card-list-bgs/bg5.png');
+        background-image: url('images/user-card-list-backgrounds/background5.png');
     }
 }

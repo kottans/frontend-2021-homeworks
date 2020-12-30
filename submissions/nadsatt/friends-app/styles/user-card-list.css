@@ -6,7 +6,7 @@
     align-content: space-evenly;
     justify-content: space-evenly;
     padding: 10px 0;
-    border-image: url('./../images/user-card-list-imgs/user-card-list-border.png');
+    border-image: url('./../images/user-card-list-images/user-card-list-border.png');
     border-image-slice: 24;
     border-image-outset: 0;
     border-image-repeat: round;

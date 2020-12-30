@@ -5,7 +5,7 @@
     justify-content: center;
     align-items: center;
     border: 12px solid;
-    border-image-source: url('./../images/icon-imgs/icon-border.png');
+    border-image-source: url('./../images/icon-images/icon-border.png');
     border-image-slice: 12;
     border-image-outset: 0;
     border-image-repeat: repeat;

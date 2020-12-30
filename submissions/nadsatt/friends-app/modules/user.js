@@ -1,5 +1,5 @@
 export class User {
-    constructor(user,imgElement, frontBorderImgElement, backBorderImgElement, backImgElement){
+    constructor(user, frontImage, frontBorderImage, backBorderImage, backImage){
         this.gender = user.gender;
         this.firstName = user.name.first;
         this.lastName = user.name.last;
@@ -11,10 +11,10 @@ export class User {
         this.registration = new Date(user.registered.date).getTime();
         this.formattedRegistration = this.getFormattedDate(new Date(user.registered.date));
 
-        this.imgElement = imgElement;
-        this.frontBorderImgElement = frontBorderImgElement;
-        this.backBorderImgElement = backBorderImgElement;
-        this.backImgElement = backImgElement;
+        this.frontImage = frontImage;
+        this.frontBorderImage = frontBorderImage;
+        this.backBorderImage = backBorderImage;
+        this.backImage = backImage;
     }
 
     getFormattedDate(date){
