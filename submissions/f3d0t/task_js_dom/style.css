@@ -17,7 +17,12 @@ body {
 	top: 0;
 	left: 0;
 	border-radius: 50%;
-	background-image: linear-gradient(to bottom, rgb(237, 83, 77) 48%, rgb(51, 51, 51) 48%, rgb(51, 51, 51) 52%, rgb(255, 255, 255) 52%, rgb(255, 255, 255) 100%);
+	background-image: linear-gradient(to bottom, 
+	rgb(237, 83, 77) 48%, 
+	rgb(51, 51, 51) 48%, 
+	rgb(51, 51, 51) 52%, 
+	rgb(255, 255, 255) 52%, 
+	rgb(255, 255, 255) 100%);
 	box-shadow: inset -5px 0 rgba(0, 0, 0, 0.2);
 	cursor: pointer;
 	transform: rotate(0deg);

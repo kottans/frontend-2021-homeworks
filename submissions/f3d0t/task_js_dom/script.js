@@ -37,44 +37,41 @@ const createMenuLinks = (array, container) => {
 		let li = document.createElement("li");
 		li.textContent = element.name;
 		li.dataset.id = element.id;
-		li.className = "";
+		li.classList = "";
 		wrapper.appendChild(li);
 	});
 	container.appendChild(wrapper);
 };
 
-const paintContent = (id, arr) => {
-	let wrapper = document.createElement("main");
-	wrapper.className = "main";
+const getMainContent = (id, arr) => {
+	let wrapper = document.createElement("div");
 	let item = arr.find((item) => item.id == id);
 	let h2 = document.createElement("h2");
-	h2.className = "main__name";
+	h2.classList = "main__name";
 	h2.innerText = item.name;
 	let img = document.createElement("img");
-	img.className = "main__img";
+	img.classList = "main__img";
 	img.src = item.imagePath;
 	img.alt = item.name;
 	let p = document.createElement("p");
-	p.className = "main__text";
+	p.classList = "main__text";
 	p.innerText = item.description;
-	wrapper.appendChild(h2);
-	wrapper.appendChild(img);
-	wrapper.appendChild(p);
+	wrapper.append(h2, img, p);
 	return wrapper;
 };
 
 document.addEventListener("DOMContentLoaded", () => {
 	const nav = document.getElementById("navigation");
-	const nameHeader = document.getElementById("name");
+	const main = document.getElementById("main");
 	createMenuLinks(pokemons, nav);
 
-	nav.addEventListener("click", function (evt) {
-		let currentId = evt.target.dataset.id;
-		if (currentId != undefined) {
-			nav.querySelector(".active") != null ? nav.querySelector(".active").classList.toggle("active") : null;
-			evt.target.classList.toggle("active");
-			let main = document.querySelector(".main");
-			main.parentElement.replaceChild(paintContent(currentId, pokemons), main);
+	nav.addEventListener("click", function ({ target }) {
+		let currentId = target.dataset.id;
+		let oldId = nav.querySelector(".active")?.dataset.id;
+		if (target.nodeName === "LI" && oldId !== currentId) {
+			nav.querySelector(".active")?.classList.toggle("active");
+			target.classList.toggle("active");
+			main.replaceChild(getMainContent(currentId, pokemons), main.firstElementChild);
 		}
 	});
 	document.getElementById("nav_switch").addEventListener("click", function () {
