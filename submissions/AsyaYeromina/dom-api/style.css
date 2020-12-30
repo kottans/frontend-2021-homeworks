@@ -4,7 +4,11 @@
 	--buttons-color: rgba(255,255,255,0.2);
 	--buttons-active-color: rgba(255,255,255,0.5);
 }
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> d62f3c358c69944d7a0df5c4c10fe8397a35295a
 html {
 	height: 100%;
 }
@@ -136,13 +140,21 @@ body {
 	max-width: 80%;
 	margin: 0 auto 40px;
 }
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> d62f3c358c69944d7a0df5c4c10fe8397a35295a
 }
 
 @media (min-width: 900px) {
 	.main__content{
 		display: grid;
+<<<<<<< HEAD
 		grid-template-columns: 1fr 1fr;	
+=======
+		grid-template-columns: 1fr 1fr;
+>>>>>>> d62f3c358c69944d7a0df5c4c10fe8397a35295a
 		grid-template-rows: max-content;
 		grid-column-gap: 40px;
 	}
@@ -155,7 +167,11 @@ body {
 	.content__list-title {
 		margin-bottom: 16px;
 	}
+<<<<<<< HEAD
 } 
+=======
+}
+>>>>>>> d62f3c358c69944d7a0df5c4c10fe8397a35295a
 
 @media (min-width: 1200px) {
 	.main {
@@ -169,7 +185,11 @@ body {
 	}
 
 	.main__content{
+<<<<<<< HEAD
 		grid-template-columns: 1fr 1fr;	
+=======
+		grid-template-columns: 1fr 1fr;
+>>>>>>> d62f3c358c69944d7a0df5c4c10fe8397a35295a
 	}
 
 	.menu__tab-list {
@@ -180,4 +200,8 @@ body {
 		font-size: 48px;
 		margin: 48px;
 	}
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> d62f3c358c69944d7a0df5c4c10fe8397a35295a
