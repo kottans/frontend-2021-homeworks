@@ -7,41 +7,46 @@
 
   // ======== OBJECTS DEFINITIONS ========
   class Inhabitant {
-    constructor(name, age, species) {
+    constructor(species, name, age, gender, limbs, saying) {
+      this.species = species;
       this.name = name;
       this.age = age;
-      this.species = species;
+      this.gender = gender;
+      this.limbs = limbs;
+      this.saying = saying;
     }
 
     getName() {
       return this.name;
     }
 
+    getLimbs() {
+      return `I have ${this.limbs} limbs`
+    }
+
     introduce() {
-      return `I'm ${this.age} years old ${this.species}.`
+      return `I'm ${this.age} years old ${this.species}, ${this.gender}. ${this.getLimbs()}. "${this.saying}". `
     }
   }
 
   class Human extends Inhabitant {
     constructor(name, lastName, age, gender, saying) {
-      super(name, age, 'human');
-      this.gender = gender;
+      super('human', name, age, gender, [2, 2], saying);
       this.lastName = lastName;
-      this.saying = saying;
     }
 
     getName() {
       return `${super.getName()} ${this.lastName}`;
     }
 
-    introduce() {
-      return `${super.introduce()} I feel I'm ${this.gender}. My message is "${this.saying}" `;
+    getLimbs() {
+      return `I have ${this.limbs[0]} hands and ${this.limbs[1]} legs`
     }
   }
 
   class Woman extends Human {
     constructor(name, lastName, age, saying) {
-      super(name, lastName, age, 'woman', saying);
+      super(name, lastName, age, 'female', saying);
       this.lovedBy;
     }
 
@@ -60,7 +65,7 @@
 
   class Man extends Human {
     constructor(name, lastName, age, saying) {
-      super(name, lastName, age, 'man', saying);
+      super(name, lastName, age, 'male', saying);
     }
 
     beGentleman() {
@@ -73,9 +78,12 @@
   }
 
   class Pet extends Inhabitant {
-    constructor(name, age, species, sex) {
-      super(name, age, species);
-      this.sex = sex;
+    constructor(species, name, age, gender, limbs, saying) {
+      super(species, name, age, gender, limbs, saying);
+    }
+
+    getLimbs() {
+      return `I have ${this.limbs} paws`
     }
 
     beTooMuchNice() {
@@ -88,30 +96,14 @@
   }
 
   class Cat extends Pet {
-    constructor(name, age, sex) {
-      super(name, age, 'cat', sex);
-    }
-
-    sayMeow() {
-      return `meow!..`
-    }
-
-    introduce() {
-      return super.introduce() + this.sayMeow();
+    constructor(name, age, gender) {
+      super('cat', name, age, gender, 4, 'Meow!..');
     }
   }
 
   class Dog extends Pet {
-    constructor(name, age, sex) {
-      super(name, age, 'dog', sex);
-    }
-
-    defendMyLord() {
-      return `Go away, strangers! woof-woof..`
-    }
-
-    introduce() {
-      return super.introduce() + this.defendMyLord();
+    constructor(name, age, gender) {
+      super('dog', name, age, gender, 4, 'woof-woof..');
     }
   }
 
@@ -120,7 +112,7 @@
   class CatWoman extends Woman {
     constructor(name, lastName, age, saying) {
       const halfCat = new Cat();
-      super(name, lastName, age, halfCat.sayMeow());
+      super(name, lastName, age, halfCat.saying);
       add_prop_value(this, new Cat({}), 'species');
     }
   }
@@ -146,11 +138,11 @@
     }
   }
 
-  const alien = new Inhabitant('Eva', 'one billion', 'alien');
-  const alex = new Human('Alex', 'Flash', 18, 'agender', 'Let\'s be king to each other!')
+  const alien = new Inhabitant('alien', 'Eva', 'one billion', 'agender', 12, 'You are not alone!');
+  const alex = new Human('Alex', 'Flash', 18, 'agender', 'Let\'s be king to each other!');
   const johnny = new Man('Johnny', 'Depp', 57, 'Hate my ex!');
   const love = new Woman('Love', 'Beautiful', 26, 'Love each other!');
-  const ratatouille = new Pet('Ratatouille', 1.5, 'rat', 'male');
+  const ratatouille = new Pet('rat', 'Ratatouille', 1.5, 'male', 4, 'Yammy!');
   const roxy = new Cat('Roxolana', 1, 'female');
   const easy = new Dog('Easy', 2, 'female');
   const catWoman = new CatWoman('Selina', 'Kyle', 21, 'I\'m cat!');
