@@ -6,8 +6,10 @@
 @import './styles/reset.css';
 @import './styles/responsive.css';
 
-@import './styles/header.css';
+@import './styles/loading-page.css';
 @import './styles/loading-roller.css';
+
+@import './styles/header.css';
 
 @import './styles/user-card-list.css';
 @import './styles/user-card-item.css';
@@ -39,25 +41,6 @@ body {
     padding: 15px;
     color: white;
     background-color: var(--gray-color);
-}
-
-.init-page {
-    position:fixed;
-    left:0;
-    right:0;
-    top:0;
-    bottom:0;
-    background-color: #120F12;
-    z-index:2;
-}
-
-.loading-info {
-    position: absolute;
-    left: 50%;
-    top: 40%;
-    transform: translate(-50%, -50%);
-    font-family: 'Courier New', Courier, monospace;
-    text-align: center;
 }
 
 .header-wrapper {

@@ -2,36 +2,42 @@ import svgs from './svgs.js';
 
 export class Icon {
     constructor(filter){
-        this.filter = filter;
-        this.isSelected = false;
+        this.defineElement(filter);
+        this.defineElementProperties();
+        this.defineElementMethods();
 
-        this.defineElement();
-        this.linkElementWithInstance();
-   }
+        return this.element;
+    }
 
-    defineElement(){
+    defineElement(filter){
         const heading = document.createElement('span');
         heading.classList.add('icon-item__heading')
-        heading.textContent = this.filter.property;
+        heading.textContent = filter.property;
 
         this.element = document.createElement('li');
-        this.element.classList.add('icon-item', `${this.filter.category}-icon-item`);
-        this.element.setAttribute('data-filter-name', this.filter.name);
-        this.element.innerHTML = svgs[this.filter.property];
+        this.element.classList.add('icon-item', `${filter.category}-icon-item`);
+        this.element.setAttribute('data-filter-name', filter.name);
+        this.element.innerHTML = svgs[filter.property];
         this.element.append(heading);
     }
 
-    linkElementWithInstance(){
-        this.element.instance = this;
+    defineElementProperties(){
+        this.element.selected = false;
+    }
+
+    defineElementMethods(){
+        // copy methods to avoid methods duplication in different instances
+        this.element.select = this.select;
+        this.element.unselect = this.unselect;
     }
 
     select(){
-        this.element.classList.add('icon-item--selected');
-        this.isSelected = true;
+        this.classList.add('icon-item--selected');
+        this.selected = true;
     }
 
     unselect(){
-        this.element.classList.remove('icon-item--selected');
-        this.isSelected = false;
+        this.classList.remove('icon-item--selected');
+        this.selected = false;
     }
 }

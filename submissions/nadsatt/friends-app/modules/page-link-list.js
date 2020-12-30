@@ -2,22 +2,11 @@ import { PageLink, CornerPageLink } from './page-link-items.js';
 
 export class PageLinkList {
     constructor(userService, userCardList){
-        this.userService = userService;
-        this.userCardList = userCardList;
-        this.fragment = new DocumentFragment();
-
-        this.usersPerPage = 10;
-        this.maxPageLinksNumber = 5;
-
-        this.defineCornerPageLinks();
         this.defineElement();
-        this.insertElement();
-        this.defineElementClickHandler();
-    }
+        this.defineElementProperties(userService, userCardList);
+        this.defineElementMethods();
 
-    defineCornerPageLinks(){
-        this.leftPageLinks = ['First', 'Prev'].map(value => new CornerPageLink(value).element);
-        this.rightPageLinks = ['Next', 'Last'].map(value => new CornerPageLink(value).element);
+        return this.element;
     }
 
     defineElement(){
@@ -25,12 +14,20 @@ export class PageLinkList {
         this.element.classList.add('page-link-list');
     }
 
-    insertElement(){
-        document.querySelector('.page-link-list-wrapper').append(this.element);
+    defineElementProperties(userService, userCardList){
+        this.element.userService = userService;
+        this.element.userCardList = userCardList;
+
+        this.element.usersPerPage = 10;
+        this.element.maxPageLinksNumber = 5;
+        this.element.fragment = new DocumentFragment();
+
+        this.element.leftPageLinks = ['First', 'Prev'].map(value => new CornerPageLink(value));
+        this.element.rightPageLinks = ['Next', 'Last'].map(value => new CornerPageLink(value));
     }
 
-    defineElementClickHandler(){
-        this.element.onclick = ({target, target:{textContent: value}}) => {
+    defineElementMethods(){
+        this.element.onclick = function({target, target:{textContent: value}}){
             if(this.checkIfMiddlePageLinkClicked(target)){
                 let currentPageNumber = +value;
                 this.performPagination(currentPageNumber);
@@ -42,110 +39,110 @@ export class PageLinkList {
                                         this.pagesNumber;
                 this.performPagination(currentPageNumber);
             }
-        }
-    }
+        };
 
-    checkIfMiddlePageLinkClicked(target){
-        return target.classList.contains('page-link-item');
-    }
+        this.element.checkIfMiddlePageLinkClicked = function(target){
+            return target.classList.contains('page-link-item');
+        };
 
-    checkIfCornerPageLinkClicked(target){
-        return target.classList.contains('corner-page-link-item');
-    }
+        this.element.checkIfCornerPageLinkClicked = function(target){
+            return target.classList.contains('corner-page-link-item');
+        };
 
-    performPagination(currentPageNumber = 1){
-        this.getUsersNumber();
-        this.definePagesNumber();
+        this.element.performPagination = function(currentPageNumber = 1){
+            this.getUsersNumber();
+            this.definePagesNumber();
 
-        this.validateCurrentPageNumber(currentPageNumber);
-        this.defineCurrentPageUsers();
-        this.updateCurrentPageUsers();
-        this.userCardList.updateUserCards();
+            this.validateCurrentPageNumber(currentPageNumber);
+            this.defineCurrentPageUsers();
+            this.updateCurrentPageUsers();
+            this.userCardList.updateUserCards();
 
-        this.defineFirstAndLastMiddlePageLinksNumbers();
-        this.defineMiddlePageLinksNumbers();
+            this.defineFirstAndLastMiddlePageLinksNumbers();
+            this.defineMiddlePageLinksNumbers();
 
-        this.defineMiddlePageLinks();
-        this.updateCornerPageLinks();
-        this.renderPageLinks();
-    }
+            this.defineMiddlePageLinks();
+            this.updateCornerPageLinks();
+            this.renderPageLinks();
+        };
 
-    getUsersNumber(){
-        this.usersNumber = this.userService.users.length;
-    }
+        this.element.getUsersNumber = function(){
+            this.usersNumber = this.userService.users.length;
+        };
 
-    definePagesNumber(){
-        this.pagesNumber = Math.ceil(this.usersNumber/this.usersPerPage);
-    }
+        this.element.definePagesNumber = function(){
+            this.pagesNumber = Math.ceil(this.usersNumber/this.usersPerPage);
+        };
 
-    validateCurrentPageNumber(currentPageNumber){
-        this.currentPageNumber =
-            (currentPageNumber < 1) ? 1 :
-            (currentPageNumber > this.pagesNumber) ? this.pagesNumber :
-            currentPageNumber;
-    }
+        this.element.validateCurrentPageNumber = function(currentPageNumber){
+            this.currentPageNumber =
+                (currentPageNumber < 1) ? 1 :
+                (currentPageNumber > this.pagesNumber) ? this.pagesNumber :
+                currentPageNumber;
+        };
 
-    defineCurrentPageUsers(){
-        let firstUserIndex = (this.currentPageNumber - 1) * this.usersPerPage;
-        let lastUserIndex = Math.min(firstUserIndex + this.usersPerPage - 1, this.usersNumber - 1);
+        this.element.defineCurrentPageUsers = function(){
+            let firstUserIndex = (this.currentPageNumber - 1) * this.usersPerPage;
+            let lastUserIndex = Math.min(firstUserIndex + this.usersPerPage - 1, this.usersNumber - 1);
 
-        this.currentPageUsers = this.userService.users.slice(firstUserIndex, ++lastUserIndex);
-    }
+            this.currentPageUsers = this.userService.users.slice(firstUserIndex, ++lastUserIndex);
+        };
 
-    updateCurrentPageUsers(){
-        this.userService.currentPageUsers = this.currentPageUsers;
-    }
+        this.element.updateCurrentPageUsers = function(){
+            this.userService.currentPageUsers = this.currentPageUsers;
+        };
 
-    defineFirstAndLastMiddlePageLinksNumbers(){
-        if (this.pagesNumber <= this.maxPageLinksNumber) {
-            this.firstPageLinkNumber = 1;
-            this.lastPageLinkNumber = this.pagesNumber;
-        } else {
-            let maxPageLinksBeforeCurrentPageLink = Math.floor(this.maxPageLinksNumber / 2);
-            let maxPageLinksAfterCurrentPageLink = Math.ceil(this.maxPageLinksNumber / 2) - 1;
-            if (this.currentPageNumber <= maxPageLinksBeforeCurrentPageLink) {
-                // current pageLink near the start of middle pageLinks
+        this.element.defineFirstAndLastMiddlePageLinksNumbers = function(){
+            if (this.pagesNumber <= this.maxPageLinksNumber) {
                 this.firstPageLinkNumber = 1;
-                this.lastPageLinkNumber = this.maxPageLinksNumber;
-            } else if (this.currentPageNumber + maxPageLinksAfterCurrentPageLink >= this.pagesNumber) {
-                // current pageLink near the end of middle pageLinks
-                this.firstPageLinkNumber = this.pagesNumber - this.maxPageLinksNumber + 1;
                 this.lastPageLinkNumber = this.pagesNumber;
             } else {
-                // current pageLink somewhere in the middle pageLinks
-                this.firstPageLinkNumber = this.currentPageNumber - maxPageLinksBeforeCurrentPageLink;
-                this.lastPageLinkNumber = this.currentPageNumber + maxPageLinksAfterCurrentPageLink;
+                let maxPageLinksBeforeCurrentPageLink = Math.floor(this.maxPageLinksNumber / 2);
+                let maxPageLinksAfterCurrentPageLink = Math.ceil(this.maxPageLinksNumber / 2) - 1;
+                if (this.currentPageNumber <= maxPageLinksBeforeCurrentPageLink) {
+                    // current pageLink near the start of middle pageLinks
+                    this.firstPageLinkNumber = 1;
+                    this.lastPageLinkNumber = this.maxPageLinksNumber;
+                } else if (this.currentPageNumber + maxPageLinksAfterCurrentPageLink >= this.pagesNumber) {
+                    // current pageLink near the end of middle pageLinks
+                    this.firstPageLinkNumber = this.pagesNumber - this.maxPageLinksNumber + 1;
+                    this.lastPageLinkNumber = this.pagesNumber;
+                } else {
+                    // current pageLink somewhere in the middle pageLinks
+                    this.firstPageLinkNumber = this.currentPageNumber - maxPageLinksBeforeCurrentPageLink;
+                    this.lastPageLinkNumber = this.currentPageNumber + maxPageLinksAfterCurrentPageLink;
+                }
             }
-        }
-    }
+        };
 
-    defineMiddlePageLinksNumbers(){
-        this.middlePageLinksNumbers = [...Array(++this.lastPageLinkNumber).keys()].slice(this.firstPageLinkNumber);
-    }
+        this.element.defineMiddlePageLinksNumbers = function(){
+            this.middlePageLinksNumbers = [...Array(++this.lastPageLinkNumber).keys()].slice(this.firstPageLinkNumber);
+        };
 
-    defineMiddlePageLinks(){
-        this.middlePageLinks = this.middlePageLinksNumbers.map(number => {
-            const pageLink = new PageLink(number).element;
-            if(number === this.currentPageNumber) pageLink.classList.add('page-link-item--current');
-            return pageLink;
-        });
-    }
+        this.element.defineMiddlePageLinks = function(){
+            this.middlePageLinks = this.middlePageLinksNumbers.map(number => {
+                const pageLink = new PageLink(number);
+                if(number === this.currentPageNumber) pageLink.classList.add('page-link-item--current');
+                return pageLink;
+            });
+        };
 
-    updateCornerPageLinks(){
-        this.leftPageLinks.concat(this.rightPageLinks)
-            .forEach(pageLink => pageLink.instance.enable());
+        this.element.updateCornerPageLinks = function(){
+            this.leftPageLinks.concat(this.rightPageLinks)
+                .forEach(pageLink => pageLink.enable());
 
-        if(this.currentPageNumber === 1 || this.currentPageNumber === 0){
-            this.leftPageLinks.forEach(pageLink => pageLink.instance.disable());
-        }
-        if(this.currentPageNumber === this.pagesNumber){
-            this.rightPageLinks.forEach(pageLink => pageLink.instance.disable());
-        }
-    }
+            if(this.currentPageNumber === 1 || this.currentPageNumber === 0){
+                this.leftPageLinks.forEach(pageLink => pageLink.disable());
+            }
+            if(this.currentPageNumber === this.pagesNumber){
+                this.rightPageLinks.forEach(pageLink => pageLink.disable());
+            }
+        };
 
-    renderPageLinks(){
-        this.element.textContent = '';
-        this.fragment.append(...this.leftPageLinks.concat(this.middlePageLinks, this.rightPageLinks));
-        this.element.append(this.fragment);
+        this.element.renderPageLinks = function(){
+            this.textContent = '';
+            this.fragment.append(...this.leftPageLinks.concat(this.middlePageLinks, this.rightPageLinks));
+            this.append(this.fragment);
+        };
     }
 }

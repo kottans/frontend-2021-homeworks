@@ -1,4 +1,4 @@
-.header {
+header {
     width: 100%;
     height: 100%;
     display: flex;
@@ -44,12 +44,12 @@
     fill: white;
 }
 
-.header__text {
+.header__sound-text {
     color: white;
     font-size: 10px;
 }
 
-.header__sound-button:hover .header__text {
+.header__sound-button:hover .header__sound-text {
     color: var(--gold-color);
 }
 
@@ -57,7 +57,7 @@
     fill: var(--gold-color);
 }
 
-.header__text,
+.header__sound-text,
 .header__sound-icon,
 .header__sound-icon svg,
 .header__sound-icon svg * {

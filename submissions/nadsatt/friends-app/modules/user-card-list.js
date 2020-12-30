@@ -2,11 +2,11 @@ import { UserCard } from './user-card-item.js';
 
 export class UserCardList {
     constructor(userService){
-        this.userService = userService;
-
         this.defineElement();
-        this.insertElement();
-        this.fragment = new DocumentFragment();
+        this.defineElementProperties(userService);
+        this.defineElementMethods();
+
+        return this.element;
     }
 
     defineElement(){
@@ -14,23 +14,26 @@ export class UserCardList {
         this.element.classList.add('user-card-list');
     }
 
-    insertElement(){
-        document.querySelector('.user-card-list-wrapper').append(this.element);
+    defineElementProperties(userService){
+        this.element.userService = userService;
+        this.element.fragment = new DocumentFragment();
     }
 
-    updateUserCards(){
-        this.createUserCards();
-        this.renderUserCards();
-    }
+    defineElementMethods(){
+        this.element.updateUserCards = function(){
+            this.createUserCards();
+            this.renderUserCards();
+        };
 
-    createUserCards(){
-        this.userCards = this.userService.currentPageUsers
-            .map(user => new UserCard(user).element);
-    }
+        this.element.createUserCards = function(){
+            this.userCards = this.userService.currentPageUsers
+                .map(user => new UserCard(user));
+        };
 
-    renderUserCards(){
-        this.element.textContent = '';
-        this.fragment.append(...this.userCards);
-        this.element.append(this.fragment);
+        this.element.renderUserCards = function(){
+            this.textContent = '';
+            this.fragment.append(...this.userCards);
+            this.append(this.fragment);
+        };
     }
 }

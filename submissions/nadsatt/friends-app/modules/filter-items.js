@@ -2,82 +2,90 @@ import svgs from './svgs.js';
 
 class Filter {
     constructor(optionsHTML, category, property, userService){
-        this.optionsHTML = optionsHTML;
-        this.category = category;
-        this.property = property;
-        this.name = `${property}-${category}`;
-        this.userService = userService;
-
-        this.defineElement();
-        this.linkElementWithInstance();
-
-        this.activatedState = 'none';
-        this.activatedOptionElement = this.element.querySelector(`[data-state="none"]`);
+        this.defineElement(optionsHTML);
+        this.defineElementProperties(category, property, userService);
+        this.defineElementMethods();
     }
 
-    defineElement(){
-        const innerHTML =
-            `<div class="filter-item__options">
-                ${this.optionsHTML}
-                <span class="filter-item__option" data-state="none">${svgs.none}</span>
-             </div>`;
-
+    defineElement(optionsHTML){
         this.element = document.createElement('li');
-        this.element.innerHTML = innerHTML;
-
-        this.element.classList.add('filter-item', `${this.category}-filter-item`);
-        this.element.setAttribute('data-current-state', 'none');
-        this.element.setAttribute('data-filter-name', this.name);
+        this.element.innerHTML =
+            `<div class="filter-item__options">
+                ${optionsHTML}
+                <span class="filter-item__option" data-state="none">${svgs.none}</span>
+            </div>`;
     }
 
-    linkElementWithInstance(){
-        this.element.instance = this;
+    defineElementProperties(category, property, userService){
+        this.element.category = category;
+        this.element.property = property;
+        this.element.name = `${property}-${category}`;
+        this.element.userService = userService;
+
+        this.element.defaultState = 'none';
+        this.element.state = this.element.defaultState;
+        this.element.defaultOption = this.element.querySelector(`[data-state="none"]`);
+        this.element.activatedOption = this.element.defaultOption;
+
+        this.element.classList.add('filter-item', `${this.element.category}-filter-item`);
+    }
+
+    defineElementMethods(){
+        // copy methods to avoid methods duplication in different instances
+        this.element.filterUsersAccordingToState = this.filterUsersAccordingToState;
+        this.element.changeState = this.changeState;
+        this.element.deactivateOptionAndIcon = this.deactivateOptionAndIcon;
+        this.element.activateOptionAndIcon = this.activateOptionAndIcon;
+        this.element.updateOptionAndState = this.updateOptionAndState;
+        this.element.open = this.open;
+        this.element.close = this.close;
     }
 
     filterUsersAccordingToState(){
-        if(this.activatedState !== 'none') this[this.activatedState]();
+        if(this.state !== this.defaultState) this[this.state]();
     }
 
-    changeState(activatedOptionElement){
+    changeState(activatedOption){
         this.deactivateOptionAndIcon();
-        this.updateOptionAndState(activatedOptionElement);
-        if(this.activatedState !== 'none') this.activateOptionAndIcon();
+        this.updateOptionAndState(activatedOption);
+        if(this.state !== this.defaultState) this.activateOptionAndIcon();
     }
 
     deactivateOptionAndIcon(){
-        this.activatedOptionElement.classList.remove('filter-item__option--activated');
-        this.iconElement.classList.remove('icon-item--activated');
+        this.activatedOption.classList.remove('filter-item__option--activated');
+        this.icon.classList.remove('icon-item--activated');
     }
 
     activateOptionAndIcon(){
-        this.activatedOptionElement.classList.add('filter-item__option--activated');
-        this.iconElement.classList.add('icon-item--activated');
+        this.activatedOption.classList.add('filter-item__option--activated');
+        this.icon.classList.add('icon-item--activated');
     }
 
-    updateOptionAndState(activatedOptionElement){
-        this.activatedOptionElement = activatedOptionElement;
-
-        this.activatedState = activatedOptionElement.dataset.state;
-        this.element.setAttribute('data-current-state', this.activatedState);
+    updateOptionAndState(activatedOption){
+        this.activatedOption = activatedOption;
+        this.state = activatedOption.dataset.state;
     }
 
-    openElement(){
-        this.element.classList.add('filter-item--opened');
+    open(){
+        this.classList.add('filter-item--opened');
     }
 
-    closeElement(){
-        this.element.classList.remove('filter-item--opened');
+    close(){
+        this.classList.remove('filter-item--opened');
     }
 }
 
 class SearchFilter extends Filter {
     constructor(...args){
         const optionsHTML = `<input class="filter-item__option" type="text" data-state="search">`;
-        super(optionsHTML, 'search', ...args);
+        const category = 'search';
+        super(optionsHTML, category, ...args);
 
-        this.input = this.element.querySelector('input');
-        this.span = this.element.querySelector('span');
-        this.span.addEventListener('click', () => this.input.value = '');
+        this.element.input = this.element.querySelector('input');
+
+        this.element.search = this.search;
+        this.element.changeState = this.changeState;
+        this.element.resetInput = this.resetInput;
     }
 
     search(){
@@ -88,10 +96,16 @@ class SearchFilter extends Filter {
         );
     }
 
-    changeState(activatedOptionElement){
+    changeState(activatedOption){
         this.deactivateOptionAndIcon();
-        this.updateOptionAndState(activatedOptionElement);
-        if(this.activatedState !== 'none' && this.input.value) this.activateOptionAndIcon();
+        this.updateOptionAndState(activatedOption);
+
+        if(this.state === this.defaultState) this.resetInput();
+        else if(this.input.value) this.activateOptionAndIcon();
+    }
+
+    resetInput(){
+        this.input.value = ''
     }
 }
 
@@ -101,11 +115,13 @@ class ToggleFilter extends Filter {
             `<span class="filter-item__option" data-state="state1">${svgs[firstState]}</span>
              <span class="filter-item__option" data-state="state2">${svgs[secondState]}</span>`;
         const category = 'search';
-
         super(optionsHTML, category, ...args);
 
-        this.firstState = firstState;
-        this.secondState = secondState;
+        this.element.firstState = firstState;
+        this.element.secondState = secondState;
+
+        this.element.state1 = this.state1;
+        this.element.state2 = this.state2;
     }
 
     state1(){
@@ -122,46 +138,56 @@ class ToggleFilter extends Filter {
 }
 
 class SortFilter extends Filter {
-    constructor(ascComparator, descComparator, ascSvg, descSvg, ...args){
+    constructor(ascSvg, descSvg, ...args){
         const optionsHTML =
             `<span class="filter-item__option" data-state="asc">${ascSvg}</span>
              <span class="filter-item__option" data-state="desc">${descSvg}</span>`;
         const category = 'sort';
-
         super(optionsHTML, category, ...args);
 
-        this.ascComparator = ascComparator;
-        this.descComparator = descComparator;
+        this.element.resetState = this.resetState;
+        this.element.asc = this.asc;
+        this.element.desc = this.desc;
     }
 
     resetState(){
-        this.changeState(this.element.querySelector(`.filter-item__option[data-state="none"]`));
+        this.changeState(this.defaultOption);
     }
 
     asc(){
-        this.userService.users.sort(this.ascComparator);
-    }
+        this.userService.users.sort(this.ascComparator.bind(this));
+    };
 
     desc(){
-        this.userService.users.sort(this.descComparator);
+        this.userService.users.sort(this.descComparator.bind(this));
     }
 }
 
 class StringSortFilter extends SortFilter {
     constructor(...args){
-        const ascComparator = (a, b) => a[this.property].localeCompare(b[this.property]),
-              descComparator = (a, b) => b[this.property].localeCompare(a[this.property]);
+        super(svgs.ascString, svgs.descString, ...args);
 
-        super(ascComparator, descComparator, svgs.ascString, svgs.descString, ...args);
+        this.element.ascComparator = function(a, b){
+            return a[this.property].localeCompare(b[this.property]);
+        };
+
+        this.element.descComparator = function(a, b){
+            return b[this.property].localeCompare(a[this.property]);
+        };
     }
 }
 
 class NumberSortFilter extends SortFilter {
     constructor(...args){
-        const ascComparator = (a, b) => a[this.property] - b[this.property],
-              descComparator = (a, b) => b[this.property] - a[this.property];
+        super(svgs.ascNumber, svgs.descNumber, ...args);
 
-        super(ascComparator, descComparator, svgs.ascNumber, svgs.descNumber, ...args);
+        this.element.ascComparator = function(a, b){
+            return a[this.property] - b[this.property];
+        };
+
+        this.element.descComparator = function(a, b){
+            return b[this.property] - a[this.property];
+        };
     }
 }
 

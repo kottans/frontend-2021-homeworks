@@ -1,20 +1,12 @@
 export class FilterList{
     constructor(filters, category){
-        this.defineElement(filters, category);
-    }
+        const element = document.createElement('ul');
+        element.classList.add('filter-list', `${category}-filter-list`);
+        element.append(...filters);
 
-    defineElement(filters, category){
-        const filterElements = filters.map(filter => filter.element);
-        this.element = document.createElement('ul');
-        this.element.classList.add('filter-list', `${category}-filter-list`);
-        this.element.append(...filterElements);
-    }
+        element.open = function(){this.classList.add('filter-list--opened')};
+        element.close = function(){this.classList.remove('filter-list--opened')};
 
-    openElement(){
-        this.element.classList.add('filter-list--opened');
-    }
-
-    closeElement(){
-        this.element.classList.remove('filter-list--opened');
+        return element;
     }
 }

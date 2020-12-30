@@ -57,27 +57,27 @@
 .user-card__header {
     width: 100%;
     position: absolute;
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: center;
     font-family: 'Raleway', sans-serif;
     background-repeat: no-repeat;
     border-radius: 5px;
 }
 
 .user-card__front-header {
+    display: block;
     height: 80px;
+    line-height: calc(60px/4);
     bottom: 0;
-    padding: 5px 12px;
+    padding: 10px 12px;
     font-size: 11px;
     text-align: center;
     background-size: cover;
 }
 
 .user-card__back-header {
-    height: 50px;
+    height: 55px;
     top: 0;
     display: flex;
+    flex-flow: column nowrap;
     justify-content: center;
     align-items: center;
     padding-top: 5px;
@@ -114,13 +114,12 @@
 .user-card__back-main {
     flex-grow: 1;
     padding: 12px 15px 15px;
-    margin-top: 50px;
+    margin-top: 55px;
     z-index: 1;
     font-size: 13px;
 }
 
 .user-card__front-prop {
-    margin: 1px 0px;
     color: var(--gold-color);
     text-shadow: -1px -1px 1px black;
 }

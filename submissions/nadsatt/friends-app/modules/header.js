@@ -3,59 +3,46 @@ import svgs from './../modules/svgs.js';
 export class Header {
     constructor(){
         this.defineElement();
-        this.insertElement();
+        this.defineElementProperties();
+        this.defineElementMethods();
 
-        this.defineSoundButton();
-        this.defineSoundButtonClickHandler();
+        return this.element;
     }
 
     defineElement(){
-        const HTML =
+        this.element = document.createElement('header');
+        this.element.innerHTML =
             `<h2 class="header__heading">Friends App</h2>
              <div class="header__sound-button">
                 <span class="header__sound-icon">${svgs.play}</span>
-                <span class="header__text">play</span>
+                <span class="header__sound-text">play</span>
              </div>`;
-
-        this.element = document.createElement('header');
-        this.element.classList.add('header');
-        this.element.insertAdjacentHTML('afterbegin', HTML);
     }
 
-    insertElement(){
-        document.querySelector('.header-wrapper').append(this.element);
+    defineElementProperties(){
+        this.element.soundIcon = this.element.querySelector('.header__sound-icon');
+        this.element.soundText = this.element.querySelector('.header__sound-text');
+        this.element.soundButton = this.element.querySelector('.header__sound-button');
+
+        this.element.sound = new Audio('sounds/audio.mp3');
+        this.element.sound.loop = true;
+        this.element.sound.volume = 0.1;
     }
 
-    defineSoundButton(){
-        this.soundButton = this.element.querySelector('.header__sound-button');
+    defineElementMethods(){
+        this.element.soundButton.addEventListener('click', (() => {
+            if(this.sound.paused){
+                this.soundIcon.innerHTML = svgs.pause;
+                this.soundText.textContent = 'pause';
 
-        const sound = new Audio('sounds/audio.mp3');
-        sound.loop = true;
-        sound.volume = 0.1;
-        this.soundButton.sound = sound;
-    }
+                this.sound.play();
+            }
+            else {
+                this.soundIcon.innerHTML = svgs.play;
+                this.soundText.textContent = 'play';
 
-    defineSoundButtonClickHandler(){
-        this.soundButton.onclick = this.handleSoundButtonClick;
-    }
-
-    handleSoundButtonClick({target}){
-        const soundIcon = target.querySelector('.header__sound-icon');
-        const soundText = target.querySelector('.header__text');
-
-        if(soundIcon.querySelector('svg').classList.contains('play')){
-            soundIcon.textContent = '';
-            soundText.textContent = 'pause';
-            soundIcon.insertAdjacentHTML(`afterbegin`, svgs.pause);
-
-            target.sound.play();
-        }
-        else if(soundIcon.querySelector('svg').classList.contains('pause')){
-            soundIcon.textContent = '';
-            soundText.textContent = 'play';
-            soundIcon.insertAdjacentHTML(`afterbegin`, svgs.play);
-
-            target.sound.pause();
-        }
+                this.sound.pause();
+            }
+        }).bind(this.element));
     }
 }
