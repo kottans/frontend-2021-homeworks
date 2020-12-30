@@ -4,6 +4,7 @@
 	--buttons-color: rgba(255,255,255,0.2);
 	--buttons-active-color: rgba(255,255,255,0.5);
 }
+
 html {
 	height: 100%;
 }
@@ -135,6 +136,7 @@ body {
 	max-width: 80%;
 	margin: 0 auto 40px;
 }
+
 }
 
 @media (min-width: 900px) {
