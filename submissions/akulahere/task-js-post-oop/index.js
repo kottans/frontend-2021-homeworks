@@ -1,37 +1,35 @@
 class Inhabitant {
-  constructor(species, name, gender, legs, hands, saying) {
+  constructor(species, name, gender, legs, saying) {
     this.species = species;
     this.name = name;
     this.gender = gender;
     this.legs = legs;
-    this.hands = hands;
     this.saying = saying;
-    this.friends = Array.isArray(this.friends) ? this.friends : 'No friends' ;
+    this.friends = 'No friends' ;
   }
 
   makeFriend(friend) {
     this.friends = this.friends === 'No friends' ? [] : this.friends;
     this.friends.push(friend.name);
   }
+  getProperties() {
+    return ['species', 'name', 'gender', 'legs', 'saying', 'friends'];
+  }
 
   makeMessage() {
-    const properties = [];
-    for (const property of Object.keys(this)) {
-      properties.push(property.toString());
-    }
-    return properties.map(property => `${capitalizeString(property)}: ${this[property]}`).join(' ')
+    return this.getProperties().map(property => `${capitalizeString(property)}: ${this[property]}`).join(' ')
   }
 }
 
 class Dog extends Inhabitant {
   constructor(name, gender) {
-    super('dog', name, gender, 4, 0, 'woof-woof!');
+    super('dog', name, gender, 4, 'woof-woof!');
   }
 }
 
 class Cat extends Inhabitant {
   constructor(name, gender) {
-    super('cat', name, gender, 4, 0, 'mrrr!');
+    super('cat', name, gender, 4, 'mrrr!');
   }
 }
 
@@ -42,11 +40,23 @@ class CatWoman extends Cat {
     this.legs = 2;
     this.hands = 2;
   }
+  getProperties() {
+    let properties = super.getProperties();
+    properties.splice(4, 0, 'hands');
+    return properties;
+  }
 }
 
 class Human extends Inhabitant {
   constructor(name, gender, saying) {
-    super('human', name, gender, 2, 2, saying);
+    super('human', name, gender, 2, saying);
+    this.hands = 2;
+  }
+
+  getProperties() {
+    let properties = super.getProperties();
+    properties.splice(4, 0, 'hands');
+    return properties;
   }
 }
 
@@ -55,6 +65,7 @@ const woman = new Human('Lero', 'female', 'Bye!');
 const dog = new Dog('Toby', 'male');
 const cat = new Cat('Sheldon', 'male');
 const catWoman = new CatWoman('Mary');
+
 dog.makeFriend(cat);
 dog.makeFriend(man);
 man.makeFriend(cat);
