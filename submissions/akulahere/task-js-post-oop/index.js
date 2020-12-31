@@ -55,7 +55,7 @@ class Human extends Inhabitant {
 
   getProperties() {
     let properties = super.getProperties();
-    properties.splice(4, 0, 'hands');
+    properties.splice(properties.indexOf('legs'), 0, 'hands');
     return properties;
   }
 }
