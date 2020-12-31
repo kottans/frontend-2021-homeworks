@@ -42,23 +42,20 @@ const createMenuList = (arrayOfPokemons, container) => {
 	container.appendChild(wrapper);
 };
 
-const getPokemonContent = (id) => {
+const createPokemonContent = (pokemon) => {
 	const wrapper = document.createElement("div");
-	const currentPokemon = pokemons.find((item) => item.id == id);
-	if (!currentPokemon) {
-		const h2 = document.createElement("h2");
-		h2.classList.add("main__name");
-		h2.innerText = currentPokemon.name;
-		const img = document.createElement("img");
-		img.classList.add("main__img");
-		img.src = currentPokemon.imagePath;
-		img.alt = currentPokemon.name;
-		const p = document.createElement("p");
-		p.classList.add("main__text");
-		p.innerText = currentPokemon.description;
-		wrapper.append(h2, img, p);
-		return wrapper;
-	} else return false;
+	const h2 = document.createElement("h2");
+	h2.classList.add("main__name");
+	h2.innerText = pokemon.name;
+	const img = document.createElement("img");
+	img.classList.add("main__img");
+	img.src = pokemon.imagePath;
+	img.alt = pokemon.name;
+	const p = document.createElement("p");
+	p.classList.add("main__text");
+	p.innerText = pokemon.description;
+	wrapper.append(h2, img, p);
+	return wrapper;
 };
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -72,10 +69,10 @@ document.addEventListener("DOMContentLoaded", () => {
 		if (target.nodeName === "LI" && oldId !== currentId) {
 			nav.querySelector(".active")?.classList.toggle("active");
 			target.classList.toggle("active");
-			let newPokemon = getPokemonContent(currentId);
+			let newPokemon = pokemons.find((item) => item.id == currentId);
 			if (newPokemon) {
 				main.innerHTML = "";
-				main.appendChild(newPokemon);
+				main.appendChild(createPokemonContent(newPokemon));
 			}
 		}
 	});
