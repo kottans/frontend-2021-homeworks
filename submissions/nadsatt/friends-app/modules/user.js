@@ -8,15 +8,8 @@ export class User {
         this.age = user.dob.age;
         this.country = user.location.country;
         this.location = `${user.location.country}, ${user.location.city}`;
-        this.registration = new Date(user.registered.date).getTime();
-        this.formattedRegistration = this.getFormattedDate(new Date(user.registered.date));
-    }
-
-    getFormattedDate(date){
-        const day = date.getDate();
-        const month = date.getMonth() + 1;
-        const year = date.getFullYear();
-
-        return `0${day}`.slice(-2) + '-' + `0${month}`.slice(-2) + '-' + year;
+        this.date =  new Date(user.registered.date);
+        this.registration = this.date.getTime();
+        this.formattedRegistration = new Intl.DateTimeFormat(['ban', 'id']).format(this.date);
     }
 }
