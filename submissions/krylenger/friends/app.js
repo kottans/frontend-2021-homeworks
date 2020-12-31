@@ -3,16 +3,7 @@ const url = "https://randomuser.me/api/?results=100";
 const cardsContainer = document.querySelector(".cards-container");
 const search = document.querySelector(".main__search");
 const asideSortForm = document.querySelector('.aside__form');
-const buttonSortContainerName = document.querySelector(".aside__buttons-container--name");
-const buttonSortContainerAge = document.querySelector(".aside__buttons-container--age");
-const buttonSortContainerRegistrationDate = document.querySelector(".aside__buttons-container--registrationDate");
-const asideFilterGenderContainer = document.querySelector(".inner-container--column-sex");
-const asideRadioGendersAll = document.querySelector('.aside__radio--genders-all');
-const asideRadioGenderMale = document.querySelector('.aside__radio--male');
-const asideRadioGenderFemale = document.querySelector('.aside__radio--female');
 const buttonReset = document.querySelector(".aside__button--reset");
-const asideFilterCountry = document.querySelector(".aside__select");
-const asideFilterAge = document.querySelector(".aside__range");
 const asideRangeAgeOutput = document.querySelector(".aside__range-output");
 
 const filtersState = {
@@ -31,7 +22,6 @@ const fetchUsers = async () => {
     const { results } = await response.json();
     return results;
   } catch (error) {
-    alert(error + `\nLet's try one more time!`);
     initApp();
   }
 };
@@ -174,28 +164,13 @@ const filterCards = (usersData) => {
 };
 
 const addEventListeners = (usersData) => {
+
   search.addEventListener("keyup", ({ target }) => {
     filtersState.search = target.value;
     filterCards(usersData);
   });
 
-  asideFilterGenderContainer.addEventListener("click", ({ target }) => {
-    filtersState.gender = target.id;
-    filterCards(usersData);
-  });
-
-  asideFilterCountry.addEventListener("change", ({ target }) => {
-    filtersState.country = target.value;
-    filterCards(usersData);
-  });
-
-  asideFilterAge.addEventListener("input", ({ target }) => {
-    asideRangeAgeOutput.textContent = target.value;
-    filtersState.age = target.value;
-    filterCards(usersData);
-  });
-
-  asideSortForm.addEventListener("click", ({ target }) => {
+  asideSortForm.addEventListener("input", ({ target }) => {
     switch (target.id) {
       case "name_AZ":
       case "name_ZA":
@@ -211,6 +186,18 @@ const addEventListeners = (usersData) => {
       case "registrationDate_NEW":
         filtersState.sortRegistrationDate = target.id;
         filtersState.sortAge, (filtersState.sortName = null);
+        break;
+      case 'male':
+      case 'female':
+      case 'genders-all':
+        filtersState.gender = target.id;
+        break;
+      case 'countries':
+        filtersState.country = target.value;
+        break;
+      case 'rangeAge':
+        asideRangeAgeOutput.textContent = target.value;
+        filtersState.age = target.value;
         break;
     }
     filterCards(usersData);
