@@ -31,9 +31,9 @@ const pokemons = [
 	},
 ];
 
-const createMenuLinks = (array, container) => {
+const createMenuList = (arrayOfPokemons, container) => {
 	const wrapper = document.createElement("ul");
-	array.forEach((element) => {
+	arrayOfPokemons.forEach((element) => {
 		const li = document.createElement("li");
 		li.textContent = element.name;
 		li.dataset.id = element.id;
@@ -44,25 +44,27 @@ const createMenuLinks = (array, container) => {
 
 const getPokemonContent = (id) => {
 	const wrapper = document.createElement("div");
-	const item = pokemons.find((item) => item.id == id);
-	const h2 = document.createElement("h2");
-	h2.classList.add("main__name");
-	h2.innerText = item.name;
-	const img = document.createElement("img");
-	img.classList.add("main__img");
-	img.src = item.imagePath;
-	img.alt = item.name;
-	const p = document.createElement("p");
-	p.classList.add("main__text");
-	p.innerText = item.description;
-	wrapper.append(h2, img, p);
-	return wrapper;
+	const currentPokemon = pokemons.find((item) => item.id == id);
+	if (currentPokemon !== undefined) {
+		const h2 = document.createElement("h2");
+		h2.classList.add("main__name");
+		h2.innerText = currentPokemon.name;
+		const img = document.createElement("img");
+		img.classList.add("main__img");
+		img.src = currentPokemon.imagePath;
+		img.alt = currentPokemon.name;
+		const p = document.createElement("p");
+		p.classList.add("main__text");
+		p.innerText = currentPokemon.description;
+		wrapper.append(h2, img, p);
+		return wrapper;
+	} else return false;
 };
 
 document.addEventListener("DOMContentLoaded", () => {
 	const nav = document.getElementById("navigation");
 	const main = document.getElementById("main");
-	createMenuLinks(pokemons, nav);
+	createMenuList(pokemons, nav);
 
 	nav.addEventListener("click", function ({ target }) {
 		const currentId = target.dataset.id;
@@ -70,8 +72,11 @@ document.addEventListener("DOMContentLoaded", () => {
 		if (target.nodeName === "LI" && oldId !== currentId) {
 			nav.querySelector(".active")?.classList.toggle("active");
 			target.classList.toggle("active");
-			main.innerHTML = "";
-			main.appendChild(getPokemonContent(currentId));
+			let newPokemon = getPokemonContent(currentId);
+			if (newPokemon) {
+				main.innerHTML = "";
+				main.appendChild(newPokemon);
+			}
 		}
 	});
 	document.getElementById("nav_switch").addEventListener("click", function () {
