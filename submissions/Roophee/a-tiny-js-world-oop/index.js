@@ -18,7 +18,7 @@ class Inhabitant {
     }
 
     description() {
-        return ['name', 'gender', 'species', 'saying', 'legs', 'tail', 'friends'].map(property => this[property].length === 0 ? `${property}: none` : `${property}: ${this[property]}`).join(delimiter);
+        return ['name', 'gender', 'species', 'saying', 'legs', 'tail', 'friends'].map(property => this[property].length === 0 ? `${property}:none` : `${property}:${this[property]}`).join(delimiter);
     }
 }
 
@@ -39,11 +39,11 @@ class Cat extends Inhabitant {
 class Human extends Inhabitant {
     static saying = 'Cogito ergo sum!';
     constructor(name, gender, saying, legs = 2, tail = 'none') {
-        super(name, gender, saying || Human.saying, legs, tail)
+        super(name, gender, saying || Human.saying, legs, tail);
         this.hands = 2;
     }
     description() {
-        return [super.description(), `hands: ${this.hands}`].join(delimiter)
+        return [super.description(), `hands:${this.hands}`].join(delimiter);
     }
 }
 
