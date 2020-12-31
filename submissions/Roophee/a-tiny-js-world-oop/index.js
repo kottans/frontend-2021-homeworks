@@ -18,7 +18,7 @@ class Inhabitant {
     }
 
     description() {
-        return ['name', 'gender', 'species', 'saying', 'legs', 'tail', 'friends'].map(property => this[property].length === 0 ? `${property}:none` : `${property}:${this[property]}`).join(delimiter);
+        return ['name', 'gender', 'species', 'saying', 'legs', 'tail', 'friends'].map(property => Array.isarray(this[property]) && this[property].length === 0 ? `${property}:none` : `${property}:${this[property]}`).join(delimiter);
     }
 }
 
