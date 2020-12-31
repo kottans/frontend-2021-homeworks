@@ -6,6 +6,8 @@ const asideSortForm = document.querySelector('.aside__form');
 const buttonReset = document.querySelector(".aside__button--reset");
 const asideRangeAgeOutput = document.querySelector(".aside__range-output");
 
+const main = document.querySelector('.main');
+
 const filtersState = {
   search: null,
   gender: null,
@@ -22,11 +24,36 @@ const fetchUsers = async () => {
     const { results } = await response.json();
     return results;
   } catch (error) {
-    initApp();
+    renderErrorMessage();
   }
 };
 
+const addTryOnceMoreEventListener = (onceMoreButton, messageContainer) => {
+  onceMoreButton.addEventListener('click', () => {
+    main.classList.remove('main--error');
+    messageContainer.remove();
+    onceMoreButton.remove();
+    initApp();
+  })
+}
+
 const createFullName = (firstName, lastName) => `${firstName} ${lastName}`;
+
+const renderErrorMessage = () => {
+
+  const messageContainer = document.createElement('div');
+  const onceMoreButton = document.createElement('button');
+  
+  messageContainer.textContent = 'Oooops, something went wrong... Whould you like to try one more time?';
+  onceMoreButton.textContent = 'Once More!'
+
+  main.appendChild(messageContainer);
+  main.appendChild(onceMoreButton);
+
+  main.classList.add('main--error');
+
+  addTryOnceMoreEventListener(onceMoreButton, messageContainer);
+}
 
 const createCard = (user) => {
   const card = document.createElement("div");
@@ -66,7 +93,12 @@ const emptyCardsContainer = () => {
   cardsContainer.innerHTML = "";
 };
 
+const emptyMainContainer = () => {
+  main.innerHTML = "";
+};
+
 const renderUserCards = (usersData) => {
+  
   emptyCardsContainer();
   const fragment = document.createDocumentFragment();
   usersData.forEach((user) => {

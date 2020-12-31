@@ -9,14 +9,17 @@
 </head>
 
 <body class="body">
-    <form class="aside__form">
-        <header class="header">Friends App</header>
-        <aside class="aside">
+    <header class="header">Friends App</header>
+    <aside class="aside">
+        <form class="aside__form">
+            <div class="card__search-container">
+                <input class="main__search" type="search" name="users" id="search" placeholder="🔎 search your users">
+            </div>
             <div class="outer-container outer-container__sort">
                 <h2 class="aside__h2">Sort</h2>
                 <div class="inner-container">
                     <p class="aside__p">name</p>
-                    <div class="aside__radios-container aside__radios-container--name">
+                    <div class=" aside__container--name aside__radios-container">
                         <input class="aside__radio-input" type="radio" name="sortName" id="name_AZ"></input>
                         <label class="aside__label aside__button--AZ" for="name_AZ"></label>
                         <input class="aside__radio-input" type="radio" name="sortName" id="name_ZA"></input>
@@ -25,7 +28,7 @@
                 </div>
                 <div class="inner-container">
                     <p class="aside__p">age</p>
-                    <div class="aside__radios-container aside__radios-container--age">
+                    <div class=" aside__container--age aside__radios-container">
                         <input class="aside__radio-input" type="radio" name="sortAge" id="age_19"></input>
                         <label class="aside__label aside__button--19" for="age_19"></label>
                         <input class="aside__radio-input" type="radio" name="sortAge" id="age_91"></input>
@@ -34,7 +37,7 @@
                 </div>
                 <div class="inner-container">
                     <p class="aside__p">registration<br>date</p>
-                    <div class="aside__radios-container aside__radios-container--registrationDate">
+                    <div class="aside__container--registrationDate aside__radios-container">
                         <input class="aside__radio-input" type="radio" name="sortAge" id="registrationDate_OLD"></input>
                         <label class="aside__label aside__button--OLD" for="registrationDate_OLD"></label>
                         <input class="aside__radio-input" type="radio" name="sortAge" id="registrationDate_NEW"></input>
@@ -48,13 +51,11 @@
                     <p class="aside__p">sex</p>
                     <div class="inner-container inner-container--column inner-container--column-sex">
                         <div class="inner-container">
-                            <input class="aside__radio aside__radio--genders-all" type="radio" name="sex"
-                                id="genders-all" value='genders-all' checked>
+                            <input class="aside__radio aside__radio--genders-all" type="radio" name="sex" id="genders-all" value='genders-all' checked>
                             <label for="genders-all">all</label>
                         </div>
                         <div class="inner-container">
-                            <input class="aside__radio aside__radio--male" type="radio" name="sex" id="male"
-                                value='male'>
+                            <input class="aside__radio aside__radio--male" type="radio" name="sex" id="male" value='male'>
                             <label for="male">male</label>
                         </div>
                         <div class="inner-container">
@@ -98,18 +99,15 @@
                 </div>
 
             </div>
+        </form>
 
-        </aside>
-        <main class="main">
-            <div class="card__search-container">
-                <input class="main__search" type="search" name="users" id="search" placeholder="🔎 search your users">
-            </div>
-            <div class="cards-container">
+    </aside>
+    <main class="main">
+        
+        <div class="cards-container">
 
-            </div>
-        </main>
-    </form>
-
+        </div>
+    </main>
     <script src="./app.js"></script>
 </body>
 

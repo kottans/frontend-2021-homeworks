@@ -4,7 +4,7 @@
     font-weight: 300;
 }
 
-.aside__form {
+.body {
     display: grid;
     height: 100vh;
     grid-template: 100px auto / 1fr 4fr;
@@ -125,12 +125,19 @@
     flex-direction: column;
 }
 
+.main--error {
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    padding: 100px;
+    background-color: tomato;
+}
+
 .card__search-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     height: 50px;
-    border: 1px solid gray;
 }
 
 .main__search {
