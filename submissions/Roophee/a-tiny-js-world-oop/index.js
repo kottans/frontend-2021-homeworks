@@ -1,5 +1,7 @@
 "use strict";
 
+const delimiter = '; '
+
 class Inhabitant  {
     constructor(name, gender, saying, legs=4, tail= 1 ){
         this.name = name;
@@ -10,21 +12,16 @@ class Inhabitant  {
         this.tail = tail;
         this.friends = [];
     }
+    show() {
+        console.log(this.constructor)
+    }
 
     addFriends(...arrayOfFriends) {
         arrayOfFriends.forEach(({name}) => this.friends.push(name));
     }
 
     description(){
-        let descriptionArray = ['name: '+ this.name,
-            'gender: '+ this.gender,
-            'species: '+ this.species,
-            'saying: '+ this.saying,
-            'legs: '+ this.legs,
-            'tail: '+ this.tail,
-            'friends: '+ (this.friends.length === 0? 'none' : this.friends),
-        ];
-        return descriptionArray.join('; ');
+        return Object.entries(this).map(property => `${property[0]}: ${property[1]}`).join(delimiter);
     }
 }
 
@@ -47,9 +44,6 @@ class Human extends Inhabitant  {
     constructor(name, gender,saying, legs= 2, tail = 'none'){
         super(name, gender, saying || Human.saying, legs, tail)
         this.hands = 2;
-    }
-    description() {
-        return [super.description(),'hands: '+this.hands].join(';');
     }
 }
 
