@@ -165,12 +165,8 @@ const filterCards = (usersData) => {
 
 const addEventListeners = (usersData) => {
 
-  search.addEventListener("keyup", ({ target }) => {
-    filtersState.search = target.value;
-    filterCards(usersData);
-  });
-
   asideSortForm.addEventListener("input", ({ target }) => {
+
     switch (target.id) {
       case "name_AZ":
       case "name_ZA":
@@ -199,6 +195,10 @@ const addEventListeners = (usersData) => {
         asideRangeAgeOutput.textContent = target.value;
         filtersState.age = target.value;
         break;
+      case 'search':
+        filtersState.search = target.value;
+        break;
+        
     }
     filterCards(usersData);
   });

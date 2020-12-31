@@ -9,9 +9,9 @@
 </head>
 
 <body class="body">
-    <header class="header">Friends App</header>
-    <aside class="aside">
-        <form class="aside__form">
+    <form class="aside__form">
+        <header class="header">Friends App</header>
+        <aside class="aside">
             <div class="outer-container outer-container__sort">
                 <h2 class="aside__h2">Sort</h2>
                 <div class="inner-container">
@@ -48,11 +48,13 @@
                     <p class="aside__p">sex</p>
                     <div class="inner-container inner-container--column inner-container--column-sex">
                         <div class="inner-container">
-                            <input class="aside__radio aside__radio--genders-all" type="radio" name="sex" id="genders-all" value='genders-all' checked>
+                            <input class="aside__radio aside__radio--genders-all" type="radio" name="sex"
+                                id="genders-all" value='genders-all' checked>
                             <label for="genders-all">all</label>
                         </div>
                         <div class="inner-container">
-                            <input class="aside__radio aside__radio--male" type="radio" name="sex" id="male" value='male'>
+                            <input class="aside__radio aside__radio--male" type="radio" name="sex" id="male"
+                                value='male'>
                             <label for="male">male</label>
                         </div>
                         <div class="inner-container">
@@ -96,17 +98,18 @@
                 </div>
 
             </div>
-        </form>
 
-    </aside>
-    <main class="main">
-        <div class="card__search-container">
-            <input class="main__search" type="search" name="users" id="search" placeholder="🔎 search your users">
-        </div>
-        <div class="cards-container">
+        </aside>
+        <main class="main">
+            <div class="card__search-container">
+                <input class="main__search" type="search" name="users" id="search" placeholder="🔎 search your users">
+            </div>
+            <div class="cards-container">
 
-        </div>
-    </main>
+            </div>
+        </main>
+    </form>
+
     <script src="./app.js"></script>
 </body>
 
