@@ -36,7 +36,7 @@ const memes = [
     }
 ]
 
-const nav_ul = document.querySelector(".nav_ul");
+const navUl = document.querySelector(".nav_ul");
 const aside = document.querySelector("aside");
 const main = document.querySelector("main");
 const openbtn = document.querySelector(".nav-open-button");
@@ -45,7 +45,7 @@ let navButtonListArray;
 function createNavButtons() {
     const navButtonList = document.createDocumentFragment();
 
-    nav_ul.innerHTML = "";
+    navUl.innerHTML = "";
     memes.forEach(function (element) {
         const navLi = document.createElement("li");
         const navButtonItem = document.createElement("button");
@@ -54,7 +54,7 @@ function createNavButtons() {
         navLi.append(navButtonItem);
         navButtonList.append(navLi);
     });
-    nav_ul.append(navButtonList);
+    navUl.append(navButtonList);
     navButtonListArray = Array.from(document.querySelectorAll(".nav-button"));
 }
 
@@ -86,11 +86,12 @@ function hideMenu(target) {
 }
 
 function highlightSelectedItem(target) {
-    if (document.querySelector('.nav-button.highlight') !== null)
-        document.querySelector('.nav-button.highlight').classList.remove('highlight');
+    const menuItemHighlight = document.querySelector('.nav-button.highlight');
+    if (menuItemHighlight)
+        menuItemHighlight.classList.remove('highlight');
     target.classList.add('highlight');
 }
 
 createNavButtons();
-nav_ul.addEventListener("click", displayMain);
+navUl.addEventListener("click", displayMain);
 openbtn.addEventListener("click", hideMenu)
