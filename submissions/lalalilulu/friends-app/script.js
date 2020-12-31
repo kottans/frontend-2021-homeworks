@@ -25,12 +25,15 @@ const startApp = (response) => {
                 sortedArray = sortByAge(friendsArray, false);
                 break;
             case "female":
+                resetCheckedFilters();
                 sortedArray = sortByGender(friendsArray, "female");
                 break;
             case "male":
+                resetCheckedFilters();
                 sortedArray = sortByGender(friendsArray, "male");
                 break;
             case "all":
+                resetCheckedFilters();
                 sortedArray = sortByGender(friendsArray, null);
                 break;
         }
@@ -77,12 +80,8 @@ const renderContent = (friends) => {
 }
 
 const searchByValue = (array, value) => {
-    let sortedArray = [...array];
-    if(document.getElementById("female").checked) {
-         sortedArray = sortByGender(array, "female");
-    } else if(document.getElementById("male").checked) {
-        sortedArray = sortByGender(array, "male");
-    }
+    let sortedArray = checkGender(array);
+    sortedArray = checkNameAge(sortedArray);
     return sortedArray.filter(friend => {
         const firstLastName = `${friend.name.first} ${friend.name.last}`;
         return firstLastName.includes(value);
@@ -90,7 +89,8 @@ const searchByValue = (array, value) => {
 }
 
 const sortByName = (array, isAscending) => {
-    const sortedArray = array.sort((prev, next) => {
+    const sortedArray = checkGender(array);
+    sortedArray.sort((prev, next) => {
         const prevName = prev.name.first;
         const nextName = next.name.first;
         if (prevName < nextName) return -1;
@@ -101,10 +101,39 @@ const sortByName = (array, isAscending) => {
 }
 
 const sortByAge = (array, isAscending) => {
-    const sortedArray =  array.sort((prev, next) => prev.dob.age - next.dob.age);
+    const sortedArray = checkGender(array);
+    sortedArray.sort((prev, next) => prev.dob.age - next.dob.age);
     return isAscending ? sortedArray : sortedArray.reverse();
 }
 
 const sortByGender = (array, gender) => {
     return gender !== null ? array.filter(friend => friend.gender === gender) : array;
+}
+
+const checkGender = (array) => {
+    let sortedArray = [...array];
+    if(document.getElementById("female").checked) {
+        sortedArray = sortByGender(array, "female");
+    } else if(document.getElementById("male").checked) {
+        sortedArray = sortByGender(array, "male");
+    }
+    return sortedArray;
+}
+
+const checkNameAge = (array) => {
+    let sortedArray = [...array];
+    if(document.getElementById("age-ascending").checked) {
+        sortedArray = sortByAge(sortedArray, true);
+    } else if(document.getElementById("age-descending").checked) {
+        sortedArray = sortByAge(sortedArray, false);
+    } else if(document.getElementById("name-ascending").checked) {
+        sortedArray = sortByName(sortedArray, true);
+    } else if(document.getElementById("name-descending").checked) {
+        sortedArray = sortByName(sortedArray, false);
+    }
+    return sortedArray;
+}
+
+const resetCheckedFilters = () => {
+    document.querySelectorAll('input[name="filter"]:checked').forEach(element => element.checked = false);
 }
