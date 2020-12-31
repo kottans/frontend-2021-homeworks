@@ -42,8 +42,8 @@ class Program {
                 this.pageLinkList.performPagination();
                 this.loadingPage.remove();
             })
-            .catch(() => {
-                this.loadingPage.displayLoadingError();
+            .catch((e) => {
+                this.loadingPage.displayLoadingError(e.message);
             });
     }
 }

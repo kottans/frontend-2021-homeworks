@@ -15,13 +15,13 @@ export class ApiService {
         if(response.status === 200){
             const json = await response.json();
             let users = json.results.map(user => new User(user));
-
             let usersWithImages = await this.imageService.loadImages(users);
+
             return usersWithImages;
         }
         else if(retries > 0){
             return this.getUsers(usersCount, --retries);
         }
-        else throw new Error();
+        else throw new Error(response);
     }
 }

@@ -27,7 +27,6 @@ export class LoadingPage {
     defineElementProperties(program){
         this.element.program = program;
         this.element.loadingMessage = 'Please wait until users will be loaded..';
-        this.element.errorMessage = 'Error occured while trying to fetch users.';
 
         this.element.loadingInfo = this.element.querySelector('.loading-info');
         this.element.loadingRoller = this.element.querySelector('.loading-roller');
@@ -50,10 +49,10 @@ export class LoadingPage {
             this.append(this.loadingRoller);
         };
 
-        this.element.displayLoadingError = function(){
+        this.element.displayLoadingError = function(errorMessage){
             this.loadingRoller.remove();
 
-            this.loadingInfo.textContent = this.errorMessage;
+            this.loadingInfo.textContent = errorMessage;
             this.append(this.reloadButton);
         };
 
