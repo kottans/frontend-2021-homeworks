@@ -12,16 +12,13 @@ class Inhabitant  {
         this.tail = tail;
         this.friends = [];
     }
-    show() {
-        console.log(this.constructor)
-    }
 
     addFriends(...arrayOfFriends) {
         arrayOfFriends.forEach(({name}) => this.friends.push(name));
     }
 
     description(){
-        return Object.entries(this).map(property => `${property[0]}: ${property[1]}`).join(delimiter);
+        return ['name','gender','species','saying','legs','tail','friends'].map(property => this[property].length ===0?`${property}:none`:`${property}: ${this[property]}`).join(delimiter);
     }
 }
 
@@ -44,6 +41,9 @@ class Human extends Inhabitant  {
     constructor(name, gender,saying, legs= 2, tail = 'none'){
         super(name, gender, saying || Human.saying, legs, tail)
         this.hands = 2;
+    }
+    description() {
+        return [super.description(),`hands: ${this.hands}`].join(delimiter)
     }
 }
 
