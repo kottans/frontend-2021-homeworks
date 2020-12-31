@@ -45,7 +45,7 @@ const createMenuList = (arrayOfPokemons, container) => {
 const getPokemonContent = (id) => {
 	const wrapper = document.createElement("div");
 	const currentPokemon = pokemons.find((item) => item.id == id);
-	if (currentPokemon !== undefined) {
+	if (!currentPokemon) {
 		const h2 = document.createElement("h2");
 		h2.classList.add("main__name");
 		h2.innerText = currentPokemon.name;
