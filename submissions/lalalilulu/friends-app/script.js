@@ -6,13 +6,12 @@ const startApp = (response) => {
     renderContent(response);
     const friendsArray = response;
 
-    document.getElementById("search").addEventListener("keyup", ({target}) => {
-        renderContent(searchByValue(friendsArray, target.value));
-    });
-
-    document.querySelector(".filter-items").addEventListener("change", ({target}) => {
+    document.querySelector("#filter-form").addEventListener("input", ({target}) => {
         let sortedArray = [];
         switch (target.id) {
+            case "search":
+                sortedArray = searchByValue(friendsArray, target.value);
+                break;
             case "name-ascending":
                 sortedArray = sortByName(friendsArray, true);
                 break;
@@ -92,9 +91,11 @@ const searchByValue = (array, value) => {
 
 const sortByName = (array, isAscending) => {
     const sortedArray = array.sort((prev, next) => {
-        if (prev.name.first < next.name.first) return -1;
-        if (prev.name.first > next.name.first) return 1;
-        if (prev.name.first === next.name.first) return 0;
+        const prevName = prev.name.first;
+        const nextName = next.name.first;
+        if (prevName < nextName) return -1;
+        if (prevName > nextName) return 1;
+        if (prevName === nextName) return 0;
     });
     return isAscending ? sortedArray : sortedArray.reverse();
 }

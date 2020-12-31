@@ -20,7 +20,8 @@ body {
 }
 
 .header {
-    height: 5em;
+    height: 10%;
+    min-height: 50px;
     width: 100%;
     border-bottom: 1px solid #13BDF7;
     display: flex;
@@ -101,13 +102,13 @@ body {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
+    display: none;
 }
 
 .sort {
     display: inline-block;
     width: 35px;
     height: 35px;
-    background: url(img/sort-ascending.png) center no-repeat;
     transition: .5s;
 }
 
