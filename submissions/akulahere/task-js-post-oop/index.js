@@ -65,9 +65,7 @@ const woman = new Human('Lero', 'female', 'Bye!');
 const dog = new Dog('Toby', 'male');
 const cat = new Cat('Sheldon', 'male');
 const catWoman = new CatWoman('Mary');
-console.log(catWoman.getProperties())
 
-console.log(man)
 dog.makeFriend(cat);
 dog.makeFriend(man);
 man.makeFriend(cat);
