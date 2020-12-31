@@ -16,7 +16,7 @@ class Inhabitant {
     return ['species', 'name', 'gender', 'legs', 'saying', 'friends'];
   }
 
-  makeMessage() {
+  toString() {
     return this.getProperties().map(property => `${capitalizeString(property)}: ${this[property]}`).join(' ')
   }
 }
@@ -42,7 +42,7 @@ class CatWoman extends Cat {
   }
   getProperties() {
     let properties = super.getProperties();
-    properties.splice(4, 0, 'hands');
+    properties.splice(properties.indexOf('legs'), 0, 'hands');
     return properties;
   }
 }
@@ -65,7 +65,9 @@ const woman = new Human('Lero', 'female', 'Bye!');
 const dog = new Dog('Toby', 'male');
 const cat = new Cat('Sheldon', 'male');
 const catWoman = new CatWoman('Mary');
+console.log(catWoman.getProperties())
 
+console.log(man)
 dog.makeFriend(cat);
 dog.makeFriend(man);
 man.makeFriend(cat);
@@ -73,4 +75,4 @@ const inhabitantsArray = [dog, cat, man, woman, catWoman];
 
 const capitalizeString = (string) => string.charAt(0).toUpperCase() + string.slice(1);
 
-inhabitantsArray.forEach(inhabitant => print(inhabitant.makeMessage()));
+inhabitantsArray.forEach(inhabitant => print(inhabitant));
