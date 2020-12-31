@@ -40,10 +40,12 @@ function addEnemy() {
     allEnemies.push(enemy);
 }
 
-// Clear enemies if the player won or lose
-function clearEnemy() {
+// Reset game if the player won or lose
+function resetGame() {
     allEnemies = [];
     addEnemy();
+    player.lvl = playerStartLevel;
+    addScore(playerStartLevel);              
 }
 
 //Create level counter
@@ -57,8 +59,13 @@ function addLevelCounter() {
         transform: translateX(-50%);
     `;
 
-    levelCounter.innerHTML = `Level: ${playerStartLevel}`;
+    addScore(playerStartLevel);
     document.body.prepend(levelCounter);
+}
+
+// Add score to level counter
+function addScore(score) {
+    levelCounter.innerHTML = `Level: ${score}`;
 }
 
 //----------------------------------------------
@@ -82,24 +89,23 @@ Character.prototype.render = function() {
 const Enemy = function(x, y, sprite, speed, player) {
     Character.call(this, x, y, sprite);
     this.speed = speed;
+    this.player = player;
 };
 
 Enemy.prototype = Object.create(Character.prototype);
 
 //Check characters collision
 Enemy.prototype.enemyCollision = function() {
-    if (this.x - borderCollision <= player.x        // Left
-        && this.y - borderCollision <= player.y     // Up
-        && this.x + borderCollision >= player.x     // Right
-        && this.y + borderCollision >= player.y) {  // Down
-        player.x = playerStartPosX;
-        player.y = playerStartPosY;
+    if (this.x - borderCollision <= this.player.x        // Left
+        && this.y - borderCollision <= this.player.y     // Up
+        && this.x + borderCollision >= this.player.x     // Right
+        && this.y + borderCollision >= this.player.y) {  // Down
+        this.player.x = playerStartPosX;
+        this.player.y = playerStartPosY;
 
-        setTimeout(function() {
-            alert(`Game over...\nYou received ${player.lvl} level.`);
-            player.lvl = 1;
-            clearEnemy();
-            levelCounter.innerHTML = `Level: 1`;
+        setTimeout(() => {
+            alert(`Game over...\nYou received ${this.player.lvl} level.`);
+            resetGame();
         }, 100);
     }
 };
@@ -133,14 +139,12 @@ Player.prototype.checkProgress = function() {
             this.x = playerStartPosX;
             this.y = playerStartPosY;
             this.lvl++;
-            levelCounter.innerHTML = `Level: ${this.lvl}`;
+            addScore(this.lvl);
             addEnemy();
 
             if (this.lvl === levelForWin) {
                 alert('Victory!!!');
-                this.lvl = playerStartLevel;
-                clearEnemy();
-                levelCounter.innerHTML = `Level: ${playerStartLevel}`;              
+                resetGame();            
             } else {
                 alert(`Level UP!\nYour level is ${this.lvl}`);
             }
