@@ -3,6 +3,7 @@ const enemyInfo = {
 	maxSpeed: 300,
 	sprite: "images/enemy-bug.png",
 	width: 75,
+	startPositionX: -75
 };
 const cellInfo = {
 	width: 101,
@@ -15,7 +16,7 @@ const playerInfo = {
 	startPositionY: cellInfo.height * 5 - cellInfo.beingPositionCorrection,
 };
 const playingAreaInfo = {
-	width: cellInfo.width * 4,
+	width: cellInfo.width * 5,
 	height: cellInfo.height * 5,
 };
 
@@ -44,7 +45,7 @@ Enemy.prototype = Object.create(Being.prototype);
 Enemy.prototype.update = function (dt) {
 	this.x += this.speed * dt;
 	if (this.x > cellInfo.width * 5) {
-		this.x = -cellInfo.width;
+		this.x = enemyInfo.startPositionX;
 		this.speed = generateEnemySpeed();
 	}
 	this.checkCollision();
@@ -118,9 +119,8 @@ Player.prototype.handleInput = function (keycode) {
 
 const player = new Player(playerInfo.startPositionX, playerInfo.startPositionY);
 
-const enemyStartPostionsY = [1, 2, 3].map((rowNumber) => cellInfo.height * rowNumber - cellInfo.beingPositionCorrection);
-const allEnemies = enemyStartPostionsY.map((posY) => new Enemy(-enemyInfo.width, posY, player));
-
+const enemyStartPostionsY = Array.from({ length: 3 }, (v, rowNum) => rowNum + 1).map((rowNumber) => cellInfo.height * rowNumber - cellInfo.beingPositionCorrection);
+const allEnemies = enemyStartPostionsY.map((posY) => new Enemy(enemyInfo.startPositionX, posY, player));
 document.addEventListener("keyup", function (e) {
 	var allowedKeys = {
 		37: "left",
