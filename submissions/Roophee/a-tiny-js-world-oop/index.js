@@ -2,8 +2,8 @@
 
 const delimiter = '; '
 
-class Inhabitant  {
-    constructor(name, gender, saying, legs=4, tail= 1 ){
+class Inhabitant {
+    constructor(name, gender, saying, legs = 4, tail = 1) {
         this.name = name;
         this.gender = gender;
         this.species = this.constructor.name.toLowerCase();
@@ -14,47 +14,47 @@ class Inhabitant  {
     }
 
     addFriends(...arrayOfFriends) {
-        arrayOfFriends.forEach(({name}) => this.friends.push(name));
+        arrayOfFriends.forEach(({ name }) => this.friends.push(name));
     }
 
-    description(){
-        return ['name','gender','species','saying','legs','tail','friends'].map(property => this[property].length ===0?`${property}:none`:`${property}: ${this[property]}`).join(delimiter);
+    description() {
+        return ['name', 'gender', 'species', 'saying', 'legs', 'tail', 'friends'].map(property => this[property].length === 0 ? `${property}: none` : `${property}: ${this[property]}`).join(delimiter);
     }
 }
 
-class Dog extends Inhabitant  {
+class Dog extends Inhabitant {
     static saying = 'Woof-Woof!';
-    constructor(name, gender){
+    constructor(name, gender) {
         super(name, gender, Dog.saying);
     }
 }
 
-class Cat extends Inhabitant  {
+class Cat extends Inhabitant {
     static saying = 'Meow!';
-    constructor(name, gender){
+    constructor(name, gender) {
         super(name, gender, Cat.saying);
     }
 }
 
-class Human extends Inhabitant  {
+class Human extends Inhabitant {
     static saying = 'Cogito ergo sum!';
-    constructor(name, gender,saying, legs= 2, tail = 'none'){
+    constructor(name, gender, saying, legs = 2, tail = 'none') {
         super(name, gender, saying || Human.saying, legs, tail)
         this.hands = 2;
     }
     description() {
-        return [super.description(),`hands: ${this.hands}`].join(delimiter)
+        return [super.description(), `hands: ${this.hands}`].join(delimiter)
     }
 }
 
 class WomanCat extends Human {
-    constructor(name, gender){
+    constructor(name, gender) {
         super(name, gender, Cat.saying);
     }
 }
 
-const dog = new Dog('Milo','male'),
-    cat = new Cat('Kitty','female'),
+const dog = new Dog('Milo', 'male'),
+    cat = new Cat('Kitty', 'female'),
     man = new Human('Michael', 'male'),
     woman = new Human('Helga', 'female', 'Per aspera ad astra!'),
     hero = new WomanCat('Sara', 'female'),
@@ -65,4 +65,4 @@ man.addFriends(woman);
 woman.addFriends(man, cat, dog);
 hero.addFriends(man, woman, cat, dog);
 
-population.forEach(item =>print(item.description()));
+population.forEach(item => print(item.description()));
