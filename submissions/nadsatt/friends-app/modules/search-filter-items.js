@@ -1,6 +1,6 @@
 import { SearchFilter, ToggleFilter } from './filter-items.js';
 
-class UserNameSearchFilter extends SearchFilter {
+export class UserNameSearchFilter extends SearchFilter {
     constructor(category, userService){
         const property = 'name';
         super(property, category, userService);
@@ -8,7 +8,7 @@ class UserNameSearchFilter extends SearchFilter {
     }
 }
 
-class UserEmailSearchFilter extends SearchFilter {
+export class UserEmailSearchFilter extends SearchFilter {
     constructor(category, userService){
         const property = 'email';
         super(property, category, userService);
@@ -16,7 +16,7 @@ class UserEmailSearchFilter extends SearchFilter {
     }
 }
 
-class UserLocationSearchFilter extends SearchFilter {
+export class UserLocationSearchFilter extends SearchFilter {
     constructor(category, userService){
         const property = 'location';
         super(property, category, userService);
@@ -24,7 +24,7 @@ class UserLocationSearchFilter extends SearchFilter {
     }
 }
 
-class GenderToggleFilter extends ToggleFilter {
+export class UserGenderToggleFilter extends ToggleFilter {
     constructor(category, userService){
         const firstState = 'female';
         const secondState = 'male';
@@ -33,10 +33,3 @@ class GenderToggleFilter extends ToggleFilter {
         return this.element;
     }
 }
-
-export default [
-    UserNameSearchFilter,
-    UserEmailSearchFilter,
-    UserLocationSearchFilter,
-    GenderToggleFilter
-];

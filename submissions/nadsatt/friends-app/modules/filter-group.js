@@ -1,5 +1,12 @@
-import searchFilterClasses from './search-filter-items.js';
-import sortFilterClasses from './sort-filter-items.js';
+import { UserNameSearchFilter,
+         UserEmailSearchFilter,
+         UserLocationSearchFilter,
+         UserGenderToggleFilter } from './search-filter-items.js';
+
+import { UserNameSortFilter,
+         UserAgeSortFilter,
+         UserLocationSortFilter,
+         UserRegistrationSortFilter } from './sort-filter-items.js';
 
 import { FilterSubgroup } from './filter-subgroup.js';
 import { FilterList } from './filter-list.js';
@@ -26,6 +33,12 @@ export class FilterGroup {
         this.element.filterCategories = ['sort', 'search'];
         this.element.userService = userService;
         this.element.pageLinkList = pageLinkList;
+
+        const searchFilterClasses = [UserNameSearchFilter, UserEmailSearchFilter,
+                                     UserLocationSearchFilter, UserGenderToggleFilter];
+
+        const sortFilterClasses = [UserNameSortFilter, UserAgeSortFilter,
+                                   UserLocationSortFilter, UserRegistrationSortFilter];
 
         this.element.sortFilters = sortFilterClasses.map(Filter => new Filter(this.element.filterCategories[0], userService));
         this.element.searchFilters = searchFilterClasses.map(Filter => new Filter(this.element.filterCategories[1], userService));

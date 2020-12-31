@@ -1,6 +1,6 @@
 import { StringSortFilter, NumberSortFilter } from './filter-items.js';
 
-class UserNameSortFilter extends StringSortFilter {
+export class UserNameSortFilter extends StringSortFilter {
     constructor(category, userService){
         const property = 'name';
         super(property, category, userService);
@@ -8,7 +8,7 @@ class UserNameSortFilter extends StringSortFilter {
     }
 }
 
-class UserAgeSortFilter extends NumberSortFilter {
+export class UserAgeSortFilter extends NumberSortFilter {
     constructor(category, userService){
         const property = 'age';
         super(property, category, userService);
@@ -16,7 +16,7 @@ class UserAgeSortFilter extends NumberSortFilter {
     }
 }
 
-class LocationSortFilter extends StringSortFilter {
+export class UserLocationSortFilter extends StringSortFilter {
     constructor(category, userService){
         const property = 'location';
         super(property, category, userService);
@@ -24,17 +24,10 @@ class LocationSortFilter extends StringSortFilter {
     }
 }
 
-class RegistrationSortFilter extends NumberSortFilter {
+export class UserRegistrationSortFilter extends NumberSortFilter {
     constructor(category, userService){
         const property = 'registration';
         super(property, category, userService);
         return this.element;
     }
 }
-
-export default [
-    UserNameSortFilter,
-    UserAgeSortFilter,
-    LocationSortFilter,
-    RegistrationSortFilter,
-];
