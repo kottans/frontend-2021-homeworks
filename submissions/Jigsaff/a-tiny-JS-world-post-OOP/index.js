@@ -1,13 +1,3 @@
-/* Refer to https://github.com/OleksiyRudenko/a-tiny-JS-world for the task details
-   Complete the below for code reviewers' convenience:
-
-   Code repository: _put repo URL here_
-   Web app: _put project's github pages URL here_
-   */
-
-// ======== OBJECTS DEFINITIONS ========
-// Define your objects here
-
 class Organism {
     constructor(type, legs, hands, name, gender, saying) {
         this.type = type;
@@ -19,22 +9,22 @@ class Organism {
         this.friends = [];
     }
 
-    addFriends(...Friends) {
-        Friends.forEach(({name}) => this.friends.push(name));
+    addFriends(...friends) {
+        friends.map(({name}) => this.friends.push(name));
         return this.friends;
     }
 
     toString() {
         let strings = [
             `type: ${this.type}; `,
-            `legs: ${this.legs}; `,
-            `hands: ${this.hands}; `,
             `name: ${this.name}; `,
             `gender: ${this.gender}; `,
+            `legs: ${this.legs}; `,
+            `hands: ${this.hands}; `,
             `saying: ${this.saying}; `,
         ];
 
-        if (this.friends.length > 0) {
+        if (this.friends.length) {
             strings.push(`friends: ${this.friends}; `);
         }
         return strings.join('');
@@ -42,14 +32,14 @@ class Organism {
 }
 
 class Dog extends Organism {
-    constructor(name, gender) {
-        super('dog', 4, 0, name, gender, 'Woof!');
+    constructor(name, gender, legs) {
+        super('dog', legs, 0, name, gender, 'Woof!');
     }
 }
 
 class Cat extends Organism {
-    constructor(name, gender) {
-        super('cat', 4, 0, name, gender, 'Meow!');
+    constructor(name, gender, legs) {
+        super('cat', legs, 0, name, gender, 'Meow!');
     }
 }
 
@@ -77,8 +67,8 @@ class CatWoman extends Human {
     }
 }
 
-const dog = new Dog('Fred', 'male');
-const cat = new Cat('Luna', 'female');
+const dog = new Dog('Fred', 'male', 4);
+const cat = new Cat('Luna', 'female', 4);
 const woman = new Woman('Adele');
 const man = new Man('Arnold');
 const catWoman = new CatWoman('Bella');
