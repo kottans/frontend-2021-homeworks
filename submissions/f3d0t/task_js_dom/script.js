@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		if (target.nodeName === "LI" && oldId !== currentId) {
 			nav.querySelector(".active")?.classList.toggle("active");
 			target.classList.toggle("active");
-			let newPokemon = pokemons.find((item) => item.id == currentId);
+			const newPokemon = pokemons.find((item) => item.id == currentId);
 			if (newPokemon) {
 				main.innerHTML = "";
 				main.appendChild(createPokemonContent(newPokemon));
