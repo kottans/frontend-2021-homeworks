@@ -33,10 +33,13 @@ export class PageLinkList {
                 this.performPagination(currentPageNumber);
             }
             else if(this.isCornerPageLinkClicked(target)){
-                let currentPageNumber = value === 'First' ? 1 :
-                                        value === 'Prev' ? --this.currentPageNumber :
-                                        value === 'Next' ? ++this.currentPageNumber :
-                                        this.pagesNumber;
+                let currentPageNumber;
+
+                if(value === 'First') currentPageNumber = 1;
+                else if(value === 'Prev') currentPageNumber = --this.currentPageNumber;
+                else if(value === 'Next') currentPageNumber = ++this.currentPageNumber;
+                else currentPageNumber = this.pagesNumber;
+
                 this.performPagination(currentPageNumber);
             }
         };
@@ -75,10 +78,9 @@ export class PageLinkList {
         };
 
         this.element.validateCurrentPageNumber = function(currentPageNumber){
-            this.currentPageNumber =
-                (currentPageNumber < 1) ? 1 :
-                (currentPageNumber > this.pagesNumber) ? this.pagesNumber :
-                currentPageNumber;
+            if(currentPageNumber < 1) this.currentPageNumber = 1;
+            else if (currentPageNumber > this.pagesNumber) this.currentPageNumber = this.pagesNumber;
+            else this.currentPageNumber = currentPageNumber;
         };
 
         this.element.defineCurrentPageUsers = function(){

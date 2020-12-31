@@ -43,7 +43,9 @@ export class IconList{
             const iconSelected = icon.selected;
 
             this.icons.forEach(icon => icon.unselect());
-            iconSelected ? icon.unselect() : icon.select();
+
+            if(iconSelected) icon.unselect();
+            else icon.select();
         }
 
         this.element.openFilter = function(filter){
@@ -71,4 +73,3 @@ export class IconList{
         }
     }
 }
-
