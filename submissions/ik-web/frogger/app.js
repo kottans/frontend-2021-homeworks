@@ -44,8 +44,8 @@ function addEnemy() {
 function resetGame() {
     allEnemies = [];
     addEnemy();
-    player.lvl = playerStartLevel;
-    addScore(playerStartLevel);              
+    player.level = playerStartLevel;
+    setLevel(playerStartLevel);              
 }
 
 //Create level counter
@@ -59,13 +59,13 @@ function addLevelCounter() {
         transform: translateX(-50%);
     `;
 
-    addScore(playerStartLevel);
+    setLevel(playerStartLevel);
     document.body.prepend(levelCounter);
 }
 
-// Add score to level counter
-function addScore(score) {
-    levelCounter.innerHTML = `Level: ${score}`;
+// Set level to counter
+function setLevel(level) {
+    levelCounter.innerHTML = `Level: ${level}`;
 }
 
 //----------------------------------------------
@@ -104,7 +104,7 @@ Enemy.prototype.enemyCollision = function() {
         this.player.y = playerStartPosY;
 
         setTimeout(() => {
-            alert(`Game over...\nYou received ${this.player.lvl} level.`);
+            alert(`Game over...\nYou received ${this.player.level} level.`);
             resetGame();
         }, 100);
     }
@@ -126,7 +126,7 @@ Enemy.prototype.update = function(dt) {
 // Constructor for create player
 const Player = function(x, y, sprite) {
     Character.call(this, x, y, sprite);
-    this.lvl = playerStartLevel;
+    this.level = playerStartLevel;
 };
 
 Player.prototype = Object.create(Character.prototype);
@@ -138,15 +138,15 @@ Player.prototype.checkProgress = function() {
         setTimeout(() => {
             this.x = playerStartPosX;
             this.y = playerStartPosY;
-            this.lvl++;
-            addScore(this.lvl);
+            this.level++;
+            setLevel(this.level);
             addEnemy();
 
-            if (this.lvl === levelForWin) {
+            if (this.level === levelForWin) {
                 alert('Victory!!!');
                 resetGame();            
             } else {
-                alert(`Level UP!\nYour level is ${this.lvl}`);
+                alert(`Level UP!\nYour level is ${this.level}`);
             }
 
         }, 100);
