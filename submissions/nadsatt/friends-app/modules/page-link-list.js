@@ -21,6 +21,11 @@ export class PageLinkList {
         this.element.usersPerPage = 10;
         this.element.maxPageLinksNumber = 5;
         this.element.fragment = new DocumentFragment();
+        this.element.classNames = {
+            cornerPageLink: 'corner-page-link-item',
+            middlePageLink: 'page-link-item',
+            currentPageLink: 'page-link-item--current',
+        };
 
         this.element.leftPageLinks = ['First', 'Prev'].map(value => new CornerPageLink(value));
         this.element.rightPageLinks = ['Next', 'Last'].map(value => new CornerPageLink(value));
@@ -36,7 +41,7 @@ export class PageLinkList {
                 let currentPageNumber;
 
                 if(value === 'First') currentPageNumber = 1;
-                else if(value === 'Prev') currentPageNumber = --this.currentPageNumber;
+                else if(value === 'Prev') currentPageNumber = --this.currentPageNumber || 1;
                 else if(value === 'Next') currentPageNumber = ++this.currentPageNumber;
                 else currentPageNumber = this.pagesNumber;
 
@@ -45,11 +50,11 @@ export class PageLinkList {
         };
 
         this.element.isMiddlePageLinkClicked = function(target){
-            return target.classList.contains('page-link-item');
+            return target.classList.contains(this.classNames.middlePageLink);
         };
 
         this.element.isCornerPageLinkClicked = function(target){
-            return target.classList.contains('corner-page-link-item');
+            return target.classList.contains(this.classNames.cornerPageLink);
         };
 
         this.element.performPagination = function(currentPageNumber = 1){
@@ -124,7 +129,10 @@ export class PageLinkList {
         this.element.defineMiddlePageLinks = function(){
             this.middlePageLinks = this.middlePageLinksNumbers.map(number => {
                 const pageLink = new PageLink(number);
-                if(number === this.currentPageNumber) pageLink.classList.add('page-link-item--current');
+                if(number === this.currentPageNumber) {
+                    pageLink.classList.add(this.classNames.currentPageLink);
+                }
+
                 return pageLink;
             });
         };
@@ -133,7 +141,7 @@ export class PageLinkList {
             this.leftPageLinks.concat(this.rightPageLinks)
                 .forEach(pageLink => pageLink.enable());
 
-            if(this.currentPageNumber === 1 || this.currentPageNumber === 0){
+            if(this.currentPageNumber === 1){
                 this.leftPageLinks.forEach(pageLink => pageLink.disable());
             }
             if(this.currentPageNumber === this.pagesNumber){

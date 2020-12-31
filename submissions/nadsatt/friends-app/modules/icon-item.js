@@ -15,8 +15,12 @@ export class Icon {
         heading.textContent = filter.property;
 
         this.element = document.createElement('li');
-        this.element.classList.add('icon-item', `${filter.category}-icon-item`);
-        this.element.setAttribute('data-filter-name', filter.name);
+        this.element.classNames = {
+            icon: ['icon-item', `${filter.category}-icon-item`],
+            selectedIcon: 'icon-item--selected'
+        };
+        this.element.classList.add(...this.element.classNames.icon);
+
         this.element.innerHTML = svgs[filter.property];
         this.element.append(heading);
     }
@@ -32,12 +36,12 @@ export class Icon {
     }
 
     select(){
-        this.classList.add('icon-item--selected');
+        this.classList.add(this.classNames.selectedIcon);
         this.selected = true;
     }
 
     unselect(){
-        this.classList.remove('icon-item--selected');
+        this.classList.remove(this.classNames.selectedIcon);
         this.selected = false;
     }
 }

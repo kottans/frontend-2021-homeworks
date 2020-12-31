@@ -1,9 +1,9 @@
 import svgs from './svgs.js';
 
 class Filter {
-    constructor(optionsHTML, category, property, userService){
+    constructor(optionsHTML, property, category, userService){
         this.defineElement(optionsHTML);
-        this.defineElementProperties(category, property, userService);
+        this.defineElementProperties(property, category, userService);
         this.defineElementMethods();
     }
 
@@ -16,76 +16,91 @@ class Filter {
             </div>`;
     }
 
-    defineElementProperties(category, property, userService){
-        this.element.category = category;
+    defineElementProperties(property, category, userService){
         this.element.property = property;
+        this.element.category = category;
         this.element.name = `${property}-${category}`;
         this.element.userService = userService;
 
         this.element.defaultState = 'none';
-        this.element.state = this.element.defaultState;
-        this.element.defaultOption = this.element.querySelector(`[data-state="none"]`);
+        this.element.defaultOption = this.element.querySelector(`[data-state="${this.element.defaultState}"]`);
+
+        this.element.settedState = this.element.defaultState;
         this.element.activatedOption = this.element.defaultOption;
 
-        this.element.classList.add('filter-item', `${this.element.category}-filter-item`);
+        this.element.classNames = {
+            filter: ['filter-item', `${this.element.category}-filter-item`],
+            openedFilter: 'filter-item--opened',
+            activatedOption: 'filter-item__option--activated',
+            activatedIcon: 'icon-item--activated'
+        };
+        this.element.classList.add(...this.element.classNames.filter);
     }
 
     defineElementMethods(){
         // copy methods to avoid methods duplication in different instances
-        this.element.filterUsersAccordingToState = this.filterUsersAccordingToState;
-        this.element.changeState = this.changeState;
+        this.element.open = this.open;
+        this.element.close = this.close;
+        this.element.setState = this.setState;
+        this.element.applyAccordingToState = this.applyAccordingToState;
         this.element.deactivateOptionAndIcon = this.deactivateOptionAndIcon;
         this.element.activateOptionAndIcon = this.activateOptionAndIcon;
         this.element.updateOptionAndState = this.updateOptionAndState;
-        this.element.open = this.open;
-        this.element.close = this.close;
-    }
-
-    filterUsersAccordingToState(){
-        if(this.state !== this.defaultState) this[this.state]();
-    }
-
-    changeState(activatedOption){
-        this.deactivateOptionAndIcon();
-        this.updateOptionAndState(activatedOption);
-        if(this.state !== this.defaultState) this.activateOptionAndIcon();
-    }
-
-    deactivateOptionAndIcon(){
-        this.activatedOption.classList.remove('filter-item__option--activated');
-        this.icon.classList.remove('icon-item--activated');
-    }
-
-    activateOptionAndIcon(){
-        this.activatedOption.classList.add('filter-item__option--activated');
-        this.icon.classList.add('icon-item--activated');
-    }
-
-    updateOptionAndState(activatedOption){
-        this.activatedOption = activatedOption;
-        this.state = activatedOption.dataset.state;
     }
 
     open(){
-        this.classList.add('filter-item--opened');
+        this.classList.add(this.classNames.openedFilter);
     }
 
     close(){
-        this.classList.remove('filter-item--opened');
+        this.classList.remove(this.classNames.openedFilter);
+    }
+
+    setState(option){
+        this.deactivateOptionAndIcon();
+        this.updateOptionAndState(option);
+        if(this.settedState !== this.defaultState) this.activateOptionAndIcon();
+    }
+
+    applyAccordingToState(){
+        if(this.settedState !== this.defaultState){
+            this[this.settedState]();
+        }
+    }
+
+    deactivateOptionAndIcon(){
+        this.activatedOption.classList.remove(this.classNames.activatedOption);
+        this.icon.classList.remove(this.classNames.activatedIcon);
+    }
+
+    activateOptionAndIcon(){
+        this.activatedOption.classList.add(this.classNames.activatedOption);
+        this.icon.classList.add(this.classNames.activatedIcon);
+    }
+
+    updateOptionAndState(option){
+        this.activatedOption = option;
+        this.settedState = option.dataset.state;
     }
 }
 
 class SearchFilter extends Filter {
     constructor(...args){
         const optionsHTML = `<input class="filter-item__option" type="text" data-state="search">`;
-        const category = 'search';
-        super(optionsHTML, category, ...args);
+        super(optionsHTML, ...args);
 
         this.element.input = this.element.querySelector('input');
 
+        this.element.setState = this.setState;
         this.element.search = this.search;
-        this.element.changeState = this.changeState;
-        this.element.resetInput = this.resetInput;
+    }
+
+    setState(option){
+        this.deactivateOptionAndIcon();
+        this.updateOptionAndState(option);
+
+        if(this.settedState === this.defaultState) this.input.value = ''
+        else if(this.input.value) this.activateOptionAndIcon();
     }
 
     search(){
@@ -95,42 +110,29 @@ class SearchFilter extends Filter {
             user[this.property].toLowerCase().includes(value)
         );
     }
-
-    changeState(activatedOption){
-        this.deactivateOptionAndIcon();
-        this.updateOptionAndState(activatedOption);
-
-        if(this.state === this.defaultState) this.resetInput();
-        else if(this.input.value) this.activateOptionAndIcon();
-    }
-
-    resetInput(){
-        this.input.value = ''
-    }
 }
 
 class ToggleFilter extends Filter {
     constructor(firstState, secondState, ...args){
         const optionsHTML =
-            `<span class="filter-item__option" data-state="state1">${svgs[firstState]}</span>
-             <span class="filter-item__option" data-state="state2">${svgs[secondState]}</span>`;
-        const category = 'search';
-        super(optionsHTML, category, ...args);
+            `<span class="filter-item__option" data-state="${firstState}">${svgs[firstState]}</span>
+             <span class="filter-item__option" data-state="${secondState}">${svgs[secondState]}</span>`;
+        super(optionsHTML, ...args);
 
         this.element.firstState = firstState;
         this.element.secondState = secondState;
 
-        this.element.state1 = this.state1;
-        this.element.state2 = this.state2;
+        this.element[firstState] = this.firstState;
+        this.element[secondState] = this.secondState;
     }
 
-    state1(){
+    firstState(){
         this.userService.users = this.userService.users.filter(user =>
             user[this.property] === this.firstState
         );
     }
 
-    state2(){
+    secondState(){
         this.userService.users = this.userService.users.filter(user =>
             user[this.property] === this.secondState
         );
@@ -142,8 +144,7 @@ class SortFilter extends Filter {
         const optionsHTML =
             `<span class="filter-item__option" data-state="asc">${ascSvg}</span>
              <span class="filter-item__option" data-state="desc">${descSvg}</span>`;
-        const category = 'sort';
-        super(optionsHTML, category, ...args);
+        super(optionsHTML, ...args);
 
         this.element.resetState = this.resetState;
         this.element.asc = this.asc;
@@ -151,7 +152,7 @@ class SortFilter extends Filter {
     }
 
     resetState(){
-        this.changeState(this.defaultOption);
+        this.setState(this.defaultOption);
     }
 
     asc(){

@@ -11,7 +11,11 @@ export class IconList{
 
     defineElement(filters, category){
         this.element = document.createElement('ul');
-        this.element.classList.add('icon-list', `${category}-icon-list`);
+        this.element.classNames = {
+            iconList: ['icon-list', `${category}-icon-list`],
+            categoryIcon: `${category}-icon-item`
+        };
+        this.element.classList.add(...this.element.classNames.iconList);
 
         this.element.icons = filters.map(filter => {
             const icon = new Icon(filter);
@@ -33,7 +37,7 @@ export class IconList{
 
     defineElementMethods(){
         this.element.addEventListener('click', function({target}){
-            if(target.classList.contains(`${this.category}-icon-item`)){
+            if(target.classList.contains(this.classNames.categoryIcon)){
                 this.selectIcon(target);
                 this.openFilter(target.filter);
             }
