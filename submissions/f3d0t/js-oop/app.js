@@ -18,9 +18,8 @@ const playingAreaInfo = {
 	width: cellInfo.width * 4,
 	height: cellInfo.height * 5,
 };
-const allEnemies = [];
 
-let generateEnemySpeed = function () {
+const generateEnemySpeed = function () {
 	return Math.floor(Math.random() * (enemyInfo.maxSpeed - enemyInfo.minSpeed)) + enemyInfo.minSpeed;
 };
 
@@ -34,9 +33,10 @@ Being.prototype.render = function () {
 	ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-const Enemy = function (x, y) {
+const Enemy = function (x, y, playerInstance) {
 	Being.call(this, x, y, enemyInfo.sprite);
 	this.speed = generateEnemySpeed();
+	this.player = playerInstance;
 };
 
 Enemy.prototype = Object.create(Being.prototype);
@@ -51,14 +51,14 @@ Enemy.prototype.update = function (dt) {
 };
 
 Enemy.prototype.checkCollision = function () {
-	if (this.x + enemyInfo.width >= player.x && this.x < player.x + enemyInfo.width && this.y === player.y) {
+	if (this.x + enemyInfo.width >= this.player.x && this.x < this.player.x + enemyInfo.width && this.y === this.player.y) {
 		this.win();
 	}
 };
 
 Enemy.prototype.win = function () {
 	alert("Bugs win\n(You DIE...)");
-	player.resetGame();
+	this.player.resetGame();
 };
 
 const Player = function (x, y) {
@@ -116,16 +116,10 @@ Player.prototype.handleInput = function (keycode) {
 	this.updatePosition(newX, newY);
 };
 
-const enemyStartPostionsY = [];
-for (let i = 1; i <= 3; i++) {
-	enemyStartPostionsY.push(cellInfo.height * i - cellInfo.beingPositionCorrection);
-}
-enemyStartPostionsY.forEach((posY) => {
-	let enemy = new Enemy(-enemyInfo.width, posY);
-	allEnemies.push(enemy);
-});
-
 const player = new Player(playerInfo.startPositionX, playerInfo.startPositionY);
+
+const enemyStartPostionsY = [1, 2, 3].map((rowNumber) => cellInfo.height * rowNumber - cellInfo.beingPositionCorrection);
+const allEnemies = enemyStartPostionsY.map((posY) => new Enemy(-enemyInfo.width, posY, player));
 
 document.addEventListener("keyup", function (e) {
 	var allowedKeys = {
