@@ -1,12 +1,12 @@
 const container = document.querySelector(".container"),
 	numCards = 9,
 	cardsData = ((assetsPath) => {
-		const arr = [];
+		const cardsDataArray = [];
 		for (let i = 1; i <= numCards; i++) {
 			const card = {path: `${assetsPath}p${i}.svg`, name: `p${i}`};
-			arr.push(card, card);
+			cardsDataArray.push(card, card);
 		}
-		return arr;
+		return cardsDataArray;
 	})("assets/");
 
 let checkedCards = [],
@@ -16,7 +16,7 @@ let checkedCards = [],
 
 function shuffleArray(o) {
 	for (
-		var j, x, i = o.length;
+		let j, x, i = o.length;
 		i;
 		j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x
 	);
