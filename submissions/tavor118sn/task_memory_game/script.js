@@ -21,7 +21,7 @@ const shuffleArray = (array) => array.sort(function () {
 
 // Generate gameboard
 
-const createCard = (elem, index) => {
+const createCard = (elem) => {
 
   const flipCard = document.createElement('div');
   flipCard.classList.add('flip-card');
@@ -29,13 +29,11 @@ const createCard = (elem, index) => {
 
   const flipInner = document.createElement('div');
   flipInner.classList.add('flip-card-inner');
+  flipInner.style = `--image: url("../img/${elem}.png")`;
 
   flipInner.innerHTML = `
     <div class="front">
       <img class="front-img" src="./img/brawl-stars-main-icon.png" alt="Brawl Icon">
-    </div>
-      <div class="back">
-      <img class="front-img" src="./img/${elem}.png" alt="${elem}">
     </div>`;
   flipCard.appendChild(flipInner);
 
@@ -50,8 +48,8 @@ const initGame = () => {
   let fragment = document.createDocumentFragment();
 
   let allCards = shuffleArray([...CARDS, ...CARDS]);
-  allCards.forEach((elem, index) => {
-    fragment.appendChild(createCard(elem, index));
+  allCards.forEach(elem => {
+    fragment.appendChild(createCard(elem));
   });
   GAME_BOARD.appendChild(fragment);
 };
@@ -120,5 +118,3 @@ GAME_BOARD.addEventListener('click', (event) => {
   handleCardChoice(flipCard);
 
 });
-
-

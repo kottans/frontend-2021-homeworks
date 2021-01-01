@@ -98,7 +98,7 @@ body {
   transform: rotateY(180deg);
 }
 
-.front, .back {
+.front {
   background-color: lightskyblue;
   border-radius: 1em;
   border: 2px solid #fff;
@@ -110,7 +110,21 @@ body {
 
 }
 
-.back {
+.flip-card-inner::after {
+  content: "";
+
+  display: block;
+  background: lightskyblue var(--image) no-repeat center;
+  background-size: auto 100%;
+
+  border-radius: 1em;
+  border: 2px solid #fff;
+
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+
   transform: rotateY(180deg);
 }
 
