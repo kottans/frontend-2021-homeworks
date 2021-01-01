@@ -8,6 +8,11 @@
 
 .page-link-item,
 .corner-page-link-item {
+    cursor: pointer;
+}
+
+.page-link {
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -16,22 +21,23 @@
     color: white;
     border: 1.5px solid var(--gold-color);
     border-radius: 5px;
-    cursor: pointer;
+    pointer-events: none;
+    text-decoration: none;
 }
 
-.page-link-item:hover,
-.corner-page-link-item:not(.corner-page-link-item--disabled):hover {
+.page-link-item:hover .page-link,
+.corner-page-link-item:not(.corner-page-link-item--disabled):hover .page-link {
     color: var(--gold-color);
     border-color: var(--gold-color);
 }
 
-.page-link-item--current {
+.page-link-item--current .page-link {
     background-color: var(--green-color);
     color: var(--gold-color);
     border-color: var(--gold-color);
 }
 
-.corner-page-link-item--disabled {
+.corner-page-link-item--disabled .page-link {
     border-color: rgb(156, 156, 156);
     color: rgb(156, 156, 156);
     pointer-events: none;

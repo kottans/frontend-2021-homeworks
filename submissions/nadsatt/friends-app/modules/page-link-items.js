@@ -1,10 +1,15 @@
 export class PageLink {
     constructor(value, className = 'page-link-item'){
-        const element = document.createElement('li');
-        element.classList.add(className);
+        const element = document.createElement('a');
+        element.setAttribute('href', '#');
+        element.classList.add('page-link');
         element.textContent = value;
 
-        return element;
+        const wrapper = document.createElement('li');
+        wrapper.classList.add(className);
+        wrapper.append(element);
+
+        return wrapper;
     }
 }
 

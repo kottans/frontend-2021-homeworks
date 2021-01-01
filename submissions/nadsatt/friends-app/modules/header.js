@@ -30,7 +30,7 @@ export class Header {
     }
 
     defineElementMethods(){
-        this.element.soundButton.addEventListener('click', (() => {
+        this.element.soundButton.addEventListener('click', (function(){
             if(this.sound.paused){
                 this.soundIcon.innerHTML = svgs.pause;
                 this.soundText.textContent = 'pause';
