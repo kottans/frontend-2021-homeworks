@@ -32,7 +32,7 @@ export class PageLinkList {
     }
 
     defineElementMethods(){
-        this.element.onclick = function({target, target:{textContent: value}}){
+        this.element.addEventListener('click', function({target, target:{textContent: value}}){
             if(this.isMiddlePageLinkClicked(target)){
                 let currentPageNumber = +value;
                 this.performPagination(currentPageNumber);
@@ -47,7 +47,7 @@ export class PageLinkList {
 
                 this.performPagination(currentPageNumber);
             }
-        };
+        });
 
         this.element.isMiddlePageLinkClicked = function(target){
             return target.classList.contains(this.classNames.middlePageLink);

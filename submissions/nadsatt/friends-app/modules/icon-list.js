@@ -1,9 +1,9 @@
 import { Icon } from './icon-item.js';
 
 export class IconList{
-    constructor(filters, filterList, category){
-        this.defineElement(filters, category);
-        this.defineElementProperties(filters, filterList, category);
+    constructor(filterList, category){
+        this.defineElement(filterList.filters, category);
+        this.defineElementProperties(filterList, category);
         this.defineElementMethods();
 
         return this.element;
@@ -27,8 +27,7 @@ export class IconList{
         this.element.append(...this.element.icons);
     }
 
-    defineElementProperties(filters, filterList, category){
-        this.element.filters = filters;
+    defineElementProperties(filterList, category){
         this.element.filterList = filterList;
         this.element.category = category;
         this.element.openedFilter = null;
