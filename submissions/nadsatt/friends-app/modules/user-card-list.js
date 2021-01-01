@@ -2,19 +2,16 @@ import { UserCard } from './user-card-item.js';
 
 export class UserCardList {
     constructor(userService){
-        this.defineElement();
-        this.defineElementProperties(userService);
+        this.defineElement(userService);
         this.defineElementMethods();
 
         return this.element;
     }
 
-    defineElement(){
+    defineElement(userService){
         this.element = document.createElement('ul');
         this.element.classList.add('user-card-list');
-    }
 
-    defineElementProperties(userService){
         this.element.userService = userService;
         this.element.fragment = new DocumentFragment();
     }

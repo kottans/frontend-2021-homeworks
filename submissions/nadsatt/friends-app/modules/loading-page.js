@@ -1,13 +1,12 @@
 export class LoadingPage {
     constructor(program){
-        this.defineElement();
-        this.defineElementProperties(program);
+        this.defineElement(program);
         this.defineElementMethods();
 
         return this.element;
     }
 
-    defineElement(){
+    defineElement(program){
         this.element = document.createElement('div');
         this.element.classList.add('loading-page');
         this.element.innerHTML = `
@@ -22,12 +21,9 @@ export class LoadingPage {
                 <div class="loading-roller__point"></div>
                 <div class="loading-roller__point"></div>
             </div>`;
-    }
 
-    defineElementProperties(program){
         this.element.program = program;
         this.element.loadingMessage = 'Please wait until users will be loaded..';
-
         this.element.loadingInfo = this.element.querySelector('.loading-info');
         this.element.loadingRoller = this.element.querySelector('.loading-roller');
 

@@ -16,11 +16,10 @@ export class PageLink {
 export class CornerPageLink extends PageLink {
     constructor(value){
         const classNames = {
-            cornerPageLink: 'corner-page-link-item',
-            disabledCornerPageLink:  'corner-page-link-item--disabled'
+            disabledCornerPageLink: 'corner-page-link-item--disabled'
         };
 
-        super(value, classNames.cornerPageLink);
+        super(value, 'corner-page-link-item');
 
         this.enable = function(){
             this.classList.remove(classNames.disabledCornerPageLink);

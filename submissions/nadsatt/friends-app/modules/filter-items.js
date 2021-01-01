@@ -1,22 +1,25 @@
 import svgs from './svgs.js';
 
 class Filter {
-    constructor(optionsHTML, property, category, userService){
-        this.defineElement(optionsHTML);
-        this.defineElementProperties(property, category, userService);
+    constructor(...args){
+        this.defineElement(...args);
         this.defineElementMethods();
     }
 
-    defineElement(optionsHTML){
+    defineElement(optionsHTML, property, category, userService){
         this.element = document.createElement('li');
         this.element.innerHTML =
             `<div class="filter-item__options">
                 ${optionsHTML}
                 <span class="filter-item__option" data-state="none">${svgs.none}</span>
             </div>`;
-    }
+        this.element.classList.add('filter-item', `${category}-filter-item`);
 
-    defineElementProperties(property, category, userService){
+        this.element.classNames = {
+            openedFilter: 'filter-item--opened',
+            activatedOption: 'filter-item__option--activated'
+        };
+
         this.element.property = property;
         this.element.category = category;
         this.element.name = `${property}-${category}`;
@@ -24,17 +27,8 @@ class Filter {
 
         this.element.defaultState = 'none';
         this.element.defaultOption = this.element.querySelector(`[data-state="${this.element.defaultState}"]`);
-
         this.element.settedState = this.element.defaultState;
         this.element.activatedOption = this.element.defaultOption;
-
-        this.element.classNames = {
-            filter: ['filter-item', `${this.element.category}-filter-item`],
-            openedFilter: 'filter-item--opened',
-            activatedOption: 'filter-item__option--activated',
-            activatedIcon: 'icon-item--activated'
-        };
-        this.element.classList.add(...this.element.classNames.filter);
     }
 
     defineElementMethods(){
@@ -46,6 +40,7 @@ class Filter {
         this.element.deactivateOptionAndIcon = this.deactivateOptionAndIcon;
         this.element.activateOptionAndIcon = this.activateOptionAndIcon;
         this.element.updateOptionAndState = this.updateOptionAndState;
+        this.element.getCapitalizedState = this.getCapitalizedState;
     }
 
     open(){
@@ -64,35 +59,39 @@ class Filter {
 
     applyAccordingToState(){
         if(this.settedState !== this.defaultState){
-            this[this.settedState]();
+            this[`applyAccordingTo${this.getCapitalizedState(this.settedState)}State`]();
         }
     }
 
     deactivateOptionAndIcon(){
         this.activatedOption.classList.remove(this.classNames.activatedOption);
-        this.icon.classList.remove(this.classNames.activatedIcon);
+        this.icon.deactivate();
     }
 
     activateOptionAndIcon(){
         this.activatedOption.classList.add(this.classNames.activatedOption);
-        this.icon.classList.add(this.classNames.activatedIcon);
+        this.icon.activate();
     }
 
     updateOptionAndState(option){
         this.activatedOption = option;
         this.settedState = option.dataset.state;
     }
+
+    getCapitalizedState(state){
+        return state[0].toUpperCase() + state.slice(1);
+    }
 }
 
 class SearchFilter extends Filter {
     constructor(...args){
-        const optionsHTML = `<input class="filter-item__option" type="text" data-state="search">`;
+        const optionsHTML =
+            `<input class="filter-item__option" type="text" data-state="search">`;
         super(optionsHTML, ...args);
 
         this.element.input = this.element.querySelector('input');
-
         this.element.setState = this.setState;
-        this.element.search = this.search;
+        this.element.applyAccordingToSearchState = this.applyAccordingToSearchState;
     }
 
     setState(option){
@@ -103,7 +102,7 @@ class SearchFilter extends Filter {
         else if(this.input.value) this.activateOptionAndIcon();
     }
 
-    search(){
+    applyAccordingToSearchState(){
         const value = this.input.value.toLowerCase();
 
         this.userService.users = this.userService.users.filter(user =>
@@ -121,18 +120,17 @@ class ToggleFilter extends Filter {
 
         this.element.firstState = firstState;
         this.element.secondState = secondState;
-
-        this.element[firstState] = this.firstState;
-        this.element[secondState] = this.secondState;
+        this.element[`applyAccordingTo${this.getCapitalizedState(firstState)}State`] = this.applyAccordingToFirstState;
+        this.element[`applyAccordingTo${this.getCapitalizedState(secondState)}State`] = this.applyAccordingToSecondState;
     }
 
-    firstState(){
+    applyAccordingToFirstState(){
         this.userService.users = this.userService.users.filter(user =>
             user[this.property] === this.firstState
         );
     }
 
-    secondState(){
+    applyAccordingToSecondState(){
         this.userService.users = this.userService.users.filter(user =>
             user[this.property] === this.secondState
         );
@@ -147,19 +145,19 @@ class SortFilter extends Filter {
         super(optionsHTML, ...args);
 
         this.element.resetState = this.resetState;
-        this.element.asc = this.asc;
-        this.element.desc = this.desc;
+        this.element.applyAccordingToAscState = this.applyAccordingToAscState;
+        this.element.applyAccordingToDescState = this.applyAccordingToDescState;
     }
 
     resetState(){
         this.setState(this.defaultOption);
     }
 
-    asc(){
+    applyAccordingToAscState(){
         this.userService.users.sort(this.ascComparator.bind(this));
     };
 
-    desc(){
+    applyAccordingToDescState(){
         this.userService.users.sort(this.descComparator.bind(this));
     }
 }

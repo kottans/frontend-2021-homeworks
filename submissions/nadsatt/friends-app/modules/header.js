@@ -3,7 +3,6 @@ import svgs from './../modules/svgs.js';
 export class Header {
     constructor(){
         this.defineElement();
-        this.defineElementProperties();
         this.defineElementMethods();
 
         return this.element;
@@ -17,9 +16,7 @@ export class Header {
                 <span class="header__sound-icon">${svgs.play}</span>
                 <span class="header__sound-text">play</span>
              </div>`;
-    }
-
-    defineElementProperties(){
+             
         this.element.soundIcon = this.element.querySelector('.header__sound-icon');
         this.element.soundText = this.element.querySelector('.header__sound-text');
         this.element.soundButton = this.element.querySelector('.header__sound-button');

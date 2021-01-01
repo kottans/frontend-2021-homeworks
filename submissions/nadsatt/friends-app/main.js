@@ -36,7 +36,7 @@ class Program {
         document.body.querySelector('.filter-group-wrapper').append(this.filterGroup);
     }
 
-    getUsers(usersCount = 150){
+    getUsers(usersCount = 100){
         this.userService.getUsers(usersCount)
             .then(() => {
                 this.pageLinkList.performPagination();
@@ -48,4 +48,4 @@ class Program {
     }
 }
 
-new Program().getUsers();
+new Program().getUsers(150);

@@ -1,5 +1,5 @@
-import * as searchFilterClasses from './search-filter-items.js';
-import * as sortFilterClasses from './sort-filter-items.js';
+import * as searchFiltersModule from './search-filter-items.js';
+import * as sortFiltersModule from './sort-filter-items.js';
 import { FilterList } from './filter-list.js';
 import { IconList } from './icon-list.js';
 
@@ -12,24 +12,30 @@ export class FilterGroup {
     }
 
     defineElement(userService, pageLinkList){
+        const categories = ['sort', 'search'];
+        const filtersModules = [sortFiltersModule,
+                                searchFiltersModule];
+
+        [this[`${categories[0]}FilterClasses`],
+         this[`${categories[1]}FilterClasses`]] = filtersModules.map(filtersModule =>
+            Object.values(filtersModule)
+        );
+
         this.element = document.createElement('div');
         this.element.classList.add('filter-group');
-
-        const categories = ['sort', 'search'];
         this.element.userService = userService;
         this.element.pageLinkList = pageLinkList;
 
-        this.sortFilterClasses = Object.values(sortFilterClasses);
-        this.searchFilterClasses = Object.values(searchFilterClasses);
-
         [this.element[`${categories[0]}Filters`],
          this.element[`${categories[1]}Filters`]] = categories.map(category =>
-            this[`${category}FilterClasses`]
-                .map(FilterClass => new FilterClass(category, userService))
+            this[`${category}FilterClasses`].map(FilterClass =>
+                new FilterClass(category, userService))
         );
 
-        this.element.filters = [...this.element.sortFilters,
-                                ...this.element.searchFilters];
+        this.element.filters = categories.reduce((res, category) => {
+            res.push(...this.element[`${category}Filters`]);
+            return res;
+        }, []);
 
         [this.element[`${categories[0]}FilterList`],
          this.element[`${categories[1]}FilterList`]] = categories.map(category =>
