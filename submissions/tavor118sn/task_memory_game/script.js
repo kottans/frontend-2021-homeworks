@@ -45,15 +45,15 @@ const createCard = (elem, index) => {
 
 
 const initGame = () => {
-
   GAME_BOARD.innerHTML = '';
   pairsFound = 0;
+  let fragment = document.createDocumentFragment();
 
   let allCards = shuffleArray([...CARDS, ...CARDS]);
-
   allCards.forEach((elem, index) => {
-    GAME_BOARD.appendChild(createCard(elem, index));
+    fragment.appendChild(createCard(elem, index));
   });
+  GAME_BOARD.appendChild(fragment);
 };
 
 
