@@ -24,6 +24,7 @@ const prStates = [
 
 const url = {
   prListFilteredByAuthorPrefix: "https://github.com/kottans/frontend-2021-homeworks/pulls?q=is%3Apr+author%3A",
+  prPrefix: "https://github.com/kottans/frontend-2021-homeworks/pull/",
 }
 
 const statsFileName = "./pr-stats.md";
@@ -76,7 +77,7 @@ function makeMDtable(authors, labels, dataByAuthor) {
     const row = [makePrListUrl(authorName),
       ...labels.map(label => {
         return dataByAuthor[authorName][label]
-         ? `#${dataByAuthor[authorName][label].prn} (${dataByAuthor[authorName][label].state[0]})`
+         ? makePrUrl(dataByAuthor[authorName][label].prn, dataByAuthor[authorName][label].state[0])
          : " ";
       })];
     rows.push(row.join(columnDelimiter));
@@ -86,6 +87,14 @@ function makeMDtable(authors, labels, dataByAuthor) {
 
 function makePrListUrl(authorName) {
   return `[${authorName}](${url.prListFilteredByAuthorPrefix + authorName})`;
+}
+
+function makePrUrl(prn, state) {
+  let anchorText =
+    (state === 'm' ? "**" : "") +
+    `#${prn}` +
+    (state === 'm' ? "**" : ` ${state}`);
+  return `[${anchorText}](${url.prPrefix}${prn})`;
 }
 
 async function collectPullRequestData() {
