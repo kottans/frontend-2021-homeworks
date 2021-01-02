@@ -2,7 +2,7 @@
    Complete the below for code reviewers' convenience:
 
    Code repository: _put repo URL here_
-   Web app: _put project's github pages URL here_
+     Web app: https://samval007.github.io/a-tiny-JS-world/	
    */
 
 // ======== OBJECTS DEFINITIONS ========
@@ -59,3 +59,5 @@ const woman = new Human("Liza", "female", "Tere hommikust!");
 const persons = [man, woman, dog, cat];
 
 persons.forEach((person) => print(person.say()));
+
+
