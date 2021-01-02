@@ -7,6 +7,8 @@ const writeFile = promisify(require('fs').writeFile);
 
 console.log("This script requires https://github.com/cli/cli installed\n");
 
+const baseRepoUrl = "https://github.com/kottans/frontend-2021-homeworks/";
+
 const prLabels = [
   "Hooli-style Popup",
   "JS DOM",
@@ -23,8 +25,8 @@ const prStates = [
 ];
 
 const url = {
-  prListFilteredByAuthorPrefix: "https://github.com/kottans/frontend-2021-homeworks/pulls?q=is%3Apr+author%3A",
-  prPrefix: "https://github.com/kottans/frontend-2021-homeworks/pull/",
+  prListFilteredByAuthorPrefix: baseRepoUrl + "pulls?q=is%3Apr+author%3A",
+  prPrefix: baseRepoUrl + "pull/",
 }
 
 const statsFileName = "./pr-stats.md";
