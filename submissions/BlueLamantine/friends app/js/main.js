@@ -1,7 +1,11 @@
 class Render {
   constructor() {
-    this.profilesContainer = document.querySelector('.profile-cards');
-    this.filtersContainer = document.querySelector('#filters');
+    if (Render.instance == null) {
+      this.profilesContainer = document.querySelector('.profile-cards');
+      this.filtersContainer = document.querySelector('#filters');
+      Render.instance = this;
+    }
+    return Render.instance;
   }
 
   getHtmlProfile(profileData, profileIndex) {
@@ -155,23 +159,27 @@ class Render {
 }
 
 class Filter {
-  constructor() {
-    this.profilesContainer = document.querySelector('.profile-cards');
-    this.renderDataWithFilters = new Render();
-    this.renderDataWithFilters.renderFilters();
-    this.filtersPanel = document.querySelector('#filters');
-    this.searchInput = document.querySelector('#nameInput');
-    this.sortedUsers = [];
-    this.sortByNameTypes = {
-      inAscending: 'nameAZ',
-      inDescending: 'nameZA',
-      byDefault: 'nameAll',
-    };
-    this.sortByAgeTypes = {
-      inAscending: 'age09',
-      inDescending: 'age90',
-      byDefault: 'ageAll',
-    };
+  constructor(render) {
+    if (Filter.instance == null) {
+      this.profilesContainer = document.querySelector('.profile-cards');
+      this.renderDataWithFilters = render;
+      render.renderFilters();
+      this.filtersPanel = document.querySelector('#filters');
+      this.searchInput = document.querySelector('#nameInput');
+      this.sortedUsers = [];
+      this.sortByNameTypes = {
+        inAscending: 'nameAZ',
+        inDescending: 'nameZA',
+        byDefault: 'nameAll',
+      };
+      this.sortByAgeTypes = {
+        inAscending: 'age09',
+        inDescending: 'age90',
+        byDefault: 'ageAll',
+      };
+      Filter.instance = this;
+    }
+    return Filter.instance;
   }
 
   unckeckedRadioButton(nodeName) {
@@ -209,9 +217,9 @@ class Filter {
         this.unckeckedRadioButton('sort-name');
         this.sortByContent(selected.id, this.sortByAgeTypes, 'age');
       },
-      default: () => false,
+      sortByEmail: () => false,
     };
-    return (sort[selected.name] || sort['default'])();
+    return (sort[selected.name] || sort.sortByEmail)();
   }
 
   startFilter() {
@@ -282,8 +290,8 @@ class Filter {
 
 class Users {
   constructor(render, filter) {
-    this.render = render;
-    this.filter = filter;
+    this.renderData = render;
+    this.filterData = filter;
     this.apiURL = `https://randomuser.me/api/`;
     this.errorMessage = `Uh oh, something has gone wrong. Please tweet us @randomapi about the issue. Thank you.`;
   }
@@ -293,10 +301,10 @@ class Users {
       const response = await fetch(this.apiURL + `?results=100&seed=abc`);
       if (!response.ok) throw new Error(errorMessage);
       const usersData = await response.json();
-      this.render.usersDataForRender = this.filter.usersDataForFilter =
+      this.renderData.usersDataForRender = this.filterData.usersDataForFilter =
         usersData.results;
-      this.render.renderProfiles();
-      this.filter.startFilter();
+      this.renderData.renderProfiles();
+      this.filterData.startFilter();
     } catch (err) {
       console.error(err);
     }
@@ -311,13 +319,21 @@ class Observer {
   }
 }
 
-const getUsersData = new Users(new Render(), new Filter());
+class Animation {
+  constructor() {
+    this.animationDuration = 7000;
+    this.preloadAnimation = setTimeout(() => {
+      document.querySelector('#preload').remove();
+      document.querySelector('body').style.setProperty('--scroll', 'auto');
+      document.querySelector('.wrapper').classList.remove('hidden');
+    }, this.animationDuration);
+  }
+}
+
+const render = new Render();
+const filter = new Filter(render);
+const getUsersData = new Users(render, filter);
+
 getUsersData.getUsersData();
-
 new Observer();
-
-setTimeout(() => {
-  document.querySelector('#preload').remove();
-  document.querySelector('body').style.setProperty('--scroll', 'auto');
-  document.querySelector('.wrapper').classList.remove('hidden');
-}, 7000);
+new Animation();
