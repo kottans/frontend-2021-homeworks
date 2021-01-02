@@ -1,27 +1,27 @@
-const enemyInfo = {
+const ENEMY_INFO = {
 	minSpeed: 100,
 	maxSpeed: 300,
 	sprite: "images/enemy-bug.png",
 	width: 75,
 	startPositionX: -75
 };
-const cellInfo = {
+const CELL_INFO = {
 	width: 101,
 	height: 83,
 	beingPositionCorrection: 28,
 };
-const playerInfo = {
+const PLAYER_INFO = {
 	sprite: "images/char-boy.png",
-	startPositionX: cellInfo.width * 2,
-	startPositionY: cellInfo.height * 5 - cellInfo.beingPositionCorrection,
+	startPositionX: CELL_INFO.width * 2,
+	startPositionY: CELL_INFO.height * 5 - CELL_INFO.beingPositionCorrection,
 };
-const playingAreaInfo = {
-	width: cellInfo.width * 5,
-	height: cellInfo.height * 5,
+const PLAYING_AREA_INFO = {
+	width: CELL_INFO.width * 4,
+	height: CELL_INFO.height * 5,
 };
 
 const generateEnemySpeed = function () {
-	return Math.floor(Math.random() * (enemyInfo.maxSpeed - enemyInfo.minSpeed)) + enemyInfo.minSpeed;
+	return Math.floor(Math.random() * (ENEMY_INFO.maxSpeed - ENEMY_INFO.minSpeed)) + ENEMY_INFO.minSpeed;
 };
 
 const Being = function (x, y, sprite) {
@@ -35,7 +35,7 @@ Being.prototype.render = function () {
 };
 
 const Enemy = function (x, y, playerInstance) {
-	Being.call(this, x, y, enemyInfo.sprite);
+	Being.call(this, x, y, ENEMY_INFO.sprite);
 	this.speed = generateEnemySpeed();
 	this.player = playerInstance;
 };
@@ -44,15 +44,15 @@ Enemy.prototype = Object.create(Being.prototype);
 
 Enemy.prototype.update = function (dt) {
 	this.x += this.speed * dt;
-	if (this.x > cellInfo.width * 5) {
-		this.x = enemyInfo.startPositionX;
+	if (this.x > CELL_INFO.width * 5) {
+		this.x = ENEMY_INFO.startPositionX;
 		this.speed = generateEnemySpeed();
 	}
 	this.checkCollision();
 };
 
 Enemy.prototype.checkCollision = function () {
-	if (this.x + enemyInfo.width >= this.player.x && this.x < this.player.x + enemyInfo.width && this.y === this.player.y) {
+	if (this.x + ENEMY_INFO.width >= this.player.x && this.x < this.player.x + ENEMY_INFO.width && this.y === this.player.y) {
 		this.win();
 	}
 };
@@ -63,7 +63,7 @@ Enemy.prototype.win = function () {
 };
 
 const Player = function (x, y) {
-	Being.call(this, x, y, playerInfo.sprite);
+	Being.call(this, x, y, PLAYER_INFO.sprite);
 };
 
 Player.prototype = Object.create(Being.prototype);
@@ -78,15 +78,15 @@ Player.prototype.win = function () {
 };
 
 Player.prototype.resetGame = function () {
-	player.x = playerInfo.startPositionX;
-	player.y = playerInfo.startPositionY;
+	player.x = PLAYER_INFO.startPositionX;
+	player.y = PLAYER_INFO.startPositionY;
 };
 
 Player.prototype.updatePosition = function (newX, newY) {
-	if (newX >= 0 && newX <= playingAreaInfo.width) {
+	if (newX >= 0 && newX <= PLAYING_AREA_INFO.width) {
 		this.x = newX;
 	}
-	if (newY >= 0 && newY <= playingAreaInfo.height) {
+	if (newY >= 0 && newY <= PLAYING_AREA_INFO.height) {
 		this.y = newY;
 	}
 	if (newY < 0) {
@@ -100,16 +100,16 @@ Player.prototype.handleInput = function (keycode) {
 		newY = this.y;
 	switch (keycode) {
 		case "up":
-			newY = this.y - cellInfo.height;
+			newY = this.y - CELL_INFO.height;
 			break;
 		case "right":
-			newX = this.x + cellInfo.width;
+			newX = this.x + CELL_INFO.width;
 			break;
 		case "down":
-			newY = this.y + cellInfo.height;
+			newY = this.y + CELL_INFO.height;
 			break;
 		case "left":
-			newX = this.x - cellInfo.width;
+			newX = this.x - CELL_INFO.width;
 			break;
 		default:
 			break;
@@ -117,10 +117,10 @@ Player.prototype.handleInput = function (keycode) {
 	this.updatePosition(newX, newY);
 };
 
-const player = new Player(playerInfo.startPositionX, playerInfo.startPositionY);
+const player = new Player(PLAYER_INFO.startPositionX, PLAYER_INFO.startPositionY);
 
-const enemyStartPostionsY = Array.from({ length: 3 }, (v, rowNum) => rowNum + 1).map((rowNumber) => cellInfo.height * rowNumber - cellInfo.beingPositionCorrection);
-const allEnemies = enemyStartPostionsY.map((posY) => new Enemy(enemyInfo.startPositionX, posY, player));
+const enemyStartPostionsY = Array.from({ length: 3 }, (element, index) => (index + 1) * CELL_INFO.height - CELL_INFO.beingPositionCorrection);
+const allEnemies = enemyStartPostionsY.map((posY) => new Enemy(ENEMY_INFO.startPositionX, posY, player));
 document.addEventListener("keyup", function (e) {
 	var allowedKeys = {
 		37: "left",
