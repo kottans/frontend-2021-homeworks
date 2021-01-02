@@ -8,12 +8,12 @@ const ENEMY_INFO = {
 const CELL_INFO = {
 	width: 101,
 	height: 83,
-	beingPositionCorrection: 28,
+	creaturePositionCorrection: 28,
 };
 const PLAYER_INFO = {
 	sprite: "images/char-boy.png",
 	startPositionX: CELL_INFO.width * 2,
-	startPositionY: CELL_INFO.height * 5 - CELL_INFO.beingPositionCorrection,
+	startPositionY: CELL_INFO.height * 5 - CELL_INFO.creaturePositionCorrection,
 };
 const PLAYING_AREA_INFO = {
 	width: CELL_INFO.width * 4,
@@ -24,23 +24,23 @@ const generateEnemySpeed = function () {
 	return Math.floor(Math.random() * (ENEMY_INFO.maxSpeed - ENEMY_INFO.minSpeed)) + ENEMY_INFO.minSpeed;
 };
 
-const Being = function (x, y, sprite) {
+const Creature = function (x, y, sprite) {
 	this.x = x;
 	this.y = y;
 	this.sprite = sprite;
 };
 
-Being.prototype.render = function () {
+Creature.prototype.render = function () {
 	ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
 const Enemy = function (x, y, playerInstance) {
-	Being.call(this, x, y, ENEMY_INFO.sprite);
+	Creature.call(this, x, y, ENEMY_INFO.sprite);
 	this.speed = generateEnemySpeed();
 	this.player = playerInstance;
 };
 
-Enemy.prototype = Object.create(Being.prototype);
+Enemy.prototype = Object.create(Creature.prototype);
 
 Enemy.prototype.update = function (dt) {
 	this.x += this.speed * dt;
@@ -63,10 +63,10 @@ Enemy.prototype.win = function () {
 };
 
 const Player = function (x, y) {
-	Being.call(this, x, y, PLAYER_INFO.sprite);
+	Creature.call(this, x, y, PLAYER_INFO.sprite);
 };
 
-Player.prototype = Object.create(Being.prototype);
+Player.prototype = Object.create(Creature.prototype);
 
 Player.prototype.update = function () {};
 
@@ -119,7 +119,7 @@ Player.prototype.handleInput = function (keycode) {
 
 const player = new Player(PLAYER_INFO.startPositionX, PLAYER_INFO.startPositionY);
 
-const enemyStartPostionsY = Array.from({ length: 3 }, (element, index) => (index + 1) * CELL_INFO.height - CELL_INFO.beingPositionCorrection);
+const enemyStartPostionsY = Array.from({ length: 3 }, (element, index) => (index + 1) * CELL_INFO.height - CELL_INFO.creaturePositionCorrection);
 const allEnemies = enemyStartPostionsY.map((posY) => new Enemy(ENEMY_INFO.startPositionX, posY, player));
 document.addEventListener("keyup", function (e) {
 	var allowedKeys = {
