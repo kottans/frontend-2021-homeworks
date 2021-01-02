@@ -51,18 +51,7 @@ fieldset {
 }
 .wrapper__sidebar-opener {
     display: none;
-    position: fixed;
-    top: 300px;
-    left: 0;
-    z-index: 1;
 }
-.wrapper__sidebar-opener-checkbox {
-    display: none;
-    position: fixed;
-    left: -999999px;
-    top: -999999px;
-}
-
 
 
 /* utils classes */
@@ -204,7 +193,7 @@ body.lock {
 
 
 /* sidebar */
-.sidebar {
+.sidebar__container {
     background-color: var(--sidebar-bg-color);
 }
 
@@ -409,22 +398,17 @@ body.lock {
     }
     .wrapper__sidebar-opener {
         display: flex;
-        top: 302px;
-        transform: translateX(-90%);
+        transform: translateX(10%);
         transition: transform 1s ease;
     }
-    .wrapper__sidebar-opener-checkbox {
-        display: block;
-    }
-    .wrapper__sidebar {
-        transform: translateX(-200%);
-        transition: transform 1s ease;
-    }
-    .wrapper__sidebar-opener-checkbox:checked ~ .wrapper__sidebar {
+    .wrapper__sidebar-opener--active {
         transform: translateX(0);
     }
-    .wrapper__sidebar-opener-checkbox:checked ~ .wrapper__sidebar-opener {
-        border-top-right-radius: 0;
+    .wrapper__sidebar {
+        transform: translateX(-100%);
+        transition: transform 1s ease;
+    }
+    .wrapper__sidebar--active {
         transform: translateX(0);
     }
     .card {

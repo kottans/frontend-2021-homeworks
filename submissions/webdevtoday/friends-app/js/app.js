@@ -15,8 +15,18 @@ const sortAndFiltersState = {
     // sorts:
     sort: null,
 };
+
+const sidebar = document.getElementsByClassName('sidebar')[0];
+const sidebarOpener = document.getElementsByClassName('sidebar-opener')[0];
 const sidebar__container = document.getElementsByClassName('sidebar__container')[0];
 const cards = document.getElementsByClassName('cards')[0];
+
+function addListenerToAsideOpener() {
+    sidebarOpener.addEventListener('click', () => {
+        sidebarOpener.classList.toggle('wrapper__sidebar-opener--active');
+        sidebar.classList.toggle('wrapper__sidebar--active');
+    });
+}
 
 function addListenerToResetButton() {
     document.querySelector('[type=reset]').addEventListener('click', () => {
@@ -72,6 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 sidebar__container.append(makeForm());
                 addListenerToForm();
                 addListenerToResetButton();
+                addListenerToAsideOpener();
                 disableProloader();
                 unlockBody();
             })
