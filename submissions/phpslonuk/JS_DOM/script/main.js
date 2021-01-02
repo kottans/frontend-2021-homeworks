@@ -1,9 +1,4 @@
-const ELEMENTS = document.querySelectorAll('.nav-list');
-const TITLE = document.querySelector('.title');
-const COUNTRY_IMG = document.querySelector('.country-img');
-const COUNTRY_DESCRIPTION = document.querySelector('.country-description');
-
-const DB = [
+const DATABASE = [
 	{
 		image: "https://raw.githubusercontent.com/phpslonuk/JS_DOM/main/img/Ukraine.jpg",
 		title: "Різдво в Україні",
@@ -92,25 +87,55 @@ const DB = [
 	}
 ]
 
-ELEMENTS.forEach(elem => {
-	elem.addEventListener("click", getElementAttribute)
-})
 
-function doWithElement(db, index) {
-	TITLE.innerHTML = db[index].title;
-	COUNTRY_IMG.src = db[index].image;
-	COUNTRY_DESCRIPTION.innerHTML = db[index].description;
+const doWithElement = function (db, index) {
+	document.querySelector(".title").innerHTML = db[index].title;
+	document.querySelector(".country-img").src = db[index].image;
+	document.querySelector(".country-description").innerHTML = db[index].description;
+
+
 }
 
-function getElementAttribute(e) {
-	let index;
-	if (e.target.nodeName == 'A') {
-		index = e.path[1].attributes[1].nodeValue;
-	} else {
-		index = e.target.attributes[1].nodeValue;
-	}
+const getElementAttribute = function (e) {
+	let index = e.target.dataset.index;
+	doWithElement(DATABASE, index);
 
-	doWithElement(DB, index);
-	
 }
 
+const createContent = function () {
+	let content = document.querySelector(".main");
+	let article = document.createElement("article");
+	article.className = "article";
+	article.innerHTML = `
+	    <div>
+        <h2 class="title">Kottans i wish you a Merry Christmas</h2>
+        </div>
+        <p class="country-description">Привіт всім, я радий вас тут вітати, бажаю всім пройти цей курс і
+          отримати від нього максимум знань і задоволення. Можливо не всім вийде попасти на наступний рівень
+          але Новий Рік і Різдво ніхто не пропустить, тому всього вам найкращого у наступному році КОТАНИ
+          !!!!!</p>
+        <img class="country-img" src="https://raw.githubusercontent.com/phpslonuk/JS_DOM/main/img/kitten-sleeping.jpg" alt="country">`;
+
+	let navigation = document.createElement("nav");
+	navigation.className = "navbar";
+	let navList = document.createElement("ul");
+	navList.className = "main-menu";
+
+	DATABASE.forEach(function (item, i) {
+		let li = document.createElement("li");
+		li.className = "nav-list";
+		li.setAttribute("data-index", i);
+		li.addEventListener("click", getElementAttribute)
+
+		let text = document.createTextNode(item.alt);
+		li.appendChild(text);
+		navList.appendChild(li);
+	});
+
+	navigation.appendChild(navList);
+	content.appendChild(navigation);
+	content.appendChild(article);
+
+}
+
+createContent();

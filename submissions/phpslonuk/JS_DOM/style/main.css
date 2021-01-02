@@ -31,7 +31,7 @@ p {
 }
 
 .header {
-	background-image: url(../img/merry-christmas2.jpg);
+	background-image: url(https://raw.githubusercontent.com/phpslonuk/JS_DOM/main/img/merry-christmas2.jpg);
 	height: 278px;
 	background-color: #cccccc;
 }
@@ -42,6 +42,7 @@ p {
 
 .country-img {
 	width: 100%;
+	max-height: 600px;
 	height: auto;
 }
 
@@ -52,7 +53,6 @@ ul.main-menu {
 	font-family: 13px;
 	font-weight: 300;
 	list-style: none;
-	/*position: absolute;*/
 	cursor: pointer;
 }
 
