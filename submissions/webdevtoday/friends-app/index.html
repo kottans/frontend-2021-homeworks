@@ -3,11 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Friends-App</title>
+    <title>Friends App</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-    <div class="wrapper"></div>
+<body class="lock">
+    <div class="preloader"></div>
+    <div class="wrapper">
+        <div class="wrapper__container">
+            <main class="main wrapper__main">
+                <div class="main__container">
+                    <div class="cards"></div>
+                </div>
+            </main>
+
+            <input type="checkbox" class="wrapper__sidebar-opener-checkbox sidebar-opener-checkbox" id="sidebar-opener-flag">
+            <label class="wrapper__sidebar-opener sidebar-opener" for="sidebar-opener-flag">
+                <span>Sort & Filter</span>
+                <span>></span>
+            </label>
+            <aside class="sidebar wrapper__sidebar">
+                <div class="sidebar__container"></div>
+            </aside>
+        </div>
+    </div>
 
     <script type="module" src="js/app.js"></script>
 </body>

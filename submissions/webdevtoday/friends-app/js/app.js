@@ -1,44 +1,84 @@
-import {Controller} from './Controller.js';
-import { Route } from './Route.js';
-import Cache from './components/Cache.js';
+import { getUsers } from './components/RandomUserAPI.js';
+import { normalizeUsers } from './components/normalizeUsers.js';
+import { makeCard } from './components/makeCard.js';
+import { oops } from './components/oops.js';
+import { makeForm } from './components/makeForm.js';
+import { sortAndFiltersFunctions } from './components/sortAndFiltersFunctions.js';
+
+let users = [];
+const sortAndFiltersState = {
+    // filters:
+    age: null,
+    name: null,
+    gender: null,
+
+    // sorts:
+    sort: null,
+};
+const sidebar__container = document.getElementsByClassName('sidebar__container')[0];
+const cards = document.getElementsByClassName('cards')[0];
+
+function addListenerToResetButton() {
+    document.querySelector('[type=reset]').addEventListener('click', () => {
+        sortAndFiltersState.age = null;
+        sortAndFiltersState.name = null;
+        sortAndFiltersState.gender = null;
+        sortAndFiltersState.sort = null;
+        cards.innerHTML = '';
+        cards.append( ...users.map(makeCard) );
+    })
+}
+
+function addListenerToForm() {
+    const form = document.forms.sortingAndFiltering;
+
+    form.addEventListener('input', ({target}) => {
+        if (sortAndFiltersState.hasOwnProperty(target.name)) {
+            sortAndFiltersState[target.name] = target.value;
+        }
+
+        let copyUsers = [...users];
+
+        for (let key in sortAndFiltersState) {
+            if (sortAndFiltersState[key] === null) continue;
+
+            if (key === 'sort') {
+                copyUsers.sort(sortAndFiltersFunctions(sortAndFiltersState[key]));
+            } else {
+                copyUsers = copyUsers.filter(sortAndFiltersFunctions(key)(sortAndFiltersState[key]));
+            }
+        }
+
+        cards.innerHTML = '';
+        cards.append( ...copyUsers.map(makeCard) );
+
+    });
+}
+
+function disableProloader() {
+    document.getElementsByClassName('preloader')[0].style.display = 'none';
+}
+function unlockBody() {
+    document.body.classList.remove('lock');
+}
 
 document.addEventListener('DOMContentLoaded', () => {
-    "use strict";
-
-    const mainContent = document.querySelector('.wrapper');
-
-    const cache = new Cache();
-    const controller = new Controller(mainContent, cache);
-    const route = new Route(controller, {
-        'home': 'Home',
-    });
-
-    function updatestate(state) {
-        if (!state) return;
-        history.pushState(state, '', state.page);
-        if (state.page === '') {
-            location.hash = '#home';
-            route.to('home', state.params);
-            return true;
-        }
-        location.hash = state.page;
-        route.to(state.hash.slice(1), state.params);
-        return true;
-    };
-
-    function makeStateFromHash(urlhash) {
-        if (urlhash.indexOf('?')) {
-            const [hash, params] = urlhash.split('?');
-            return {page: urlhash, hash: hash, params: params}
-        }
-        return { page: urlhash, hash: urlhash, params: '' };
-    }
-
-    window.addEventListener('popstate', () => {
-        const state = makeStateFromHash(location.hash);
-        history.pushState(state, '', state.page);
-        updatestate(state);
-    });
-
-    updatestate(makeStateFromHash(location.hash));
+    (async () => {
+        getUsers()
+            .then(res => res.json())
+            .then(({results}) => {
+                users = results.map(normalizeUsers);
+                cards.append(...users.map(makeCard));
+                sidebar__container.append(makeForm());
+                addListenerToForm();
+                addListenerToResetButton();
+                disableProloader();
+                unlockBody();
+            })
+            .catch(err => {
+                cards.append(oops());
+                disableProloader();
+                console.log(err);
+            });
+    })();
 });

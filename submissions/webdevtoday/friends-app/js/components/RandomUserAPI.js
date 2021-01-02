@@ -1,20 +1,9 @@
-export class RandomUserAPI {
-    constructor(url_settings) {
-        this.url_settings = url_settings;
+export async function getUsers() {
+    const API_URL = new URL('https://randomuser.me/api/');
+    API_URL.searchParams.set('inc', 'gender,name,location,email,registered,dob,picture,phone');
+    API_URL.searchParams.set('noinfo', '');
+    API_URL.searchParams.set('results', '100');
+    API_URL.searchParams.set('seed', 'msfa');
 
-        this.url = new URL(this.url_settings.main_url);
-        this.url_settings.params.forEach(param => {
-            this.url.searchParams.set(param.key, param.value);
-        });
-    }
-
-    async getUsersPromise() {
-        const res = await fetch(this.url);
-        if (res.ok) { // если HTTP-статус в диапазоне 200-299
-            // получаем тело ответа (см. про этот метод ниже)
-            return await res.json();
-        } else {
-            console.log(`Ошибка HTTP: ${res.status}`);
-        }
-    }
+    return await fetch(API_URL);
 }
