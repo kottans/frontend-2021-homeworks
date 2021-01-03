@@ -35,7 +35,6 @@ const CARDS_ARRAY = [
 const CARDS_CONTAINER = document.getElementById("cards_container");
 const TURN_DELAY = 900;
 const openedNow = []; //will contain array of two cards(Dom objects), implemented to avoid bugs on checking
-let solvedPairsCount = 0;
 let startTime = Date.now();
 
 const shuffleArray = (array) => array.sort(() => 0.5 - Math.random());
@@ -67,7 +66,6 @@ const checkPair = (twoCardsArray) => {
 				card.classList.add("solved");
 			}, TURN_DELAY);
 		});
-		solvedPairsCount++;
 	}
 	twoCardsArray.forEach((card) => {
 		setTimeout(() => {
@@ -84,7 +82,6 @@ const checkIfWin = () => {
 }
 
 const startGame = () => {
-	solvedPairsCount = 0;
 	CARDS_CONTAINER.innerHTML = "";
 	CARDS_CONTAINER.append(getAllCardsHTML());
 	startTime = Date.now();
