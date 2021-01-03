@@ -1,26 +1,67 @@
-function Inhabitant(species, name, gender, legs, hands, saying) {
-   this.species = species;
-   this.name = name;
-   this.gender = gender;
-   this.legs = legs;
-   this.hands = hands;
-   this.saying = saying;
+class Inhabitant {
+   constructor(species, name, gender, legs, hands, saying) {
+      this.species = species;
+      this.name = name;
+      this.gender = gender;
+      this.legs = legs;
+      this.hands = hands;
+      this.saying = saying;
+      this.friends = [];
+   }
+
+   addFriends(...friends) {
+      this.friends = [...friends];
+   }
+
+   createOutput() {
+      return `Hello there :wave: My species is ${this.species}, my name is ${this.name} and I'm ${this.gender} with ${this.legs} legs and ${this.hands} hands. 
+      My favourite quote: ${this.saying} for my Best friends: ${this.friends[0].map(friend => friend.name).join(', ')}`;
+   }
 };
 
-Inhabitant.prototype.addFriends = function (...friends) {
-   this.friends = friends;
+class Human extends Inhabitant {
+   constructor(name, gender, saying) {
+      super('human', name, gender, 2, 2, saying);
+   }
 }
 
-Inhabitant.prototype.createOutput = function () {
-   return `Hello there :wave: My species is ${this.species}, my name is ${this.name} and I'm ${this.gender} with ${this.legs} legs and ${this.hands} hands. 
-      My favourite quote: ${this.saying} for my Best friends: ${this.friends[0].map(friend => friend.name).join(', ')}`;
+class Man extends Human {
+   constructor(name, saying) {
+      super(name, 'male', saying);
+   }
 }
 
-const boi = new Inhabitant('human', 'Dadia Fedor', 'male', 2, 2, 'Я ничей. Я сам по себе мальчик. Свой собственный.');
-const mama = new Inhabitant('human', 'Rimma', 'female', 2, 2, 'Это не техника дошла, а я сама сюда дошла, на лыжах!');
-const papa = new Inhabitant('human', 'Dmitriy', 'male', 2, 2, 'Здравствуйте! Угадайте, кто я?');
-const pes = new Inhabitant('dog', 'Sharik', 'male', 4, 0, 'Попрошу внимания! Сделайте, пожалуйста, умные лица!');
-const kot = new Inhabitant('cat', 'Matroskin', 'male', 4, 0, 'Не правильно ты, дядя Фёдор, бутерброд ешь...');
+class Woman extends Human {
+   constructor(name, saying) {
+      super(name, 'female', saying);
+   }
+}
+
+class Animal extends Inhabitant {
+   constructor(species, name, gender, saying) {
+      super(species, name, gender, 4, 0, saying);
+   }
+}
+
+class Cat extends Animal {
+   constructor(name, gender, saying) {
+      super('cat', name, gender, saying);
+
+   }
+}
+
+class Dog extends Animal {
+   constructor(name, gender, saying) {
+      super('dog', name, gender, saying);
+
+   }
+}
+
+const boi = new Man('Dadia Fedor', 'Я ничей. Я сам по себе мальчик. Свой собственный.');
+const mama = new Woman('Rimma', 'Это не техника дошла, а я сама сюда дошла, на лыжах!');
+const papa = new Man('Dmitriy', 'Здравствуйте! Угадайте, кто я?');
+const pes = new Dog('Sharik', 'male', 'Попрошу внимания! Сделайте, пожалуйста, умные лица!');
+const kot = new Cat('Matroskin', 'male', 'Не правильно ты, дядя Фёдор, бутерброд ешь...');
 
 boi.addFriends([mama, papa, kot, pes]);
 mama.addFriends([boi, papa]);
