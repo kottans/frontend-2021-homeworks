@@ -24,6 +24,11 @@ const prStates = [
   "merged",
 ];
 
+const parsingRegex = {
+  pr: /^(?<prn>\d+)\t.+\t(?<author>.+):.*$/mg,
+  issue: /^(?<issuen>\d+).+\t(?<author>.+):.*\t(?<labels>.*)\t.*$/mg,
+};
+
 const url = {
   prListFilteredByAuthorPrefix: baseRepoUrl + "pulls?q=is%3Apr+author%3A",
   prPrefix: baseRepoUrl + "pull/",
@@ -32,41 +37,31 @@ const url = {
 
 const statsFileName = "./pr-stats.md";
 
-main();
+main()
+  .then(() => console.log("\nAll done"));
 
 async function main() {
   let prDataByAuthor = {}, issueDataByAuthor = {};
   try {
     prDataByAuthor = await collectPullRequestData(prLabels, prStates);
   } catch (e) {
-    console.error('ERROR: Failed to collect PR data', e);
+    console.error('ERROR: Failed to fetch PR data', e);
     return;
   }
   try {
     issueDataByAuthor = await collectIssueData(prLabels);
   } catch (e) {
-    console.error('ERROR: Failed to collect issue data', e);
+    console.error('ERROR: Failed to fetch issue data', e);
     return;
   }
-  Object.keys(issueDataByAuthor)
-    .forEach(authorName => {
-      prDataByAuthor[authorName] = {
-        ...issueDataByAuthor[authorName],
-        ...prDataByAuthor[authorName],
-      };
-    });
+  prDataByAuthor = mergeObjects(prDataByAuthor, issueDataByAuthor);
   const orderedAuthors = Object.keys(prDataByAuthor)
     .map(authorName => ({
       author: authorName,
       prs: Object.keys(prDataByAuthor[authorName]).length,
     }))
-    .sort((a,b) => {
-      if (a.prs === b.prs) {
-        if (a.author.toLowerCase() < b.author.toLowerCase()) return -1;
-        return 1;
-      }
-      return b.prs - a.prs;
-    }).map(authorStats => authorStats.author);
+    .sort(makeComparator("prs", "author"))
+    .map(authorStats => authorStats.author);
   const table = [
     "# Open and merged PRs by task labels",
     "",
@@ -81,7 +76,7 @@ async function main() {
     "",
   ].join("\n");
   const ioResult = await saveStatsToAFile(statsFileName, table);
-  console.log(`Saving stats ${statsFileName}: ${ioResult}`);
+  console.log(`\nSaving stats ${statsFileName}: ${ioResult}`);
 }
 
 async function saveStatsToAFile(fileName, text) {
@@ -96,10 +91,11 @@ async function saveStatsToAFile(fileName, text) {
 
 function makeMDtable(authors, labels, dataByAuthor) {
   const columnDelimiter = " | ";
-  const rows = [];
+  const rows = [
+    'author' + columnDelimiter + labels.join(columnDelimiter),
+    "--- | ".repeat(labels.length) + "---",
+  ];
   let coveredTasksCountLatest = Number.MAX_SAFE_INTEGER;
-  rows.push('author' + columnDelimiter + labels.join(columnDelimiter));
-  rows.push("--- | ".repeat(labels.length) + "---");
   authors.forEach(authorName => {
     const coveredTasksCount = Object.keys(dataByAuthor[authorName]).length;
     if (coveredTasksCount < coveredTasksCountLatest) {
@@ -127,9 +123,9 @@ function makePrListUrl(authorName) {
 
 function makePrUrl(prn, state) {
   let anchorText =
-    (state === 'm' ? "**" : "") +
+    (state[0] === 'm' ? "**" : "") +
     `#${prn}` +
-    (state === 'm' ? "**" : ` ${state}`);
+    (state[0] === 'm' ? "**" : ` ${state[0]}`);
   return `[${anchorText}](${url.prPrefix}${prn})`;
 }
 
@@ -145,10 +141,9 @@ async function collectPullRequestData(prLabels, prStates) {
             const data = await exec(command);
             const prs = parsePrsData(data.stdout);
             prs.forEach(({prn, author}) => {
-              if (!dataByAuthor[author]) dataByAuthor[author] = {};
-              dataByAuthor[author][label] = {
-                prn,
-                state,
+              dataByAuthor[author] = {
+                ...dataByAuthor[author],
+                [label]: { prn, state },
               };
             });
           } catch(e) {
@@ -168,11 +163,10 @@ async function collectIssueData(prLabels) {
   const data = await exec(fetchIssueListGhCommand(prLabels));
   const issues = parseIssuesData(data.stdout);
   issues.forEach(({issuen, author, labels}) => {
-    if (!dataByAuthor[author]) dataByAuthor[author] = {};
     labels.forEach(label => {
-      dataByAuthor[author][label] = {
-        prn: issuen,
-        state: "issue",
+      dataByAuthor[author] = {
+        ...dataByAuthor[author],
+        [label]: { prn: issuen, state: "issue" },
       };
     });
   });
@@ -180,26 +174,18 @@ async function collectIssueData(prLabels) {
 }
 
 function parsePrsData(data) {
-  const result = [];
-  const matches = data.matchAll(/^(?<prn>\d+)\t.+\t(?<author>.+):.*$/mg);
-  for (const match of matches) {
-    result.push(match.groups);
-  }
-  return result;
+  const matches = data.matchAll(parsingRegex.pr);
+  return Array.from(matches, ({groups}) => groups);
 }
 
 function parseIssuesData(data) {
-  const result = [];
-  const matches = data.matchAll(/^(?<issuen>\d+).+\t(?<author>.+):.*\t(?<labels>.*)\t.*$/mg);
-  for (const match of matches) {
-    const {issuen, author, labels} = match.groups;
-    result.push({
-      issuen,
-      author,
-      labels: labels.split(", "),
-    });
-  }
-  return result;
+  const matches = data.matchAll(parsingRegex.issue);
+  return Array.from(matches,
+    ({ groups: {
+      issuen, author, labels,
+    }}) => ({
+      issuen, author, labels: labels.split(", "),
+    }));
 }
 
 function fetchPrListGhCommand(label, state) {
@@ -211,4 +197,28 @@ function fetchIssueListGhCommand(labels) {
     "gh issue list --state all --limit 200 ",
     ...labels.map(label => `"${label}"`),
   ].join(" --label ");
+}
+
+function makeComparator(primaryKeyNumericDescending, secondaryKeyAlphaAscendingCaseInsensitive) {
+  return function (a, b) {
+    const [aPk, bPk] = [a, b].map(item => item[primaryKeyNumericDescending]);
+    if (aPk === bPk) {
+      const [aSk, bSk] = [a, b].map(item => item[secondaryKeyAlphaAscendingCaseInsensitive].toLowerCase());
+      if (aSk < bSk) return -1;
+      return 1;
+    }
+    return bPk - aPk;
+  }
+}
+
+function mergeObjects(primaryObject, secondaryObject) {
+  const mergedObject = {...primaryObject};
+  Object.keys(secondaryObject)
+    .forEach(key => {
+      mergedObject[key] = {
+        ...secondaryObject[key],
+        ...primaryObject[key],
+      };
+    });
+  return mergedObject;
 }
