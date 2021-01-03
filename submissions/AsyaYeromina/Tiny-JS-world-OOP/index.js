@@ -35,14 +35,18 @@ class Animal extends Inhabitant {
       this.speech,
       this.friends,
     ]
-      .map((propertyValue) =>
-      (propertyValue == this.tail && propertyValue == true) ? propertyValue = 'has tail' : propertyValue
-      )
-      .map((propertyValue) =>
-        Array.isArray(propertyValue) ? propertyValue.join(", ") : propertyValue
-      )
-      .join("; ");
-  }
+    .map((propertyValue) =>
+    propertyValue == this.tail && propertyValue === true
+      ? (propertyValue = "has tail")
+      : propertyValue == this.tail && propertyValue === false
+      ? (propertyValue = "no tail")
+      : propertyValue
+    )
+    .map((propertyValue) =>
+      Array.isArray(propertyValue) ? propertyValue.join(", ") : propertyValue
+    )
+    .join("; ");
+    }
 }
 
 class Canis extends Animal {
