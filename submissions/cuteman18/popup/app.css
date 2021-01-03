@@ -82,6 +82,10 @@ span {
 .dropDown:focus ~ .holder { 
   outline: 2px solid blue; 
 }
+.button:focus ~ .more { 
+  color: yellow;
+  background: green; 
+}
 .button:checked ~ .more { 
   display: none; 
 }
