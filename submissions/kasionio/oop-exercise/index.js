@@ -15,13 +15,27 @@ class Inhabitant {
       this.legs = legs;
       this.saying = saying;
   }
+  getOutput() {
+    const properties = ['species', 'name', 'gender', 'legs', 'saying'];
+    return properties.map(prop => prop + ':'+ this[prop])
+    .join('; '); 
+  }
 }
 
-class Human extends Inhabitant {
-  constructor(name, gender, saying, hands) {
-      super('human', name, gender, 2, saying);
+class HumanBeing extends Inhabitant {
+  constructor(species, name, gender, saying, hands) {
+      super(species, name, gender, 2, saying);
       this.hands = 2;
   }
+  getOutput() {
+    return super.getOutput() + '; hands: ' + this.hands;
+  } 
+}
+
+class Human extends HumanBeing {
+  constructor(name, gender, saying) {
+    super('human', name, gender, saying);
+}
 }
 
 class Man extends Human {
@@ -50,13 +64,17 @@ class Dog extends Animal {
 
 class Cat extends Animal {
   constructor(name, gender) {
-      super('cat', name, gender, 'meow');
+      super('cat', name, gender);
+      this.saying = Cat.say()
   }
+  static say() {
+    return 'meow';
+  } 
 }
 
-class CatWoman extends Inhabitant {
+class CatWoman extends HumanBeing {
   constructor(name) {
-      super('catWoman', name, 'female', 2, cat.saying);
+      super('catWoman', name, 'female', Cat.say());
   }
 }
 
@@ -67,10 +85,5 @@ let dog = new Dog('Toby', 'male');
 let catWoman = new CatWoman('Betty');
 
 const inhabitants = [man, woman, catWoman, cat, dog];
-const properties = ['species', 'name', 'gender', 'legs', 'hands', 'saying'];
 
-const message = (inhabitants) => inhabitants.map(inhabitant => properties.map(prop => inhabitant[prop] ? inhabitant[prop] : 'undefined')
-  .join('; '))
-  .join('\n');
-
-print(message(inhabitants));
+inhabitants.forEach(inhabitant => print(inhabitant.getOutput()))
