@@ -92,7 +92,7 @@ function makeMDtable(authors, labels, dataByAuthor) {
       makePrListUrl(authorName),
       ...labels.map(label =>
         dataByAuthor[authorName][label]
-          ? makePrUrl(dataByAuthor[authorName][label].prn, dataByAuthor[authorName][label].state[0])
+          ? makePrUrl(dataByAuthor[authorName][label].prNr, dataByAuthor[authorName][label].state[0])
           : " "
       )].join(columnDelimiter)
     );
@@ -104,12 +104,12 @@ function makePrListUrl(authorName) {
   return `[${authorName}](${url.prListFilteredByAuthorPrefix + authorName})`;
 }
 
-function makePrUrl(prn, state) {
+function makePrUrl(prNr, state) {
   let anchorText =
     (state[0] === 'm' ? "**" : "") +
-    `#${prn}` +
+    `#${prNr}` +
     (state[0] === 'm' ? "**" : ` ${state[0]}`);
-  return `[${anchorText}](${url.prPrefix}${prn})`;
+  return `[${anchorText}](${url.prPrefix}${prNr})`;
 }
 
 async function collectPullRequestData(prLabels, prStates) {
@@ -122,10 +122,10 @@ async function collectPullRequestData(prLabels, prStates) {
         try {
           const data = await exec(command);
           const prs = parsePrsData(data.stdout);
-          prs.forEach(({prn, author}) => {
+          prs.forEach(({prNr, author}) => {
             dataByAuthor[author] = {
               ...dataByAuthor[author],
-              [label]: { prn, state },
+              [label]: { prNr, state },
             };
           });
         } catch(e) {
@@ -144,11 +144,11 @@ async function collectIssueData(prLabels) {
   try {
     const data = await exec(command);
     const issues = parseIssuesData(data.stdout);
-    issues.forEach(({issuen, author, labels}) => {
+    issues.forEach(({issueNr, author, labels}) => {
       labels.forEach(label => {
         dataByAuthor[author] = {
           ...dataByAuthor[author],
-          [label]: { prn: issuen, state: "issue" },
+          [label]: { prNr: issueNr, state: "issue" },
         };
       });
     });
@@ -168,9 +168,9 @@ function parseIssuesData(data) {
   const matches = data.matchAll(parsingRegex.issue);
   return Array.from(matches,
     ({ groups: {
-      issuen, author, labels,
+      issueNr, author, labels,
     }}) => ({
-      issuen, author, labels: labels.split(", "),
+      issueNr, author, labels: labels.split(", "),
     }));
 }
 

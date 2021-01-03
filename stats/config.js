@@ -16,8 +16,8 @@ const prStates = [
 ];
 
 const parsingRegex = {
-  pr: /^(?<prn>\d+)\t.+\t(?<author>.+):.*$/mg,
-  issue: /^(?<issuen>\d+).+\t(?<author>.+):.*\t(?<labels>.*)\t.*$/mg,
+  pr: /^(?<prNr>\d+)\t.+\t(?<author>.+):.*$/mg,
+  issue: /^(?<issueNr>\d+).+\t(?<author>.+):.*\t(?<labels>.*)\t.*$/mg,
 };
 
 const url = {
