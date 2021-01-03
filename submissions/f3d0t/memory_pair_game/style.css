@@ -91,6 +91,7 @@ body{
 }
 .card__front, .card__back {
     backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
     position: absolute; 
     top: 0;
     left: 0;
@@ -154,7 +155,7 @@ body{
 		display: none;
 	}
 	main{
-		height: 100%;
+		height: calc(100vh - 120px);
 	}
 	.cards_container{
 		width: 100%;
