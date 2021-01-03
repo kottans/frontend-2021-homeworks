@@ -31,7 +31,7 @@
     border-color: var(--gold-color);
 }
 
-.page-link-item--current .page-link {
+.page-link-item--selected .page-link {
     background-color: var(--green-color);
     color: var(--gold-color);
     border-color: var(--gold-color);

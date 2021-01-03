@@ -5,89 +5,69 @@ import { IconList } from './icon-list.js';
 
 export class FilterGroup {
     constructor(userService, pageLinkList){
-        this.defineElement(userService, pageLinkList);
-        this.defineElementMethods();
-
-        return this.element;
-    }
-
-    defineElement(userService, pageLinkList){
         const categories = ['sort', 'search'];
-        const filtersModules = [sortFiltersModule,
-                                searchFiltersModule];
-
-        [this[`${categories[0]}FilterClasses`],
-         this[`${categories[1]}FilterClasses`]] = filtersModules.map(filtersModule =>
-            Object.values(filtersModule)
-        );
+        const sortFilterClasses = Object.values(sortFiltersModule);
+        const searchFilterClasses = Object.values(searchFiltersModule);
 
         this.element = document.createElement('div');
         this.element.classList.add('filter-group');
-        this.element.userService = userService;
-        this.element.pageLinkList = pageLinkList;
+        this.element.addEventListener('click', e => this.performFiltering(e));
+        this.element.addEventListener('input', e => this.performFiltering(e));
 
-        [this.element[`${categories[0]}Filters`],
-         this.element[`${categories[1]}Filters`]] = categories.map(category =>
-            this[`${category}FilterClasses`].map(FilterClass =>
-                new FilterClass(category, userService))
-        );
+        this.userService = userService;
+        this.pageLinkList = pageLinkList;
 
-        this.element.filters = categories.reduce((res, category) => {
-            res.push(...this.element[`${category}Filters`]);
-            return res;
-        }, []);
+        this.sortFilters = sortFilterClasses
+            .map(FilterClass => new FilterClass(categories[0], userService));
+        this.searchFilters = searchFilterClasses
+            .map(FilterClass => new FilterClass(categories[1], userService));
+        this.filters = this.sortFilters.concat(this.searchFilters);
 
-        [this.element[`${categories[0]}FilterList`],
-         this.element[`${categories[1]}FilterList`]] = categories.map(category =>
-            new FilterList(this.element[`${category}Filters`], category)
-        );
+        this.sortFilterList = new FilterList(this.sortFilters, categories[0]);
+        this.searchFilterList = new FilterList(this.searchFilters, categories[1]);
 
-        [this.element[`${categories[0]}IconList`],
-         this.element[`${categories[1]}IconList`]] = categories.map(category =>
-            new IconList(this.element[`${category}FilterList`], category)
-        );
+        this.sortIconList = new IconList(this.sortFilterList, categories[0]);
+        this.searchIconList = new IconList(this.searchFilterList, categories[1]);
 
-        this.element.append(...categories.map(category => {
+        const filterSubGroups = categories.map(category => {
             const filterSubGroup = document.createElement('div');
             filterSubGroup.classList.add(`${category}-filter-subgroup`);
-            filterSubGroup.innerHTML = `<h3 class="filter-subgroup__heading">${categories[0]}</h3>`;
+            filterSubGroup.innerHTML = `<h3 class="filter-subgroup__heading">${category}</h3>`;
 
-            filterSubGroup.append(this.element[`${category}IconList`],
-                                  this.element[`${category}FilterList`]);
+            filterSubGroup.append(this[`${category}IconList`].element,
+                                  this[`${category}FilterList`].element);
             return filterSubGroup;
-        }));
+        });
+
+        this.element.append(...filterSubGroups);
     }
 
-    defineElementMethods(){
-        this.element.performFiltering = function({target}){
-            if(target.classList.contains('filter-item__option')){
-                const filter = target.closest('.filter-item');
+    performFiltering({target}){
+        if(target.classList.contains('filter-item__option')){
+            const filterElement = target.closest('.filter-item');
+            const filter = this.filters.find(filter => filter.element === filterElement);
 
-                if(this.isSortFilterSelected(filter)) this.resetSortFiltersStates();
-                this.setFilterState(target, filter);
-                this.userService.resetUsers();
-                this.filterUsers();
-                this.pageLinkList.performPagination();
-            }
-        };
+            if(this.isSortFilterSelected(filter)) this.resetSortFiltersStates();
+            this.setFilterState(target, filter);
+            this.userService.resetUsers();
+            this.filterUsers();
+            this.pageLinkList.performPagination();
+        }
+    }
 
-        this.element.addEventListener('click', this.element.performFiltering);
-        this.element.addEventListener('input', this.element.performFiltering);
+    isSortFilterSelected(filter){
+        return filter.category === 'sort';
+    }
 
-        this.element.isSortFilterSelected = function(filter){
-            return filter.classList.contains('sort-filter-item');
-        };
+    resetSortFiltersStates(){
+        this.sortFilters.forEach(filter => filter.resetState());
+    }
 
-        this.element.resetSortFiltersStates = function(){
-            this.sortFilters.forEach(filter => filter.resetState());
-        };
+    setFilterState(filterOptionElement, filter){
+        filter.setState(filterOptionElement);
+    }
 
-        this.element.setFilterState = function(filterOption, filter){
-            filter.setState(filterOption);
-        };
-
-        this.element.filterUsers = function(){
-            this.filters.forEach(filter => filter.applyAccordingToState());
-        };
+    filterUsers(){
+        this.filters.forEach(filter => filter.applyAccordingToState());
     }
 }

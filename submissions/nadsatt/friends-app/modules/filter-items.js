@@ -1,12 +1,7 @@
 import svgs from './svgs.js';
 
 class Filter {
-    constructor(...args){
-        this.defineElement(...args);
-        this.defineElementMethods();
-    }
-
-    defineElement(optionsHTML, property, category, userService){
+    constructor(optionsHTML, property, category, userService){
         this.element = document.createElement('li');
         this.element.innerHTML =
             `<div class="filter-item__options">
@@ -15,45 +10,31 @@ class Filter {
             </div>`;
         this.element.classList.add('filter-item', `${category}-filter-item`);
 
-        this.element.classNames = {
-            openedFilter: 'filter-item--opened',
-            activatedOption: 'filter-item__option--activated'
+        this.property = property;
+        this.category = category;
+        this.name = `${property}-${category}`;
+        this.userService = userService;
+        this.defaultState = 'none';
+        this.defaultOptionElement = this.element.querySelector(`[data-state="${this.defaultState}"]`);
+        this.settedState = this.defaultState;
+        this.activatedOptionElement = this.defaultOptionElement;
+        this.classNames = {
+            openedFilterElement: 'filter-item--opened',
+            activatedOptionElement: 'filter-item__option--activated'
         };
-
-        this.element.property = property;
-        this.element.category = category;
-        this.element.name = `${property}-${category}`;
-        this.element.userService = userService;
-
-        this.element.defaultState = 'none';
-        this.element.defaultOption = this.element.querySelector(`[data-state="${this.element.defaultState}"]`);
-        this.element.settedState = this.element.defaultState;
-        this.element.activatedOption = this.element.defaultOption;
-    }
-
-    defineElementMethods(){
-        // copy methods to avoid methods duplication in different instances
-        this.element.open = this.open;
-        this.element.close = this.close;
-        this.element.setState = this.setState;
-        this.element.applyAccordingToState = this.applyAccordingToState;
-        this.element.deactivateOptionAndIcon = this.deactivateOptionAndIcon;
-        this.element.activateOptionAndIcon = this.activateOptionAndIcon;
-        this.element.updateOptionAndState = this.updateOptionAndState;
-        this.element.getCapitalizedState = this.getCapitalizedState;
     }
 
     open(){
-        this.classList.add(this.classNames.openedFilter);
+        this.element.classList.add(this.classNames.openedFilterElement);
     }
 
     close(){
-        this.classList.remove(this.classNames.openedFilter);
+        this.element.classList.remove(this.classNames.openedFilterElement);
     }
 
-    setState(option){
+    setState(optionElement){
         this.deactivateOptionAndIcon();
-        this.updateOptionAndState(option);
+        this.updateOptionAndState(optionElement);
         if(this.settedState !== this.defaultState) this.activateOptionAndIcon();
     }
 
@@ -64,18 +45,18 @@ class Filter {
     }
 
     deactivateOptionAndIcon(){
-        this.activatedOption.classList.remove(this.classNames.activatedOption);
+        this.activatedOptionElement.classList.remove(this.classNames.activatedOptionElement);
         this.icon.deactivate();
     }
 
     activateOptionAndIcon(){
-        this.activatedOption.classList.add(this.classNames.activatedOption);
+        this.activatedOptionElement.classList.add(this.classNames.activatedOptionElement);
         this.icon.activate();
     }
 
-    updateOptionAndState(option){
-        this.activatedOption = option;
-        this.settedState = option.dataset.state;
+    updateOptionAndState(optionElement){
+        this.activatedOptionElement = optionElement;
+        this.settedState = optionElement.dataset.state;
     }
 
     getCapitalizedState(state){
@@ -89,14 +70,12 @@ class SearchFilter extends Filter {
             `<input class="filter-item__option" type="text" data-state="search">`;
         super(optionsHTML, ...args);
 
-        this.element.input = this.element.querySelector('input');
-        this.element.setState = this.setState;
-        this.element.applyAccordingToSearchState = this.applyAccordingToSearchState;
+        this.input = this.element.querySelector('input');
     }
 
-    setState(option){
+    setState(optionElement){
         this.deactivateOptionAndIcon();
-        this.updateOptionAndState(option);
+        this.updateOptionAndState(optionElement);
 
         if(this.settedState === this.defaultState) this.input.value = ''
         else if(this.input.value) this.activateOptionAndIcon();
@@ -118,10 +97,10 @@ class ToggleFilter extends Filter {
              <span class="filter-item__option" data-state="${secondState}">${svgs[secondState]}</span>`;
         super(optionsHTML, ...args);
 
-        this.element.firstState = firstState;
-        this.element.secondState = secondState;
-        this.element[`applyAccordingTo${this.getCapitalizedState(firstState)}State`] = this.applyAccordingToFirstState;
-        this.element[`applyAccordingTo${this.getCapitalizedState(secondState)}State`] = this.applyAccordingToSecondState;
+        this.firstState = firstState;
+        this.secondState = secondState;
+        this[`applyAccordingTo${this.getCapitalizedState(firstState)}State`] = this.applyAccordingToFirstState;
+        this[`applyAccordingTo${this.getCapitalizedState(secondState)}State`] = this.applyAccordingToSecondState;
     }
 
     applyAccordingToFirstState(){
@@ -143,14 +122,10 @@ class SortFilter extends Filter {
             `<span class="filter-item__option" data-state="asc">${ascSvg}</span>
              <span class="filter-item__option" data-state="desc">${descSvg}</span>`;
         super(optionsHTML, ...args);
-
-        this.element.resetState = this.resetState;
-        this.element.applyAccordingToAscState = this.applyAccordingToAscState;
-        this.element.applyAccordingToDescState = this.applyAccordingToDescState;
     }
 
     resetState(){
-        this.setState(this.defaultOption);
+        this.setState(this.defaultOptionElement);
     }
 
     applyAccordingToAscState(){
@@ -166,11 +141,11 @@ class StringSortFilter extends SortFilter {
     constructor(...args){
         super(svgs.ascString, svgs.descString, ...args);
 
-        this.element.ascComparator = function(a, b){
+        this.ascComparator = function(a, b){
             return a[this.property].localeCompare(b[this.property]);
         };
 
-        this.element.descComparator = function(a, b){
+        this.descComparator = function(a, b){
             return b[this.property].localeCompare(a[this.property]);
         };
     }
@@ -180,11 +155,11 @@ class NumberSortFilter extends SortFilter {
     constructor(...args){
         super(svgs.ascNumber, svgs.descNumber, ...args);
 
-        this.element.ascComparator = function(a, b){
+        this.ascComparator = function(a, b){
             return a[this.property] - b[this.property];
         };
 
-        this.element.descComparator = function(a, b){
+        this.descComparator = function(a, b){
             return b[this.property] - a[this.property];
         };
     }

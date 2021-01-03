@@ -1,7 +1,6 @@
 export class UserService {
     constructor(apiService){
         this.apiService = apiService;
-
         this.originalUsers;
         this.users;
         this.currentPageUsers;

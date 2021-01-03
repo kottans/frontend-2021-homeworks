@@ -1,14 +1,20 @@
 export class FilterList{
     constructor(filters, category){
-        const element = document.createElement('ul');
-        element.classList.add('filter-list', `${category}-filter-list`);
-        element.openedFilterListClassName = 'filter-list--opened';
-        element.filters = filters;
-        element.append(...filters);
+        this.element = document.createElement('ul');
+        this.element.classList.add('filter-list', `${category}-filter-list`);
+        this.element.append(...filters.map(filter => filter.element));
 
-        element.open = function(){this.classList.add(this.openedFilterListClassName)};
-        element.close = function(){this.classList.remove(this.openedFilterListClassName)};
-
-        return element;
+        this.filters = filters;
+        this.classNames = {
+            openedFilterList: 'filter-list--opened'
+        };
     }
+
+    open(){
+        this.element.classList.add(this.classNames.openedFilterList);
+    }
+
+    close(){
+        this.element.classList.remove(this.classNames.openedFilterList);
+    };
 }

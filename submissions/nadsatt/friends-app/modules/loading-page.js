@@ -1,12 +1,5 @@
 export class LoadingPage {
     constructor(program){
-        this.defineElement(program);
-        this.defineElementMethods();
-
-        return this.element;
-    }
-
-    defineElement(program){
         this.element = document.createElement('div');
         this.element.classList.add('loading-page');
         this.element.innerHTML = `
@@ -22,38 +15,34 @@ export class LoadingPage {
                 <div class="loading-roller__point"></div>
             </div>`;
 
-        this.element.program = program;
-        this.element.loadingMessage = 'Please wait until users will be loaded..';
-        this.element.loadingInfo = this.element.querySelector('.loading-info');
-        this.element.loadingRoller = this.element.querySelector('.loading-roller');
-
-        this.element.reloadButton = document.createElement('button');
-        this.element.reloadButton.classList.add('reload-button');
-        this.element.reloadButton.textContent = 'Try again';
+        this.program = program;
+        this.loadingMessage = 'Please wait until users will be loaded..';
+        this.loadingInfo = this.element.querySelector('.loading-info');
+        this.loadingRoller = this.element.querySelector('.loading-roller');
+        this.reloadButton = document.createElement('button');
+        this.reloadButton.classList.add('reload-button');
+        this.reloadButton.textContent = 'Try again';
+        this.reloadButton.addEventListener('click', () => this.handleReloadButtonClick());
     }
 
-    defineElementMethods(){
-        this.element.reloadButton.addEventListener('click', (function(){
-            this.displayLoading();
-            this.program.getUsers();
-        }).bind(this.element));
+    handleReloadButtonClick(){
+        this.displayLoading();
+        this.program.getUsers();
+    }
 
-        this.element.displayLoading = function(){
-            this.reloadButton.remove();
+    displayLoading(){
+        this.reloadButton.remove();
+        this.loadingInfo.textContent = this.loadingMessage;
+        this.element.append(this.loadingRoller);
+    }
 
-            this.loadingInfo.textContent = this.loadingMessage;
-            this.append(this.loadingRoller);
-        };
+    displayLoadingError(errorMessage){
+        this.loadingRoller.remove();
+        this.loadingInfo.textContent = errorMessage;
+        this.element.append(this.reloadButton);
+    }
 
-        this.element.displayLoadingError = function(errorMessage){
-            this.loadingRoller.remove();
-
-            this.loadingInfo.textContent = errorMessage;
-            this.append(this.reloadButton);
-        };
-
-        this.element.remove = function(){
-            document.body.removeChild(this);
-        };
+    remove(){
+        this.element.remove();
     }
 }

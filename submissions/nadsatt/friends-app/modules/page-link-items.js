@@ -1,32 +1,38 @@
 export class PageLink {
     constructor(value, className = 'page-link-item'){
-        const element = document.createElement('a');
-        element.setAttribute('href', '#');
-        element.classList.add('page-link');
-        element.textContent = value;
+        const innerElement = document.createElement('a');
+        innerElement.setAttribute('href', '#');
+        innerElement.classList.add('page-link');
+        innerElement.textContent = value;
+        this.element = document.createElement('li');
+        this.element.classList.add(className);
+        this.element.append(innerElement);
 
-        const wrapper = document.createElement('li');
-        wrapper.classList.add(className);
-        wrapper.append(element);
+        this.classNames = {
+            selectedPageLinkItem: 'page-link-item--selected'
+        }
+    }
 
-        return wrapper;
+    select(){
+        this.element.classList.add(this.classNames.selectedPageLinkItem);
     }
 }
 
 export class CornerPageLink extends PageLink {
     constructor(value){
-        const classNames = {
+        const cornerPageLinkClassName = 'corner-page-link-item';
+        super(value, cornerPageLinkClassName);
+
+        this.classNames = {
             disabledCornerPageLink: 'corner-page-link-item--disabled'
         };
+    }
 
-        super(value, 'corner-page-link-item');
+    enable(){
+        this.element.classList.remove(this.classNames.disabledCornerPageLink);
+    }
 
-        this.enable = function(){
-            this.classList.remove(classNames.disabledCornerPageLink);
-        };
-
-        this.disable = function(){
-            this.classList.add(classNames.disabledCornerPageLink);
-        };
+    disable(){
+        this.element.classList.add(this.classNames.disabledCornerPageLink);
     }
 }
