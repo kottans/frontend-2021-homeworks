@@ -13,7 +13,7 @@ header {
     background-color: #ffd700;
 }
 
-.gameField {
+#gameField {
     margin: 5% auto 0 auto;
     width: 713px;
     display: flex;
