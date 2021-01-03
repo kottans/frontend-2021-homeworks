@@ -133,26 +133,23 @@ async function collectPullRequestData(prLabels, prStates) {
   console.log("NB! Relevant PRs must have labels assigned. Only open and merged PRs are accounted.");
   const dataByAuthor = {};
   await Promise.all(
-    prLabels.map(async (label) => {
-      await Promise.all(
-        prStates.map(async (state) => {
-          const command = fetchPrListGhCommand(label, state);
-          try {
-            const data = await exec(command);
-            const prs = parsePrsData(data.stdout);
-            prs.forEach(({prn, author}) => {
-              dataByAuthor[author] = {
-                ...dataByAuthor[author],
-                [label]: { prn, state },
-              };
-            });
-          } catch(e) {
-            console.error(`ERROR executing "${command}"`);
-            throw new Error(e);
-          }
-        })
-      )
-    })
+    recombine(prLabels, prStates)
+      .map(async ([label, state]) => {
+        const command = fetchPrListGhCommand(label, state);
+        try {
+          const data = await exec(command);
+          const prs = parsePrsData(data.stdout);
+          prs.forEach(({prn, author}) => {
+            dataByAuthor[author] = {
+              ...dataByAuthor[author],
+              [label]: { prn, state },
+            };
+          });
+        } catch(e) {
+          console.error(`ERROR executing "${command}"`);
+          throw new Error(e);
+        }
+      })
   );
   return dataByAuthor;
 }
@@ -221,4 +218,14 @@ function mergeObjects(primaryObject, secondaryObject) {
       };
     });
   return mergedObject;
+}
+
+/**
+ * Recombines elements from input arrays into an array of tuples
+ * @param {Array} arr1
+ * @param {Array} arr2
+ * @returns {[*,*][]}
+ */
+function recombine(arr1, arr2) {
+  return arr1.reduce((acc, e1) => [...acc, ...arr2.map(e2 => [e1, e2])], []);
 }
