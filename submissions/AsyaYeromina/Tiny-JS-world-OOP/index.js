@@ -14,9 +14,55 @@ class Inhabitant {
     this.name = inhabitantProperties.name;
     this.gender = inhabitantProperties.gender;
     this.legs = inhabitantProperties.legs;
-    this.hands = inhabitantProperties.hands;
     this.speech = inhabitantProperties.speech;
     this.friends = inhabitantProperties.friends;
+  }
+}
+
+class Animal extends Inhabitant {
+  constructor(inhabitantProperties) {
+    super({ ...inhabitantProperties, legs: 4});
+    this.tail = inhabitantProperties.tail;
+  }
+
+  toString() {
+    return [
+      this.species,
+      this.name,
+      this.gender,
+      this.legs,
+      this.tail,
+      this.speech,
+      this.friends,
+    ]
+      .map((propertyValue) =>
+      (propertyValue == this.tail && propertyValue == true) ? propertyValue = 'has tail' : propertyValue
+      )
+      .map((propertyValue) =>
+        Array.isArray(propertyValue) ? propertyValue.join(", ") : propertyValue
+      )
+      .join("; ");
+  }
+}
+
+class Canis extends Animal {
+  constructor(inhabitantProperties) {
+    super({ ...inhabitantProperties, species: "Canis", speech: "Woof-woof!", tail: true });
+  }
+}
+
+class FelisCatus extends Animal {
+  static catSpeech = "Meow";
+
+  constructor(inhabitantProperties) {
+    super({ ...inhabitantProperties, species: "Felis catus", speech: FelisCatus.catSpeech, tail: true });
+  }
+}
+
+class Sapiens extends Inhabitant {
+  constructor(inhabitantProperties) {
+    super({ ...inhabitantProperties, legs: 2});
+    this.hands = 2;
   }
 
   toString() {
@@ -29,39 +75,10 @@ class Inhabitant {
       this.speech,
       this.friends,
     ]
-      .filter((propertyValue) => propertyValue !== null)
       .map((propertyValue) =>
         Array.isArray(propertyValue) ? propertyValue.join(", ") : propertyValue
       )
       .join("; ");
-  }
-}
-
-class Animal extends Inhabitant {
-  constructor(inhabitantProperties) {
-    super({ ...inhabitantProperties, legs: 4, hands: null });
-  }
-}
-
-class Canis extends Animal {
-  constructor(inhabitantProperties) {
-    super({ ...inhabitantProperties, species: "Canis", speech: "Woof-woof!" });
-  }
-}
-
-class FelisCatus extends Animal {
-  constructor(inhabitantProperties) {
-    super({ ...inhabitantProperties, species: "Felis catus", speech: "Meow" });
-  }
-
-  catSpeech() {
-    return this.speech;
-  }
-}
-
-class Sapiens extends Inhabitant {
-  constructor(inhabitantProperties) {
-    super({ ...inhabitantProperties, legs: 2, hands: 2 });
   }
 }
 
@@ -73,7 +90,7 @@ class HomoSapiens extends Sapiens {
 
 class FelisSapiens extends Sapiens {
   constructor(inhabitantProperties) {
-    super({ ...inhabitantProperties, species: "Felis sapiens"});
+    super({ ...inhabitantProperties, species: "Felis sapiens" });
   }
 }
 
@@ -116,7 +133,7 @@ const man = new Man({
 const catWoman = new FelisSapiens({
   name: "Selina",
   gender: "female",
-  speech: new FelisCatus({}).catSpeech(),
+  speech: FelisCatus.catSpeech,
   friends: ["Stepan", "Python"],
 });
 
