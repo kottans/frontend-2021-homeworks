@@ -1,11 +1,11 @@
-let arrOfUnits = ["img/cartman.jpg",
+const arrOfUnits = ["img/cartman.jpg",
     "img/chief.jpg",
     "img/sten.jpg",
     "img/kyle.jpg",
     "img/kenny.jpg"
 ];
-let imgCover = `img/cover.jpg`;
-let gameField = document.querySelector("#gameField");
+const imgCover = `img/cover.jpg`;
+const gameField = document.querySelector("#gameField");
 let isLocked = false;
 let firstCard;
 let secondCard;
@@ -13,13 +13,13 @@ let isSecondCard = false;
 let unopenedCards;
 
 //feed him array & any even number
-let duplicateElements = function(array, times) {
+const duplicateElements = function(array, times) {
     return array.reduce((res, current) => {
         return res.concat(Array(times).fill(current));
     }, []);
 };
 
-let shuffle = function(arr) {
+const shuffle = function(arr) {
     const result = [];
     while (arr.length > 0) {
         let random = Math.floor(Math.random() * arr.length);
@@ -70,7 +70,7 @@ const checkCard = function({ target }) {
     };
 };
 
-let renderCard = function(arr) {
+const renderCard = function(arr) {
     for (let i = 0; i < arr.length; i++) {
         let card = document.createElement("div");
         card.setAttribute("id", i);
