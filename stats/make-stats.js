@@ -55,7 +55,7 @@ async function main() {
     " - \\#xxx i -- labelled issue referring to p2p PR(s)",
     " - **\\#xxx** -- PR is merged",
     "",
-    makeMDtable(orderedAuthors, prLabels, prDataByAuthor),
+    makeMarkdownTable(orderedAuthors, prLabels, prDataByAuthor),
     "",
   ].join("\n");
   const ioResult = await saveStatsToAFile(statsFileName, table);
@@ -72,7 +72,7 @@ async function saveStatsToAFile(fileName, text) {
   }
 }
 
-function makeMDtable(authors, labels, dataByAuthor) {
+function makeMarkdownTable(authors, labels, dataByAuthor) {
   const columnDelimiter = " | ";
   const rows = [
     'author' + columnDelimiter + labels.join(columnDelimiter),
