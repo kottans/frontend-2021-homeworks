@@ -4,55 +4,38 @@
 const { promisify } = require('util');
 const exec = promisify(require('child_process').exec);
 const writeFile = promisify(require('fs').writeFile);
+const {
+  prLabels,
+  prStates,
+  parsingRegex,
+  url,
+  statsFileName,
+} = require('./config');
 
-console.log("This script requires https://github.com/cli/cli installed\n");
-
-const baseRepoUrl = "https://github.com/kottans/frontend-2021-homeworks/";
-
-const prLabels = [
-  "Hooli-style Popup",
-  "JS DOM",
-  "JS pre-OOP",
-  "JS OOP",
-  "JS post-OOP",
-  "Memory Pair Game",
-  "Friends App",
-];
-
-const prStates = [
-  "open",
-  "merged",
-];
-
-const parsingRegex = {
-  pr: /^(?<prn>\d+)\t.+\t(?<author>.+):.*$/mg,
-  issue: /^(?<issuen>\d+).+\t(?<author>.+):.*\t(?<labels>.*)\t.*$/mg,
-};
-
-const url = {
-  prListFilteredByAuthorPrefix: baseRepoUrl + "pulls?q=is%3Apr+author%3A",
-  prPrefix: baseRepoUrl + "pull/",
-  issuePrefix: baseRepoUrl + "issues/",
-}
-
-const statsFileName = "./pr-stats.md";
-
-main()
-  .then(() => console.log("\nAll done"));
+exec("gh --version")
+  .catch(e => {
+    console.error("make-stats ERROR: This script requires https://github.com/cli/cli installed\n");
+    throw e;
+  })
+  .then(() => main())
+  .then(() => console.log("\nAll done"))
+  .catch(e => {
+    console.error("make-stats ERROR:\n", e);
+  });
 
 async function main() {
   let prDataByAuthor = {}, issueDataByAuthor = {};
   try {
     prDataByAuthor = await collectPullRequestData(prLabels, prStates);
   } catch (e) {
-    console.error('ERROR: Failed to fetch PR data', e);
-    return;
+    console.error('ERROR: Failed to fetch PR data');
+    throw e;
   }
   try {
     issueDataByAuthor = await collectIssueData(prLabels);
   } catch (e) {
-    console.error('ERROR: Failed to fetch issue data', e);
-    return;
+    console.error('ERROR: Failed to fetch issue data');
+    throw e;
   }
   prDataByAuthor = mergeObjects(prDataByAuthor, issueDataByAuthor);
   const orderedAuthors = Object.keys(prDataByAuthor)
@@ -83,7 +66,7 @@ async function saveStatsToAFile(fileName, text) {
   try {
     await writeFile(fileName, text);
     return 'Success';
-  } catch (err) {
+  } catch (e) {
     console.error(`Error writing data to "${fileName}"`);
     return 'Failure';
   }
@@ -157,16 +140,22 @@ async function collectPullRequestData(prLabels, prStates) {
 async function collectIssueData(prLabels) {
   console.log("NB! Relevant issues must have their titles starting with 'author_username:' and have labels assigned");
   const dataByAuthor = {};
-  const data = await exec(fetchIssueListGhCommand(prLabels));
-  const issues = parseIssuesData(data.stdout);
-  issues.forEach(({issuen, author, labels}) => {
-    labels.forEach(label => {
-      dataByAuthor[author] = {
-        ...dataByAuthor[author],
-        [label]: { prn: issuen, state: "issue" },
-      };
+  const command = fetchIssueListGhCommand(prLabels);
+  try {
+    const data = await exec(command);
+    const issues = parseIssuesData(data.stdout);
+    issues.forEach(({issuen, author, labels}) => {
+      labels.forEach(label => {
+        dataByAuthor[author] = {
+          ...dataByAuthor[author],
+          [label]: { prn: issuen, state: "issue" },
+        };
+      });
     });
-  });
+  } catch(e) {
+    console.error(`ERROR executing "${command}"`);
+    throw new Error(e);
+  }
   return dataByAuthor;
 }
 
