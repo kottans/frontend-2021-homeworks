@@ -31,7 +31,7 @@ const shuffle = function(arr) {
 };
 
 const checkCard = function({ target }) {
-    if (target.closest(".flipper").className !== "flipper") { return };
+    if (!target.closest(".flipper")) { return };
     if (!isLocked) {
         if (isSecondCard) {
             isLocked = true;
