@@ -67,9 +67,19 @@ async function main() {
       }
       return b.prs - a.prs;
     }).map(authorStats => authorStats.author);
-  const table = "Open and merged PRs by task labels\n\n" +
-    `_as of ${new Date().toISOString()} UTC_\n\n` +
-    makeMDtable(orderedAuthors, prLabels, prDataByAuthor);
+  const table = [
+    "# Open and merged PRs by task labels",
+    "",
+    `_as of ${new Date().toISOString()} UTC_`,
+    "",
+    "PR reference legend:",
+    " - \\#xxx o -- PR is yet open ",
+    " - \\#xxx i -- labelled issue referring to p2p PR(s)",
+    " - **\\#xxx** -- PR is merged",
+    "",
+    makeMDtable(orderedAuthors, prLabels, prDataByAuthor),
+    "",
+  ].join("\n");
   const ioResult = await saveStatsToAFile(statsFileName, table);
   console.log(`Saving stats ${statsFileName}: ${ioResult}`);
 }
@@ -93,7 +103,10 @@ function makeMDtable(authors, labels, dataByAuthor) {
   authors.forEach(authorName => {
     const coveredTasksCount = Object.keys(dataByAuthor[authorName]).length;
     if (coveredTasksCount < coveredTasksCountLatest) {
-      rows.push(`**${coveredTasksCount} task(s)**` + columnDelimiter.repeat(labels.length));
+      rows.push(
+        `**${coveredTasksCount} task${coveredTasksCount > 1 ? 's' : ''}**` +
+        columnDelimiter.repeat(labels.length)
+      );
       coveredTasksCountLatest = coveredTasksCount;
     }
     rows.push([
@@ -105,7 +118,7 @@ function makeMDtable(authors, labels, dataByAuthor) {
       )].join(columnDelimiter)
     );
   });
-  return rows.join("\n")+"\n";
+  return rows.join("\n");
 }
 
 function makePrListUrl(authorName) {
