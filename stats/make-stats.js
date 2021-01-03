@@ -21,13 +21,13 @@ exec("gh --version")
 async function main() {
   let prDataByAuthor = {}, issueDataByAuthor = {};
   try {
-    prDataByAuthor = await collectPullRequestData(prLabels, prStates);
+    prDataByAuthor = await fetchPullRequestData(prLabels, prStates);
   } catch (e) {
     console.error('ERROR: Failed to fetch PR data');
     throw e;
   }
   try {
-    issueDataByAuthor = await collectIssueData(prLabels);
+    issueDataByAuthor = await fetchIssueData(prLabels);
   } catch (e) {
     console.error('ERROR: Failed to fetch issue data');
     throw e;
@@ -107,7 +107,7 @@ function makePrUrl(prNr, state) {
   return `[${anchorText}](${url.prPrefix}${prNr})`;
 }
 
-async function collectPullRequestData(prLabels, prStates) {
+async function fetchPullRequestData(prLabels, prStates) {
   console.log("NB! Relevant PRs must have labels assigned. Only open and merged PRs are accounted.");
   const dataByAuthor = {};
   await Promise.all(
@@ -132,7 +132,7 @@ async function collectPullRequestData(prLabels, prStates) {
   return dataByAuthor;
 }
 
-async function collectIssueData(prLabels) {
+async function fetchIssueData(prLabels) {
   console.log("NB! Relevant issues must have their titles starting with 'author_username:' and have labels assigned");
   const dataByAuthor = {};
   const command = fetchIssueListGhCommand(prLabels);
