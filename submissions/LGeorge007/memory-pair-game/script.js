@@ -1,4 +1,4 @@
-const arrOfUnits = ["img/cartman.jpg",
+let arrOfUnits = ["img/cartman.jpg",
     "img/chief.jpg",
     "img/sten.jpg",
     "img/kyle.jpg",
@@ -33,7 +33,7 @@ const checkCard = function({ target }) {
     if (!isLocked) {
         if (isSecondCard) {
             isLocked = true;
-            secondCard = target.closest("div");
+            secondCard = target.closest(".flipper");
             secondCard.classList.toggle("rotateCard");
             //The same card must not be removed
             if (firstCard.id !== secondCard.id) {
@@ -63,7 +63,7 @@ const checkCard = function({ target }) {
                 }, 1500);
             };
         } else {
-            firstCard = target.closest("div");
+            firstCard = target.closest(".flipper");
             firstCard.classList.toggle("rotateCard");
             isSecondCard = true;
         };
