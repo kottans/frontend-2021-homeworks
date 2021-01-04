@@ -1,17 +1,13 @@
-const url = "https://randomuser.me/api/?results=16";
-const usersContainer = document.querySelector(".users-container");
+const URL = "https://randomuser.me/api/?results=16";
+const USERS_CONTAINER = document.querySelector(".users-container");
 
-const initState = {
-  maleGender: false,
-  femaleGender: false,
-  allGenders: true,
-};
+const INIT_GENDER = "all";
 
-let state = Object.assign({}, initState);
+let selectedGender = INIT_GENDER;
 
-const errorMessage = (message) => `<p class="error-message">${message}</p>`;
+const showMessage = (message) => `<p class="message">${message}</p>`;
 
-const userTemplate = (photo, name, email, gender, age) => {
+const createUserTemplate = (photo, name, email, gender, age) => {
   return `
    <div class="user">
       <img
@@ -32,28 +28,36 @@ const userTemplate = (photo, name, email, gender, age) => {
 
 async function getUsers() {
   try {
-    const response = await fetch(url);
+    const response = await fetch(URL);
     const json = await response.json();
     return json.results;
   } catch {
-    usersContainer.innerHTML += errorMessage("oops :( users fetch failed");
+    USERS_CONTAINER.innerHTML += showMessage("oops :( users fetch failed");
   }
 }
 
-async function app() {
+async function renderApp() {
   const initUsers = await getUsers();
   const users = initUsers.slice();
+  const sortByAgeParameters = {
+    users: users,
+    sortingTriggersContainer: document.querySelector("#age-sort"),
+    sortingFunction: sortByAge,
+    ascendingTrigger: document.querySelector("#sort-ascending"),
+    descendingTrigger: document.querySelector("#sort-descending"),
+  };
+  const sortByNameParameters = {
+    users: users,
+    sortingTriggersContainer: document.querySelector("#name-sort"),
+    sortingFunction: sortByName,
+    ascendingTrigger: document.querySelector("#sort-az"),
+    descendingTrigger: document.querySelector("#sort-za"),
+  };
   renderUsers(users);
   handleSearch(users);
   handleFilterByGender(users, initUsers);
-  handleSort(users, "#age-sort", sortByAge, [
-    "#sort-ascending",
-    "#sort-descending",
-  ]);
-  handleSort(users, "#name-sort", sortByName, [
-    "#sort-az",
-    "#sort-za"
-   ]);
+  handleSort(sortByAgeParameters);
+  handleSort(sortByNameParameters);
   handleResetToDefault(initUsers);
 }
 
@@ -68,32 +72,30 @@ const renderUsers = (users) => {
       dob: { age },
     }) => {
       const name = `${first} ${last}`;
-      renderedUsers += userTemplate(photo, name, email, gender, age);
+      renderedUsers += createUserTemplate(photo, name, email, gender, age);
     }
   );
-  usersContainer.innerHTML = "";
-  usersContainer.innerHTML += renderedUsers;
+  USERS_CONTAINER.innerHTML = "";
+  USERS_CONTAINER.innerHTML += renderedUsers;
 };
 
-const handleSort = (
+const handleSort = ({
   users,
-  container,
-  sortFunc,
-  [ascendingTrigger, descendingTrigger]
-) => {
-  container = document.querySelector(container);
-  ascendingTrigger = document.querySelector(ascendingTrigger);
-  descendingTrigger = document.querySelector(descendingTrigger);
-
-  container.addEventListener("click", ({ target }) => {
+  sortingTriggersContainer,
+  sortingFunction,
+  ascendingTrigger,
+  descendingTrigger,
+}) => {
+  sortingTriggersContainer.addEventListener("click", ({ target }) => {
+    resetSearch();
     const filteredUsers = checkSelectedState(users);
 
     if (target === ascendingTrigger) {
-      sortFunc(filteredUsers);
+      sortingFunction(filteredUsers);
       renderUsers(filteredUsers);
     }
     if (target === descendingTrigger) {
-      sortFunc(filteredUsers).reverse();
+      sortingFunction(filteredUsers).reverse();
       renderUsers(filteredUsers);
     }
   });
@@ -101,14 +103,15 @@ const handleSort = (
 
 const checkSelectedState = (users) => {
   let data;
-  state.maleGender
-    ? (data = filterByGender(users, "male"))
-    : state.femaleGender
-    ? (data = filterByGender(users, "female"))
-    : (data = users);
+  if (selectedGender === "male") {
+    data = filterByGender(users, "male");
+  } else if (selectedGender === "female") {
+    data = filterByGender(users, "female");
+  } else {
+    data = users;
+  }
   return data;
 };
-
 const handleFilterByGender = (users, initUsers) => {
   const maleTrigger = document.querySelector("#gender-male");
   const femaleTrigger = document.querySelector("#gender-female");
@@ -117,34 +120,34 @@ const handleFilterByGender = (users, initUsers) => {
 
   genderBlock.addEventListener("click", ({ target }) => {
     if (target === maleTrigger) {
-      resetState();
-      resetSorting();
       const men = filterByGender(users, "male");
-      renderUsers(men);
-      state.maleGender = true;
+      updateSelectedGender(men, "male");
     }
     if (target === femaleTrigger) {
-      resetState();
-      resetSorting();
       const women = filterByGender(users, "female");
-      renderUsers(women);
-      state.femaleGender = true;
+      updateSelectedGender(women, "female");
     }
     if (target === allGendersTrigger) {
-      resetState();
-      resetSorting();
-      renderUsers(initUsers);
-      state.allGenders = true;
+      updateSelectedGender(initUsers, "all");
     }
   });
 };
 
+const updateSelectedGender = (usersForRender, gender) => {
+  resetState();
+  resetSearch();
+  resetSorting();
+  renderUsers(usersForRender);
+  selectedGender = gender;
+};
+
 const resetState = () => {
-  for (let stateItem in state) {
-    if (state.hasOwnProperty(stateItem)) {
-      state[stateItem] = false;
-    }
-  }
+  selectedGender = INIT_GENDER;
+};
+
+const resetSearch = () => {
+  const searchInput = document.querySelector("#search-input");
+  searchInput.value = "";
 };
 
 const resetSorting = () => {
@@ -155,10 +158,11 @@ const resetSorting = () => {
 };
 
 const handleResetToDefault = (initUsers) => {
-  const resetBtn = document.querySelector("#reset-btn");
-  resetBtn.addEventListener("click", () => {
+  const resetButton = document.querySelector("#reset-button");
+  resetButton.addEventListener("click", () => {
     renderUsers(initUsers);
-    state = initState;
+    resetState();
+    resetSearch();
   });
 };
 const handleSearch = (users) => {
@@ -180,20 +184,23 @@ const filterByGender = (users, gender) => {
 
 const searchUsers = (users, searchValue) => {
   searchValue = searchValue.toLowerCase();
+  const filteredUsers = checkSelectedState(users);
   if (searchValue) {
-    const searchResults = users.filter(({ name: { first: firstName } }) => {
-      firstName = firstName.toLowerCase();
-      return firstName.includes(searchValue);
-    });
+    const searchResults = filteredUsers.filter(
+      ({ name: { first: firstName } }) => {
+        firstName = firstName.toLowerCase();
+        return firstName.includes(searchValue);
+      }
+    );
     renderUsers(searchResults);
 
     if (searchResults.length === 0) {
-      usersContainer.innerHTML = "";
-      usersContainer.innerHTML += errorMessage("users not found :(");
+      USERS_CONTAINER.innerHTML = "";
+      USERS_CONTAINER.innerHTML += showMessage("users not found");
     }
   } else {
-    renderUsers(users);
+    renderUsers(filteredUsers);
   }
 };
 
-app();
+renderApp();
