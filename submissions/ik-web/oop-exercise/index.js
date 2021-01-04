@@ -44,18 +44,15 @@ class Human extends Inhabitant {
    }
 
    toPrint() {
-      return `A ${this.species} (<i>${this.gender}<i>) named <strong>${this.name}</strong> has ${this.legs} legs and ${this.hands} hands likes to say <u>${this.saying}</u>`;
+      const strToArr = super.toPrint().split('legs');
+      return `${strToArr[0]} legs and ${this.hands} hands${strToArr[1]}`;
    }
 }
 
-class CatWoman extends Inhabitant {
-   constructor(name, hands, saying) {
-      super('mystery of nature', name, 'female', 2, saying);
-      this.hands = hands;
-   }
-
-   toPrint() {
-      return `A ${this.species} (<i>${this.gender}<i>) named <strong>${this.name}</strong> has ${this.legs} legs and ${this.hands} hands likes to say <u>${this.saying}</u>`;
+class CatWoman extends Human {
+   constructor(name, saying) {
+      super(name, 'female', 2, saying);
+      this.species = 'mystery of nature';
    }
 }
 
@@ -63,7 +60,7 @@ const dog = new Dog('Bobik', 'male');
 const cat = new Cat('Barsik', 'male');
 const man = new Human('Benjamin', 'male', 2, 'Hi to all!');
 const woman = new Human('Sarah', 'female', 2, 'Hello everyone!');
-const catWoman = new CatWoman('anonymos', 2, cat.getSaying());
+const catWoman = new CatWoman('anonymos', cat.getSaying());
 const tinyJsWorldPopulation = [dog, cat, man, woman, catWoman];
 
 tinyJsWorldPopulation.forEach(function(obj) {
