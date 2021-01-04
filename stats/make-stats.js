@@ -4,69 +4,42 @@
 const { promisify } = require('util');
 const exec = promisify(require('child_process').exec);
 const writeFile = promisify(require('fs').writeFile);
+const { prLabels, prStates, parsingRegex, url, statsFileName } = require('./config');
+const { mergeObjects, recombine } = require('./utils');
 
-console.log("This script requires https://github.com/cli/cli installed\n");
-
-const baseRepoUrl = "https://github.com/kottans/frontend-2021-homeworks/";
-
-const prLabels = [
-  "Hooli-style Popup",
-  "JS DOM",
-  "JS pre-OOP",
-  "JS OOP",
-  "JS post-OOP",
-  "Memory Pair Game",
-  "Friends App",
-];
-
-const prStates = [
-  "open",
-  "merged",
-];
-
-const url = {
-  prListFilteredByAuthorPrefix: baseRepoUrl + "pulls?q=is%3Apr+author%3A",
-  prPrefix: baseRepoUrl + "pull/",
-  issuePrefix: baseRepoUrl + "issues/",
-}
-
-const statsFileName = "./pr-stats.md";
-
-main();
+exec("gh --version")
+  .catch(e => {
+    console.error("make-stats ERROR: This script requires https://github.com/cli/cli installed\n");
+    throw e;
+  })
+  .then(() => main())
+  .then(() => console.log("\nAll done"))
+  .catch(e => {
+    console.error("make-stats ERROR:\n", e);
+  });
 
 async function main() {
   let prDataByAuthor = {}, issueDataByAuthor = {};
   try {
-    prDataByAuthor = await collectPullRequestData(prLabels, prStates);
+    prDataByAuthor = await fetchPullRequestData(prLabels, prStates);
   } catch (e) {
-    console.error('ERROR: Failed to collect PR data', e);
-    return;
+    console.error('ERROR: Failed to fetch PR data');
+    throw e;
   }
   try {
-    issueDataByAuthor = await collectIssueData(prLabels);
+    issueDataByAuthor = await fetchIssueData(prLabels);
   } catch (e) {
-    console.error('ERROR: Failed to collect issue data', e);
-    return;
+    console.error('ERROR: Failed to fetch issue data');
+    throw e;
   }
-  Object.keys(issueDataByAuthor)
-    .forEach(authorName => {
-      prDataByAuthor[authorName] = {
-        ...issueDataByAuthor[authorName],
-        ...prDataByAuthor[authorName],
-      };
-    });
+  prDataByAuthor = mergeObjects(prDataByAuthor, issueDataByAuthor);
   const orderedAuthors = Object.keys(prDataByAuthor)
     .map(authorName => ({
       author: authorName,
       prs: Object.keys(prDataByAuthor[authorName]).length,
     }))
-    .sort((a,b) => {
-      if (a.prs === b.prs) {
-        if (a.author.toLowerCase() < b.author.toLowerCase()) return -1;
-        return 1;
-      }
-      return b.prs - a.prs;
-    }).map(authorStats => authorStats.author);
+    .sort(makeComparator("prs", "author"))
+    .map(authorStats => authorStats.author);
   const table = [
     "# Open and merged PRs by task labels",
     "",
@@ -77,29 +50,30 @@ async function main() {
     " - \\#xxx i -- labelled issue referring to p2p PR(s)",
     " - **\\#xxx** -- PR is merged",
     "",
-    makeMDtable(orderedAuthors, prLabels, prDataByAuthor),
+    makeMarkdownTable(orderedAuthors, prLabels, prDataByAuthor),
     "",
   ].join("\n");
   const ioResult = await saveStatsToAFile(statsFileName, table);
-  console.log(`Saving stats ${statsFileName}: ${ioResult}`);
+  console.log(`\nSaving stats ${statsFileName}: ${ioResult}`);
 }
 
 async function saveStatsToAFile(fileName, text) {
   try {
     await writeFile(fileName, text);
     return 'Success';
-  } catch (err) {
+  } catch (e) {
     console.error(`Error writing data to "${fileName}"`);
     return 'Failure';
   }
 }
 
-function makeMDtable(authors, labels, dataByAuthor) {
+function makeMarkdownTable(authors, labels, dataByAuthor) {
   const columnDelimiter = " | ";
-  const rows = [];
+  const rows = [
+    'author' + columnDelimiter + labels.join(columnDelimiter),
+    "--- | ".repeat(labels.length) + "---",
+  ];
   let coveredTasksCountLatest = Number.MAX_SAFE_INTEGER;
-  rows.push('author' + columnDelimiter + labels.join(columnDelimiter));
-  rows.push("--- | ".repeat(labels.length) + "---");
   authors.forEach(authorName => {
     const coveredTasksCount = Object.keys(dataByAuthor[authorName]).length;
     if (coveredTasksCount < coveredTasksCountLatest) {
@@ -113,7 +87,7 @@ function makeMDtable(authors, labels, dataByAuthor) {
       makePrListUrl(authorName),
       ...labels.map(label =>
         dataByAuthor[authorName][label]
-          ? makePrUrl(dataByAuthor[authorName][label].prn, dataByAuthor[authorName][label].state[0])
+          ? makePrUrl(dataByAuthor[authorName][label].prNr, dataByAuthor[authorName][label].state[0])
           : " "
       )].join(columnDelimiter)
     );
@@ -125,81 +99,74 @@ function makePrListUrl(authorName) {
   return `[${authorName}](${url.prListFilteredByAuthorPrefix + authorName})`;
 }
 
-function makePrUrl(prn, state) {
+function makePrUrl(prNr, state) {
   let anchorText =
-    (state === 'm' ? "**" : "") +
-    `#${prn}` +
-    (state === 'm' ? "**" : ` ${state}`);
-  return `[${anchorText}](${url.prPrefix}${prn})`;
+    (state[0] === 'm' ? "**" : "") +
+    `#${prNr}` +
+    (state[0] === 'm' ? "**" : ` ${state[0]}`);
+  return `[${anchorText}](${url.prPrefix}${prNr})`;
 }
 
-async function collectPullRequestData(prLabels, prStates) {
+async function fetchPullRequestData(prLabels, prStates) {
   console.log("NB! Relevant PRs must have labels assigned. Only open and merged PRs are accounted.");
   const dataByAuthor = {};
   await Promise.all(
-    prLabels.map(async (label) => {
-      await Promise.all(
-        prStates.map(async (state) => {
-          const command = fetchPrListGhCommand(label, state);
-          try {
-            const data = await exec(command);
-            const prs = parsePrsData(data.stdout);
-            prs.forEach(({prn, author}) => {
-              if (!dataByAuthor[author]) dataByAuthor[author] = {};
-              dataByAuthor[author][label] = {
-                prn,
-                state,
-              };
-            });
-          } catch(e) {
-            console.error(`ERROR executing "${command}"`);
-            throw new Error(e);
-          }
-        })
-      )
-    })
+    recombine(prLabels, prStates)
+      .map(async ([label, state]) => {
+        const command = fetchPrListGhCommand(label, state);
+        try {
+          const data = await exec(command);
+          const prs = parsePrsData(data.stdout);
+          prs.forEach(({prNr, author}) => {
+            dataByAuthor[author] = {
+              ...dataByAuthor[author],
+              [label]: { prNr, state },
+            };
+          });
+        } catch(e) {
+          console.error(`ERROR executing "${command}"`);
+          throw new Error(e);
+        }
+      })
   );
   return dataByAuthor;
 }
 
-async function collectIssueData(prLabels) {
+async function fetchIssueData(prLabels) {
   console.log("NB! Relevant issues must have their titles starting with 'author_username:' and have labels assigned");
   const dataByAuthor = {};
-  const data = await exec(fetchIssueListGhCommand(prLabels));
-  const issues = parseIssuesData(data.stdout);
-  issues.forEach(({issuen, author, labels}) => {
-    if (!dataByAuthor[author]) dataByAuthor[author] = {};
-    labels.forEach(label => {
-      dataByAuthor[author][label] = {
-        prn: issuen,
-        state: "issue",
-      };
+  const command = fetchIssueListGhCommand(prLabels);
+  try {
+    const data = await exec(command);
+    const issues = parseIssuesData(data.stdout);
+    issues.forEach(({issueNr, author, labels}) => {
+      labels.forEach(label => {
+        dataByAuthor[author] = {
+          ...dataByAuthor[author],
+          [label]: { prNr: issueNr, state: "issue" },
+        };
+      });
     });
-  });
+  } catch(e) {
+    console.error(`ERROR executing "${command}"`);
+    throw new Error(e);
+  }
   return dataByAuthor;
 }
 
 function parsePrsData(data) {
-  const result = [];
-  const matches = data.matchAll(/^(?<prn>\d+)\t.+\t(?<author>.+):.*$/mg);
-  for (const match of matches) {
-    result.push(match.groups);
-  }
-  return result;
+  const matches = data.matchAll(parsingRegex.pr);
+  return Array.from(matches, ({groups}) => groups);
 }
 
 function parseIssuesData(data) {
-  const result = [];
-  const matches = data.matchAll(/^(?<issuen>\d+).+\t(?<author>.+):.*\t(?<labels>.*)\t.*$/mg);
-  for (const match of matches) {
-    const {issuen, author, labels} = match.groups;
-    result.push({
-      issuen,
-      author,
-      labels: labels.split(", "),
-    });
-  }
-  return result;
+  const matches = data.matchAll(parsingRegex.issue);
+  return Array.from(matches,
+    ({ groups: {
+      issueNr, author, labels,
+    }}) => ({
+      issueNr, author, labels: labels.split(", "),
+    }));
 }
 
 function fetchPrListGhCommand(label, state) {
@@ -211,4 +178,16 @@ function fetchIssueListGhCommand(labels) {
     "gh issue list --state all --limit 200 ",
     ...labels.map(label => `"${label}"`),
   ].join(" --label ");
+}
+
+function makeComparator(primaryKeyNumericDescending, secondaryKeyAlphaAscendingCaseInsensitive) {
+  return function (a, b) {
+    const [aPk, bPk] = [a, b].map(item => item[primaryKeyNumericDescending]);
+    if (aPk === bPk) {
+      const [aSk, bSk] = [a, b].map(item => item[secondaryKeyAlphaAscendingCaseInsensitive].toLowerCase());
+      if (aSk < bSk) return -1;
+      return 1;
+    }
+    return bPk - aPk;
+  }
 }
