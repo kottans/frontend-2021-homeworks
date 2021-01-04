@@ -1,13 +1,14 @@
 class Inhabitant {
-  constructor(species, name, gender, saying, friends) {
+  constructor(species, name, gender, saying, friends, legs) {
     this.species = species;
     this.name = name;
     this.gender = gender;
     this.saying = saying;
     this.friends = friends;
+    this.legs = legs;
   }
   toString() {
-    const properties = ["species", "name", "gender", "saying", "friends"].map(
+    const properties = ["species", "name", "gender", "saying", "friends", "legs"].map(
       (prop) => `${prop}: ${this[prop]}`
     );
     return properties.join("; ");
@@ -15,14 +16,13 @@ class Inhabitant {
 }
 class Human extends Inhabitant {
   constructor(name, gender, saying, friends) {
-    super("human", name, gender, saying, friends);
-    this.legs = 2;
+    super("human", name, gender, saying, friends, 2);
     this.hands = 2;
   }
   toString() {
     return [
       super.toString(),
-      ...["hands", "legs"].map((prop) => `${prop}: ${this[prop]}`),
+      ...["hands"].map((prop) => `${prop}: ${this[prop]}`),
     ].join("; ");
   }
 }
@@ -38,32 +38,23 @@ class Woman extends Human {
 }
 class Dog extends Inhabitant {
   constructor(name, gender, saying, friends) {
-    super("dog", name, gender, saying, friends);
-    this.legs = 4;
-  }
-  toString() {
-    return `${super.toString()}; ` + `legs: ${this.legs}`;
+    super("dog", name, gender, saying, friends, 4);
   }
 }
 class Cat extends Inhabitant {
   constructor(name, gender, saying, friends) {
-    super("cat", name, gender, saying, friends);
-    this.legs = 4;
-  }
-  toString() {
-    return `${super.toString()}; ` + `legs: ${this.legs}`;
+    super("cat", name, gender, saying, friends, 4);
   }
 }
 class CatWoman extends Inhabitant {
   constructor(name, friends) {
-    super("cat-woman", name, "female", cat.saying, friends);
-    this.legs = 2;
+    super("cat-woman", name, "female", cat.saying, friends, 2);
     this.hands = 2;
   }
   toString() {
     return [
       super.toString(),
-      ...["hands", "legs"].map((prop) => `${prop}: ${this[prop]}`),
+      ...["hands"].map((prop) => `${prop}: ${this[prop]}`),
     ].join("; ");
   }
 }
