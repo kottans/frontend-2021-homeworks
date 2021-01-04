@@ -45,7 +45,7 @@ class Human extends Inhabitant {
 
    toPrint() {
       const strToArr = super.toPrint().split('legs');
-      return `${strToArr[0]} legs and ${this.hands} hands${strToArr[1]}`;
+      return `${strToArr[0]}legs and ${this.hands} hands${strToArr[1]}`;
    }
 }
 
