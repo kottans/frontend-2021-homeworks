@@ -50,6 +50,7 @@ body {
 .user__info {
   display: flex;
   flex-direction: column;
+  word-break: break-word;
 }
 
 .user__photo {
@@ -73,7 +74,8 @@ body {
   text-decoration: none;
 }
 
-.user__gender, .user__age {
+.user__gender,
+.user__age {
   display: block;
   font-size: 16px;
   line-height: 24px;
@@ -111,8 +113,7 @@ body {
   cursor: pointer;
 }
 
-.error-message {
-  color: red;
+.message {
   font-weight: bold;
 }
 
