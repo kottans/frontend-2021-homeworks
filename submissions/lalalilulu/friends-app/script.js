@@ -34,14 +34,14 @@ const startApp = (response) => {
                 break;
             case "all":
                 resetCheckedFilters();
-                sortedArray = sortByGender(friendsArray, null);
+                sortedArray = [...friendsArray];
                 break;
         }
         renderContent(sortedArray);
     });
 }
 
-const fetchContent = function() {
+const fetchContent = function () {
     const jsonHeader = {dataType: "json"};
     return fetch('https://randomuser.me/api/?inc=name,gender,phone,picture,dob&results=24', jsonHeader)
         .then(response => response.json())
@@ -52,7 +52,7 @@ const createPersonCard = (friend) => {
     const card = document.createElement("div");
     card.classList.add("card");
     card.innerHTML =
-                `<div class="card-img">
+        `<div class="card-img">
                     <img src="${friend.picture.medium}" alt="friend-photo">
                 </div>
                 <div class="card-content">
@@ -89,32 +89,34 @@ const searchByValue = (array, value) => {
 }
 
 const sortByName = (array, isAscending) => {
+    return sortArray(array, isAscending, true);
+}
+
+const sortByAge = (array, isAscending) => {
+    return sortArray(array, isAscending, false);
+}
+
+const sortByGender = (array, gender) => {
+    return array.filter(friend => friend.gender === gender);
+}
+
+const sortArray = (array, isAscending, isNameSorting) => {
     const sortedArray = checkGender(array);
     sortedArray.sort((prev, next) => {
-        const prevName = prev.name.first;
-        const nextName = next.name.first;
-        if (prevName < nextName) return -1;
-        if (prevName > nextName) return 1;
-        if (prevName === nextName) return 0;
+        const prevValue = isNameSorting ? prev.name.first : prev.dob.age;
+        const nextValue = isNameSorting ? next.name.first : next.dob.age;
+        if (prevValue < nextValue) return -1;
+        if (prevValue > nextValue) return 1;
+        if (prevValue === nextValue) return 0;
     });
     return isAscending ? sortedArray : sortedArray.reverse();
 }
 
-const sortByAge = (array, isAscending) => {
-    const sortedArray = checkGender(array);
-    sortedArray.sort((prev, next) => prev.dob.age - next.dob.age);
-    return isAscending ? sortedArray : sortedArray.reverse();
-}
-
-const sortByGender = (array, gender) => {
-    return gender !== null ? array.filter(friend => friend.gender === gender) : array;
-}
-
 const checkGender = (array) => {
     let sortedArray = [...array];
-    if(document.getElementById("female").checked) {
+    if (document.getElementById("female").checked) {
         sortedArray = sortByGender(array, "female");
-    } else if(document.getElementById("male").checked) {
+    } else if (document.getElementById("male").checked) {
         sortedArray = sortByGender(array, "male");
     }
     return sortedArray;
@@ -122,13 +124,13 @@ const checkGender = (array) => {
 
 const checkNameAge = (array) => {
     let sortedArray = [...array];
-    if(document.getElementById("age-ascending").checked) {
+    if (document.getElementById("age-ascending").checked) {
         sortedArray = sortByAge(sortedArray, true);
-    } else if(document.getElementById("age-descending").checked) {
+    } else if (document.getElementById("age-descending").checked) {
         sortedArray = sortByAge(sortedArray, false);
-    } else if(document.getElementById("name-ascending").checked) {
+    } else if (document.getElementById("name-ascending").checked) {
         sortedArray = sortByName(sortedArray, true);
-    } else if(document.getElementById("name-descending").checked) {
+    } else if (document.getElementById("name-descending").checked) {
         sortedArray = sortByName(sortedArray, false);
     }
     return sortedArray;
