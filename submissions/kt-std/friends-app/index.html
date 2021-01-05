@@ -13,6 +13,7 @@
     <header class="header__container flex">
         <h3 class="logo__text">Fri<span class="colored">end</span>s App</h3>
         <div class="search__container">
+            <span class="info flex"></span>
             <input type="text" class="search__field" id="search" placeholder="Search...">
             <label class="before"></label>
         </div>
@@ -47,7 +48,7 @@
                     <input type="checkbox" class="checkbox" name="gender_female" value="female" id="female" checked>
                 </div>
             </div>
-            <div class="filter__item" id="ageFilter">
+            <div class="filter__item age__filter" id="ageFilter">
                 <label class="label">Age:</label>
                 <div class="filter__row">
                     <input type="number" class="number" name="minAge" id="minAge">
@@ -57,9 +58,9 @@
             </div>
         </div>
         <div class="cards__container"></div>
+        <button class="more__button " id="moreFriends" onclick="getFriends()">More friends</button>
     </main>
     <script src="js/script.js"></script>
 </body>
 
 </html>
-

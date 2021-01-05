@@ -12,7 +12,7 @@
 }
 
 :root {
-	--animation-duration: .5s;
+    --animation-duration: .5s;
     --border-radius: 5px;
     --logo-text: #666;
     --color-accent: #7CB342;
@@ -63,7 +63,7 @@ body {
     box-shadow: var(--shadow);
 }
 
-.header__container {	
+.header__container {
     justify-content: space-between;
     align-items: center;
     box-sizing: border-box;
@@ -97,7 +97,7 @@ body {
 .cards__container {
     display: flex;
     width: 100%;
-    justify-content: space-around;
+    justify-content: center;
     flex-wrap: wrap;
     margin-right: -20px;
 }
@@ -180,11 +180,79 @@ body {
     height: 30px;
 }
 
+.button[data-title]:hover::after,
+.info:hover:after {
+    animation: opacity var(--animation-duration);
+    content: attr(data-title);
+    padding: 10px var(--padding);
+    border: 1px solid var(--border-color);
+    box-sizing: border-box;
+    min-width: 100px;
+    text-align: center;
+    white-space: nowrap;
+    background-color: white;
+    position: absolute;
+    z-index: 1000;
+    bottom: -101%;
+    color: var(--username-color);
+    border-radius: var(--border-radius);
+    font-size: var(--font-small);
+    left: 100%;
+}
+
+@keyframes opacity {
+    0% { opacity: 0 };
+    100% { opacity: 1 };
+}
+
 .card__image {
     height: 80px;
     transition: var(--animation-duration);
     border-radius: 50%;
     filter: saturate(0);
+}
+
+.info {
+    box-sizing: border-box;
+    width: 40px;
+    height: 25px;
+    margin-right: 10px;
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: var(--font-small);
+}
+
+.info:before {
+    position: absolute;
+    box-sizing: border-box;
+    width: 25px;
+    height: 25px;
+    font-weight: var(--bold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 1px solid var(--border-color);
+    z-index: 10;
+    color: var(--color-accent);
+    content: '?';
+    transition: var(--animation-duration);
+}
+
+.info:hover:before {
+    border-color: var(--color-accent);
+}
+
+.info:hover:after {
+    bottom: 0;
+    text-align: left;
+    white-space: normal;
+    transform: translateY(90%);
+    width: 200px;
+    content: 'Searching for first name, last name, username, email and location is allowed';
 }
 
 .column {
@@ -345,6 +413,7 @@ body {
     filter: saturate(1);
 }
 
+.more__button,
 .filters__button {
     border: 1px solid var(--border-color);
     box-sizing: border-box;
@@ -353,6 +422,7 @@ body {
     padding: 10px var(--padding);
     border-radius: var(--border-radius);
 }
+
 
 .heading {
     font-size: var(--font-large);
@@ -367,21 +437,35 @@ body {
     margin-left: 5px;
 }
 
+.more__button,
 .filters__button:hover {
     cursor: pointer;
     background-color: var(--color-accent);
     color: white;
 }
 
-.filters__button::-moz-focus-inner {
+.more__button:hover {
+    box-shadow: var(--shadow);
+}
+
+.more__button {
+    margin-top: var(--margin);
+}
+
+.filters__button::-moz-focus-inner,
+.more__button::-moz-focus-inner {
     border: 0;
 }
 
 .filters__container {
     background-color: white;
-    height: 120px;
+    -webkit-transition: max-height .5s, padding .5s;
+    transition: max-height .5s, padding .5s;
+    max-height: 0;
+    overflow: hidden;
     width: 100%;
-    display: none;
+    transition: max-height 0.5s ease-out;
+    display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: var(--margin);
@@ -389,8 +473,12 @@ body {
     padding: 0 var(--padding);
 }
 
+.filters__container>* {
+    padding: var(--padding) 0;
+}
+
 .display {
-    display: flex;
+    max-height: 500px;
 }
 
 .label {
@@ -476,6 +564,11 @@ body {
     margin-right: var(--margin);
 }
 
+.filter__item:last-of-type,
+.gender__filter>.filter__item:last-of-type {
+    margin-right: 0;
+}
+
 .gender__filter {
     display: flex;
 }
@@ -538,6 +631,7 @@ body {
 
     .card__container {
         width: 100%;
+        min-width: 100px;
         max-width: 250px;
     }
 
@@ -552,9 +646,29 @@ body {
     .filters__container {
         height: auto;
         flex-direction: column;
-        padding: 20px;
+        padding: 0 20px;
         align-items: center;
         align-content: center;
         flex-wrap: wrap;
     }
+}
+
+@media (min-width: 600px) and (max-width: 700px) {
+    .filters__container {
+        flex-direction: row;
+    }
+}
+
+
+.age__filter,
+.gender__filter,
+.select__item {
+    visibility: hidden;
+    transition: .5s;
+    opacity: 0;
+}
+
+.visible {
+    opacity: 1;
+    visibility: visible;
 }
