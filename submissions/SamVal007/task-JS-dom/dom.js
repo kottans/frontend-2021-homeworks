@@ -114,14 +114,13 @@ const generatePlayerDescription = (id) => {
 
   PLAYERS[id].description.forEach(item => {
     const p = document.createElement('p');
-
     p.textContent = item;
-    div.appendChild(p);
+    fragment.appendChild(p);
   });
 
 
-  fragment.appendChild(div);
-  return fragment.firstElementChild.innerHTML;
+  div.appendChild(fragment);
+  return div.innerHTML;
 }
 
 const displayContent = (activeElem) => {
@@ -134,7 +133,9 @@ const displayContent = (activeElem) => {
 }
 
 
-const displayMain = ({target}) => {
+const displayMain = ({
+  target
+}) => {
   if (target.id === currentPlayerIndex) return;
   currentPlayerIndex = target.id;
 
