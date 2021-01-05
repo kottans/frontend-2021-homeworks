@@ -3,6 +3,9 @@ class Render {
     if (Render.instance == null) {
       this.profilesContainer = document.querySelector('.profile-cards');
       this.filtersContainer = document.querySelector('#filters');
+      document.querySelector('#menu').addEventListener('click', () => {
+        document.querySelector('#filters').classList.toggle('active');
+      });
       Render.instance = this;
     }
     return Render.instance;
@@ -160,26 +163,22 @@ class Render {
 
 class Filter {
   constructor(render) {
-    if (Filter.instance == null) {
-      this.profilesContainer = document.querySelector('.profile-cards');
-      this.renderDataWithFilters = render;
-      render.renderFilters();
-      this.filtersPanel = document.querySelector('#filters');
-      this.searchInput = document.querySelector('#nameInput');
-      this.sortedUsers = [];
-      this.sortByNameTypes = {
-        inAscending: 'nameAZ',
-        inDescending: 'nameZA',
-        byDefault: 'nameAll',
-      };
-      this.sortByAgeTypes = {
-        inAscending: 'age09',
-        inDescending: 'age90',
-        byDefault: 'ageAll',
-      };
-      Filter.instance = this;
-    }
-    return Filter.instance;
+    this.profilesContainer = document.querySelector('.profile-cards');
+    this.renderDataWithFilters = render;
+    render.renderFilters();
+    this.filtersPanel = document.querySelector('#filters');
+    this.searchInput = document.querySelector('#nameInput');
+    this.sortedUsers = [];
+    this.sortByNameTypes = {
+      inAscending: 'nameAZ',
+      inDescending: 'nameZA',
+      byDefault: 'nameAll',
+    };
+    this.sortByAgeTypes = {
+      inAscending: 'age09',
+      inDescending: 'age90',
+      byDefault: 'ageAll',
+    };
   }
 
   unckeckedRadioButton(nodeName) {
@@ -189,7 +188,33 @@ class Filter {
     if (checkedRadio) checkedRadio.checked = false;
   }
 
-  selectSort(selected) {
+  selectSortMethod(selectedRadioButton) {
+    const name = selectedRadioButton.name;
+    const sortMethod = {
+      'sort-gender': () => {
+        this.unckeckedRadioButton('sort-name');
+        this.unckeckedRadioButton('sort-age');
+        this.sortByGender(selectedRadioButton.id);
+      },
+      'sort-name': () => {
+        this.unckeckedRadioButton('sort-age');
+        this.sortByContent(
+          selectedRadioButton.id,
+          this.sortByNameTypes,
+          'name'
+        );
+      },
+      'sort-age': () => {
+        this.unckeckedRadioButton('sort-name');
+        this.sortByContent(selectedRadioButton.id, this.sortByAgeTypes, 'age');
+      },
+    };
+    return sortMethod[name]();
+  }
+
+  startFilter() {
+    this.usersByDefault = [...this.usersDataForFilter];
+
     this.searchInput.addEventListener('input', ({ target }) => {
       let usersByEmail = [];
       let filter = target.value.toUpperCase();
@@ -203,30 +228,9 @@ class Filter {
       this.renderDataWithFilters.renderProfiles();
     });
 
-    const sort = {
-      'sort-gender': () => {
-        this.unckeckedRadioButton('sort-name');
-        this.unckeckedRadioButton('sort-age');
-        this.sortByGender(selected.id);
-      },
-      'sort-name': () => {
-        this.unckeckedRadioButton('sort-age');
-        this.sortByContent(selected.id, this.sortByNameTypes, 'name');
-      },
-      'sort-age': () => {
-        this.unckeckedRadioButton('sort-name');
-        this.sortByContent(selected.id, this.sortByAgeTypes, 'age');
-      },
-      sortByEmail: () => false,
-    };
-    return (sort[selected.name] || sort.sortByEmail)();
-  }
-
-  startFilter() {
-    this.usersByDefault = [...this.usersDataForFilter];
     this.filtersPanel.addEventListener('click', ({ target }) => {
-      if (target.type === 'radio' || target.type === 'text') {
-        this.selectSort(target);
+      if (target.type === 'radio') {
+        this.selectSortMethod(target);
         this.renderDataWithFilters.usersDataForRender = this.usersDataForFilter;
         this.renderDataWithFilters.renderProfiles();
       }
@@ -252,13 +256,17 @@ class Filter {
         this.sortedUsers = [...this.usersDataForFilter];
       },
     };
+
     return selectGender[gender]();
   }
 
   sortByContent(sortType, sortTypes, sortBy) {
-    if (this.sortedUsers.length !== 0)
+    if (this.sortedUsers.length !== 0) {
       this.usersDataForFilter = [...this.sortedUsers];
-    else this.sortedUsers = [...this.usersByDefault];
+    } else {
+      this.sortedUsers = [...this.usersByDefault];
+    }
+
     const typeOfSort = {
       [sortTypes.byDefault]: () => {
         this.usersDataForFilter = [...this.sortedUsers];
@@ -301,8 +309,11 @@ class Users {
       const response = await fetch(this.apiURL + `?results=100&seed=abc`);
       if (!response.ok) throw new Error(errorMessage);
       const usersData = await response.json();
-      this.renderData.usersDataForRender = this.filterData.usersDataForFilter =
-        usersData.results;
+
+      this.renderData.usersDataForRender = 
+      this.filterData.usersDataForFilter =
+      usersData.results;
+
       this.renderData.renderProfiles();
       this.filterData.startFilter();
     } catch (err) {
@@ -311,23 +322,13 @@ class Users {
   }
 }
 
-class Observer {
-  constructor() {
-    document.querySelector('#menu').addEventListener('click', () => {
-      document.querySelector('#filters').classList.toggle('active');
-    });
-  }
-}
-
-class Animation {
-  constructor() {
-    this.animationDuration = 7000;
-    this.preloadAnimation = setTimeout(() => {
-      document.querySelector('#preload').remove();
-      document.querySelector('body').style.setProperty('--scroll', 'auto');
-      document.querySelector('.wrapper').classList.remove('hidden');
-    }, this.animationDuration);
-  }
+function animation() {
+  const animationDuration = 7000;
+  setTimeout(() => {
+    document.querySelector('#preload').remove();
+    document.querySelector('body').style.setProperty('--scroll', 'auto');
+    document.querySelector('.wrapper').classList.remove('hidden');
+  }, animationDuration);
 }
 
 const render = new Render();
@@ -335,5 +336,4 @@ const filter = new Filter(render);
 const getUsersData = new Users(render, filter);
 
 getUsersData.getUsersData();
-new Observer();
-new Animation();
+animation();
