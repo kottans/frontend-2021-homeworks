@@ -38,7 +38,7 @@ const bindEventListeners = (friends) => {
 				if (radioButton.checked) {
 					friends.sortByAge(radioButton.id);
 				}
-			});
+			});//this two forEach callbacks is needed to re-sort new arrays of cards, filtered by gender
 		}
 		if (target.name == "name") {
 			friends.sortByName(target.id);
