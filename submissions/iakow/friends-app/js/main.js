@@ -202,14 +202,8 @@ function getPlaceholders() {
 
     return fakeUserCard;
   }
-
-  const placeholders = [];
-
-  for (let i = 0; i < USERS_AMOUNT; i++) {
-    placeholders.push(getPlaceholder());
-  }
-
-  return placeholders;
+  
+  return Array.from({length: USERS_AMOUNT}, getPlaceholder)
 }
 
 function getUserCard(fetchedUserData) {
