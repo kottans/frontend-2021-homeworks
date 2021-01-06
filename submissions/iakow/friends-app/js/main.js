@@ -4,16 +4,13 @@ disableFilters();
 
 const USERS_AMOUNT = 100;
 
-mountUserList(getPlaceholders());
+renderUsersList();
 
-const ALL_USER_CARDS = [];
+let ALL_USERS;
 
-getUsersData().then((results) => {
-  results.forEach((userData) => {
-    ALL_USER_CARDS.push(getUserCard(userData));
-  });
-
-  mountUserList(ALL_USER_CARDS);
+getUsersData().then((usersData) => {
+  ALL_USERS = usersData;
+  renderUsersList(ALL_USERS);
   enableFilters();
 });
 
@@ -33,6 +30,57 @@ function getUsersData(attempts = 5) {
 
       return getUsersData(attempts - 1);
     });
+}
+
+function renderUsersList(usersData) {
+  const userCards = usersData
+    ? Array.from(usersData, buildUserCard)
+    : Array.from({ length: USERS_AMOUNT }, buildPlaceholder);
+
+  mount(userCards);
+
+  function buildUserCard(userData) {
+    const card = document.createElement("li");
+    card.classList.add("user-card");
+
+    const { nat, picture, name, dob, location, phone, email } = userData;
+
+    const flag = `<img class="user-card__flag" src="https://www.countryflags.io/${nat}/flat/24.png">`;
+
+    card.innerHTML = `
+      <div class="user-card__cover" style="background-image: url('${picture.large}')"></div>
+      <img class="user-card__photo" src="${picture.large}">
+      <p class="user-card__name">${name.first} ${name.last}, ${dob.age}</p>
+      <p class="user-card__addr">${flag}${location.country}, ${location.city}</p>
+      <p class="user-card__phone">${phone}</p>
+      <p class="user-card__email">${email}</p>`;
+
+    return card;
+  }
+
+  function buildPlaceholder() {
+    const fakeUserCard = document.createElement("div");
+    fakeUserCard.classList.add("user-card", "placeholder");
+
+    fakeUserCard.innerHTML = `
+      <img class="user-card__photo" height="100" width="100">
+      <p class="user-card__name">Full Name, AGE </p>
+      <p class="user-card__addr">Country, City</p>
+      <p class="user-card__phone">PHONE-NUMBER</p>
+      <p class="user-card__email">user e-mail address</p>`;
+
+    return fakeUserCard;
+  }
+
+  function mount(usercardsArr) {
+    const userList = document.querySelector("#user-list");
+    const fragment = document.createDocumentFragment();
+
+    fragment.append(...usercardsArr);
+
+    userList.innerHTML = "";
+    userList.append(fragment);
+  }
 }
 
 function addHandlers() {
@@ -97,7 +145,7 @@ function addHandlers() {
       .querySelectorAll(".filter")
       .forEach((filter) => (filter.value = ""));
 
-    mountUserList(ALL_USER_CARDS);
+    mountUserCards(ALL_USER_CARDS);
   });
 }
 
@@ -109,7 +157,7 @@ function applyFilters() {
     .sort(sortByAge)
     .sort(sortByName);
 
-  mountUserList(filteredArr);
+  mountUserCards(filteredArr);
 
   const filters = document.querySelectorAll(".filter");
   document.querySelector("#reset-filters").disabled = [...filters].every(
@@ -186,52 +234,4 @@ function enableFilters() {
   document
     .querySelectorAll(".filter")
     .forEach((controll) => (controll.disabled = false));
-}
-
-function getPlaceholders() {
-  function getPlaceholder() {
-    const fakeUserCard = document.createElement("div");
-    fakeUserCard.classList.add("user-card", "placeholder");
-
-    fakeUserCard.innerHTML = `
-      <img class="user-card__photo" height="100" width="100">
-      <p class="user-card__name">Full Name, AGE </p>
-      <p class="user-card__addr">Country, City</p>
-      <p class="user-card__phone">PHONE-NUMBER</p>
-      <p class="user-card__email">user e-mail address</p>`;
-
-    return fakeUserCard;
-  }
-  
-  return Array.from({length: USERS_AMOUNT}, getPlaceholder)
-}
-
-function getUserCard(fetchedUserData) {
-  const card = document.createElement("li");
-  card.classList.add("user-card");
-  card.userData = fetchedUserData;
-
-  const { nat, picture, name, dob, location, phone, email } = fetchedUserData;
-
-  const flag = `<img class="user-card__flag" src="https://www.countryflags.io/${nat}/flat/24.png">`;
-
-  card.innerHTML = `
-    <div class="user-card__cover" style="background-image: url('${picture.large}')"></div>
-    <img class="user-card__photo" src="${picture.large}">
-    <p class="user-card__name">${name.first} ${name.last}, ${dob.age}</p>
-    <p class="user-card__addr">${flag}${location.country}, ${location.city}</p>
-    <p class="user-card__phone">${phone}</p>
-    <p class="user-card__email">${email}</p>`;
-
-  return card;
-}
-
-function mountUserList(usercardsArr) {
-  const userList = document.querySelector("#user-list");
-  const fragment = document.createDocumentFragment();
-
-  fragment.append(...usercardsArr);
-
-  userList.innerHTML = "";
-  userList.append(fragment);
 }
