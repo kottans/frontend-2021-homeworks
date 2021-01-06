@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;500;700&display=swap');
+* {
+	margin: 0;
+	box-sizing: border-box;
+}
+:root {
+	--dark: #111;
+	--gray: #222;
+    --light: #eee;
+    --shadow: #88888888;
+    --main_padding: 40px;
+    --link_color: #ce5757;
+    --filters_width: 240px;
+}
+body{
+    background: var(--dark);
+    color: var(--light);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    transition: background 500ms linear, color 100ms linear, border 500ms linear;
+}
+
+.header{
+    position: sticky;
+    padding: 2em 1em;
+    top: 0;
+    left: 0;
+    background: var(--gray);
+    border-bottom: 2px solid var(--light);
+}
+.header__title{
+    font-size: 2em;
+    font-weight: 700;
+}
+.day_night{
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    background: var(--light);
+    height: 20px;
+    width: 150px;
+    padding: 0 20px;
+    cursor: pointer;
+    transition: background 300ms linear;
+    clip-path: polygon(41% 0, 62% 0, 62% 100%, 41% 100%);
+	-webkit-user-select: none; /* Safari */
+	-ms-user-select: none;
+	user-select: none;
+}
+.night_icon{
+    position: absolute;
+    left: 100%;
+    top: 1px;
+    transition: left 500ms linear;
+}
+.day_icon{
+    position: absolute;
+    left: 69px;
+    top: 1px;
+    transition: left 500ms linear;
+}
+.day_night.light .day_icon{
+    left: 0;
+}
+.day_night.light .night_icon{
+    left: 69px;
+}
+
+.filters{
+    background: var(--gray);
+    border-right: 2px solid var(--light);
+    width: var(--filters_width);
+    height: 100%;
+    position: fixed;
+    padding: 0 0.8em;
+    font-size: 14px;
+}
+.filters__section{
+    margin: 0.8em 0;
+}
+.filters__section--centered{
+    text-align: center;
+}
+.filters__text_field{
+    width: 100%;
+}
+.input__heading{
+    margin-bottom: 0.8em;
+}
+.filters__button{
+    width: 100px;
+    margin: auto;
+    font-family: 'IBM Plex Mono', monospace;
+}
+.filters input[type=radio], .filters label{
+    cursor: pointer;
+}
+
+.main{
+    display: flex;
+    flex-wrap: wrap;
+    padding: var(--main_padding);
+    justify-content: center;
+    margin-left: var(--filters_width);
+}
+.card{
+    flex-basis: 260px;
+    margin-right: 30px;
+    margin-bottom: 30px;
+    background: var(--gray);
+    text-align: center;
+    border: 1px solid var(--light);
+    padding-top: 1em;
+    padding-bottom: 1em;
+    box-shadow: 10px 10px 0px var(--shadow);
+    transition: box-shadow 600ms linear;
+}
+.card:hover{
+    box-shadow: 13px 13px 0px var(--shadow), -13px -13px 0px var(--shadow);
+}
+.card__img{
+    height: 126px;
+    width: 126px;
+    margin-bottom: 0.5em;
+    border: 1px solid var(--light);
+}
+.card__name, .card__age, .card__phone, .card__email, .card__country{   
+    display: block;
+    padding: 0.5em;
+    border-top: 1px dashed var(--light);
+}
+.card__country{
+    display: block;
+    padding: 0.5em 0.5em 0 0.5em;
+    border-top: 1px dashed var(--light);
+}
+.card__email, .card__phone{
+    color: var(--light);
+    text-decoration: none;
+}
+.card__email:hover, .card__phone:hover{
+    color: var(--link_color);
+    text-decoration: underline;
+}
