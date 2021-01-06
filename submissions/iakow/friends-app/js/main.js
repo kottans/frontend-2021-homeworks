@@ -145,19 +145,19 @@ function addHandlers() {
       .querySelectorAll(".filter")
       .forEach((filter) => (filter.value = ""));
 
-    mountUserCards(ALL_USER_CARDS);
+      renderUsersList(ALL_USERS);
   });
 }
 
 function applyFilters() {
-  const filteredArr = [...ALL_USER_CARDS]
+  const filteredArr = [...ALL_USERS]
     .filter(filterByName)
     .filter(filterByAge)
     .filter(filterBySex)
     .sort(sortByAge)
     .sort(sortByName);
 
-  mountUserCards(filteredArr);
+  renderUsersList(filteredArr);
 
   const filters = document.querySelectorAll(".filter");
   document.querySelector("#reset-filters").disabled = [...filters].every(
@@ -165,7 +165,7 @@ function applyFilters() {
   );
 
   function filterByName(user) {
-    const firstName = user.userData.name.first.toLowerCase();
+    const firstName = user.name.first.toLowerCase();
     const input = document.querySelector("#filter-name").value.toLowerCase();
 
     return firstName.startsWith(input);
@@ -174,7 +174,7 @@ function applyFilters() {
   function filterByAge(user) {
     const min = document.querySelector("#filter-age-min").value;
     const max = document.querySelector("#filter-age-max").value;
-    const { age } = user.userData.dob;
+    const { age } = user.dob;
 
     if (!min && !max) return user;
     if (min && !max) return +age >= +min;
@@ -186,9 +186,9 @@ function applyFilters() {
     const input = document.querySelector("#filter-sex").value;
 
     if (input === "male") {
-      return user.userData.gender === "male";
+      return user.gender === "male";
     } else if (input === "female") {
-      return user.userData.gender === "female";
+      return user.gender === "female";
     } else if (input === "") {
       return true;
     }
@@ -197,9 +197,9 @@ function applyFilters() {
   function sortByAge(user1, user2) {
     const input = document.querySelector("#sort-age").value;
     if (input === "down") {
-      return +user2.userData.dob.age - +user1.userData.dob.age;
+      return +user2.dob.age - +user1.dob.age;
     } else if (input === "up") {
-      return +user1.userData.dob.age - +user2.userData.dob.age;
+      return +user1.dob.age - +user2.dob.age;
     } else if (input === "") {
       return 0;
     }
@@ -207,8 +207,8 @@ function applyFilters() {
 
   function sortByName(user1, user2) {
     const input = document.querySelector("#sort-name").value;
-    const name1 = user1.userData.name.first + user1.userData.name.last;
-    const name2 = user2.userData.name.first + user2.userData.name.last;
+    const name1 = user1.name.first + user1.name.last;
+    const name2 = user2.name.first + user2.name.last;
 
     if (input === "up") {
       if (name1 > name2) return 1;
