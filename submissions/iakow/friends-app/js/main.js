@@ -8,19 +8,32 @@ mountUserList(getPlaceholders());
 
 const ALL_USER_CARDS = [];
 
-fetch(`https://randomuser.me/api/?results=${USERS_AMOUNT}`)
-  .then((response) => response.json())
-  .then((response) => {
-    response.results.forEach((userData) => {
-      ALL_USER_CARDS.push(getUserCard(userData));
-    });
-
-    mountUserList(ALL_USER_CARDS);
-    enableFilters();
+getUsersData().then((results) => {
+  results.forEach((userData) => {
+    ALL_USER_CARDS.push(getUserCard(userData));
   });
+
+  mountUserList(ALL_USER_CARDS);
+  enableFilters();
+});
 
 addHandlers();
 
+function getUsersData(attempts = 5) {
+  const url = `https://randomuser.me/api/?results=${USERS_AMOUNT}`;
+
+  return fetch(url)
+    .then((response) => response.json())
+    .then((response) => response.results)
+    .catch((error) => {
+      if (attempts === 0) {
+        alert("Can't get data. Try restarting or try again later.");
+        throw error;
+      }
+
+      return getUsersData(attempts - 1);
+    });
+}
 
 function addHandlers() {
   const filtersBlock = document.querySelector("#filters-block");
@@ -80,7 +93,9 @@ function addHandlers() {
   document.querySelector("#reset-filters").addEventListener("click", (e) => {
     e.target.disabled = true;
 
-    document.querySelectorAll(".filter").forEach((filter) => (filter.value = ""));
+    document
+      .querySelectorAll(".filter")
+      .forEach((filter) => (filter.value = ""));
 
     mountUserList(ALL_USER_CARDS);
   });
@@ -183,7 +198,7 @@ function getPlaceholders() {
       `<p class="user-card__name">Full Name, AGE </p>`,
       `<p class="user-card__addr">Country, City</p>`,
       `<p class="user-card__phone">PHONE-NUMBER</p>`,
-      `<p class="user-card__email">user e-mail address</p>`
+      `<p class="user-card__email">user e-mail address</p>`,
     ].join("\n");
 
     return fakeUserCard;
@@ -203,7 +218,7 @@ function getUserCard(fetchedUserData) {
   card.classList.add("user-card");
   card.userData = fetchedUserData;
 
-  const {nat, picture, name, dob, location, phone, email} = fetchedUserData;
+  const { nat, picture, name, dob, location, phone, email } = fetchedUserData;
 
   const flag = `<img class="user-card__flag" src="https://www.countryflags.io/${nat}/flat/24.png">`;
 
@@ -213,7 +228,7 @@ function getUserCard(fetchedUserData) {
     `<p class="user-card__name">${name.first} ${name.last}, ${dob.age}</p>`,
     `<p class="user-card__addr">${flag}${location.country}, ${location.city}</p>`,
     `<p class="user-card__phone">${phone}</p>`,
-    `<p class="user-card__email">${email}</p>`
+    `<p class="user-card__email">${email}</p>`,
   ].join("\n");
 
   return card;
