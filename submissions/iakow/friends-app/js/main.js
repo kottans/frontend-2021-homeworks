@@ -193,13 +193,12 @@ function getPlaceholders() {
     const fakeUserCard = document.createElement("div");
     fakeUserCard.classList.add("user-card", "placeholder");
 
-    fakeUserCard.innerHTML = [
-      `<img class="user-card__photo" height="100" width="100">`,
-      `<p class="user-card__name">Full Name, AGE </p>`,
-      `<p class="user-card__addr">Country, City</p>`,
-      `<p class="user-card__phone">PHONE-NUMBER</p>`,
-      `<p class="user-card__email">user e-mail address</p>`,
-    ].join("\n");
+    fakeUserCard.innerHTML = `
+      <img class="user-card__photo" height="100" width="100">
+      <p class="user-card__name">Full Name, AGE </p>
+      <p class="user-card__addr">Country, City</p>
+      <p class="user-card__phone">PHONE-NUMBER</p>
+      <p class="user-card__email">user e-mail address</p>`;
 
     return fakeUserCard;
   }
@@ -222,14 +221,13 @@ function getUserCard(fetchedUserData) {
 
   const flag = `<img class="user-card__flag" src="https://www.countryflags.io/${nat}/flat/24.png">`;
 
-  card.innerHTML = [
-    `<div class="user-card__cover" style="background-image: url('${picture.large}')"></div>`,
-    `<img class="user-card__photo" src="${picture.large}">`,
-    `<p class="user-card__name">${name.first} ${name.last}, ${dob.age}</p>`,
-    `<p class="user-card__addr">${flag}${location.country}, ${location.city}</p>`,
-    `<p class="user-card__phone">${phone}</p>`,
-    `<p class="user-card__email">${email}</p>`,
-  ].join("\n");
+  card.innerHTML = `
+    <div class="user-card__cover" style="background-image: url('${picture.large}')"></div>
+    <img class="user-card__photo" src="${picture.large}">
+    <p class="user-card__name">${name.first} ${name.last}, ${dob.age}</p>
+    <p class="user-card__addr">${flag}${location.country}, ${location.city}</p>
+    <p class="user-card__phone">${phone}</p>
+    <p class="user-card__email">${email}</p>`;
 
   return card;
 }
