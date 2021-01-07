@@ -1,7 +1,11 @@
 const URL = "https://randomuser.me/api/?results=16";
 const USERS_CONTAINER = document.querySelector(".users-container");
 
-const INIT_GENDER = "all";
+const ALL_GENDERS = "all";
+const MALE_GENDER = "male";
+const FEMALE_GENDER = "female";
+
+const INIT_GENDER = ALL_GENDERS;
 
 let selectedGender = INIT_GENDER;
 
@@ -29,10 +33,13 @@ const createUserTemplate = (photo, name, email, gender, age) => {
 async function getUsers() {
   try {
     const response = await fetch(URL);
-    const json = await response.json();
-    return json.results;
+    if (response.ok) {
+      const json = await response.json();
+      return json.results;
+    }
   } catch {
     USERS_CONTAINER.innerHTML += showMessage("oops :( users fetch failed");
+    throw Error(response.statusText);
   }
 }
 
@@ -40,18 +47,14 @@ async function renderApp() {
   const initUsers = await getUsers();
   const users = initUsers.slice();
   const sortByAgeParameters = {
-    users: users,
+    users,
     sortingTriggersContainer: document.querySelector("#age-sort"),
     sortingFunction: sortByAge,
-    ascendingTrigger: document.querySelector("#sort-ascending"),
-    descendingTrigger: document.querySelector("#sort-descending"),
   };
   const sortByNameParameters = {
-    users: users,
+    users,
     sortingTriggersContainer: document.querySelector("#name-sort"),
     sortingFunction: sortByName,
-    ascendingTrigger: document.querySelector("#sort-az"),
-    descendingTrigger: document.querySelector("#sort-za"),
   };
   renderUsers(users);
   handleSearch(users);
@@ -79,58 +82,56 @@ const renderUsers = (users) => {
   USERS_CONTAINER.innerHTML += renderedUsers;
 };
 
-const handleSort = ({
-  users,
-  sortingTriggersContainer,
-  sortingFunction,
-  ascendingTrigger,
-  descendingTrigger,
-}) => {
-  sortingTriggersContainer.addEventListener("click", ({ target }) => {
-    resetSearch();
-    const filteredUsers = checkSelectedState(users);
+const handleSort = ({ users, sortingTriggersContainer, sortingFunction }) => {
+  sortingTriggersContainer.addEventListener(
+    "click",
+    ({ target: { value: targetValue } }) => {
+      resetSearch();
+      const filteredUsers = checkSelectedState(users);
+      const ascendingSorting = "ascending";
+      const descendingSorting = "descending";
 
-    if (target === ascendingTrigger) {
-      sortingFunction(filteredUsers);
+      if (targetValue === ascendingSorting) {
+        sortingFunction(filteredUsers);
+      }
+      if (targetValue === descendingSorting) {
+        sortingFunction(filteredUsers).reverse();
+      }
       renderUsers(filteredUsers);
     }
-    if (target === descendingTrigger) {
-      sortingFunction(filteredUsers).reverse();
-      renderUsers(filteredUsers);
-    }
-  });
+  );
 };
 
 const checkSelectedState = (users) => {
-  let data;
-  if (selectedGender === "male") {
-    data = filterByGender(users, "male");
-  } else if (selectedGender === "female") {
-    data = filterByGender(users, "female");
+  let result;
+  if (selectedGender === MALE_GENDER) {
+    result = filterByGender(users, MALE_GENDER);
+  } else if (selectedGender === FEMALE_GENDER) {
+    result = filterByGender(users, FEMALE_GENDER);
   } else {
-    data = users;
+    result = users;
   }
-  return data;
+  return result;
 };
 const handleFilterByGender = (users, initUsers) => {
-  const maleTrigger = document.querySelector("#gender-male");
-  const femaleTrigger = document.querySelector("#gender-female");
-  const allGendersTrigger = document.querySelector("#gender-all");
   const genderBlock = document.querySelector("#gender-block");
 
-  genderBlock.addEventListener("click", ({ target }) => {
-    if (target === maleTrigger) {
-      const men = filterByGender(users, "male");
-      updateSelectedGender(men, "male");
+  genderBlock.addEventListener(
+    "click",
+    ({ target: { value: targetValue } }) => {
+      if (targetValue === MALE_GENDER) {
+        const men = filterByGender(users, MALE_GENDER);
+        updateSelectedGender(men, MALE_GENDER);
+      }
+      if (targetValue === FEMALE_GENDER) {
+        const women = filterByGender(users, FEMALE_GENDER);
+        updateSelectedGender(women, FEMALE_GENDER);
+      }
+      if (targetValue === ALL_GENDERS) {
+        updateSelectedGender(initUsers, ALL_GENDERS);
+      }
     }
-    if (target === femaleTrigger) {
-      const women = filterByGender(users, "female");
-      updateSelectedGender(women, "female");
-    }
-    if (target === allGendersTrigger) {
-      updateSelectedGender(initUsers, "all");
-    }
-  });
+  );
 };
 
 const updateSelectedGender = (usersForRender, gender) => {
@@ -183,13 +184,12 @@ const filterByGender = (users, gender) => {
 };
 
 const searchUsers = (users, searchValue) => {
-  searchValue = searchValue.toLowerCase();
+  const formattedSearchValue = searchValue.toLowerCase();
   const filteredUsers = checkSelectedState(users);
-  if (searchValue) {
+  if (formattedSearchValue) {
     const searchResults = filteredUsers.filter(
       ({ name: { first: firstName } }) => {
-        firstName = firstName.toLowerCase();
-        return firstName.includes(searchValue);
+        return firstName.toLowerCase().includes(formattedSearchValue);
       }
     );
     renderUsers(searchResults);
