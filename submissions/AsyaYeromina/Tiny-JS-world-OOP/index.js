@@ -17,41 +17,41 @@ class Inhabitant {
     this.speech = inhabitantProperties.speech;
     this.friends = inhabitantProperties.friends;
   }
+
+  toString() {
+    return [
+      "speech",
+      "name",
+      "friends",
+      "species",
+      "gender",
+      "legs",
+    ]
+      .map((propertyName) =>
+        Array.isArray(this[propertyName])
+        ? `${propertyName}: ${this[propertyName].join(", ")}`
+        : `${propertyName}: ${this[propertyName]}`
+      )
+      .join("; ");
+  }
 }
 
 class Animal extends Inhabitant {
   constructor(inhabitantProperties) {
     super({ ...inhabitantProperties, legs: 4});
-    this.tail = inhabitantProperties.tail;
+    this.hasTail = inhabitantProperties.hasTail;
   }
 
   toString() {
-    return [
-      this.species,
-      this.name,
-      this.gender,
-      this.legs,
-      this.tail,
-      this.speech,
-      this.friends,
-    ]
-    .map((propertyValue) =>
-    propertyValue == this.tail && propertyValue === true
-      ? (propertyValue = "has tail")
-      : propertyValue == this.tail && propertyValue === false
-      ? (propertyValue = "no tail")
-      : propertyValue
-    )
-    .map((propertyValue) =>
-      Array.isArray(propertyValue) ? propertyValue.join(", ") : propertyValue
-    )
-    .join("; ");
+    return [ super.toString(),
+      this.hasTail ? "has tail" : "no tail",]
+      .join("; ");
     }
 }
 
 class Canis extends Animal {
   constructor(inhabitantProperties) {
-    super({ ...inhabitantProperties, species: "Canis", speech: "Woof-woof!", tail: true });
+    super({ ...inhabitantProperties, species: "Canis", speech: "Woof-woof!", hasTail: true });
   }
 }
 
@@ -59,7 +59,7 @@ class FelisCatus extends Animal {
   static catSpeech = "Meow";
 
   constructor(inhabitantProperties) {
-    super({ ...inhabitantProperties, species: "Felis catus", speech: FelisCatus.catSpeech, tail: true });
+    super({ ...inhabitantProperties, species: "Felis catus", speech: FelisCatus.catSpeech, hasTail: true });
   }
 }
 
@@ -70,19 +70,9 @@ class Sapiens extends Inhabitant {
   }
 
   toString() {
-    return [
-      this.species,
-      this.name,
-      this.gender,
-      this.legs,
-      this.hands,
-      this.speech,
-      this.friends,
-    ]
-      .map((propertyValue) =>
-        Array.isArray(propertyValue) ? propertyValue.join(", ") : propertyValue
-      )
-      .join("; ");
+    return [ super.toString(),
+      `hands: ${this.hands}`,
+    ].join("; ");
   }
 }
 
