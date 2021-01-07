@@ -101,7 +101,10 @@ class Player extends Character {
     }
 
     minusScore() {
-        this.score <= playerStartValue.startScore ? this.score = playerStartValue.startScore : this.score--;
+        if (this.score <= playerStartValue.startScore)
+          this.score = playerStartValue.startScore;
+        else
+          this.score--;
     }
 
     prizePoint() {
@@ -126,4 +129,3 @@ document.addEventListener('keyup', e => {
 
 const player = new Player(playerStartValue.x, playerStartValue.y, playerStartValue.icon);
 const allEnemies = [enemyStartValue.firstEnemy, enemyStartValue.secondEnemy, enemyStartValue.thirdEnemy].map(y =>  new Enemy(enemyStartValue.x, y, enemyStartValue.icon, player));
-
