@@ -1,100 +1,106 @@
-// Enemies our player must avoid
-var Enemy = function(x, y, speed) {
+// Enemies our player must avoid.........
 
-    this.x = x;
-    this.y = y;
-    this.speed = speed;
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
-
-    // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
-    this.sprite = 'images/enemy-bug.png';
+const PLAYER_CONF = {
+    START_X: 202,
+    START_Y: 405,
+    MOVE_LEFT_RIGTH: 102,
+    MOVE_UP_DOWN: 83,
+    PAUSE: 600,
+    MAX_X_RIGHT: 405,
+    MAX_Y_DOWN: 405,
 };
 
-// Update the enemy's position, required method for game
-// Parameter: dt, a time delta between ticks
-Enemy.prototype.update = function(dt) {
-    // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
-    // all computers.
-    this.x = this.x + this.speed * dt;
-
-    if (this.x > 510) {
-        this.x = -50;
-        this.speed = 100 + Math.floor(Math.random() * 222);
-    }
-
-    if (player.x < this.x + 80 &&
-        player.x + 80 > this.x &&
-        player.y < this.y + 60 &&
-        player.y + 60 > this.y) {
-        player.x = 202;
-        player.y = 405;
-    }
+const ENEMY_CONF = {
+	MAX_X: 510,
+	MIN_X: -50,
+	SPEED_COEFF: 100,
+	SPEED_FACTOR: 222,
+	WIDTH: 80,
+	HEIGHT: 60,
+    START_X: 0,
+    SPEED_START: 200,
 };
 
-// Draw the enemy on the screen, required method for game
-Enemy.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-};
+class Character {
+	constructor (x, y, sprite) {
+		this.x = x;
+		this.y = y;
+		this.sprite = sprite;
+	}
 
-// Now write your own player class
-// This class requires an update(), render() and
-// a handleInput() method.
+	render () {
+		ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+	}
+} 
 
-let Player = function (x, y) {
-    this.x = x;
-    this.y = y;
-    this.sprite = 'images/char-boy.png';
+class Player extends Character {
+	constructor(x, y, sprite = 'images/char-boy.png') {
+		super(x, y, sprite);
+	}
+	update(dt) {
+
+	}
+	handleInput (keyPress) {
+		if (keyPress == 'left' && this.x > 0) {
+        	this.x -= PLAYER_CONF.MOVE_LEFT_RIGTH;
+    	};
+    	if (keyPress == 'right' && this.x < PLAYER_CONF.MAX_X_RIGHT) {
+        	this.x += PLAYER_CONF.MOVE_LEFT_RIGTH;
+    	};
+    	if (keyPress == 'up' && this.y > 0) {
+        	this.y -= PLAYER_CONF.MOVE_UP_DOWN;
+    	};
+    	if (keyPress == 'down' && this.y < PLAYER_CONF.MAX_Y_DOWN) {
+        	this.y += PLAYER_CONF.MOVE_UP_DOWN;
+    	};
+    	if (this.y < 0) {
+        	setTimeout(function(){
+            	player.x = PLAYER_CONF.START_X;
+            	player.y = PLAYER_CONF.START_Y;
+        	}, PLAYER_CONF.PAUSE);
+    	}
+	}
 }
 
-Player.prototype.update = function(dt){
+class Enemy extends Character {
+	constructor (x, y, speed, sprite = 'images/enemy-bug.png') {
+		super(x, y, sprite);
+		this.speed = speed;
+	}
 
-};
+	update (dt) {
+		this.x = this.x + this.speed * dt;
 
-Player.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-};
+    	if (this.x > ENEMY_CONF.MAX_X) {
+        	this.x = ENEMY_CONF.MIN_X;
+        	this.speed = ENEMY_CONF.SPEED_COEFF + Math.floor(Math.random() * ENEMY_CONF.SPEED_FACTOR);
+    	}
 
-Player.prototype.handleInput = function(keyPress){
-    if (keyPress == 'left' && this.x > 0) {
-        this.x -= 102;
-    };
-    if (keyPress == 'right' && this.x < 405) {
-        this.x += 102;
-    };
-    if (keyPress == 'up' && this.y > 0) {
-        this.y -= 83;
-    };
-    if (keyPress == 'down' && this.y < 405) {
-        this.y += 83;
-    };
-    if (this.y < 0) {
-        setTimeout(function(){
-            player.x = 202;
-            player.y = 405;
-        }, 600);
-    };
+    	this.checkCollisions();
+	}
 
-};
-
-
-
+	checkCollisions () {
+		if (player.x < this.x + ENEMY_CONF.WIDTH &&
+        	player.x + ENEMY_CONF.WIDTH > this.x &&
+        	player.y < this.y + ENEMY_CONF.HEIGHT &&
+        	player.y + ENEMY_CONF.HEIGHT > this.y) {
+        		player.x = PLAYER_CONF.START_X;
+        		player.y = PLAYER_CONF.START_Y;
+    		}
+	}
+}
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 let allEnemies = [];
-let enemyLocation = [63, 147, 230];
+const ENEMY_LOCATION = [63, 147, 230];
 
-enemyLocation.forEach(function(locationY){
-    enemy = new Enemy(0, locationY, 200);
+ENEMY_LOCATION.forEach(function(locationY){
+    enemy = new Enemy(ENEMY_CONF.START_X, locationY, ENEMY_CONF.SPEED_START);
     allEnemies.push(enemy);
 });
 
-let player = new Player(202, 405);
-
-
+let player = new Player(PLAYER_CONF.START_X, PLAYER_CONF.START_Y);
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
 document.addEventListener('keyup', function(e) {
