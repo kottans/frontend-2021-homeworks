@@ -7,37 +7,22 @@ const USERS_AMOUNT = 100;
 renderUsersList();
 
 let ALL_USERS;
+const USERS_MAP = new Map();
 
 getUsersData().then((usersData) => {
-  ALL_USERS = usersData;
+  storeUsersData(usersData);
   renderUsersList(ALL_USERS);
   enableFilters();
 });
 
 addHandlers();
 
-function getUsersData(attempts = 5) {
-  const url = `https://randomuser.me/api/?results=${USERS_AMOUNT}`;
+function storeUsersData(usersData) {
+  ALL_USERS = usersData;
 
-  return fetch(url)
-    .then((response) => response.json())
-    .then((response) => response.results)
-    .catch((error) => {
-      if (attempts === 0) {
-        alert("Can't get data. Try restarting or try again later.");
-        throw error;
-      }
-
-      return getUsersData(attempts - 1);
-    });
-}
-
-function renderUsersList(usersData) {
-  const userCards = usersData
-    ? Array.from(usersData, buildUserCard)
-    : Array.from({ length: USERS_AMOUNT }, buildPlaceholder);
-
-  mount(userCards);
+  usersData.forEach((userData) =>
+    USERS_MAP.set(userData, buildUserCard(userData))
+  );
 
   function buildUserCard(userData) {
     const card = document.createElement("li");
@@ -57,6 +42,30 @@ function renderUsersList(usersData) {
 
     return card;
   }
+}
+
+function getUsersData(attempts = 5) {
+  const url = `https://randomuser.me/api/?results=${USERS_AMOUNT}`;
+
+  return fetch(url)
+    .then((response) => response.json())
+    .then((response) => response.results)
+    .catch((error) => {
+      if (attempts === 0) {
+        alert("Can't get data. Try restarting or try again later.");
+        throw error;
+      }
+
+      return getUsersData(attempts - 1);
+    });
+}
+
+function renderUsersList(usersData) {
+  const userCards = usersData
+    ? Array.from(usersData, getUserCard)
+    : Array.from({ length: USERS_AMOUNT }, buildPlaceholder);
+
+  mount(userCards);
 
   function buildPlaceholder() {
     const fakeUserCard = document.createElement("div");
@@ -70,6 +79,10 @@ function renderUsersList(usersData) {
       <p class="user-card__email">user e-mail address</p>`;
 
     return fakeUserCard;
+  }
+
+  function getUserCard(userData) {
+    return USERS_MAP.get(userData)
   }
 
   function mount(usercardsArr) {
@@ -145,7 +158,7 @@ function addHandlers() {
       .querySelectorAll(".filter")
       .forEach((filter) => (filter.value = ""));
 
-      renderUsersList(ALL_USERS);
+    renderUsersList(ALL_USERS);
   });
 }
 
