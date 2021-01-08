@@ -3,62 +3,93 @@
    Complete the below for code reviewers' convenience:
 */
 
-'use strict';
-
 class Inhabitats {
-	constructor (species, name, surname, gender, legs, hands, saying) {
-		this.species = species;
-		this.name = name;
-		this.surname = surname;
-		this.gender = gender;
-		this.legs = legs;
-		this.hands = hands;
-		this.saying = saying;
+	constructor(gender, legs, hands){
+		this.gender = 'female';
+		this.legs = '4';
+		this.hands = '0';
 	}
+	toString(){
+		const properties = ['species', 'name', 'surname', 'gender', 'legs', 'hands', 'saying'];
+		const arrowProperties = properties.map(key => this[key]).join(', ');
+		return arrowProperties;
+	};
+	saying(){
+		let string = `Hi, I\'m ` + this.species + `. My name is ` + this.name + `. My surname is ` + this.surname + `. I\'m ` + this.gender + `. I have ` + this.legs + ` legs and ` + this.hands + ` hands.`;
+
+		const arrowString = string.split();
+		const checkString = arrowString.map(item => item).filter(value => value).join('; ');
+
+		return checkString;
+	};
 };
 
-Inhabitats.prototype.toString = function() {
-	return `${this.species}; ${this.name}; ${this.surname}; ${this.gender}; ${this.legs}; ${this.hands}; ${this.saying}`
+class Human extends Inhabitats{
+	constructor(species, legs, hands){
+		super(species, legs, hands);
+		this.species = 'human';
+		this.legs = '2';
+		this.hands = '2';
+	};
 };
 
 class Cat extends Inhabitats {
-	constructor (species, name, surname, gender, legs, hands, saying){
-		super(species, name, surname, gender, legs, hands, saying);
-	}
+	constructor (species, name, surname){
+		super(species, name, surname);
+		this.species = 'cat';
+		this.name = 'Murka';
+		this.surname = 'Murkovna';
+	};
+	itsSaying(){
+		return super.saying();
+	};
 };
 
-class Man extends Inhabitats {
-	constructor (species, name, surname, gender, legs, hands, saying){
-		super(species, name, surname, gender, legs, hands, saying);
-	}
-};
-
-class Dog extends Inhabitats {
-	constructor (species, name, surname, gender, legs, hands, saying){
-		super(species, name, surname, gender, legs, hands, saying);
-	}
-};
-
-class Woman extends Inhabitats {
-	constructor (species, name, surname, gender, legs, hands, saying){
-		super(species, name, surname, gender, legs, hands, saying);
-	}
-};
-
-const cat = new Cat('cat', 'Murka', 'Murkovna', 'female', '4', '0', 'Hey, I\'m cat.');
-const man = new Man('human', 'Jorj', 'Kluni', 'male', '2', '2', 'Did you see Ocean\'s Eleven?');
-const dog = new Dog('dog', 'Arrow', 'Space', 'female', '4', '0', 'I were in space, what about you?');
-const woman = new Woman('human', 'Enn', 'Hatuey', 'female', '2', '2', 'Follow me on instagram.');
-
-const allInhabitats = [
-	cat,
-	man,
-	dog,
-	woman
-];
-
-const forInhabitats = () => {
-	return allInhabitats.forEach(some => print(some));
+class Man extends Human {
+	constructor (name, surname, gender){
+		super(name, surname, gender);
+		this.name = 'Jorj';
+		this.surname = 'Kluni';
+		this.gender = 'male';
+	};
+	itsSaying(){
+		return super.saying();
+	};
 }
 
-forInhabitats();
+class Dog extends Inhabitats {
+	constructor(species, name, surname){
+		super(species, name, surname);
+		this.species = 'dog';
+		this.name = 'Arrow';
+		this.surname = 'Space';
+	};
+	itsSaying(){
+		return super.saying();
+	};
+};
+
+class Woman extends Human {
+	constructor(name, surname, gender){
+		super(name, surname, gender);
+		this.name = 'Enn';
+		this.surname = 'Hatuey';
+		this.gender = 'female';
+	};
+	itsSaying(){
+		return super.saying();
+	};
+};
+
+const cat = new Cat();
+const man = new Man();
+const dog = new Dog();
+const woman = new Woman();
+
+const allInhabitats = [cat, man, dog, woman];
+
+const printAll = function() {
+	allInhabitats.map(item => print(item.itsSaying()));
+}
+
+printAll();
