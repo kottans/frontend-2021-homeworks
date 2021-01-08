@@ -179,14 +179,18 @@ main {
   background-image: url("../img/email-48.png");
 }
 
+aside {
+  grid-area: aside;
+}
+
 .filters-block {
   position: relative;
-
   display: flex;
   flex-direction: column;
-  grid-area: aside;
   gap: 20px;
   align-items: center;
+  width: 100%;
+  height: 100%;
   padding: 20px 14px;
 
   background-color: rgb(53 113 155);
