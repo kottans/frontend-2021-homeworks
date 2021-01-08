@@ -98,10 +98,7 @@ function changeSize(card) {
 	}, 500);
 }
 
-function setOpacity(property, value, delay) {
-	if (delay === undefined) {
-		delay = 1000;
-	}
+function setOpacity(property, value, delay = 1000) {
 	setTimeout(() => (property.style.opacity = value), delay);
 }
 
@@ -128,10 +125,9 @@ function showWinMessage() {
 }
 
 function reset() {
-	const clearVars = [checkedCards, checkedCardsContainers, foundMatches].map(
-		(variable) => (variable = [])
-	);
-	[checkedCards, checkedCardsContainers, foundMatches] = clearVars;
+	checkedCards = [];
+	checkedCardsContainers = [];
+	foundMatches = [];
 	shuffledCards = shuffleArray(cardsData);
 	container.innerHTML = "";
 	document.querySelector(".win__container").style.display = "none";
