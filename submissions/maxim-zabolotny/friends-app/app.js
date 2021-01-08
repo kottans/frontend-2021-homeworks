@@ -44,12 +44,10 @@ const SORT = {
     })),
 }
 
-const capitalized = ({
-    first,
-    last
-}) => {
-    let str = `${first} ${last}`
-    return str.split(' ').map(s => s.charAt(0).toUpperCase() + s.slice(1)).join(' ');
+const capitalize = str => str.charAt(0).toUpperCase() + str.slice(1);
+
+const getCapitalizedName  = ({first, last}) => {
+    return `${capitalize(first)} ${capitalize(last)}`
 }
 
 const formatDate = (date) => {
@@ -101,14 +99,14 @@ class Card {
 
 const generateMarkupForCard = (name, photo, email, date, location, cell, password) => {
     return `<div class="details">
-    <p class="user_title">${capitalized(name)}</p>
+    <p class="user_title">${getCapitalizedName(name)}</p>
     <div class="user_photo horizontal_center">
         <img src="${photo}" alt="${name}">
     </div>
     <p class="user_value">${email}</p>
 </div>
 <ul class="values_list horizontal_center">
-    <li data-title="Hi, My name is" data-value="${capitalized(name)}" data-label="name" class=""></li>
+    <li data-title="Hi, My name is" data-value="${getCapitalizedName(name)}" data-label="name" class=""></li>
     <li data-title="My email address is" data-value="${email}" data-label="email" class="active"></li>
     <li data-title="My birthday is" data-value="${formatDate(date)}" data-label="birthday" class=""></li>
     <li data-title="My address is" data-value="${location}" data-label="location" class=""></li>
