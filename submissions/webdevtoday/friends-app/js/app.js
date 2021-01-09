@@ -72,23 +72,21 @@ function unlockBody() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    (async () => {
-        getUsers()
-            .then(res => res.json())
-            .then(({results}) => {
-                users = results.map(normalizeUsers);
-                cards.append(...users.map(makeCard));
-                sidebar__container.append(makeForm());
-                addListenerToForm();
-                addListenerToResetButton();
-                addListenerToAsideOpener();
-                disableProloader();
-                unlockBody();
-            })
-            .catch(err => {
-                cards.append(showErrorScreen());
-                disableProloader();
-                console.log(err);
-            });
-    })();
+    getUsers()
+        .then(res => res.json())
+        .then(({results}) => {
+            users = results.map(normalizeUsers);
+            cards.append(...users.map(makeCard));
+            sidebar__container.append(makeForm());
+            addListenerToForm();
+            addListenerToResetButton();
+            addListenerToAsideOpener();
+            disableProloader();
+            unlockBody();
+        })
+        .catch(err => {
+            cards.append(showErrorScreen());
+            disableProloader();
+            console.log(err);
+        });
 });
