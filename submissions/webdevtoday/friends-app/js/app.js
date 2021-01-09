@@ -30,10 +30,9 @@ function addListenerToAsideOpener() {
 
 function addListenerToResetButton() {
     document.querySelector('[type=reset]').addEventListener('click', () => {
-        sortAndFiltersState.age = null;
-        sortAndFiltersState.name = null;
-        sortAndFiltersState.gender = null;
-        sortAndFiltersState.sort = null;
+        for (let key in sortAndFiltersState) {
+            sortAndFiltersState[key] = null;
+        }
         cards.innerHTML = '';
         cards.append( ...users.map(makeCard) );
     })
