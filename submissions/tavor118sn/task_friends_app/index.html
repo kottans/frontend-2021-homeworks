@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Firends app</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Arimo&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="css/reset.css"/>
+    <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+<div class="wrapper">
+    <header class="main-head">
+        <h1>Firends app</h1>
+    </header>
+
+    <aside class="aside">
+        <form class="form" name="mainForm">
+
+            <label for="fname" class="label">First Name</label>
+            <input type="text" id="fname" name="firstname" placeholder="Search">
+
+            <label for="userSortAge" class="label">Sort by age</label>
+            <select id="userSortAge" name="userSortAge" class="select">
+                <option value="noOrdering">No ordering</option>
+                <option value="ascending">Ascending</option>
+                <option value="descending">Descending</option>
+            </select>
+
+            <label for="userSortName" class="label">Sort by name</label>
+            <select id="userSortName" name="userSortName" class="select">
+                <option value="noOrdering">No ordering</option>
+                <option value="ascending">Ascending</option>
+                <option value="descending">Descending</option>
+            </select>
+
+            <label for="userFilterGender" class="label">Filter by gender</label>
+            <select id="userFilterGender" name="userFilterGender" class="select">
+                <option value="all">All</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select>
+
+            <input type="submit" value="Submit">
+
+        </form>
+    </aside>
+
+    <section class="content">
+        <ul class="listing" id="cardList">
+        </ul>
+    </section>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
