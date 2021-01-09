@@ -7,12 +7,9 @@ import { sortAndFiltersFunctions } from './components/sortAndFiltersFunctions.js
 
 let users = [];
 const sortAndFiltersState = {
-    // filters:
     age: null,
     name: null,
     gender: null,
-
-    // sorts:
     sort: null,
 };
 
