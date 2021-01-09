@@ -1,7 +1,7 @@
 import { getUsers } from './components/RandomUserAPI.js';
 import { normalizeUsers } from './components/normalizeUsers.js';
 import { makeCard } from './components/makeCard.js';
-import { oops } from './components/oops.js';
+import { showErrorScreen } from './components/showErrorScreen.js';
 import { makeForm } from './components/makeForm.js';
 import { sortAndFiltersFunctions } from './components/sortAndFiltersFunctions.js';
 
@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 unlockBody();
             })
             .catch(err => {
-                cards.append(oops());
+                cards.append(showErrorScreen());
                 disableProloader();
                 console.log(err);
             });
