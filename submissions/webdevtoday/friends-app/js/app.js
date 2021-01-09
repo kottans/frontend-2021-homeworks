@@ -16,10 +16,10 @@ const sortAndFiltersState = {
     sort: null,
 };
 
-const sidebar = document.getElementsByClassName('sidebar')[0];
-const sidebarOpener = document.getElementsByClassName('sidebar-opener')[0];
-const sidebar__container = document.getElementsByClassName('sidebar__container')[0];
-const cards = document.getElementsByClassName('cards')[0];
+const sidebar = document.querySelector('.sidebar');
+const sidebarOpener = document.querySelector('.sidebar-opener');
+const sidebar__container = document.querySelector('.sidebar__container');
+const cards = document.querySelector('.cards');
 
 function addListenerToAsideOpener() {
     sidebarOpener.addEventListener('click', () => {
@@ -66,7 +66,7 @@ function addListenerToForm() {
 }
 
 function disableProloader() {
-    document.getElementsByClassName('preloader')[0].style.display = 'none';
+    document.querySelector('.preloader').style.display = 'none';
 }
 function unlockBody() {
     document.body.classList.remove('lock');
