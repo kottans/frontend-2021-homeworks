@@ -1,13 +1,37 @@
-// Enemies our player must avoid
-const ENEMY_START_POSITION_X = -100;
+const CANVAS = {
+    BLOCK_WIDTH: 101,
+    BLOCK_HEIGHT: 82,
+    NUMBER_OF_BLOCKS_X: 5,
+    NUMBER_OF_BLOCKS_Y: 6,
+    PADDING_BOTTOM: 62
+};
 
-var Enemy = function(y) {
+const ENEMY_CONF = {
+    MIN_SPEED: 100,
+    TOP_INITIAL_Y: 60,
+    MIDDLE_INITIAL_Y: 145,
+    BOTTOM_INITIAL_Y: 230,
+    PADDING: 50
+};
+
+const PLAYER_CONF = {
+    INITIAL_X: 202,
+    INITIAL_Y: 410
+};
+
+const WATER_EDGE = 52;
+const INITIAL_ENEMY_X = -CANVAS.BLOCK_WIDTH;
+const EDGE_X = CANVAS.BLOCK_WIDTH * CANVAS.NUMBER_OF_BLOCKS_X;
+const EDGE_Y = CANVAS.BLOCK_HEIGHT * CANVAS.NUMBER_OF_BLOCKS_Y - CANVAS.PADDING_BOTTOM;
+
+// Enemies our player must avoid
+const Enemy = function(y) {
     // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
-    const MIN_SPEED = 100;
-    this.x = ENEMY_START_POSITION_X;
+    // we've provided one for you to get started   
+    const RANDOM_ADDITIONAL_SPEED = Math.floor(Math.random() * 200);
+    this.x = INITIAL_ENEMY_X;
     this.y = y;
-    this.speed = MIN_SPEED + Math.floor(Math.random() * 200);
+    this.speed = ENEMY_CONF.MIN_SPEED + RANDOM_ADDITIONAL_SPEED;
 
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
@@ -20,11 +44,10 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
+
     this.x += this.speed * dt;
-    if (this.x > 520) {
-        this.x = ENEMY_START_POSITION_X;
-    } else if (player.y === this.y && player.x - 60 < this.x && player.x + 50 > this.x) {
-        player.reset();
+    if (this.x > EDGE_X) {
+        this.x = -CANVAS.BLOCK_WIDTH;
     }
 };
 
@@ -36,53 +59,81 @@ Enemy.prototype.render = function() {
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
-let Player = function(x, y) {
+const Player = function(x, y) {
     this.x = x;
     this.y = y;
     this.sprite = 'images/char-boy.png';
 };
 
-Player.prototype.update = function(dt) {}
+Player.prototype.update = function() {
+    this.checkCollision();
+};
+
+Player.prototype.checkCollision = function() {
+    allEnemies.forEach(function(enemy) {
+        if (this.y - ENEMY_CONF.PADDING < enemy.y &&
+            this.y + ENEMY_CONF.PADDING > enemy.y &&
+            this.x - ENEMY_CONF.PADDING < enemy.x &&
+            this.x + ENEMY_CONF.PADDING > enemy.x) {
+           	 this.lose();
+        }
+    }, this);
+};
 
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
 Player.prototype.handleInput = function(keyCode) {
-    if (this.y > 0 && keyCode === 'up') {
-        this.y -= 85;
+
+    if (this.y >= 0 && keyCode === 'up') {
+        this.y -= CANVAS.BLOCK_HEIGHT;
     }
-    if (this.y < 400 && keyCode === 'down') {
-        this.y += 85;
+    if (this.y < EDGE_Y - CANVAS.BLOCK_HEIGHT && keyCode === 'down') {
+        this.y += CANVAS.BLOCK_HEIGHT;
     }
     if (this.x > 0 && keyCode === 'left') {
-        this.x -= 100;
+        this.x -= CANVAS.BLOCK_WIDTH;
     }
-    if (this.x < 400 && keyCode === 'right') {
-        this.x += 100;
+    if (this.x < EDGE_X - CANVAS.BLOCK_WIDTH && keyCode === 'right') {
+        this.x += CANVAS.BLOCK_WIDTH;
     }
-    if (this.y < 0) {
-        this.reset()
+    if (this.y < WATER_EDGE) {
+        this.wins();
     }
-}
+};
 
-let counter = 0;
-Player.prototype.reset = function() {
+Player.prototype.resetPosition = function() {
+    this.x = PLAYER_CONF.INITIAL_X;
+    this.y = PLAYER_CONF.INITIAL_Y;
+};
+
+Player.prototype.wins = function() {
+
     setTimeout(() => {
-        this.x = 200;
-        this.y = 400;
+        alert('You win!');
+        this.resetPosition();
     }, 100);
-}
+};
+
+Player.prototype.lose = function() {
+    setTimeout(() => {
+        this.resetPosition();
+    }, 100);
+    alert('You lose! Keep trying!');
+};
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 
-let enemy1 = new Enemy(230);
-let enemy2 = new Enemy(145);
-let enemy3 = new Enemy(60);
-const allEnemies = [enemy1, enemy2, enemy3];
-let player = new Player(200, 400);
+const allEnemies = [
+    new Enemy(ENEMY_CONF.TOP_INITIAL_Y),
+    new Enemy(ENEMY_CONF.MIDDLE_INITIAL_Y),
+    new Enemy(ENEMY_CONF.BOTTOM_INITIAL_Y)
+];
+
+const player = new Player(PLAYER_CONF.INITIAL_X, PLAYER_CONF.INITIAL_Y);
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
