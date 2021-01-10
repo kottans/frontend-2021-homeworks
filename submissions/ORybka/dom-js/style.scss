@@ -1,0 +1,523 @@
+:root {
+  --tyrell: rgba(44, 107, 63, 0.8);
+  --baratheon: rgba(158, 142, 83, 0.8);
+  --arryn: rgba(125, 146, 139, 0.8);
+  --tully: rgba(82, 82, 94, 0.9);
+  --stark: rgba(147, 137, 112, 0.8);
+  --lannister: rgba(186, 168, 58, 0.8);
+  --targaryen: rgba(170, 43, 34, 0.8);
+  --martell: rgba(170, 96, 27, 0.8);
+  --greyjoy: rgba(114, 96, 50, 0.8);
+  --background: rgba(83, 69, 43, 0.9);
+  --text: rgb(0, 0, 0);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  margin: 0;
+  text-align: center;
+}
+
+a {
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #000;
+}
+
+li {
+  list-style-type: none;
+}
+
+@font-face {
+  font-family: 'game_of_thronesregular';
+  src: url('assets/fonts/game-of-thrones-webfont.woff2') format('woff2'), url('assets/fonts/game-of-thrones-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@keyframes opacity {
+  0% {
+    opacity: 0;
+  }
+  40% {
+    opacity: 0;
+  }
+  75% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes right {
+  0% {
+    opacity: 0;
+  }
+  75% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+html {
+  font-family: 'Gothic A1', sans-serif;
+  font-size: 16px;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+@media screen and (max-width: 768px) {
+  html {
+    font-size: 12px;
+  }
+}
+
+.background-container .background-picture {
+  position: fixed;
+  width: 150%;
+  height: 500%;
+  background-image: url('assets/westeros_map.jpg');
+  background-size: cover;
+  overflow: hidden;
+}
+
+@media (max-width: 992px) {
+  .background-container .background-picture {
+    background-size: 110% 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .background-container .background-picture {
+    background-size: 120% 100%;
+  }
+}
+
+.container {
+  position: absolute;
+  max-height: 120rem;
+  width: 80%;
+  max-width: 70rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+
+  h1 {
+    font-family: 'game_of_thronesregular';
+    font-size: 2rem;
+    padding: 1rem;
+    margin: 1rem auto;
+    color: var(--text);
+    background-color: var(--background);
+    letter-spacing: 0.7rem;
+    line-height: 2.5rem;
+    border-radius: 0.8rem;
+  }
+
+  .icon {
+    display: none;
+  }
+}
+
+.content-container {
+  display: grid;
+  grid-template-columns: 25% 75%;
+  border-radius: 0.5rem;
+  padding: 0 1rem;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+
+  .menu-container {
+    margin: 0 auto;
+    width: 90%;
+  }
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  height: 3rem;
+  width: 13rem;
+  margin: 0.7rem auto;
+  background-color: var(--background);
+  color: var(--text);
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  border-radius: 0.8rem;
+  border: none;
+
+  .menu-item-img {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin: 0 0.5rem 0 0.7rem;
+    transition: all 0.8s ease-in;
+  }
+
+  span {
+    text-align: start;
+    margin-left: 0.5rem;
+    font-weight: bold;
+    animation: right 1s forwards;
+  }
+
+  &:hover {
+    background-color: #cabd9f;
+    transition: all 0.5s ease-in;
+  }
+
+  &:focus > .menu-item-img {
+    position: absolute;
+    margin-left: 10rem;
+    transition: all 0.5s ease-in;
+  }
+
+  &:focus > span {
+    animation: opacity 1s forwards;
+  }
+
+  &:focus {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #cabd9f;
+    transition: 0.5s ease-in;
+    border: 0.2rem solid black;
+    outline: none;
+  }
+}
+
+@media (max-width: 992px) {
+  .menu-item {
+    width: 9rem;
+
+    &:focus > .menu-item-img {
+      margin-left: 6.5rem;
+    }
+
+    &:focus > span {
+      width: 4rem;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .header-container {
+    background-color: var(--background);
+    border-radius: 0.5rem;
+    height: 10rem;
+    margin-bottom: 1rem;
+
+    h1 {
+      background-color: transparent;
+    }
+
+    .icon {
+      display: block;
+      font-size: 3.5rem;
+      margin-top: -2rem;
+      transform: rotate(0);
+      transition: all 0.5s;
+    }
+
+    .active {
+      transform: rotate(0.5turn);
+      transition: all 0.5s;
+    }
+  }
+
+  .active {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .navbar {
+    position: absolute;
+    top: -100%;
+    overflow: auto;
+
+    .menu-container {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-around;
+    }
+  }
+
+  .navbar.active {
+    position: relative;
+    left: -2.5%;
+    margin-top: -1rem;
+    width: 105%;
+    background-color: rgb(126, 110, 80);
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+  }
+
+  .menu-item {
+    background-color: transparent;
+    border: 1px solid #000;
+    width: 9.5rem;
+    height: 2.5rem;
+    margin: 0.3rem 0;
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-around;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 1rem 2rem;
+}
+
+.content-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  height: 100%;
+  color: var(--text);
+
+  .house {
+    font-family: 'game_of_thronesregular';
+    text-align: center;
+    line-height: 2rem;
+    margin-bottom: 1rem;
+    letter-spacing: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 1rem auto 0;
+
+    &::after {
+      content: '';
+      display: block;
+      width: 120%;
+      height: 0.2rem;
+      margin: 1rem -10% 0;
+      background-color: var(--text);
+    }
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: 40% 60%;
+    margin-top: 3rem;
+  }
+
+  .col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: fit-content;
+    margin: 0 0.5rem 1rem;
+  }
+
+  .shield {
+    height: 10rem;
+    width: auto;
+    margin: 0 0 1rem;
+  }
+
+  .slogan {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    line-height: 1.7rem;
+  }
+
+  .description {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 0.5rem;
+    padding: 0.5rem 2rem;
+    margin-top: -2rem;
+    text-align: center;
+    font-weight: bold;
+    height: fit-content;
+    min-height: 18rem;
+    line-height: 18rem;
+  }
+
+  span {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 18px;
+  }
+}
+
+.question {
+  width: 80%;
+  font-size: 1.1rem;
+  margin: 1rem auto 1rem;
+  text-align: center;
+  font-weight: bold;
+
+  &::before {
+    content: '';
+    display: block;
+    width: 105%;
+    height: 0.2rem;
+    margin: 0 -2.5% 0.5rem;
+    background-color: var(--text);
+  }
+
+  &::after {
+    content: '';
+    display: block;
+    width: 105%;
+    height: 0.2rem;
+    margin: 0.5rem -2.5% 0;
+    background-color: var(--text);
+  }
+}
+
+.content-img-container {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 0.5rem;
+
+  .content-img {
+    display: flex;
+    height: 8rem;
+    width: 8rem;
+    margin: 0.5rem 0;
+    background-color: var(--stark);
+    border-radius: 50%;
+    background-size: cover;
+    border: 0.1rem solid black;
+  }
+}
+
+.fire {
+  background-image: url(assets/fire.gif);
+}
+
+.light {
+  background-image: url(assets/light.gif);
+}
+
+.dead {
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+@media (max-width: 992px) {
+  .col {
+    padding-top: 4rem;
+  }
+
+  .content-info .house::after {
+    width: 70%;
+    margin: 1rem auto 0;
+  }
+
+  .content-img-container .content-img {
+    height: 5rem;
+    width: 5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-container {
+    h1 {
+      font-size: 1.5rem;
+    }
+  }
+
+  .content-container {
+    display: flex;
+    flex-direction: column;
+    padding: 0 1rem;
+  }
+
+  .content-info {
+    .row {
+      display: flex;
+      flex-direction: column;
+      margin-top: 1rem;
+    }
+
+    .col {
+      margin: 0.5rem auto 2rem;
+      padding-top: 0;
+    }
+
+    .shield {
+      height: 7rem;
+    }
+  }
+
+  .content-img-container {
+    .content-img {
+      height: 5rem;
+      width: 5rem;
+    }
+  }
+
+  .question {
+    font-size: 0.9rem;
+  }
+}
+
+footer {
+  font-family: 'game_of_thronesregular';
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  margin: 0.5rem 0 1rem;
+
+  .footer-info {
+    height: 100%;
+    width: 200%;
+    padding: 1rem 0;
+    background-color: var(--background);
+    border-radius: 0.5rem;
+    text-align: center;
+    line-height: 1.5rem;
+
+    .github-link {
+      color: black;
+      &:hover {
+        color: rgb(126, 99, 50);
+      }
+    }
+  }
+}
