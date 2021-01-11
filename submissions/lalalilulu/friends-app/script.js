@@ -99,6 +99,7 @@ const sortArray = (array, isAscending, isNameSorting) => {
         const nextValue = isNameSorting ? next.name.first : next.dob.age;
         if (prevValue < nextValue) return -1;
         if (prevValue > nextValue) return 1;
+        return 0;
     });
     return isAscending ? sortedArray : sortedArray.reverse();
 }
