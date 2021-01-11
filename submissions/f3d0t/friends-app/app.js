@@ -33,18 +33,21 @@ const bindEventListeners = (friends) => {
 		if (target.name === "gender") {
 			friends.filterByGender(target.id);
 			FILTERS.elements.search.value = "";
-			if (FILTERS.querySelector("[name=userName]:checked")) {
-				friends.sortByName(FILTERS.querySelector("[name=userName]:checked").id);
+			const checkedUserName = FILTERS.querySelector("[name=userName]:checked");
+			if (checkedUserName) {
+				friends.sortByName(checkedUserName.id);
 			}
-			if (FILTERS.querySelector("[name=userAge]:checked")) {
-				friends.sortByAge(FILTERS.querySelector("[name=userAge]:checked").id);
+			const checkedUserAge = FILTERS.querySelector("[name=userAge]:checked");
+			if (checkedUserAge) {
+				friends.sortByAge(checkedUserAge.id);
 			} //this two forEach callbacks is needed to re-sort new arrays of cards, filtered by gender
 		}
 		if (target.name === "userName") {
 			friends.sortByName(target.id);
 			FILTERS.elements.search.value = "";
-			if (FILTERS.querySelector("[name=userAge]:checked")) {
-				FILTERS.querySelector("[name=userAge]:checked").checked = false;
+			const checkedUserAge = FILTERS.querySelector("[name=userAge]:checked");
+			if (checkedUserAge) {
+				checkedUserAge.checked = false;
 			}
 		}
 		if (target.name === "userAge") {
@@ -122,9 +125,13 @@ class FriendsList {
 const sortObjectsByPropertyValue = (arrayOfObjects, key, sortOrder) => {
 	const array = arrayOfObjects;
 	array.sort((a, b) => {
-		if (a[key] > b[key]) {return 1;}
-		else if (a[key] < b[key]) {return -1;}
-		else {return 0;}
+		if (a[key] > b[key]) {
+			return 1;
+		} else if (a[key] < b[key]) {
+			return -1;
+		} else {
+			return 0;
+		}
 	});
 	return sortOrder === "ascending" ? array : array.reverse();
 };
