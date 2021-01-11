@@ -82,10 +82,10 @@ body.light{
     top: 1px;
     transition: left 500ms linear;
 }
-.day_night.light .day_icon{
+body.light .day_night .day_icon{
     left: 0;
 }
-.day_night.light .night_icon{
+body.light .day_night .night_icon{
     left: 69px;
 }
 

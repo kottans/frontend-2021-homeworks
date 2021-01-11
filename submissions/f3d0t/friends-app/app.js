@@ -1,4 +1,4 @@
-const BODY = document.querySelector("body");
+const BODY = document.body;
 const MAIN = document.querySelector(".main");
 const FILTERS = document.querySelector(".filters");
 const RESET_BUTTON = document.querySelector(".filters__button");
@@ -8,19 +8,15 @@ const REQUEST_LINK = `https://randomuser.me/api/?results=${FRIENDS_COUNT}`;
 
 const fetchData = async (requestLink) => {
 	try {
-		const response = handleErrors(await fetch(requestLink));
+		const response = await fetch(requestLink);
+		if (!response.ok) {
+			throw Error("HTTP-Error: " + response.statusText);
+		}
 		const { results } = await response.json();
 		return results;
 	} catch (error) {
 		alert(error);
 	}
-};
-
-const handleErrors = (response) => {
-	if (!response.ok) {
-		throw Error("HTTP-Error: " + response.statusText);
-	}
-	return response;
 };
 
 const initApp = (friendsDataArray) => {
@@ -31,27 +27,27 @@ const initApp = (friendsDataArray) => {
 
 const bindEventListeners = (friends) => {
 	FILTERS.addEventListener("input", ({ target }) => {
-		if (target.name == "search") {
+		if (target.name === "search") {
 			friends.filterBySearch(target.value);
 		}
-		if (target.name == "gender") {
+		if (target.name === "gender") {
 			friends.filterByGender(target.id);
 			FILTERS.elements.search.value = "";
-			if (FILTERS.querySelector("[name=name]:checked")) {
-				friends.sortByName(FILTERS.querySelector("[name=name]:checked").id);
+			if (FILTERS.querySelector("[name=userName]:checked")) {
+				friends.sortByName(FILTERS.querySelector("[name=userName]:checked").id);
 			}
-			if (FILTERS.querySelector("[name=age]:checked")) {
-				friends.sortByAge(FILTERS.querySelector("[name=age]:checked").id);
+			if (FILTERS.querySelector("[name=userAge]:checked")) {
+				friends.sortByAge(FILTERS.querySelector("[name=userAge]:checked").id);
 			} //this two forEach callbacks is needed to re-sort new arrays of cards, filtered by gender
 		}
-		if (target.name == "name") {
+		if (target.name === "userName") {
 			friends.sortByName(target.id);
 			FILTERS.elements.search.value = "";
-			if (FILTERS.querySelector("[name=age]:checked")) {
-				FILTERS.querySelector("[name=age]:checked").checked = false;
+			if (FILTERS.querySelector("[name=userAge]:checked")) {
+				FILTERS.querySelector("[name=userAge]:checked").checked = false;
 			}
 		}
-		if (target.name == "age") {
+		if (target.name === "userAge") {
 			friends.sortByAge(target.id);
 			FILTERS.elements.search.value = "";
 		}
@@ -64,8 +60,8 @@ const bindEventListeners = (friends) => {
 		FILTERS.elements.search.value = "";
 		friends.resetFilters();
 	});
-	FILTERS.addEventListener("keydown", (event) => {
-		if (event.key == "Enter") {
+	FILTERS.addEventListener("submit", (event) => {
+		if (event.key === "Enter") {
 			event.preventDefault();
 		}
 	});
@@ -86,63 +82,38 @@ class FriendsList {
 		this.renderCards();
 	}
 	filterByGender(gender) {
-		if (gender == "male") {
-			this.currentCards = this.allCards.filter(
-				(friendCard) => friendCard["gender"] == "male"
-			);
+		if (gender === "male") {
+			this.currentCards = this.allCards.filter((friendCard) => friendCard.gender === "male");
 		}
-		if (gender == "female") {
-			this.currentCards = this.allCards.filter(
-				(friendCard) => friendCard["gender"] == "female"
-			);
+		if (gender === "female") {
+			this.currentCards = this.allCards.filter((friendCard) => friendCard.gender === "female");
 		}
-		if (gender == "all") {
+		if (gender === "all") {
 			this.currentCards = [...this.allCards];
 		}
 		this.renderCards();
 	}
 	filterBySearch(searchValue) {
-		const filteredArray = this.currentCards.filter(
-			(friendCard) =>
-				Object.values(friendCard)
-					.slice(1)
-					.join(" ")
-					.toLowerCase()
-					.indexOf(searchValue.toLowerCase()) > -1
+		const filteredArray = this.currentCards.filter((friendCard) =>
+			friendCard.searchTarget.toLowerCase().includes(searchValue.toLowerCase())
 		);
 		this.renderCards(filteredArray);
 	}
 	sortByName(sortType) {
-		if (sortType == "az") {
-			this.currentCards = sortObjectsByPropertyValue(
-				this.currentCards,
-				"name",
-				"ascending"
-			);
+		if (sortType === "az") {
+			this.currentCards = sortObjectsByPropertyValue(this.currentCards, "name", "ascending");
 		}
-		if (sortType == "za") {
-			this.currentCards = sortObjectsByPropertyValue(
-				this.currentCards,
-				"name",
-				"descending"
-			);
+		if (sortType === "za") {
+			this.currentCards = sortObjectsByPropertyValue(this.currentCards, "name", "descending");
 		}
 		this.renderCards();
 	}
 	sortByAge(sortType) {
-		if (sortType == "ascending") {
-			this.currentCards = sortObjectsByPropertyValue(
-				this.currentCards,
-				"age",
-				"ascending"
-			);
+		if (sortType === "ascending") {
+			this.currentCards = sortObjectsByPropertyValue(this.currentCards, "age", "ascending");
 		}
-		if (sortType == "descending") {
-			this.currentCards = sortObjectsByPropertyValue(
-				this.currentCards,
-				"age",
-				"descending"
-			);
+		if (sortType === "descending") {
+			this.currentCards = sortObjectsByPropertyValue(this.currentCards, "age", "descending");
 		}
 		this.renderCards();
 	}
@@ -150,12 +121,12 @@ class FriendsList {
 
 const sortObjectsByPropertyValue = (arrayOfObjects, key, sortOrder) => {
 	const array = arrayOfObjects;
-	const modifier = sortOrder == "ascending" ? 1 : -1;
-	return array.sort((a, b) => {
-		if (a[key] > b[key]) return 1 * modifier;
-		else if (a[key] < b[key]) return -1 * modifier;
-		else return 0;
+	array.sort((a, b) => {
+		if (a[key] > b[key]) {return 1;}
+		else if (a[key] < b[key]) {return -1;}
+		else {return 0;}
 	});
+	return sortOrder === "ascending" ? array : array.reverse();
 };
 
 class FriendCard {
@@ -167,16 +138,17 @@ class FriendCard {
 		this.email = friendData.email;
 		this.phone = friendData.cell;
 		this.country = friendData.location.country;
+		this.searchTarget = `${this.name} ${this.age} ${this.email} ${this.phone} ${this.country}`;
 	}
 
 	createCard() {
 		const card = document.createElement("div");
 		card.classList.add("card");
-		card.innerHTML = `<img class="card__img" src="${this.photo}" alt="${this.name} photo"'>\n
-                          <h3 class="card__name">${this.name}</h3>\n
-                          <span class="card__age">Age: ${this.age}</span>\n
-                          <a class="card__phone" href="tel:+${this.phone.replace(/\D/g,"")}">${this.phone}</a>\n
-                          <a class="card__email" href="mailto:${this.email}">${this.email}</a>\n
+		card.innerHTML = `<img class="card__img" src="${this.photo}" alt="${this.name} photo"'>
+                          <h3 class="card__name">${this.name}</h3>
+                          <span class="card__age">Age: ${this.age}</span>
+                          <a class="card__phone" href="tel:+${this.phone.replace(/\D/g, "")}">${this.phone}</a>
+                          <a class="card__email" href="mailto:${this.email}">${this.email}</a>
                           <span class="card__country">${this.country}</span>`;
 		return card;
 	}
@@ -184,7 +156,6 @@ class FriendCard {
 
 const dayNightChange = () => {
 	BODY.classList.toggle("light");
-	DAY_NIGHT.classList.toggle("light");
 };
 
 document.addEventListener("DOMContentLoaded", () => {
