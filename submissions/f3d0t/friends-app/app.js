@@ -1,3 +1,4 @@
+const BODY = document.querySelector("body");
 const MAIN = document.querySelector(".main");
 const FILTERS = document.querySelector(".filters");
 const RESET_BUTTON = document.querySelector(".filters__button");
@@ -7,12 +8,19 @@ const REQUEST_LINK = `https://randomuser.me/api/?results=${FRIENDS_COUNT}`;
 
 const fetchData = async (requestLink) => {
 	try {
-		const response = await fetch(requestLink);
+		const response = handleErrors(await fetch(requestLink));
 		const { results } = await response.json();
 		return results;
 	} catch (error) {
-		alert("HTTP-Error: " + error);
+		alert(error);
 	}
+};
+
+const handleErrors = (response) => {
+	if (!response.ok) {
+		throw Error("HTTP-Error: " + response.statusText);
+	}
+	return response;
 };
 
 const initApp = (friendsDataArray) => {
@@ -29,20 +37,19 @@ const bindEventListeners = (friends) => {
 		if (target.name == "gender") {
 			friends.filterByGender(target.id);
 			FILTERS.elements.search.value = "";
-			FILTERS.elements.name.forEach((radioButton) => {
-				if (radioButton.checked) {
-					friends.sortByName(radioButton.id);
-				}
-			});
-			FILTERS.elements.age.forEach((radioButton) => {
-				if (radioButton.checked) {
-					friends.sortByAge(radioButton.id);
-				}
-			});//this two forEach callbacks is needed to re-sort new arrays of cards, filtered by gender
+			if (FILTERS.querySelector("[name=name]:checked")) {
+				friends.sortByName(FILTERS.querySelector("[name=name]:checked").id);
+			}
+			if (FILTERS.querySelector("[name=age]:checked")) {
+				friends.sortByAge(FILTERS.querySelector("[name=age]:checked").id);
+			}//this two forEach callbacks is needed to re-sort new arrays of cards, filtered by gender
 		}
 		if (target.name == "name") {
 			friends.sortByName(target.id);
 			FILTERS.elements.search.value = "";
+			if (FILTERS.querySelector("[name=age]:checked")) {
+				FILTERS.querySelector("[name=age]:checked").checked = false;
+			}
 		}
 		if (target.name == "age") {
 			friends.sortByAge(target.id);
@@ -51,14 +58,14 @@ const bindEventListeners = (friends) => {
 	});
 	RESET_BUTTON.addEventListener("click", (e) => {
 		e.preventDefault();
-		FILTERS.querySelectorAll("input[type=radio]").forEach((radioButton) => {
+		FILTERS.querySelectorAll("input[type=radio]:checked").forEach((radioButton) => {
 			radioButton.checked = false;
 		});
 		FILTERS.elements.search.value = "";
 		friends.resetFilters();
 	});
 	FILTERS.addEventListener("keydown", (event) => {
-		if (event.keyIdentifier == "U+000A" || event.keyIdentifier == "Enter" || event.keyCode == 13) {
+		if (event.key == "Enter") {
 			event.preventDefault();
 		}
 	});
@@ -80,10 +87,14 @@ class FriendsList {
 	}
 	filterByGender(gender) {
 		if (gender == "male") {
-			this.currentCards = this.allCards.filter((friendCard) => friendCard["gender"] == "male");
+			this.currentCards = this.allCards.filter(
+				(friendCard) => friendCard["gender"] == "male"
+			);
 		}
 		if (gender == "female") {
-			this.currentCards = this.allCards.filter((friendCard) => friendCard["gender"] == "female");
+			this.currentCards = this.allCards.filter(
+				(friendCard) => friendCard["gender"] == "female"
+			);
 		}
 		if (gender == "all") {
 			this.currentCards = [...this.allCards];
@@ -91,24 +102,47 @@ class FriendsList {
 		this.renderCards();
 	}
 	filterBySearch(searchValue) {
-		const filteredArray = this.currentCards.filter((friendCard) => Object.values(friendCard).slice(1).join(" ").toLowerCase().indexOf(searchValue.toLowerCase()) > -1);
+		const filteredArray = this.currentCards.filter(
+			(friendCard) =>
+				Object.values(friendCard)
+					.slice(1)
+					.join(" ")
+					.toLowerCase()
+					.indexOf(searchValue.toLowerCase()) > -1
+		);
 		this.renderCards(filteredArray);
 	}
 	sortByName(sortType) {
 		if (sortType == "az") {
-			this.currentCards = sortObjectsByPropertyValue(this.currentCards, "name", "ascending");
+			this.currentCards = sortObjectsByPropertyValue(
+				this.currentCards,
+				"name",
+				"ascending"
+			);
 		}
 		if (sortType == "za") {
-			this.currentCards = sortObjectsByPropertyValue(this.currentCards, "name", "descending");
+			this.currentCards = sortObjectsByPropertyValue(
+				this.currentCards,
+				"name",
+				"descending"
+			);
 		}
 		this.renderCards();
 	}
 	sortByAge(sortType) {
 		if (sortType == "ascending") {
-			this.currentCards = sortObjectsByPropertyValue(this.currentCards, "age", "ascending");
+			this.currentCards = sortObjectsByPropertyValue(
+				this.currentCards,
+				"age",
+				"ascending"
+			);
 		}
 		if (sortType == "descending") {
-			this.currentCards = sortObjectsByPropertyValue(this.currentCards, "age", "descending");
+			this.currentCards = sortObjectsByPropertyValue(
+				this.currentCards,
+				"age",
+				"descending"
+			);
 		}
 		this.renderCards();
 	}
@@ -117,7 +151,11 @@ class FriendsList {
 const sortObjectsByPropertyValue = (arrayOfObjects, key, sortOrder) => {
 	const array = arrayOfObjects;
 	const modifier = sortOrder == "ascending" ? 1 : -1;
-	return array.sort((a, b) => (a[key] > b[key] ? 1 * modifier : a[key] < b[key] ? -1 * modifier : 0));
+	return array.sort((a, b) => {
+		if (a[key] > b[key]) return 1 * modifier;
+		else if (a[key] < b[key]) return -1 * modifier;
+		else return 0;
+	});
 };
 
 class FriendCard {
@@ -134,28 +172,26 @@ class FriendCard {
 	createCard() {
 		const card = document.createElement("div");
 		card.classList.add("card");
-		card.innerHTML = `<img class="card__img" src="${this.photo}" alt="${this.name} photo"'>\n
+		card.innerHTML = `<img class="card__img" src="${this.photo}" alt="${
+			this.name
+		} photo"'>\n
                           <h3 class="card__name">${this.name}</h3>\n
                           <span class="card__age">Age: ${this.age}</span>\n
-                          <a class="card__phone" href="tel:+${this.phone.replace(/\D/g, "")}">${this.phone}</a>\n
-                          <a class="card__email" href="mailto:${this.email}">${this.email}</a>\n
+                          <a class="card__phone" href="tel:+${this.phone.replace(
+														/\D/g,
+														""
+													)}">${this.phone}</a>\n
+                          <a class="card__email" href="mailto:${this.email}">${
+			this.email
+		}</a>\n
                           <span class="card__country">${this.country}</span>`;
 		return card;
 	}
 }
 
 const dayNightChange = () => {
-	if (!DAY_NIGHT.classList.contains("light")) {
-		document.documentElement.style.setProperty("--light", "#111");
-		document.documentElement.style.setProperty("--dark", "#eee");
-		document.documentElement.style.setProperty("--gray", "#ccc");
-		DAY_NIGHT.classList.toggle("light");
-	} else {
-		document.documentElement.style.setProperty("--light", "#eee");
-		document.documentElement.style.setProperty("--dark", "#111");
-		document.documentElement.style.setProperty("--gray", "#222");
-		DAY_NIGHT.classList.toggle("light");
-	}
+	BODY.classList.toggle("light");
+	DAY_NIGHT.classList.toggle("light");
 };
 
 document.addEventListener("DOMContentLoaded", () => {
