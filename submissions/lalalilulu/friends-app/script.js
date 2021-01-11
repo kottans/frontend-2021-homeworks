@@ -13,24 +13,24 @@ const startApp = (response) => {
                 sortedArray = searchByValue(friendsArray, target.value);
                 break;
             case "name-ascending":
-                sortedArray = sortByName(friendsArray, true);
+                sortedArray = sortArray(friendsArray, true, true);
                 break;
             case "name-descending":
-                sortedArray = sortByName(friendsArray, false);
+                sortedArray = sortArray(friendsArray, false, true);
                 break;
             case "age-ascending":
-                sortedArray = sortByAge(friendsArray, true);
+                sortedArray = sortArray(friendsArray, true, false);
                 break;
             case "age-descending":
-                sortedArray = sortByAge(friendsArray, false);
+                sortedArray = sortArray(friendsArray, false, false);
                 break;
             case "female":
                 resetCheckedFilters();
-                sortedArray = sortByGender(friendsArray, "female");
+                sortedArray = filterByGender(friendsArray, "female");
                 break;
             case "male":
                 resetCheckedFilters();
-                sortedArray = sortByGender(friendsArray, "male");
+                sortedArray = filterByGender(friendsArray, "male");
                 break;
             case "all":
                 resetCheckedFilters();
@@ -88,15 +88,7 @@ const searchByValue = (array, value) => {
     })
 }
 
-const sortByName = (array, isAscending) => {
-    return sortArray(array, isAscending, true);
-}
-
-const sortByAge = (array, isAscending) => {
-    return sortArray(array, isAscending, false);
-}
-
-const sortByGender = (array, gender) => {
+const filterByGender = (array, gender) => {
     return array.filter(friend => friend.gender === gender);
 }
 
@@ -107,7 +99,6 @@ const sortArray = (array, isAscending, isNameSorting) => {
         const nextValue = isNameSorting ? next.name.first : next.dob.age;
         if (prevValue < nextValue) return -1;
         if (prevValue > nextValue) return 1;
-        if (prevValue === nextValue) return 0;
     });
     return isAscending ? sortedArray : sortedArray.reverse();
 }
@@ -115,9 +106,9 @@ const sortArray = (array, isAscending, isNameSorting) => {
 const checkGender = (array) => {
     let sortedArray = [...array];
     if (document.getElementById("female").checked) {
-        sortedArray = sortByGender(array, "female");
+        sortedArray = filterByGender(array, "female");
     } else if (document.getElementById("male").checked) {
-        sortedArray = sortByGender(array, "male");
+        sortedArray = filterByGender(array, "male");
     }
     return sortedArray;
 }
@@ -125,13 +116,13 @@ const checkGender = (array) => {
 const checkNameAge = (array) => {
     let sortedArray = [...array];
     if (document.getElementById("age-ascending").checked) {
-        sortedArray = sortByAge(sortedArray, true);
+        sortedArray = sortArray(sortedArray, true, false);
     } else if (document.getElementById("age-descending").checked) {
-        sortedArray = sortByAge(sortedArray, false);
+        sortedArray = sortArray(sortedArray, false, false);
     } else if (document.getElementById("name-ascending").checked) {
-        sortedArray = sortByName(sortedArray, true);
+        sortedArray = sortArray(sortedArray, true, true);
     } else if (document.getElementById("name-descending").checked) {
-        sortedArray = sortByName(sortedArray, false);
+        sortedArray = sortArray(sortedArray, false, true);
     }
     return sortedArray;
 }
