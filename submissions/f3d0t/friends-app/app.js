@@ -42,7 +42,7 @@ const bindEventListeners = (friends) => {
 			}
 			if (FILTERS.querySelector("[name=age]:checked")) {
 				friends.sortByAge(FILTERS.querySelector("[name=age]:checked").id);
-			}//this two forEach callbacks is needed to re-sort new arrays of cards, filtered by gender
+			} //this two forEach callbacks is needed to re-sort new arrays of cards, filtered by gender
 		}
 		if (target.name == "name") {
 			friends.sortByName(target.id);
@@ -172,18 +172,11 @@ class FriendCard {
 	createCard() {
 		const card = document.createElement("div");
 		card.classList.add("card");
-		card.innerHTML = `<img class="card__img" src="${this.photo}" alt="${
-			this.name
-		} photo"'>\n
+		card.innerHTML = `<img class="card__img" src="${this.photo}" alt="${this.name} photo"'>\n
                           <h3 class="card__name">${this.name}</h3>\n
                           <span class="card__age">Age: ${this.age}</span>\n
-                          <a class="card__phone" href="tel:+${this.phone.replace(
-														/\D/g,
-														""
-													)}">${this.phone}</a>\n
-                          <a class="card__email" href="mailto:${this.email}">${
-			this.email
-		}</a>\n
+                          <a class="card__phone" href="tel:+${this.phone.replace(/\D/g,"")}">${this.phone}</a>\n
+                          <a class="card__email" href="mailto:${this.email}">${this.email}</a>\n
                           <span class="card__country">${this.country}</span>`;
 		return card;
 	}
