@@ -25,14 +25,16 @@
         </div>
         <form class="filters__container">
             <fieldset class="select__item fieldset" id="sort">
-                <legend class="legend">Sort:</legend>            
-                <span class="select__face-item select__container" id="sort">Sorting type</span>        
-                <ul name="sort"  class="select__list">
-                    <li value="namesAscending" class="list__item">Names: A first</li>
-                    <li value="namesDescending" class="list__item">Names: Z first</li>
-                    <li value="ageAscending" class="list__item">Age: ascending</li>
-                    <li value="ageDescending" class="list__item">Age: descending</li>
-                </ul>              
+                <legend class="legend">Sort:</legend>
+                <span class="select-label" id="selectLabel">Sort by</span>
+                <span class="select__face-item select__container" tabindex='0' option-selected="false" id="listLabel" 
+                    aria-haspopup="listbox" aria-labelledby="selectLabel listLabel">Sorting type</span>
+                <ul name="sort" role="listbox" class="select__list" aria-labelledby="selectLabel" tabindex="-1">
+                    <li value="namesAscending" role="option" tabindex="-1" class="list__item">Names: A first</li>
+                    <li value="namesDescending" role="option" tabindex="-1" class="list__item">Names: Z first</li>
+                    <li value="ageAscending" role="option" tabindex="-1" class="list__item">Age: ascending</li>
+                    <li value="ageDescending" role="option" tabindex="-1" class="list__item">Age: descending</li>
+                </ul>
             </fieldset>
             <fieldset class="gender__filter fieldset" id="genderFilter">
                 <legend class="legend">Gender:</legend>
