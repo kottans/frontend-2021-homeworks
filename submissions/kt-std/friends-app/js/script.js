@@ -8,7 +8,7 @@ const USERS_AMOUNT = 24,
 function getFriends() {
 	fetch(API_URL)
 		.then((response) => {
-			if (checkResponseStatus(response.status)) {
+			if (response.ok) {
 				return response.json();
 			} else {
 				appendErrorMessage(
@@ -37,13 +37,6 @@ function getFriends() {
 
 getFriends();
 
-function checkResponseStatus(status) {
-	if (status >= 200 && status < 300) {
-		return true;
-	} else {
-		return false;
-	}
-}
 
 function setTotalCounter(friendsArray) {
 	TOTAL_COUNTER.innerText = `${friendsArray.length} Totals`;
@@ -53,15 +46,10 @@ function setTotalCounter(friendsArray) {
 }
 
 function initializeAgeLimits(friendsArray) {
-	["minAge", "maxAge"].forEach((limitInputId) =>
-		["min", "max"].forEach((limitType) =>
-			setAgeLimit(
-				getCertainAgeLimit(friendsArray, limitType),
-				limitInputId,
-				limitType
-			)
-		)
-	);
+	setAgeLimit(getCertainAgeLimit(friendsArray, 'min'), 'minAge', 'min');
+	setAgeLimit(getCertainAgeLimit(friendsArray, 'max'), 'minAge', 'max');
+	setAgeLimit(getCertainAgeLimit(friendsArray, 'min'), 'maxAge', 'min');
+	setAgeLimit(getCertainAgeLimit(friendsArray, 'max'), 'maxAge', 'max');
 }
 
 function appendNoResultsMessage() {
@@ -148,10 +136,10 @@ function getFriendCardTemplate(friend) {
 
 function reformatPhoneNumber(number) {
 	return number
-		.replace(/[^0-9]+/g, "")
-		.replace(/.(\d{3})/g, "$1-")
-		.replace(/(^\d{3,3})-(.\d+)/, "+($1)-$2")
-		.replace(/[-]+$/g, "");
+		.replace(/[^0-9]+/g, "") //leave only numbers in phone number
+		.replace(/.(\d{3})/g, "$1-") // add dashes between groups of digits consisting of 3 numbers 
+		.replace(/(^\d{3,3})-(.\d+)/, "+($1)-$2") // get first group of 3 digits and place them inside brackets 
+		.replace(/[-]+$/g, ""); //remove extra dash if it appers after the last group of numbers
 }
 
 function getDate(date) {
@@ -176,34 +164,8 @@ function getResponseErrorMessage(status, statusText) {
 function setAgeLimit(ageLimit, limitInputId, limitType) {
 	const limitInput = document.getElementById(limitInputId);
 	limitInput[limitType] = ageLimit;
-	setInputLimitValue(
-		limitInput,
-		limitInputId,
-		limitType,
-		"minAge",
-		"min",
-		ageLimit
-	);
-	setInputLimitValue(
-		limitInput,
-		limitInputId,
-		limitType,
-		"maxAge",
-		"max",
-		ageLimit
-	);
-}
-
-function setInputLimitValue(
-	limitInput,
-	limitInputId,
-	limitType,
-	limitInputIdValue,
-	limitTypeValue,
-	ageLimit
-) {
-	if (limitInputId === limitInputIdValue && limitType === limitTypeValue)
-		limitInput.value = ageLimit;
+	if (limitInputId === "minAge" && limitType === "min") limitInput.value = ageLimit;
+	if (limitInputId === "maxAge" && limitType === "max") limitInput.value = ageLimit;
 }
 
 function getCertainAgeLimit(friendsArray, value) {
@@ -223,25 +185,23 @@ function sortCards(e, friendsArray) {
 
 function sortCardsArray(condition, friendsArray) {
 	switch (condition) {
-		case "ND":
+		case "namesDescending":
 			FRIENDS_ARRAY.sort((a, b) => b.firstName.localeCompare(a.firstName));
 			break;
-		case "NA":
+		case "namesAscending":
 			FRIENDS_ARRAY.sort((a, b) => a.firstName.localeCompare(b.firstName));
 			break;
-		case "AD":
+		case "ageDescending":
 			FRIENDS_ARRAY.sort((a, b) => b.age - a.age);
 			break;
-		case "AA":
+		case "ageAscending":
 			FRIENDS_ARRAY.sort((a, b) => a.age - b.age);
 			break;
 	}
 }
 
 function findSubstring(string, substring) {
-	return string.toLowerCase().indexOf(substring.toLowerCase()) >= 0
-		? true
-		: false;
+	return string.toLowerCase().indexOf(substring.toLowerCase()) >= 0;
 }
 
 function findMatchesWithPropertiesValues(
@@ -256,36 +216,29 @@ function findMatchesWithPropertiesValues(
 	});
 }
 
-function filterByGenderValue(genderList, friendsArray) {
-	return friendsArray.filter((friend) =>
-		genderList.some((gender) => friend.gender === gender.value)
-	);
-}
-
-function filterByAgeLimits(minAge, maxAge, friendsArray) {
-	return friendsArray.filter(
-		(friend) => friend.age >= minAge && friend.age <= maxAge
-	);
-}
-
 function filterByGender(e, friendsArray) {
 	let checkboxes = document.querySelectorAll("input[type=checkbox]");
 	checkboxes = Array.from(checkboxes).filter((checkbox) => checkbox.checked);
-	return filterByGenderValue(checkboxes, friendsArray);
+	return friendsArray.filter((friend) =>
+		checkboxes.some((gender) => friend.gender === gender.value)
+	);
 }
 
 function filterByAge(friendsArray) {
 	const min = document.getElementById("minAge"),
 		max = document.getElementById("maxAge");
 	if (min.value && max.value) {
-		return filterByAgeLimits(min.value, max.value, friendsArray);
+		return friendsArray.filter(
+			(friend) => friend.age >= min.value && friend.age <= max.value
+		);
 	}
 }
 
-checkFiltersChanged = (event) =>
-	["list__item", "number", "checkbox"].some(
+function checkFiltersChanged(event) {
+	return ["list__item", "number", "checkbox"].some(
 		(filter) => event.target.className === filter
 	);
+}
 
 function updateCards(event) {
 	if (checkFiltersChanged(event)) {
@@ -298,15 +251,16 @@ function updateCards(event) {
 }
 
 document.querySelector("#showFiltersButton").addEventListener("click", (e) => {
-	const filtersContainer = document.querySelector(".filters__container");
-	filtersContainer.classList.toggle("display");
-	Array.from(filtersContainer.children).forEach((node) => {
-		node.classList.toggle("visible");
-	});
+	document.querySelector(".filters__container").classList.toggle("display");
 });
 
 document.querySelector("#sort").addEventListener("click", (e) => {
-	document.querySelector(".select__list").classList.toggle("visible");
+	if (
+		e.target.classList.contains("list__item") ||
+		e.target.classList.contains("select__container")
+	) {
+		document.querySelector(".select__list").classList.toggle("visible");
+	}
 });
 
 document.querySelector("#search").addEventListener("input", (e) => {

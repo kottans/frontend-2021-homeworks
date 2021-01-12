@@ -23,22 +23,19 @@
             <h2 class="heading">Your friends <span class="amount"></span></h2>
             <button class="filters__button" id="showFiltersButton">Show filters</button>
         </div>
-        <div class="filters__container">
-            <div class="select__item">
-                <label class="label" for="sort">Sort:</label>
-                <ul class="select__container" id="sort">
-                    <li>
-                        <span class="select__face-item">Sorting type</span>
-                        <ul name="sort" id="sort" class="select__list">
-                            <li value="NA" class="list__item">Names: A first</li>
-                            <li value="ND" class="list__item">Names: Z first</li>
-                            <li value="AA" class="list__item">Age: ascending</li>
-                            <li value="AD" class="list__item">Age: descending</li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            <div class="gender__filter" id="genderFilter">
+        <form class="filters__container">
+            <fieldset class="select__item fieldset" id="sort">
+                <legend class="legend">Sort:</legend>            
+                <span class="select__face-item select__container" id="sort">Sorting type</span>        
+                <ul name="sort"  class="select__list">
+                    <li value="namesAscending" class="list__item">Names: A first</li>
+                    <li value="namesDescending" class="list__item">Names: Z first</li>
+                    <li value="ageAscending" class="list__item">Age: ascending</li>
+                    <li value="ageDescending" class="list__item">Age: descending</li>
+                </ul>              
+            </fieldset>
+            <fieldset class="gender__filter fieldset" id="genderFilter">
+                <legend class="legend">Gender:</legend>
                 <div class="filter__item">
                     <label class="label" for="male">Male:</label>
                     <input type="checkbox" class="checkbox" name="gender_male" value="male" id="male" checked>
@@ -47,16 +44,14 @@
                     <label class="label" for="female">Female:</label>
                     <input type="checkbox" class="checkbox" name="gender_female" value="female" id="female" checked>
                 </div>
-            </div>
-            <div class="filter__item age__filter" id="ageFilter">
-                <label class="label">Age:</label>
-                <div class="filter__row">
-                    <input type="number" class="number" name="minAge" id="minAge">
-                    <span>—</span>
-                    <input type="number" class="number" name="maxAge" id="maxAge">
-                </div>
-            </div>
-        </div>
+            </fieldset>
+            <fieldset class="age__filter fieldset" id="ageFilter">
+                <legend class="legend">Age:</legend>
+                <input type="number" class="number" name="minAge" id="minAge">
+                <span>—</span>
+                <input type="number" class="number" name="maxAge" id="maxAge">
+            </fieldset>
+        </form>
         <div class="cards__container"></div>
         <button class="more__button " id="moreFriends" onclick="getFriends()">More friends</button>
     </main>
