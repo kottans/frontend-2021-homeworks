@@ -1,0 +1,139 @@
+/* iPads (вертикальная и горизонтальная) ----------- */
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+  .menu-wrap {
+    width: 30%;
+    margin-right: 2%;
+  }
+
+  .friendsList-wrap {
+    width: 68%;
+  }
+
+  .friendsList-wrap {
+    justify-content: space-around;
+  }
+}
+
+/* Smartphones portrait----------- */
+@media only screen and (min-width: 320px) and (max-width: 767px) and (orientation: portrait) {
+  .header-scroll {
+    background: #8360c3;
+  }
+  .menu-btn-container {
+    display: inline-block;
+  }
+
+  .header-name {
+    font-size: 25px;
+    margin: 15px 0 15px 0;
+  }
+
+  .main-wrap {
+    flex-direction: column;
+    padding: 0;
+    z-index: 0;
+  }
+
+  .menu-wrap {
+    width: 100%;
+    padding: 2%;
+    margin: 0;
+  }
+
+  .menu-wrap.change {
+    transform: translateY(-500px);
+  }
+
+  .menu-wrap.change + .friendsList-wrap {
+    transform: translateY(-300px);
+  }
+
+  .search-form {
+    height: 35px;
+    margin-bottom: 20px;
+  }
+
+  .filter-sort-menu {
+    position: relative;
+    width: 100%;
+  }
+
+  .sorting-legend {
+    font-size: 17px;
+  }
+
+  .btn {
+    width: 80px;
+    height: 35px;
+    font-size: 20px;
+  }
+
+  .ageSort-wrap {
+    margin-bottom: 0px;
+  }
+
+  .filter-gender__legend {
+    font-size: 17px;
+  }
+
+  .friendsList-wrap {
+    width: 100%;
+    padding: 2%;
+    margin: 0;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
+}
+
+/* Smartphones landscape----------- */
+@media only screen and (min-width: 320px) and (max-width: 812px) and (orientation: landscape) {
+  .header-name {
+    font-size: 35px;
+    margin: 15px 0 15px 0;
+  }
+
+  .menu-wrap {
+    width: 39%;
+    padding: 0 2% 0 2%;
+    margin-right: 1%;
+  }
+
+  .search-form {
+    height: 30px;
+    margin-bottom: 10px;
+    background-size: 13px;
+    font-size: 18px;
+  }
+
+  .filter-sort-menu {
+    position: fixed;
+    justify-content: flex-start;
+  }
+
+  .sorting-legend {
+    font-size: 15px;
+    margin-bottom: 5px;
+  }
+
+  .btn {
+    width: 60px;
+    height: 28px;
+    font-size: 17px;
+    margin-bottom: 5px;
+  }
+
+  .ageSort-wrap {
+    margin-bottom: 0px;
+  }
+
+  .filter-gender__legend {
+    font-size: 15px;
+    margin-bottom: 5px;
+  }
+
+  .friendsList-wrap {
+    width: 60%;
+    justify-content: space-around;
+  }
+}
