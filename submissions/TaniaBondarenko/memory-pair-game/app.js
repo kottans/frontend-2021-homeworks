@@ -18,11 +18,14 @@ const CARDS_BACK_ARR = [
 ];
         
 const CARDS_LENGTH = 16;
-const DELAY1 = 1600;
-const DELAY2 = 800;
-const DELAY3 = 400;
-const FRONT_CARD_PATH = '<img src="images/front_card.png" class="card_front" alt=" "></img>';
-let cardsFlipped;
+const DELAY = 800;
+const DELAY_HIDE_CARD = 600;
+const CARD_BOARD = document.querySelector(".card_board");
+let isFlipped = false;
+let numOpenCards = 0;
+let cards;
+let firstCard;
+let secondCard;
 let pairsOpened;
 let numOfAttempts;
 
@@ -31,17 +34,18 @@ window.addEventListener("load", createBoard);
 function createBoard() {
   resetVariables();
   shuffle(CARDS_BACK_ARR);
-  const CARD_BOARD = document.querySelector(".card_board");
+  const frontCardPath = '<img src="images/front_card.png" class="card_front" alt=" "></img>';
   for (let i = 0; i < CARDS_LENGTH; i++) {
     let cardInner = document.createElement("div");
     cardInner.setAttribute("class", "card_inner");
-    cardInner.innerHTML = `${FRONT_CARD_PATH} <img src="${CARDS_BACK_ARR[i]}" class="card_back" alt=" ">`;
+    cardInner.innerHTML = `${frontCardPath} <img src="${CARDS_BACK_ARR[i]}" class="card_back" alt=" ">`;
     CARD_BOARD.appendChild(cardInner);
   }
+  cards = Array.from(document.querySelectorAll(".card_inner"));
+  letGame();
 };
 
 function resetVariables() {
-  cardsFlipped = [];
   pairsOpened = 0;
   numOfAttempts = 0;
 };
@@ -57,59 +61,75 @@ function shuffle(arr) {
   };
 };
 
+function letGame(){
 setTimeout(() => {
-    const CARDS = Array.from(document.querySelectorAll(".card_inner"));
-    CARDS.forEach(card => card.addEventListener('click', flipCard));
-}, DELAY1);
+  CARD_BOARD.addEventListener('click', flipCard);
+}, DELAY);
+};
 
-function flipCard(e) {
-  const CARD_INNER = e.target.parentElement;
-  CARD_INNER.classList.add('is-flipped');
-  cardsFlipped.push(CARD_INNER); 
-  if (cardsFlipped.length === 2) {
-    isMatch();
-  } else {
-    cardsFlipped;
-  };
+function blockBoard() {
+  CARD_BOARD.removeEventListener("click", flipCard);
+}
+
+function flipCard({ target }) {
+  const cardInner = target.parentElement;
+  if (!target.className === "card_inner") return;
+  if (target.className==="card_board") return;
+  if (!cardInner.classList.contains("is-flipped")) {
+    cardInner.classList.add('is-flipped');
+    if (!isFlipped) {
+      firstCard = cardInner;
+      isFlipped = true;
+      numOpenCards++;
+    } else {
+      secondCard = cardInner;
+      isFlipped = false;
+      numOpenCards++;
+    }
+    if (numOpenCards === 2) {
+      blockBoard();
+      isMatch();
+      numOpenCards = 0;
+    }
+    else {
+      return;
+    }
+  }
 };
 
 function isMatch() {
   numOfAttempts++;
-  let firstCard = cardsFlipped[0].lastElementChild.getAttribute("src");
-  let secondCard = cardsFlipped[1].lastElementChild.getAttribute("src");
-  if (firstCard === secondCard && cardsFlipped[0] != cardsFlipped[1]) {
-    setTimeout(showImg, DELAY3); 
+  let firstSrc=firstCard.lastElementChild.getAttribute("src");
+  let secondSrc=secondCard.lastElementChild.getAttribute("src");
+  if (firstSrc === secondSrc && firstCard != secondCard) {
+    setTimeout(hideImg, DELAY_HIDE_CARD);
     pairsOpened++;
-  } 
-  else {
-    setTimeout(removeFlip, DELAY2);
+  } else {
+   setTimeout(removeFlip, DELAY);
   }
-  wonGame();
+  setTimeout(letGame, DELAY);
+    
+  if (pairsOpened === CARDS_LENGTH / 2) {
+    wonGame();
+  }
 };
 
-function showImg() {
-  cardsFlipped.forEach(card => {
-    card.classList.add("is-shown");
-    card.classList.remove("is-flipped");
-  });
-  cardsFlipped = [];
+function hideImg() {
+  removeFlip();
+  firstCard.classList.add("is-hidden");
+  secondCard.classList.add("is-hidden");
 };
 
 function removeFlip() {
-  cardsFlipped.forEach(card => {
+  cards.forEach(card => {
     card.classList.remove("is-flipped");
   });
-  cardsFlipped = [];
 };
 
 function wonGame() {
-  if (pairsOpened === CARDS_LENGTH / 2) {
     setTimeout(() => {
       askPlayer();
-    }, DELAY1);
-  } else {
-    return;
-  }
+    }, DELAY);
 };
 
 function askPlayer() {
@@ -117,15 +137,13 @@ function askPlayer() {
         document.location.reload();
       } else {
         resetVariables();
-        window.removeEventListener("load", createBoard);
-        mode.removeEventListener("click", changeMode);
+        blockBoard();
       };
 };
 
-let mode = document.querySelector(".mode");
+const mode = document.querySelector(".mode");
 mode.addEventListener("click", changeMode);
 
 function changeMode() {
-  let bodyBack = document.querySelector(".background");
-  bodyBack.classList.toggle("switch");
+  document.querySelector(".background").classList.toggle("switch");
 };
