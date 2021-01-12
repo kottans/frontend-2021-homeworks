@@ -129,6 +129,8 @@ body.light .day_night .night_icon{
     margin-left: var(--filters_width);
 }
 .card{
+    display: flex;
+    flex-flow: column wrap;
     flex-basis: 260px;
     margin-right: 30px;
     margin-bottom: 30px;
@@ -144,6 +146,7 @@ body.light .day_night .night_icon{
     box-shadow: 13px 13px 0px var(--shadow), -13px -13px 0px var(--shadow);
 }
 .card__img{
+    align-self: center;
     height: 126px;
     width: 126px;
     margin-bottom: 0.5em;

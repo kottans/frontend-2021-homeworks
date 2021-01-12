@@ -1,4 +1,3 @@
-const BODY = document.body;
 const MAIN = document.querySelector(".main");
 const FILTERS = document.querySelector(".filters");
 const RESET_BUTTON = document.querySelector(".filters__button");
@@ -63,7 +62,7 @@ const bindEventListeners = (friends) => {
 		FILTERS.elements.search.value = "";
 		friends.resetFilters();
 	});
-	FILTERS.addEventListener("submit", (event) => {
+	FILTERS.addEventListener("keydown", (event) => {
 		if (event.key === "Enter") {
 			event.preventDefault();
 		}
@@ -85,14 +84,10 @@ class FriendsList {
 		this.renderCards();
 	}
 	filterByGender(gender) {
-		if (gender === "male") {
-			this.currentCards = this.allCards.filter((friendCard) => friendCard.gender === "male");
-		}
-		if (gender === "female") {
-			this.currentCards = this.allCards.filter((friendCard) => friendCard.gender === "female");
-		}
 		if (gender === "all") {
 			this.currentCards = [...this.allCards];
+		} else {
+			this.currentCards = this.allCards.filter((friendCard) => friendCard.gender === gender);
 		}
 		this.renderCards();
 	}
@@ -103,37 +98,26 @@ class FriendsList {
 		this.renderCards(filteredArray);
 	}
 	sortByName(sortType) {
-		if (sortType === "az") {
-			this.currentCards = sortObjectsByPropertyValue(this.currentCards, "name", "ascending");
-		}
-		if (sortType === "za") {
-			this.currentCards = sortObjectsByPropertyValue(this.currentCards, "name", "descending");
-		}
+		this.currentCards = sortObjectsByPropertyValue(this.currentCards, "name", sortType);
 		this.renderCards();
 	}
 	sortByAge(sortType) {
-		if (sortType === "ascending") {
-			this.currentCards = sortObjectsByPropertyValue(this.currentCards, "age", "ascending");
-		}
-		if (sortType === "descending") {
-			this.currentCards = sortObjectsByPropertyValue(this.currentCards, "age", "descending");
-		}
+		this.currentCards = sortObjectsByPropertyValue(this.currentCards, "age", sortType);
 		this.renderCards();
 	}
 }
 
-const sortObjectsByPropertyValue = (arrayOfObjects, key, sortOrder) => {
-	const array = arrayOfObjects;
-	array.sort((a, b) => {
+const sortObjectsByPropertyValue = (arrayOfCards, key, sortOrder) => {
+	arrayOfCards.sort((a, b) => {
 		if (a[key] > b[key]) {
 			return 1;
-		} else if (a[key] < b[key]) {
-			return -1;
-		} else {
-			return 0;
 		}
+		if (a[key] < b[key]) {
+			return -1;
+		}
+		return 0;
 	});
-	return sortOrder === "ascending" ? array : array.reverse();
+	return sortOrder === "ascending" ? arrayOfCards : arrayOfCards.reverse();
 };
 
 class FriendCard {
@@ -161,13 +145,9 @@ class FriendCard {
 	}
 }
 
-const dayNightChange = () => {
-	BODY.classList.toggle("light");
-};
-
 document.addEventListener("DOMContentLoaded", () => {
-	fetchData(REQUEST_LINK).then((resultDataArray) => initApp(resultDataArray));
+	fetchData(REQUEST_LINK).then(initApp);
 	DAY_NIGHT.addEventListener("click", () => {
-		dayNightChange();
+		document.body.classList.toggle("light");
 	});
 });
