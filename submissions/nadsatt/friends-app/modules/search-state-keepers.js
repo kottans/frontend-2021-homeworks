@@ -27,9 +27,7 @@ export class UserLocationSearchStateKeeper extends SearchStateKeeper {
 export class UserGenderSearchStateKeeper extends FilterStateKeeper {
     constructor(userService){
         const propertyToApplyStateBy = 'gender';
-        const firstState = 'female';
-        const secondState = 'male';
-        super({firstState, secondState,
-               propertyToApplyStateBy, category, userService});
+        const states = ['female', 'male'];
+        super({states, propertyToApplyStateBy, category, userService});
     }
 }

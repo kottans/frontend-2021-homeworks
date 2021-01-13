@@ -106,14 +106,13 @@ class SearchStateKeeper extends StateKeeper {
 }
 
 export class FilterStateKeeper extends StateKeeper {
-    constructor({firstState, secondState, ...args}){
-        const optionsHTML =
-            `<span class="option-group__option" data-state="${firstState}">
-                ${svgs[`${firstState}`]}
-             </span>
-             <span class="option-group__option" data-state="${secondState}">
-                ${svgs[`${secondState}`]}
-             </span>`;
+    constructor({states, ...args}){
+        const optionsHTML = states
+            .map(state =>
+                `<span class="option-group__option" data-state="${state}">
+                    ${svgs[`${state}`]}
+                 </span>`
+            ).join('');
         super({optionsHTML, ...args});
     }
 
