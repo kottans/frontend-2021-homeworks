@@ -96,10 +96,12 @@ class SearchStateKeeper extends StateKeeper {
     }
 
     applySearch(value){
-        this.userService.users = this.userService.users.filter(
+        let users = this.userService.users;
+        users = users.filter(
             user => user[this.propertyToApplyStateBy].toLowerCase()
-                .includes(value.toLowerCase())
+            .includes(value.toLowerCase())
         );
+        this.userService.users = users;
     }
 }
 
@@ -122,9 +124,11 @@ export class FilterStateKeeper extends StateKeeper {
     }
 
     applyFilter(value){
-        this.userService.users = this.userService.users.filter(
+        let users = this.userService.users;
+        users = this.userService.users.filter(
             user => user[this.propertyToApplyStateBy] === value
         );
+        this.userService.users = users;
     }
 }
 
@@ -154,7 +158,9 @@ class SortStateKeeper extends StateKeeper {
     }
 
     applySort(comparator){
-        this.userService.users.sort(comparator);
+        let users = this.userService.users;
+        users.sort(comparator);
+        this.userService.users = users;
     }
 }
 

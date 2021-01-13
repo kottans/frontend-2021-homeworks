@@ -6,12 +6,19 @@ export class UserService {
         this.currentPageUsers;
     }
 
+    get users(){
+        return this._users;
+    }
+    set users(value){
+        this._users = value;
+    }
+
     async getUsers(usersCount){
-        this.originalUsers = await this.apiService.getUsers(usersCount);
-        this.users = [...this.originalUsers];
+        this._originalUsers = await this.apiService.getUsers(usersCount);
+        this._users = [...this._originalUsers];
     }
 
     resetUsers(){
-        this.users = [...this.originalUsers];
+        this._users = [...this._originalUsers];
     }
 }
