@@ -1,0 +1,87 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  background: rgb(42, 43, 53);
+}
+
+.main-header {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 45px;
+  font-weight: bold;
+  color: rgb(240, 240, 240);
+  text-align: center;
+  padding: 10px;
+}
+
+.exp-container {
+  text-align: center;
+  background: white;
+  padding: 10px;
+}
+
+.exp-header {
+  font-size: 30px;
+}
+
+.game-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-gap: 15px;
+}
+
+.card {
+  width: 130px;
+  height: 170px;
+  box-shadow: 0 0 10px rgba(29, 24, 24, 0.39);
+  background-color: transparent;
+  position: relative;
+  text-align: center;
+  transition: transform 0.3s;
+  transform-style: preserve-3d;
+}
+
+.card-img {
+  width: 130px;
+  height: 170px;
+}
+
+.flip {
+  transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.card-front {
+  background-image: url(./resources/gf-cardback.jpg);
+  background-size: 100%;
+  color: black;
+}
+
+.card-back {
+  color: white;
+  transform: rotateY(180deg);
+}
+
+.hidden {
+  opacity: 0;
+  transition: opacity 0.3s;
+}

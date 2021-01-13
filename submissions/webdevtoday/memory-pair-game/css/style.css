@@ -1,0 +1,132 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --card-width: 110px;
+    --card-height: 140px;
+    --card-gap: 10px;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    min-width: 365px;
+}
+
+img {
+    max-width: 100%;
+}
+
+.gameboard {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 550px;
+    margin: 0 auto;
+}
+
+.card:hover {
+    cursor: pointer;
+}
+.pair:hover, .open:hover {
+    cursor: not-allowed;
+}
+.flip-container {
+    perspective: 1000px;
+    margin: var(--card-gap);
+}
+.flip-container.open .flipper, .flip-container.open .flipper {
+    transform: rotateY(180deg);
+}
+.flip-container, .front, .back {
+    width: var(--card-width);
+    height: var(--card-height);
+}
+.flipper {
+    transition: .6s;
+    transform-style: preserve-3d;
+    position: relative;
+}
+.front, .back {
+    backface-visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    border: 1px solid black;
+}
+.front {
+    z-index: 2;
+    transform: rotateY(0deg);
+}
+.back {
+    transform: rotateY(180deg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.score {
+    position: fixed;
+    top: 0;
+    left: 0;
+    font-size: 40px;
+    background-color: blue;
+    padding: 10px 20px;
+    color: white;
+}
+
+.button {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+
+    padding: 15px 20px;
+    border: none;
+    border-radius: 5px;
+
+    text-transform: uppercase;
+
+    color: white;
+    background-color: green;
+
+    transition: all .6s ease;
+}
+.button:hover {
+    background-color: yellowgreen;
+    color: gray;
+    cursor: pointer;
+}
+.button:active, .button:focus {
+    border: none;
+    outline: none;
+}
+.button--hidden {
+    display: none;
+}
+
+@media (max-width: 600px) {
+    :root {
+        --card-height: 120px;
+        --card-gap: 5px;
+    }
+
+    body {
+        display: flex;
+        align-items: center;
+    }
+}
+
+@media (max-width: 465px) {
+    body {
+        display: flex;
+        align-items: flex-end;
+    }
+}

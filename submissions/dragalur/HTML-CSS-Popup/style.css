@@ -1,0 +1,203 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+.header {
+	width: 100%;
+	height: 50px;
+	align-items: center;
+}
+.menu {
+	width: 300px;
+	float: right;
+	padding-top: 10px;
+}
+.menu .menu-link {
+	text-decoration: none;
+	color: gray;
+	align-items: center;
+	justify-content: space-around;
+	margin-top: 10px;
+}
+.image-poup {
+	width: 28px;
+	height: 28px;
+	border: 1px solid transparent;
+}
+.menu-item-personLink {
+	border-radius: 50%;
+	background-color: yellow;
+	width: 30px;
+	height: 30px;
+}
+.various-app {
+	overflow: auto;
+	width: 375px;
+	height: 482px;
+	text-align: center;
+	border: solid 1px rgb(179, 179, 179);
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+	opacity: 0;
+	visibility: hidden;
+	position: absolute;
+	right: 65px;
+	top: 55px;
+}
+.various-app img {
+	width: 40px;
+	height: auto;
+	max-height: 40px;
+}
+.various-app p {
+	color: gray;
+	padding-top: 10px;
+}
+.app-first {
+	padding: 35px 25px 0 25px;
+	display: flex;
+	flex-wrap: wrap;
+}
+.items-app {
+	display: table;
+	width: 100px;
+	height: 80px;
+	padding-top: 20px;
+}
+.image-bloc {
+	width: 40px;
+	height: 40px;
+	margin: auto;
+}
+.button-app {
+	border: 1px solid transparent;
+	text-decoration: none;
+}
+.button-app:hover {
+	border: solid 1px rgb(194, 194, 194);
+	border-radius: 10px;
+}
+.buttom {
+	width: 100%;
+	height: 30px;
+	border: none;
+	background-color: rgb(212, 212, 212);
+	margin-top: 5px;
+	outline: none;
+}
+.buttom:hover {
+	border: solid 1px rgb(139, 139, 139);
+}
+.buttom a {
+	width: 100%;
+	height: 100%;
+}
+.app-second {
+	padding: 35px 25px 0 25px;
+	display: flex;
+	flex-wrap: wrap;
+	display: none;
+}
+.triang{
+	visibility: hidden;
+	opacity: -1;
+}
+.triang::before,
+.triang::after {
+	content: '';
+	position: absolute;
+	top: 40px;
+	z-index: -1;
+	border-left: 15px solid transparent;
+	border-right: 15px solid transparent;
+	border-bottom: 15px solid rgb(179, 179, 179);
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+.triang::before {
+	box-shadow: none;
+}
+.triang::after {
+	top: 41px;
+	z-index: 1; /* Накладываем поверх, чтобы скрыть следы тени */
+	border-bottom: 15px solid #fff;
+	border-top: 0 solid transparent;
+	box-shadow: none;
+}
+.second-input {
+	position: absolute;
+	opacity: 0;
+}
+.first-input {
+	position: absolute;
+	opacity: 0;
+}
+.first-input:checked ~ .various-app{
+	opacity: 1;
+	visibility: visible;
+}
+.first-input:checked ~ .triang{
+	opacity: 1;
+	visibility: visible;
+}
+.second-input:checked ~ .app-second {
+	display: flex;
+}
+.second-input:checked ~ .second-navbar-button {
+	display: none;
+}
+.second-input:checked ~ .line {
+	display: block;
+}
+.line {
+	border-top: 1px solid rgb(212, 212, 212);
+	width: 100%;
+	position: relative;
+	top:20px;
+	display: none;
+}
+.text-end {
+	text-decoration: none;
+	font-size: 20px;
+	position: relative;
+	top: 10px;
+	left: 60px;
+	color: gray;
+	margin-bottom: 20px;
+
+}
+.navbar-button {
+	width: 32px;
+	cursor: pointer;
+}
+.menu-list {
+	list-style-type: none;
+	display: flex;
+	align-items: center;	
+}
+.menu-list li {
+	cursor: pointer;
+	margin-left: 20px;
+}
+.focus-div {
+	width: 29px;
+	height: 29px;
+	position: absolute;
+	right: 141px;
+	top: 10px;
+	z-index: -1;
+}
+.first-input:focus ~ .focus-div {
+	outline: 2px solid black;
+}
+.second-input:focus ~ .second-navbar-button{
+	border: 2px solid black;
+}
+.second-navbar-button{
+	display: block;
+	width: 100%-2px;
+	height: 26px;
+	background-color: rgb(212, 212, 212);
+	margin-top: 9px;
+	visibility: visible;
+	opacity: 1;
+	border: 2px solid transparent;
+}
