@@ -22,6 +22,8 @@ export class ApiService {
         else if(retries > 0){
             return this.getUsers(usersCount, --retries);
         }
-        else throw new Error(response);
+        else {
+            throw new Error(response);
+        }
     }
 }

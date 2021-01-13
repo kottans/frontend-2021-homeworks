@@ -73,7 +73,9 @@ export class ImageService {
             this.images.forEach(image => {
                 image.onload = () => {
                     this.imagesLoadedCount++;
-                    if(this.imagesLoadedCount === this.totalImagesCount) resolve(users)
+                    if(this.imagesLoadedCount === this.totalImagesCount){
+                        resolve(users);
+                    }
                 };
 
                 image.onloadError = e => reject(e);
