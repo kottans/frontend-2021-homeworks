@@ -1,9 +1,0 @@
-.filter-subgroup__heading {
-    position: relative;
-    z-index: 1;
-    height: 40px;
-    padding: 7px 0;
-    margin-left: -1px;
-    background-color: var(--gray-color);
-    text-transform: capitalize;
-}

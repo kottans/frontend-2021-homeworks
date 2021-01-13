@@ -1,5 +1,5 @@
 @media screen and (min-width: 800px){
-    body .filter-group-wrapper {
+    body .state-keeper-group-wrapper {
         width: 35vw;
     }
     body .content-wrapper {
@@ -15,7 +15,7 @@
 }
 
 @media screen and (min-width: 1000px){
-    body .filter-group-wrapper {
+    body .state-keeper-group-wrapper {
         width: 30vw;
     }
     body .content-wrapper {
@@ -24,7 +24,7 @@
 }
 
 @media screen and (min-width: 1100px){
-    body .filter-group-wrapper {
+    body .state-keeper-group-wrapper {
         width: 25vw;
     }
     body .content-wrapper {

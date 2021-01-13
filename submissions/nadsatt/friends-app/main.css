@@ -11,15 +11,10 @@
 
 @import './styles/header.css';
 
+@import './styles/state-keeper-subgroup.css';
+
 @import './styles/user-card-list.css';
 @import './styles/user-card-item.css';
-
-@import './styles/filter-group.css';
-@import './styles/filter-list.css';
-@import './styles/filter-item.css';
-
-@import './styles/icon-list.css';
-@import './styles/icon-item.css';
 
 @import './styles/page-link-list.css';
 @import './styles/page-link-item.css';
@@ -49,7 +44,7 @@ body {
     margin-bottom: 15px;
 }
 
-.filter-group-wrapper {
+.state-keeper-group-wrapper {
     width: 100%;
     margin-bottom: 10px;
 }

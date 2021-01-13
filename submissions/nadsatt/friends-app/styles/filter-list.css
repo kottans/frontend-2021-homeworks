@@ -1,9 +1,0 @@
-.filter-list {
-    height: 40px;
-    margin-top: -41px;
-    transition: margin-top .15s linear;
-}
-
-.filter-list--opened {
-    margin-top: 0px;
-}

@@ -13,7 +13,7 @@ export class Header {
         this.soundIcon = this.element.querySelector('.header__sound-icon');
         this.soundText = this.element.querySelector('.header__sound-text');
         this.soundButton = this.element.querySelector('.header__sound-button');
-        this.soundButton.addEventListener('click', e => handleSoundButtonClick.bind(e));
+        this.soundButton.addEventListener('click', e => this.handleSoundButtonClick(e));
         this.sound = new Audio('sounds/audio.mp3');
         this.sound.loop = true;
         this.sound.volume = 0.1;

@@ -5,7 +5,7 @@ import { LoadingPage } from './modules/loading-page.js';
 import { Header } from './modules/header.js';
 import { UserCardList } from './modules/user-card-list.js';
 import { PageLinkList } from './modules/page-link-list.js';
-import { FilterGroup } from './modules/filter-group.js';
+import { StateKeeperGroup } from './modules/state-keeper-group.js';
 
 class Program {
     constructor(){
@@ -35,9 +35,9 @@ class Program {
         document.body.querySelector('.page-link-list-wrapper')
             .append(this.pageLinkList.element);
 
-        this.filterGroup = new FilterGroup(this.userService, this.pageLinkList);
-        document.body.querySelector('.filter-group-wrapper')
-            .append(this.filterGroup.element);
+        this.stateKeeperGroup = new StateKeeperGroup(this.userService, this.pageLinkList);
+        document.body.querySelector('.state-keeper-group-wrapper')
+            .append(this.stateKeeperGroup.element);
     }
 
     getUsers(usersCount = 100){
