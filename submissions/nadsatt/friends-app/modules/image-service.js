@@ -1,14 +1,12 @@
 export class ImageService {
     constructor(){
-        this.totalImagesCount = 0;
-        this.imagesLoadedCount = 0;
-        this.uniqueFemaleImagesCount = 60;
-        this.uniqueMaleImagesCount = 50;
+        this.totalImages = 0;
+        this.imagesLoaded = 0;
+        this.uniqueFemaleImages = 60;
+        this.uniqueMaleImages = 50;
         this.images = [];
-
         this.borderImagePath = 'images/user-card-images/user-card-border.png';
         this.backImagePath = 'images/user-card-images/user-card-back-background.jpg';
-
         this.imageAlts = {
             front: 'user-image',
             border: 'old-gold-border-image',
@@ -21,25 +19,11 @@ export class ImageService {
         };
     }
 
-    get femaleImagePath(){
-        const imageNumber = this.defineImageNumber(this.uniqueFemaleImagesCount);
-        return `images/female-images/female${imageNumber}.jpeg`;
-    }
-
-    get maleImagePath(){
-        const imageNumber = this.defineImageNumber(this.uniqueMaleImagesCount);
-        return `images/male-images/male${imageNumber}.jpeg`;
-    }
-
-    defineImageNumber(max, min = 1){
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
-
     loadImages(users){
         return new Promise((resolve, reject) => {
             users = users.map(user => {
                 user.frontImage = this.createImage(
-                    this[`${user.gender}ImagePath`],
+                    this.getFrontImagePath(user.gender),
                     this.imageAlts.front,
                     this.imageClasses.front
                 );
@@ -72,15 +56,30 @@ export class ImageService {
 
             this.images.forEach(image => {
                 image.onload = () => {
-                    this.imagesLoadedCount++;
-                    if(this.imagesLoadedCount === this.totalImagesCount){
+                    this.imagesLoaded++;
+                    if(this.imagesLoaded === this.totalImages){
                         resolve(users);
                     }
                 };
 
-                image.onloadError = e => reject(e);
+                image.onloadError = reject;
             });
         });
+    }
+
+    getFrontImagePath(gender){
+        if(gender === 'female'){
+            const imageNumber = this.defineImageNumber(this.uniqueFemaleImages);
+            return `images/female-images/female${imageNumber}.jpeg`;
+        }
+        else {
+            const imageNumber = this.defineImageNumber(this.uniqueMaleImages);
+            return `images/male-images/male${imageNumber}.jpeg`;
+        }
+    }
+
+    defineImageNumber(max, min = 1){
+        return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
     createImage(imagePath, alt, className){
@@ -89,7 +88,7 @@ export class ImageService {
         image.setAttribute('alt', alt);
         image.classList.add(className);
 
-        this.totalImagesCount++;
+        this.totalImages++;
         return image;
     }
 }
