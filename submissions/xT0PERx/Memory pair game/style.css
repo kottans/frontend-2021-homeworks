@@ -8,7 +8,7 @@
 
 .card {
   position: relative;
-  background: url('../images/cardClosed.png') no-repeat;
+  background: url("../images/cardClosed.png") no-repeat;
   margin: 5px;
   border-radius: 10px;
   height: 225px;
@@ -16,10 +16,10 @@
   transform: rotateY(180deg);
 }
 
-.card:active {
+/* .card:active {
   transform: scale(0.95);
   transition: transform 150ms;
-}
+} */
 
 .card__clicked {
   margin: 5px;

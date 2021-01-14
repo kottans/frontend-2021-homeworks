@@ -31,7 +31,18 @@ const putImgsInCards = function () {
 
 const overturnsCard = function () {
   gameBoard.addEventListener('click', function ({ target }) {
+    let check = [];
     if (target.nodeName !== 'DIV') {
+      return;
+    }
+
+    for (let x = 0; x < gameBoard.childElementCount; x++) {
+      if (gameBoard.children[x].className === 'card__clicked') {
+        check.push(gameBoard.children[x].className);
+      }
+    }
+
+    if (check.length === 2) {
       return;
     }
 
@@ -48,9 +59,9 @@ const overturnsCard = function () {
   });
 };
 
-const fragmentForCompaires = document.createDocumentFragment();
+const comparison = document.createDocumentFragment();
 const compareImgs = function () {
-  fragmentForCompaires.appendChild(gameBoard);
+  comparison.appendChild(gameBoard);
 
   const cardsImg = gameBoard.children;
   const checkImg = [];
@@ -62,15 +73,6 @@ const compareImgs = function () {
     if (cardsImg[x].classList.contains('card__clicked')) {
       if (cardsImg[x].childElementCount !== 0) {
         checkImg.push(cardsImg[x]);
-      }
-    }
-  }
-  //clicked no more than two cadrs
-  if (checkImg.length > 2) {
-    for (let x = 0; x < cardsImg.length; x++) {
-      if (cardsImg[x].classList.contains('card__clicked')) {
-        cardsImg[x].classList.remove('card__clicked');
-        cardsImg[x].classList.add('card');
       }
     }
   }
@@ -96,7 +98,7 @@ const compareImgs = function () {
       }, 400);
     }
   }
-  document.body.appendChild(gameBoard);
+  document.querySelector('main').appendChild(gameBoard);
 };
 
 function CountingMatchingPairsOfCards() {
