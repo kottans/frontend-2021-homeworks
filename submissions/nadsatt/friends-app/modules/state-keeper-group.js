@@ -13,39 +13,31 @@ export class StateKeeperGroup {
         this.element = document.createElement('div');
         this.element.classList.add('state-keeper-group');
         this.element.addEventListener('click',
-            e => this.handleStateKeeperStateSelection(e)
-        );
+            e => this.handleStateKeeperStateSelection(e));
         this.element.addEventListener('input',
-            e => this.handleStateKeeperStateSelection(e)
-        );
+            e => this.handleStateKeeperStateSelection(e));
 
         this.sortStateKeepers = sortStateKeeperClasses.map(
-            StateKeeperClass => new StateKeeperClass(userService)
-        );
+            StateKeeperClass => new StateKeeperClass(userService));
         this.searchStateKeepers = searchStateKeeperClasses.map(
-            StateKeeperClass => new StateKeeperClass(userService)
-        );
+            StateKeeperClass => new StateKeeperClass(userService));
         this.stateKeepers = this.sortStateKeepers
             .concat(this.searchStateKeepers);
 
         this.sortStateKeeperSubGroup = new StateKeeperSubGroup(
-            this.sortStateKeepers
-        );
+            this.sortStateKeepers);
         this.searchStateKeeperSubGroup = new StateKeeperSubGroup(
-            this.searchStateKeepers
-        );
+            this.searchStateKeepers);
         this.element.append(
             this.sortStateKeeperSubGroup.element,
-            this.searchStateKeeperSubGroup.element
-        );
+            this.searchStateKeeperSubGroup.element);
     }
 
     handleStateKeeperStateSelection({target}){
         if(target.classList.contains('option-group__option')){
             const options = target.closest('.option-group');
             const stateKeeper = this.stateKeepers.find(
-                stateKeeper => stateKeeper.options === options
-            );
+                stateKeeper => stateKeeper.options === options);
 
             if(this.isSortStateKeeper(stateKeeper)){
                 this.resetSortStateKeepersStates();
@@ -63,12 +55,12 @@ export class StateKeeperGroup {
     }
 
     resetSortStateKeepersStates(){
-        this.sortStateKeepers.forEach(stateKeeper =>
-            stateKeeper.resetState());
+        this.sortStateKeepers.forEach(
+            stateKeeper => stateKeeper.resetState());
     }
 
     applyStateKeepersStates(){
-        this.stateKeepers.forEach(stateKeeper =>
-            stateKeeper.applyState());
+        this.stateKeepers.forEach(
+            stateKeeper => stateKeeper.applyState());
     }
 }

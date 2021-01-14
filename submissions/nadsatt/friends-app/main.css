@@ -7,14 +7,10 @@
 @import './styles/responsive.css';
 
 @import './styles/loading-page.css';
-@import './styles/loading-roller.css';
-
 @import './styles/header.css';
-@import './styles/state-keeper-subgroup.css';
+@import './styles/state-keepers.css';
 @import './styles/pagination.css';
-
-@import './styles/user-card-list.css';
-@import './styles/user-card-item.css';
+@import './styles/user-cards.css';
 
 :root {
     --gray-color: rgb(20,21,23);

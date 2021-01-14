@@ -11,22 +11,19 @@ export class StateKeeperSubGroup{
         });
 
         stateKeeperList.append(...stateKeeperItems);
-        stateKeeperList.classList.add(
-            `state-keeper-list`, `${category}-state-keeper-list`
-        );
+        stateKeeperList.classList.add(`state-keeper-list`,
+            `${category}-state-keeper-list`);
         stateKeeperList.addEventListener('click',
-            e => this.handleStateKeeperOpening(e)
-        );
+            e => this.handleStateKeeperOpening(e));
+
+        this.optionsWrapper = document.createElement('div');
+        this.optionsWrapper.classList.add(`options-wrapper`,
+            `${category}-options-wrapper`);
 
         this.element = document.createElement('div');
         this.element.classList.add('state-keeper-subgroup');
-        this.element.insertAdjacentHTML(
-            'afterbegin', `<h3 class="subgroup-heading">${category}</h3>`
-        );
-        this.optionsWrapper = document.createElement('div');
-        this.optionsWrapper.classList.add(
-            `options-wrapper`, `${category}-options-wrapper`
-        );
+        this.element.insertAdjacentHTML('afterbegin',
+            `<h3 class="subgroup-heading">${category}</h3>`);
         this.element.append(stateKeeperList, this.optionsWrapper);
 
         this.stateKeepers = stateKeepers;
@@ -38,8 +35,8 @@ export class StateKeeperSubGroup{
 
     handleStateKeeperOpening({target}){
         if(target.classList.contains(`${this.category}-state-keeper`)){
-            const stateKeeper = this.stateKeepers.find(stateKeeper =>
-                stateKeeper.element === target);
+            const stateKeeper = this.stateKeepers.find(
+                stateKeeper => stateKeeper.element === target);
 
             if(!this.openedStateKeeper){
                 stateKeeper.styleAsOpened();
@@ -51,8 +48,7 @@ export class StateKeeperSubGroup{
             }
             else {
                 this.stateKeepers.forEach(
-                    stateKeeper => stateKeeper.styleAsClosed()
-                );
+                    stateKeeper => stateKeeper.styleAsClosed());
                 stateKeeper.styleAsOpened();
                 this.changeOptions(stateKeeper);
             }
@@ -60,25 +56,30 @@ export class StateKeeperSubGroup{
     }
 
     openOptions(stateKeeper){
-        this.optionsWrapper.classList.add(this.openedOptionsWrapperClass);
+        this.optionsWrapper.classList.add(
+            this.openedOptionsWrapperClass);
+
         this.optionsWrapper.append(stateKeeper.options);
+
         this.openedStateKeeper = stateKeeper;
     }
 
     closeOptions(){
-        this.optionsWrapper.classList.remove(this.openedOptionsWrapperClass);
+        this.optionsWrapper.classList.remove(
+            this.openedOptionsWrapperClass);
+
         setTimeout(
             () => this.optionsWrapper.textContent = '',
-            this.optionsWrapperClosingTime
-        );
+            this.optionsWrapperClosingTime);
+
         this.openedStateKeeper = null;
     }
 
     changeOptions(stateKeeper){
         this.optionsWrapper.replaceChild(
             stateKeeper.options,
-            this.openedStateKeeper.options
-        );
+            this.openedStateKeeper.options);
+
         this.openedStateKeeper = stateKeeper;
     }
 }

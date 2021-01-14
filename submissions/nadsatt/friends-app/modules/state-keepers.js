@@ -3,9 +3,8 @@ import svgs from './svgs.js';
 export class StateKeeper {
     constructor({optionsHTML, propertyToApplyStateBy, category, userService}){
         this.element = document.createElement('div');
-        this.element.classList.add(
-            'state-keeper', `${category}-state-keeper`
-        );
+        this.element.classList.add('state-keeper',
+            `${category}-state-keeper`);
         this.element.innerHTML =
             `${svgs[propertyToApplyStateBy]}
              <span class="state-keeper__name">
@@ -25,8 +24,7 @@ export class StateKeeper {
         this.userService = userService;
         this.defaultState = 'none';
         this.defaultOption = this.options.querySelector(
-            `[data-state="${this.defaultState}"]`
-        );
+            `[data-state="${this.defaultState}"]`);
         this.state = this.defaultState;
         this.selectedOption = this.defaultOption;
         this.classNames = {
@@ -97,10 +95,12 @@ class SearchStateKeeper extends StateKeeper {
 
     applySearch(value){
         let users = this.userService.users;
+
         users = users.filter(
             user => user[this.propertyToApplyStateBy].toLowerCase()
-            .includes(value.toLowerCase())
+                .includes(value.toLowerCase())
         );
+
         this.userService.users = users;
     }
 }
@@ -111,8 +111,8 @@ export class FilterStateKeeper extends StateKeeper {
             .map(state =>
                 `<span class="option-group__option" data-state="${state}">
                     ${svgs[`${state}`]}
-                 </span>`
-            ).join('');
+                 </span>`)
+            .join('');
         super({optionsHTML, ...args});
     }
 
@@ -124,9 +124,11 @@ export class FilterStateKeeper extends StateKeeper {
 
     applyFilter(value){
         let users = this.userService.users;
+
         users = this.userService.users.filter(
             user => user[this.propertyToApplyStateBy] === value
         );
+
         this.userService.users = users;
     }
 }
