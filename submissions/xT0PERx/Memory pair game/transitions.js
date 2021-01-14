@@ -17,39 +17,20 @@ function getingSortList() {
 let winCount = 0;
 
 //this func must added imgs in all my cards
-const allCardsOnTheDesk = document.querySelector('main');
+const gameBoard = document.getElementById('cards_block');
 const putImgsInCards = function () {
-  const fragment = document
-    .createDocumentFragment()
-    .appendChild(allCardsOnTheDesk);
+  const fragment = document.createDocumentFragment().appendChild(gameBoard);
 
   for (let i = 0; i < cardDeck.length; i++) {
     const img = document.createElement('img');
     img.src = cardDeck[i];
     fragment.children[i].appendChild(img);
   }
-  document.body.appendChild(fragment);
+  document.querySelector('main').appendChild(fragment);
 };
 
-// const overturnsCard = ({ target }) => {
-//   if (target.nodeName !== 'DIV') {
-//     return;
-//   }
-
-//   if (target.classList.contains('card__clicked') === true) {
-//     target.classList.remove('card__clicked');
-//     target.classList.add('card');
-//   } else if (target.classList.contains('card') === true) {
-//     target.classList.remove('card');
-//     target.classList.add('card__clicked');
-//   }
-//   compareImgs();
-// };
-
-// allCardsOnTheDesk.addEventListener('click', overturnsCard());
-
 const overturnsCard = function () {
-  allCardsOnTheDesk.addEventListener('click', function ({ target }) {
+  gameBoard.addEventListener('click', function ({ target }) {
     if (target.nodeName !== 'DIV') {
       return;
     }
@@ -69,9 +50,9 @@ const overturnsCard = function () {
 
 const fragmentForCompaires = document.createDocumentFragment();
 const compareImgs = function () {
-  fragmentForCompaires.appendChild(allCardsOnTheDesk);
+  fragmentForCompaires.appendChild(gameBoard);
 
-  const cardsImg = allCardsOnTheDesk.children;
+  const cardsImg = gameBoard.children;
   const checkImg = [];
 
   for (let x = 0; x < cardsImg.length; x++) {
@@ -115,7 +96,7 @@ const compareImgs = function () {
       }, 400);
     }
   }
-  document.body.appendChild(allCardsOnTheDesk);
+  document.body.appendChild(gameBoard);
 };
 
 function CountingMatchingPairsOfCards() {
