@@ -46,7 +46,7 @@ function addListenerToForm() {
         let copyUsers = [...users];
 
         for (let key in sortAndFiltersState) {
-            if (sortAndFiltersState[key] === null) continue;
+            if (sortAndFiltersState[key] === null || sortAndFiltersState[key] === "") continue;
 
             if (key === 'sort') {
                 copyUsers.sort(sortAndFiltersFunctions(sortAndFiltersState[key]));
