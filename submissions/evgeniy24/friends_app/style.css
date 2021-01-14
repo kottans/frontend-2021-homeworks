@@ -8,6 +8,7 @@
   background: white;
   overflow: hidden;
   z-index: 5;
+  padding: 1%;
 }
 
 .menu-btn-container {
@@ -73,12 +74,11 @@
 }
 
 .filter-sort-menu {
-  width: inherit;
+  width: 22%;
   position: fixed;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  padding: 2px;
 }
 
 .search-form {
@@ -180,8 +180,8 @@
 }
 
 .friendsList-wrap {
-  width: 74%;
-  margin-left: 3%;
+  width: 75%;
+  margin-left: 2%;
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;

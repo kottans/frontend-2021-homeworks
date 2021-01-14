@@ -188,28 +188,25 @@ function renderErrorMessage() {
 mobileMenuBtn.addEventListener('click', function() {
     clickMenuBtn(mobileMenuBtn);
     clickMenuBtn(filterSortMobileMenu);
+    scrollDepth = window.pageYOffset;
+    scrollToTop();
 });
 
 function clickMenuBtn(elem) {
     elem.classList.toggle('change');
 }
 
-/* //change header color whhile scrolling page
-let isScrolling = false;
-window.addEventListener("scroll", throttleScroll, false);
+let scrollDepth;
 
-function throttleScroll(e) {
-    if (isScrolling == false ) {
-        window.requestAnimationFrame(function() {
-            while (pageYOffset < document.documentElement.clientHeight) {
-                headerStickyBG(e);
-            }
-          isScrolling = false;
-        });
+function scrollToTop() {   
+    let timer = 0; 
+    if (scrollDepth > 100) {
+        window.scrollTo(pageXOffset, scrollDepth);
+        scrollDepth = scrollDepth - 60;
+        timer = setTimeout(scrollToTop, 15);
+    } else {
+        clearTimeout(timer);
+        window.scrollTo(0,0);
     }
-    isScrolling = true;
-}
-
-function headerStickyBG() {
-    headerMobile.classList.add('header-scroll');
-} */
+   
+} 
