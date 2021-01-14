@@ -1,8 +1,0 @@
-.page-link-list {
-    height: 40px;
-    padding: 7px 0;
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-evenly;
-    align-items: stretch;
-}

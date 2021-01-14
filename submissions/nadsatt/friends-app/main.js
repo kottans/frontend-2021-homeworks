@@ -3,7 +3,7 @@ import { UserService } from './modules/user-service.js';
 import { LoadingPage } from './modules/loading-page.js';
 import { Header } from './modules/header.js';
 import { UserCardList } from './modules/user-card-list.js';
-import { PageLinkList } from './modules/page-link-list.js';
+import { Pagination } from './modules/pagination.js';
 import { StateKeeperGroup } from './modules/state-keeper-group.js';
 
 class Program {
@@ -22,13 +22,12 @@ class Program {
         document.body.querySelector('.user-card-list-wrapper')
             .append(this.userCardList.element);
 
-        this.pageLinkList = new PageLinkList(
-            this.userService, this.userCardList);
-        document.body.querySelector('.page-link-list-wrapper')
-            .append(this.pageLinkList.element);
+        this.pagination = new Pagination(this.userService, this.userCardList);
+        document.body.querySelector('.pagination-wrapper')
+            .append(this.pagination.element);
 
         this.stateKeeperGroup = new StateKeeperGroup(
-            this.userService, this.pageLinkList);
+            this.userService, this.paginationList);
         document.body.querySelector('.state-keeper-group-wrapper')
             .append(this.stateKeeperGroup.element);
     }
@@ -36,7 +35,7 @@ class Program {
     getUsers(usersCount = 100){
         this.userService.getUsers(usersCount)
             .then(() => {
-                this.pageLinkList.performPagination();
+                this.pagination.performPagination();
                 this.loadingPage.remove();
             })
             .catch((e) => {

@@ -10,14 +10,11 @@
 @import './styles/loading-roller.css';
 
 @import './styles/header.css';
-
 @import './styles/state-keeper-subgroup.css';
+@import './styles/pagination.css';
 
 @import './styles/user-card-list.css';
 @import './styles/user-card-item.css';
-
-@import './styles/page-link-list.css';
-@import './styles/page-link-item.css';
 
 :root {
     --gray-color: rgb(20,21,23);
@@ -55,7 +52,7 @@ body {
     flex-flow: column nowrap;
 }
 
-.page-link-list-wrapper {
+.pagination-wrapper {
     margin-bottom: 10px;
     order: -1;
 }

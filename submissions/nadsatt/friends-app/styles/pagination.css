@@ -1,17 +1,26 @@
-.page-link-item {
+.pagination-list {
+    height: 40px;
+    padding: 7px 0;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-evenly;
+    align-items: stretch;
+}
+
+.pagination-item {
     width: 7%;
 }
 
-.corner-page-link-item {
+.corner-pagination-item {
     width: 14.5%;
 }
 
-.page-link-item,
-.corner-page-link-item {
+.pagination-item,
+.corner-pagination-item {
     cursor: pointer;
 }
 
-.page-link {
+.pagination-link {
     width: 100%;
     display: flex;
     justify-content: center;
@@ -25,19 +34,19 @@
     text-decoration: none;
 }
 
-.page-link-item:hover .page-link,
-.corner-page-link-item:not(.corner-page-link-item--disabled):hover .page-link {
+.pagination-item:hover .pagination-link,
+.corner-pagination-item:not(.corner-pagination-item--disabled):hover .pagination-link {
     color: var(--gold-color);
     border-color: var(--gold-color);
 }
 
-.page-link-item--selected .page-link {
+.pagination-item--selected .pagination-link {
     background-color: var(--green-color);
     color: var(--gold-color);
     border-color: var(--gold-color);
 }
 
-.corner-page-link-item--disabled .page-link {
+.corner-pagination-item--disabled .pagination-link {
     border-color: rgb(156, 156, 156);
     color: rgb(156, 156, 156);
     pointer-events: none;

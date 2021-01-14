@@ -1,9 +1,6 @@
 export class UserService {
     constructor(apiService){
         this.apiService = apiService;
-        this.originalUsers;
-        this.users;
-        this.currentPageUsers;
     }
 
     get users(){
@@ -11,6 +8,13 @@ export class UserService {
     }
     set users(value){
         this._users = value;
+    }
+
+    get currentPageUsers(){
+        return this._currentPageUsers;
+    }
+    set currentPageUsers(value){
+        this._currentPageUsers = value;
     }
 
     async getUsers(usersCount){
