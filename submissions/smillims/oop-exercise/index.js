@@ -9,18 +9,8 @@ class Inhabitats {
 		this.legs = '4';
 		this.hands = '0';
 	}
-	toString(){
-		const properties = ['species', 'name', 'surname', 'gender', 'legs', 'hands', 'saying'];
-		const arrowProperties = properties.map(key => this[key]).join(', ');
-		return arrowProperties;
-	};
 	saying(){
-		let string = `Hi, I\'m ` + this.species + `. My name is ` + this.name + `. My surname is ` + this.surname + `. I\'m ` + this.gender + `. I have ` + this.legs + ` legs and ` + this.hands + ` hands.`;
-
-		const arrowString = string.split();
-		const checkString = arrowString.map(item => item).filter(value => value).join('; ');
-
-		return checkString;
+		return `Hi, I\'m ` + this.species + `. My name is ` + this.name + `. My surname is ` + this.surname + `. I\'m ` + this.gender + `. I have ` + this.legs + ` legs and ` + this.hands + ` hands.`;
 	};
 };
 
