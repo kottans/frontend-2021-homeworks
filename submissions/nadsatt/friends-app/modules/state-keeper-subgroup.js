@@ -29,7 +29,7 @@ export class StateKeeperSubGroup{
         this.stateKeepers = stateKeepers;
         this.category = category;
         this.openedStateKeeper = null;
-        this.optionsWrapperClosingTime = 300;
+        this.optionsWrapperClosingTime = 100;
         this.openedOptionsWrapperClass = 'options-wrapper--opened';
     }
 
