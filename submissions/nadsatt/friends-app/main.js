@@ -18,7 +18,7 @@ class Program {
         document.body.querySelector('.header-wrapper')
             .append(this.header.element);
 
-        this.userCardList = new UserCardList(this.userService);
+        this.userCardList = new UserCardList();
         document.body.querySelector('.user-card-list-wrapper')
             .append(this.userCardList.element);
 
@@ -27,13 +27,13 @@ class Program {
             .append(this.pagination.element);
 
         this.stateKeeperGroup = new StateKeeperGroup(
-            this.userService, this.paginationList);
+            this.userService, this.pagination);
         document.body.querySelector('.state-keeper-group-wrapper')
             .append(this.stateKeeperGroup.element);
     }
 
     getUsers(usersCount = 100){
-        this.userService.getUsers(usersCount)
+        this.userService.fetchUsers(usersCount)
             .then(() => {
                 this.pagination.performPagination();
                 this.loadingPage.remove();

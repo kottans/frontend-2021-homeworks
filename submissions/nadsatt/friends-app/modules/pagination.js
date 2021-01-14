@@ -93,9 +93,10 @@ export class Pagination {
         this.getUsersCount();
         this.definePagesCount();
         this.validateCurrentPage(currentPage);
-        this.defineCurrentPageUsers();
+        
         this.updateCurrentPageUsers();
-        this.userCardList.updateUserCards();
+        this.updateUserCards();
+
         this.defineFirstAndLastMiddlePaginationItem();
         this.defineMiddlePages();
         this.defineMiddlePaginationItems();
@@ -123,17 +124,21 @@ export class Pagination {
         }
     }
 
-    defineCurrentPageUsers(){
+    updateCurrentPageUsers(){
         let firstUserIndex = (this.currentPage - 1) * this.usersPerPage;
-        let lastUserIndex = Math.min(firstUserIndex +
-            this.usersPerPage - 1, this.usersCount - 1);
+        let lastUserIndex = Math.min(
+            firstUserIndex + this.usersPerPage - 1,
+            this.usersCount - 1
+        );
 
-        this.currentPageUsers = this.userService.users.slice(
-            firstUserIndex, ++lastUserIndex);
+        this.currentPageUsers = this.userService.users
+            .slice(firstUserIndex, ++lastUserIndex);
+
+        this.userService.currentPageUsers = this.currentPageUsers;
     }
 
-    updateCurrentPageUsers(){
-        this.userService.currentPageUsers = this.currentPageUsers;
+    updateUserCards(){
+        this.userCardList.updateUserCards(this.currentPageUsers);
     }
 
     defineFirstAndLastMiddlePaginationItem(){
