@@ -36,7 +36,7 @@ const CARDS_CONTAINER = document.getElementById("cards_container");
 const TURN_DELAY = 900;
 const openedNow = []; //will contain array of two cards(Dom objects), implemented to avoid bugs on checking
 let startTime = Date.now();
-
+let solvedCardsCount = 0;
 const shuffleArray = (array) => array.sort(() => 0.5 - Math.random());
 
 const getCardHTML = (cardObject) => {
@@ -66,6 +66,7 @@ const checkPair = (twoCardsArray) => {
 				card.classList.add("solved");
 			}, TURN_DELAY);
 		});
+		solvedCardsCount += 2;
 	}
 	twoCardsArray.forEach((card) => {
 		setTimeout(() => {
@@ -75,7 +76,7 @@ const checkPair = (twoCardsArray) => {
 };
 
 const checkIfWin = () => {
-    if (CARDS_CONTAINER.getElementsByClassName("solved").length == CARDS_CONTAINER.childNodes.length) {
+    if (solvedCardsCount === 16) {
         alert("You win!!!\nYour time is " + Math.floor((Date.now() - startTime) / 1000) + " seconds");
         setTimeout(startGame, TURN_DELAY);
     }
@@ -84,6 +85,7 @@ const checkIfWin = () => {
 const startGame = () => {
 	CARDS_CONTAINER.innerHTML = "";
 	CARDS_CONTAINER.append(getAllCardsHTML());
+	solvedCardsCount = 0;
 	startTime = Date.now();
 };
 
