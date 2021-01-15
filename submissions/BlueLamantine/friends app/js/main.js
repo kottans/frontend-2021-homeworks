@@ -1,14 +1,10 @@
 class Render {
   constructor() {
-    if (Render.instance == null) {
-      this.profilesContainer = document.querySelector('.profile-cards');
-      this.filtersContainer = document.querySelector('#filters');
-      document.querySelector('#menu').addEventListener('click', () => {
-        document.querySelector('#filters').classList.toggle('active');
-      });
-      Render.instance = this;
-    }
-    return Render.instance;
+    this.profilesContainer = document.querySelector('.profile-cards');
+    this.filtersContainer = document.querySelector('#filters');
+    document.querySelector('#menu').addEventListener('click', () => {
+      document.querySelector('#filters').classList.toggle('active');
+    });
   }
 
   getHtmlProfile(profileData, profileIndex) {
@@ -100,9 +96,9 @@ class Render {
     `;
   }
 
-  renderProfiles() {
+  renderProfiles(profiles) {
     this.profilesContainer.innerHTML = '';
-    this.usersDataForRender.forEach((profile, index) => {
+    profiles.forEach((profile, index) => {
       this.profilesContainer.insertAdjacentHTML(
         'beforeend',
         this.getHtmlProfile(profile, index)
@@ -179,13 +175,13 @@ class Filter {
       byName: 'sort-name',
     };
     this.sortByNameTypes = {
-      inAscending: 'nameAZ',
-      inDescending: 'nameZA',
+      ascending: 'nameAZ',
+      descending: 'nameZA',
       byDefault: 'nameAll',
     };
     this.sortByAgeTypes = {
-      inAscending: 'age09',
-      inDescending: 'age90',
+      ascending: 'age09',
+      descending: 'age90',
       byDefault: 'ageAll',
     };
     this.sortByGenderTypes = {
@@ -194,7 +190,7 @@ class Filter {
     };
   }
 
-  uncheckRadioButton(node) {
+  uncheckSelectedFilter(node) {
     const checkedRadio = document.querySelector(
       `input[type=radio][name=${node.buttonName}]:checked `
     );
@@ -207,12 +203,12 @@ class Filter {
     const methodName = selectedRadioButton.name;
     const sortMethod = {
       [this.sortMethods.byGender]: () => {
-        this.uncheckRadioButton({buttonName : this.sortMethods.byName});
-        this.uncheckRadioButton({buttonName : this.sortMethods.byAge});
+        this.uncheckSelectedFilter({ buttonName: this.sortMethods.byName });
+        this.uncheckSelectedFilter({ buttonName: this.sortMethods.byAge });
         this.sortByGender(selectedRadioButton.id);
       },
       [this.sortMethods.byName]: () => {
-        this.uncheckRadioButton({buttonName : this.sortMethods.byAge});
+        this.uncheckSelectedFilter({ buttonName: this.sortMethods.byAge });
         this.sortByContent(
           selectedRadioButton.id,
           this.sortByNameTypes,
@@ -220,7 +216,7 @@ class Filter {
         );
       },
       [this.sortMethods.byAge]: () => {
-        this.uncheckRadioButton({buttonName : this.sortMethods.byName});
+        this.uncheckSelectedFilter({ buttonName: this.sortMethods.byName });
         this.sortByContent(
           selectedRadioButton.id,
           this.sortByAgeTypes,
@@ -231,23 +227,20 @@ class Filter {
     return sortMethod[methodName]();
   }
 
-  startFilter() {
-    this.usersByDefault = [...this.usersDataForFilter];
+  addListenersForFilters() {
+    this.usersByDefault = [...Users.usersData];
 
     this.searchInput.addEventListener('input', ({ target }) => {
       let userInput = target.value.toUpperCase();
-
-      const usersByEmail = this.usersDataForFilter.filter(user =>
+      const usersByEmail = Users.usersData.filter(user =>
         user.email.toUpperCase().startsWith(userInput)
       );
-      this.renderDataWithFilters.usersDataForRender = usersByEmail;
-      this.renderDataWithFilters.renderProfiles();
+      this.renderDataWithFilters.renderProfiles(usersByEmail);
     });
 
     this.filtersPanel.addEventListener('change', ({ target }) => {
       this.selectSortMethod(target);
-      this.renderDataWithFilters.usersDataForRender = this.usersDataForFilter;
-      this.renderDataWithFilters.renderProfiles();
+      this.renderDataWithFilters.renderProfiles(this.usersDataForFilter);
     });
   }
 
@@ -274,36 +267,44 @@ class Filter {
     return selectGender[gender]();
   }
 
+  sortNamesInAscending() {
+    return this.usersDataForFilter.sort((a, b) =>
+      a.name.first.localeCompare(b.name.first)
+    );
+  }
+  sortAgesInAscending() {
+    return this.usersDataForFilter.sort((a, b) =>
+      a.dob.age.toString().localeCompare(b.dob.age.toString())
+    );
+  }
+
   sortByContent(sortType, sortTypes, sortBy) {
     if (this.sortedUsers.length !== 0) {
       this.usersDataForFilter = [...this.sortedUsers];
     } else {
       this.sortedUsers = [...this.usersByDefault];
+      this.usersDataForFilter = [...this.usersByDefault];
     }
 
     const typesOfSort = {
       [sortTypes.byDefault]: () => {
         this.usersDataForFilter = [...this.sortedUsers];
       },
-      [sortTypes.inAscending]: () => {
-        if (sortBy == this.sortIndicators.name)
-          this.usersDataForFilter.sort((a, b) =>
-            a.name.first.localeCompare(b.name.first)
-          );
-        if (sortBy == this.sortIndicators.age)
-          this.usersDataForFilter.sort((a, b) =>
-            a.dob.age.toString().localeCompare(b.dob.age.toString())
-          );
+      [sortTypes.ascending]: () => {
+        if (sortBy == this.sortIndicators.name) {
+          this.sortNamesInAscending();
+        }
+        if (sortBy == this.sortIndicators.age) {
+          this.sortAgesInAscending();
+        }
       },
-      [sortTypes.inDescending]: () => {
-        if (sortBy == this.sortIndicators.name)
-          this.usersDataForFilter.sort((a, b) =>
-            b.name.first.localeCompare(a.name.first)
-          );
-        if (sortBy == this.sortIndicators.age)
-          this.usersDataForFilter.sort((a, b) =>
-            b.dob.age.toString().localeCompare(a.dob.age.toString())
-          );
+      [sortTypes.descending]: () => {
+        if (sortBy == this.sortIndicators.name) {
+          this.sortNamesInAscending().reverse();
+        }
+        if (sortBy == this.sortIndicators.age) {
+          this.sortAgesInAscending().reverse();
+        }
       },
     };
     return typesOfSort[sortType]();
@@ -318,17 +319,22 @@ class Users {
     this.errorMessage = `Uh oh, something has gone wrong. Please tweet us @randomapi about the issue. Thank you.`;
   }
 
+  set usersData(profilesData) {
+    this.usersProfiles = profilesData;
+  }
+
+  get usersData() {
+    return this.usersProfiles;
+  }
+
   async getUsersData() {
     try {
       const response = await fetch(this.apiURL + `?results=100&seed=abc`);
       if (!response.ok) throw new Error(errorMessage);
-      const usersData = await response.json();
-
-      this.renderData.usersDataForRender = this.filterData.usersDataForFilter =
-        usersData.results;
-
-      this.renderData.renderProfiles();
-      this.filterData.startFilter();
+      const users = await response.json();
+      Users.usersData = users.results;
+      this.renderData.renderProfiles(users.results);
+      this.filterData.addListenersForFilters();
     } catch (err) {
       console.error(err);
     }
@@ -336,12 +342,12 @@ class Users {
 }
 
 function animation() {
-  const animationDuration = 7000;
+  const animationDurationOfIntro = 7000;
   setTimeout(() => {
     document.querySelector('#preload').remove();
     document.querySelector('body').style.setProperty('--scroll', 'auto');
     document.querySelector('.wrapper').classList.remove('hidden');
-  }, animationDuration);
+  }, animationDurationOfIntro);
 }
 
 const renderer = new Render();
