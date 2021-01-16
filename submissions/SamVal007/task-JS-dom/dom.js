@@ -1,5 +1,3 @@
-const nav = document.querySelector('nav');
-
 const PLAYERS = [{
     name: "Ronnie O'Sullivan",
     born: "5 December 1975 (age 45) Wordsley, West Midlands, England",
@@ -99,6 +97,7 @@ const playerBorn = document.querySelector('.born');
 const playerCurrentRanking = document.querySelector('.current-ranking');
 const playerCareerWinnings = document.querySelector('.career-winnings');
 const playerDescription = document.querySelector('.description');
+const menuContainer = document.querySelector('nav');
 
 
 let currentPlayerIndex = 0;
@@ -110,7 +109,6 @@ const toggleActiveLink = (newActiveEl) => {
 
 const generatePlayerDescription = (id) => {
   const fragment = document.createDocumentFragment();
-  const div = document.createElement('div');
 
   PLAYERS[id].description.forEach(item => {
     const p = document.createElement('p');
@@ -118,10 +116,8 @@ const generatePlayerDescription = (id) => {
     fragment.appendChild(p);
   });
 
-
-  div.appendChild(fragment);
-  return div.innerHTML;
-}
+  return fragment;
+};
 
 const displayContent = (activeElem) => {
   const data = PLAYERS[activeElem.id];
@@ -130,12 +126,10 @@ const displayContent = (activeElem) => {
   playerBorn.textContent = data.born;
   playerCurrentRanking.textContent = data.currentRanking;
   playerCareerWinnings.textContent = data.careerWinnings;
-}
+};
 
+const displayMain = ({target}) => {
 
-const displayMain = ({
-  target
-}) => {
   if (target.id === currentPlayerIndex) return;
   currentPlayerIndex = target.id;
 
@@ -143,9 +137,11 @@ const displayMain = ({
 
   toggleActiveLink(target);
 
-  playerDescription.innerHTML = generatePlayerDescription(target.id);
+  playerDescription.innerHTML = '';
+  playerDescription.appendChild(generatePlayerDescription(target.id));
 
   document.querySelector('#menuGamburger').checked = false;
-}
 
-nav.addEventListener("click", displayMain);
+};
+
+menuContainer.addEventListener("click", displayMain);
