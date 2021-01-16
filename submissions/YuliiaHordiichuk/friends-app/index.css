@@ -90,7 +90,10 @@ body {
     }
 
 .form__input:not(.form__input_search) {
-    display: none; 
+    width: 0; 
+    height: 0; 
+    overflow: hidden;
+    margin: 0;  
 }
 
 .form {
@@ -150,9 +153,18 @@ body {
     cursor: pointer;
 }
 
-.form__input:checked + .form__label .fas {
+.form__input:checked + .fas {
     color: #fadb51;
 }
+
+.form__label {
+    border: 1px solid transparent; 
+    padding: 5px 5px 2px 2px; 
+}
+
+.form__label:focus-within {
+    border: 1px solid #333232; 
+} 
 
 .form__button {
     margin-top: 10px; 
@@ -173,12 +185,10 @@ body {
     }
 
 
-.form__button:hover {
-    border: 2px solid #333232; 
-}
-
-.form__button:focus {
-    outline: none;
+.form__button:hover, .form__button:focus {
+    border: 2px solid #333232;
+    border-radius: 10px;
+    outline: none;  
 }
 
 .cards {

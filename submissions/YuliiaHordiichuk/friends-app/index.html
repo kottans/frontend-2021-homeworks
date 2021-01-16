@@ -18,7 +18,7 @@
                 <div class="form__fieldset">
                     <legend class="form__title">Search by name</legend>
                     <input class="form__input form__input_search" 
-                            placeholder="e.g John" 
+                            placeholder="e.g John Brown" 
                             id="name-search"
                             value=''
                             name="searchBy">
@@ -26,69 +26,64 @@
 
                 <div class="form__fieldset">
                     <legend class="form__title">Sort by age</legend>
-                    <input class="form__input form__input_increase" 
+                    <label class="form__label">
+                        <input class="form__input form__input_increase" 
                            type="radio" 
                            name="sortBy"
                            value="0-9" 
                            id="age-increase">
-                    <label class="form__label" for="age-increase">
                         <i class="fas fa-sort-numeric-down"></i>
                     </label>
-                    <input class="form__input form__input_decrease" 
+                    <label class="form__label">
+                        <input class="form__input form__input_decrease" 
                            type="radio" 
                            name="sortBy" 
-                           value="9-0"
-                           id="age-decrease">
-                    <label class="form__label" for="age-decrease">
+                           value="9-0">
                         <i class="fas fa-sort-numeric-up"></i>
                     </label> 
                 </div>
 
                 <div class="form__fieldset">
                     <legend class="form__title">Sort by name</legend>
-                    <input class="form__input form__input_alphabet-down" 
+                    <label class="form__label">
+                        <input class="form__input form__input_alphabet-down" 
                             type="radio" 
                             name="sortBy" 
-                            value="a-z"
-                            id="alphabet-down">
-                    <label class="form__label" for="alphabet-down">
+                            value="a-z">
                         <i class="fas fa-sort-alpha-down"></i>
                     </label>
-                    <input class="form__input form__input_alphabet-up" 
+                    <label class="form__label">
+                        <input class="form__input form__input_alphabet-up" 
                             type="radio" 
                             name="sortBy" 
-                            value ="z-a"
-                            id="alphabet-up">
-                    <label class="form__label" for="alphabet-up">
+                            value ="z-a">
                         <i class="fas fa-sort-alpha-up"></i>
                     </label> 
                 </div>
 
                 <div class="form__fieldset">
                     <legend class="form__title">Filter by gender</legend>
-                    <input class="form__input form__input_all" 
+                    <label class="form__label">
+                        <input class="form__input form__input_all" 
                             type="radio" 
                             name="filterBy" 
                             value='all'
-                            id="all-gender" 
                             checked>
-                    <label class="form__label" for="all-gender">
                         <i class="fas fa-venus-mars"></i>
                     </label>
-                    <input class="form__input form__input_man" 
+
+                    <label class="form__label">
+                        <input class="form__input form__input_man" 
                             type="radio" 
                             name="filterBy" 
-                            value="male"
-                            id="man-gender">
-                    <label class="form__label" for="man-gender">
+                            value="male">
                         <i class="fas fa-mars"></i>
                     </label>
-                    <input class="form__input form__input_woman" 
+                    <label class="form__label">
+                        <input class="form__input form__input_woman" 
                             type="radio" 
                             name="filterBy"
-                            value="female" 
-                            id="woman-gender">
-                    <label class="form__label" for="woman-gender">
+                            value="female">
                         <i class="fas fa-venus"></i>
                     </label>
                 </div>

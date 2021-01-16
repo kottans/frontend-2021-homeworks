@@ -108,7 +108,8 @@ function filterByGender(dataArray) {
 }
 
 function filterBySearch(dataArray) {
-    return dataArray.filter(el => el.name.first.includes(searchBy))
+    return dataArray.filter(el => el.name.first.toLowerCase().includes(searchBy.toLowerCase()) || 
+                            el.name.last.toLowerCase().includes(searchBy.toLowerCase())); 
 }
 
 initApp()
