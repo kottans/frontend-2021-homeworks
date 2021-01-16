@@ -66,3 +66,4 @@ const woman = new Human("Liza", "female", "Tere hommikust!");
 const persons = [man, woman, dog, cat];
 
 persons.forEach((person) => print(person.say()));
+
