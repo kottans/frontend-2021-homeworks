@@ -12,9 +12,6 @@ const enemyStartValue = {
     "icon": "images/enemy-bug.png",
     "minX": -50,
     "maxX": 510,
-    // "firstEnemy": 63,
-    // "secondEnemy": 147,
-    // "thirdEnemy": 230
     "initialYcoordinates": [63, 147, 230]
 };
 
@@ -102,7 +99,10 @@ class Player extends Character {
     }
 
     decreaseScore() {
-        this.score <= playerStartValue.startScore ? this.score = playerStartValue.startScore : this.score--;
+        if (this.score <= playerStartValue.startScore)
+          this.score = playerStartValue.startScore;
+        else
+          this.score--;
     }
 
     takingScorePoint() {
@@ -126,5 +126,5 @@ document.addEventListener('keyup', e => {
 });
 
 const player = new Player(playerStartValue.x, playerStartValue.y, playerStartValue.icon);
-//const allEnemies = [enemyStartValue.firstEnemy, enemyStartValue.secondEnemy, enemyStartValue.thirdEnemy].map(y => new Enemy(enemyStartValue.x, y, enemyStartValue.icon, player));
+
 const allEnemies = enemyStartValue.initialYcoordinates.map(y => new Enemy(enemyStartValue.x, y, enemyStartValue.icon, player));
