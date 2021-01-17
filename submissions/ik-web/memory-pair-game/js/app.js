@@ -26,14 +26,16 @@ document.addEventListener("DOMContentLoaded", () => {
             src: 'img/teach.jpg'
         }
     ];
+    
     //--------------------------------------------
-    const playArea = document.querySelector('#play-area');
     const gameName = document.querySelector('#title');
+    const playArea = document.querySelector('#play-area');
     const playCardsTotal = cards.length * 2;
-    const closeCardsDelay = 800;
-    const hideCardsDelay = 100;
+
     const checkPairDelay = 800;
-    const delayEndGame = 800;
+    const closeCardsDelay = 800;
+    const hideCardsDelay = 600;
+    const delayEndGame = 900;
     
     //--------------------------------------------
     function ShuffleArr(arr) {
@@ -44,12 +46,12 @@ document.addEventListener("DOMContentLoaded", () => {
         return arr;
     }
     
-    function createCard(id, src) {
+    function createCard(cardId, cardImageSrc) {
         return `
-        <div class="card" data-id="${id}"> 
+        <div class="card" data-id="${cardId}"> 
             <div class="flipper"> 
                 <div class="front">
-                    <img src="${src}" class="image">
+                    <img src="${cardImageSrc}" class="image">
                 </div>              
                 <div class="back"></div>                
             </div>        
@@ -57,44 +59,55 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
     }
     
-    function addCardsToPlayArea(arr) {
-        const playCards = arr.concat(arr);
-        let playCardsToStr = '';
+    function addCardsToPlayArea(cards) {
+        const playCards = cards.concat(cards);
+        let ShuffledCards = '';
     
-        ShuffleArr(playCards).forEach((item) => playCardsToStr += createCard(item['id'], item['src']));
-        playArea.innerHTML = playCardsToStr;
+        ShuffleArr(playCards).forEach((playCard) => ShuffledCards += createCard(playCard.id, playCard.src));
+        playArea.innerHTML = ShuffledCards;
     }
     
     //--------------------------------------------
-    function clickCard({target}) {
+    function clickCard() {
+        playArea.addEventListener('click', checkCard);
+    }
+
+    //--------------------------------------------   
+    function checkCard({target}) {
         let clickTarget = target.closest('div.card');
         if (!clickTarget) return;
         clickTarget.classList.add('open');
-    
+
         checkPair();
     }
-    
-    function stopClick() {
-        playArea.removeEventListener('click', clickCard);
-    }
-    
-    //--------------------------------------------
+
     function checkPair() {
-        const allCards = [...document.querySelectorAll('.card')];
-        const pair = allCards.filter( (item) => item.classList.contains('open'));
+        const openedCards = [...document.querySelectorAll('.open')];
         
-        if (pair.length === 2) {
+        if (openedCards.length === 2) {
             stopClick();
             
-            if (pair[0].getAttribute('data-id') === pair[1].getAttribute('data-id')) {
-                hideCards(pair);
+            if (openedCards[0].getAttribute('data-id') === openedCards[1].getAttribute('data-id')) {
+                hideCards(openedCards);
             }
             
-            closeCards(pair);
+            closeCards(openedCards);
+            setTimeout(clickCard, checkPairDelay);
         }
-        setTimeout(playGame, checkPairDelay);
     }
-    
+
+    //--------------------------------------------   
+    function stopClick() {
+        playArea.removeEventListener('click', checkCard);
+    }
+
+    function hideCards(openedCards) {
+        setTimeout(() => {
+            openedCards.forEach( (card) => card.classList.add('hide') );
+            checkWin();
+        }, hideCardsDelay);
+    }
+
     function checkWin() {
         const hiddenCards = document.querySelectorAll('.hide');
         
@@ -102,36 +115,23 @@ document.addEventListener("DOMContentLoaded", () => {
             setTimeout(endGame, delayEndGame);
         }
     }
-    
+
     function endGame() {
         document.querySelector('.off').classList.remove('off');
         document.querySelector('#btn').addEventListener('click', () => window.location.reload());
         gameName.classList.add('off');
     }
-    
-    //--------------------------------------------
-    function closeCards(arr) {
+
+    function closeCards(openedCards) {
         setTimeout(() => {
-            arr.forEach( (item) => item.classList.remove('open') )
+            openedCards.forEach( (card) => card.classList.remove('open') );
         }, closeCardsDelay);  
     }
-    
-    function hideCards(arr) {
-        setTimeout(() => {
-            arr.forEach( (item) => item.classList.add('hide') );
-            checkWin();
-        }, hideCardsDelay);
-    }
-    
-    //--------------------------------------------
-    function playGame() {
-        playArea.addEventListener('click', clickCard);
-    }
-    
+
     //--------------------------------------------
     function gameStart() {
         addCardsToPlayArea(cards);
-        playGame();
+        clickCard();
     }
     
     //--------------------------------------------

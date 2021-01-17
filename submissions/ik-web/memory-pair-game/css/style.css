@@ -18,7 +18,7 @@ img {
 /* Game decoration
 ------------------------------ */
 .wrapper {
-    background: url(../img/bg.jpg) center center / cover no-repeat;
+    background: #8d835f url(../img/bg.jpg) center center / cover no-repeat;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -54,7 +54,8 @@ img {
 }
 
 .hide {
-    visibility: hidden;
+    opacity: 0;
+    transition: opacity .2s linear;
 }
 
 .card.open .flipper { 
