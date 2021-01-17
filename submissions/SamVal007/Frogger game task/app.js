@@ -54,10 +54,10 @@ class Enemy extends Character {
     }
 
     collisionHappened() {
-        if (player.x < this.x + coordsGameGround.conflictX && player.x + coordsGameGround.conflictX > this.x && player.y < this.y + coordsGameGround.conflictY && coordsGameGround.conflictY + player.y > this.y) {
-            player.x = playerStartValue.x;
-            player.y = playerStartValue.y;
-            player.decreaseScore();
+        if (this.player.x < this.x + coordsGameGround.conflictX && this.player.x + coordsGameGround.conflictX > this.x && this.player.y < this.y + coordsGameGround.conflictY && coordsGameGround.conflictY + this.player.y > this.y) {
+            this.player.x = playerStartValue.x;
+            this.player.y = playerStartValue.y;
+            this.player.decreaseScore();
         }
     }
 
@@ -100,9 +100,9 @@ class Player extends Character {
 
     decreaseScore() {
         if (this.score <= playerStartValue.startScore)
-          this.score = playerStartValue.startScore;
+            this.score = playerStartValue.startScore;
         else
-          this.score--;
+            this.score--;
     }
 
     takingScorePoint() {
@@ -121,10 +121,8 @@ document.addEventListener('keyup', e => {
         39: 'right',
         40: 'down'
     };
-
     player.handleInput(allowedKeys[e.keyCode]);
 });
 
 const player = new Player(playerStartValue.x, playerStartValue.y, playerStartValue.icon);
-
 const allEnemies = enemyStartValue.initialYcoordinates.map(y => new Enemy(enemyStartValue.x, y, enemyStartValue.icon, player));
