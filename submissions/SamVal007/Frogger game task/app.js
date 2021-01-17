@@ -12,9 +12,10 @@ const enemyStartValue = {
     "icon": "images/enemy-bug.png",
     "minX": -50,
     "maxX": 510,
-    "firstEnemy": 63,
-    "secondEnemy": 147,
-    "thirdEnemy": 230
+    // "firstEnemy": 63,
+    // "secondEnemy": 147,
+    // "thirdEnemy": 230
+    "initialYcoordinates": [63, 147, 230]
 };
 
 const coordsGameGround = {
@@ -48,18 +49,18 @@ class Enemy extends Character {
 
     update(dt) {
         this.x += this.speed * dt;
-        if(this.x > enemyStartValue.maxX) {
+        if (this.x > enemyStartValue.maxX) {
             this.x = enemyStartValue.minX;
             this.speed = this.getRandomSpeed();
         }
-        this.isCollision();
+        this.collisionHappened();
     }
 
-    isCollision() {
-        if(player.x < this.x + coordsGameGround.conflictX && player.x + coordsGameGround.conflictX > this.x && player.y < this.y + coordsGameGround.conflictY && coordsGameGround.conflictY + player.y > this.y) {
+    collisionHappened() {
+        if (player.x < this.x + coordsGameGround.conflictX && player.x + coordsGameGround.conflictX > this.x && player.y < this.y + coordsGameGround.conflictY && coordsGameGround.conflictY + player.y > this.y) {
             player.x = playerStartValue.x;
             player.y = playerStartValue.y;
-            this.player.minusScore();
+            player.decreaseScore();
         }
     }
 
@@ -75,41 +76,38 @@ class Player extends Character {
     }
 
     update(dt) {
-       this.prizePoint();
+        this.takingScorePoint();
     }
 
     handleInput(keyPress) {
-        if(keyPress == 'left' && this.x > coordsGameGround.min) {
+        if (keyPress == 'left' && this.x > coordsGameGround.min) {
             this.x -= playerStartValue.stepX;
         }
 
-        if(keyPress == 'right' && this.x < coordsGameGround.max) {
+        if (keyPress == 'right' && this.x < coordsGameGround.max) {
             this.x += playerStartValue.stepX;
         }
 
-        if(keyPress == 'up' && this.y > coordsGameGround.min) {
+        if (keyPress == 'up' && this.y > coordsGameGround.min) {
             this.y -= playerStartValue.stepY;
         }
 
-        if(keyPress == 'down' && this.y < coordsGameGround.max) {
+        if (keyPress == 'down' && this.y < coordsGameGround.max) {
             this.y += playerStartValue.stepY;
         }
     }
 
-    plusScore() {
+    increaseScore() {
         this.score++;
     }
 
-    minusScore() {
-        if (this.score <= playerStartValue.startScore)
-          this.score = playerStartValue.startScore;
-        else
-          this.score--;
+    decreaseScore() {
+        this.score <= playerStartValue.startScore ? this.score = playerStartValue.startScore : this.score--;
     }
 
-    prizePoint() {
-        if(this.y <= coordsGameGround.min) {
-            this.plusScore();
+    takingScorePoint() {
+        if (this.y <= coordsGameGround.min) {
+            this.increaseScore();
             this.x = playerStartValue.x;
             this.y = playerStartValue.y;
         }
@@ -128,4 +126,5 @@ document.addEventListener('keyup', e => {
 });
 
 const player = new Player(playerStartValue.x, playerStartValue.y, playerStartValue.icon);
-const allEnemies = [enemyStartValue.firstEnemy, enemyStartValue.secondEnemy, enemyStartValue.thirdEnemy].map(y =>  new Enemy(enemyStartValue.x, y, enemyStartValue.icon, player));
+//const allEnemies = [enemyStartValue.firstEnemy, enemyStartValue.secondEnemy, enemyStartValue.thirdEnemy].map(y => new Enemy(enemyStartValue.x, y, enemyStartValue.icon, player));
+const allEnemies = enemyStartValue.initialYcoordinates.map(y => new Enemy(enemyStartValue.x, y, enemyStartValue.icon, player));
