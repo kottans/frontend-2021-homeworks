@@ -21,113 +21,12 @@
   }
 }
 
-/* Smartphones landscape----------- */
-@media only screen and (min-width: 415px) and (max-width: 767px) {
-  .header-name {
-    font-size: 30px;
-    margin: 15px 0 15px 0;
-  }
-
-  .menu-wrap {
-    width: 39%;
-    padding: 0 2% 0 2%;
-  }
-
-  .search-form {
-    height: 30px;
-    margin-bottom: 10px;
-    background-size: 13px;
-    font-size: 18px;
-  }
-
-  .filter-sort-menu {
-    width: 38%;
-    position: fixed;
-    justify-content: flex-start;
-  }
-
-  .sorting-legend {
-    font-size: 15px;
-    margin-bottom: 5px;
-  }
-
-  .btn {
-    width: 60px;
-    height: 28px;
-    font-size: 17px;
-    margin-bottom: 5px;
-  }
-
-  .ageSort-wrap {
-    margin-bottom: 0px;
-  }
-
-  .filter-gender__legend {
-    font-size: 15px;
-    margin-bottom: 5px;
-  }
-
-  .friendsList-wrap {
-    width: 60%;
-    margin-left: 1%;
-    justify-content: space-around;
-  }
-}
-
-/*Iphones X and more */
-@media only screen and (min-width: 812px) and (max-height: 375px) {
-  .header-name {
-    font-size: 30px;
-    margin: 15px 0 15px 0;
-  }
-
-  .menu-wrap {
-    width: 39%;
-    padding: 0 2% 0 2%;
-  }
-
-  .search-form {
-    height: 30px;
-    margin-bottom: 10px;
-    background-size: 13px;
-    font-size: 18px;
-  }
-
-  .filter-sort-menu {
-    width: 38%;
-    position: fixed;
-    justify-content: flex-start;
-  }
-
-  .sorting-legend {
-    font-size: 15px;
-    margin-bottom: 5px;
-  }
-
-  .btn {
-    width: 60px;
-    height: 28px;
-    font-size: 17px;
-    margin-bottom: 5px;
-  }
-
-  .ageSort-wrap {
-    margin-bottom: 0px;
-  }
-
-  .filter-gender__legend {
-    font-size: 15px;
-    margin-bottom: 5px;
-  }
-
-  .friendsList-wrap {
-    width: 60%;
-    margin-left: 1%;
-    justify-content: space-around;
-  }
-}
 /* Smartphones portrait----------- */
 @media only screen and (min-width: 319px) and (max-width: 414px) {
+  .header {
+    justify-content: flex-start;
+  }
+
   .menu-btn-container {
     display: inline-block;
   }
@@ -192,5 +91,111 @@
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+  }
+}
+
+/* Smartphones landscape----------- */
+@media only screen and (min-width: 415px) and (max-width: 767px) {
+  .header-name {
+    font-size: 30px;
+    margin: 15px 0 15px 0;
+  }
+
+  .menu-wrap {
+    width: 39%;
+    padding: 0 2% 0 2%;
+  }
+
+  .search-form {
+    height: 30px;
+    margin-bottom: 10px;
+    background-size: 13px;
+    font-size: 18px;
+  }
+
+  .filter-sort-menu {
+    width: 38%;
+    position: fixed;
+    justify-content: flex-start;
+  }
+
+  .sorting-legend {
+    font-size: 15px;
+    margin-bottom: 5px;
+  }
+
+  .btn {
+    width: 60px;
+    height: 28px;
+    font-size: 17px;
+    margin-bottom: 5px;
+  }
+
+  .ageSort-wrap {
+    margin-bottom: 0px;
+  }
+
+  .filter-gender__legend {
+    font-size: 15px;
+    margin-bottom: 5px;
+  }
+
+  .friendsList-wrap {
+    width: 60%;
+    margin-left: 1%;
+    justify-content: space-around;
+  }
+}
+
+/*Iphones X > landscape */
+@media only screen and (min-width: 812px) and (max-height: 415px) {
+  .header-name {
+    font-size: 30px;
+    margin: 15px 0 15px 0;
+  }
+
+  .menu-wrap {
+    width: 39%;
+    padding: 0 2% 0 2%;
+  }
+
+  .search-form {
+    height: 30px;
+    margin-bottom: 10px;
+    background-size: 13px;
+    font-size: 18px;
+  }
+
+  .filter-sort-menu {
+    width: 38%;
+    position: fixed;
+    justify-content: flex-start;
+  }
+
+  .sorting-legend {
+    font-size: 15px;
+    margin-bottom: 5px;
+  }
+
+  .btn {
+    width: 60px;
+    height: 28px;
+    font-size: 17px;
+    margin-bottom: 5px;
+  }
+
+  .ageSort-wrap {
+    margin-bottom: 0px;
+  }
+
+  .filter-gender__legend {
+    font-size: 15px;
+    margin-bottom: 5px;
+  }
+
+  .friendsList-wrap {
+    width: 60%;
+    margin-left: 1%;
+    justify-content: space-around;
   }
 }

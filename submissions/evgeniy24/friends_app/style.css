@@ -14,6 +14,8 @@
 .menu-btn-container {
   display: none;
   cursor: pointer;
+  margin-left: 10px;
+  margin-right: 20px;
 }
 
 .bar1,
@@ -55,10 +57,13 @@
 }
 
 .header-name {
+  display: flex;
+  justify-content: space-around;
+  width: 70%;
   font-family: "hanging-letters";
   font-size: 50px;
   letter-spacing: 3px;
-  margin: 30px 0 40px 0;
+  margin: 30px 0 40px 0px;
   text-align: center;
 }
 .main-wrap {
@@ -102,7 +107,7 @@
   background-position-y: center;
   background-position-x: 2%;
   background-repeat: no-repeat;
-  margin: 0 auto 30px auto;
+  margin: 3px auto 30px auto;
   font-size: 23px;
 }
 
@@ -170,7 +175,7 @@
 }
 
 .error-btn {
-  width: 200px;
+  width: 300px;
 }
 
 .filter-wrap {
@@ -312,4 +317,15 @@
   font-size: 16px;
   font-weight: 600;
   color: #396afc;
+}
+
+.error-message-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.error-msg-text {
+  font-size: 45px;
 }

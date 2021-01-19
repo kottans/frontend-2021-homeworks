@@ -13,7 +13,9 @@ let friendsArr = [],
     filterByAll = document.querySelector('.filter-gender__all'),
     seachedFriends,
     sortedList,
+    errorBtn,
     genderList, genderListMale, genderListFiltered,
+    scrollDepth,
     mobileMenuBtn = document.querySelector('.menu-btn-container'),
     filterSortMobileMenu = document.querySelector('.menu-wrap'),
     headerMobile = document.querySelector('.header');
@@ -24,15 +26,19 @@ const sendRequest = function(method, url) {
     });
 }
 
-sendRequest('GET', requestURL)
-.then( function(data) { 
-    friendsArr = data.results;
-    renderFriendsList(friendsArr);
-})
-.catch( function(err) {
-    console.log(err)
-    renderErrorMessage();
-});
+function start() {
+    sendRequest('GET', requestURL)
+    .then( function(data) { 
+        friendsArr = data.results;
+        renderFriendsList(friendsArr);
+    })
+    .catch( function(err) {
+        console.log(err)
+        renderErrorMessage();
+    });
+}
+
+start();
 
 // drawing a list of friends---------------------------
 function renderFriendsList(friends) {
@@ -89,7 +95,7 @@ function renderFriendsCard(friend) {
     friendsListWrap.append(cardWrap);
 }
 
-//find a friend by the name 
+//find a friend by the name ------------------------------------
 searchField.addEventListener('input', function() {
     let searchName = searchField.value.toLowerCase();
     if (searchName !== '') {
@@ -102,7 +108,7 @@ searchField.addEventListener('input', function() {
     }
 })
 
-//sorting List of friends
+//sorting List of friends --------------------------------------------
 sortMenu.addEventListener('click', function(event) {
     if (seachedFriends) {
         sortedList = seachedFriends;
@@ -164,17 +170,16 @@ filterMenu.addEventListener('click', function(event) {
         
 })
 
-// Error block 
+// Error block ------------------------------------------------------
 function renderErrorMessage() {
     const messageErrorWrap =  document.createElement('div');
     const messageError = document.createElement('p');
     const tryMoreBtn = document.createElement('button');
 
     messageErrorWrap.classList.add('error-message-wrap')
-
     tryMoreBtn.classList.add('btn');
     tryMoreBtn.classList.add('error-btn');
-
+    messageError.classList.add('error-msg-text');
 
     messageError.textContent = 'OOPS! Something Bad Happened, please try again';
     tryMoreBtn.textContent = 'Try Again';
@@ -196,8 +201,7 @@ function clickMenuBtn(elem) {
     elem.classList.toggle('change');
 }
 
-let scrollDepth;
-
+//smooth scrolling up
 function scrollToTop() {   
     let timer = 0; 
     if (scrollDepth > 100) {
@@ -210,3 +214,11 @@ function scrollToTop() {
     }
    
 } 
+
+// ErrorBtn reSendRequest -----------------------
+friendsListWrap.addEventListener('click', function(event) {
+    if (event.target.classList == 'btn error-btn') {
+        friendsListWrap.innerHTML = '';
+        start();
+    }
+})
