@@ -2,56 +2,36 @@
 
 const CARD_LIST = document.getElementById('cardList');
 const FORM = document.forms.mainForm;
-const ASCENDING_ORDER = 'ascending';
-const DESCENDING_ORDER = 'descending';
 
 let friends;
-
-// URL
-
-const USER_FIELDS = ['gender', 'name', 'email', 'picture', 'dob'];
-
-const SITE_URL = 'https://randomuser.me/api/';
-const BASE_URL = new URL(SITE_URL);
-BASE_URL.searchParams.set('nat', 'us');
-BASE_URL.searchParams.set('results', '12');
-BASE_URL.searchParams.set('inc', USER_FIELDS.join());
-
-const buildUrl = (queryParam, paramValue) => {
-  const newUrl = new URL(BASE_URL);
-  if (queryParam && paramValue) {
-    newUrl.searchParams.set(queryParam, paramValue);
-  }
-  return newUrl;
-};
 
 // Render cards
 
 const createCard = (userInfo) => {
-  const userWholeCard = document.createElement('li');
-  userWholeCard.classList.add('user-card');
+  const userCard = document.createElement('li');
+  userCard.classList.add('user-card');
 
   const userImg = document.createElement('img');
   userImg.setAttribute('src', userInfo.picture.large);
   userImg.setAttribute('alt', 'user_photo');
   userImg.classList.add('user-photo');
-  userWholeCard.appendChild(userImg);
+  userCard.appendChild(userImg);
 
   const cardHeader = document.createElement('h2');
   cardHeader.classList.add('user-full-name');
   cardHeader.innerHTML = `${userInfo.name.first} ${userInfo.name.last}`;
-  userWholeCard.appendChild(cardHeader);
+  userCard.appendChild(cardHeader);
 
   const genderElem = document.createElement('p');
   genderElem.innerHTML = `Gender: <strong>${userInfo.gender}</strong>`;
-  userWholeCard.appendChild(genderElem);
+  userCard.appendChild(genderElem);
 
   const ageElem = document.createElement('p');
   ageElem.innerHTML = `Age: <strong>${userInfo.dob.age}</strong>`;
   ageElem.classList.add('user-age');
-  userWholeCard.appendChild(ageElem);
+  userCard.appendChild(ageElem);
 
-  return userWholeCard;
+  return userCard;
 };
 
 const generateFriendsListing = (friendList) => {
@@ -68,17 +48,22 @@ const generateFriendsListing = (friendList) => {
 // Load users
 
 async function loadUserList() {
-  const newUrl = buildUrl();
+  const userFields = ['gender', 'name', 'email', 'picture', 'dob'];
+  const siteUrl = 'https://randomuser.me/api/';
+  const baseUrl = new URL(siteUrl);
+  baseUrl.searchParams.set('nat', 'us');
+  baseUrl.searchParams.set('results', '12');
+  baseUrl.searchParams.set('inc', userFields.join());
+
   // try to make request at least 5 times in case of errors
   for (let i = 0; i < 5; i++) {
     try {
-      const response = await fetch(newUrl);
+      const response = await fetch(baseUrl);
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       } else {
         const friends = await response.json();
-        generateFriendsListing(friends.results);
         return friends.results;
       }
     } catch (e) {
@@ -91,8 +76,7 @@ async function loadUserList() {
 
 const getFormData = (form) => {
   return {
-    userSortAge: form.userSortAge.value,
-    userSortName: form.userSortName.value,
+    userSort: form.userSort.value,
     userFilterGender: form.userFilterGender.value,
   };
 };
@@ -109,37 +93,48 @@ const filterByName = (event) => {
   const enteredFirstName = event.target.value;
 
   let friendList = [...friends];
-  friendList = friendList.filter(
-    (user) => user.name.first.toLowerCase().search(enteredFirstName.toLowerCase()) !== -1
+  friendList = friendList.filter((user) =>
+    (user.name.first + user.name.last)
+      .toLowerCase()
+      .includes(enteredFirstName.toLowerCase())
   );
 
   generateFriendsListing(friendList);
+};
+
+const sortByLastNameAsc = (a, b) => {
+  const nameA = a.name.last.toUpperCase();
+  const nameB = b.name.last.toUpperCase();
+  return nameA < nameB ? -1 : nameA > nameB ? 1 : 0;
+};
+
+const sortByLastNameDesc = (a, b) => {
+  const nameA = a.name.last.toUpperCase();
+  const nameB = b.name.last.toUpperCase();
+  return nameA < nameB ? 1 : nameA > nameB ? -1 : 0;
+};
+
+const sortByAgeAsc = (a, b) => {
+  return a.dob.age - b.dob.age;
+};
+
+const sortByAgeDesc = (a, b) => {
+  return b.dob.age - a.dob.age;
+};
+
+const sortFuncMapper = {
+  sortByAgeAsc,
+  sortByAgeDesc,
+  sortByLastNameAsc,
+  sortByLastNameDesc,
 };
 
 const sortAndFilterListing = (event) => {
   event.preventDefault();
   const formData = getFormData(FORM);
 
-  const sortFunc = (a, b) => {
-    let sortAge = 0;
-    if (formData.userSortAge === ASCENDING_ORDER) {
-      sortAge = a.dob.age - b.dob.age;
-    } else if (formData.userSortAge === DESCENDING_ORDER) {
-      sortAge = b.dob.age - a.dob.age;
-    }
-
-    const nameA = a.name.last.toUpperCase();
-    const nameB = b.name.last.toUpperCase();
-    let sortName;
-    if (formData.userSortName === ASCENDING_ORDER) {
-      sortName = nameA < nameB ? -1 : nameA > nameB ? 1 : 0;
-    } else if (formData.userSortName === DESCENDING_ORDER) {
-      sortName = nameA < nameB ? 1 : nameA > nameB ? -1 : 0;
-    }
-    return sortAge || sortName;
-  };
-
   let friendList = filterByGender(formData.userFilterGender);
+  const sortFunc = sortFuncMapper[formData.userSort];
   friendList = friendList.sort(sortFunc);
 
   generateFriendsListing(friendList);
@@ -149,6 +144,8 @@ const sortAndFilterListing = (event) => {
 
 (async () => {
   friends = await loadUserList();
+  const friendList = friends.sort(sortByAgeAsc);
+  generateFriendsListing(friendList);
 })();
 
 FORM.addEventListener('submit', sortAndFilterListing);

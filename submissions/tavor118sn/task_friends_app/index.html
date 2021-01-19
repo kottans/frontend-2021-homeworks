@@ -23,18 +23,12 @@
             <label for="fname" class="label">First Name</label>
             <input type="text" id="fname" name="firstname" placeholder="Search">
 
-            <label for="userSortAge" class="label">Sort by age</label>
-            <select id="userSortAge" name="userSortAge" class="select">
-                <option value="noOrdering">No ordering</option>
-                <option value="ascending">Ascending</option>
-                <option value="descending">Descending</option>
-            </select>
-
-            <label for="userSortName" class="label">Sort by name</label>
-            <select id="userSortName" name="userSortName" class="select">
-                <option value="noOrdering">No ordering</option>
-                <option value="ascending">Ascending</option>
-                <option value="descending">Descending</option>
+            <label for="userSort" class="label">Sort by</label>
+            <select id="userSort" name="userSort" class="select">
+                <option value="sortByAgeAsc">Age Ascending</option>
+                <option value="sortByAgeDesc">Age Descending</option>
+                <option value="sortByLastNameAsc">Last Name Asc</option>
+                <option value="sortByLastNameDesc">Last Name Desc</option>
             </select>
 
             <label for="userFilterGender" class="label">Filter by gender</label>
