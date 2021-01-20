@@ -37,7 +37,7 @@ function refreshPage() {
 }
 
 async function addFriends(arr) {
-      try  {let fragment = document.createDocumentFragment();
+      let fragment = document.createDocumentFragment();
         await arr.forEach(friend => {
                 let friendCard = document.createElement("div");
                friendCard.setAttribute("class", "friend_card");
@@ -53,9 +53,7 @@ async function addFriends(arr) {
                 fragment.appendChild(friendCard);       
         });
               friendsContainer.appendChild(fragment);
-      } catch {
-              refreshPage();
-      }
+
 };
 
 document.querySelector(".sidebar").addEventListener("click", sortFriends);
