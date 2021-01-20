@@ -1,4 +1,4 @@
-const imageses = [
+const images = [
   'images/Alfa-romeo.jpeg',
   'images/Ford.jpeg',
   'images/Mazda.jpeg',
@@ -6,117 +6,89 @@ const imageses = [
   'images/Peugeot.jpeg',
 ];
 
-const cardDeck = [...imageses, ...imageses];
+const cardDeck = [...images, ...images];
+const duration = 600;
+let winCount = 0;
+let firstOpenCard = null;
+let isBlock = false;
+const pointsWon = images.length;
+const gameBoard = document.querySelector('.cards');
 
-function getingSortList() {
+function getSortList() {
   cardDeck.sort(function () {
     return 0.5 - Math.random();
   });
 }
 
-let winCount = 0;
-
-//this func must added imgs in all my cards
-const gameBoard = document.getElementById('cards_block');
 const putImgsInCards = function () {
-  const fragment = document.createDocumentFragment().appendChild(gameBoard);
-
-  for (let i = 0; i < cardDeck.length; i++) {
-    const img = document.createElement('img');
-    img.src = cardDeck[i];
-    fragment.children[i].appendChild(img);
-  }
-  document.querySelector('main').appendChild(fragment);
-};
-
-const overturnsCard = function () {
-  gameBoard.addEventListener('click', function ({ target }) {
-    let check = [];
-    if (target.nodeName !== 'DIV') {
-      return;
-    }
-
-    for (let x = 0; x < gameBoard.childElementCount; x++) {
-      if (gameBoard.children[x].className === 'card__clicked') {
-        check.push(gameBoard.children[x].className);
-      }
-    }
-
-    if (check.length === 2) {
-      return;
-    }
-
-    if (target.classList.contains('card__clicked')) {
-      target.classList.remove('card__clicked');
-      target.classList.add('card');
-    } else if (target.classList.contains('card')) {
-      target.classList.remove('card');
-      target.classList.add('card__clicked');
-    }
-
-    compareImgs();
-    checkWin();
+  cardDeck.forEach(function (value) {
+    template = `
+        <div class="card">
+            <img class='front front-images' src='images/cardClosed.png' alt='front-card'>
+            <img class='back back__image' src='${value}' alt='back-card'>
+        </div>         
+      `;
+    gameBoard.insertAdjacentHTML('beforeEnd', template);
   });
 };
 
-const comparison = document.createDocumentFragment();
-const compareImgs = function () {
-  comparison.appendChild(gameBoard);
+function flipBackCards() {
+  gameBoard.querySelectorAll('.card--show').forEach(function (value) {
+    value.classList.remove('card--show');
+  });
+}
 
-  const cardsImg = gameBoard.children;
-  const checkImg = [];
+function checkCards(card) {
+  if (firstOpenCard === null) {
+    firstOpenCard = card;
 
-  for (let x = 0; x < cardsImg.length; x++) {
-    if (cardsImg[x].childElementCount === 0) {
-      cardsImg[x].delete;
-    }
-    if (cardsImg[x].classList.contains('card__clicked')) {
-      if (cardsImg[x].childElementCount !== 0) {
-        checkImg.push(cardsImg[x]);
-      }
-    }
+    return;
   }
 
-  if (checkImg.length === 2) {
-    const firstImg = checkImg[0].firstChild;
-    const secondImg = checkImg[1].firstChild;
+  isBlock = true;
 
-    if (firstImg.src === secondImg.src) {
-      timer = setTimeout(function () {
-        firstImg.remove();
-        checkImg[0].classList.remove('card__clicked');
-        secondImg.remove();
-        checkImg[1].classList.remove('card__clicked');
-      }, 400);
-      CountingMatchingPairsOfCards();
-    }
-
-    if (firstImg.src !== secondImg.src) {
-      timer = setTimeout(function () {
-        checkImg[0].classList.replace('card__clicked', 'card');
-        checkImg[1].classList.replace('card__clicked', 'card');
-      }, 400);
-    }
+  if (
+    firstOpenCard.lastElementChild.getAttribute('src') ===
+      card.lastElementChild.getAttribute('src') &&
+    firstOpenCard !== card
+  ) {
+    setTimeout(function () {
+      winCount++;
+      firstOpenCard.classList.add('card--hidden');
+      card.classList.add('card--hidden');
+      firstOpenCard = null;
+      checkWin();
+      isBlock = false;
+    }, duration);
+  } else {
+    setTimeout(function () {
+      firstOpenCard = null;
+      flipBackCards();
+      isBlock = false;
+    }, duration);
   }
-  document.querySelector('main').appendChild(gameBoard);
-};
+}
 
-function CountingMatchingPairsOfCards() {
-  winCount++;
+function showCard({ target }) {
+  if (!isBlock) {
+    const parentCard = target.closest('.card');
+    parentCard.classList.add('card--show');
+    checkCards(parentCard);
+  }
 }
 
 function checkWin() {
-  if (winCount === 5) {
+  if (winCount === pointsWon) {
     setTimeout(function () {
       alert('You are the winner!');
-    }, 600);
+    }, duration);
   }
 }
 
 function InitGame() {
-  getingSortList();
+  getSortList();
   putImgsInCards();
-  overturnsCard();
+  gameBoard.addEventListener('click', showCard);
 }
 
 InitGame();
