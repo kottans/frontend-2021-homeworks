@@ -1,11 +1,6 @@
-// Global variables
-
 const CARD_LIST = document.getElementById('cardList');
-const FORM = document.forms.mainForm;
 
 let friends;
-
-// Render cards
 
 const createCard = (userInfo) => {
   const userCard = document.createElement('li');
@@ -45,8 +40,6 @@ const generateFriendsListing = (friendList) => {
   CARD_LIST.appendChild(fragment);
 };
 
-// Load users
-
 async function loadUserList() {
   const userFields = ['gender', 'name', 'email', 'picture', 'dob'];
   const siteUrl = 'https://randomuser.me/api/';
@@ -67,12 +60,10 @@ async function loadUserList() {
         return friends.results;
       }
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   }
 }
-
-// Sorting and filtering
 
 const getFormData = (form) => {
   return {
@@ -102,36 +93,26 @@ const filterByName = (event) => {
   generateFriendsListing(friendList);
 };
 
-const sortByLastNameAsc = (a, b) => {
+const doSortByLastName = (a, b) => {
   const nameA = a.name.last.toUpperCase();
   const nameB = b.name.last.toUpperCase();
   return nameA < nameB ? -1 : nameA > nameB ? 1 : 0;
 };
 
-const sortByLastNameDesc = (a, b) => {
-  const nameA = a.name.last.toUpperCase();
-  const nameB = b.name.last.toUpperCase();
-  return nameA < nameB ? 1 : nameA > nameB ? -1 : 0;
-};
-
-const sortByAgeAsc = (a, b) => {
+const doSortByAge = (a, b) => {
   return a.dob.age - b.dob.age;
 };
 
-const sortByAgeDesc = (a, b) => {
-  return b.dob.age - a.dob.age;
-};
-
 const sortFuncMapper = {
-  sortByAgeAsc,
-  sortByAgeDesc,
-  sortByLastNameAsc,
-  sortByLastNameDesc,
+  sortByAgeAsc: (a, b) => doSortByAge(a, b),
+  sortByAgeDesc: (a, b) => doSortByAge(b, a),
+  sortByLastNameAsc: (a, b) => doSortByLastName(a, b),
+  sortByLastNameDesc: (a, b) => doSortByLastName(b, a),
 };
 
-const sortAndFilterListing = (event) => {
+const doListSortingAndFiltering = (event) => {
   event.preventDefault();
-  const formData = getFormData(FORM);
+  const formData = getFormData(document.forms.mainForm);
 
   let friendList = filterByGender(formData.userFilterGender);
   const sortFunc = sortFuncMapper[formData.userSort];
@@ -140,14 +121,12 @@ const sortAndFilterListing = (event) => {
   generateFriendsListing(friendList);
 };
 
-// Initialization
-
 (async () => {
   friends = await loadUserList();
-  const friendList = friends.sort(sortByAgeAsc);
+  const friendList = friends.sort(sortFuncMapper.sortByAgeAsc);
   generateFriendsListing(friendList);
 })();
 
-FORM.addEventListener('submit', sortAndFilterListing);
+document.forms.mainForm.addEventListener('submit', doListSortingAndFiltering);
 
-FORM.firstname.addEventListener('input', filterByName);
+document.forms.mainForm.firstname.addEventListener('input', filterByName);
