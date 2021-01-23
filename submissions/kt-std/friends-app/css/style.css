@@ -210,17 +210,8 @@ body {
 }
 
 @keyframes opacity {
-    0% {
-        opacity: 0
-    }
-
-    ;
-
-    100% {
-        opacity: 1
-    }
-
-    ;
+    0% { opacity: 0 };
+    100% { opacity: 1 };
 }
 
 .card__image {
@@ -567,6 +558,7 @@ body {
     opacity: 0;
 }
 
+
 .visible,
 .display>* {
     visibility: visible;
@@ -574,15 +566,41 @@ body {
 }
 
 .list__item {
-    padding: 10px var(--padding);
-    transition: var(--animation-duration);
-    font-size: var(--font-small);
-    border-bottom: 1px solid var(--border-color);
+    width: 100%;
 }
 
-.list__item:focus,
-.list__item:hover {
+.list__input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    position: absolute;
+    height: 0;
+    width: 0;
+}
+
+.list__label {
+    display: inline-block;
+    box-sizing: border-box;
+    color: var(--username-color);
+    width: 100%;
+    padding: 10px var(--padding);
+    transition: .2s;
+    font-size: var(--font-small);
+    border-bottom: 1px solid var(--border-color);
     cursor: pointer;
+}
+
+.list__label:hover,
+.list__input:checked~.list__label:hover {
+    background-color: var(--color-accent);
+    color: white;
+}
+
+.focus {
+    background-color: var(--background-color);
+}
+
+.list__input:checked~.list__label {
     background-color: var(--background-color);
 }
 

@@ -1,4 +1,5 @@
 let FRIENDS_ARRAY = [],
+    selectedOption,
     INITIAL_FRIENDS_ARRAY = [];
 const USERS_AMOUNT = 24,
     API_URL = `https://randomuser.me/api/?results=${USERS_AMOUNT}`,
@@ -8,7 +9,10 @@ const USERS_AMOUNT = 24,
     SELECT_CONTAINER = document.querySelector(".select__container"),
     FILTERS_CONTAINER = document.querySelector(".filters__container"),
     OPTIONS_CONTAINER = document.querySelector(".select__list"),
+    OPTIONS_LIST = document.querySelectorAll(".list__label"),
     TOTAL_COUNTER = document.querySelector(".amount");
+
+
 
 function getFriends() {
     fetch(API_URL)
@@ -22,6 +26,7 @@ function getFriends() {
                         response.statusText
                     )
                 );
+                return response.json();
             }
         })
         .then((responseBody) => {
@@ -183,15 +188,18 @@ function getAgeLimits(friendsArray) {
 }
 
 function sortCards(e, friendsArray) {
-    if (e.target.classList.contains("list__item")) {
-        updateSelectText(e.target.textContent);
-        SELECT_CONTAINER.attributes["option-selected"].value = true;
-        sortCardsArray(e.target.attributes.value.value, friendsArray);
+    if (
+        e.target.classList.contains("list__label") ||
+        e.target.classList.contains("select__container")
+    ) {
+        SELECT_CONTAINER.attributes["select-modified"].value = true;
+        sortCardsArray(e.target.getAttribute("value"), friendsArray);
     }
 }
 
-function updateSelectText(text) {
-    SELECT_CONTAINER.innerText = text;
+function updateSelectText(itemToSelect) {
+    SELECT_CONTAINER.textContent = itemToSelect.textContent;
+    SELECT_CONTAINER.setAttribute("value", itemToSelect.getAttribute("value"));
 }
 
 function sortCardsArray(condition, friendsArray) {
@@ -228,8 +236,7 @@ function findMatchesWithPropertiesValues(
 }
 
 function filterByGender(e, friendsArray) {
-    let checkboxes = document.querySelectorAll("input[type=checkbox]");
-    checkboxes = Array.from(checkboxes).filter((checkbox) => checkbox.checked);
+    let checkboxes = Array.from(document.querySelectorAll(".checkbox:checked"));
     return friendsArray.filter((friend) =>
         checkboxes.some((gender) => friend.gender === gender.value)
     );
@@ -238,17 +245,18 @@ function filterByGender(e, friendsArray) {
 function filterByAge(friendsArray) {
     const min = document.getElementById(MIN_AGE_INPUT_ID),
         max = document.getElementById(MAX_AGE_INPUT_ID);
-    if (min.value && max.value) {
-        return friendsArray.filter(
-            (friend) => friend.age >= min.value && friend.age <= max.value
-        );
-    }
+    if (max.value) friendsArray = friendsArray.filter((friend) => friend.age <= max.value);
+    if (min.value) friendsArray = friendsArray.filter((friend) => friend.age >= min.value);
+    return friendsArray;
 }
 
 function checkFiltersChanged(event) {
-    return ["list__item", "number", "checkbox"].some(
-        (filter) => event.target.className === filter
-    );
+    return ["list__label", "select__container", "number", "checkbox"]
+        .some((filter) => {
+            if (!(event.type === "click" &&  event.target.classList.contains("select__container"))) {
+                return event.target.classList.contains(filter);
+            }
+        });
 }
 
 function updateCards(event) {
@@ -261,69 +269,74 @@ function updateCards(event) {
     }
 }
 
-function checkOptionsSelected() {
-    return SELECT_CONTAINER.attributes["option-selected"].value === "true";
+function isSelectModified() {
+    return SELECT_CONTAINER.attributes["select-modified"].value === "true";
 }
 
 function checkOptionsVisibility() {
     return OPTIONS_CONTAINER.classList.contains("visible");
 }
 
-function resetOptionTabindex(option) {
-    option.tabIndex = -1;
+function resetPreviouslySelectedOptions(selectedOption) {
+    Array.from(OPTIONS_LIST).forEach((option) => {
+        if (option.textContent != selectedOption) {
+            document.getElementById(option.htmlFor).checked = false;
+        }
+    });
+}
+
+function removeAriaSelectedAttribute(option) {
     option.removeAttribute("aria-selected");
 }
 
 function getSelectOption(selectText) {
-    return Array.from(OPTIONS_CONTAINER.children).filter(
-        (option) => option.textContent === selectText)[0];
+    return Array.from(OPTIONS_LIST).find(
+        (option) => option.textContent === selectText
+    );
 }
 
 function higlightSelectedOption(itemToSelect) {
-    itemToSelect.tabIndex = 0;
-    setTimeout(() => {
-        itemToSelect.focus();
-    }, 100);
     itemToSelect.setAttribute("aria-selected", "true");
-    updateSelectText(itemToSelect.textContent);
+    document.getElementById(itemToSelect.htmlFor).checked = true;
+    updateSelectText(itemToSelect);
 }
 
 function focusOnItem(buttonPressed) {
-    const selectedItem = document.activeElement;
+    const optionsListArray = Array.from(OPTIONS_LIST),
+        selectedItem = optionsListArray.find(
+            (listItem) => listItem.textContent === selectedOption
+        ),
+        selectedItemIndex = Array.from(OPTIONS_LIST).indexOf(selectedItem);
     if (buttonPressed === "ArrowUp") {
         switch (true) {
-            case selectedItem.previousElementSibling &&
-                isSelectOption(selectedItem):
-                higlightSelectedOption(selectedItem.previousElementSibling);
+            case !isFirstListItem(selectedItemIndex):
+                higlightSelectedOption(optionsListArray[selectedItemIndex - 1]);
+                selectedOption = optionsListArray[selectedItemIndex - 1].textContent;
+                resetPreviouslySelectedOptions(selectedOption);
+                removeAriaSelectedAttribute(selectedItem);
                 break;
-            case !selectedItem.previousElementSibling:
-                higlightSelectedOption(OPTIONS_CONTAINER.firstElementChild);
-                break;
-            case !isSelectOption(selectedItem):
-                higlightSelectedOption(OPTIONS_CONTAINER.lastElementChild);
+            case !isFirstListItem(selectedItemIndex):
                 break;
         }
     } else if (buttonPressed === "ArrowDown") {
         switch (true) {
-            case selectedItem.nextElementSibling &&
-                isSelectOption(selectedItem):
-                higlightSelectedOption(selectedItem.nextElementSibling);
+            case !isLastListItem(selectedItemIndex, optionsListArray):
+                higlightSelectedOption(optionsListArray[selectedItemIndex + 1]);
+                selectedOption = optionsListArray[selectedItemIndex + 1].textContent;
+                resetPreviouslySelectedOptions(selectedOption);
+                removeAriaSelectedAttribute(selectedItem);
                 break;
-            case !selectedItem.nextElementSibling:
-                higlightSelectedOption(OPTIONS_CONTAINER.lastElementChild);
+            case isLastListItem(selectedItemIndex, optionsListArray):
                 break;
-            case !isSelectOption(selectedItem):
-                higlightSelectedOption(OPTIONS_CONTAINER.firstElementChild);
         }
     }
-    resetOptionTabindex(selectedItem);
 }
 
-function isSelectOption(selectedItem) {
-    return (
-        selectedItem.classList.contains("select__list") ||
-        selectedItem.classList.contains("list__item")
-    );
+function isLastListItem(selectedItemIndex, optionsArray){
+    return selectedItemIndex === optionsArray.length - 1;
+}
+function isFirstListItem(selectedItemIndex){
+    return selectedItemIndex === 0;
 }
 
 function observeOptionsListVisibility() {
@@ -335,6 +348,10 @@ function observeOptionsListVisibility() {
                         mutation.target.classList.contains("visible") &&
                         !SELECT_CONTAINER.getAttribute("aria-expanded")
                     ) {
+                        resetPreviouslySelectedOptions(selectedOption);
+                        updateSelectText(getSelectOption(selectedOption));
+                        higlightSelectedOption(getSelectOption(selectedOption));
+
                         SELECT_CONTAINER.setAttribute("aria-expanded", "true");
                     }
                     if (
@@ -350,10 +367,13 @@ function observeOptionsListVisibility() {
     observer.observe(OPTIONS_CONTAINER, options);
 }
 
+observeOptionsListVisibility();
+
 SELECT_CONTAINER.addEventListener("focusout", (e) => {
     if (
         checkOptionsVisibility() &&
-        !e.relatedTarget.classList.contains("list__item") &&
+        e.relatedTarget !== null &&
+        !e.relatedTarget.classList.contains("list__value") &&
         !e.relatedTarget.classList.contains("select__container")
     )
         OPTIONS_CONTAINER.classList.toggle("visible");
@@ -362,19 +382,23 @@ SELECT_CONTAINER.addEventListener("focusout", (e) => {
 document.addEventListener("keydown", (keyEvent) => {
     if (keyEvent.target === SELECT_CONTAINER) {
         if (keyEvent.code === "Space" || keyEvent.code === "Enter") {
-            OPTIONS_CONTAINER.classList.toggle("visible");
-            if (checkOptionsSelected()) {
-                higlightSelectedOption(
-                    getSelectOption(SELECT_CONTAINER.textContent)
-                );
+            keyEvent.preventDefault();
+            if (!checkOptionsVisibility()) {
+                OPTIONS_CONTAINER.classList.add("visible");
+                if (isSelectModified()) {
+                    higlightSelectedOption(getSelectOption(selectedOption));
+                } else {
+                    selectedOption = OPTIONS_LIST[0].textContent;
+                    higlightSelectedOption(OPTIONS_LIST[0]);
+                }
             } else {
-                higlightSelectedOption(
-                    getSelectOption(
-                        OPTIONS_CONTAINER.firstElementChild.textContent
-                    )
-                );
+                updateCards(keyEvent);
+                OPTIONS_CONTAINER.classList.remove("visible");
             }
         }
+    }
+    if (keyEvent.code === "Escape" && checkOptionsVisibility()) {
+        OPTIONS_CONTAINER.classList.remove("visible");
     }
     if (
         checkOptionsVisibility() &&
@@ -383,18 +407,7 @@ document.addEventListener("keydown", (keyEvent) => {
         keyEvent.preventDefault();
         focusOnItem(keyEvent.code);
     }
-    if (
-        keyEvent.target.classList.contains("list__item") &&
-        (keyEvent.code === "Space" ||
-            keyEvent.code === "Enter" ||
-            keyEvent.code === "Escape")
-    ) {
-        const selectedOption = document.activeElement;
-        resetOptionTabindex(selectedOption);
-        OPTIONS_CONTAINER.classList.toggle("visible");
-        updateCards(keyEvent);
-    }
-    SELECT_CONTAINER.tabIndex = 0;
+    resetPreviouslySelectedOptions(selectedOption);
 });
 
 document.querySelector("#showFiltersButton").addEventListener("click", (e) => {
@@ -411,9 +424,12 @@ document.addEventListener("click", (e) => {
 
 document.querySelector("#sort").addEventListener("click", (e) => {
     if (
-        e.target.classList.contains("list__item") ||
+        e.target.classList.contains("list__label") ||
         e.target.classList.contains("select__container")
     ) {
+        selectedOption = !SELECT_CONTAINER.getAttribute("value")  
+            ? OPTIONS_LIST[0].textContent 
+            : e.target.textContent;
         OPTIONS_CONTAINER.classList.toggle("visible");
     }
 });
@@ -440,8 +456,7 @@ window.addEventListener("beforeunload", () => {
     ["#search", "#minAge", "#maxAge"].forEach(
         (element) => (document.querySelector(element).value = "")
     );
-
-    SELECT_CONTAINER.attributes["option-selected"].value = "false";
+    SELECT_CONTAINER.attributes["select-modified"].value = "false";
     document.querySelector("#female").checked = "true";
     document.querySelector("#male").checked = "true";
 });
