@@ -1,0 +1,172 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;500;700&display=swap');
+* {
+	margin: 0;
+	box-sizing: border-box;
+}
+:root {
+	--themeDark-background: #111;
+    --themeDark-border: #555;
+    --themeDark-text: #eee;
+    --themeDark-header-background: #222;
+    --themeDark-header-border: #eee;
+	--themeLight-background: #eee;
+	--themeLight-border: #aaa;
+    --themeLight-text: #111;
+    --themeLight-header-background: #ddd;
+    --themeLight-header-border: #111;
+    --shadow: #88888888;
+    --main_padding: 40px;
+    --link_color: #ce5757;
+    --filters_width: 240px;
+}
+body{
+    --textColor: var(--themeDark-text);
+    --backgroundColor: var(--themeDark-background);
+    --borderColor: var(--themeDark-border);
+    --header-background: var(--themeDark-header-background);
+    --header-border: var(--themeDark-header-border);
+    background: var(--backgroundColor);
+    color: var(--textColor);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    transition: background 500ms linear, color 100ms linear, border 500ms linear;
+    
+}
+
+body.light{
+    --textColor: var(--themeLight-text);
+    --backgroundColor: var(--themeLight-background);
+    --borderColor: var(--themeLight-border);
+    --header-background: var(--themeLight-header-background);
+    --header-border: var(--themeLight-header-border);
+}
+
+.header{
+    position: sticky;
+    padding: 2em 1em;
+    top: 0;
+    left: 0;
+    background: var(--header-background);
+    border-bottom: 2px solid var(--header-border);
+}
+.header__title{
+    font-size: 2em;
+    font-weight: 700;
+}
+.day_night{
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    background: var(--textColor);
+    height: 20px;
+    width: 150px;
+    padding: 0 20px;
+    cursor: pointer;
+    transition: background 300ms linear;
+    clip-path: polygon(41% 0, 62% 0, 62% 100%, 41% 100%);
+	-webkit-user-select: none; /* Safari */
+	-ms-user-select: none;
+	user-select: none;
+}
+.night_icon{
+    position: absolute;
+    left: 100%;
+    top: 1px;
+    transition: left 500ms linear;
+}
+.day_icon{
+    position: absolute;
+    left: 69px;
+    top: 1px;
+    transition: left 500ms linear;
+}
+body.light .day_night .day_icon{
+    left: 0;
+}
+body.light .day_night .night_icon{
+    left: 69px;
+}
+
+.filters{
+    background: var(--header-background);
+    border-right: 2px solid var(--header-border);
+    width: var(--filters_width);
+    height: 100%;
+    position: fixed;
+    padding: 0 0.8em;
+    font-size: 14px;
+}
+.filters__section{
+    margin: 0.8em 0;
+    border: 0;
+    padding: 0;
+}
+.filters__section--centered{
+    text-align: center;
+}
+.filters__text_field{
+    width: 100%;
+}
+.input__heading{
+    margin-bottom: 0.8em;
+}
+.filters__button{
+    width: 100px;
+    margin: auto;
+    font-family: 'IBM Plex Mono', monospace;
+}
+.filters input[type=radio], .filters label{
+    cursor: pointer;
+}
+
+.main{
+    display: flex;
+    flex-wrap: wrap;
+    padding: var(--main_padding);
+    justify-content: center;
+    margin-left: var(--filters_width);
+}
+.card{
+    display: flex;
+    flex-flow: column wrap;
+    flex-basis: 260px;
+    margin-right: 30px;
+    margin-bottom: 30px;
+    background: var(--gray);
+    text-align: center;
+    border: 1px solid var(--borderColor);
+    padding-top: 1em;
+    padding-bottom: 1em;
+    box-shadow: 10px 10px 0px var(--shadow);
+    transition: box-shadow 600ms linear;
+}
+.card:hover{
+    box-shadow: 13px 13px 0px var(--shadow), -13px -13px 0px var(--shadow);
+}
+.card__img{
+    align-self: center;
+    height: 126px;
+    width: 126px;
+    margin-bottom: 0.5em;
+    border: 1px solid var(--borderColor);
+}
+.card__name, .card__age, .card__phone, .card__email, .card__country{   
+    display: block;
+    padding: 0.5em;
+    border-top: 1px dashed var(--borderColor);
+}
+.card__country{
+    display: block;
+    padding: 0.5em 0.5em 0 0.5em;
+    border-top: 1px dashed var(--borderColor);
+}
+.card__email, .card__phone{
+    color: var(--textColor);
+    text-decoration: none;
+}
+.card__email:hover, .card__phone:hover{
+    color: var(--link_color);
+    text-decoration: underline;
+}

@@ -1,0 +1,65 @@
+header {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--gray-color);
+    border: 1px solid;
+    border-image: linear-gradient(to right, var(--light-brown-color) 85%, transparent 100%) 1 / 1 / 0 stretch;
+}
+
+.header__heading {
+    line-height: 60px;
+    text-align: center;
+    letter-spacing: .15em;
+    font-family: 'Megrim', cursive;
+}
+
+.header__sound-button {
+    width: 41px;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
+    padding: 5px;
+    border: 1px solid var(--gold-color);
+    border-radius: 5px;
+    background-color: black;
+    cursor: pointer;
+}
+
+.header__sound-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2px;
+}
+
+.header__sound-icon svg {
+    width: 15px;
+    height: 15px;
+    fill: white;
+}
+
+.header__sound-text {
+    color: white;
+    font-size: 10px;
+}
+
+.header__sound-button:hover .header__sound-text {
+    color: var(--gold-color);
+}
+
+.header__sound-button:hover .header__sound-icon svg {
+    fill: var(--gold-color);
+}
+
+.header__sound-text,
+.header__sound-icon,
+.header__sound-icon svg,
+.header__sound-icon svg * {
+    pointer-events: none;
+}
