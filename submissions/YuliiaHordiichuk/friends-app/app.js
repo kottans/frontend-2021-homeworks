@@ -1,7 +1,4 @@
-const cardsContainer = document.querySelector('.cards__items'); 
 const randomUsersUrl = 'https://randomuser.me/api/?results=36&inc=gender,name,email,phone,picture,dob';  
-const form = document.querySelector('.form');
-const resetButton = document.querySelector('.form__button');
 
 let users; 
 let searchBy = ''; 
@@ -11,11 +8,11 @@ let filterBy = 'all';
 function getData() {
     fetch(randomUsersUrl)
         .then(answer => answer.json())
-        .then((data) => {
-            users = data.results;
-            createCards(data.results); 
+        .then(( { results } ) => {
+            users = results;
+            createCards(results); 
         })
-        .catch(err => {
+        .catch(() => {
             const textContainer = document.querySelector('.cards'); 
             textContainer.innerHTML = "Uh oh, something has gone wrong. Reload the page"; 
         })
@@ -27,6 +24,9 @@ function initApp() {
 }
 
 function bindEventListeners () {
+    const form = document.querySelector('.form');
+    const resetButton = document.querySelector('.form__button');
+
     form.addEventListener('input', ({ target: { name, value } }) => {
         if (name === 'sortBy') {
             sortBy = value; 
@@ -35,14 +35,14 @@ function bindEventListeners () {
         } else if (name === 'filterBy') {
             filterBy = value; 
         }
-    
-        createCards(getChosenCards()); 
+        
+        createCards(getChosenUsers()); 
     }); 
     
     resetButton.addEventListener('click', () => createCards(users))
 }
 
-function getChosenCards() {
+function getChosenUsers() {
     let newUsers = [...users]; 
     
     if (filterBy !== 'all') {
@@ -51,56 +51,68 @@ function getChosenCards() {
     if (searchBy) {
         newUsers = filterBySearch(newUsers); 
     }; 
-    if (sortBy) {
-        newUsers = sort(newUsers); 
-    }; 
+    if (sortBy === '0-9' || sortBy === '9-0') {
+        newUsers = sortByAge(newUsers); 
+    } else if (sortBy === 'a-z' || sortBy === 'z-a') {
+        newUsers = sortByName(newUsers)
+    }
 
     return newUsers; 
 }
 
 function createCards(dataArray) {
-    cardsContainer.innerHTML = dataArray.map(item => {
+    const cardsContainer = document.querySelector('.cards__items'); 
+
+    cardsContainer.innerHTML = dataArray.map(( { picture: {large}, name: { first, last }, dob: {age}, email, phone } ) => {
         return `
             <li class="cards__item card">
-                <img class="card__img" alt="user image" src="${item.picture.large}">
-                <h2 class="card__title">${item.name.first} ${item.name.last}</h2>
-                <p class="card__detail">${item.dob.age} years old </p>
+                <img class="card__img" alt="user image" src="${large}">
+                <h2 class="card__title">${first} ${last}</h2>
+                <p class="card__detail">${age} years old </p>
                 <h3 class="card__subtitle">Contact details</h3>
-                <a class="card__detail card__detail_link" href="mailto:${item.email}">${item.email}</a>
-                <a class="card__detail card__detail_link" href="tel:${item.phone}">${item.phone}</a>
+                <a class="card__detail card__detail_link" href="mailto:${email}">${email}</a>
+                <a class="card__detail card__detail_link" href="tel:${phone}">${phone}</a>
             </li>
         `; 
     }).join(''); 
 }
 
-function sort(dataArray) {
-        if (sortBy === '0-9') {
-            dataArray.sort((a,b) => a.dob.age - b.dob.age)
-        } else if (sortBy === '9-0') {
-            dataArray.sort((a,b) => b.dob.age - a.dob.age)
-        } else if (sortBy === 'a-z') {
-            dataArray.sort((a,b) => {
-                if (a.name.first < b.name.first) {
-                    return -1; 
-                }
-                if (a.name.first > b.name.first) {
-                    return 1; 
-                }
-                return 0; 
-            })
-        } else if (sortBy === 'z-a') {
-            dataArray.sort((a,b) => {
-                if (a.name.first > b.name.first) {
-                    return -1; 
-                }
-                if (a.name.first < b.name.first) {
-                    return 1; 
-                }
-                return 0; 
-            })
-        }
+function sortByAge(dataArray) {
+    if (sortBy === '0-9') {
+        sortByOrder(dataArray, 'dob', 'age', 'ascending')
+    } else if (sortBy === '9-0') {
+        sortByOrder(dataArray, 'dob', 'age', 'descending')
+    }
+
+    return dataArray;
+}
+
+function sortByName(dataArray) {
+    if (sortBy === 'a-z') {
+        sortByOrder (dataArray, 'name', 'first', 'ascending')
+    } else if (sortBy === 'z-a') {
+        sortByOrder (dataArray, 'name', 'first', 'descending')
+    }
 
     return dataArray; 
+}
+
+function sortByOrder(dataArray, keyToCompare, valueToCompare, sortType) {
+    dataArray.sort((a,b) => {
+        if (a[keyToCompare][valueToCompare] < b[keyToCompare][valueToCompare]) {
+            return -1; 
+        }
+        if (a[keyToCompare][valueToCompare] > b[keyToCompare][valueToCompare]) {
+            return 1; 
+        }
+        return 0; 
+    })
+
+    if (sortType === 'ascending') {
+        return dataArray; 
+    } else if (sortType === 'descending') {
+        return dataArray.reverse(); 
+    }
 }
 
 function filterByGender(dataArray) {
@@ -108,8 +120,11 @@ function filterByGender(dataArray) {
 }
 
 function filterBySearch(dataArray) {
-    return dataArray.filter(el => el.name.first.toLowerCase().includes(searchBy.toLowerCase()) || 
-                            el.name.last.toLowerCase().includes(searchBy.toLowerCase())); 
-}
-
+    return dataArray.filter(
+      ({ name:  { first, last } }) =>
+        first.toLowerCase().includes(searchBy.toLowerCase()) ||
+        last.toLowerCase().includes(searchBy.toLowerCase())
+    );
+}  
+  
 initApp()
