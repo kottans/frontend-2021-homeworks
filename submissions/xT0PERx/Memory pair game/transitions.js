@@ -14,13 +14,15 @@ let isBlock = false;
 const pointsWon = images.length;
 const gameBoard = document.querySelector('.cards');
 
-function getSortList() {
+function sortList() {
   cardDeck.sort(function () {
     return 0.5 - Math.random();
   });
 }
 
 const putImgsInCards = function () {
+  let fragment = document.createDocumentFragment();
+  fragment.appendChild(gameBoard);
   cardDeck.forEach(function (value) {
     template = `
         <div class="card">
@@ -30,6 +32,7 @@ const putImgsInCards = function () {
       `;
     gameBoard.insertAdjacentHTML('beforeEnd', template);
   });
+  document.querySelector('main').appendChild(fragment);
 };
 
 function flipBackCards() {
@@ -86,7 +89,7 @@ function checkWin() {
 }
 
 function InitGame() {
-  getSortList();
+  sortList();
   putImgsInCards();
   gameBoard.addEventListener('click', showCard);
 }
