@@ -1,0 +1,103 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    font-size: 1vw;
+}
+
+h2{
+    font-size: 2vw;
+}
+
+.ticket-legends{
+    width: 52vw;
+    margin: 3vh auto 4vh;
+    display: flex;
+    justify-content: center;
+}
+
+.ticket-legends > h2 {
+    margin: 0 1.5vw;
+    align-self: center;
+}
+
+.screen{
+    width: 52vw;
+    margin: 0 auto;
+}
+
+.screen > h2{
+    width: fit-content;
+    margin: 0 auto;
+}
+
+.seats {
+    display: grid;
+    grid-gap: 0.75vw;
+    grid-template-columns: repeat(17, 1.9vw);
+    grid-template-rows: repeat(10, 2.85vw);
+    width: 46.5%;
+    margin: 1vh auto 0vh;
+    padding: 1vw;
+}
+
+.place {
+    width: 1.9vw;
+    height: 2.85vw;
+    background-color: #9fff40;
+    border-radius: 0.3vw;
+    border: 0.1vw solid darkblue;
+}
+
+[type=checkbox] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    display: none;
+}
+
+[type=checkbox]:checked + .place{
+    background-color: darkblue;
+}
+
+.range1 {
+    grid-column: 4/5;
+}
+
+.range2 {
+    grid-column: 2/3;
+}
+
+.range3 {
+    grid-column: 2/3;
+}
+
+.range4 {
+    grid-column: 2/3;
+}
+
+.range5 {
+    grid-column: 2/3;
+}
+
+.range6 {
+    grid-column: 3/4;
+}
+
+.range7 {
+    grid-column: 3/4;
+}
+
+.range8 {
+    grid-column: 3/4;
+}
+
+.range9 {
+    grid-column: 2/3;
+}
+
+.range10 {
+    grid-column: 1/2;
+}
