@@ -1,0 +1,109 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 18px;
+  background-size: contain;
+  background: url("img/fon.gif");
+  overflow: hidden;
+}
+
+body:before {
+  width: 100%;
+  height: 100%;
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  background-image: -moz-linear-gradient(top left,  rgba(53, 53, 44, 0.6), rgba(68, 85, 85, 0.212));
+  background-image: -ms-linear-gradient(top left,  rgba(53, 53, 44, 0.6), rgba(68, 85, 85, 0.212));
+  background-image: -webkit-linear-gradient(top left,  rgba(53, 53, 44, 0.6), rgba(68, 85, 85, 0.212));
+  background-image: -o-linear-gradient(top left,  rgba(53, 53, 44, 0.6), rgba(68, 85, 85, 0.212));
+  background-image: linear-gradient(to bottom right, rgba(53, 53, 44, 0.6), rgba(68, 85, 85, 0.212));
+  background-size: auto;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 98vw;
+  height: 98vh;
+  padding: 1%;
+}
+
+.header {
+  text-align: center;
+}
+
+h1,
+h3 {
+  color: #fff;
+  font-family: 'Monoton', cursive;
+}
+
+.game,
+.front_card,
+.back_card {
+  display: inherit;
+  flex-flow: row wrap;
+  justify-content: center;
+  perspective: 1000px;
+}
+
+.card {
+  position: relative;
+  width: 7vw;
+  height: 27vh;
+  margin: 0.3em;
+  border: 3px solid rgb(192, 146, 28);
+  border-radius: 5px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.30);
+  cursor: pointer;
+  perspective: 1000px;
+  transition: 0.9s;
+  transform-style: preserve-3d;
+}
+
+.front_card,
+.back_card {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  margin: 0;
+  backface-visibility: hidden;
+  z-index: -1;
+}
+
+.back_card:hover {
+  box-shadow: 0 0 15px #b7afbd;
+}
+
+.front_card {
+  transform: rotateY(180deg);
+}
+
+.back_card {
+  transform: rotateY(0deg);
+}
+
+.img-front_card,
+.img-back_card {
+  width: 100%;
+  height: 100%;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.flipped {
+  transform: rotateY(180deg);
+}
