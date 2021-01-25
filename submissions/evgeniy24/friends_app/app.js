@@ -1,55 +1,63 @@
-const requestURL = 'https://randomuser.me/api/?results=20';
-let friendsArr = [],
-    friendsListWrap = document.querySelector('.friendsList-wrap'),
-    sortMenu = document.querySelector('.filter-sort-menu'),
-    searchField = document.querySelector('#search'),
-    sortByNameAZ = document.querySelector('.nameSortAZ'),
-    sortByNameZA = document.querySelector('.nameSortZA'),
-    sortByAgeYO = document.querySelector('.ageSortYoungerFirst'),
-    sortByAgeOY = document.querySelector('.ageSortOlderFirst'),
-    filterMenu = document.querySelector('.filter-gender'),
-    filterByMale = document.querySelector('.filter-gender__male'),
-    filterByFemale = document.querySelector('.filter-gender__female'),
-    filterByAll = document.querySelector('.filter-gender__all'),
-    seachedFriends,
+const REQUEST_URL  = 'https://randomuser.me/api/?results=20',
+    FRIENDS_LIST_WRAP = document.querySelector('.friendsList-wrap'),
+    MENU_WRAP = document.querySelector('.menu-wrap'),
+    SORTING_MENU = document.querySelector('.filter-sort-menu'),
+    SEARCH_FIELD = document.querySelector('#search'),
+    SORT_BY_NAME_AZ = document.querySelector('.nameSortAZ'),
+    SORT_BY_NAME_ZA = document.querySelector('.nameSortZA'),
+    SORT_BY_AGE_YO = document.querySelector('.ageSortYoungerFirst'),
+    SORT_BY_AGE_OY = document.querySelector('.ageSortOlderFirst'),
+    FILTER_MENU = document.querySelector('.filter-gender'),
+    FILTER_BY_MALE = document.querySelector('.filter-gender__male'),
+    FILTER_BY_FEMALE = document.querySelector('.filter-gender__female'),
+    FILTER_BY_ALL = document.querySelector('.filter-gender__all'),
+    MOBILE_MENU_BUTTON = document.querySelector('.button-container');
+let friendsList = [],  
+    searchResultList,
     sortedList,
-    errorBtn,
-    genderList, genderListMale, genderListFiltered,
-    scrollDepth,
-    mobileMenuBtn = document.querySelector('.menu-btn-container'),
-    filterSortMobileMenu = document.querySelector('.menu-wrap'),
-    headerMobile = document.querySelector('.header');
+    errorButton,
+    genderNeutralList, filteredByGenderList,
+    scrollDepth;
+    
 
 const sendRequest = function(method, url) {
-    return fetch(url).then(function(response) {
-        return response.json();
-    });
+    return fetch(url)
+        .then(handleErrors)
+        .then(function(response) {
+            return response.json();
+        });
 }
 
-function start() {
-    sendRequest('GET', requestURL)
+function handleErrors(response) {
+    if (response.status > 400) {
+        throw Error(response.statusText);
+    }
+    return response;
+}
+
+function startApp() {
+    sendRequest('GET', REQUEST_URL)
     .then( function(data) { 
-        friendsArr = data.results;
-        renderFriendsList(friendsArr);
+        friendsList = data.results;
+        renderFriendsList(friendsList);
     })
     .catch( function(err) {
-        console.log(err)
         renderErrorMessage();
     });
 }
 
-start();
+startApp();
 
 // drawing a list of friends---------------------------
 function renderFriendsList(friends) {
-    friendsListWrap.innerHTML = '';
+    FRIENDS_LIST_WRAP.innerHTML = '';
     
     friends.forEach(function(friend) {
         renderFriendsCard(friend);
     });
 }
 
-// create and add a friend card to the markup-----------
+// create friends card, add card to the markup-----------
 function renderFriendsCard(friend) {
     const cardWrap = document.createElement('div');
     const mainInfo = document.createElement('div');
@@ -92,51 +100,51 @@ function renderFriendsCard(friend) {
     mainInfo.append(friendsName, friendAge, friendCity);
     friendPhotoWrap.append(friendPhoto);
     cardWrap.append(friendPhotoWrap, mainInfo, moreWrap);
-    friendsListWrap.append(cardWrap);
+    FRIENDS_LIST_WRAP.append(cardWrap);
 }
 
 //find a friend by the name ------------------------------------
-searchField.addEventListener('input', function() {
-    let searchName = searchField.value.toLowerCase();
+SEARCH_FIELD.addEventListener('input', function() {
+    let searchName = SEARCH_FIELD.value.toLowerCase();
     if (searchName !== '') {
-            seachedFriends = friendsArr.filter(function(friend) {
+            searchResultList = friendsList.filter(function(friend) {
             return friend.name.first.toLowerCase().includes(searchName) 
         })
-        return renderFriendsList(seachedFriends);
+        return renderFriendsList(searchResultList);
     }  else {
-        renderFriendsList(friendsArr);
+        renderFriendsList(friendsList);
     }
 })
 
 //sorting List of friends --------------------------------------------
-sortMenu.addEventListener('click', function(event) {
-    if (seachedFriends) {
-        sortedList = seachedFriends;
-    } else if (genderListFiltered) {
-        sortedList = genderListFiltered;
+SORTING_MENU.addEventListener('click', function(event) {
+    if (searchResultList) {
+        sortedList = searchResultList;
+    } else if (filteredByGenderList) {
+        sortedList = filteredByGenderList;
     } else {
-        sortedList = [...friendsArr];
+        sortedList = [...friendsList];
     }
     
-    if (event.target === sortByNameAZ) {
+    if (event.target === SORT_BY_NAME_AZ) {
         sortedList.sort(function(a, b) {
            return (a.name.first > b.name.first) - (a.name.first < b.name.first);
         })
         renderFriendsList(sortedList);
 
-    } else if (event.target === sortByNameZA) {
+    } else if (event.target === SORT_BY_NAME_ZA) {
         sortedList.sort(function(a, b) {
             return (b.name.first > a.name.first) - (b.name.first < a.name.first);
         })
         renderFriendsList(sortedList);
 
-    } else if (event.target === sortByAgeYO) {
+    } else if (event.target === SORT_BY_AGE_YO) {
         sortedList.sort(function(a, b) {
             return (a.dob.age - b.dob.age)
         })
         renderFriendsList(sortedList);
 
-    } else if (event.target === sortByAgeOY) {
+    } else if (event.target === SORT_BY_AGE_OY) {
         sortedList.sort(function(a, b) {
             return (b.dob.age - a.dob.age)
         })
@@ -144,33 +152,34 @@ sortMenu.addEventListener('click', function(event) {
     } 
 })
 
-filterMenu.addEventListener('click', function(event) {
-    if (seachedFriends) {
-        genderList = seachedFriends;
+//filtering list of friends by gender
+FILTER_MENU.addEventListener('click', function(event) {
+    if (searchResultList) {
+        genderNeutralList = searchResultList;
     } else {
-        genderList = [...friendsArr];
+        genderNeutralList = [...friendsList];
     }
 
-    if (event.target === filterByMale) {
-        genderListFiltered = genderList.filter(function(friend) {
+    if (event.target === FILTER_BY_MALE) {
+        filteredByGenderList = genderNeutralList.filter(function(friend) {
            return friend.gender === 'male'; 
         })
-        renderFriendsList(genderListFiltered);
+        renderFriendsList(filteredByGenderList);
         
-    } else if (event.target === filterByFemale) {
-        genderListFiltered = genderList.filter(function(friend) {
+    } else if (event.target === FILTER_BY_FEMALE) {
+        filteredByGenderList = genderNeutralList.filter(function(friend) {
            return friend.gender === 'female'; 
         })
-        renderFriendsList(genderListFiltered);
+        renderFriendsList(filteredByGenderList);
 
-    } else if (event.target === filterByAll) {
-        genderListFiltered = [...friendsArr];
-        renderFriendsList(genderList);
+    } else if (event.target === FILTER_BY_ALL) {
+        filteredByGenderList = [...friendsList];
+        renderFriendsList(filteredByGenderList);
         }
         
 })
 
-// Error block ------------------------------------------------------
+// showing user message when data loading error ------------------------------------------------------
 function renderErrorMessage() {
     const messageErrorWrap =  document.createElement('div');
     const messageError = document.createElement('p');
@@ -186,13 +195,13 @@ function renderErrorMessage() {
 
 
     messageErrorWrap.append(messageError, tryMoreBtn);
-    friendsListWrap.append(messageErrorWrap);
+    FRIENDS_LIST_WRAP.append(messageErrorWrap);
 }
 
-// click on menu-mobile btn show/hode filter-sort menu and menu-btn animation
-mobileMenuBtn.addEventListener('click', function() {
-    clickMenuBtn(mobileMenuBtn);
-    clickMenuBtn(filterSortMobileMenu);
+// show/hide filter and sorting menus on mobile devices
+MOBILE_MENU_BUTTON.addEventListener('click', function() {
+    clickMenuBtn(MOBILE_MENU_BUTTON);
+    clickMenuBtn(MENU_WRAP);
     scrollDepth = window.pageYOffset;
     scrollToTop();
 });
@@ -201,7 +210,7 @@ function clickMenuBtn(elem) {
     elem.classList.toggle('change');
 }
 
-//smooth scrolling up
+//smooth scrolling to top
 function scrollToTop() {   
     let timer = 0; 
     if (scrollDepth > 100) {
@@ -215,10 +224,10 @@ function scrollToTop() {
    
 } 
 
-// ErrorBtn reSendRequest -----------------------
-friendsListWrap.addEventListener('click', function(event) {
+// when error - reSend Request to server -----------------------
+FRIENDS_LIST_WRAP.addEventListener('click', function(event) {
     if (event.target.classList == 'btn error-btn') {
-        friendsListWrap.innerHTML = '';
+        FRIENDS_LIST_WRAP.innerHTML = '';
         start();
     }
 })

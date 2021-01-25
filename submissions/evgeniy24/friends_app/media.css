@@ -23,11 +23,11 @@
 
 /* Smartphones portrait----------- */
 @media only screen and (min-width: 319px) and (max-width: 414px) {
-  .header {
+  header {
     justify-content: flex-start;
   }
 
-  .menu-btn-container {
+  .button-container {
     display: inline-block;
   }
 
