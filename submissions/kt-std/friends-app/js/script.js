@@ -20,28 +20,24 @@ function getFriends() {
             if (response.ok) {
                 return response.json();
             } else {
-                appendErrorMessage(
-                    getResponseErrorMessage(
-                        response.status,
-                        response.statusText
-                    )
-                );
-                return response.json();
+                throw new Error(getResponseErrorMessage(
+                    response.status,
+                    response.statusText
+                ));
             }
         })
         .then((responseBody) => {
-            if (responseBody !== undefined) {
-                INITIAL_FRIENDS_ARRAY = INITIAL_FRIENDS_ARRAY.concat(
-                    flattenFriendProperties(responseBody.results)
-                );
-                FRIENDS_ARRAY = INITIAL_FRIENDS_ARRAY;
-                appendFriendsCards(FRIENDS_ARRAY);
-                setTotalCounter(FRIENDS_ARRAY);
-                initializeAgeLimits(FRIENDS_ARRAY);
-            }
+            INITIAL_FRIENDS_ARRAY = INITIAL_FRIENDS_ARRAY.concat(
+                flattenFriendProperties(responseBody.results)
+            );
+            FRIENDS_ARRAY = INITIAL_FRIENDS_ARRAY;
+            appendFriendsCards(FRIENDS_ARRAY);
+            setTotalCounter(FRIENDS_ARRAY);
+            initializeAgeLimits(FRIENDS_ARRAY);
         })
         .catch((error) => {
-            appendErrorMessage(`${error} <br> Try to reload the page!`);
+            const errorText = error.toString().split(" ").slice(1).join(" ");
+            appendErrorMessage(`Oh no ... ${errorText} <br> Try to reload the page!`);
             document.querySelector(".main__container").classList.toggle("display-none");
             document.querySelector(".more__button").classList.toggle("display-none");
         });
@@ -167,8 +163,7 @@ function getGenderIcon(gender) {
 }
 
 function getResponseErrorMessage(status, statusText) {
-    return `<h1 class='error__message'>Sorry, an error occured!</h1>
-            <h2 class='error__code'>${status}: ${statusText}</h2>`;
+    return `<h2 class='error__code'>${status}: ${statusText}</h2>`;
 }
 
 function setAgeLimits(ageLimits, limitInputId) {
@@ -427,9 +422,7 @@ document.querySelector("#sort").addEventListener("click", (e) => {
         e.target.classList.contains("list__label") ||
         e.target.classList.contains("select__container")
     ) {
-        selectedOption = !SELECT_CONTAINER.getAttribute("value")  
-            ? OPTIONS_LIST[0].textContent 
-            : e.target.textContent;
+        selectedOption = !SELECT_CONTAINER.getAttribute("value")  ? OPTIONS_LIST[0].textContent : e.target.textContent;
         OPTIONS_CONTAINER.classList.toggle("visible");
     }
 });
