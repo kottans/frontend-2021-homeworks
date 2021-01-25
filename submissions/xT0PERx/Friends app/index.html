@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FriendsAppByT0PER</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
+    />
+  </head>
+
+  <body>
+    <header class="top">
+      <h1>friends app</h1>
+    </header>
+
+    <main class="main_window">
+      <div class="container" id="container">
+        <ul class="list" id="usersList"></ul>
+      </div>
+
+      <aside class="sidebar">
+        <nav class="wrapper">
+          <ul id="filters_menu" class="filters_list">
+            <li class="search">
+              <form action="" method="get">
+                <input
+                  type="text"
+                  name="search"
+                  class="searcher"
+                  placeholder="Find..."
+                />
+                <button type="submit"></button>
+              </form>
+            </li>
+            <li class="sort_usersByAlphabet">
+              <button id="Abc" class="filter-btn">Abc</button>
+              <button id="Zyx" class="filter-btn">Zyx</button>
+            </li>
+            <li class="selection-box">
+              <p>Gender :</p>
+              <button id="male" class="filter-btn">Male</button>
+              <button id="female" class="filter-btn">Female</button>
+            </li>
+            <li class="selection-box">
+              <p>Age :</p>
+              <button id="younger-ftr" class="filter-btn">Younger first</button>
+              <button id="senior-ftr" class="filter-btn">Older first</button>
+            </li>
+            <li class="reset_btn">
+              <button class="filter-btn" id="reset">Reset Filters</button>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+    </main>
+    <footer class="bottom">
+      <h2>Created as part of the training course of KOTTANS</h2>
+    </footer>
+  </body>
+
+  <script src="js/index.js"></script>
+</html>
