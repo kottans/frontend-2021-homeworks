@@ -19,7 +19,6 @@ let friendsList = [],
     genderNeutralList, filteredByGenderList,
     scrollDepth;
     
-
 const sendRequest = function(method, url) {
     return fetch(url)
         .then(handleErrors)
@@ -228,6 +227,6 @@ function scrollToTop() {
 FRIENDS_LIST_WRAP.addEventListener('click', function(event) {
     if (event.target.classList == 'btn error-btn') {
         FRIENDS_LIST_WRAP.innerHTML = '';
-        start();
+        startApp();
     }
 })
