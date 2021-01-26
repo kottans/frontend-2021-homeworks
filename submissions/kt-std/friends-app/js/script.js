@@ -3,8 +3,8 @@ let FRIENDS_ARRAY = [],
     INITIAL_FRIENDS_ARRAY = [];
 const USERS_AMOUNT = 24,
     API_URL = `https://randomuser.me/api/?results=${USERS_AMOUNT}`,
-    MIN_AGE_INPUT_ID = "minAge",
-    MAX_AGE_INPUT_ID = "maxAge",
+    MIN_AGE_INPUT = document.getElementById("minAge"),
+    MAX_AGE_INPUT = document.getElementById("maxAge"),
     CARDS_CONTAINER = document.querySelector(".cards__container"),
     SELECT_CONTAINER = document.querySelector(".select__container"),
     FILTERS_CONTAINER = document.querySelector(".filters__container"),
@@ -13,9 +13,17 @@ const USERS_AMOUNT = 24,
     TOTAL_COUNTER = document.querySelector(".amount");
 
 
+async function initializeApp(){
+    await getFriends();
+    appendFriendsCards(FRIENDS_ARRAY);
+    setTotalCounter(FRIENDS_ARRAY);
+    initializeAgeLimits(FRIENDS_ARRAY);
+}
 
-function getFriends() {
-    fetch(API_URL)
+initializeApp();
+
+async function getFriends() {
+    return fetch(API_URL)
         .then((response) => {
             if (response.ok) {
                 return response.json();
@@ -31,9 +39,6 @@ function getFriends() {
                 flattenFriendProperties(responseBody.results)
             );
             FRIENDS_ARRAY = INITIAL_FRIENDS_ARRAY;
-            appendFriendsCards(FRIENDS_ARRAY);
-            setTotalCounter(FRIENDS_ARRAY);
-            initializeAgeLimits(FRIENDS_ARRAY);
         })
         .catch((error) => {
             const errorText = error.toString().split(" ").slice(1).join(" ");
@@ -42,8 +47,6 @@ function getFriends() {
             document.querySelector(".more__button").classList.toggle("display-none");
         });
 }
-
-getFriends();
 
 function setTotalCounter(friendsArray) {
     TOTAL_COUNTER.innerText = `${friendsArray.length} Totals`;
@@ -54,8 +57,8 @@ function setTotalCounter(friendsArray) {
 
 function initializeAgeLimits(friendsArray) {
     const ageLimits = getAgeLimits(friendsArray);
-    setAgeLimits(ageLimits, MIN_AGE_INPUT_ID);
-    setAgeLimits(ageLimits, MAX_AGE_INPUT_ID);
+    setAgeLimits(ageLimits, MIN_AGE_INPUT, 'min');
+    setAgeLimits(ageLimits, MAX_AGE_INPUT, 'max');
 }
 
 function appendNoResultsMessage() {
@@ -166,12 +169,10 @@ function getResponseErrorMessage(status, statusText) {
     return `<h2 class='error__code'>${status}: ${statusText}</h2>`;
 }
 
-function setAgeLimits(ageLimits, limitInputId) {
-    const limitInput = document.getElementById(limitInputId);
+function setAgeLimits(ageLimits, limitInput, limit) {
     limitInput.min = ageLimits.min;
     limitInput.max = ageLimits.max;
-    if (limitInputId === MIN_AGE_INPUT_ID) limitInput.value = ageLimits.min;
-    if (limitInputId === MAX_AGE_INPUT_ID) limitInput.value = ageLimits.max;
+    limitInput.value = ageLimits[limit];
 }
 
 function getAgeLimits(friendsArray) {
@@ -188,7 +189,7 @@ function sortCards(e, friendsArray) {
         e.target.classList.contains("select__container")
     ) {
         SELECT_CONTAINER.attributes["select-modified"].value = true;
-        sortCardsArray(e.target.getAttribute("value"), friendsArray);
+        sortCardsArray[e.target.getAttribute("value")](friendsArray);
     }
 }
 
@@ -197,25 +198,23 @@ function updateSelectText(itemToSelect) {
     SELECT_CONTAINER.setAttribute("value", itemToSelect.getAttribute("value"));
 }
 
-function sortCardsArray(condition, friendsArray) {
-    switch (condition) {
-        case "namesDescending":
-            FRIENDS_ARRAY.sort((a, b) => b.firstName.localeCompare(a.firstName));
-            break;
-        case "namesAscending":
-            FRIENDS_ARRAY.sort((a, b) => a.firstName.localeCompare(b.firstName));
-            break;
-        case "ageDescending":
-            FRIENDS_ARRAY.sort((a, b) => b.age - a.age);
-            break;
-        case "ageAscending":
-            FRIENDS_ARRAY.sort((a, b) => a.age - b.age);
-            break;
-    }
+const sortCardsArray = {
+    namesDescending: function(friendsArray) {
+        friendsArray.sort((a, b) => b.firstName.localeCompare(a.firstName));
+    },
+    namesAscending: function(friendsArray) {
+        friendsArray.sort((a, b) => a.firstName.localeCompare(b.firstName));
+    },
+    ageDescending: function(friendsArray) {
+        friendsArray.sort((a, b) => b.age - a.age);
+    },
+    ageAscending: function(friendsArray) {
+        friendsArray.sort((a, b) => a.age - b.age);
+    },
 }
 
 function findSubstring(string, substring) {
-    return string.toLowerCase().indexOf(substring.toLowerCase()) >= 0;
+    return string.toLowerCase().includes(substring.toLowerCase());
 }
 
 function findMatchesWithPropertiesValues(
@@ -224,9 +223,7 @@ function findMatchesWithPropertiesValues(
     substring
 ) {
     return friendsArray.filter((friend) => {
-        return propertiesList
-            .map((property) => findSubstring(friend[property], substring))
-            .some((el) => el);
+        return propertiesList.filter((property) => findSubstring(friend[property], substring)).length;
     });
 }
 
@@ -238,10 +235,10 @@ function filterByGender(e, friendsArray) {
 }
 
 function filterByAge(friendsArray) {
-    const min = document.getElementById(MIN_AGE_INPUT_ID),
-        max = document.getElementById(MAX_AGE_INPUT_ID);
-    if (max.value) friendsArray = friendsArray.filter((friend) => friend.age <= max.value);
-    if (min.value) friendsArray = friendsArray.filter((friend) => friend.age >= min.value);
+    if (MIN_AGE_INPUT.value) friendsArray = friendsArray
+        .filter((friend) => friend.age >= MIN_AGE_INPUT.value);
+    if (MAX_AGE_INPUT.value) friendsArray = friendsArray
+        .filter((friend) => friend.age <= MAX_AGE_INPUT.value);
     return friendsArray;
 }
 
@@ -300,38 +297,15 @@ function focusOnItem(buttonPressed) {
     const optionsListArray = Array.from(OPTIONS_LIST),
         selectedItem = optionsListArray.find(
             (listItem) => listItem.textContent === selectedOption
-        ),
-        selectedItemIndex = Array.from(OPTIONS_LIST).indexOf(selectedItem);
-    if (buttonPressed === "ArrowUp") {
-        switch (true) {
-            case !isFirstListItem(selectedItemIndex):
-                higlightSelectedOption(optionsListArray[selectedItemIndex - 1]);
-                selectedOption = optionsListArray[selectedItemIndex - 1].textContent;
-                resetPreviouslySelectedOptions(selectedOption);
-                removeAriaSelectedAttribute(selectedItem);
-                break;
-            case !isFirstListItem(selectedItemIndex):
-                break;
-        }
-    } else if (buttonPressed === "ArrowDown") {
-        switch (true) {
-            case !isLastListItem(selectedItemIndex, optionsListArray):
-                higlightSelectedOption(optionsListArray[selectedItemIndex + 1]);
-                selectedOption = optionsListArray[selectedItemIndex + 1].textContent;
-                resetPreviouslySelectedOptions(selectedOption);
-                removeAriaSelectedAttribute(selectedItem);
-                break;
-            case isLastListItem(selectedItemIndex, optionsListArray):
-                break;
-        }
-    }
-}
-
-function isLastListItem(selectedItemIndex, optionsArray){
-    return selectedItemIndex === optionsArray.length - 1;
-}
-function isFirstListItem(selectedItemIndex){
-    return selectedItemIndex === 0;
+        );
+    let selectedItemIndex = Array.from(OPTIONS_LIST).indexOf(selectedItem);
+    buttonPressed === "ArrowUp" ? selectedItemIndex-- : selectedItemIndex++;
+    if(selectedItemIndex >= 0 && selectedItemIndex <= optionsListArray.length-1){
+        higlightSelectedOption(optionsListArray[selectedItemIndex]);
+        selectedOption = optionsListArray[selectedItemIndex].textContent;
+        resetPreviouslySelectedOptions(selectedOption);
+        removeAriaSelectedAttribute(selectedItem);
+    }    
 }
 
 function observeOptionsListVisibility() {
