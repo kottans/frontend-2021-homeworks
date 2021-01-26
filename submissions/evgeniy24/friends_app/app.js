@@ -124,29 +124,31 @@ SORTING_MENU.addEventListener('click', function(event) {
     } else {
         sortedList = [...friendsList];
     }
+
+    const sortByName = function(a, b) {
+        const nameA = a.name.first.toUpperCase();
+        const nameB = b.name.first.toUpperCase();
+        return nameA < nameB ? -1 : nameA > nameB ? 1 : 0;
+    }
+
+    const sortByAge = function(a, b) {
+        return (a.dob.age - b.dob.age);
+    }
     
     if (event.target === SORT_BY_NAME_AZ) {
-        sortedList.sort(function(a, b) {
-           return (a.name.first > b.name.first) - (a.name.first < b.name.first);
-        })
+        sortedList.sort((a, b) => sortByName(a, b));
         renderFriendsList(sortedList);
 
     } else if (event.target === SORT_BY_NAME_ZA) {
-        sortedList.sort(function(a, b) {
-            return (b.name.first > a.name.first) - (b.name.first < a.name.first);
-        })
+        sortedList.sort((a, b) => sortByName(b, a));
         renderFriendsList(sortedList);
 
     } else if (event.target === SORT_BY_AGE_YO) {
-        sortedList.sort(function(a, b) {
-            return (a.dob.age - b.dob.age)
-        })
+        sortedList.sort((a, b) => sortByAge(a, b));
         renderFriendsList(sortedList);
 
     } else if (event.target === SORT_BY_AGE_OY) {
-        sortedList.sort(function(a, b) {
-            return (b.dob.age - a.dob.age)
-        })
+        sortedList.sort((a, b) => sortByAge(b, a));
         renderFriendsList(sortedList);
     } 
 })
