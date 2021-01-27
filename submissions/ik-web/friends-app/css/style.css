@@ -1,0 +1,352 @@
+/* Variables
+------------------------- */
+:root {
+    --body-bg-color: #e4e3e3;
+    --header-bg-color: linear-gradient(#00ffff, #9198e5);
+    --header-content-color: #fff;
+    --aside-bg-color:#c5c2c2;
+    --card-bg-color: #fff;
+    --text-color: #303030;
+    --border-color: #6d6d6d;
+    --btn-bg-color: #76c8d6;
+    --btn-bg-hover-color: #77ffff;
+    --btn-bg-active-color: #9198e5;
+}
+
+/* Common styles
+------------------------------ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+body {
+    background-color: var(--body-bg-color);
+}
+
+a {
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+img {
+    width: 100%;
+}
+
+/* Page styles
+------------------------------ */
+.header {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 10px;
+    width: 100%;
+    height: 60px;
+    background: var(--header-bg-color);
+    box-shadow: 0 0 8px 0 #000;
+}
+
+.header__title {
+    font-weight: 800;
+    color: var(--header-content-color);
+    text-shadow: 0 1px 4px #000;
+}
+
+.burger {
+    display: none;
+}
+
+.main {
+    display: flex;
+}
+
+.aside {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 3;
+    padding: 90px 15px 0;
+    width: 240px;
+    height: 100%;
+    background-color: var(--aside-bg-color);
+    box-shadow: 0 0 8px 0 #000;
+}
+
+/* Menu styles
+------------------------------ */
+
+.menu {
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    user-select: none;
+}
+
+.menu__item {
+    padding-top: 15px;
+    text-align: center;
+}
+
+.menuItem__name {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--text-color);
+}
+
+.menuItem__search {
+    padding: 5px;
+    width: 160px;
+    font-size: 14px;
+    color: var(--text-color);
+}
+
+.menuItem__search:focus {
+    outline: none;
+}
+
+.menuItem__btnBox {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.menuItem__btnWrapper {
+    padding: 8px;
+}
+
+.menuItem__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    height: 30px;
+    text-align: center;
+    font-size: 16px;
+    color: var(--text-color);
+    background-color:var(--btn-bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    transition: background-color .1s linear;
+}
+
+.menuItem__btn:hover {
+    background-color: var(--btn-bg-hover-color);
+    cursor: pointer;
+}
+
+input:checked~.menuItem__btn{
+    background-color: var(--btn-bg-active-color);
+}
+
+.menuItem__radio {
+    position: absolute;
+    left: -999px;
+}
+
+.menuItem__btnReset {
+    display: block;
+    margin: 20px auto;
+    outline: none;
+    border: 1px solid var(--border-color);
+}
+
+/* Users container styles
+------------------------------ */
+.usersBox {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 80px 5px 20px 247px;
+    width: 100%;
+}
+
+.usersBox__message {
+    margin-top: 25vh;
+    font-size: 28px;
+    color: var(--text-color);
+}
+
+/* Users container styles
+------------------------------ */
+.userCard {
+    padding: 10px;
+}
+
+.userCard__inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 225px;
+    height: 335px;
+    padding-bottom: 10px;
+    border: 1px solid var(--border-color);
+    background-color: var(--card-bg-color);
+    transition: box-shadow .25s linear;
+}
+
+.userCard__inner:hover {
+    box-shadow: 5px 5px 10px 4px #888787;
+}
+
+.userCard__userName {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 35px;
+    text-align: center;
+    font-size: 18px;
+    color: var(--header-content-color);
+    text-shadow: 0 1px 4px #000;
+    background: var(--header-bg-color);
+}
+
+.userCard__userPhoto {
+    width: 160px;
+    height: 160px;
+    background-color: cyan;
+}
+
+.userCard__userInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    height: 90px;
+}
+
+.userInfo__item {
+    font-size: 14px;
+    color: var(--text-color);
+}
+
+/* Media styles
+------------------------------ */
+@media (max-width: 991px) {
+
+    /* Burger styles
+    ------------------------------ */
+    .burger {
+        position: absolute;
+        top: 50%;
+        left: 10px;
+        transform: translateY(-50%);
+        display: block;
+        width: 40px;
+        height: 40px;
+    }
+    .burger span {
+        background-color: var(--header-content-color);
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 17px;
+        width: 100%;
+        height: 4px;
+    }
+
+    .burger span:before,
+    .burger span:after {
+        background-color: var(--header-content-color);
+        content: '';
+        display: block;
+        position: absolute;
+        right: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .burger span:before {
+        top: -10px;
+    }
+    .burger span:after {
+        bottom: -10px;
+    }
+
+    /* Burger-active styles
+    ------------------------------*/
+    .body.blocked {
+        overflow: hidden;
+    }
+
+    .burger.active span{
+        background: none;
+    }
+
+    .burger.active span:before {
+        top: 0;
+        transform: rotate(45deg);
+    }
+    .burger.active span:after {
+        bottom: 0;
+        transform: rotate(-45deg);
+    }
+
+    /* ---------------------------- */
+    .aside {
+        left: -600px;
+        width: 50%;
+        height: auto;
+        transition: left .3s linear;
+    }
+    
+    .aside.active {
+        left: 0;
+    }
+
+    .menu {
+        border: 0;
+    }
+
+    .menuItem__search {
+        font-size: 20px;
+    }
+
+    .menuItem__btn {
+        height: 48px;
+    }
+
+    .usersBox {
+        padding-left: 5px;
+    }
+
+    .userCard__inner:hover {
+        box-shadow: none;
+    }
+}
+
+@media (max-width: 575px) {
+
+    .header {
+        justify-content: flex-end;
+    }
+    
+    .header__title {
+        font-size: 26px;
+    }
+
+    .aside {
+        padding: 70px 15px 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .menu_item {
+        padding: 0 0 5px;
+    }
+
+    .menuItem__btnBox {
+        padding-bottom: 0;
+    }
+
+    .menuItem__btnReset {
+        margin-top: 20px;
+    }
+}
