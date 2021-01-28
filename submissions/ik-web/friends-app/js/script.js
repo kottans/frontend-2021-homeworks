@@ -2,11 +2,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const url = 'https://randomuser.me/api/?results=80&seed=fa21';
     const usersBox = document.querySelector('.usersBox');
-    const aside = document.querySelector('.aside');
-    const menu = document.querySelector('.menu');
-    const body = document.querySelector('.body');
-    const inputGenderAll = document.querySelector('#all').value;
-    const burgerMenu = document.querySelector('.burger');
 
     // ---------------------------------------------------------------
     function createUserCard(name, photo, gender, age, phone, email) {
@@ -37,9 +32,9 @@ document.addEventListener('DOMContentLoaded', () => {
         .catch(err => window.location.reload());
     }
 
-    function addUserCardsOnPage(userInfo) {
+    function addUserCardsOnPage(usersInfo) {
         let userCards = '';
-        userInfo.forEach(user => {
+        usersInfo.forEach(user => {
             userCards += createUserCard(
                 `${user.name.first} ${user.name.last}`,
                 user.picture.large, 
@@ -53,80 +48,84 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     // ---------------------------------------------------------------
     function doBurgerMenu() {
-        burgerMenu.addEventListener('click', function (e) {
+        document.querySelector('.burger').addEventListener('click', function (e) {
             e.preventDefault();
             this.classList.toggle('active');
-            aside.classList.toggle('active');
-            body.classList.toggle('blocked');
+            document.querySelector('.aside').classList.toggle('active');
+            document.querySelector('.body').classList.toggle('blocked');
         });
     }
     // ---------------------------------------------------------------
-    function doMenu(userInfo) {
+    function doMenu(usersInfo) {
+        const menu = document.querySelector('.menu');
+
         menu.addEventListener('input', ({target}) => {
-            let userInfoCopy = [...userInfo];
+            let usersInfoCopy = [...usersInfo];
             const inputSearchName = menu.search.value;
             const inputSort = menu.sort.value;
             const inputGenderFilter = menu.gender.value;
             
-            if (inputSearchName) userInfoCopy = doSearchByName(userInfoCopy, inputSearchName);
-            if (inputSort) doSort(userInfoCopy, inputSort);
-            if (inputGenderFilter) userInfoCopy = doFilterByGender(userInfoCopy, inputGenderFilter);
+            if (inputSearchName) usersInfoCopy = doSearchByName(usersInfoCopy, inputSearchName);
+            if (inputSort) doSort(usersInfoCopy, inputSort);
+            if (inputGenderFilter) usersInfoCopy = doFilterByGender(usersInfoCopy, inputGenderFilter);
 
-            if (userInfoCopy.length === 0) {
+            if (usersInfoCopy.length === 0) {
                 usersBox.innerHTML = '<h2 class="usersBox__message">No matches found...</h2>';
             } else {
-                addUserCardsOnPage(userInfoCopy);
+                addUserCardsOnPage(usersInfoCopy);
             }
         });
     }
     // ---------------------------------------------------------------
-    function doSearchByName(userInfoCopy, inputSearch) {
-        return userInfoCopy.filter(user => {
+    function doSearchByName(usersInfoCopy, inputSearch) {
+        return usersInfoCopy.filter(user => {
             const userFullName = `${user.name.first} ${user.name.last}`;
             return userFullName.toLowerCase().includes(inputSearch.toLowerCase());
         });
     }
     // ---------------------------------------------------------------
-    function doSort(userInfoCopy, inputSort) {
+    function doSort(usersInfoCopy, inputSort) {
         const sortFunctions = {
-            sortNameAZ: () => userInfoCopy.sort((user1, user2) => sortByName(user1, user2)),
-            sortNameZA: () => userInfoCopy.sort((user2, user1) => sortByName(user1, user2)),
-            sortAgeAsc: () => userInfoCopy.sort((user1, user2) => sortByAge(user1, user2)),
-            sortAgeDesc: () => userInfoCopy.sort((user2, user1) => sortByAge(user1, user2))
+            sortNameAZ: () => usersInfoCopy.sort((a, b) => sortByName(a, b)),
+            sortNameZA: () => usersInfoCopy.sort((b, a) => sortByName(a, b)),
+            sortAgeAsc: () => usersInfoCopy.sort((a, b) => sortByAge(a, b)),
+            sortAgeDesc: () => usersInfoCopy.sort((b, a) => sortByAge(a, b))
         };
         if (sortFunctions.hasOwnProperty(inputSort)) sortFunctions[inputSort]();
     }
 
-    function sortByName(user1, user2) {
-        const userFullName1 = `${user1.name.first} ${user1.name.last}`;
-        const userFullName2 = `${user2.name.first} ${user2.name.last}`;
-        return userFullName1.localeCompare(userFullName2);
+    function sortByName(a, b) {
+        const fullUserNameA = `${a.name.first} ${a.name.last}`;
+        const fullUserNameB = `${b.name.first} ${b.name.last}`;
+        return fullUserNameA.localeCompare(fullUserNameB);
     }
 
-    function sortByAge(user1, user2) {
-        const userAge1 = user1.dob.age;
-        const userAge2 = user2.dob.age;
-        return userAge1 - userAge2;       
+    function sortByAge(a, b) {
+        const ageA = a.dob.age;
+        const ageB = b.dob.age;
+        return ageA - ageB;       
     }
     // ---------------------------------------------------------------
-    function doFilterByGender(userInfoCopy, inputGenderFilter) {
+    function doFilterByGender(usersInfoCopy, inputGenderFilter) {
+        const inputGenderAll = document.querySelector('#all').value;
+
         if (inputGenderFilter === inputGenderAll) {
-            return userInfoCopy;
-        } else return userInfoCopy.filter(user => inputGenderFilter === user.gender);
+            return usersInfoCopy;
+        } else return usersInfoCopy.filter(user => inputGenderFilter === user.gender);
     }
     // ---------------------------------------------------------------
-    function doReset(userInfo) {
+    function doReset(usersInfo) {
         document.querySelector('#reset').addEventListener('click', (e) => {
-            addUserCardsOnPage(userInfo);
+            addUserCardsOnPage(usersInfo);
         });
     }
     // ---------------------------------------------------------------
     async function startApp() {
-        const userInfo = await getUsersInfo();
-        addUserCardsOnPage(userInfo);
+        const usersInfo = await getUsersInfo();
+        addUserCardsOnPage(usersInfo);
         doBurgerMenu();
-        doMenu(userInfo);
-        doReset(userInfo);
+        doMenu(usersInfo);
+        doReset(usersInfo);
     }
     // ===============================================================
     startApp();
