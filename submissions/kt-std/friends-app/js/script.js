@@ -3,9 +3,11 @@ let FRIENDS_ARRAY = [],
     INITIAL_FRIENDS_ARRAY = [];
 const USERS_AMOUNT = 24,
     API_URL = `https://randomuser.me/api/?results=${USERS_AMOUNT}`,
+    ALLOWED_SEARCH_FILTER_PROPERTIES = ["firstName", "lastName", "email", "username", "country"],
     MIN_AGE_INPUT = document.getElementById("minAge"),
     MAX_AGE_INPUT = document.getElementById("maxAge"),
     CARDS_CONTAINER = document.querySelector(".cards__container"),
+    SEARCH_INPUT = document.querySelector("#search"),
     SELECT_CONTAINER = document.querySelector(".select__container"),
     FILTERS_CONTAINER = document.querySelector(".filters__container"),
     OPTIONS_CONTAINER = document.querySelector(".select__list"),
@@ -15,9 +17,11 @@ const USERS_AMOUNT = 24,
 
 async function initializeApp(){
     await getFriends();
-    appendFriendsCards(FRIENDS_ARRAY);
-    setTotalCounter(FRIENDS_ARRAY);
-    initializeAgeLimits(FRIENDS_ARRAY);
+    if(FRIENDS_ARRAY.length){
+        appendFriendsCards(FRIENDS_ARRAY);
+        setTotalCounter(FRIENDS_ARRAY);
+        initializeAgeLimits(FRIENDS_ARRAY);
+    }    
 }
 
 initializeApp();
@@ -183,13 +187,11 @@ function getAgeLimits(friendsArray) {
     };
 }
 
-function sortCards(e, friendsArray) {
-    if (
-        e.target.classList.contains("list__label") ||
-        e.target.classList.contains("select__container")
-    ) {
+function sortCards(friendsArray) {
+    const checkedSortInput = document.querySelector(".list__input:checked");
+    if(checkedSortInput){
         SELECT_CONTAINER.attributes["select-modified"].value = true;
-        sortCardsArray[e.target.getAttribute("value")](friendsArray);
+        sortCardsArray[checkedSortInput.getAttribute("value")](friendsArray);
     }
 }
 
@@ -218,16 +220,16 @@ function findSubstring(string, substring) {
 }
 
 function findMatchesWithPropertiesValues(
-    propertiesList,
     friendsArray,
     substring
 ) {
     return friendsArray.filter((friend) => {
-        return propertiesList.filter((property) => findSubstring(friend[property], substring)).length;
+        return ALLOWED_SEARCH_FILTER_PROPERTIES
+            .filter((property) => findSubstring(friend[property], substring)).length;
     });
 }
 
-function filterByGender(e, friendsArray) {
+function filterByGender(friendsArray) {
     let checkboxes = Array.from(document.querySelectorAll(".checkbox:checked"));
     return friendsArray.filter((friend) =>
         checkboxes.some((gender) => friend.gender === gender.value)
@@ -242,23 +244,27 @@ function filterByAge(friendsArray) {
     return friendsArray;
 }
 
-function checkFiltersChanged(event) {
-    return ["list__label", "select__container", "number", "checkbox"]
-        .some((filter) => {
-            if (!(event.type === "click" &&  event.target.classList.contains("select__container"))) {
-                return event.target.classList.contains(filter);
-            }
-        });
+
+function updateCards() {    
+    FRIENDS_ARRAY = INITIAL_FRIENDS_ARRAY;
+    sortCards(FRIENDS_ARRAY);
+    FRIENDS_ARRAY = filterByAge(FRIENDS_ARRAY);
+    FRIENDS_ARRAY = filterByGender(FRIENDS_ARRAY);
+    if(!isSearchEmpty()) {
+        FRIENDS_ARRAY = findMatchesWithPropertiesValues(
+            FRIENDS_ARRAY,
+            SEARCH_INPUT.value
+        );
+    }
+    appendFriendsCards(FRIENDS_ARRAY);
 }
 
-function updateCards(event) {
-    if (checkFiltersChanged(event)) {
-        FRIENDS_ARRAY = INITIAL_FRIENDS_ARRAY;
-        sortCards(event, FRIENDS_ARRAY);
-        FRIENDS_ARRAY = filterByAge(FRIENDS_ARRAY);
-        FRIENDS_ARRAY = filterByGender(event, FRIENDS_ARRAY);
-        appendFriendsCards(FRIENDS_ARRAY);
-    }
+function isSearchEmpty(){
+    return !document.getElementById("search").value;
+}
+
+function isItemInFocus(e){
+    return e.target.contains(e.relatedTarget);
 }
 
 function isSelectModified() {
@@ -271,7 +277,7 @@ function checkOptionsVisibility() {
 
 function resetPreviouslySelectedOptions(selectedOption) {
     Array.from(OPTIONS_LIST).forEach((option) => {
-        if (option.textContent != selectedOption) {
+        if (option.textContent !== selectedOption) {
             document.getElementById(option.htmlFor).checked = false;
         }
     });
@@ -299,13 +305,19 @@ function focusOnItem(buttonPressed) {
             (listItem) => listItem.textContent === selectedOption
         );
     let selectedItemIndex = Array.from(OPTIONS_LIST).indexOf(selectedItem);
-    buttonPressed === "ArrowUp" ? selectedItemIndex-- : selectedItemIndex++;
-    if(selectedItemIndex >= 0 && selectedItemIndex <= optionsListArray.length-1){
-        higlightSelectedOption(optionsListArray[selectedItemIndex]);
-        selectedOption = optionsListArray[selectedItemIndex].textContent;
-        resetPreviouslySelectedOptions(selectedOption);
-        removeAriaSelectedAttribute(selectedItem);
-    }    
+    if(buttonPressed === "ArrowUp"){
+        if (--selectedItemIndex < 0) {
+            selectedItemIndex = optionsListArray.length-1;
+        }        
+    }else{
+        if (++selectedItemIndex > optionsListArray.length-1) {
+            selectedItemIndex = 0;
+        }
+    }
+    higlightSelectedOption(optionsListArray[selectedItemIndex]);
+    selectedOption = optionsListArray[selectedItemIndex].textContent;
+    resetPreviouslySelectedOptions(selectedOption);
+    removeAriaSelectedAttribute(selectedItem);
 }
 
 function observeOptionsListVisibility() {
@@ -316,11 +328,9 @@ function observeOptionsListVisibility() {
                     if (
                         mutation.target.classList.contains("visible") &&
                         !SELECT_CONTAINER.getAttribute("aria-expanded")
-                    ) {
-                        resetPreviouslySelectedOptions(selectedOption);
-                        updateSelectText(getSelectOption(selectedOption));
+                    ) { 
+                        resetPreviouslySelectedOptions(selectedOption);                  
                         higlightSelectedOption(getSelectOption(selectedOption));
-
                         SELECT_CONTAINER.setAttribute("aria-expanded", "true");
                     }
                     if (
@@ -338,20 +348,33 @@ function observeOptionsListVisibility() {
 
 observeOptionsListVisibility();
 
-SELECT_CONTAINER.addEventListener("focusout", (e) => {
-    if (
-        checkOptionsVisibility() &&
-        e.relatedTarget !== null &&
-        !e.relatedTarget.classList.contains("list__value") &&
-        !e.relatedTarget.classList.contains("select__container")
-    )
-        OPTIONS_CONTAINER.classList.toggle("visible");
+document.querySelectorAll(".list__input").forEach(input => {
+    input.addEventListener("change", (e) => {
+        const selectedItemLabel = document.querySelector(`[for=${e.target.id}]`);
+        selectedOption = selectedItemLabel.textContent;
+        resetPreviouslySelectedOptions(selectedOption);
+        updateSelectText(selectedItemLabel);
+        updateCards();
+    });
 });
 
-document.addEventListener("keydown", (keyEvent) => {
-    if (keyEvent.target === SELECT_CONTAINER) {
-        if (keyEvent.code === "Space" || keyEvent.code === "Enter") {
-            keyEvent.preventDefault();
+document.querySelectorAll(".gender__input, .number").forEach(input => {
+    input.addEventListener("change", () => updateCards());
+});
+
+document.querySelector("#search").addEventListener("input", () => updateCards());
+
+SELECT_CONTAINER.addEventListener("focusout", (e) => {
+    if (!isItemInFocus(e)){
+        OPTIONS_CONTAINER.classList.remove("visible");
+    }
+});
+
+document.addEventListener("keydown", (e) => {
+    const {target, code} = e;
+    if (target === SELECT_CONTAINER) {
+        if (code === "Space" || code === "Enter") {
+            e.preventDefault();
             if (!checkOptionsVisibility()) {
                 OPTIONS_CONTAINER.classList.add("visible");
                 if (isSelectModified()) {
@@ -361,20 +384,20 @@ document.addEventListener("keydown", (keyEvent) => {
                     higlightSelectedOption(OPTIONS_LIST[0]);
                 }
             } else {
-                updateCards(keyEvent);
+                updateCards();
                 OPTIONS_CONTAINER.classList.remove("visible");
             }
         }
     }
-    if (keyEvent.code === "Escape" && checkOptionsVisibility()) {
+    if (code === "Escape" && checkOptionsVisibility()) {
         OPTIONS_CONTAINER.classList.remove("visible");
     }
     if (
         checkOptionsVisibility() &&
-        (keyEvent.code == "ArrowUp" || keyEvent.code == "ArrowDown")
+        (code == "ArrowUp" || code == "ArrowDown")
     ) {
-        keyEvent.preventDefault();
-        focusOnItem(keyEvent.code);
+        e.preventDefault();
+        focusOnItem(code);
     }
     resetPreviouslySelectedOptions(selectedOption);
 });
@@ -383,47 +406,21 @@ document.querySelector("#showFiltersButton").addEventListener("click", (e) => {
     FILTERS_CONTAINER.classList.toggle("display");
 });
 
-document.addEventListener("click", (e) => {
-    if (checkOptionsVisibility()) {
-        if (e.target != OPTIONS_CONTAINER && e.target != SELECT_CONTAINER) {
-            OPTIONS_CONTAINER.classList.toggle("visible");
-        }
+SELECT_CONTAINER.addEventListener("click", (e) => {
+    OPTIONS_CONTAINER.classList.toggle("visible");
+    if(!SELECT_CONTAINER.getAttribute("value")){
+        selectedOption = OPTIONS_LIST[0].textContent;
+    }else{
+        selectedOption = e.target.textContent;
     }
-});
-
-document.querySelector("#sort").addEventListener("click", (e) => {
-    if (
-        e.target.classList.contains("list__label") ||
-        e.target.classList.contains("select__container")
-    ) {
-        selectedOption = !SELECT_CONTAINER.getAttribute("value")  ? OPTIONS_LIST[0].textContent : e.target.textContent;
-        OPTIONS_CONTAINER.classList.toggle("visible");
-    }
-});
-
-document.querySelector("#search").addEventListener("input", (e) => {
-    const inputString = e.target.value,
-        filteredArray = findMatchesWithPropertiesValues(
-            ["firstName", "lastName", "email", "username", "country"],
-            FRIENDS_ARRAY,
-            inputString
-        );
-    appendFriendsCards(filteredArray);
-});
-
-FILTERS_CONTAINER.addEventListener("click", (e) => updateCards(e));
-
-document.querySelectorAll(".number").forEach((ageInput) => {
-    ageInput.addEventListener("change", (event) => {
-        updateCards(event);
-    });
 });
 
 window.addEventListener("beforeunload", () => {
-    ["#search", "#minAge", "#maxAge"].forEach(
-        (element) => (document.querySelector(element).value = "")
-    );
     SELECT_CONTAINER.attributes["select-modified"].value = "false";
     document.querySelector("#female").checked = "true";
     document.querySelector("#male").checked = "true";
+    document.querySelector("#maxAge").value = "";
+    document.querySelector("#minAge").value = "";
+    document.querySelector("#search").value = "";
+    document.querySelectorAll(".list__input").forEach(input => input.checked = "false");
 });

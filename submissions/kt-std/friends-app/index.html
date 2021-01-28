@@ -31,19 +31,19 @@
                     aria-haspopup="listbox" value="" aria-labelledby="selectLabel listLabel">Sorting type</span>
                 <ul name="sort" role="listbox" class="select__list" aria-labelledby="selectLabel" tabindex="-1">
                    <li class="list__item">
-                        <input type="checkbox" class="list__input" tabindex="-1" id="namesAscending">
+                        <input type="checkbox" class="list__input" tabindex="-1" value="namesAscending" id="namesAscending">
                         <label role="option" class="list__label" for="namesAscending" value="namesAscending">Names: A first</label>
                     </li>
                     <li class="list__item">
-                        <input type="checkbox" class="list__input" tabindex="-1" id="namesDescending">
+                        <input type="checkbox" class="list__input" tabindex="-1" value="namesDescending" id="namesDescending">
                         <label role="option" class="list__label" for="namesDescending" value="namesDescending">Names: Z first</label>
                     </li>
                     <li class="list__item">
-                        <input type="checkbox" class="list__input" tabindex="-1" id="ageAscending">
+                        <input type="checkbox" class="list__input" tabindex="-1" value="ageAscending" id="ageAscending">
                         <label role="option" class="list__label" for="ageAscending" value="ageAscending">Age: ascending</label>
                     </li>
                     <li class="list__item">
-                        <input type="checkbox" class="list__input" tabindex="-1" id="ageDescending">
+                        <input type="checkbox" class="list__input" tabindex="-1" value="ageDescending" id="ageDescending">
                         <label role="option" class="list__label" for="ageDescending" value="ageDescending">Age: descending</label>
                     </li>
                 </ul>
@@ -52,11 +52,11 @@
                 <legend class="legend">Gender:</legend>
                 <div class="filter__item">
                     <label class="label" for="male">Male:</label>
-                    <input type="checkbox" class="checkbox" name="gender_male" value="male" id="male" checked>
+                    <input type="checkbox" class="checkbox gender__input" name="gender_male" value="male" id="male" checked>
                 </div>
                 <div class="filter__item">
                     <label class="label" for="female">Female:</label>
-                    <input type="checkbox" class="checkbox" name="gender_female" value="female" id="female" checked>
+                    <input type="checkbox" class="checkbox gender__input" name="gender_female" value="female" id="female" checked>
                 </div>
             </fieldset>
             <fieldset class="age__filter fieldset" id="ageFilter">
