@@ -200,7 +200,7 @@ button.refresh_button {
   background: url("images/9-1.png") center center no-repeat;
 }
 
-@media screen and (min-width: 320px) and (max-width: 480px) {
+@media screen and (min-width: 320px) {
   .refresh,
   .slogan {
     font-size: 19px;
@@ -265,92 +265,29 @@ button.refresh_button {
   }
 }
 
-@media screen and (min-width: 481px) and (max-width: 768px) {
+@media screen and (min-width: 480px) {
   .refresh,
   .slogan {
     font-size: 20px;
-    letter-spacing: 0em;
-  }
-
-  .text {
-    display: none;
-  }
-
-  .sort,
-  .filter {
-    letter-spacing: 0em;
-    margin-bottom: 2px;
   }
 
   .search {
     width: 70px;
-    letter-spacing: 0em;
-    font-weight: 100;
-    font-size: 12px;
   }
 
   .friends {
     margin-left: 150px;
   }
-
-  .friend_card,
-  .card_wrapper,
-  .name,
-  .info_block,
-  .photo {
-    width: 230px;
-  }
-
-  .friend_card,
-  .card_wrapper {
-    height: 280px;
-  }
-
-  .name {
-    font-size: 16px;
-    height: 30px;
-  }
-
-  .info_block {
-    height: 100px;
-  }
-
-  .age,
-  .email {
-    font-size: 14px;
-  }
-
-  .place {
-    font-size: 16px;
-  }
-
-  .gender {
-    font-size: 12px;
-  }
 }
 
-@media screen and (min-width: 769px) and (max-width: 1024px) {
+@media screen and (min-width: 770px) {
   .slogan,
   .refresh {
     font-size: 22px;
-    letter-spacing: 0em;
-  }
-
-  .text {
-    display: none;
-    letter-spacing: 0.1em;
-  }
-
-  .sort,
-  .filter {
-    letter-spacing: 0em;
-    margin-bottom: 2px;
   }
 
   .search {
     width: 80px;
-    letter-spacing: 0em;
-    font-weight: 100;
     font-size: 13px;
   }
 
@@ -377,7 +314,6 @@ button.refresh_button {
 
   .name {
     font-size: 17px;
-    height: 30px;
   }
 
   .info_block {
@@ -398,11 +334,10 @@ button.refresh_button {
   }
 }
 
-@media screen and (min-width: 1025px) and (max-width: 1200px) {
+@media screen and (min-width: 1025px) {
   .slogan,
   .refresh {
     font-size: 18px;
-    letter-spacing: 0em;
   }
 
   .sidebar {
@@ -440,27 +375,7 @@ button.refresh_button {
     width: 180px;
   }
 
-  .friend_card,
-  .card_wrapper {
-    height: 280px;
-  }
-
   .name {
-    font-size: 18px;
-    height: 30px;
-  }
-
-  .info_block {
-    height: 100px;
-  }
-
-  .age,
-  .email,
-  .gender {
-    font-size: 14px;
-  }
-
-  .place {
     font-size: 18px;
   }
 }
