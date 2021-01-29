@@ -103,14 +103,10 @@ restart.classList.add("overlay-text-small");
 restart.innerText = "Click to Restart";
 victoryScreen.appendChild(restart);
 
-let backFace;
 let backImg;
-let frontFace;
 let frontImg;
 let boardCard;
 let cards;
-let cardsId = [];
-let cardsSelected = [];
 let cardsWon = 0;
 
 let hasFlippedCard = false;
@@ -165,24 +161,24 @@ document.addEventListener("DOMContentLoaded", function () {
   function flipCard() {
     if (lockBoard) return;
     if (this === firstCard) return;
+
     this.classList.add("flip");
 
     if (!hasFlippedCard) {
       hasFlippedCard = true;
       firstCard = this;
-    } else {
-      hasFlippedCard = false;
-      secondCard = this;
-
-      setTimeout(checkForMatch, 500);
+      return;
     }
+
+    secondCard = this;
+    checkForMatch();
   }
 
   function checkForMatch() {
     if (firstCard.dataset.name === secondCard.dataset.name) {
       disableCards();
       cardsWon += 1;
-      setTimeout(checkWon, 700);
+      setTimeout(checkWon, 1000);
     } else {
       unflipCards();
     }
@@ -191,8 +187,6 @@ document.addEventListener("DOMContentLoaded", function () {
   function disableCards() {
     firstCard.removeEventListener("click", flipCard);
     secondCard.removeEventListener("click", flipCard);
-    firstCard.classList.add("matched");
-    secondCard.classList.add("matched");
 
     resetBoard();
   }
@@ -204,13 +198,13 @@ document.addEventListener("DOMContentLoaded", function () {
       secondCard.classList.remove("flip");
 
       resetBoard();
-    }, 700);
+    }, 1000);
   }
 
   function checkWon() {
     if (cardsWon === cardArray.length / 2) {
       victoryScreen.classList.add("visible");
-      
+
       setTimeout(() => replay(), 1000);
     }
   }
