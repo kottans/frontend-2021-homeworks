@@ -47,7 +47,6 @@ function startApp() {
 
 startApp();
 
-// drawing a list of friends---------------------------
 function renderFriendsList(friends) {
     FRIENDS_LIST_WRAP.innerHTML = '';
     
@@ -56,7 +55,6 @@ function renderFriendsList(friends) {
     });
 }
 
-// create friends card, add card to the markup-----------
 function renderFriendsCard(friend) {
     const cardWrap = document.createElement('div');
     const mainInfo = document.createElement('div');
@@ -102,7 +100,6 @@ function renderFriendsCard(friend) {
     FRIENDS_LIST_WRAP.append(cardWrap);
 }
 
-//find a friend by the name ------------------------------------
 SEARCH_FIELD.addEventListener('input', function() {
     let searchName = SEARCH_FIELD.value.toLowerCase();
     if (searchName !== '') {
@@ -115,7 +112,6 @@ SEARCH_FIELD.addEventListener('input', function() {
     }
 })
 
-//sorting List of friends --------------------------------------------
 SORTING_MENU.addEventListener('click', function(event) {
     if (searchResultList) {
         sortedList = searchResultList;
@@ -153,7 +149,6 @@ SORTING_MENU.addEventListener('click', function(event) {
     } 
 })
 
-//filtering list of friends by gender
 FILTER_MENU.addEventListener('click', function(event) {
     if (searchResultList) {
         genderNeutralList = searchResultList;
@@ -180,7 +175,6 @@ FILTER_MENU.addEventListener('click', function(event) {
         
 })
 
-// showing user message when data loading error ------------------------------------------------------
 function renderErrorMessage() {
     const messageErrorWrap =  document.createElement('div');
     const messageError = document.createElement('p');
@@ -199,7 +193,6 @@ function renderErrorMessage() {
     FRIENDS_LIST_WRAP.append(messageErrorWrap);
 }
 
-// show/hide filter and sorting menus on mobile devices
 MOBILE_MENU_BUTTON.addEventListener('click', function() {
     clickMenuBtn(MOBILE_MENU_BUTTON);
     clickMenuBtn(MENU_WRAP);
@@ -211,7 +204,6 @@ function clickMenuBtn(elem) {
     elem.classList.toggle('change');
 }
 
-//smooth scrolling to top
 function scrollToTop() {   
     let timer = 0; 
     if (scrollDepth > 100) {
@@ -225,7 +217,6 @@ function scrollToTop() {
    
 } 
 
-// when error - reSend Request to server -----------------------
 FRIENDS_LIST_WRAP.addEventListener('click', function(event) {
     if (event.target.classList == 'btn error-btn') {
         FRIENDS_LIST_WRAP.innerHTML = '';
