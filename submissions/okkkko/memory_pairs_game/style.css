@@ -1,0 +1,83 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  background-color: rgb(223, 223, 223);
+}
+.game_title {
+  text-align: center;
+  margin-top: 5vh;
+  font-size: 32px;
+  font-family: "Inconsolata", monospace;
+  font-weight: 500;
+}
+.game_field {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px 10px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+  width: 630px;
+}
+.flip-container {
+  perspective: 1000px;
+}
+
+.flip-container.clicked .flipper {
+  transform: rotateY(180deg);
+}
+.flip-container.clicked.hidden {
+  visibility: hidden;
+}
+.front img,
+.back img {
+  cursor: pointer;
+  width: 150px;
+  height: 150px;
+  border: 2px solid rgb(71, 68, 68);
+  border-radius:5px;
+}
+.flip-container {
+  width: 150px;
+  height: 150px;
+}
+
+.flipper {
+  transition: 0.6s;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+.front,
+.back {
+  backface-visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.front {
+  z-index: 2;
+  transform: rotateY(0deg);
+}
+.back {
+  transform: rotateY(180deg);
+}
+@media (max-width: 660px) {
+  .game_field {
+    grid-template-columns: repeat(3, 1fr);
+    width: 320px;
+    gap: 5px 5px;
+  }
+  .front img,
+  .back img {
+    width: 103px;
+    height: 103px;
+  }
+  .flip-container {
+    width: 103px;
+    height: 103px;
+  }
+}
