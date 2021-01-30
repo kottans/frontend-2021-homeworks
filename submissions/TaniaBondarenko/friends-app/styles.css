@@ -335,9 +335,12 @@ button.refresh_button {
 }
 
 @media screen and (min-width: 1025px) {
-  .slogan,
-  .refresh {
+  .slogan {
     font-size: 18px;
+  }
+
+  .refresh {
+    font-size: 30px;
   }
 
   .sidebar {
