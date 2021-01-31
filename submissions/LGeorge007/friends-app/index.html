@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Friends App</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="logo">
+        <button class="menu-button"><strong>&#9776</strong></button>
+        <h1>Friends App</h1>
+    </header>
+    <aside class="sidebar">
+        <form action="/practice.html" class="filters" method="POST">
+            <fieldset class="sort-by">
+                <legend>Sort by Age</legend>
+                <label class="radio-button">
+                    <input type="radio" id="age-ascending" class="radio-input" name="sortBy" data-order="ascending"
+                        checked>
+                    <span class="radio-asc"></span>
+                    <span>Asc</span>
+                </label>
+                <label class="radio-button">
+                    <input type="radio" id="age-descending" class="radio-input" name="sortBy" data-order="descending">
+                    <span class="radio-desc"></span>
+                    <span>Desc</span>
+                </label>
+            </fieldset>
+            <fieldset class="sort-by">
+                <legend>Sort by Name</legend>
+                <label class="radio-button">
+                    <input type="radio" id="name-ascending" class="radio-input" name="sortBy" data-order="descending">
+                    <span class="radio-asc"></span>
+                    <span>Asc</span>
+                </label>
+                <label class="radio-button">
+                    <input type="radio" id="name-descending" class="radio-input" name="sortBy" data-order="descending">
+                    <span class="radio-desc"></span>
+                    <span>Desc</span>
+                </label>
+            </fieldset>
+            <fieldset class="filter-by">
+                <legend>Filter by gender</legend>
+                <label class="radio-button">
+                    <input type="radio" id="man" class="switch" name="gender" data-gender="male">
+                    <span>man</span>
+                </label>
+                <label class="radio-button">
+                    <input type="radio" id="woman" class="switch" name="gender" data-gender="female">
+                    <span>woman</span>
+                </label>
+                <label class="radio-button">
+                    <input type="radio" id="all" class="switch" name="gender" data-gender="all" checked>
+                    <span>all</span>
+                </label>
+            </fieldset>
+            <fieldset>
+                <legend>Search</legend>
+                <input type="text" id="search-input" class="search-input" placeholder="First name" spellcheck="false">
+            </fieldset>
+            <input type="button" id="reset-button" class="reset-button" value="reset">
+        </form>
+    </aside>
+    <main class="content">
+    </main>
+    <script src="script.js"></script>
+</body>
+
+</html>
