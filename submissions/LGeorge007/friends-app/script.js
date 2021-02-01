@@ -21,8 +21,21 @@ const state = {
 };
 let result = [];
 
-const sortByAge = (a, b) => a.dob.age <= b.dob.age ? -1 : 1;
-const sortByName = (a, b) => a.name.first.toLowerCase() >= b.name.first.toLowerCase() ? 1 : -1;
+const sortByAge = function(a, b) {
+    return a.dob.age == b.dob.age
+                ? 0
+                : a.dob.age <= b.dob.age
+                        ? -1
+                        : 1;
+}
+
+const sortByName = function(a, b) {
+    return a.name.first.toLowerCase() == b.name.first.toLowerCase()
+                ? 0
+                : a.name.first.toLowerCase() >= b.name.first.toLowerCase()
+                        ? 1
+                        : -1;
+}
 
 const slideMenu = function() {
     navPanel.classList.toggle("sidebar-toggle");
