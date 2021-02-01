@@ -1,0 +1,227 @@
+* {
+  box-sizing: border-box;
+}
+
+header {
+  text-align: center;
+}
+
+.main {
+  display: flex;
+  flex-direction: row;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.menu-trigger {
+  display: none;
+  position: fixed;
+  right: 0;
+  width: 50px;
+  height: 90px;
+  z-index: 1;
+  padding-top: 16px;
+  background: #222;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.menu-trigger p {
+  color: white;
+  font-weight: bold;
+  transform: rotate(0.25turn);
+  -webkit-transform: rotate(0.25turn);
+  -moz-transform: rotate(0.25turn);
+  -ms-transform: rotate(0.25turn);
+  -o-transform: rotate(0.25turn);
+}
+
+.filter-sidebar {
+  position: fixed;
+  min-width: 300px;
+  padding: 0 5px;
+  background-color: white;
+}
+
+.filter-sidebar fieldset {
+  margin: 0 0 20px 0;
+  padding: 15px 5px;
+  text-align: center;
+}
+
+.filter-sidebar legend {
+  text-align: left;
+}
+
+.filter-sidebar fieldset input:nth-of-type(2) {
+  margin-left: 15px;
+}
+
+.reset-filters {
+  width: 100%;
+  border: 1px solid #b4b4b4;
+  border-radius: 0;
+  padding: 7px;
+  background: white;
+  transition: background-color 0.2s;
+}
+.reset-filter:focus {
+  outline: none;
+}
+.reset-filter:active {
+  background-color: #b4b4b4;
+}
+
+.contacts-block {
+  margin-left: 300px;
+  padding: 7px 20px;
+  width: calc(100% - 300px);
+}
+
+.search input {
+  padding: 10px 15px;
+  border: 1px solid #b4b4b4;
+  width: 100%;
+}
+
+.search input:focus {
+  outline-color: #2389ff;
+  box-shadow: 0 0 2px rgba(0, 115, 255, 0.2);
+}
+
+.contact-card {
+  border: 1px solid #b4b4b4;
+}
+
+.contact-card {
+  display: flex;
+  padding: 15px;
+}
+
+.user-photo {
+  margin-right: 20px;
+  align-self: center;
+  border-radius: 5%;
+  -webkit-border-radius: 5%;
+  -moz-border-radius: 5%;
+  -ms-border-radius: 5%;
+  -o-border-radius: 5%;
+}
+
+.contacts-card .info-block {
+  justify-self: center;
+}
+
+.contact-card .info-block p {
+  margin: 0;
+  color: #767676;
+}
+
+.contact-card .info-block p:not(:first-child) {
+  margin-top: 7px;
+  color: #767676;
+}
+
+.contact-card .info-block p:first-child {
+  color: #2d55c6;
+}
+
+@media screen and (max-width: 500px) {
+  .filter-sidebar {
+    position: fixed;
+    left: -300px;
+    transition: left 0.1s;
+    -webkit-transition: left 0.1s;
+    -moz-transition: left 0.1s;
+    -ms-transition: left 0.1s;
+    -o-transition: left 0.1s;
+  }
+
+  .menu-trigger {
+    display: block;
+  }
+
+  .visible {
+    left: 0;
+    width: 100%;
+  }
+
+  .contacts-block {
+    width: 100%;
+    margin: 0;
+    padding: 5px;
+  }
+
+  .contact-card {
+    padding: 2px;
+    word-wrap: break-word;
+  }
+
+  .user-photo {
+    margin-right: 5px;
+    width: 20%;
+  }
+}
+
+/* loader*/
+
+.lds-ellipsis {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+  top: 200px;
+  left: 50%;
+}
+.lds-ellipsis div {
+  position: absolute;
+
+  top: 33px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: rgb(116, 116, 116);
+  animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+.lds-ellipsis div:nth-child(1) {
+  left: 8px;
+  animation: lds-ellipsis1 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(2) {
+  left: 8px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(3) {
+  left: 32px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(4) {
+  left: 56px;
+  animation: lds-ellipsis3 0.6s infinite;
+}
+@keyframes lds-ellipsis1 {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes lds-ellipsis3 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+@keyframes lds-ellipsis2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(24px, 0);
+  }
+}
