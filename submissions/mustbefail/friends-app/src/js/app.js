@@ -46,7 +46,8 @@ export default () => {
   const sorters = document.querySelectorAll('.sort');
   sorters.forEach((sorter) =>
     sorter.addEventListener('change', ({ target }) => {
-      state[target.name] = target.value;
+      const { name, value } = target;
+      state[name] = value;
       render(state);
     })
   );
@@ -54,7 +55,8 @@ export default () => {
   const filters = document.querySelectorAll('.filter');
   filters.forEach((filter) =>
     filter.addEventListener('input', ({ target }) => {
-      state.filter[target.name] = target.value;
+      const { name, value } = target;
+      state.filter[name] = value.toLowerCase();
       render(state);
     })
   );
