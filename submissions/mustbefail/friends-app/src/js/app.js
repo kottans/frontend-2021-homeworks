@@ -3,10 +3,10 @@ import makeCardTemplate from './template.js';
 
 const contactsContainer = document.querySelector('.contacts-container');
 
-const render = async (state) => {
-  const users = await getUsers(API_REQ);
-  const sortedUsers = sortUsers(state.sort, users);
-  const filteredUsers = filterUsers(state.filter, sortedUsers);
+const render = (state) => {
+  const { sort, filter, users } = state;
+  const sortedUsers = sortUsers(sort, users);
+  const filteredUsers = filterUsers(filter, sortedUsers);
   const cards = filteredUsers
     .map((user) =>
       makeCardTemplate(
@@ -23,7 +23,7 @@ const render = async (state) => {
   contactsContainer.innerHTML = cards;
 };
 
-const getUsers = async (url) => {
+const getUsers = async (url, state) => {
   try {
     const response = await fetch(url);
 
@@ -32,10 +32,11 @@ const getUsers = async (url) => {
     } else {
       const json = await response.json();
       const users = await json.results;
-      return users;
+      state.users = [...users];
+      render(state);
     }
   } catch (error) {
-    console.error(e);
+    console.error(error);
   }
 };
 
@@ -46,6 +47,7 @@ export default () => {
       name: null,
       gender: null,
     },
+    users: [],
   };
 
   const sorters = document.querySelectorAll('.sort');
@@ -79,5 +81,5 @@ export default () => {
     filterMenu.classList.toggle('visible');
   });
 
-  render(state);
+  getUsers(API_REQ, state);
 };
