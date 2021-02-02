@@ -43,6 +43,7 @@ header {
   min-width: 300px;
   padding: 0 5px;
   background-color: white;
+  user-select: none;
 }
 
 .filter-sidebar fieldset {

@@ -4,9 +4,7 @@ import makeCardTemplate from './template.js';
 const contactsContainer = document.querySelector('.contacts-container');
 
 const render = async (state) => {
-  const response = await getUsers(API_REQ, 5);
-  const json = await response.json();
-  const users = await json.results;
+  const users = await getUsers(API_REQ);
   const sortedUsers = sortUsers(state.sort, users);
   const filteredUsers = filterUsers(state.filter, sortedUsers);
   const cards = filteredUsers
@@ -25,12 +23,19 @@ const render = async (state) => {
   contactsContainer.innerHTML = cards;
 };
 
-const getUsers = async (url, n) => {
+const getUsers = async (url) => {
   try {
-    return await fetch(url);
-  } catch (err) {
-    if (n === 1) throw err;
-    return await getUsers(url, n - 1);
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    } else {
+      const json = await response.json();
+      const users = await json.results;
+      return users;
+    }
+  } catch (error) {
+    console.error(e);
   }
 };
 
