@@ -53,13 +53,13 @@ function sortForm(users) {
 
 	switch(sortType) {
 		case 'age asc':
-			users.sort((a,b) => sortByAge(a,b));
+			users.sort(sortByAge);
 			break;
 		case 'age desc':
 			users.sort((a,b) => sortByAge(b,a));
 			break;
 		case 'name asc':
-			users.sort((a,b) => sortByName(a,b));
+			users.sort(sortByName);
 			break;
 		case 'name desc':
 			users.sort((a,b) => sortByName(b,a));
