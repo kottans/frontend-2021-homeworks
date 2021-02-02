@@ -1,0 +1,298 @@
+@charset "UTF-8";
+
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+:active {
+  outline: none;
+}
+
+a:active {
+  outline: none;
+}
+
+nav,
+footer,
+header,
+aside {
+  display: block;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  font-size: 100%;
+  line-height: 1;
+  font-size: 14px;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+input,
+button,
+textarea {
+  font-family: inherit;
+}
+
+input::-ms-clear {
+  display: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+button::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+
+a,
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+ul li {
+  list-style: none;
+}
+
+img {
+  vertical-align: top;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+/*--------------------*/
+
+body {
+  background-color: #907dde;
+  color: white;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 25px;
+}
+
+main {
+  font-variant: small-caps;
+  color: #000000;
+}
+
+img {
+  min-width: 305px;
+  max-width: 100%;
+  min-height: 258px;
+  max-height: 258px;
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 50px 70px;
+}
+.header-h1 {
+  width: 245px;
+  height: 40px;
+
+  font-size: 36px;
+  line-height: 42px;
+  text-transform: uppercase;
+
+  color: #ffffff;
+
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.header-h1__flip-vertical {
+  width: 245px;
+  height: 40px;
+
+  font-style: normal;
+  font-weight: bold;
+  font-size: 36px;
+  line-height: 42px;
+  text-transform: uppercase;
+
+  color: #ffffff;
+
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  transform: matrix(-1, 0, 0, 1, 0, 0);
+}
+
+.section-form {
+  display: flex;
+}
+.form-sort {
+  display: flex;
+  min-width: 100%;
+
+  justify-content: center;
+
+  padding: 8px 10px;
+
+  background-color: white;
+  box-shadow: inset 0px 0px 5px 3px rgba(0, 0, 0, 0.25);
+}
+.form-sort p {
+  display: inline-block;
+}
+.block-search {
+  margin-right: 10px;
+}
+.block-search > input {
+  max-width: 370px;
+  height: 78px;
+
+  font-size: 36px;
+  font-weight: bold;
+  padding: 10px;
+
+  background: #ffffff;
+  box-shadow: inset 0px 0px 4px 5px rgba(0, 0, 0, 0.25);
+}
+.block-gender {
+  min-width: 410px;
+  max-width: 500px;
+}
+.block-age {
+  max-width: 500px;
+  position: relative;
+}
+.block-name {
+  max-width: 315px;
+}
+.block-gender,
+.block-age,
+.block-name {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+  padding: 0px 15px;
+
+  background-color: red;
+}
+.form-button {
+  width: 210px;
+
+  font-size: 28px;
+  font-weight: bold;
+  font-variant: small-caps;
+  margin-right: 0px;
+
+  outline: 1px solid #000;
+
+  color: white;
+  background-color: #ff0000;
+  transition: all 0.5s;
+}
+.form-button:hover {
+  color: #000;
+  background-color: rgb(255, 255, 255);
+
+  transition: all 0.5s;
+}
+.form-button:active {
+  background-color: rgba(215, 245, 245);
+  transition: all 0.2s;
+}
+.gender-inner,
+.age-inner,
+.name-inner {
+  margin-right: 15px;
+}
+.sort-by-gender,
+.sort-by-name {
+  font-variant: small-caps;
+}
+.sort-female-label,
+.sort-male-label,
+.sort-both-label,
+.sort-age-top-label,
+.sort-age-down-label,
+.sort-name-top-label,
+.sort-name-down-label {
+  font-size: 22px;
+  font-variant: small-caps;
+}
+.sort-age-top-label {
+  margin-right: 25px;
+}
+.sort-age-top-label::after {
+  content: "";
+  position: absolute;
+  top: 24px;
+
+  min-width: 25px;
+  min-height: 25px;
+
+  color: #000;
+  background-image: url(../img/icons/icons8-arrow-top.png);
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+.sort-age-down-label:after {
+  content: "";
+  position: absolute;
+  top: 24px;
+
+  min-width: 25px;
+  min-height: 25px;
+
+  transform: rotate(180deg);
+
+  color: #000;
+  background-image: url(../img/icons/icons8-arrow-down.png);
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.main {
+  display: flex;
+
+  padding: 25px 40px;
+}
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+
+  justify-content: center;
+}
+.card-item {
+  max-width: 305px;
+
+  padding-bottom: 30px;
+  margin-right: 30px;
+}
+.card-item-container {
+  font-size: 24px;
+}
+.card-item-container > h4 {
+  font-size: 28px;
+  line-height: 40px;
+  font-variant: small-caps;
+
+  color: #000000;
+}

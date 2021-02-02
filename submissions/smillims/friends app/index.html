@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Friends App</title>
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/media.css">
+</head>
+<body>
+	<header class="header">
+		<h1 class="header-h1">friends app</h1>
+		<h1 class="header-h1__flip-vertical">friends app</h1>
+	</header>
+
+	<div class="section-form">
+		<form class="form-sort" name='sortForm' onsubmit="return false;">
+			<div class="block-search">
+				<input type="text" id="search" placeholder="Search..." name="search">
+			</div>
+			<div class="block-gender">
+				<p class="gender-inner sort-by-gender">Choose by:</p>
+				<input class="gender-inner sort-female" id="female" type="radio" name="gender" value="female">
+				<label class="gender-inner sort-female-label" for="female">female</label>
+				<input class="gender-inner sort-male" id="male" type="radio" name="gender" value="male">
+				<label class="gender-inner sort-male-label" for="male">male</label>
+			</div>
+			<div class="block-age">
+				<input class="age-inner sort-age-top" id="age-top" type="radio" name="sort" value="age asc">
+				<label class="age-inner sort-age-top-label" for="age-top">age</label>
+				<input class="age-inner sort-age-down" id="age-down" type="radio" name="sort" value="age desc">
+				<label class="age-inner sort-age-down-label" for="age-down">age</label>
+			</div>
+			<div class="block-name">
+				<p class="name-inner sort-by-name">name:</p>
+				<input class="name-inner sort-name-top" id="name-top" type="radio" name="sort" value="name asc">
+				<label class="name-inner sort-name-top-label" for="name-top">a-z</label>
+				<input class="name-inner sort-name-down" id="name-down" type="radio" name="sort" value="name desc">
+				<label class="name-inner sort-name-down-label" for="name-down">z-a</label>
+			</div>
+			<button class="form-button" type="button">button</button>
+		</form>
+	</div>
+
+	<main class="main">
+		<div class="cards">
+			
+		</div>
+	</main>
+
+	<script src="js/script.js"></script>
+</body>
+</html>
