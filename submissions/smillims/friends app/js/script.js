@@ -5,12 +5,13 @@ function startApp() {
 	fetch(requestURL)
 		.then(handleErrors)
 		.then(({results}) => {
-			render(results)
+			render(results);
 			button.addEventListener('click', () => {applySetting(results)});
 		})
 		.catch(err => {
 			console.log(err);
-			alert('Please reload page');
+			alert('Happened error. Please, wait a second');
+			location.reload();
 		})
 };
 
