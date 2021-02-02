@@ -27,7 +27,8 @@ const filters = {
 
 export const sortUsers = (query, users) => {
   if (!query) return users;
-  return users.sort(sorters[query]);
+  const sortedUsers = [...users].sort(sorters[query]);
+  return sortedUsers;
 };
 
 export const filterUsers = (query, users) => {
