@@ -273,7 +273,7 @@ function isItemInFocus(e){
 }
 
 function isSelectModified() {
-    return SELECT_CONTAINER.setAttribute("select-modified", "true");
+    return SELECT_CONTAINER.getAttribute("select-modified") === "true";
 }
 
 function checkOptionsVisibility() {
