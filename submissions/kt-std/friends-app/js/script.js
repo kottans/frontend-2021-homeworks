@@ -209,17 +209,25 @@ function updateSelectText(itemToSelect) {
 
 const sortByType = {
     namesDescending: function(friends) {
-        friends.sort((a, b) => b.firstName.localeCompare(a.firstName));
+        friends.sort((a, b) => sortNames(b, a));
     },
     namesAscending: function(friends) {
-        friends.sort((a, b) => a.firstName.localeCompare(b.firstName));
+        friends.sort((a, b) => sortNames(a, b));
     },
     ageDescending: function(friends) {
-        friends.sort((a, b) => b.age - a.age);
+        friends.sort((a, b) => sortAge(b, a));
     },
     ageAscending: function(friends) {
-        friends.sort((a, b) => a.age - b.age);
+        friends.sort((a, b) => sortAge(a, b));
     },
+}
+
+function sortNames(current, next) {
+    return current.firstName.localeCompare(next.firstName);
+}
+
+function sortAge(current, next) {
+    return current.age - next.age;
 }
 
 function findSubstring(string, substring) {
@@ -242,10 +250,12 @@ function filterByGender(friends) {
 }
 
 function filterByAge(friends) {
-    if (MIN_AGE_INPUT.value) friends = friends
-        .filter((friend) => friend.age >= MIN_AGE_INPUT.value);
-    if (MAX_AGE_INPUT.value) friends = friends
-        .filter((friend) => friend.age <= MAX_AGE_INPUT.value);
+    if (MIN_AGE_INPUT.value) {
+        friends = friends.filter((friend) => friend.age >= MIN_AGE_INPUT.value);
+    }
+    if (MAX_AGE_INPUT.value){
+        friends = friends.filter((friend) => friend.age <= MAX_AGE_INPUT.value);
+    }
     return friends;
 }
 
