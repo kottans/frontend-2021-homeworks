@@ -1,34 +1,41 @@
-export const API_REQ = `https://randomuser.me/api/?results=30&seed=a123bc&nat=us,dk,fr,gb&inc=gender,name,registered,dob,location,picture,phone,email`;
+const sortByAge = (a, b) => a.age - b.age;
 
-const fullName = (user) => `${user.name.first} ${user.name.last}`.toLowerCase();
-const convertDate = (date) => new Date(date);
+const sortByName = (a, b) => a.name.localeCompare(b.name);
 
-const sorters = {
-  abc: (a, b) => fullName(a).localeCompare(fullName(b)),
-  zyx: (a, b) => fullName(b).localeCompare(fullName(a)),
-  ageMinMax: (a, b) => a.dob.age - b.dob.age,
-  ageMaxMin: (a, b) => b.dob.age - a.dob.age,
-  regMinMax: (a, b) =>
-    convertDate(a.registered.date) - convertDate(b.registered.date),
-  regMaxMin: (a, b) =>
-    convertDate(b.registered.date) - convertDate(a.registered.date),
-};
+const sortByReg = (a, b) => a.registered - b.registered;
 
 const filters = {
-  gender: (value) => (user) => {
+  gender: (value) => ({ gender }) => {
     if (value === 'both') return true;
-    return user.gender === value;
+    return gender === value;
   },
-  name: (value) => (user) => {
+  name: (value) => ({ name }) => {
     if (value === '') return true;
-    return fullName(user).includes(value);
+    return name.toLowerCase().includes(value);
   },
 };
 
 export const sortUsers = (query, users) => {
-  if (!query) return users;
-  const sortedUsers = [...users].sort(sorters[query]);
-  return sortedUsers;
+  switch (query) {
+    case 'age_asc':
+      users.sort(sortByAge);
+      break;
+    case 'age_desc':
+      users.sort((a, b) => sortByAge(b, a));
+      break;
+    case 'name_asc':
+      users.sort(sortByName);
+      break;
+    case 'name_desc':
+      users.sort((a, b) => sortByName(b, a));
+      break;
+    case 'registered_asc':
+      users.sort(sortByReg);
+      break;
+    case 'registered_desc':
+      users.sort((a, b) => sortByReg(b, a));
+      break;
+  }
 };
 
 export const filterUsers = (query, users) => {
@@ -43,12 +50,9 @@ export const filterUsers = (query, users) => {
   return result;
 };
 
-export const resetFilters = (state) => {
-  for (let field in state) {
-    if (typeof state[field] === 'object') {
-      resetFilters(state[field]);
-    } else {
-      state[field] = null;
-    }
-  }
+export const resetState = (state) => {
+  state.filtration = {
+    filter: {},
+    sort: null,
+  };
 };
