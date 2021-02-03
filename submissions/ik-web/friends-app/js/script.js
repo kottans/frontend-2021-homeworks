@@ -3,8 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const url = 'https://randomuser.me/api/?results=80&seed=fa21';
     const usersBox = document.querySelector('.usersBox');
 
-    // ---------------------------------------------------------------
-    function createUserCard(name, photo, gender, age, phone, email) {
+    function createUserCard({name, photo, gender, age, phone, email}) {
         return `
             <div class="userCard">
                 <div class="userCard__inner">
@@ -35,18 +34,19 @@ document.addEventListener('DOMContentLoaded', () => {
     function addUserCardsOnPage(usersInfo) {
         let userCards = '';
         usersInfo.forEach(user => {
-            userCards += createUserCard(
-                `${user.name.first} ${user.name.last}`,
-                user.picture.large, 
-                user.gender, 
-                user.dob.age, 
-                user.phone,
-                user.email
-            );
+            userInfo = {
+                name: `${user.name.first} ${user.name.last}`,
+                photo: user.picture.large, 
+                gender: user.gender, 
+                age: user.dob.age, 
+                phone: user.phone,
+                email: user.email
+            };
+            userCards += createUserCard(userInfo);
         });
         usersBox.innerHTML = userCards;
     }
-    // ---------------------------------------------------------------
+
     function doBurgerMenu() {
         document.querySelector('.burger').addEventListener('click', function (e) {
             e.preventDefault();
@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.querySelector('.body').classList.toggle('blocked');
         });
     }
-    // ---------------------------------------------------------------
+
     function doMenu(usersInfo) {
         const menu = document.querySelector('.menu');
 
@@ -76,14 +76,14 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-    // ---------------------------------------------------------------
+
     function doSearchByName(usersInfoCopy, inputSearch) {
         return usersInfoCopy.filter(user => {
             const userFullName = `${user.name.first} ${user.name.last}`;
             return userFullName.toLowerCase().includes(inputSearch.toLowerCase());
         });
     }
-    // ---------------------------------------------------------------
+
     function doSort(usersInfoCopy, inputSort) {
         const sortFunctions = {
             sortNameAZ: () => usersInfoCopy.sort((a, b) => sortByName(a, b)),
@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const ageB = b.dob.age;
         return ageA - ageB;       
     }
-    // ---------------------------------------------------------------
+
     function doFilterByGender(usersInfoCopy, inputGenderFilter) {
         const inputGenderAll = document.querySelector('#all').value;
 
@@ -113,13 +113,13 @@ document.addEventListener('DOMContentLoaded', () => {
             return usersInfoCopy;
         } else return usersInfoCopy.filter(user => inputGenderFilter === user.gender);
     }
-    // ---------------------------------------------------------------
+
     function doReset(usersInfo) {
         document.querySelector('#reset').addEventListener('click', (e) => {
             addUserCardsOnPage(usersInfo);
         });
     }
-    // ---------------------------------------------------------------
+
     async function startApp() {
         const usersInfo = await getUsersInfo();
         addUserCardsOnPage(usersInfo);
@@ -127,6 +127,6 @@ document.addEventListener('DOMContentLoaded', () => {
         doMenu(usersInfo);
         doReset(usersInfo);
     }
-    // ===============================================================
+    
     startApp();
 });
