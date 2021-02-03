@@ -1,10 +1,7 @@
-let FRIENDS_ARRAY = [],
+let FRIENDS = [],
     selectedOption,
-    INITIAL_FRIENDS_ARRAY = [];
-const USERS_AMOUNT = 24,
-    API_URL = `https://randomuser.me/api/?results=${USERS_AMOUNT}`,
-    ALLOWED_SEARCH_FILTER_PROPERTIES = ["firstName", "lastName", "email", "username", "country"],
-    MIN_AGE_INPUT = document.getElementById("minAge"),
+    INITIAL_FRIENDS = [];
+const MIN_AGE_INPUT = document.getElementById("minAge"),
     MAX_AGE_INPUT = document.getElementById("maxAge"),
     CARDS_CONTAINER = document.querySelector(".cards__container"),
     SEARCH_INPUT = document.querySelector("#search"),
@@ -17,92 +14,102 @@ const USERS_AMOUNT = 24,
 
 async function initializeApp(){
     await getFriends();
-    if(FRIENDS_ARRAY.length){
-        appendFriendsCards(FRIENDS_ARRAY);
-        setTotalCounter(FRIENDS_ARRAY);
-        initializeAgeLimits(FRIENDS_ARRAY);
+    if(FRIENDS.length){
+        appendFriendsCards(FRIENDS);
+        setTotalCounter(FRIENDS);
+        initializeAgeLimits(FRIENDS);
     }    
 }
 
-initializeApp();
-
 async function getFriends() {
+    const USERS_AMOUNT = 24,
+        API_URL = `https://randomuser.me/api/?results=${USERS_AMOUNT}`;
     return fetch(API_URL)
-        .then((response) => {
-            if (response.ok) {
-                return response.json();
-            } else {
-                throw new Error(getResponseErrorMessage(
-                    response.status,
-                    response.statusText
-                ));
-            }
-        })
+        .then((response) => handleResponseStatus(response))
         .then((responseBody) => {
-            INITIAL_FRIENDS_ARRAY = INITIAL_FRIENDS_ARRAY.concat(
-                flattenFriendProperties(responseBody.results)
-            );
-            FRIENDS_ARRAY = INITIAL_FRIENDS_ARRAY;
+            addMoreInitialFriends(responseBody);
+            FRIENDS = INITIAL_FRIENDS;
         })
-        .catch((error) => {
-            const errorText = error.toString().split(" ").slice(1).join(" ");
-            appendErrorMessage(`Oh no ... ${errorText} <br> Try to reload the page!`);
-            document.querySelector(".main__container").classList.toggle("display-none");
-            document.querySelector(".more__button").classList.toggle("display-none");
-        });
+        .catch((error) => appendErrorMessage(getErrorText(error)));
 }
 
-function setTotalCounter(friendsArray) {
-    TOTAL_COUNTER.innerText = `${friendsArray.length} Totals`;
-    if (!friendsArray.length) {
-        appendNoResultsMessage();
+function handleResponseStatus(response){
+    if (response.ok) {
+        return response.json();
+    } else {
+        throwError(response);
     }
 }
 
-function initializeAgeLimits(friendsArray) {
-    const ageLimits = getAgeLimits(friendsArray);
+function throwError(response){
+    throw new Error(getResponseErrorMessage(
+        response.status,
+        response.statusText
+    ));
+}
+
+function addMoreInitialFriends(responseBody){
+    INITIAL_FRIENDS = INITIAL_FRIENDS.concat(
+        flattenFriendProperties(responseBody.results)
+    );
+}
+
+function hideMainContent(){
+    document.querySelector(".main__container").classList.toggle("display-none");
+    document.querySelector(".more__button").classList.toggle("display-none");
+}
+
+function getErrorText(error){
+    return error.toString().split(" ").slice(1).join(" ");
+}
+
+function setTotalCounter(friends) {
+    TOTAL_COUNTER.innerText = `${friends.length} Totals`;
+}
+
+function initializeAgeLimits(friends) {
+    const ageLimits = getAgeLimits(friends);
     setAgeLimits(ageLimits, MIN_AGE_INPUT, 'min');
     setAgeLimits(ageLimits, MAX_AGE_INPUT, 'max');
 }
 
 function appendNoResultsMessage() {
-    const noResultMessage = document.createElement("h3");
-    noResultMessage.innerText = "Sorry! No results found :(";
-    noResultMessage.classList.add("no-results");
-    CARDS_CONTAINER.appendChild(noResultMessage);
+    CARDS_CONTAINER.innerHTML = `<h3 class="no-results">Sorry, no results found ¯\\_(ツ)_/¯</h3>`;
 }
 
-function appendFriendsCards(friendsArray) {
+function appendFriendsCards(friends) {
     cleanCardsContainer();
-    setTotalCounter(friendsArray);
+    setTotalCounter(friends);
+    friends.length 
+        ? CARDS_CONTAINER.appendChild(createCardsFragment(friends)) 
+        : appendNoResultsMessage();    
+}
+
+function createCardsFragment(friends){
     const fragment = document.createDocumentFragment();
-    friendsArray.forEach((friend) => {
+    friends.forEach((friend) => {
         const template = document.createElement("template");
         template.innerHTML = getFriendCardTemplate(friend);
         fragment.appendChild(template.content);
     });
-    CARDS_CONTAINER.appendChild(fragment);
+    return fragment;
 }
 
 function appendErrorMessage(errorText) {
-    const div = document.createElement("div"),
-        img = document.createElement("img");
-    div.innerHTML = errorText;
-    div.classList.add("error__container");
-    img.classList.add("error__image");
-    img.src = "assets/error.svg";
-    div.appendChild(img);
-    document.querySelector(".main__row").classList.toggle("display-none");
-    document.querySelector(".more__button").classList.toggle("display-none");
-    document.body.append(div);
+    hideMainContent();
+    document.body.innerHTML += `<div class="error__container">
+                                    <p>Oh no ... ${errorText}</p>
+                                    <p>Try to reload the page!</p>
+                                    <img src="assets/error.svg" class="error__image">
+                                </div>`; 
 }
 
 function cleanCardsContainer() {
     CARDS_CONTAINER.innerHTML = "";
 }
 
-function flattenFriendProperties(friendsArray) {
-    return friendsArray.map((friend) => {
+function flattenFriendProperties(friends) {
+    return friends.map((friend) => {
         return {
             firstName: friend.name.first,
             lastName: friend.name.last,
@@ -179,19 +186,19 @@ function setAgeLimits(ageLimits, limitInput, limit) {
     limitInput.value = ageLimits[limit];
 }
 
-function getAgeLimits(friendsArray) {
-    const sortedArray = friendsArray.sort((a, b) => a.age - b.age);
+function getAgeLimits(friends) {
+    const sortedFriends = friends.sort((a, b) => a.age - b.age);
     return {
-        min: sortedArray[0].age,
-        max: sortedArray[sortedArray.length - 1].age,
+        min: sortedFriends[0].age,
+        max: sortedFriends[sortedFriends.length - 1].age,
     };
 }
 
-function sortCards(friendsArray) {
+function sortCards(friends) {
     const checkedSortInput = document.querySelector(".list__input:checked");
     if(checkedSortInput){
-        SELECT_CONTAINER.attributes["select-modified"].value = true;
-        sortCardsArray[checkedSortInput.getAttribute("value")](friendsArray);
+        SELECT_CONTAINER.setAttribute("select-modified", true);
+        sortByType[checkedSortInput.getAttribute("value")](friends);
     }
 }
 
@@ -200,18 +207,18 @@ function updateSelectText(itemToSelect) {
     SELECT_CONTAINER.setAttribute("value", itemToSelect.getAttribute("value"));
 }
 
-const sortCardsArray = {
-    namesDescending: function(friendsArray) {
-        friendsArray.sort((a, b) => b.firstName.localeCompare(a.firstName));
+const sortByType = {
+    namesDescending: function(friends) {
+        friends.sort((a, b) => b.firstName.localeCompare(a.firstName));
     },
-    namesAscending: function(friendsArray) {
-        friendsArray.sort((a, b) => a.firstName.localeCompare(b.firstName));
+    namesAscending: function(friends) {
+        friends.sort((a, b) => a.firstName.localeCompare(b.firstName));
     },
-    ageDescending: function(friendsArray) {
-        friendsArray.sort((a, b) => b.age - a.age);
+    ageDescending: function(friends) {
+        friends.sort((a, b) => b.age - a.age);
     },
-    ageAscending: function(friendsArray) {
-        friendsArray.sort((a, b) => a.age - b.age);
+    ageAscending: function(friends) {
+        friends.sort((a, b) => a.age - b.age);
     },
 }
 
@@ -219,44 +226,42 @@ function findSubstring(string, substring) {
     return string.toLowerCase().includes(substring.toLowerCase());
 }
 
-function findMatchesWithPropertiesValues(
-    friendsArray,
-    substring
-) {
-    return friendsArray.filter((friend) => {
+function findMatchesWithPropertiesValues(friends, substring) {
+    const ALLOWED_SEARCH_FILTER_PROPERTIES = ["firstName", "lastName", "email", "username", "country"];
+    return friends.filter((friend) => {
         return ALLOWED_SEARCH_FILTER_PROPERTIES
             .filter((property) => findSubstring(friend[property], substring)).length;
     });
 }
 
-function filterByGender(friendsArray) {
+function filterByGender(friends) {
     let checkboxes = Array.from(document.querySelectorAll(".checkbox:checked"));
-    return friendsArray.filter((friend) =>
+    return friends.filter((friend) =>
         checkboxes.some((gender) => friend.gender === gender.value)
     );
 }
 
-function filterByAge(friendsArray) {
-    if (MIN_AGE_INPUT.value) friendsArray = friendsArray
+function filterByAge(friends) {
+    if (MIN_AGE_INPUT.value) friends = friends
         .filter((friend) => friend.age >= MIN_AGE_INPUT.value);
-    if (MAX_AGE_INPUT.value) friendsArray = friendsArray
+    if (MAX_AGE_INPUT.value) friends = friends
         .filter((friend) => friend.age <= MAX_AGE_INPUT.value);
-    return friendsArray;
+    return friends;
 }
 
 
 function updateCards() {    
-    FRIENDS_ARRAY = INITIAL_FRIENDS_ARRAY;
-    sortCards(FRIENDS_ARRAY);
-    FRIENDS_ARRAY = filterByAge(FRIENDS_ARRAY);
-    FRIENDS_ARRAY = filterByGender(FRIENDS_ARRAY);
+    FRIENDS = INITIAL_FRIENDS;
+    sortCards(FRIENDS);
+    FRIENDS = filterByAge(FRIENDS);
+    FRIENDS = filterByGender(FRIENDS);
     if(!isSearchEmpty()) {
-        FRIENDS_ARRAY = findMatchesWithPropertiesValues(
-            FRIENDS_ARRAY,
+        FRIENDS = findMatchesWithPropertiesValues(
+            FRIENDS,
             SEARCH_INPUT.value
         );
     }
-    appendFriendsCards(FRIENDS_ARRAY);
+    appendFriendsCards(FRIENDS);
 }
 
 function isSearchEmpty(){
@@ -268,7 +273,7 @@ function isItemInFocus(e){
 }
 
 function isSelectModified() {
-    return SELECT_CONTAINER.attributes["select-modified"].value === "true";
+    return SELECT_CONTAINER.setAttribute("select-modified", "true");
 }
 
 function checkOptionsVisibility() {
@@ -278,7 +283,9 @@ function checkOptionsVisibility() {
 function resetPreviouslySelectedOptions(selectedOption) {
     Array.from(OPTIONS_LIST).forEach((option) => {
         if (option.textContent !== selectedOption) {
-            document.getElementById(option.htmlFor).checked = false;
+            option.control.checked = false;
+        }else{
+            option.control.checked = true;
         }
     });
 }
@@ -295,32 +302,32 @@ function getSelectOption(selectText) {
 
 function higlightSelectedOption(itemToSelect) {
     itemToSelect.setAttribute("aria-selected", "true");
-    document.getElementById(itemToSelect.htmlFor).checked = true;
+    itemToSelect.control.checked = true;
     updateSelectText(itemToSelect);
 }
 
 function focusOnItem(buttonPressed) {
-    const optionsListArray = Array.from(OPTIONS_LIST),
-        selectedItem = optionsListArray.find(
+    const optionsList = Array.from(OPTIONS_LIST),
+        selectedItem = optionsList.find(
             (listItem) => listItem.textContent === selectedOption
         );
     let selectedItemIndex = Array.from(OPTIONS_LIST).indexOf(selectedItem);
     if(buttonPressed === "ArrowUp"){
         if (--selectedItemIndex < 0) {
-            selectedItemIndex = optionsListArray.length-1;
+            selectedItemIndex = optionsList.length-1;
         }        
     }else{
-        if (++selectedItemIndex > optionsListArray.length-1) {
+        if (++selectedItemIndex > optionsList.length-1) {
             selectedItemIndex = 0;
         }
     }
-    higlightSelectedOption(optionsListArray[selectedItemIndex]);
-    selectedOption = optionsListArray[selectedItemIndex].textContent;
+    higlightSelectedOption(optionsList[selectedItemIndex]);
+    selectedOption = optionsList[selectedItemIndex].textContent;
     resetPreviouslySelectedOptions(selectedOption);
     removeAriaSelectedAttribute(selectedItem);
 }
 
-function observeOptionsListVisibility() {
+(function observeOptionsListVisibility() {
     const options = { attributes: true, attributesFilter: ["classList"] },
         callback = function (mutationsList, observer) {
             for (const mutation of mutationsList) {
@@ -344,9 +351,8 @@ function observeOptionsListVisibility() {
         };
     const observer = new MutationObserver(callback);
     observer.observe(OPTIONS_CONTAINER, options);
-}
+})();
 
-observeOptionsListVisibility();
 
 document.querySelectorAll(".list__input").forEach(input => {
     input.addEventListener("change", (e) => {
@@ -416,7 +422,7 @@ SELECT_CONTAINER.addEventListener("click", (e) => {
 });
 
 window.addEventListener("beforeunload", () => {
-    SELECT_CONTAINER.attributes["select-modified"].value = "false";
+    SELECT_CONTAINER.setAttribute("select-modified", "false");
     document.querySelector("#female").checked = "true";
     document.querySelector("#male").checked = "true";
     document.querySelector("#maxAge").value = "";
@@ -424,3 +430,5 @@ window.addEventListener("beforeunload", () => {
     document.querySelector("#search").value = "";
     document.querySelectorAll(".list__input").forEach(input => input.checked = "false");
 });
+
+initializeApp();
