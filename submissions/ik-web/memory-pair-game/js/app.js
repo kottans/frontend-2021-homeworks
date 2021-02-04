@@ -26,8 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
             src: 'img/teach.jpg'
         }
     ];
-    
-    //--------------------------------------------
+
     const gameName = document.querySelector('#title');
     const playArea = document.querySelector('#play-area');
     const playCardsTotal = cards.length * 2;
@@ -37,7 +36,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const hideCardsDelay = 600;
     const delayEndGame = 900;
     
-    //--------------------------------------------
     function ShuffleArr(arr) {
         for(let i = 0; i < arr.length; i++) {
             let k = Math.floor( Math.random() * arr.length);
@@ -67,12 +65,10 @@ document.addEventListener("DOMContentLoaded", () => {
         playArea.innerHTML = ShuffledCards;
     }
     
-    //--------------------------------------------
     function clickCard() {
         playArea.addEventListener('click', checkCard);
     }
 
-    //--------------------------------------------   
     function checkCard({target}) {
         let clickTarget = target.closest('div.card');
         if (!clickTarget) return;
@@ -96,7 +92,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    //--------------------------------------------   
     function stopClick() {
         playArea.removeEventListener('click', checkCard);
     }
@@ -128,13 +123,11 @@ document.addEventListener("DOMContentLoaded", () => {
         }, closeCardsDelay);  
     }
 
-    //--------------------------------------------
     function gameStart() {
         addCardsToPlayArea(cards);
         clickCard();
     }
     
-    //--------------------------------------------
     gameStart();
 
 });
