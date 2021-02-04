@@ -19,7 +19,7 @@ let friendsList = [],
     genderNeutralList, filteredByGenderList,
     scrollDepth;
     
-const sendRequest = function(method, url) {
+const sendRequest = function(url) {
     return fetch(url)
         .then(handleErrors)
         .then(function(response) {
@@ -35,7 +35,7 @@ function handleErrors(response) {
 }
 
 function startApp() {
-    sendRequest('GET', REQUEST_URL)
+    sendRequest(REQUEST_URL)
     .then( function(data) { 
         friendsList = data.results;
         renderFriendsList(friendsList);
