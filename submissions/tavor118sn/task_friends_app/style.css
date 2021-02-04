@@ -1,0 +1,167 @@
+
+body {
+  font-family: 'Arimo', sans-serif;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+strong {
+  font-weight: bold;
+}
+
+.wrapper {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-areas: "header" "aside" "content"
+}
+
+.main-head {
+  grid-area: header;
+}
+
+.aside {
+  grid-area: aside;
+}
+
+.content {
+  grid-area: content;
+}
+
+/* header */
+
+.main-head {
+  background-color: #231f20;
+  color: white;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5em;
+}
+
+.header .title {
+  font-size: 2em;
+}
+
+/* FORM */
+
+.aside {
+  margin-left: 1em;
+  margin-bottom: 2em;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+.form input, .select {
+  font-size: 0.9em;
+}
+
+.form input[name=firstname] {
+  width: 100%;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+
+  background-color: white;
+  background-image: url('../img/searchicon.png');
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 40px;
+}
+
+.form .select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.form .label {
+  display: block;
+  width: 100%;
+  color: #27aae1;
+  padding-top: 0.5em;
+}
+
+.form input[type=submit] {
+  width: 100%;
+  background-color: #25ad9f;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.form input[type=submit]:hover {
+  background-color: #1c7d74;
+}
+
+/* user cards */
+
+.listing {
+  list-style: none;
+  margin: 0 1em 2em;
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+}
+
+.listing .user-card {
+  border: 1px solid #edeff2;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user-card:hover {
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+.user-photo {
+  min-width: 100%;
+  height: auto;
+  border-radius: 5px;
+  transition: all ease-out 0.3s;
+}
+
+.user-full-name {
+  color: #27aae1;
+  font-size: 1.2em;
+  padding: 0.5em;
+  text-align: center;
+}
+
+.user-age {
+  padding-bottom: 1.0em;
+}
+
+/*
+
+  **********
+  RESPONSIVE
+  **********
+
+ */
+
+@media (min-width: 700px) {
+  .wrapper {
+    grid-template-columns: 1fr 3fr;
+    grid-template-areas: "header header" "aside    content" "aside    content"
+  }
+
+  .aside .form {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+  }
+}
