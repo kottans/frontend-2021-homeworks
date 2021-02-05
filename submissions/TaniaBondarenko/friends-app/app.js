@@ -13,7 +13,7 @@ function fetchFriends() {
     .then((response) => response.json())
     .then((data) => (allFriends = data.results))
     .then(() => addFriends(allFriends))
-    .catch((error) => showErrorMessage());
+    .catch(showErrorMessage);
 }
 
 function handleErrors(response) {
