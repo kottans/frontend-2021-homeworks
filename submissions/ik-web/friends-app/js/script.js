@@ -24,11 +24,19 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
     }
     
-    function getUsersInfo() {
+    function getUsersInfo(requestAttempts = 10) {
+        const errorMessage = '<h2 class="error-message">Server is unavailable<br>Please try again later...</h2>';
+
         return fetch(url)
         .then(response => response.json())
         .then(response => response.results)
-        .catch(err => window.location.reload());
+        .catch(err => {
+            if (requestAttempts === 0) {
+                usersBox.innerHTML = errorMessage;
+                throw err;
+            }      
+            return getUsersInfo(requestAttempts - 1);
+        });
     }
 
     function addUserCardsOnPage(usersInfo) {
