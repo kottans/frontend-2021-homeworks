@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const hideCardsDelay = 600;
     const delayEndGame = 900;
     
-    function ShuffleArr(arr) {
+    function shuffleArr(arr) {
         for(let i = 0; i < arr.length; i++) {
             let k = Math.floor( Math.random() * arr.length);
             [arr[i], arr[k]] = [arr[k], arr[i]];
@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="card" data-id="${cardId}"> 
             <div class="flipper"> 
                 <div class="front">
-                    <img src="${cardImageSrc}" class="image">
+                    <img src="${cardImageSrc}" class="image" alt="pirate">
                 </div>              
                 <div class="back"></div>                
             </div>        
@@ -59,10 +59,11 @@ document.addEventListener("DOMContentLoaded", () => {
     
     function addCardsToPlayArea(cards) {
         const playCards = cards.concat(cards);
-        let ShuffledCards = '';
-    
-        ShuffleArr(playCards).forEach((playCard) => ShuffledCards += createCard(playCard.id, playCard.src));
-        playArea.innerHTML = ShuffledCards;
+        const shuffledCards = shuffleArr(playCards)
+        .map(playCard => createCard(playCard.id, playCard.src))
+        .join('');
+
+        playArea.innerHTML = shuffledCards;
     }
     
     function clickCard() {
@@ -83,7 +84,9 @@ document.addEventListener("DOMContentLoaded", () => {
         if (openedCards.length === 2) {
             stopClick();
             
-            if (openedCards[0].getAttribute('data-id') === openedCards[1].getAttribute('data-id')) {
+            const [firstCard, secondCard] = openedCards;
+
+            if (firstCard.getAttribute('data-id') === secondCard.getAttribute('data-id')) {
                 hideCards(openedCards);
             }
             
