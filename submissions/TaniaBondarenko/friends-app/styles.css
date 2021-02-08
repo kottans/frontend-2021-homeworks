@@ -3,7 +3,7 @@
   padding: 0;
 }
 
-html {
+body {
   background: url("images/woodWorldSmall.jpg");
   max-width: 100%;
   -webkit-background-size: cover;
@@ -14,17 +14,17 @@ html {
   letter-spacing: 0.05em;
 }
 
-.refresh {
-  font-size: 50px;
-  color: cornsilk;
-  text-align: center;
-}
-
 .slogan {
   font-size: 40px;
   text-align: left;
   color: cornsilk;
   max-width: 200px;
+}
+
+.errorMessage {
+  font-size: 40px;
+  text-align: center;
+  color: cornsilk;
 }
 
 .main {
@@ -154,22 +154,6 @@ html {
   margin-top: 5px;
 }
 
-button {
-  border-radius: 20%;
-  outline: none;
-  border: 1px solid rgb(106, 83, 63);
-}
-
-button:hover,
-button:focus,
-button:active {
-  cursor: pointer;
-  background-color: #998978;
-}
-button.refresh_button {
-  border-radius: 5%;
-}
-
 .search::placeholder {
   color: cornsilk;
   opacity: 0.7;
@@ -180,28 +164,29 @@ button.refresh_button {
 .ascendent_by_name,
 .descendent_by_name,
 .descendent_by_age {
-  height: 40px;
-  width: 50px;
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
 }
 
-.ascendent_by_name {
-  background: url("images/a-z.png") center center no-repeat;
+.ascendent_by_age + img,
+.ascendent_by_name + img,
+.descendent_by_name + img,
+.descendent_by_age + img {
+  cursor: pointer;
+  border-radius: 20%;
+  border: 1px solid rgb(106, 83, 63);
 }
 
-.descendent_by_name {
-  background: url("images/z-a.png") center center no-repeat;
-}
-
-.ascendent_by_age {
-  background: url("images/1-9.png") center center no-repeat;
-}
-
-.descendent_by_age {
-  background: url("images/9-1.png") center center no-repeat;
+.ascendent_by_age:checked + img,
+.ascendent_by_name:checked + img,
+.descendent_by_name:checked + img,
+.descendent_by_age:checked + img {
+  background-color: #998978;
 }
 
 @media screen and (min-width: 320px) {
-  .refresh,
   .slogan {
     font-size: 19px;
     letter-spacing: 0em;
@@ -266,7 +251,6 @@ button.refresh_button {
 }
 
 @media screen and (min-width: 480px) {
-  .refresh,
   .slogan {
     font-size: 20px;
   }
@@ -281,8 +265,7 @@ button.refresh_button {
 }
 
 @media screen and (min-width: 770px) {
-  .slogan,
-  .refresh {
+  .slogan {
     font-size: 22px;
   }
 
@@ -337,10 +320,6 @@ button.refresh_button {
 @media screen and (min-width: 1025px) {
   .slogan {
     font-size: 18px;
-  }
-
-  .refresh {
-    font-size: 30px;
   }
 
   .sidebar {

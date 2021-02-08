@@ -1,19 +1,20 @@
 const NUM_OF_FRIENDS = 20;
 const FRIENDS = document.querySelector(".friends");
+const MALE_RADIO_BUTTON = document.getElementById("male");
+const FEMALE_RADIO_BUTTON = document.getElementById("female");
+const ALL_RADIO_BUTTON = document.getElementById("all");
+let sortedFriends;
 let allFriends;
-let friendsForFilter;
 let isFiltered = false;
-let justMale;
-let justFemale;
 
 function fetchFriends() {
-  const api_url = `https://randomuser.me/api/?results=${NUM_OF_FRIENDS}`;
-  fetch(api_url)
+  const apiUrl = `https://randomuser.me/api/?results=${NUM_OF_FRIENDS}`;
+  fetch(apiUrl)
     .then(handleErrors)
     .then((response) => response.json())
     .then((data) => (allFriends = data.results))
     .then(() => addFriends(allFriends))
-    .catch((error) => showErrorMessage());
+    .catch(showErrorMessage);
 }
 
 function handleErrors(response) {
@@ -24,10 +25,8 @@ function handleErrors(response) {
 }
 
 function showErrorMessage() {
-  const wholePage = document.querySelector("body");
-  wholePage.setAttribute("class", "refresh");
-  wholePage.innerHTML = `<div>Ops...Something went wrong.</div>
-        <div>Refresh the page to start finding friends</div>`;
+  const wholePage = document.body;
+  wholePage.innerHTML = `<div class="errorMessage">Ops...Something went wrong.</div>`;
 }
 
 function addFriends(friendsToBeAdded) {
@@ -35,18 +34,12 @@ function addFriends(friendsToBeAdded) {
   friendsToBeAdded.forEach((friend) => {
     let friendCard = document.createElement("div");
     friendCard.setAttribute("class", "friend_card");
-    friendCard.innerHTML = `<div class="card_wrapper ${
-      friend.gender
-    }"><div class="name ">${`${friend.name.first} ${friend.name.last}`}</div>
-                                <div class="photo"><img src="${
-                                  friend.picture.large
-                                }"></div>
+    friendCard.innerHTML = `<div class="card_wrapper ${friend.gender}"><div class="name ">${`${friend.name.first} ${friend.name.last}`}</div>
+                                <div class="photo"><img src="${friend.picture.large}"></div>
                                 <div class="info_block">
                                 <div class="age">Age ${friend.dob.age}</div>
                                 <div class="place">${friend.location.city}</div>
-                                <div class="email"><a href="mailto:${
-                                  friend.mail
-                                }" class="email_link">${friend.email}</a></div>
+                                <div class="email"><a href="mailto:${friend.mail}" class="email_link">${friend.email}</a></div>
                                 <div class="gender">${friend.gender}</div>
                                 </div></div>
                                 `;
@@ -55,107 +48,130 @@ function addFriends(friendsToBeAdded) {
   FRIENDS.appendChild(fragment);
 }
 
-document
-  .querySelector(".sidebar")
-  .addEventListener("click", showSorteredFriends);
+document.querySelector(".sortPanel").addEventListener("click", showSorteredFriends);
 
 function makeContainerEmpty() {
   let innerText = " ";
   FRIENDS.innerHTML = innerText.replace(innerText, " ");
 }
 
-function redrawfriends() {
-  makeContainerEmpty();
-  addFriends(friendsForFilter);
-}
-
 function showSorteredFriends({ target }) {
-  chooseAppropriateFriends();
-  const nameUp = "ascendent_by_name";
-  const nameDown = "descendent_by_name";
-  const ageUp = "ascendent_by_age";
-  const ageDown = "descendent_by_age";
-  switch (target.className || target.id) {
-    case nameUp:
-      sortByNameUp();
-      redrawfriends();
+  switch (target.value) {
+    case "nameUp":
+      showSortByNameUp();
       break;
-    case nameDown:
-      sortByNameDown();
-      redrawfriends();
+    case "nameDown":
+      showSortByNameDown();
       break;
-    case ageUp:
-      sortByAgeUp();
-      redrawfriends();
+    case "ageUp":
+      showSortByAgeUp();
       break;
-    case ageDown:
-      sortByAgeDown();
-      redrawfriends();
+    case "ageDown":
+      showSortByAgeDown();
       break;
   }
 }
 
+function showSortByNameUp() {
+  makeContainerEmpty();
+  if (MALE_RADIO_BUTTON.checked) {
+    sortedFriends = sortByNameUp().filter((el) => el.gender === "male");
+  } else if (FEMALE_RADIO_BUTTON.checked) {
+    sortedFriends = sortByNameUp().filter((el) => el.gender === "female");
+  } else if (ALL_RADIO_BUTTON.checked) {
+    sortedFriends = sortByNameUp();
+  }
+  addFriends(sortedFriends);
+}
+
+function showSortByNameDown() {
+  makeContainerEmpty();
+  if (MALE_RADIO_BUTTON.checked) {
+    sortedFriends = sortByNameDown().filter((el) => el.gender === "male");
+  } else if (FEMALE_RADIO_BUTTON.checked) {
+    sortedFriends = sortByNameDown().filter((el) => el.gender === "female");
+  } else if (ALL_RADIO_BUTTON.checked) {
+    sortedFriends = sortByNameDown();
+  }
+  addFriends(sortedFriends);
+}
+
+function showSortByAgeUp() {
+  makeContainerEmpty();
+  if (MALE_RADIO_BUTTON.checked) {
+    sortedFriends = sortByAgeUp().filter((el) => el.gender === "male");
+  } else if (FEMALE_RADIO_BUTTON.checked) {
+    sortedFriends = sortByAgeUp().filter((el) => el.gender === "female");
+  } else if (ALL_RADIO_BUTTON.checked) {
+    sortedFriends = sortByAgeUp();
+  }
+  addFriends(sortedFriends);
+}
+
+function showSortByAgeDown() {
+  makeContainerEmpty();
+  if (MALE_RADIO_BUTTON.checked) {
+    sortedFriends = sortByAgeDown().filter((el) => el.gender === "male");
+  } else if (FEMALE_RADIO_BUTTON.checked) {
+    sortedFriends = sortByAgeDown().filter((el) => el.gender === "female");
+  } else if (ALL_RADIO_BUTTON.checked) {
+    sortedFriends = sortByAgeDown();
+  }
+  addFriends(sortedFriends);
+}
+
 function sortByNameUp() {
-  friendsForFilter.sort((a, b) => a.name.first.localeCompare(b.name.first));
+  return allFriends.sort((a, b) => a.name.first.localeCompare(b.name.first));
 }
 
 function sortByNameDown() {
-  friendsForFilter.sort((a, b) => b.name.first.localeCompare(a.name.first));
+  return allFriends.sort((a, b) => b.name.first.localeCompare(a.name.first));
 }
 
 function sortByAgeUp() {
-  friendsForFilter.sort((a, b) => a.dob.age - b.dob.age);
+  return allFriends.sort((a, b) => a.dob.age - b.dob.age);
 }
 
 function sortByAgeDown() {
-  friendsForFilter.sort((a, b) => b.dob.age - a.dob.age);
+  return allFriends.sort((a, b) => b.dob.age - a.dob.age);
 }
 
 document.querySelector(".filter").addEventListener("click", doFilter);
 
 function doFilter({ target }) {
-  makeContainerEmpty();
-  if (target.value === "male") {
-    justMale = allFriends.filter((el) => el.gender === "male");
-    addFriends(justMale);
+  if (target.value === "male" || target.value === "female") {
+    makeContainerEmpty();
+    sortedFriends = filterBySex(target.value);
     isFiltered = true;
-  } else if (target.value === "female") {
-    justFemale = allFriends.filter((el) => el.gender === "female");
-    addFriends(justFemale);
-    isFiltered = true;
+    addFriends(sortedFriends);
   } else if (target.value === "all") {
+    makeContainerEmpty();
     addFriends(allFriends);
     isFiltered = false;
   }
 }
 
-document.querySelector(".search").addEventListener("keyup", makeSearch);
-
-function chooseAppropriateFriends() {
-  const maleRadioButton = document.getElementById("male");
-  const femaleRadioButton = document.getElementById("female");
-  if (isFiltered && maleRadioButton.checked) {
-    friendsForFilter = justMale;
-  }
-  if (isFiltered && femaleRadioButton.checked) {
-    friendsForFilter = justFemale;
-  }
-  if (!isFiltered) {
-    friendsForFilter = allFriends;
-  }
+function filterBySex(sex) {
+  return allFriends.filter((el) => el.gender === sex);
 }
 
-function makeSearch() {
+document.querySelector(".search").addEventListener("keyup", makeValidSearch);
+
+function makeSearch(friendsForSearch) {
   const searchValue = document.querySelector(".search").value.toLowerCase();
-  chooseAppropriateFriends();
-  const friendsAccordingToSearch = friendsForFilter.filter((elem) => {
-    return (
-      elem.name.last.toLowerCase().startsWith(searchValue, 0) ||
-      elem.name.first.toLowerCase().startsWith(searchValue)
-    );
+  let friendsAccordingToSearch = friendsForSearch.filter((elem) => {
+    return elem.name.last.toLowerCase().startsWith(searchValue, 0) || elem.name.first.toLowerCase().startsWith(searchValue);
   });
   makeContainerEmpty();
   addFriends(friendsAccordingToSearch);
+}
+
+function makeValidSearch() {
+  if (isFiltered) {
+    makeSearch(sortedFriends);
+  } else {
+    makeSearch(allFriends);
+  }
 }
 
 window.addEventListener("load", fetchFriends);
