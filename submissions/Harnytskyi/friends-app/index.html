@@ -12,23 +12,35 @@
 <body>
     <header class="header">
             <div class="header-title"><b>Friends</b>App</div>
-        <input id="search" class="search" onkeyup="search()" placeholder="Search" onsearch="search()" type="search">
+        <input id="search" class="search" onkeyup="searchEvent()" placeholder="Search" onsearch="searchEvent()" type="search">
     </header>
     <main>
         <div class="filters">
-            <div class="filter-item">
+            <div id="filter-sort" class="filter-item">
                 <p class="filters-header"><b>Sort</b></p>
-                <input type="button" class="button-sort" id="a-z" value="A-Z">
-                <input type="button" class="button-sort" id="z-a" value="Z-A">
+                <label class="radio-sort-container" value="">
+                    <input type="radio" name="sort-alphabet" id="a-z" value="alphabet-ascend">
+                    <div class="radio-sort">A-Z</div>
+                </label>
+                <label class="radio-sort-container">
+                    <input type="radio" name="sort-alphabet" id="z-a" value="alphabet-descend">
+                    <div class="radio-sort">Z-A</div>
+                </label>
                 <br>
-                <input type="button" class="button-sort" id="0-9" value="0-9">
-                <input type="button" class="button-sort" id="9-0" value="9-0">
+                <label class="radio-sort-container">
+                    <input type="radio" name="sort-age" id="0-9" value="age-ascend">
+                    <div class="radio-sort">0-9</div>
+                </label>
+                <label class="radio-sort-container">
+                    <input type="radio" name="sort-age" id="9-0" value="age-descend">
+                    <div class="radio-sort">9-0</div>
+                </label>
             </div>  
-            <div class="filter-item">
+            <div id="filter-gender" class="filter-item">
                 <p class="filters-header"><b>Gender</b></p>
-                <label><input type="checkbox" id="gender-male"  checked>Man</label>
+                <label><input type="checkbox" id="gender-male" value="male" checked>Man</label>
                 <br>
-                <label><input type="checkbox" id="gender-female" checked>Woman</label>
+                <label><input type="checkbox" id="gender-female" value="female" checked>Woman</label>
             </div>
         </div>
         <div id = "contentField" class="content-field">

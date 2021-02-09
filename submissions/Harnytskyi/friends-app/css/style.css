@@ -13,19 +13,16 @@ body {
     margin-bottom: 40px;
 }
 
-.button-sort {
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
+.radio-sort-container {
     height: 30px;
     line-height: 30px;
     color: #464646;
+    min-width: 24px;
     width: 60px;
     font-size: 12px;
     font-weight: 400;
     font-family: 'DM Sans', sans-serif;
     padding: 0;
-    background-color: #E5E5E5;
     text-decoration: none;
     display: inline-block;
     cursor: pointer;
@@ -34,13 +31,38 @@ body {
     margin: 0px 6px 6px 0px;
 }
 
-.button-sort:hover {
+.radio-sort-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    appearance: none;
+}
+
+.radio-sort-container input:checked~.radio-sort {
+    background-color: #d0d0d0;
+}
+
+.radio-sort-container input:focus~.radio-sort {
+    outline: auto;
+}
+
+.radio-sort-container:hover {
     background: #EEEEEE;
-    border: solid #FFFFFF 0;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     border-radius: 4px;
     text-decoration: none;
+}
+
+.radio-sort {
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    background-color: #E5E5E5;
+}
+
+.radio-sort:hover {
+    background: #EEEEEE;
 }
 
 .button-message {
