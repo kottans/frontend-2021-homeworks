@@ -27,19 +27,6 @@ body {
 	height: 24px;
 }
 
-.triangle {
-	display: none;
-	position: absolute;
-	top: 49px;
-	right: 116px;
-	width: 0;
-	height: 0;
-	z-index: 2;
-	border-left: 12px solid transparent;
-	border-right: 12px solid transparent;
-	border-bottom: 12px solid #d4d4d4;
-}
-
 .empty {
 	position: absolute;
 	top: 2px;
@@ -118,7 +105,7 @@ body {
 }
 
 .popupIconsItem a:focus {
-	outline: 1px solid #3f56fb;
+	outline: 1px solid gray;
 }
 
 .popupIconsItem img,
@@ -135,16 +122,45 @@ body {
 	text-align: center;
 }
 
-.popUp:checked ~ .iconsContainer {
+
+
+.menuItem:focus {
+	outline: 1px solid grey;
+}
+
+.popUp:focus ~ .button {
+	outline: 1px solid grey;
+}
+
+.MoreApps:focus ~ .MorePopUp {
+	outline: 1px solid black;
+}
+
+.triangle::after {
+	content: '';
+	display: none;
+	position: absolute;
+	top: 49px;
+	right: 116px;
+	width: 0;
+	height: 0;
+	z-index: 2;
+	border-left: 12px solid transparent;
+	border-right: 12px solid transparent;
+	border-bottom: 12px solid #d4d4d4;
+}
+
+.popUp:checked ~ .triangle::after {
 	display: block;
 }
 
-.popUp:checked ~ .triangle {
+.popUp:checked ~ .iconsContainer {
 	display: block;
 }
 
 .MorePopUp {
 	display: block;
+	cursor: pointer;
 	margin-top: 10px;
 	line-height: 35px;
 	text-align: center;
@@ -162,7 +178,6 @@ body {
 	color: #eee;
 	width: 200px;
 	opacity: 0.5;
-
 	margin-right: auto;
 	margin-left: auto;
 }
