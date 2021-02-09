@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" />
+    <title>Friends App</title>
+</head>
+<body>
+    <header>
+        <div>
+            <h1 class="logo">Friends APP</h1>
+        </div>
+    </header>
+
+    <div class="wrapper">
+        <form class="filters">
+            <div class="filter search-name">
+                <label>
+                    <input class="input-text" placeholder="Find who?" value="" type="search" />
+                </label>
+            </div>
+            <div class="filter">
+                <h2 class="filter-name">By gender</h2>
+                <label>
+                    <input class="radio-box" type="radio" name="gender" value="all" checked>
+                    <span>
+                        all
+                    </span>
+                </label>
+                <br>
+                <label>
+                    <input class="radio-box" type="radio" name="gender" value="male">
+                    <span>
+                        male
+                    </span>
+                </label>
+                <br>
+                <label>
+                    <input class="radio-box" type="radio" name="gender" value="female">
+                    <span>
+                        female
+                    </span>
+                </label>
+            </div>
+
+            <div class="filter">
+                <h2 class="filter-name">By name</h2>
+                <label>
+                    <input class="radio-box" type="radio" name="order" value="nameAsc">
+                    <span>
+                        Asc </span>
+                </label>
+                <br>
+                <label>
+                    <input class="radio-box" type="radio" name="order" value="nameDesc">
+                    <span>
+                        Desc
+                    </span>
+                </label>
+            </div>
+
+            <div class="filter">
+                <h2 class="filter-name">By age</h2>
+                <label>
+                    <input class="radio-box" type="radio" name="order" value="ageAsc">
+                    <span>
+                        Asc
+                    </span>
+                </label>
+                <br>
+                <label>
+                    <input class="radio-box" type="radio" name="order" value="ageDesc">
+                    <span>
+                        Desc
+                    </span>
+                </label>
+            </div>
+            <div class="filter">
+                <label>
+                    <input type="reset" class="reset_button" value="reset" />
+                </label>
+            </div>
+        </form>
+        <div class="frame cards_container"></div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
