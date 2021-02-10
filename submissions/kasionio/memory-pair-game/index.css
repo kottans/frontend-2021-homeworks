@@ -29,6 +29,8 @@
   height: 200px;
   margin: 10px;
   border: 1px #808080 solid;
+  transform-style: preserve-3d;
+  transition-duration: 0.5s;
 }
 
 .flip-card-inner {
@@ -54,13 +56,14 @@
 .flip-card_flipped {
   transform: rotateY(180deg);
   transform-style: preserve-3d;
+  transition-duration: 0.5s;
 }
 
 .hide {
   visibility: hidden;
 }
 
-.images {
+.image {
   width: 100%;
 }
 
