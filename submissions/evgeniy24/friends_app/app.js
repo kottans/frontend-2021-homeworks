@@ -1,28 +1,59 @@
-const REQUEST_URL  = 'https://randomuser.me/api/?results=20',
+const REQUEST_URL = 'https://randomuser.me/api/?results=20',
+    HEADER = document.querySelector('.header-name'),
     FRIENDS_LIST_WRAP = document.querySelector('.friendsList-wrap'),
     MENU_WRAP = document.querySelector('.menu-wrap'),
-    SORTING_MENU = document.querySelector('.filter-sort-menu'),
     SEARCH_FIELD = document.querySelector('#search'),
-    SORT_BY_NAME_AZ = document.querySelector('.nameSortAZ'),
-    SORT_BY_NAME_ZA = document.querySelector('.nameSortZA'),
-    SORT_YOUNGER_FIRST = document.querySelector('.ageSortYoungerFirst'),
-    SORT_OLDER_FIRST = document.querySelector('.ageSortOlderFirst'),
-    FILTER_MENU = document.querySelector('.filter-gender'),
-    FILTER_BY_MALE = document.querySelector('.filter-gender__male'),
-    FILTER_BY_FEMALE = document.querySelector('.filter-gender__female'),
-    FILTER_BY_ALL = document.querySelector('.filter-gender__all'),
+    SORTING_MENU = document.querySelector('.sorting-menu'),
+    FILTER_MENU = document.querySelector('.filter-menu'),
     MOBILE_MENU_BUTTON = document.querySelector('.button-container');
-let friendsList = [],  
+let friendsList = [],
     searchResultList,
     sortedList,
     errorButton,
     genderNeutralList, filteredByGenderList,
-    scrollDepth;
-    
-const sendRequest = function(url) {
+    scrollDepth,
+    lettersArr = HEADER.innerHTML.split('');
+
+//convert int to hex
+const colToHex = function (c) {
+    //colors are bright enough?
+    let color = (c < 75) ? c + 75 : c
+    let hex = color.toString(16);
+    return hex.length == 1 ? '0' + hex : hex;
+}
+
+// colToHex to concatenate a full 6 digit hex code
+const rgbToHex = function (r, g, b) {
+    return '#' + colToHex(r) + colToHex(g) + colToHex(b);
+}
+
+const getRandomColor = function () {
+    return rgbToHex(
+        Math.floor(Math.random() * 255),
+        Math.floor(Math.random() * 255),
+        Math.floor(Math.random() * 255)
+    )
+}
+
+const randomColor = function () {
+    let html = '';
+    lettersArr.map(function (letter) {
+        let color = getRandomColor();
+        return html +=
+            `<span style= color:${color}>
+          ${letter}
+          </span>`
+    })
+    return html;
+}
+
+HEADER.innerHTML = randomColor();
+
+
+const sendRequest = function (url) {
     return fetch(url)
         .then(handleErrors)
-        .then(function(response) {
+        .then(function (response) {
             return response.json();
         });
 }
@@ -36,29 +67,29 @@ function handleErrors(response) {
 
 function startApp() {
     sendRequest(REQUEST_URL)
-    .then( function(data) { 
-        friendsList = data.results;
-        renderFriendsList(friendsList);
-    })
-    .catch( function(err) {
-        renderErrorMessage();
-    });
+        .then(function (data) {
+            friendsList = data.results;
+            renderFriendsList(friendsList);
+        })
+        .catch(function (err) {
+            renderErrorMessage();
+        });
 }
 
 startApp();
 
 function renderFriendsList(friends) {
     FRIENDS_LIST_WRAP.innerHTML = '';
-    
-    friends.forEach(function(friend) {
+
+    friends.forEach(function (friend) {
         renderFriendsCard(friend);
     });
 }
 
 function renderFriendsCard(friend) {
     const FRIEND_CARD = document.createElement('div');
-    FRIEND_CARD.innerHTML = 
-    `
+    FRIEND_CARD.innerHTML =
+        `
     <div class="cardWrap ${friend.gender === 'male' ? 'malegradient' : 'femalegradient'}">
         <div class="cardWrap__photo-wrap">
             <img
@@ -99,101 +130,93 @@ function renderFriendsCard(friend) {
     FRIENDS_LIST_WRAP.append(FRIEND_CARD);
 }
 
-SEARCH_FIELD.addEventListener('input', function() {
+SEARCH_FIELD.addEventListener('input', function () {
     let searchName = SEARCH_FIELD.value.toLowerCase();
     if (searchName !== '') {
-            searchResultList = friendsList.filter(function(friend) {
-            return friend.name.first.toLowerCase().includes(searchName) 
+        searchResultList = friendsList.filter(function (friend) {
+            return friend.name.first.toLowerCase().includes(searchName)
         })
         return renderFriendsList(searchResultList);
-    }  else {
+    } else {
         searchResultList = [...friendsList]
         renderFriendsList(friendsList);
     }
 })
 
-SORTING_MENU.addEventListener('click', function(event) {
-    if (searchResultList) {
-        sortedList = searchResultList;
-    } else if (filteredByGenderList) {
+SORTING_MENU.addEventListener('click', function (event) {
+    if (filteredByGenderList) {
         sortedList = filteredByGenderList;
+    } else if (searchResultList) {
+        sortedList = searchResultList;
     } else {
         sortedList = [...friendsList];
     }
 
-    const sortByName = function(a, b) {
+    const searchByName = function (a, b) {
         const nameA = a.name.first.toUpperCase();
         const nameB = b.name.first.toUpperCase();
         return nameA < nameB ? -1 : nameA > nameB ? 1 : 0;
     }
 
-    const sortByAge = function(a, b) {
+    const sortByAge = function (a, b) {
         return a.dob.age - b.dob.age;
     }
-    
-    if (event.target === SORT_BY_NAME_AZ) {
-        sortedList.sort(sortByName);
+
+    if (event.target.value === 'az') {
+        sortedList.sort(searchByName);
         renderFriendsList(sortedList);
 
-    } else if (event.target === SORT_BY_NAME_ZA) {
-        sortedList.sort((a, b) => sortByName(b, a));
+    } else if (event.target.value === 'za') {
+        sortedList.sort((a, b) => searchByName(b, a));
         renderFriendsList(sortedList);
 
-    } else if (event.target === SORT_YOUNGER_FIRST) {
+    } else if (event.target.value === 'young') {
         sortedList.sort(sortByAge);
         renderFriendsList(sortedList);
 
-    } else if (event.target === SORT_OLDER_FIRST) {
+    } else if (event.target.value === 'older') {
         sortedList.sort((a, b) => sortByAge(b, a));
         renderFriendsList(sortedList);
-    } 
+    }
 })
 
-FILTER_MENU.addEventListener('click', function(event) {
+FILTER_MENU.addEventListener('click', function (event) {
+
     if (searchResultList) {
         genderNeutralList = searchResultList;
     } else {
         genderNeutralList = [...friendsList];
     }
 
-    if (event.target === FILTER_BY_MALE) {
-        filteredByGenderList = genderNeutralList.filter(function(friend) {
-           return friend.gender === 'male'; 
-        })
-        renderFriendsList(filteredByGenderList);
-        
-    } else if (event.target === FILTER_BY_FEMALE) {
-        filteredByGenderList = genderNeutralList.filter(function(friend) {
-           return friend.gender === 'female'; 
+    if (event.target.value === 'male') {
+        filteredByGenderList = genderNeutralList.filter(function (friend) {
+            return friend.gender === 'male';
         })
         renderFriendsList(filteredByGenderList);
 
-    } else if (event.target === FILTER_BY_ALL) {
+    } else if (event.target.value === 'female') {
+        filteredByGenderList = genderNeutralList.filter(function (friend) {
+            return friend.gender === 'female';
+        })
+        renderFriendsList(filteredByGenderList);
+
+    } else if (event.target.value === 'all') {
         filteredByGenderList = genderNeutralList;
         renderFriendsList(filteredByGenderList);
-        }
-        
+    }
 })
 
 function renderErrorMessage() {
-    const messageErrorWrap =  document.createElement('div');
-    const messageError = document.createElement('p');
-    const tryMoreBtn = document.createElement('button');
-
-    messageErrorWrap.classList.add('error-message-wrap')
-    tryMoreBtn.classList.add('btn');
-    tryMoreBtn.classList.add('error-btn');
-    messageError.classList.add('error-msg-text');
-
-    messageError.textContent = 'OOPS! Something Bad Happened, please try again';
-    tryMoreBtn.textContent = 'Try Again';
-
-
-    messageErrorWrap.append(messageError, tryMoreBtn);
-    FRIENDS_LIST_WRAP.append(messageErrorWrap);
+    FRIENDS_LIST_WRAP.innerHTML =
+        `
+    <div class="error-message-wrap">
+        <p class="error-msg-text">OOPS! Something Bad Happened, please try again</p>
+        <button class="radio__button error-button" value="loading-error">Try Again</button>
+    </div>
+    `
 }
 
-MOBILE_MENU_BUTTON.addEventListener('click', function() {
+MOBILE_MENU_BUTTON.addEventListener('click', function () {
     clickMenuBtn(MOBILE_MENU_BUTTON);
     clickMenuBtn(MENU_WRAP);
     scrollDepth = window.pageYOffset;
@@ -204,21 +227,21 @@ function clickMenuBtn(elem) {
     elem.classList.toggle('change');
 }
 
-function scrollToTop() {   
-    let timer = 0; 
+function scrollToTop() {
+    let timer = 0;
     if (scrollDepth > 100) {
         window.scrollTo(pageXOffset, scrollDepth);
         scrollDepth = scrollDepth - 60;
         timer = setTimeout(scrollToTop, 15);
     } else {
         clearTimeout(timer);
-        window.scrollTo(0,0);
+        window.scrollTo(0, 0);
     }
-   
-} 
 
-FRIENDS_LIST_WRAP.addEventListener('click', function(event) {
-    if (event.target.classList == 'btn error-btn') {
+}
+
+FRIENDS_LIST_WRAP.addEventListener('click', function (event) {
+    if (event.target.value == 'loading-error') {
         FRIENDS_LIST_WRAP.innerHTML = '';
         startApp();
     }

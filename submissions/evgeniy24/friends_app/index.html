@@ -20,7 +20,7 @@
     </header>
     <div class="main-wrap">
       <aside class="menu-wrap">
-        <div class="filter-sort-menu">
+        <div class="sorting-menu">
           <input
             type="text"
             name="search"
@@ -30,20 +30,76 @@
           />
           <p class="sorting-legend">SORTING</p>
           <div class="nameSort-wrap">
-            <button class="btn nameSortAZ">A-Z</button>
-            <button class="btn ageSortYoungerFirst">Young</button>
+            <label class="sorting__label">
+              <input
+                class="sorting__input"
+                type="radio"
+                name="name-sorting"
+                value="az"
+              />
+              <span class="radio__button uppercase">a-z</span>
+            </label>
+            <label class="sorting__label">
+              <input
+                class="sorting__input"
+                type="radio"
+                name="name-sorting"
+                value="za"
+              />
+              <span class="radio__button uppercase">z-a</span>
+            </label>
           </div>
           <div class="ageSort-wrap">
-            <button class="btn nameSortZA">Z-A</button>
-            <button class="btn ageSortOlderFirst">Older</button>
+            <label class="sorting__label">
+              <input
+                class="sorting__input"
+                type="radio"
+                name="age-sorting"
+                value="young"
+              />
+              <span class="radio__button">Young</span>
+            </label>
+            <label class="sorting__label">
+              <input
+                class="sorting__input"
+                type="radio"
+                name="age-sorting"
+                value="older"
+              />
+              <span class="radio__button">Older</span>
+            </label>
           </div>
           <div class="filter-gender">
-            <p class="filter-gender__legend">FILTER</p>
-            <div class="filter-wrap">
-              <button class="btn filter-gender__male">Male</button>
-              <button class="btn filter-gender__female">Female</button>
-              <button class="btn filter-gender__all">All</button>
-            </div>
+            <p class="filter-legend">FILTER</p>
+            <fieldset class="filter-menu">
+              <label class="filter__label">
+                <input
+                  class="sorting__input"
+                  type="radio"
+                  name="gender-filter"
+                  value="male"
+                />
+                <span class="radio__button">Male</span>
+              </label>
+              <label class="filter__label">
+                <input
+                  class="sorting__input"
+                  type="radio"
+                  name="gender-filter"
+                  value="female"
+                />
+                <span class="radio__button">Female</span>
+              </label>
+              <label class="filter__label">
+                <input
+                  class="sorting__input"
+                  type="radio"
+                  name="gender-filter"
+                  value="all"
+                />
+                <span class="radio__button">All</span>
+              </label>
+            </fieldset>
           </div>
         </div>
       </aside>

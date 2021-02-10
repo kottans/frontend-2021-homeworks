@@ -74,16 +74,64 @@ header {
 .menu-wrap {
   width: 23%;
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
   transition: 1s;
 }
 
-.filter-sort-menu {
+.sorting-menu {
   width: 22%;
   position: fixed;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+}
+
+.filter-menu {
+  display: flex;
+  border: none;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.sorting__input {
+  position: absolute;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.radio__button {
+  display: block;
+  text-align: center;
+  width: 110px;
+  height: 45px;
+  line-height: 45px;
+  font-size: 25px;
+  margin-bottom: 20px;
+  color: white;
+  border: 0;
+  border-radius: 4px;
+  background: #8360c3; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #2ebf91,
+    #8360c3
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #2ebf91,
+    #8360c3
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  cursor: pointer;
+  outline: none;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.sorting__input:checked + .radio__button {
+  background: linear-gradient(135deg, #e55d87 0%, #5fc3e4 100%);
 }
 
 .search-form {
@@ -120,68 +168,24 @@ header {
   display: none;
 }
 
-.nameSort-wrap {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
+.nameSort-wrap,
 .ageSort-wrap {
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-bottom: 20px;
+  justify-content: space-around;
 }
 
 .sorting-legend,
-.filter-gender__legend {
+.filter-legend {
   font-size: 20px;
   letter-spacing: 2px;
   text-align: center;
   margin-bottom: 15px;
 }
 
-.nameSort-wrap,
-.ageSort-wrap {
-  justify-content: space-around;
-}
-
-.btn {
-  width: 95px;
-  height: 45px;
-  margin: 0 5px 20px 5px;
-  font-size: 25px;
-  color: white;
-  border: 0;
-  border-radius: 4px;
-  background: #8360c3; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #2ebf91,
-    #8360c3
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #2ebf91,
-    #8360c3
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-  cursor: pointer;
-  outline: none;
-}
-
-.btn:focus {
-  background: linear-gradient(135deg, #e55d87 0%, #5fc3e4 100%);
-}
-
-.error-btn {
+.error-button {
   width: 300px;
-}
-
-.filter-wrap {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
 }
 
 .friendsList-wrap {
