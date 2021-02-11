@@ -8,22 +8,27 @@ async function fetchUsers(amount) {
   try {
     const fetchedResult = await fetch(usersURL)
     const fetchedUsers = await fetchedResult.json()
-    console.log(fetchedUsers.results)
     return fetchedUsers.results
   } catch (err) {
-    console.log(err, 'Trying to fetch again.')
     if (fetchingTries < maxTriesAmount) {
       fetchingTries++;
       return fetchUsers(amount)
     } else {
-      console.log('Too many fetching attempts. Check connection or try again later.')
       fetchingTries = 0;
     }
   }
 }
 
+function fetchErrorHandler() {
+  document.querySelector('.content').innerHTML = "All fetching attempts failed. Please check your internet connection or try again later."
+}
+
 export async function loadUsers(amount) {
   const fetchedUsers = await fetchUsers(amount)
+  if (!fetchedUsers) {
+    fetchErrorHandler()
+    return
+  }
   fetchedUsers.forEach(loadedUser => {
     const id = loadedUsers.length
     const newUser = new User({...loadedUser, id})
@@ -35,7 +40,7 @@ export async function loadUsers(amount) {
 export function peekUser({ target }) {
   const targetElement = target.closest('.user')
   if (targetElement) {
-    const id = target.closest('.user').id
+    const { id } = target.closest('.user')
     const clickedUser = loadedUsers.find(user => user.id === parseInt(id))
     document.body.appendChild(clickedUser.expandedHtmlMarkUp)
   }
@@ -69,52 +74,30 @@ function filterUsers (usersToFilter) {
   return filteredUsers;
 }
 
-function alphaSort(usersToSort, ascending) {
-  if (ascending) {
-    return usersToSort.sort(function (a, b) {
-      if (a.firstName > b.firstName) {
-        return 1;
-      }
-      if (a.firstName < b.firstName) {
-        return -1;
-      }
-      return 0;
-    })
-  } else {
-    return usersToSort.sort(function (a, b) {
-      if (a.firstName < b.firstName) {
-        return 1;
-      }
-      if (a.firstName > b.firstName) {
-        return -1;
-      }
-      return 0;
-    })
+function sortByName(a, b) {
+  if (a > b) {
+    return 1;
   }
+  if (a < b) {
+    return -1;
+  }
+  return 0;
 }
 
-function ageSort(usersToSort, ascending) {
-  if (ascending) {
-    return usersToSort.sort(function (a, b) {
-      return a.age - b.age;
-    })
-  } else {
-    return usersToSort.sort(function (a, b) {
-      return b.age - a.age;
-    })
-  }
+function sortByAge(a, b) {
+  return a - b
 }
 
 function sortUsers(usersToSort, sortType) {
   switch(sortType) {
     case 'A-Z':
-      return alphaSort(usersToSort, true);
+      return usersToSort.sort(({firstName: nameA}, {firstName: nameB}) => sortByName(nameA, nameB))
     case 'Z-A':
-      return alphaSort(usersToSort, false);
+      return usersToSort.sort(({firstName: nameA}, {firstName: nameB}) => sortByName(nameB, nameA))
     case 'ageAsc':
-      return ageSort(usersToSort, true);
+      return usersToSort.sort(({age: ageA}, {age: ageB}) => sortByAge(ageA, ageB))
     case 'ageDesc':
-      return ageSort(usersToSort, false);
+      return usersToSort.sort(({age: ageA}, {age: ageB}) => sortByAge(ageB, ageA))
   }
 }
 
