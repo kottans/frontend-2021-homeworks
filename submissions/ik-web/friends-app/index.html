@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Friends App</title>
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="body">
+
+    <header class="header">
+        <h1 class="header__title">Friends App</h1>
+        <div class="burger">
+            <span class="burger__item"></span>
+        </div>
+    </header>
+
+    <main class="main">
+
+        <aside class="aside">
+            <form class="menu" onsubmit="return false">
+
+                <div class="menu__item menuItem">
+                    <h3 class="menuItem__name">Search by name</h3>
+                    <div class="menuItem__btnBox">
+                        <div class="menuItem__btnWrapper">
+                            <input type="text" class="menuItem__search" name="search">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu__item menuItem">
+                    <h3 class="menuItem__name">Sort by name</h3>
+                    <div class="menuItem__btnBox">
+                        <div class="menuItem__btnWrapper">
+                            <input type="radio" name="sort" class="menuItem__radio" id="sortNameAZ" value="sortNameAZ">
+                            <label for="sortNameAZ" class="menuItem__btn">A-Z</label>
+                        </div>
+                        <div class="menuItem__btnWrapper">
+                            <input type="radio" name="sort" class="menuItem__radio" id="sortNameZA" value="sortNameZA">
+                            <label for="sortNameZA" class="menuItem__btn">Z-A</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu__item menuItem">
+                    <h3 class="menuItem__name">Sort by age</h3>
+                    <div class="menuItem__btnBox">
+                        <div class="menuItem__btnWrapper">
+                            <input type="radio" name="sort" class="menuItem__radio" id="sortAgeAsc" value="sortAgeAsc">
+                            <label for="sortAgeAsc" class="menuItem__btn">Age &#8679;</label>
+                        </div>
+                        <div class="menuItem__btnWrapper">
+                            <input type="radio" name="sort" class="menuItem__radio" id="sortAgeDesc" value="sortAgeDesc">
+                            <label for="sortAgeDesc" class="menuItem__btn">Age &#8681;</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu__item menuItem">
+                    <h3 class="menuItem__name">Sort by gender</h3>
+                    <div class="menuItem__btnBox">
+                        <div class="menuItem__btnWrapper">
+                            <input type="radio" name="gender" class="menuItem__radio" id="male" value="male">
+                            <label for="male" class="menuItem__btn">Male</label>
+                        </div>
+                        <div class="menuItem__btnWrapper">
+                            <input type="radio" name="gender" class="menuItem__radio" id="female" value="female">
+                            <label for="female" class="menuItem__btn">Female</label>
+                        </div>
+                        <div class="menuItem__btnWrapper">
+                            <input type="radio" name="gender" class="menuItem__radio" id="all" value="all">
+                            <label for="all" class="menuItem__btn">All</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="menuItem__btnBox">
+                        <div class="menuItem__btnWrapper">
+                            <input type="reset" class="menuItem__btn menuItem__btnReset" value="Reset" id="reset">
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </aside>
+
+        <section class="usersBox">
+            <!-- Users cards -->
+        </section>
+
+    </main>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>
