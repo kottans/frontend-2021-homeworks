@@ -47,16 +47,14 @@ class Deck {
         if (this.opened.length===2) this._closeOpened()
         this.currentDealCards[cardId].open()
         this.opened.push(this.currentDealCards[cardId])
-        this._checkOpenedMatch()
+        if (this.opened.length===2) this._checkOpenedMatch()
     }
     _checkOpenedMatch() {
         const [firstCard, secondCard] = this.opened
-        if (firstCard && secondCard) {
-            if (Card.match(firstCard, secondCard)) {
-                this.matched_quantity += 2
-                this._hideOpened()
-                if (this.matched_quantity === CARDS_QUANTITY) this.showResult(this.flip_count)
-            }
+        if (Card.match(firstCard, secondCard)) {
+            this.matched_quantity += 2
+            this._hideOpened()
+            if (this.matched_quantity === CARDS_QUANTITY) this.showResult(this.flip_count)
         }
     }
     _closeOpened() {
