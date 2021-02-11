@@ -34,15 +34,22 @@ function addFriends(friendsToBeAdded) {
   friendsToBeAdded.forEach((friend) => {
     let friendCard = document.createElement("div");
     friendCard.setAttribute("class", "friend_card");
-    friendCard.innerHTML = `<div class="card_wrapper ${friend.gender}"><div class="name ">${`${friend.name.first} ${friend.name.last}`}</div>
-                                <div class="photo"><img src="${friend.picture.large}"></div>
-                                <div class="info_block">
-                                <div class="age">Age ${friend.dob.age}</div>
-                                <div class="place">${friend.location.city}</div>
-                                <div class="email"><a href="mailto:${friend.mail}" class="email_link">${friend.email}</a></div>
-                                <div class="gender">${friend.gender}</div>
-                                </div></div>
-                                `;
+friendCard.innerHTML = `
+    <div class="card_wrapper ${friend.gender}">
+        <div class="name ">${`${friend.name.first} ${friend.name.last}`}</div>
+        <div class="photo">
+           <img src="${friend.picture.large}">
+         </div>
+        <div class="info_block">
+            <div class="age">Age ${friend.dob.age}</div>
+            <div class="place">${friend.location.city}</div>
+            <div class="email">
+                <a href="mailto:${friend.mail}" class="email_link">${friend.email}</a>
+            </div>
+            <div class="gender">${friend.gender}</div>
+        </div>
+    </div>
+`;
     fragment.appendChild(friendCard);
   });
   FRIENDS.appendChild(fragment);
