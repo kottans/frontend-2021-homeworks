@@ -1,7 +1,5 @@
 class Card {
     constructor(image, index) {
-        //image - object with file name and alt text of the image
-        //index - card index in current deal of the deck
         this.image_file = image.file
         this.div = document.createElement('div')
         this.div.id = `card${index}`
@@ -19,7 +17,6 @@ class Card {
         else return false
     }
 }
-//Card deck for memory pair matching
 class Deck {
     constructor(imagesArray, cardsQuantityInDeal, showResult) {
         //imagesArray - all available images (file name and alt text) to select from for a deal
@@ -42,29 +39,34 @@ class Deck {
         this.flip_count = 0
     }
     placeOnBoard(board) {
-        //board is div element for appending child card elements
         board.innerHTML = ''
         this.currentDealCards.forEach(card => board.appendChild(card.div))
     }
     openCard(cardId) {
         this.flip_count++
-        if (this.opened.length==2) this._closeOpened()
+        if (this.opened.length===2) this._closeOpened()
         this.currentDealCards[cardId].open()
         this.opened.push(this.currentDealCards[cardId])
         this._checkOpenedMatch()
     }
     _checkOpenedMatch() {
-        if (this.opened.length==2 && Card.match(this.opened[0], this.opened[1])) {
-            this.matched_quantity += this.opened.length
-            this._hideOpened()
-            if (this.matched_quantity == CARDS_QUANTITY) this.showResult(this.flip_count)
+        const [firstCard, secondCard] = this.opened
+        if (firstCard && secondCard) {
+            if (Card.match(firstCard, secondCard)) {
+                this.matched_quantity += 2
+                this._hideOpened()
+                if (this.matched_quantity === CARDS_QUANTITY) this.showResult(this.flip_count)
+            }
         }
     }
-    _closeOpened() {while(this.opened.length > 0) this.opened.pop().close()}
-    _hideOpened() {while(this.opened.length > 0) this.opened.pop().hide()}
+    _closeOpened() {
+        while(this.opened.length) this.opened.pop().close()
+    }
+    _hideOpened() {
+        while(this.opened.length) this.opened.pop().hide()
+    }
 }
 function cardNumber(elemenId) {
-    //extracts Id number from HTML element id
     if (elemenId.slice(0,4)==='back') return elemenId.slice(4)
     else return undefined
 }
@@ -106,7 +108,7 @@ BOARD.addEventListener('click', evt => {
         startGame()
     } else {
         let cardId = cardNumber(evt.target.id)
-        if (cardId!==undefined) DECK.openCard(cardId)
+        if (cardId) DECK.openCard(cardId)
     }
 })
 startGame()
