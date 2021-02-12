@@ -1,49 +1,80 @@
 'use strict';
 
-const allCards = document.querySelectorAll('.flipper');
+const cards = document.querySelector('.cards');
 
-const cardPosition = 12;
-const allPairCards = 6;
-let currentPair = 0;
-let hasFlippedCard = false;
 let lockCard = false;
 let firstCard = '';
 let secondCard = '';
 
-function flipCards() {
-	if(lockCard){
-		return;
-	};
-	if (this === firstCard){
+const images = [
+	'bentley',
+	'amazon',
+	'google',
+	'intel',
+	'nike',
+	'telegram'
+];
+
+const allImg = [...images, ...images];
+
+const numberOfallImg = allImg.length;
+const allPairInGame = 6;
+let currentPair = 0;
+
+function sortCard() {
+	allImg.sort(function() { 
+		return 0.5 - Math.random() 
+	});
+};
+
+function generateCard() {
+	sortCard();
+
+	let divFlipper = '';
+	allImg.forEach(item => 
+		divFlipper += `<div class="flipper" data-id="${item}">
+		<div class="front"><img src="img/logo.png" alt="Logo"></div>
+		<div class="back"><img src="img/${item}.png" alt="${item}"></div>
+	</div>`
+	);
+	
+	cards.innerHTML = divFlipper;
+	
+};
+
+function flipCards(e) {
+	let targetCard = e.target.closest('.flipper');
+
+	if (!targetCard) return;
+	if(lockCard || targetCard === firstCard) {
 		return;
 	};
 
-	this.classList.add('flip');
-
-	if(!hasFlippedCard) {
-		hasFlippedCard = true;
-		firstCard = this;
+	if(!firstCard) {
+		firstCard = targetCard;
+		firstCard.classList.add('flip');
 		return;
 	} else {
-		secondCard = this;
+		secondCard = targetCard;
+		secondCard.classList.add('flip');
 		checkPair();
 	}
 };
 
 function checkPair() {
-	if(firstCard.dataset.id === secondCard.dataset.id){
+	if(firstCard.dataset.id === secondCard.dataset.id) {
 		disablePair();
 		checkWin();
 	} else {
 		frontFlipPair();
 	}
-};
+}
 
 function disablePair() {
-	firstCard.classList.add('opacity');
 	firstCard.removeEventListener('click', flipCards);
-	secondCard.classList.add('opacity');
 	secondCard.removeEventListener('click', flipCards);
+	firstCard.classList.add('opacity');
+	secondCard.classList.add('opacity');
 
 	currentPair++;
 
@@ -51,39 +82,29 @@ function disablePair() {
 };
 
 function frontFlipPair() {
+	let waitingTime = 600;
 	lockCard = true;
 
 	setTimeout(() => {
 		firstCard.classList.remove('flip');
 		secondCard.classList.remove('flip');
-		
+
 		resetValue();
-	}, 700);
+	}, waitingTime);
 };
 
 function resetValue() {
-	hasFlippedCard = false;
-	lockCard = false
+	lockCard = false;
 	firstCard = '';
 	secondCard = '';
 };
 
 function checkWin() {
-	if(currentPair === allPairCards) {
+	if(currentPair === allPairInGame) {
 		alert('You win!');
 		location.reload();
 	};
 };
 
-function getRandomInt(max) {
-	return Math.floor(Math.random() * Math.floor(max));
-}; 
-
-(function shuffleCards() {
-	allCards.forEach(function(card) {
-		 let random = getRandomInt(cardPosition);
-		 card.style.order = random;
-	})
-})();
-
-allCards.forEach(item => item.addEventListener('click', flipCards));
+generateCard();
+cards.addEventListener('click', flipCards);

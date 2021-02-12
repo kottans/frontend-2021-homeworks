@@ -20,13 +20,6 @@ a:active {
   outline: none;
 }
 
-nav,
-footer,
-header,
-aside {
-  display: block;
-}
-
 html,
 body {
   height: 100%;
@@ -160,7 +153,6 @@ img {
   transform: rotateY(180deg);
 }
 
-.opacity > .back {
-  opacity: 0;
-  transition: 0.5s;
+.opacity {
+  visibility: hidden;
 }
