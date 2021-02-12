@@ -122,8 +122,6 @@ body {
 	text-align: center;
 }
 
-
-
 .menuItem:focus {
 	outline: 1px solid grey;
 }
