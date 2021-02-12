@@ -1,0 +1,104 @@
+.page {
+	display: flex;
+	flex-wrap: wrap;
+	align-content: center;
+	background-color: beige;
+}
+.title {
+	width: 100%;
+	text-align: center;
+	font-size: 2rem;
+	margin: 0.2rem;
+}
+.title_main {
+	padding: 0.1rem;
+	background: linear-gradient(to right, transparent, goldenrod, transparent) 50% 0%;
+}
+/* entire container, keeps perspective */
+.board {
+	margin: auto;
+	perspective: 1000px;
+	padding: 10px;
+	width: 550px;
+	height: 550px;
+	background: darkslategray;
+	border-radius: 3%;
+}
+.game_grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	align-items: center;
+	justify-items: center;
+}
+.game_message {
+	display: flex;
+	flex-wrap: wrap;
+	align-content: center;
+}
+.message {
+	width: 100%;
+	text-align: center;
+	font-size: 2rem;
+	margin: 0.5rem;
+	color: goldenrod;
+}
+.message_link {
+	text-decoration: none;
+	color: mediumaquamarine;
+}
+.message_link:hover {
+	color: mediumspringgreen;
+}
+.hidden {
+	visibility: hidden;
+}
+.card, .face, .back, .card_image {
+	width: 125px;
+	height: 125px;
+	border-radius: 8%;
+}
+.opened {
+    transform: rotateY(180deg);
+}
+/* flip animation */
+.card {
+	transition: 0.6s;
+	transform-style: preserve-3d;
+	position: relative;
+}
+/* initially shown pane */
+.back {
+	z-index: 2;
+    background-color: goldenrod;
+}
+/* initially hidden pane */
+.face {
+	transform: rotateY(180deg);
+	background-color: whitesmoke;
+}
+/* hide back of pane during swap */
+.face, .back {
+	backface-visibility: hidden;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+@media screen and (max-width: 600px) {
+	.title {
+		font-size: 5vw;
+	}
+	.board {
+		perspective: 100vw;
+		padding: 2vw;
+		width: 90vw;
+		height: 90vw;
+	}
+	.card, .face, .back, .card_image {
+		width: 20vw;
+		height: 20vw;
+	}
+	.message {
+		font-size: 5vw;
+		margin: 0.5vw;
+	}
+}
