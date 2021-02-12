@@ -5,13 +5,11 @@ body {
     padding: 0;
     background: url(../img/wallpapers.jpg) no-repeat center center fixed;
     background-size: cover;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
+    overflow: hidden;
 }
 
 .container {
-    margin: 0;
+    margin: auto;
     padding: 0;
     width: 100vw;
     height: 100vh;
