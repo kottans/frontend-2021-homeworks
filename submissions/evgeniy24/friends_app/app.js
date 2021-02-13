@@ -1,28 +1,22 @@
 const REQUEST_URL = 'https://randomuser.me/api/?results=20',
-    HEADER = document.querySelector('.header-name'),
     FRIENDS_LIST_WRAP = document.querySelector('.friendsList-wrap'),
-    MENU_WRAP = document.querySelector('.menu-wrap'),
-    SEARCH_FIELD = document.querySelector('#search'),
-    SORTING_MENU = document.querySelector('.sorting-menu'),
-    FILTER_MENU = document.querySelector('.filter-menu'),
-    MOBILE_MENU_BUTTON = document.querySelector('.button-container');
+    HEADER = document.querySelector('.header-name');
+
 let friendsList = [],
     searchResultList,
     sortedList,
-    errorButton,
-    genderNeutralList, filteredByGenderList,
+    genderNeutralList,
+    filteredByGenderList,
     scrollDepth,
     lettersArr = HEADER.innerHTML.split('');
 
-//convert int to hex
 const colToHex = function (c) {
-    //colors are bright enough?
+
     let color = (c < 75) ? c + 75 : c
     let hex = color.toString(16);
     return hex.length == 1 ? '0' + hex : hex;
 }
 
-// colToHex to concatenate a full 6 digit hex code
 const rgbToHex = function (r, g, b) {
     return '#' + colToHex(r) + colToHex(g) + colToHex(b);
 }
@@ -46,6 +40,7 @@ const randomColor = function () {
     })
     return html;
 }
+
 
 HEADER.innerHTML = randomColor();
 
@@ -87,10 +82,10 @@ function renderFriendsList(friends) {
 }
 
 function renderFriendsCard(friend) {
-    const FRIEND_CARD = document.createElement('div');
-    FRIEND_CARD.innerHTML =
+    const friendCard = document.createElement('div');
+    friendCard.innerHTML =
         `
-    <div class="cardWrap ${friend.gender === 'male' ? 'malegradient' : 'femalegradient'}">
+    <div class="cardWrap ${friend.gender === 'male' ? 'purple-gradient' : 'yellow-gradient'}">
         <div class="cardWrap__photo-wrap">
             <img
                 class="cardWrap__photo-img"
@@ -127,11 +122,13 @@ function renderFriendsCard(friend) {
         </div>
     </div>
     `
-    FRIENDS_LIST_WRAP.append(FRIEND_CARD);
+    FRIENDS_LIST_WRAP.append(friendCard);
 }
 
-SEARCH_FIELD.addEventListener('input', function () {
-    let searchName = SEARCH_FIELD.value.toLowerCase();
+SEARCH_FIELD = document.querySelector('#search');
+
+SEARCH_FIELD.addEventListener('input', function (event) {
+    let searchName = event.target.value.toLowerCase();
     if (searchName !== '') {
         searchResultList = friendsList.filter(function (friend) {
             return friend.name.first.toLowerCase().includes(searchName)
@@ -139,9 +136,21 @@ SEARCH_FIELD.addEventListener('input', function () {
         return renderFriendsList(searchResultList);
     } else {
         searchResultList = [...friendsList]
-        renderFriendsList(friendsList);
+        renderFriendsList(searchResultList);
     }
 })
+
+const sortByName = function (a, b) {
+    const nameA = a.name.first.toUpperCase();
+    const nameB = b.name.first.toUpperCase();
+    return nameA < nameB ? -1 : nameA > nameB ? 1 : 0;
+}
+
+const sortByAge = function (a, b) {
+    return a.dob.age - b.dob.age;
+}
+
+SORTING_MENU = document.querySelector('.sorting-menu');
 
 SORTING_MENU.addEventListener('click', function (event) {
     if (filteredByGenderList) {
@@ -152,33 +161,23 @@ SORTING_MENU.addEventListener('click', function (event) {
         sortedList = [...friendsList];
     }
 
-    const searchByName = function (a, b) {
-        const nameA = a.name.first.toUpperCase();
-        const nameB = b.name.first.toUpperCase();
-        return nameA < nameB ? -1 : nameA > nameB ? 1 : 0;
-    }
+    if (event.target.value === 'ascending') {
+        sortedList.sort(sortByName);
 
-    const sortByAge = function (a, b) {
-        return a.dob.age - b.dob.age;
-    }
+    } else if (event.target.value === 'descending') {
+        sortedList.sort((a, b) => sortByName(b, a));
 
-    if (event.target.value === 'az') {
-        sortedList.sort(searchByName);
-        renderFriendsList(sortedList);
-
-    } else if (event.target.value === 'za') {
-        sortedList.sort((a, b) => searchByName(b, a));
-        renderFriendsList(sortedList);
-
-    } else if (event.target.value === 'young') {
+    } else if (event.target.value === 'young-first') {
         sortedList.sort(sortByAge);
-        renderFriendsList(sortedList);
 
-    } else if (event.target.value === 'older') {
+    } else if (event.target.value === 'old-first') {
         sortedList.sort((a, b) => sortByAge(b, a));
-        renderFriendsList(sortedList);
     }
+
+    renderFriendsList(sortedList);
 })
+
+FILTER_MENU = document.querySelector('.filter-menu');
 
 FILTER_MENU.addEventListener('click', function (event) {
 
@@ -192,19 +191,43 @@ FILTER_MENU.addEventListener('click', function (event) {
         filteredByGenderList = genderNeutralList.filter(function (friend) {
             return friend.gender === 'male';
         })
-        renderFriendsList(filteredByGenderList);
 
     } else if (event.target.value === 'female') {
         filteredByGenderList = genderNeutralList.filter(function (friend) {
             return friend.gender === 'female';
         })
-        renderFriendsList(filteredByGenderList);
+
+    } else if (event.target.value === 'all') {
+        return filteredByGenderList = genderNeutralList;
+    }
+
+    renderFriendsList(filteredByGenderList)
+})
+/* FILTER_MENU.addEventListener('click', function (event) {
+    let genderNeutralList;
+
+    if (searchResultList) {
+        genderNeutralList = searchResultList;
+    } else {
+        genderNeutralList = [...friendsList];
+    }
+
+    if (event.target.value === 'male') {
+        filteredByGenderList = genderNeutralList.filter(function (friend) {
+            return friend.gender === 'male';
+        });
+
+    } else if (event.target.value === 'female') {
+        filteredByGenderList = genderNeutralList.filter(function (friend) {
+            return friend.gender === 'female';
+        });
 
     } else if (event.target.value === 'all') {
         filteredByGenderList = genderNeutralList;
-        renderFriendsList(filteredByGenderList);
     }
-})
+
+    renderFriendsList(filteredByGenderList);
+}) */
 
 function renderErrorMessage() {
     FRIENDS_LIST_WRAP.innerHTML =
@@ -216,18 +239,22 @@ function renderErrorMessage() {
     `
 }
 
-MOBILE_MENU_BUTTON.addEventListener('click', function () {
-    clickMenuBtn(MOBILE_MENU_BUTTON);
-    clickMenuBtn(MENU_WRAP);
+MOBILE_MENU_BUTTON = document.querySelector('.button-container');
+
+MOBILE_MENU_BUTTON.addEventListener('click', function (event) {
+    const menuWrap = document.querySelector('.menu-wrap');
+
+    toggleClass(event.target, menuWrap);
     scrollDepth = window.pageYOffset;
     scrollToTop();
 });
 
-function clickMenuBtn(elem) {
-    elem.classList.toggle('change');
+function toggleClass(...elem) {
+    elem.forEach((e) => e.classList.toggle('change'));
 }
 
 function scrollToTop() {
+
     let timer = 0;
     if (scrollDepth > 100) {
         window.scrollTo(pageXOffset, scrollDepth);

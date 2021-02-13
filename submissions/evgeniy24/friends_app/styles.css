@@ -209,7 +209,7 @@ header {
   z-index: 1;
 }
 
-.malegradient {
+.purple-gradient {
   background: #d3cce3; /* fallback for old browsers */
   background: -webkit-linear-gradient(
     to right,
@@ -223,7 +223,7 @@ header {
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
-.femalegradient {
+.yellow-gradient {
   background: #ffefba; /* fallback for old browsers */
   background: -webkit-linear-gradient(
     to right,
