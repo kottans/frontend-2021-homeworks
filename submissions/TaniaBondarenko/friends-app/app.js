@@ -31,19 +31,34 @@ function addFriends(friendsToBeAdded) {
   friendsToBeAdded.forEach((friend) => {
     let friendCard = document.createElement("div");
     friendCard.setAttribute("class", "friend_card");
+<<<<<<< HEAD
     friendCard.innerHTML = `
     <div class="card_wrapper ${friend.gender}">
         <p class="name ">${`${friend.name.first} ${friend.name.last}`}</p>
+=======
+friendCard.innerHTML = `
+    <div class="card_wrapper ${friend.gender}">
+        <div class="name ">${`${friend.name.first} ${friend.name.last}`}</div>
+>>>>>>> 7de896699c83a6d4c8e2d0fb7c76497e0fcc477b
         <div class="photo">
            <img src="${friend.picture.large}">
          </div>
         <div class="info_block">
+<<<<<<< HEAD
             <p class="age">Age ${friend.dob.age}</p>
             <p class="place">${friend.location.city}</p>
             <div class="email">
                 <a href="mailto:${friend.mail}" class="email_link">${friend.email}</a>
             </div>
             <p class="gender">${friend.gender}</p>
+=======
+            <div class="age">Age ${friend.dob.age}</div>
+            <div class="place">${friend.location.city}</div>
+            <div class="email">
+                <a href="mailto:${friend.mail}" class="email_link">${friend.email}</a>
+            </div>
+            <div class="gender">${friend.gender}</div>
+>>>>>>> 7de896699c83a6d4c8e2d0fb7c76497e0fcc477b
         </div>
     </div>
 `;
