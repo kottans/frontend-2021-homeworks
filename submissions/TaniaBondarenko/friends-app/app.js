@@ -1,8 +1,5 @@
 const NUM_OF_FRIENDS = 20;
 const FRIENDS = document.querySelector(".friends");
-const MALE_RADIO_BUTTON = document.getElementById("male");
-const FEMALE_RADIO_BUTTON = document.getElementById("female");
-const ALL_RADIO_BUTTON = document.getElementById("all");
 let sortedFriends;
 let allFriends;
 let isFiltered = false;
@@ -25,152 +22,97 @@ function handleErrors(response) {
 }
 
 function showErrorMessage() {
-  const wholePage = document.body;
-  wholePage.innerHTML = `<div class="errorMessage">Ops...Something went wrong.</div>`;
+  document.body.innerHTML = `<div class="errorMessage">Ops...Something went wrong.</div>`;
 }
 
 function addFriends(friendsToBeAdded) {
+  FRIENDS.innerHTML = " ";
   let fragment = document.createDocumentFragment();
   friendsToBeAdded.forEach((friend) => {
     let friendCard = document.createElement("div");
     friendCard.setAttribute("class", "friend_card");
-    friendCard.innerHTML = `<div class="card_wrapper ${friend.gender}"><div class="name ">${`${friend.name.first} ${friend.name.last}`}</div>
-                                <div class="photo"><img src="${friend.picture.large}"></div>
-                                <div class="info_block">
-                                <div class="age">Age ${friend.dob.age}</div>
-                                <div class="place">${friend.location.city}</div>
-                                <div class="email"><a href="mailto:${friend.mail}" class="email_link">${friend.email}</a></div>
-                                <div class="gender">${friend.gender}</div>
-                                </div></div>
-                                `;
+    friendCard.innerHTML = `
+    <div class="card_wrapper ${friend.gender}">
+        <p class="name ">${`${friend.name.first} ${friend.name.last}`}</p>
+        <div class="photo">
+           <img src="${friend.picture.large}">
+         </div>
+        <div class="info_block">
+            <p class="age">Age ${friend.dob.age}</p>
+            <p class="place">${friend.location.city}</p>
+            <div class="email">
+                <a href="mailto:${friend.mail}" class="email_link">${friend.email}</a>
+            </div>
+            <p class="gender">${friend.gender}</p>
+        </div>
+    </div>
+`;
     fragment.appendChild(friendCard);
   });
   FRIENDS.appendChild(fragment);
 }
 
-document.querySelector(".sortPanel").addEventListener("click", showSorteredFriends);
+document.querySelector(".sortPanel").addEventListener("click", showSortedFriends);
 
-function makeContainerEmpty() {
-  let innerText = " ";
-  FRIENDS.innerHTML = innerText.replace(innerText, " ");
-}
-
-function showSorteredFriends({ target }) {
+function showSortedFriends({ target }) {
   switch (target.value) {
     case "nameUp":
-      showSortByNameUp();
+      sortedFriends = allFriends.sort((a, b) => sortByName(a, b));
       break;
     case "nameDown":
-      showSortByNameDown();
+      sortedFriends = allFriends.sort((a, b) => sortByName(b, a));
       break;
     case "ageUp":
-      showSortByAgeUp();
+      sortedFriends = allFriends.sort((a, b) => sortByAge(a, b));
       break;
     case "ageDown":
-      showSortByAgeDown();
+      sortedFriends = allFriends.sort((a, b) => sortByAge(b, a));
       break;
   }
-}
-
-function showSortByNameUp() {
-  makeContainerEmpty();
-  if (MALE_RADIO_BUTTON.checked) {
-    sortedFriends = sortByNameUp().filter((el) => el.gender === "male");
-  } else if (FEMALE_RADIO_BUTTON.checked) {
-    sortedFriends = sortByNameUp().filter((el) => el.gender === "female");
-  } else if (ALL_RADIO_BUTTON.checked) {
-    sortedFriends = sortByNameUp();
+  if (isFiltered) {
+    let checkedValue = document.querySelector("input[name=filter]:checked").value;
+    addFriends(sortedFriends.filter((el) => el.gender === checkedValue));
+  } else {
+    addFriends(allFriends);
   }
-  addFriends(sortedFriends);
 }
 
-function showSortByNameDown() {
-  makeContainerEmpty();
-  if (MALE_RADIO_BUTTON.checked) {
-    sortedFriends = sortByNameDown().filter((el) => el.gender === "male");
-  } else if (FEMALE_RADIO_BUTTON.checked) {
-    sortedFriends = sortByNameDown().filter((el) => el.gender === "female");
-  } else if (ALL_RADIO_BUTTON.checked) {
-    sortedFriends = sortByNameDown();
-  }
-  addFriends(sortedFriends);
+function sortByName(a, b) {
+  return a.name.first.localeCompare(b.name.first);
 }
 
-function showSortByAgeUp() {
-  makeContainerEmpty();
-  if (MALE_RADIO_BUTTON.checked) {
-    sortedFriends = sortByAgeUp().filter((el) => el.gender === "male");
-  } else if (FEMALE_RADIO_BUTTON.checked) {
-    sortedFriends = sortByAgeUp().filter((el) => el.gender === "female");
-  } else if (ALL_RADIO_BUTTON.checked) {
-    sortedFriends = sortByAgeUp();
-  }
-  addFriends(sortedFriends);
-}
-
-function showSortByAgeDown() {
-  makeContainerEmpty();
-  if (MALE_RADIO_BUTTON.checked) {
-    sortedFriends = sortByAgeDown().filter((el) => el.gender === "male");
-  } else if (FEMALE_RADIO_BUTTON.checked) {
-    sortedFriends = sortByAgeDown().filter((el) => el.gender === "female");
-  } else if (ALL_RADIO_BUTTON.checked) {
-    sortedFriends = sortByAgeDown();
-  }
-  addFriends(sortedFriends);
-}
-
-function sortByNameUp() {
-  return allFriends.sort((a, b) => a.name.first.localeCompare(b.name.first));
-}
-
-function sortByNameDown() {
-  return allFriends.sort((a, b) => b.name.first.localeCompare(a.name.first));
-}
-
-function sortByAgeUp() {
-  return allFriends.sort((a, b) => a.dob.age - b.dob.age);
-}
-
-function sortByAgeDown() {
-  return allFriends.sort((a, b) => b.dob.age - a.dob.age);
+function sortByAge(a, b) {
+  return a.dob.age - b.dob.age;
 }
 
 document.querySelector(".filter").addEventListener("click", doFilter);
 
 function doFilter({ target }) {
-  if (target.value === "male" || target.value === "female") {
-    makeContainerEmpty();
-    sortedFriends = filterBySex(target.value);
-    isFiltered = true;
-    addFriends(sortedFriends);
-  } else if (target.value === "all") {
-    makeContainerEmpty();
+  if (target.value === "all") {
     addFriends(allFriends);
     isFiltered = false;
+  } else {
+    sortedFriends = allFriends.filter((el) => el.gender === target.value);
+    addFriends(sortedFriends);
+    isFiltered = true;
   }
 }
 
-function filterBySex(sex) {
-  return allFriends.filter((el) => el.gender === sex);
-}
+document.querySelector(".search").addEventListener("keyup", doValidSearch);
 
-document.querySelector(".search").addEventListener("keyup", makeValidSearch);
-
-function makeSearch(friendsForSearch) {
+function doSearch(friendsForSearch) {
   const searchValue = document.querySelector(".search").value.toLowerCase();
   let friendsAccordingToSearch = friendsForSearch.filter((elem) => {
     return elem.name.last.toLowerCase().startsWith(searchValue, 0) || elem.name.first.toLowerCase().startsWith(searchValue);
   });
-  makeContainerEmpty();
   addFriends(friendsAccordingToSearch);
 }
 
-function makeValidSearch() {
+function doValidSearch() {
   if (isFiltered) {
-    makeSearch(sortedFriends);
+    doSearch(sortedFriends);
   } else {
-    makeSearch(allFriends);
+    doSearch(allFriends);
   }
 }
 
