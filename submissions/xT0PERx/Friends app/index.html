@@ -35,22 +35,66 @@
                 <button type="submit"></button>
               </form>
             </li>
-            <li class="sort_usersByAlphabet">
-              <button id="name-ascend" class="filter-btn">Asc</button>
-              <button id="name-descend" class="filter-btn">Dsc</button>
+            <li class="selection-box">
+              <input
+                type="radio"
+                id="name_ascend"
+                value="nameAscend"
+                name="sort_by_alphabet"
+                class="sort_input"
+              />
+              <label for="name_ascend" class="filter-btn">Asc</label>
+              <input
+                type="radio"
+                id="name_descend"
+                value="nameDescend"
+                name="sort_by_alphabet"
+                class="sort_input"
+              />
+              <label for="name_descend" class="filter-btn">Dsc</label>
             </li>
             <li class="selection-box">
               <p>Gender :</p>
-              <button id="male" class="filter-btn">Male</button>
-              <button id="female" class="filter-btn">Female</button>
+              <input
+                type="radio"
+                id="male"
+                value="male"
+                name="sort_by_name"
+                class="sort_input"
+              />
+              <label for="male" class="filter-btn">Male</label>
+              <input
+                type="radio"
+                id="female"
+                value="female"
+                name="sort_by_name"
+                class="sort_input"
+              />
+              <label for="female" class="filter-btn">Female</label>
             </li>
             <li class="selection-box">
               <p>Age :</p>
-              <button id="younger-ftr" class="filter-btn">Younger first</button>
-              <button id="senior-ftr" class="filter-btn">Older first</button>
+              <input
+                type="radio"
+                id="younger"
+                value="younger"
+                name="sort_by_age"
+                class="sort_input"
+              />
+              <label for="younger" class="filter-btn">Youngest</label>
+              <input
+                type="radio"
+                id="senior"
+                value="senior"
+                name="sort_by_age"
+                class="sort_input"
+              />
+              <label for="senior" class="filter-btn">Oldgest</label>
             </li>
             <li class="reset_btn">
-              <button class="filter-btn" id="reset">Reset Filters</button>
+              <button class="filter-btn" id="reset" value="reset">
+                Reset Filters
+              </button>
             </li>
           </ul>
         </nav>
