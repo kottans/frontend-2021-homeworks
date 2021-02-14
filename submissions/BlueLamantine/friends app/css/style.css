@@ -1,0 +1,378 @@
+@font-face {
+  font-family: CyberPunk;
+  src: url(../fonts/cp.ttf);
+}
+:root {
+  --scroll: hidden;
+}
+body {
+  font-variant: all-petite-caps;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: var(--scroll);
+  padding: 0;
+  margin: 0;
+}
+.preload-animation {
+  height: 100vh;
+  width: 100%;
+  background-color: transparent;
+}
+.menu-toggle {
+  color: #fff;
+  position: absolute;
+  left: 10px;
+  font-size: 30px;
+  cursor: pointer;
+  display: none;
+}
+.kottans-header {
+  display: flex;
+  justify-content: center;
+}
+a {
+  color: #fff;
+  outline: none;
+  text-decoration: none;
+}
+.icon::before {
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  display: inline-block;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+}
+.exclamation::before {
+  content: '\f06a';
+  display: inline-block;
+  padding-right: 3px;
+  vertical-align: middle;
+  font-weight: 900;
+  font-size: 30px;
+}
+
+.top-header {
+  font-family: CyberPunk;
+  letter-spacing: 10px;
+  color: #fff;
+}
+
+.profile-cards {
+  width: 100%;
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 300px));
+  grid-row-gap: 50px;
+  grid-column-gap: 50px;
+  margin-bottom: 30px;
+  color: #fff;
+  justify-content: center;
+}
+
+.user-card {
+  font-family: Roboto;
+  border: 1px solid transparent;
+}
+.user-card:hover {
+  border: 1px solid #ffffff7d;
+  border-radius: 15px;
+}
+.profile-header:hover,
+.profile-info:hover,
+.profile-id:hover {
+  transform: scale(1.1);
+  background-color: black;
+  cursor: pointer;
+}
+.profile-photo:hover {
+  filter: none;
+}
+.content {
+  font-size: 14px;
+}
+.profile-header {
+  border-top: 10px solid #fff;
+  border-image: url(../img/profile-border-top.png) 30;
+  border-bottom: 2px solid #fff;
+  display: flex;
+  justify-content: space-between;
+}
+.protocol {
+  width: 60%;
+  color: #b00035;
+}
+
+.protocol,
+.id-protocol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  font-size: 13px;
+}
+.profile-protocol {
+  width: 90%;
+}
+
+.user-photo {
+  border: 1px solid #ffffff7d;
+  border-right: 0;
+}
+.profile-photo {
+  width: 100px;
+  height: 100px;
+  padding: 1px;
+  filter: grayscale(100%) brightness(40%) sepia(60%) hue-rotate(-50deg)
+    saturate(600%) contrast(1.5);
+}
+
+.profile-id {
+  display: flex;
+  margin: 10px 0px 10px 0px;
+}
+.profile-info,
+.id-info {
+  border: 1px solid #ffffff7d;
+}
+.block {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2px;
+  height: 50px;
+}
+.profile-id .id-info:nth-child(1) {
+  width: 70%;
+  margin-right: 5px;
+}
+.profile-id .id-info:nth-child(2) {
+  width: 30%;
+}
+.user-card span {
+  color: #ffffff7d;
+  font-size: 12px;
+}
+.name {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #ffffff7d;
+}
+.name .name-info:nth-child(1) {
+  border-right: 1px solid #ffffff7d;
+  width: 50%;
+}
+.name .name-info:nth-child(2) {
+  width: 50%;
+}
+.first-name,
+.gender,
+.age {
+  font-size: 25px;
+  font-weight: bold;
+}
+.mail {
+  font-weight: bold;
+}
+.details,
+.social,
+.location,
+.auth {
+  display: flex;
+}
+.alias {
+  color: #b00035;
+}
+.details-info {
+  width: 33%;
+  border-bottom: 1px solid #ffffff7d;
+}
+.details .details-info:nth-child(1),
+.details .details-info:nth-child(2) {
+  border-right: 1px solid #ffffff7d;
+}
+
+.social .social-info:nth-child(1) {
+  border-right: 1px solid #ffffff7d;
+  width: 35%;
+}
+.social,
+.location {
+  border-bottom: 1px solid #ffffff7d;
+}
+.location .location-info:nth-child(1) {
+  border-right: 1px solid #ffffff7d;
+  width: 50%;
+}
+.auth {
+  display: flex;
+  justify-content: space-around;
+}
+
+.loading {
+  opacity: 0;
+  display: flex;
+  justify-content: center;
+}
+.loading.active {
+  opacity: 1;
+}
+.circle {
+  background-color: #fff;
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+  margin: 3px;
+  animation: jump 0.5s ease-in infinite;
+}
+.circle:nth-of-type(2) {
+  animation-delay: 0.1s;
+}
+.circle:nth-of-type(3) {
+  animation-delay: 0.2s;
+}
+@keyframes jump {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.filters-menu {
+  color: white;
+  display: flex;
+  justify-content: space-around;
+}
+.sort-options {
+  display: flex;
+}
+.hidden {
+  display: none;
+}
+
+input[type='radio'] {
+  -webkit-appearance: none;
+  appearance: none;
+}
+.radio-lable {
+  padding: 4px 15px;
+  border: 1px solid #ffffff7d;
+}
+.radio-lable:hover {
+  cursor: pointer;
+  padding: 4px 15px;
+  border: 1px solid #b00035;
+}
+input[type='radio']:checked + .radio-lable {
+  background-color: #b00035;
+}
+.filters-menu p {
+  letter-spacing: 2px;
+  font-size: 20px;
+}
+.filter {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+  background-color: black;
+  padding-bottom: 5px;
+  border: none;
+}
+.filter-search {
+  padding-bottom: 50px;
+}
+.searchEmail {
+  outline: none;
+  background: transparent;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  color: #b00035;
+}
+.searchEmail:focus {
+  border-bottom: 2px solid #b00035;
+}
+
+.image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  filter: brightness(1.75);
+  object-fit: cover;
+  z-index: -1;
+  transform: scale(1.8);
+  animation: scaleImage 5s ease-out forwards;
+}
+
+.text-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: calc(10px + 8vw);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  text-transform: uppercase;
+  color: #fff;
+  mix-blend-mode: multiply;
+  background-color: #000;
+  mix-blend-mode: multiply;
+  opacity: 0;
+  animation: fadeInText 3s 2s ease-out forwards;
+}
+.text {
+  font-family: CyberPunk;
+  color: yellow;
+}
+.wrapper {
+  width: 100%;
+}
+
+@keyframes scaleImage {
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeInText {
+  100% {
+    opacity: 1;
+  }
+}
+.radio-wrapper {
+  display: flex;
+}
+
+@media (max-width: 991px) {
+  .menu-toggle {
+    display: block;
+  }
+  .filters-menu {
+    position: absolute;
+    width: 100%;
+    height: calc(100vh - 50px);
+    top: 10px;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    transition: 0.5s;
+    left: -100%;
+  }
+  .filters-menu.active {
+    left: 0;
+  }
+  .profile-photo {
+    filter: none;
+  }
+}

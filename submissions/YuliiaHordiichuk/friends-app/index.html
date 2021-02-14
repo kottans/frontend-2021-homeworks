@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" integrity="sha512-NmLkDIU1C/C88wi324HBc+S2kLhi08PN5GDeUVVVC/BVt/9Izdsc9SVeVfA1UZbY3sHUlDSyRXhCzHfr6hmPPw==" crossorigin="anonymous" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;1,600&family=Yusei+Magic&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+    <link rel="stylesheet" href="./index.css">
+    <title>Friends</title>
+</head>   
+<body>
+    <header class="header container">
+        <h1>Friends App</h1>
+    </header>
+    <main class="main container">
+        <aside class="sidebar">
+            <div class="form">
+                <div class="form__fieldset">
+                    <h2 class="form__title">Search by name</h2>
+                    <input class="form__input form__input_search" 
+                            placeholder="e.g John Brown" 
+                            id="name-search"
+                            value=''
+                            name="searchBy">
+                </div>
+
+                <div class="form__fieldset">
+                    <h2 class="form__title">Sort by age</h2>
+                    <label class="form__label">
+                        <input class="form__input form__input_increase" 
+                           type="radio" 
+                           name="sortBy"
+                           value="0-9" 
+                           id="age-increase">
+                        <i class="fas fa-sort-numeric-down"></i>
+                    </label>
+                    <label class="form__label">
+                        <input class="form__input form__input_decrease" 
+                           type="radio" 
+                           name="sortBy" 
+                           value="9-0">
+                        <i class="fas fa-sort-numeric-up"></i>
+                    </label> 
+                </div>
+
+                <div class="form__fieldset">
+                    <h2 class="form__title">Sort by name</h2>
+                    <label class="form__label">
+                        <input class="form__input form__input_alphabet-down" 
+                            type="radio" 
+                            name="sortBy" 
+                            value="a-z">
+                        <i class="fas fa-sort-alpha-down"></i>
+                    </label>
+                    <label class="form__label">
+                        <input class="form__input form__input_alphabet-up" 
+                            type="radio" 
+                            name="sortBy" 
+                            value ="z-a">
+                        <i class="fas fa-sort-alpha-up"></i>
+                    </label> 
+                </div>
+
+                <div class="form__fieldset">
+                    <h2 class="form__title">Filter by gender</h2>
+                    <label class="form__label">
+                        <input class="form__input form__input_all" 
+                            type="radio" 
+                            name="filterBy" 
+                            value='all'
+                            checked>
+                        <i class="fas fa-venus-mars"></i>
+                    </label>
+
+                    <label class="form__label">
+                        <input class="form__input form__input_man" 
+                            type="radio" 
+                            name="filterBy" 
+                            value="male">
+                        <i class="fas fa-mars"></i>
+                    </label>
+                    <label class="form__label">
+                        <input class="form__input form__input_woman" 
+                            type="radio" 
+                            name="filterBy"
+                            value="female">
+                        <i class="fas fa-venus"></i>
+                    </label>
+                </div>
+                <button class="form__button" type="reset">Reset</button>
+            </form>
+        </aside>
+        <section class="cards">
+            <ul class="cards__items">
+            </ul>
+        </section>
+    </main>
+    <script src="./app.js"></script>
+</body>
+</html>

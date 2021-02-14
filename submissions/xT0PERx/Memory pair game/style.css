@@ -1,0 +1,51 @@
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: start;
+  margin: 0 auto;
+  width: 850px;
+}
+
+.card--show {
+  transform: rotateY(180deg);
+}
+
+.card {
+  transition: 0.6s;
+  transform-style: preserve-3d;
+  height: 230px;
+  width: 158px;
+  margin: 5px;
+}
+
+.front,
+.back {
+  backface-visibility: hidden;
+  position: absolute;
+}
+
+.front {
+  transform: rotateY(0deg);
+  border-radius: 10px;
+}
+
+.back {
+  transform: rotateY(180deg);
+}
+
+.front__images {
+  height: 210px;
+  width: 140px;
+}
+
+.back__image {
+  width: 100%;
+  margin-top: 40px;
+  height: auto;
+  object-fit: cover;
+}
+
+.card--hidden {
+  opacity: 0;
+}

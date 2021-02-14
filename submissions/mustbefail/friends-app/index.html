@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Friends list</title>
+    <link rel="stylesheet" href="src/style.css" />
+    <link rel="stylesheet" href="node_modules/normalizecss/normalize.css" />
+    <script type="module" src="src/js/index.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>Friends App</h1>
+    </header>
+    <main class="main">
+      <div class="menu-trigger"><p>FILTER</p></div>
+      <aside class="filter-sidebar">
+        <form action="#" name="picker">
+          <div class="sorters">
+            <fieldset class="sort">
+              <legend>Sort by alphabet:</legend>
+
+              <input type="radio" id="a-z" name="sort" value="name_asc" />
+              <label for="a-z">From A to Z</label>
+
+              <input type="radio" id="z-a" name="sort" value="name_desc" />
+              <label for="z-a">From Z to A</label><br />
+            </fieldset>
+            <fieldset class="sort">
+              <legend>Sort by age:</legend>
+
+              <input type="radio" id="age-yf" name="sort" value="age_asc" />
+              <label for="age-yf">Younger first</label>
+              <input type="radio" id="age-of" name="sort" value="age_desc" />
+              <label for="age-of">Older First</label>
+            </fieldset>
+            <fieldset class="sort">
+              <legend>Sort by registration date:</legend>
+              <input
+                type="radio"
+                id="reg-date-early"
+                name="sort"
+                value="registered_asc"
+              />
+              <label for="reg-date-early">Early </label>
+
+              <input
+                type="radio"
+                id="reg-date-later"
+                name="sort"
+                value="registered_desc"
+              />
+              <label for="reg-date-later">Later</label>
+            </fieldset>
+          </div>
+          <div class="filters">
+            <fieldset class="filter">
+              <legend>Filter by gender:</legend>
+              <input type="radio" id="sex-both" name="gender" value="both" />
+              <label for="sex-both">Both </label>
+
+              <input type="radio" id="sex-man" name="gender" value="male" />
+              <label for="sex-man">Male </label>
+
+              <input type="radio" id="sex-woman" name="gender" value="female" />
+              <label for="sex-woman">Female</label>
+            </fieldset>
+            <fieldset class="filter search">
+              <legend>Filter by name:</legend>
+              <input type="text" name="name" placeholder="User name" value="" />
+            </fieldset>
+          </div>
+          <button class="reset-filters">Reset Filters</button>
+        </form>
+      </aside>
+      <article class="contacts-block">
+        <section class="contacts-container">
+          <div class="lds-ellipsis">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </section>
+      </article>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Friends App</title>
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+    <link rel="manifest" href="./favicon/site.webmanifest">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap" rel="stylesheet">
+
+    <!-- Materialize -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <!-- Animate CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- noUiSlider -->
+    <link rel="stylesheet" href="./styles/noUi.css">
+
+    <link rel="stylesheet" href="./styles/reset.css">
+    <link rel="stylesheet" href="./styles/styles.css">
+</head>
+
+
+<body>
+
+    <header id="header" class="flexContainerRow">
+        <div class="header__logoWrapper">
+            <a href="#" class="sidenav-trigger" data-target="slide-out">
+                <div class="pulse1-animation"></div>
+                <div class="pulse2-animation"></div>
+                <div class="header__logo">
+                    <i class="material-icons header__icon">face</i>
+                </div>
+            </a>
+            <h1 class="brand-logo header__title">Friends App</h1>
+            <a id="musicButton" href="#" class="musicButton">
+                <img class="musicButton__icon" src="./img/music-note.svg" alt="Turn off the music">
+            </a>
+        </div>
+        <div class="input-field search animate__animated">
+            <i class="material-icons active prefix">search</i>
+            <input id="icon_prefix" type="text" class="validate search__input">
+            <label for="icon_prefix" class="search__hint">Friend's name or last name...</label>
+        </div>
+    </header>
+
+    <nav id="slide-out" draggable="false" class="sidenav">
+        <ul>
+            <li>
+                <h4 class="nav__title">We can help you find friends!</h4>
+            </li>
+            <li>
+                <a id="resetButton" class="waves-effect waves-light btn-large hoverable sidenav-close resetButton">I don't need help</a>
+            </li>
+            <li>
+                <h5 class="nav__title">Chose gender:</h5>
+                <div class="flexContainerRow">
+                    <img class="nav__genderIco" src="./img/man.svg" alt="man icon">
+                    <img class="nav__genderIco" src="./img/woman.svg" alt="woman icon">
+                </div>
+            </li>
+            <li class="nav__gender flexContainerRow">
+                <label>
+                    <input class="with-gap nav__radioGender" name="gender" data-gender="male" type="radio" />
+                    <span class="nav__hint">Boys</span>
+                </label>
+                <label>
+                    <input class="with-gap nav__radioGender" name="gender" data-gender="female" type="radio" />
+                    <span class="nav__hint">Girls</span>
+                </label>
+            </li>
+            <li>
+                <h5 class="nav__title nav__title-age">Chose age:</h5>
+                <div id="test-slider" class="nav__uiSlider"></div>
+            </li>
+            <li>
+                <h5 class="nav__title">Sort by age:</h5>
+                <div class="flexContainerRow">
+                    <img class="nav__sortIco" src="./img/increase.svg" alt="increase icon">
+                    <img class="nav__sortIco" src="./img/decrease.svg" alt="decrease icon">
+                </div>
+            </li>
+            <li class="nav__sortAge flexContainerRow">
+                <label>
+                    <input class="with-gap nav__sort" name="sort" data-sort="0-100" type="radio" />
+                    <span class="nav__hint"><span class="minAge"></span> - <span class="maxAge"></span></span>
+                </label>
+                <label>
+                    <input class="with-gap nav__sort" name="sort" data-sort="100-0" type="radio" />
+                    <span class="nav__hint"><span class="maxAge"></span> - <span class="minAge"></span></span>
+                </label>
+            </li>
+            <li>
+                <h5 class="nav__title">Sort by name:</h5>
+                <div class="flexContainerRow">
+                    <img class="nav__sortIco" src="./img/increase.svg" alt="increase icon">
+                    <img class="nav__sortIco" src="./img/decrease.svg" alt="decrease icon">
+                </div>
+            </li>
+            <li class="nav__sortAge flexContainerRow">
+                <label>
+                    <input class="with-gap nav__sort" name="sort" data-sort="name_a-z" type="radio" />
+                    <span class="nav__hint">A - Z</span>
+                </label>
+                <label>
+                    <input class="with-gap nav__sort" name="sort" data-sort="name_z-a" type="radio" />
+                    <span class="nav__hint">Z - A</span>
+                </label>
+            </li>
+            <li>
+                <h5 class="nav__title">Sort by last name:</h5>
+                <div class="flexContainerRow">
+                    <img class="nav__sortIco" src="./img/increase.svg" alt="increase icon">
+                    <img class="nav__sortIco" src="./img/decrease.svg" alt="decrease icon">
+                </div>
+            </li>
+            <li class="nav__sortAge flexContainerRow">
+                <label>
+                    <input class="with-gap nav__sort" name="sort" data-sort="lastName_a-z" type="radio" />
+                    <span class="nav__hint">A - Z</span>
+                </label>
+                <label>
+                    <input class="with-gap nav__sort" name="sort" data-sort="lastName_z-a" type="radio" />
+                    <span class="nav__hint">Z - A</span>
+                </label>
+            </li>
+            <li>
+                <a id="filterButton" class="waves-effect waves-light btn-large hoverable sidenav-close filterButton">Show me my choice</a>
+            </li>
+        </ul>
+    </nav>
+
+    <main id="main" class="main animate__animated">
+
+        <div class="blockquote-wrapper">
+            <div class="blockquote">
+                <h1>
+                    <span class="blockquote__word">Friendship</span> is the only cement that will ever hold the <span class="blockquote__word">world</span> <span class="blockquote__word">together</span>.
+                </h1>
+                <h4>&mdash;<a href="https://en.wikipedia.org/wiki/Woodrow_Wilson" target="_blank">Woodrow Wilson</a><br>
+                </h4>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Materialize -->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- noUiSlider -->
+    <script defer src="./js/noUi.js"></script>
+    <script defer src="./js/app.js"></script>
+</body>
+
+</html>
