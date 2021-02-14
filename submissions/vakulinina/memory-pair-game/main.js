@@ -2,24 +2,24 @@ const cardBoard = document.querySelector('.card-board');
 const newGameButton = document.querySelector('.new-game-btn');
 const winPopup = document.querySelector('.win-popup');
 const cardIds = [
-  'paw-1',
-  'paw-2',
-  'paw-3',
-  'paw-4',
-  'paw-5',
-  'paw-6',
-  'paw-7',
-  'paw-8'
+  { id: 'paw-1', src: 'img/paw-1.png' },
+  { id: 'paw-2', src: 'img/paw-2.png' },
+  { id: 'paw-3', src: 'img/paw-3.png' },
+  { id: 'paw-4', src: 'img/paw-4.png' },
+  { id: 'paw-5', src: 'img/paw-5.png' },
+  { id: 'paw-6', src: 'img/paw-6.png' },
+  { id: 'paw-7', src: 'img/paw-7.png' },
+  { id: 'paw-8', src: 'img/paw-8.png' }
 ];
 
 let firstFlip;
 let secondFlip;
 let pairsOpen = 0;
 
-const cards = cardIds.flatMap(id => [createCard(id), createCard(id)]);
+const cards = cardIds.flatMap(({ id, src }) => [createCard(id, src), createCard(id, src)]);
 
-function createCard(id) {
-  let newCard = document.createElement('li');
+function createCard(id, src) {
+  const newCard = document.createElement('li');
   newCard.classList.add('card');
   newCard.id = id;
   newCard.innerHTML = `
@@ -27,14 +27,14 @@ function createCard(id) {
       <img src="img/icon-cat.svg" alt="">
     </div>
     <div class="card-back">
-      <img src="img/${id}.png" alt="">
+      <img src="${src}" alt="">
     </div>
     `;
   return newCard;
 }
 
 function renderCards() {
-  let fragment = document.createDocumentFragment();
+  const fragment = document.createDocumentFragment();
   fragment.append(...shuffleCards(cards));
   cardBoard.append(fragment);
 }
@@ -42,23 +42,19 @@ function renderCards() {
 function flipCard(card) {
   card.classList.add('flip');
   !firstFlip ? firstFlip = card : secondFlip = card;
-  if (firstFlip && secondFlip) checkPair();
+  if (firstFlip && secondFlip) setTimeout(checkPair, 600);
 }
 
 function checkPair() {
   if (firstFlip.id !== secondFlip.id) {
-    setTimeout(function () {
-      firstFlip.classList.remove('flip');
-      secondFlip.classList.remove('flip');
-      firstFlip = null;
-      secondFlip = null;
-    }, 600)
+    firstFlip.classList.remove('flip');
+    secondFlip.classList.remove('flip');
   } else {
-    firstFlip = null;
-    secondFlip = null;
     pairsOpen++;
     checkWin();
   }
+  firstFlip = null;
+  secondFlip = null;
 }
 
 function checkWin() {
@@ -76,9 +72,9 @@ function restartGame() {
 }
 
 function shuffleCards(cards) {
-  for (var i = cards.length - 1; i > 0; i--) {
-    var j = Math.floor(Math.random() * (i + 1));
-    var temp = cards[i];
+  for (let i = cards.length - 1; i > 0; i--) {
+    let j = Math.floor(Math.random() * (i + 1));
+    let temp = cards[i];
     cards[i] = cards[j];
     cards[j] = temp;
   }
@@ -88,7 +84,7 @@ function shuffleCards(cards) {
 renderCards();
 
 cardBoard.addEventListener('click', function (evt) {
-  let card = evt.target.closest('.card');
+  const card = evt.target.closest('.card');
   if (card && !(firstFlip && secondFlip) && !card.classList.contains('flip')) flipCard(card);
 })
 
