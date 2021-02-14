@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Friends App</title>
+</head>
+
+<body>
+  <header>
+    <div class="header-wrap">
+      <h1>Friends App</h1>
+      <button class="filters-button"></button>
+    </div>
+  </header>
+
+  <main>
+    <ul class="users"></ul>
+    <aside class="filters">
+      <fieldset>
+        <legend>Search</legend>
+        <input class="search-field" type="search" id="search-field" placeholder="Enter Name or City">
+      </fieldset>
+      <fieldset class="sort-buttons">
+        <legend>Sort</legend>
+        <button class="sort-button" id="name-sort">by Name</button><br>
+        <button class="sort-button" id="age-sort">by Age</button>
+      </fieldset>
+      <fieldset class="age-filter">
+        <legend>Age</legend>
+        <input class="age-input" type="number" id="age-from" min="0" max="99"> -
+        <input class="age-input" type="number" id="age-to" min="0" max="99">
+      </fieldset>
+      <fieldset class="gender-filter">
+        <legend>Gender</legend>
+        <label><input class="gender-input" type="radio" name="gender" value="male" id="gender-male"> Male</label><br>
+        <label><input class="gender-input" type="radio" name="gender" value="female" id="gender-female">
+          Female</label><br>
+        <label><input class="gender-input" type="radio" name="gender" value="any" id="gender-any" checked> Any</label>
+      </fieldset>
+    </aside>
+  </main>
+  <script src="main.js"></script>
+</body>
+
+</html>
