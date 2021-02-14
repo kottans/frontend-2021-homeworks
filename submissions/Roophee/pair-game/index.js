@@ -1,17 +1,18 @@
 "use strict";
 
-const heroesArray = ['luke', 'vader', 'solo', 'ob1', 'palpatine', 'leia', 'r2d2-c3po', 'chewbacca', 'bad1', 'bad2', 'bad3', 'bad4', 'good1', 'good3', 'good4', 'robot1', 'yoda'],
-    indexInUse = [],
-    imagesCountForTwo = {},
-    prePair = [],
-    pairs = [],
-    gameBg = document.querySelector('.game'),
-    cardPlace = document.querySelector('.game__card-place'),
-    audioItem = document.querySelector('audio'),
-    audioButton = document.querySelector('.audio__button'),
-    quantityOfUniqueCards = 17,
-    quantityOfCardsOnTheScreen = 12,
-    maxQuantityOfPairsOnTheScreen = 6;
+const heroesArray = ['luke', 'vader', 'solo', 'ob1', 'palpatine', 'leia', 'r2d2-c3po', 'chewbacca', 'bad1', 'bad2', 'bad3', 'bad4', 'good1', 'good3', 'good4', 'robot1', 'yoda'];
+const indexInUse = [];
+const imagesCountForTwo = {};
+const prePair = [];
+const pairs = [];
+const gameBg = document.querySelector('.game');
+const cardPlace = document.querySelector('.game__card-place');
+const audioItem = document.querySelector('audio');
+const audioButton = document.querySelector('.audio__button');
+const bodyElem = document.querySelector('body');
+const quantityOfUniqueCards = 17;
+const quantityOfCardsOnTheScreen = 12;
+const maxQuantityOfPairsOnTheScreen = 6;
 
 
 // TAKE RANDOM CARDS FROM POOL OF CARDS
@@ -51,7 +52,7 @@ const getRandomImage = function () {
     }
 }
 
-    //MAKE ANIMATION ON PAGE DOWNLOAD
+//MAKE ANIMATION ON PAGE DOWNLOAD
 const animateOnStart = function(){
     gameBg.style.top = `${-gameBg.clientHeight - gameBg.offsetTop}px`;
     cardPlace.style.bottom = `${-document.documentElement.clientHeight * 2}px`;
@@ -63,11 +64,31 @@ const animateOnStart = function(){
 
 document.addEventListener('DOMContentLoaded', animateOnStart);
 
+//CALCULATE CARD SIZE FROM BODY SIZE AND RETURN HANDLER
+const calculateCardSize = () => {
+    let size;
+
+    if (bodyElem.offsetWidth >= bodyElem.offsetHeight) {
+        const sizeFromOffsetHeight = bodyElem.offsetHeight*0.2673;
+            size = [sizeFromOffsetHeight*0.715, sizeFromOffsetHeight];
+    } else {
+        const sizeFromOffsetWidth = bodyElem.offsetWidth*0.2025;
+        size = [sizeFromOffsetWidth, sizeFromOffsetWidth*1.4];
+    }
+
+    const setImgWidthHeight = function(item) {
+        item.style.width = size[0]+'px';
+        item.style.height = size[1]+'px';
+    }
+    return setImgWidthHeight;
+}
+
 // ADD CARDS ON DOCUMENT
-let addCardsOnPage = function () {
-    let cardsContainerOnDynamicGeneration = document.createDocumentFragment();
+const addCardsOnPage = function () {
+    const cardsContainerOnDynamicGeneration = document.createDocumentFragment();
+    const cardSizeHandler = calculateCardSize();
     for (let i = 0; i < quantityOfCardsOnTheScreen; i++) {
-        let cardNameInsertOnDynamicGeneration = heroesArray[indexInUse[getRandomImage()]],
+        const cardNameInsertOnDynamicGeneration = heroesArray[indexInUse[getRandomImage()]],
             cardItem = document.createElement('div');
         cardItem.classList.add('game__card-holder');
         cardItem.innerHTML = `<div class="game__card-item">
@@ -80,15 +101,18 @@ let addCardsOnPage = function () {
                         </div>`;
         cardsContainerOnDynamicGeneration.appendChild(cardItem);
     }
+    [].forEach.call(cardsContainerOnDynamicGeneration.querySelectorAll('.game__card-holder'), cardSizeHandler);
+    [].forEach.call(cardsContainerOnDynamicGeneration.querySelectorAll('.game__card-img'), cardSizeHandler);
+    [].forEach.call(cardsContainerOnDynamicGeneration.querySelectorAll('.game__card-cardback'), cardSizeHandler);
     cardPlace.appendChild(cardsContainerOnDynamicGeneration);
 }
 
 addCardsOnPage();
 
 //  CLEAR ARRAYS AND OBJECTS, PICK NEW CARDS FOR THE GAME
-let clearAllOperationObjectsAndCreateNewGame = function() {
+const clearAllOperationObjectsAndCreateNewGame = function() {
     if (pairs.length === maxQuantityOfPairsOnTheScreen) {
-        let playAgain = window.confirm('Congratulations. You have matched all pairs and won the game. Want to play again?');
+        const playAgain = window.confirm('Congratulations. You have matched all pairs and won the game. Want to play again?');
                 if (playAgain) {
                     cardPlace.innerHTML = "";
                     for (const prop of Object.keys(imagesCountForTwo)) {

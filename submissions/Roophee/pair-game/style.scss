@@ -5,7 +5,6 @@ body {
     padding: 0;
     background: url(../img/wallpapers.jpg) no-repeat center center fixed;
     background-size: cover;
-    overflow: hidden;
 }
 
 .container {
@@ -25,19 +24,15 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    width: 80vw;
-    min-width: 850px;
-    height: 80vh;
-    min-height: 700px;
+    width: 90vw;
+    height: 90vh;
     background-color: rgba(2, 2, 2, 0.315);
     transition: 1s 0.5s;
 
     &__card-place {
         position: relative;
-        width: 90%;
-        min-width: 600px;
-        height: 90%;
-        min-height: 600px;
+        width: 100%;
+        height: 100%;
         transition: 1s 0.5s;
         display: grid;
         grid-template-columns: repeat(4, 1fr);
@@ -51,10 +46,8 @@ body {
     &__card-holder {
         perspective: 1000px;
         background-color: rgba(0, 0, 0, 0.027);
-        width: 10vw;
-        height: 14vw;
-        min-width: 145px;
-        min-height: 200px;
+        width: 100%;
+        height: 100%;
 
         &.active .game__card-item {
             transform: rotateY(180deg);
@@ -66,18 +59,14 @@ body {
         transition: 0.6s;
         transform-style: preserve-3d;
         position: relative;
-        width: 10vw;
-        height: 14vw;
-        min-width: 145px;
-        min-height: 200px;
+        width: 100%;
+        height: 100%;
     }
 
     &__card-front,
     &__card-back {
-        width: 10vw;
-    height: 14vw;
-    min-width: 145px;
-    min-height: 200px;
+    width: 100%;
+    height: 100%;
     backface-visibility: hidden;
     position: absolute;
     visibility: inherit;
@@ -100,10 +89,6 @@ body {
     &__card-cardback {
     cursor: pointer;
     visibility: inherit;
-    width: 10vw;
-    height: 14vw;
-    min-width: 145px;
-    min-height: 200px;
     border-radius: 5px;
     user-drag: none;
     user-select: none;
@@ -116,14 +101,14 @@ body {
 
 .audio__button {
         position: absolute;
-        width: 50px;
-        height: 50px;
+        width: 5vh;
+        height: 5vh;
         z-index: 5;
-        right: 15px;
-        top: 15px;
+        right: 10px;
+        top: 10px;
         background-image: url("https://api.iconify.design/uil:volume-mute.svg?color=rgba(2%2C2%2C2%2C0.615)");
         background-repeat: no-repeat;
-        background-size: 50px;
+        background-size: 5vh;
     }
 
 .pause {
