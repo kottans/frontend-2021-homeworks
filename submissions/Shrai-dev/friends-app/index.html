@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Annie+Use+Your+Telescope&family=Open+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <title>Friends App</title>
+  </head>
+  <body>
+    <header class="header">
+      <h1 class="header__title">Friends App</h1>
+    </header>
+    <main class="main">
+      <div class="wrapper__filters">
+        <div class="search__by-letter">
+          <input
+            type="text"
+            name="searchBar"
+            class="searchBar"
+            placeholder="search for a person"
+          />
+        </div>
+        <div class="search__by-age">
+          <h3 class="search__by-age-text">Age</h3>
+          <label class="search__by-age-label" for="age-ascending">Up</label>
+          <input
+            id="age-ascending"
+            value="age-ascending"
+            type="radio"
+            name="age"
+            data-order="ascending"
+          />
+          <label class="search__by-age-label" for="age-descending">Down</label>
+          <input
+            id="age-descending"
+            value="age-descending"
+            type="radio"
+            name="age"
+            data-order="descending"
+          />
+        </div>
+        <div class="search__by-name">
+          <h3 class="search__by-name-text">Name</h3>
+          <label class="search__by-name-label" for="name-ascending">A-Z</label>
+          <input
+            type="radio"
+            name="nameFirst"
+            id="name-ascending"
+            value="name-ascending"
+            data-order="ascending"
+          />
+          <label class="search__by-name-label" for="name-descending">Z-A</label>
+          <input
+            type="radio"
+            name="nameFirst"
+            id="name-descending"
+            value="name-descending"
+            data-order="descending"
+          />
+        </div>
+        <div class="search__by-gender">
+          <h3 class="search__by-gender-text">Gender</h3>
+          <label class="search__by-name-label" for="all-genders">All</label>
+          <input
+            type="radio"
+            name="gender"
+            id="all"
+            value="all-genders"
+            data-gender="all"
+          />
+          <label class="search__by-name-label" for="male-gender">Male</label>
+          <input
+            type="radio"
+            name="gender"
+            id="male-gender"
+            value="male"
+            data-gender="male"
+          />
+          <label class="search__by-name-label" for="female-gender"
+            >Female</label
+          >
+          <input
+            type="radio"
+            name="gender"
+            id="female-gender"
+            value="female"
+            data-gender="female"
+          />
+        </div>
+      </div>
+      <div class="container"></div>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
