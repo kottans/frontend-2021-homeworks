@@ -12,27 +12,27 @@
 <body>
     <header class="header">
             <div class="header-title"><b>Friends</b>App</div>
-        <input id="search" class="search" onkeyup="searchEvent()" placeholder="Search" onsearch="searchEvent()" type="search">
+        <input id="search" class="search" onkeyup="selectFriends()" placeholder="Search" onsearch="selectFriends()" type="search">
     </header>
     <main>
         <div class="filters">
             <div id="filter-sort" class="filter-item">
                 <p class="filters-header"><b>Sort</b></p>
                 <label class="radio-sort-container" value="">
-                    <input type="radio" name="sort-alphabet" id="a-z" value="alphabet-ascend">
+                    <input type="radio" name="sort" id="a-z" value="alphabet-ascend">
                     <div class="radio-sort">A-Z</div>
                 </label>
                 <label class="radio-sort-container">
-                    <input type="radio" name="sort-alphabet" id="z-a" value="alphabet-descend">
+                    <input type="radio" name="sort" id="z-a" value="alphabet-descend">
                     <div class="radio-sort">Z-A</div>
                 </label>
                 <br>
                 <label class="radio-sort-container">
-                    <input type="radio" name="sort-age" id="0-9" value="age-ascend">
+                    <input type="radio" name="sort" id="0-9" value="age-ascend">
                     <div class="radio-sort">0-9</div>
                 </label>
                 <label class="radio-sort-container">
-                    <input type="radio" name="sort-age" id="9-0" value="age-descend">
+                    <input type="radio" name="sort" id="9-0" value="age-descend">
                     <div class="radio-sort">9-0</div>
                 </label>
             </div>  
@@ -42,10 +42,16 @@
                 <br>
                 <label><input type="checkbox" id="gender-female" value="female" checked>Woman</label>
             </div>
+            <div id="filter-age" class="filter-item">
+                <p class="filters-header"><b>Age</b></p>
+                <input type="number" id="minAge" min="0" title="Min age" class="number-age">
+                <input type="number" id="maxAge" min="0" title="Max age" class="number-age">
+            </div>
         </div>
         <div id = "contentField" class="content-field">
+        <div id = "errorMessage" class="error-text"></div>
         <div id = "allFriends" class="allFriends"></div>
-    </div>
+        </div>
     </main>
     <script src="js/script.js"></script>
 </body>
