@@ -6,35 +6,66 @@ let lockCard = false;
 let firstCard = '';
 let secondCard = '';
 
-const images = [
-	'bentley',
-	'amazon',
-	'google',
-	'intel',
-	'nike',
-	'telegram'
+const titleImages = [
+	
+	{	
+		'id': 'bentley',
+		'srcFront': 'img/logo.png',
+		'srcBack': 'img/bentley.png',
+		'alt': 'bentley',
+	},
+	{
+		'id': 'amazon',
+		'srcFront': 'img/logo.png',
+		'srcBack':'img/amazon.png',
+		'alt': 'amazon',	
+	},
+	{
+		'id': 'google',
+		'srcFront': 'img/logo.png',
+		'srcBack':'img/google.png',
+		'alt': 'google',
+	},
+	{
+		'id': 'intel',
+		'srcFront': 'img/logo.png',
+		'srcBack':'img/intel.png',
+		'alt': 'intel',
+	},
+	{
+		'id': 'nike',
+		'srcFront': 'img/logo.png',
+		'srcBack':'img/nike.png',
+		'alt': 'nike',
+	},
+	{
+		'id': 'telegram',
+		'srcFront': 'img/logo.png',
+		'srcBack':'img/telegram.png',
+		'alt': 'telegram',
+	},
+
 ];
 
-const allImg = [...images, ...images];
+const allImages = [...titleImages, ...titleImages];
 
-const numberOfallImg = allImg.length;
-const allPairInGame = 6;
+const allPairsInGame = 6;
 let currentPair = 0;
 
-function sortCard() {
-	allImg.sort(function() { 
+function sortCards() {
+	allImages.sort(function() { 
 		return 0.5 - Math.random() 
 	});
 };
 
 function generateCard() {
-	sortCard();
+	sortCards();
 
 	let divFlipper = '';
-	allImg.forEach(item => 
-		divFlipper += `<div class="flipper" data-id="${item}">
-		<div class="front"><img src="img/logo.png" alt="Logo"></div>
-		<div class="back"><img src="img/${item}.png" alt="${item}"></div>
+	allImages.forEach(item => 
+		divFlipper += `<div class="flipper" data-id="${item.id}">
+		<div class="front"><img src="${item.srcFront}" alt="Logo"></div>
+		<div class="back"><img src="${item.srcBack}" alt="${item.alt}"></div>
 	</div>`
 	);
 	
@@ -43,12 +74,9 @@ function generateCard() {
 };
 
 function flipCards(e) {
-	let targetCard = e.target.closest('.flipper');
+	const targetCard = e.target.closest('.flipper');
 
-	if (!targetCard) return;
-	if(lockCard || targetCard === firstCard) {
-		return;
-	};
+	if(lockCard || !targetCard || targetCard === firstCard) return;
 
 	if(!firstCard) {
 		firstCard = targetCard;
@@ -82,7 +110,7 @@ function disablePair() {
 };
 
 function frontFlipPair() {
-	let waitingTime = 600;
+	const waitingTime = 600;
 	lockCard = true;
 
 	setTimeout(() => {
@@ -100,7 +128,7 @@ function resetValue() {
 };
 
 function checkWin() {
-	if(currentPair === allPairInGame) {
+	if(currentPair === allPairsInGame) {
 		alert('You win!');
 		location.reload();
 	};
