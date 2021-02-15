@@ -32,23 +32,24 @@ const cards = [
     img: "img/v-male.png",
   },
 ];
+const CARDS_AMOUNT = 16;
 
 const div = document.createElement("div");
 div.id = "board";
 document.body.appendChild(div);
 
-let mixedCards = cards.concat(cards).sort(function () {
+const mixedCards = cards.concat(cards).sort(function () {
   return 0.5 - Math.random();
 });
 
-let firstFlip = "";
-let secondFlip = "";
+let nameOfFirstCard = "";
+let nameOfSecondCard = "";
 let turn = 0;
 let previousCard = null;
 
 const board = document.getElementById("board");
 const boardGrid = document.createElement("section");
-boardGrid.setAttribute("class", "boardGrid");
+boardGrid.classList.add("boardGrid");
 board.appendChild(boardGrid);
 
 mixedCards.forEach(function (item) {
@@ -67,55 +68,55 @@ mixedCards.forEach(function (item) {
   card.appendChild(back);
 });
 
-let match = function match() {
-  let selected = document.querySelectorAll(".selected");
+const match = function () {
+  const selected = document.querySelectorAll(".selected");
   selected.forEach(function (card) {
     card.classList.add("match");
   });
-  if (document.getElementsByClassName("card match").length == 16) {
+};
+
+const checkForWin = function () {
+  if (document.getElementsByClassName("card match").length == CARDS_AMOUNT) {
     setTimeout(alert("Congrats! You won!"), 3000);
   }
 };
 
-let reset = function reset() {
-  firstFlip = "";
-  secondFlip = "";
+const reset = function () {
+  nameOfFirstCard = "";
+  nameOfSecondCard = "";
   turn = 0;
-  previousCard = null;
 
-  let selected = document.querySelectorAll(".selected");
+  const selected = document.querySelectorAll(".selected");
   selected.forEach(function (card) {
     card.classList.remove("selected");
   });
 };
 
-boardGrid.addEventListener("click", function (event) {
-  let target = event.target;
+boardGrid.addEventListener("click", function ({ target }) {
   if (
-    target.nodeName === "SECTION" ||
-    target === previousCard ||
-    target.parentNode.classList.contains("selected") ||
-    target.parentNode.classList.contains("match")
+    target.nodeName === target.closest("section") ||
+    target.closest(".card").classList.contains("selected") ||
+    target.closest(".card").classList.contains("match")
   ) {
     return;
   }
   if (turn < 2) {
     turn++;
     if (turn === 1) {
-      firstFlip = target.parentNode.dataset.name;
-      target.parentNode.classList.add("selected");
+      nameOfFirstCard = target.closest(".card").dataset.name;
+      target.closest(".card").classList.add("selected");
     } else {
-      secondFlip = target.parentNode.dataset.name;
-      target.parentNode.classList.add("selected");
+      nameOfSecondCard = target.closest(".card").dataset.name;
+      target.closest(".card").classList.add("selected");
     }
-    if (firstFlip && secondFlip) {
-      if (firstFlip === secondFlip) {
+    if (nameOfFirstCard && nameOfSecondCard) {
+      if (nameOfFirstCard === nameOfSecondCard) {
         setTimeout(match, 1000);
       }
       setTimeout(reset, 1000);
-      previousCard = target;
     }
   }
+  setTimeout(checkForWin, 1500);
 });
 
 const footer = document.createElement("footer");
