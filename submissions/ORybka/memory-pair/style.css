@@ -1,0 +1,339 @@
+/****** BASE RESET ******/
+*,
+*::before,
+*::after {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #000;
+}
+
+li {
+  list-style-type: none;
+}
+
+/****** FONTS ******/
+@font-face {
+  font-family: 'game_of_thronesregular';
+  src: url("assets/fonts/game-of-thrones-webfont.woff2") format("woff2"), url("assets/fonts/game-of-thrones-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+html {
+  font-family: 'game_of_thronesregular', sans-serif;
+  font-size: 16px;
+  color: #f3f3f3;
+}
+
+@media only screen and (min-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  html {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  html {
+    font-size: 10px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  html {
+    font-size: 8px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  html {
+    font-size: 7px;
+  }
+}
+
+.main-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 100vh;
+  min-height: 60rem;
+  background-color: #3b5079;
+}
+
+header {
+  opacity: 1;
+}
+
+.title {
+  margin: 3rem 0 1.5rem;
+}
+
+.moves {
+  margin: 0.5rem 0;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.moves strong {
+  font-size: 1.5rem;
+}
+
+.won-message {
+  display: none;
+  position: relative;
+  top: 0;
+  height: 70vh;
+  width: auto;
+  opacity: 0;
+  -webkit-transition: all 0.5s ease-in;
+  transition: all 0.5s ease-in;
+}
+
+.won-message .col {
+  position: absolute;
+  top: 25%;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  height: 7rem;
+  width: 20rem;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 5px;
+}
+
+.won-image {
+  height: 100%;
+  margin: 0 auto;
+  border-radius: 5px;
+}
+
+.won-text {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.new-game {
+  display: block;
+  height: 2.5rem;
+  width: 8rem;
+  background-color: #3b5079;
+  text-align: center;
+  margin: 1rem auto 0;
+  padding-top: 0.7rem;
+  color: #f3f3f3;
+  letter-spacing: 1px;
+  overflow: hidden;
+  border-radius: 3px;
+  -webkit-box-shadow: 0 12px 24px 0 rgba(255, 255, 255, 0.2);
+          box-shadow: 0 12px 24px 0 rgba(255, 255, 255, 0.2);
+  border: 0;
+  cursor: pointer;
+}
+
+.new-game:hover, .new-game:focus {
+  background-color: #081c38;
+}
+
+.all-cards-container {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[4];
+      grid-template-columns: repeat(4, 1fr);
+  max-width: 40rem;
+  width: 100%;
+  height: 100%;
+  max-height: 50rem;
+  margin: 0 auto;
+  opacity: 1;
+  -webkit-transition: all 0.5s ease-in;
+  transition: all 0.5s ease-in;
+}
+
+.card-container {
+  -webkit-perspective: 1000px;
+          perspective: 1000px;
+  cursor: pointer;
+  margin: 0.3rem;
+  opacity: 1;
+}
+
+.card-container.flipped .flipper {
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
+}
+
+.card-container,
+.front,
+.back {
+  width: 9rem;
+  height: 11rem;
+}
+
+.flipper {
+  -webkit-transition: 0.6s;
+  transition: 0.6s;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+  position: relative;
+  border-radius: 5%;
+}
+
+.front,
+.back {
+  text-align: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  border-radius: 5%;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+          box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+
+.front {
+  z-index: 2;
+  -webkit-transform: rotateY(0deg);
+          transform: rotateY(0deg);
+  background-image: url("assets/cards/front.webp");
+  background-size: 120%;
+  background-position: 50% 50%;
+}
+
+.back {
+  overflow: hidden;
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
+}
+
+.flipper,
+.front,
+.back {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.card-image {
+  width: 9rem;
+  height: 11rem;
+  -o-object-fit: cover;
+     object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+.fire {
+  background-image: url("assets/fire.gif");
+  background-position: center;
+}
+
+.hidden {
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: all 0.5s ease-in;
+  transition: all 0.5s ease-in;
+}
+
+.cat-left,
+.cat-right {
+  position: absolute;
+  top: 40%;
+  height: 20rem;
+  width: 0;
+  opacity: 1;
+  background-image: url(assets/dragon-cat-removebg.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  -webkit-transition: opacity 1.5s ease-in-out;
+  transition: opacity 1.5s ease-in-out;
+}
+
+.cat-right {
+  -webkit-transform: scaleX(-1);
+          transform: scaleX(-1);
+}
+
+@media only screen and (min-width: 768px) {
+  .cat-left,
+  .cat-right {
+    top: 20%;
+  }
+}
+
+footer {
+  font-family: 'game_of_thronesregular';
+  font-weight: bold;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 80%;
+  margin: 0.5rem 0 1rem;
+  opacity: 1;
+}
+
+.footer-info {
+  height: 100%;
+  width: 200%;
+  padding: 1rem 0;
+  background-color: #3b5079;
+  border-radius: 0.5rem;
+  text-align: center;
+  line-height: 1.5rem;
+}
+
+.github-link {
+  color: #f3f3f3;
+}
+
+.github-link:hover {
+  color: #081c38;
+}
+/*# sourceMappingURL=style.css.map */
