@@ -132,22 +132,22 @@ addCardsOnPage();
 
 //  CLEAR OPERATION OBJECTS, PICK NEW CARDS FOR THE GAME
 const clearAllOperationObjectsAndCreateNewGame = function() {
-    if (pairs.length === maxQuantityOfPairsOnTheScreen) {
-        const playAgain = window.confirm('Congratulations. You have matched all pairs and won the game. Want to play again?');
-                if (playAgain) {
-                    cardPlace.innerHTML = "";
-                    prePair.length = 0;
-                    pairs.length = 0;
-                    addCardsOnPage();
-                }
-            }
+    const playAgain = window.confirm('Congratulations. You have matched all pairs and won the game. Want to play again?');
+        if (playAgain) {
+            cardPlace.innerHTML = "";
+            prePair.length = 0;
+            pairs.length = 0;
+            addCardsOnPage();
+        }
 }
 
 // CHECK PLAYER COLLECTED ALL PAIRS OR NOT
 const checkGameIsOverOrNot = function () {
-    setTimeout(function () {
-            clearAllOperationObjectsAndCreateNewGame();
-    }, 2100)
+    if (pairs.length === maxQuantityOfPairsOnTheScreen){
+        setTimeout(function () {
+                clearAllOperationObjectsAndCreateNewGame();
+        }, 2100)
+    }
 }
 
 // ADD HIDE CLASS ON CARD-HOLDER ITEM IF TWO CARD ARE PAIR
