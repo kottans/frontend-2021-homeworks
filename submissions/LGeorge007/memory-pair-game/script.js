@@ -14,9 +14,11 @@ let isSecondCard = false;
 let unopenedCards = 0;
 
 const duplicateElements = function (array, times) {
-    return array.reduce((res, current) => {
-        return res.concat(Array(times).fill(current));
-    }, []);
+    const duplicatedArray = [];
+    array.forEach( el => {
+        for (let i=0; i<times; i++) duplicatedArray.push(el);
+    });
+    return duplicatedArray;
 };
 
 const shuffle = function (arr) {
@@ -29,6 +31,36 @@ const shuffle = function (arr) {
     return result;
 };
 
+const turnOverBackTwoCards = function() {
+    setTimeout(() => {
+        firstCard.classList.remove("rotateCard");
+        secondCard.classList.remove("rotateCard");
+    }, 600);
+};
+
+const hideTwoCards = function() {
+    unopenedCards -= 2;
+    setTimeout(() => {
+        firstCard.querySelector(".back").classList.add("hiddenSide");
+        secondCard.querySelector(".back").classList.add("hiddenSide");
+        firstCard.classList.add("hiddenFlipper");
+        secondCard.classList.add("hiddenFlipper");
+    }, 600);
+};
+
+const unlockChoice = function() {
+    setTimeout(() => {
+        isLocked = false;
+        isSecondCard = false;
+    }, 1000);
+};
+
+const turnCard = function({target}) {
+    card = target.closest(".flipper");
+    card.classList.toggle("rotateCard");
+    return card;
+};
+
 const checkWin = function () {
     if (unopenedCards === 0) {
         setTimeout(() => {
@@ -39,39 +71,17 @@ const checkWin = function () {
 };
 
 const checkCard = function ({target}) {
-    if (!target.closest(".flipper")) return;
-    if (!isLocked) {
+    if (!target.closest(".flipper") || isLocked) return;
         if (isSecondCard) {
             isLocked = true;
-            secondCard = target.closest(".flipper");
-            secondCard.classList.toggle("rotateCard");
-            if (firstCard.id !== secondCard.id) {
-                if (firstCard.dataset.hero === secondCard.dataset.hero) {
-                    unopenedCards -= 2;
-                    setTimeout(() => {
-                        firstCard.querySelector(".back").classList.add("hiddenSide");
-                        secondCard.querySelector(".back").classList.add("hiddenSide");
-                        firstCard.classList.add("hiddenFlipper");
-                        secondCard.classList.add("hiddenFlipper");
-                    }, 600);
-                } else {
-                    setTimeout(() => {
-                        firstCard.classList.remove("rotateCard");
-                        secondCard.classList.remove("rotateCard");
-                    }, 600);
-                };
-            };
-            setTimeout(() => {
-                isLocked = false;
-                isSecondCard = false;
-            }, 1000);
+            secondCard = turnCard({target});
+            if (firstCard.id !== secondCard.id) firstCard.dataset.hero === secondCard.dataset.hero ? hideTwoCards() : turnOverBackTwoCards();
+            unlockChoice();
             checkWin();
         } else {
-            firstCard = target.closest(".flipper");
-            firstCard.classList.toggle("rotateCard");
+            firstCard = turnCard({target});
             isSecondCard = true;
         };
-    };
 };
 
 const renderCards = function (arr) {
