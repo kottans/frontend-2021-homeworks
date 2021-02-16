@@ -56,7 +56,7 @@ const unlockChoice = function() {
 };
 
 const turnCard = function({target}) {
-    card = target.closest(".flipper");
+    let card = target.closest(".flipper");
     card.classList.toggle("rotateCard");
     return card;
 };
