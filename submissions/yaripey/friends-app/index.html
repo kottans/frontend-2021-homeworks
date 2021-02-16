@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Friends App</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/cards.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <main class="main">
+    <span class="mobile-menu"></span>
+    <aside class="sidebar">
+      <h1>Friends App</h1>
+      <form id="settings-form">
+        <div class="general-label">Gender:</div>
+        <ul class="form-sort-list">
+          <li><label class="input-label">
+              <input class="radio-input" type="radio" name="gender" value="female">
+              <div class="label-text">female</div>
+
+            </label></li>
+          <li><label class="input-label">
+              <input class="radio-input" type="radio" name="gender" value="male">
+              <div class="label-text">male</div>
+            </label>
+          </li>
+          <li><label class="input-label">
+              <input class="radio-input" type="radio" name="gender" value="both" checked>
+              <div class="label-text">both</div>
+            </label></li>
+        </ul>
+
+        <div class="general-label">Sort:</div>
+        <ul class="form-sort-list">
+          <li><label class="input-label">
+              <input class="radio-input" type="radio" name="sort-type" value="A-Z" checked>
+              <div class="label-text">A-Z</div>
+            </label></li>
+          <li><label class="input-label"><input class="radio-input" type="radio" name="sort-type" value="Z-A">
+              <div class="label-text">Z-A</div>
+            </label>
+          </li>
+          <li><label class="input-label">
+              <input class="radio-input" type="radio" name="sort-type" value="ageAsc">
+              <div class="label-text">Age ascending</div>
+            </label></li>
+          <li><label class="input-label">
+              <input class="radio-input" type="radio" name="sort-type" value="ageDesc">
+              <div class="label-text">Age descending</div>
+            </label>
+          </li>
+        </ul>
+
+        <div class="general-label">Filter by name:</div>
+        <input class="text-input" type="text" name="name-filter">
+
+        <div class="general-label">Filter by age:</div>
+        <input class="text-input" type="number" name="age-filter">
+
+      </form>
+      <button id="addUsers">Add more users</button>
+    </aside>
+    <div class="content">
+      <div class="users"></div>
+    </div>
+  </main>
+  <script type="module" src="js/main.js"></script>
+</body>
+
+</html>

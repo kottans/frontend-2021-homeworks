@@ -1,0 +1,199 @@
+.temp-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.user {
+  color: black;
+  text-decoration: none;
+  position: relative;
+  text-align: center;
+  width: 200px;
+  height: 70px;
+  background: rgb(255, 255, 255);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.6);
+  margin: 30px 30px;
+  padding-top: 50px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.1s ease-in;
+}
+
+.user:hover {
+  transform: scale(1.1);
+  transform: translateY(-5px);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6);
+  transition: 0.1s ease-out;
+}
+
+.profilePicture {
+  border: 3px solid rgb(255, 255, 255);
+  border-radius: 10px;
+  position: absolute;
+  left: 62px;
+  top: -35px;
+  height: 70px;
+  width: 70px;
+}
+
+.name {
+  font-family: Segoe, sans-serif;
+}
+
+.expanded-card-container {
+  font-family: sans-serif;  
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.4);
+  top: 0px;
+  left: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.expanded-card {
+  /* height: 400px; */
+  width: 400px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  position: relative;
+}
+
+.big-avatar-picture {
+  border-radius: 10px;
+}
+
+.big-upper-part {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.big-upper-part-right {
+  margin: 0 30px 0 30px;
+  width: 100%;
+}
+
+.big-name {
+  font-size: 25px;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-bottom: 2px solid black;
+}
+
+.big-lower-class {
+  margin-top: 20px;
+}
+
+.big-location {
+  font-size: 20px;
+  margin-bottom: 10px;
+  position: relative;
+  padding-left: 30px;
+}
+
+.big-location:before {
+  content: '';
+  background: url('../assets/compass-regular.svg') no-repeat;
+  background-size: 100%;
+  display: block;
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  top: 0px;
+  left: 0px;
+}
+
+.big-registered {
+  margin-bottom: 10px;
+}
+
+.big-cell-phone, .big-email {
+  display: block;
+  position: relative;
+  padding-left: 25px;
+}
+
+.big-cell-phone:before, .big-email:before {
+  content: '';
+  display: block;
+  height: 15px;
+  width: 15px;
+  position: absolute;
+  left: 0px;
+}
+
+.big-cell-phone:before {
+  background: url('../assets/phone-solid.svg') no-repeat;
+  background-size: 100%;
+}
+
+.big-email:before {
+  background: url('../assets/envelope-solid.svg') no-repeat;
+  background-size: 100%;
+}
+
+
+#big-close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  height: 35px;
+  width: 35px;
+  background: grey;
+  border: none;
+  padding: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#big-close-button:focus {
+  outline: none;
+}
+
+#big-close-button:after, #big-close-button:before {
+  content: '';
+  display: block;
+  position: relative;
+  height: 4px;
+  width: 25px;
+  background: white;
+  top: 0px;
+}
+
+#big-close-button:after {
+  transform: rotate(45deg);
+  top: -2px;
+}
+
+#big-close-button:before {
+  transform: rotate(-45deg);
+  top: 2px;
+}
+
+@media(min-width: 1600px) {
+  .temp-container {
+    width: 1400px;
+    margin: auto;
+  }
+}
+
+@media(max-width: 500px) {
+  .expanded-card-container {
+    align-items: flex-start;
+    z-index: 5;
+  }
+
+  .expanded-card {
+    border-radius: 0;
+  }
+
+  .big-upper-part {
+    flex-direction: column;
+  }
+}
