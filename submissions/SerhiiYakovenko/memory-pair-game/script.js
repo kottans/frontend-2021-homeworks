@@ -33,6 +33,7 @@ const cards = [
   },
 ];
 const CARDS_AMOUNT = 16;
+const MAX_FLIPS = 2;
 
 const div = document.createElement("div");
 div.id = "board";
@@ -44,7 +45,7 @@ const mixedCards = cards.concat(cards).sort(function () {
 
 let nameOfFirstCard = "";
 let nameOfSecondCard = "";
-let turn = 0;
+let flip = 0;
 let previousCard = null;
 
 const board = document.getElementById("board");
@@ -77,14 +78,15 @@ const match = function () {
 
 const checkForWin = function () {
   if (document.getElementsByClassName("card match").length == CARDS_AMOUNT) {
-    setTimeout(alert("Congrats! You won!"), 3000);
+    setTimeout(confirm("Congrats! You won!"), 3000);
+    window.location.reload();
   }
 };
 
 const reset = function () {
   nameOfFirstCard = "";
   nameOfSecondCard = "";
-  turn = 0;
+  flip = 0;
 
   const selected = document.querySelectorAll(".selected");
   selected.forEach(function (card) {
@@ -94,27 +96,19 @@ const reset = function () {
 
 boardGrid.addEventListener("click", function ({ target }) {
   if (
-    target.nodeName === target.closest("section") ||
+    !target.classList.contains("front") ||
     target.closest(".card").classList.contains("selected") ||
     target.closest(".card").classList.contains("match")
   ) {
     return;
   }
-  if (turn < 2) {
-    turn++;
-    if (turn === 1) {
-      nameOfFirstCard = target.closest(".card").dataset.name;
-      target.closest(".card").classList.add("selected");
-    } else {
-      nameOfSecondCard = target.closest(".card").dataset.name;
-      target.closest(".card").classList.add("selected");
-    }
-    if (nameOfFirstCard && nameOfSecondCard) {
-      if (nameOfFirstCard === nameOfSecondCard) {
-        setTimeout(match, 1000);
-      }
-      setTimeout(reset, 1000);
-    }
+  const cardName = target.closest(".card").dataset.name;
+  if (flip < MAX_FLIPS) {
+    flip++;
+    flip === 1 ? (nameOfFirstCard = cardName) : (nameOfSecondCard = cardName);
+    target.closest(".card").classList.add("selected");
+    if (nameOfFirstCard === nameOfSecondCard) setTimeout(match, 1000);
+    if (nameOfFirstCard && nameOfSecondCard) setTimeout(reset, 1000);
   }
   setTimeout(checkForWin, 1500);
 });
