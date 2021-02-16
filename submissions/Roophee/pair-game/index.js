@@ -42,8 +42,6 @@ const cardPlace = document.querySelector('.game__card-place');
 const audioItem = document.querySelector('audio');
 const audioButton = document.querySelector('.audio__button');
 const bodyElem = document.querySelector('body');
-const quantityOfUniqueCards = 17;
-const quantityOfCardsOnTheScreen = 12;
 const maxQuantityOfPairsOnTheScreen = 6;
 
 // SHUFFLE CARDS IN CARDS_FOR_PLAY_ARRAY
