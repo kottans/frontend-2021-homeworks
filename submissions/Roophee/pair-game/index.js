@@ -88,11 +88,11 @@ const calculateCardSize = () => {
     let size;
 
     if (bodyElem.offsetWidth >= bodyElem.offsetHeight) {
-        const sizeFromOffsetHeight = bodyElem.offsetHeight*0.2673;
-            size = [sizeFromOffsetHeight*0.715, sizeFromOffsetHeight];
+        const sizeFromOffsetHeight = Math.floor(bodyElem.offsetHeight*0.2673);
+            size = [Math.floor(sizeFromOffsetHeight*0.715), sizeFromOffsetHeight];
     } else {
-        const sizeFromOffsetWidth = bodyElem.offsetWidth*0.2025;
-        size = [sizeFromOffsetWidth, sizeFromOffsetWidth*1.4];
+        const sizeFromOffsetWidth = Math.floor(bodyElem.offsetWidth*0.2025);
+        size = [sizeFromOffsetWidth, Math.floor(sizeFromOffsetWidth*1.4)];
     }
 
     const setImgWidthHeight = function(item) {
