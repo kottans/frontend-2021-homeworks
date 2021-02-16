@@ -1,102 +1,85 @@
-const cardArray = [
+const CARD_ARRAY = [
   {
-    id: 1,
     name: "Cheerful Santa",
     src: "./assets/cheerful-santa.jpg",
   },
   {
-    id: 1,
     name: "Cheerful Santa",
     src: "./assets/cheerful-santa.jpg",
   },
   {
-    id: 2,
     name: "Christmas tree",
     src: "./assets/christmas-tree.jpg",
   },
   {
-    id: 2,
     name: "Christmas tree",
     src: "./assets/christmas-tree.jpg",
   },
   {
-    id: 3,
     name: "Christmas stocking",
     src: "./assets/christmas-stocking.jpg",
   },
   {
-    id: 3,
     name: "Christmas stocking",
     src: "./assets/christmas-stocking.jpg",
   },
   {
-    id: 4,
     name: "Elf",
     src: "./assets/elf.jpg",
   },
   {
-    id: 4,
     name: "Elf",
     src: "./assets/elf.jpg",
   },
   {
-    id: 5,
     name: "Snowman",
     src: "./assets/snowman.jpg",
   },
   {
-    id: 5,
     name: "Snowman",
     src: "./assets/snowman.jpg",
   },
   {
-    id: 6,
     name: "Gift",
     src: "./assets/gift.png",
   },
   {
-    id: 6,
     name: "Gift",
     src: "./assets/gift.png",
   },
   {
-    id: 7,
     name: "Reindeer",
     src: "./assets/reindeer.jpg",
   },
   {
-    id: 7,
     name: "Reindeer",
     src: "./assets/reindeer.jpg",
   },
   {
-    id: 8,
     name: "Christmas sleigh",
     src: "./assets/christmas-sleigh.png",
   },
   {
-    id: 8,
     name: "Christmas sleigh",
     src: "./assets/christmas-sleigh.png",
   },
 ];
 
-const main = document.querySelector(".main");
-
-const board = document.createElement("div");
-board.classList.add("memory-board");
-main.appendChild(board);
+const MAIN = document.querySelector(".main");
+const BOARD = document.querySelector(".memory-board");
 
 const startScreen = document.createElement("div");
 startScreen.classList.add("overlay-text", "visible");
 startScreen.innerText = "Click to Start";
-main.appendChild(startScreen);
+startScreen.setAttribute("data-action", "newGame");
+MAIN.appendChild(startScreen);
 
 const victoryScreen = document.createElement("div");
 victoryScreen.classList.add("overlay-text");
 victoryScreen.innerText = "Victory";
 victoryScreen.setAttribute("id", "victory-text");
-main.appendChild(victoryScreen);
+victoryScreen.setAttribute("data-action", "newGame");
+MAIN.appendChild(victoryScreen);
 
 const restart = document.createElement("span");
 restart.classList.add("overlay-text-small");
@@ -114,109 +97,107 @@ let lockBoard = false;
 let firstCard;
 let secondCard;
 
-document.addEventListener("DOMContentLoaded", function () {
-  startGame();
+function startGame() {
+  createCard(BOARD, boardCards);
+  sortCards();
 
-  function startGame() {
-    createCard(board, cardArray);
-    sortCards();
-    let overlays = Array.from(document.getElementsByClassName("overlay-text"));
-    overlays.forEach((overlay) => {
-      overlay.addEventListener("click", () => {
-        overlay.classList.remove("visible");
-      });
-    });
-
-    cards = Array.from(document.querySelectorAll(".board-card"));
-    cards.forEach((card) => card.addEventListener("click", flipCard));
-  }
-
-  function createCard(boardCard, cardArray) {
-    cardArray.forEach((card) => {
-      boardCard = document.createElement("div");
-      boardCard.classList.add("board-card");
-      boardCard.setAttribute("data-name", card.name);
-      boardCard.setAttribute("data-id", card.id);
-      board.appendChild(boardCard);
-      let backImg = document.createElement("img");
-      backImg.classList.add("back-face");
-      backImg.setAttribute("src", "./assets/snowflake.jpg");
-      boardCard.appendChild(backImg);
-      let frontImg = document.createElement("img");
-      frontImg.classList.add("front-face");
-      frontImg.setAttribute("src", card.src);
-      frontImg.setAttribute("data-name", card.name);
-      boardCard.appendChild(frontImg);
-    });
-  }
-
-  function sortCards() {
-    cards = Array.from(document.querySelectorAll(".board-card"));
-    cards.forEach((card) => {
-      let randomPosition = Math.floor(Math.random() * 16);
-      card.style.order = randomPosition;
-    });
-  }
-
-  function flipCard() {
-    if (lockBoard) return;
-    if (this === firstCard) return;
-
-    this.classList.add("flip");
-
-    if (!hasFlippedCard) {
-      hasFlippedCard = true;
-      firstCard = this;
-      return;
+  MAIN.addEventListener('click', ({ target }) => {
+    if (target.dataset.action === "newGame") {
+      target.classList.remove("visible");
     }
+  })
+}
 
-    secondCard = this;
-    checkForMatch();
+function createCard(wrapper, array) {
+  array.forEach((card) => {
+    container = document.createElement("div");
+    container.classList.add("board-card");
+    container.setAttribute("data-name", card.name);
+    wrapper.appendChild(container);
+    const backImg = document.createElement("img");
+    backImg.classList.add("back-face");
+    backImg.setAttribute("src", "./assets/snowflake.jpg");
+    container.appendChild(backImg);
+    const frontImg = document.createElement("img");
+    frontImg.classList.add("front-face");
+    frontImg.setAttribute("src", card.src);
+    frontImg.setAttribute("data-name", card.name);
+
+    container.appendChild(frontImg);
+  });
+}
+
+function sortCards() {
+  cards = Array.from(document.querySelectorAll(".board-card"));
+  cards.forEach((card) => {
+    let randomPosition = Math.floor(Math.random() * 16);
+    card.style.order = randomPosition;
+  });
+}
+
+function flipCard() {
+  if (lockBoard) return;
+  if (this === firstCard) return;
+
+  this.classList.add("flip");
+
+  if (!hasFlippedCard) {
+    hasFlippedCard = true;
+    firstCard = this;
+    return;
   }
 
-  function checkForMatch() {
-    if (firstCard.dataset.name === secondCard.dataset.name) {
-      disableCards();
-      cardsWon += 1;
-      setTimeout(checkWon, 1000);
-    } else {
-      unflipCards();
-    }
-  }
+  secondCard = this;
+  checkForMatch();
+}
 
-  function disableCards() {
-    firstCard.removeEventListener("click", flipCard);
-    secondCard.removeEventListener("click", flipCard);
+function checkForMatch() {
+  if (firstCard.dataset.name === secondCard.dataset.name) {
+    disableCards();
+    cardsWon += 1;
+    setTimeout(checkWon, 1000);
+  } else {
+    unflipCards();
+  }
+}
+
+function disableCards() {
+  firstCard.removeEventListener("click", flipCard);
+  secondCard.removeEventListener("click", flipCard);
+
+  resetBoard();
+}
+
+function unflipCards() {
+  lockBoard = true;
+  setTimeout(() => {
+    firstCard.classList.remove("flip");
+    secondCard.classList.remove("flip");
 
     resetBoard();
+  }, 1000);
+}
+
+function checkWon() {
+  if (cardsWon === CARD_ARRAY.length / 2) {
+    victoryScreen.classList.add("visible");
+
+    setTimeout(() => replay(), 1000);
   }
+}
 
-  function unflipCards() {
-    lockBoard = true;
-    setTimeout(() => {
-      firstCard.classList.remove("flip");
-      secondCard.classList.remove("flip");
+function resetBoard() {
+  [hasFlippedCard, lockBoard] = [false, false];
+  [firstCard, secondCard] = [null, null];
+}
 
-      resetBoard();
-    }, 1000);
-  }
+function replay() {
+  BOARD.innerHTML = "";
+  startGame();
+  cardsWon = 0;
+}
 
-  function checkWon() {
-    if (cardsWon === cardArray.length / 2) {
-      victoryScreen.classList.add("visible");
-
-      setTimeout(() => replay(), 1000);
-    }
-  }
-
-  function resetBoard() {
-    [hasFlippedCard, lockBoard] = [false, false];
-    [firstCard, secondCard] = [null, null];
-  }
-
-  function replay() {
-    board.innerHTML = "";
-    startGame();
-    cardsWon = 0;
-  }
+document.addEventListener("DOMContentLoaded", function () {
+  startGame();
+  let boardCards = cards.forEach((card) => card.addEventListener("click", flipCard));
 });
