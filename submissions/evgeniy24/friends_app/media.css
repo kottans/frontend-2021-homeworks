@@ -8,16 +8,16 @@
 /* iPads portrait*/
 @media only screen and (min-width: 768px) and (max-width: 1023px) {
   .menu-wrap {
-    width: 38%;
+    width: 37%;
+  }
+
+  .side-menu {
+    width: 37%;
   }
 
   .friendsList-wrap {
     width: 60%;
-    margin-left: 2%;
-  }
-
-  .sorting-menu {
-    width: 36%;
+    margin-left: 3%;
   }
 }
 
@@ -44,6 +44,11 @@
 
   .menu-wrap {
     width: 100%;
+  }
+
+  .side-menu {
+    position: relative;
+    width: 100%;
     padding: 2%;
     margin: 0;
   }
@@ -61,7 +66,7 @@
     margin-bottom: 20px;
   }
 
-  .sorting-menu {
+  .sorting-wrap {
     position: relative;
     width: 100%;
   }
@@ -101,8 +106,12 @@
     margin: 15px 0 15px 0;
   }
 
-  .menu-wrap {
+  .menu-wrap,
+  .side-menu {
     width: 39%;
+  }
+
+  .side-menu {
     padding: 0 2% 0 2%;
   }
 
@@ -113,15 +122,21 @@
     font-size: 18px;
   }
 
-  .sorting-menu {
-    width: 38%;
-    position: fixed;
+  .sorting-wrap {
     justify-content: flex-start;
   }
 
   .sorting-legend {
     font-size: 15px;
     margin-bottom: 5px;
+  }
+
+  .radio__button {
+    width: 60px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 15px;
+    margin: 0 5px 10px 5px;
   }
 
   .btn {
@@ -154,21 +169,20 @@
     margin: 15px 0 15px 0;
   }
 
+  .side-menu,
   .menu-wrap {
     width: 39%;
-    padding: 0 2% 0 2%;
   }
 
   .search-form {
+    width: 90%;
     height: 30px;
     margin-bottom: 10px;
     background-size: 13px;
     font-size: 18px;
   }
 
-  .sorting-menu {
-    width: 38%;
-    position: fixed;
+  .sorting-wrap {
     justify-content: flex-start;
   }
 
@@ -177,10 +191,18 @@
     margin-bottom: 5px;
   }
 
-  .btn {
+  .radio__button {
     width: 60px;
-    height: 28px;
-    font-size: 17px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 15px;
+    margin: 0 5px 10px 5px;
+  }
+
+  .btn {
+    width: 40px;
+    height: 20px;
+    font-size: 13px;
     margin-bottom: 5px;
   }
 

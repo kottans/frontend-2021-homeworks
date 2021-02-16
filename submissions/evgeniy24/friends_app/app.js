@@ -5,45 +5,8 @@ const REQUEST_URL = 'https://randomuser.me/api/?results=20',
 let friendsList = [],
     searchResultList,
     sortedList,
-    genderNeutralList,
     filteredByGenderList,
-    scrollDepth,
-    lettersArr = HEADER.innerHTML.split('');
-
-const colToHex = function (c) {
-
-    let color = (c < 75) ? c + 75 : c
-    let hex = color.toString(16);
-    return hex.length == 1 ? '0' + hex : hex;
-}
-
-const rgbToHex = function (r, g, b) {
-    return '#' + colToHex(r) + colToHex(g) + colToHex(b);
-}
-
-const getRandomColor = function () {
-    return rgbToHex(
-        Math.floor(Math.random() * 255),
-        Math.floor(Math.random() * 255),
-        Math.floor(Math.random() * 255)
-    )
-}
-
-const randomColor = function () {
-    let html = '';
-    lettersArr.map(function (letter) {
-        let color = getRandomColor();
-        return html +=
-            `<span style= color:${color}>
-          ${letter}
-          </span>`
-    })
-    return html;
-}
-
-
-HEADER.innerHTML = randomColor();
-
+    scrollDepth;
 
 const sendRequest = function (url) {
     return fetch(url)
@@ -125,9 +88,24 @@ function renderFriendsCard(friend) {
     FRIENDS_LIST_WRAP.append(friendCard);
 }
 
-SEARCH_FIELD = document.querySelector('#search');
+function renderErrorMessage() {
+    FRIENDS_LIST_WRAP.innerHTML =
+        `
+    <div class="error-message-wrap">
+        <p class="error-msg-text">OOPS! Something Bad Happened, please try again</p>
+        <button class="radio__button error-button" value="loading-error">Try Again</button>
+    </div>
+    `
+}
 
-SEARCH_FIELD.addEventListener('input', function (event) {
+FRIENDS_LIST_WRAP.addEventListener('click', function (event) {
+    if (event.target.value == 'loading-error') {
+        FRIENDS_LIST_WRAP.innerHTML = '';
+        startApp();
+    }
+})
+
+const searchByName = function (event) {
     let searchName = event.target.value.toLowerCase();
     if (searchName !== '') {
         searchResultList = friendsList.filter(function (friend) {
@@ -138,25 +116,17 @@ SEARCH_FIELD.addEventListener('input', function (event) {
         searchResultList = [...friendsList]
         renderFriendsList(searchResultList);
     }
-})
-
-const sortByName = function (a, b) {
-    const nameA = a.name.first.toUpperCase();
-    const nameB = b.name.first.toUpperCase();
-    return nameA < nameB ? -1 : nameA > nameB ? 1 : 0;
 }
 
-const sortByAge = function (a, b) {
-    return a.dob.age - b.dob.age;
-}
+const SEARCH_FIELD = document.querySelector('#search');
 
-SORTING_MENU = document.querySelector('.sorting-menu');
+SEARCH_FIELD.addEventListener('input', searchByName);
 
-SORTING_MENU.addEventListener('click', function (event) {
-    if (filteredByGenderList) {
-        sortedList = filteredByGenderList;
-    } else if (searchResultList) {
+const sortingFriends = function (event) {
+    if (searchResultList) {
         sortedList = searchResultList;
+    } else if (filteredByGenderList) {
+        sortedList = filteredByGenderList;
     } else {
         sortedList = [...friendsList];
     }
@@ -175,91 +145,73 @@ SORTING_MENU.addEventListener('click', function (event) {
     }
 
     renderFriendsList(sortedList);
-})
+}
 
-FILTER_MENU = document.querySelector('.filter-menu');
+const sortByName = function (a, b) {
+    const nameA = a.name.first.toUpperCase();
+    const nameB = b.name.first.toUpperCase();
+    return nameA < nameB ? -1 : nameA > nameB ? 1 : 0;
+}
 
-FILTER_MENU.addEventListener('click', function (event) {
+const sortByAge = function (a, b) {
+    return a.dob.age - b.dob.age;
+}
 
+const SORTING_MENU = document.querySelector('.sorting-wrap');
+
+SORTING_MENU.addEventListener('click', sortingFriends);
+
+const filterFriends = function (event) {
+    let unFilteredList,
+        input = event.target.closest('input');
     if (searchResultList) {
-        genderNeutralList = searchResultList;
+        unFilteredList = searchResultList;
     } else {
-        genderNeutralList = [...friendsList];
+        unFilteredList = [...friendsList];
     }
 
-    if (event.target.value === 'male') {
-        filteredByGenderList = genderNeutralList.filter(function (friend) {
-            return friend.gender === 'male';
+    if (input.value === 'male') {
+        filteredByGenderList = unFilteredList.filter(function (friend) {
+            return friend.gender === input.value;
         })
 
-    } else if (event.target.value === 'female') {
-        filteredByGenderList = genderNeutralList.filter(function (friend) {
-            return friend.gender === 'female';
+    } else if (input.value === 'female') {
+        filteredByGenderList = unFilteredList.filter(function (friend) {
+            return friend.gender === input.value;
         })
 
-    } else if (event.target.value === 'all') {
-        return filteredByGenderList = genderNeutralList;
-    }
-
-    renderFriendsList(filteredByGenderList)
-})
-/* FILTER_MENU.addEventListener('click', function (event) {
-    let genderNeutralList;
-
-    if (searchResultList) {
-        genderNeutralList = searchResultList;
-    } else {
-        genderNeutralList = [...friendsList];
-    }
-
-    if (event.target.value === 'male') {
-        filteredByGenderList = genderNeutralList.filter(function (friend) {
-            return friend.gender === 'male';
-        });
-
-    } else if (event.target.value === 'female') {
-        filteredByGenderList = genderNeutralList.filter(function (friend) {
-            return friend.gender === 'female';
-        });
-
-    } else if (event.target.value === 'all') {
-        filteredByGenderList = genderNeutralList;
+    } else if (input.value === 'all') {
+        filteredByGenderList = friendsList;
     }
 
     renderFriendsList(filteredByGenderList);
-}) */
-
-function renderErrorMessage() {
-    FRIENDS_LIST_WRAP.innerHTML =
-        `
-    <div class="error-message-wrap">
-        <p class="error-msg-text">OOPS! Something Bad Happened, please try again</p>
-        <button class="radio__button error-button" value="loading-error">Try Again</button>
-    </div>
-    `
 }
 
-MOBILE_MENU_BUTTON = document.querySelector('.button-container');
+const FILTER_MENU = document.querySelector('.filter-menu');
 
-MOBILE_MENU_BUTTON.addEventListener('click', function (event) {
+FILTER_MENU.addEventListener('input', filterFriends);
+
+const menuHiding = function (event) {
     const menuWrap = document.querySelector('.menu-wrap');
 
     toggleClass(event.target, menuWrap);
     scrollDepth = window.pageYOffset;
     scrollToTop();
-});
+}
 
 function toggleClass(...elem) {
     elem.forEach((e) => e.classList.toggle('change'));
 }
 
 function scrollToTop() {
-
+    const limitDepth = 100,
+        scrollStep = 60,
+        scrollStepPause = 15;
     let timer = 0;
-    if (scrollDepth > 100) {
+    if (scrollDepth > limitDepth) {
         window.scrollTo(pageXOffset, scrollDepth);
-        scrollDepth = scrollDepth - 60;
-        timer = setTimeout(scrollToTop, 15);
+        scrollDepth = scrollDepth - scrollStep;
+        timer = setTimeout(scrollToTop, scrollStepPause);
     } else {
         clearTimeout(timer);
         window.scrollTo(0, 0);
@@ -267,9 +219,10 @@ function scrollToTop() {
 
 }
 
-FRIENDS_LIST_WRAP.addEventListener('click', function (event) {
-    if (event.target.value == 'loading-error') {
-        FRIENDS_LIST_WRAP.innerHTML = '';
-        startApp();
-    }
-})
+const MOBILE_MENU_BUTTON = document.querySelector('.button-container');
+
+MOBILE_MENU_BUTTON.addEventListener('click', menuHiding);
+
+
+
+
