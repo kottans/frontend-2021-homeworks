@@ -168,22 +168,23 @@ let clearPair = function(currentPair) {
 
 // CHECK IS TWO CARDS A PAIR OR NOT
 let checkPairOrNot = function () {
-    if (prePair.length === 2 && prePair[0][0] === prePair[1][0]) {
+    if (prePair.length === 2){
         let currentPair = prePair.slice();
         prePair.splice(0, 2);
-        pairs.push('1');
-        setTimeout(function (currentPair) {
-            hidePair(currentPair);
-        }, 500, currentPair);
-        checkGameIsOverOrNot();
+        if (currentPair[0][0] === currentPair[1][0]) {
+            pairs.push('1');
+            setTimeout(function (currentPair) {
+                hidePair(currentPair);
+            }, 500, currentPair);
+            checkGameIsOverOrNot();
 
-    } else if (prePair.length === 2 && prePair[0][0] !== prePair[1][0]) {
-        let currentPair = prePair.slice();
-        prePair.splice(0, 2);
-        setTimeout(function (currentPair) {
-            clearPair(currentPair);
-        }, 800, currentPair);
-}}
+        } else if ( currentPair[0][0] !== currentPair[1][0]) {
+            setTimeout(function (currentPair) {
+                clearPair(currentPair);
+            }, 800, currentPair);
+        }
+    }
+}
 
 // GET PICTURE NAME FROM ALT AND PARENT ELEMENT
 let createCardInfoAndAddItInCheckPlace = (cardBack, cardHolderElement) => {
@@ -199,7 +200,7 @@ cardPlace.addEventListener('click', function (e) {
         if (prePair.length < 2) {
             cardHolderElement.classList.add('active');
             createCardInfoAndAddItInCheckPlace(cardBack,cardHolderElement);
-        checkPairOrNot();
+            checkPairOrNot()
         }
     }
 })
