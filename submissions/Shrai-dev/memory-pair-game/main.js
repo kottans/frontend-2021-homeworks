@@ -98,7 +98,7 @@ let firstCard;
 let secondCard;
 
 function startGame() {
-  createCard(BOARD, boardCards);
+  createCard(BOARD, CARD_ARRAY);
   sortCards();
 
   MAIN.addEventListener('click', ({ target }) => {
