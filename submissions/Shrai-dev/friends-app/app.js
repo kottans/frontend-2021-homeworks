@@ -2,11 +2,10 @@ const CONTAINER = document.querySelector(".container");
 const SEARCH_BAR = document.querySelector(".searchBar");
 const SORTING_MENU = document.querySelector(".wrapper__filters");
 const SORT_GENDER = document.querySelector(".search__by-gender");
-const FRIENDS_NUMBER = 100;
-const URL = `https://randomuser.me/api/?results=${FRIENDS_NUMBER}`;
+const URL = `https://randomuser.me/api/?results=100`;
 let friends = [];
 
-const fetchPeople = (url) =>
+const fetchFriends = (url) =>
   fetch(url)
     .then((res) => {
       if (res.ok) {
@@ -17,13 +16,13 @@ const fetchPeople = (url) =>
     .then(({ results }) => results);
 
 const renderFriends = (friends) => {
-  const friendsList = drawPeople(friends);
+  const friendsList = drawFriends(friends);
   CONTAINER.innerHTML = "";
   CONTAINER.append(friendsList);
 };
 
 const start = () => {
-  fetchPeople(URL).then((results) => {
+  fetchFriends(URL).then((results) => {
     renderFriends(results);
     friends = results.slice();
   });
@@ -39,7 +38,7 @@ const createCard = (friend) => {
   return card;
 };
 
-const drawPeople = (friends) => {
+const drawFriends = (friends) => {
   const wrapper = document.createElement("div");
   wrapper.classList.add("wrapper");
 
@@ -52,16 +51,14 @@ SEARCH_BAR.addEventListener("input", (event) => {
   let searchName = event.target.value.toLowerCase();
   if (searchName !== "") {
     searchResults = friends.filter((el) =>
-    `${el.name.first}${el.name.last}`
-      .toLowerCase()
-      .includes(searchName));
+      `${el.name.first}${el.name.last}`.toLowerCase().includes(searchName)
+    );
     return renderFriends(searchResults);
   } else {
     searchResults = [...friends];
     renderFriends(searchResults);
   }
 });
-
 
 SORTING_MENU.addEventListener("click", ({ target }) => {
   let sortedArr = [...friends];
@@ -70,32 +67,24 @@ SORTING_MENU.addEventListener("click", ({ target }) => {
     sortedArr = sortByGender(sortedArr, gender.value);
   }
   if (target.value === "age-ascending") {
-    sortByAgeAsc(sortedArr);
+    sortedArr.sort((a, b) => sortByAge(a, b));
   } else if (target.value === "age-descending") {
-    sortByAgeDesc(sortedArr);
+    sortedArr.sort((a, b) => sortByAge(b, a));
   } else if (target.value === "name-ascending") {
-    sortByNameAsc(sortedArr);
+    sortedArr.sort((a, b) => sortByName(a, b));
   } else if (target.value === "name-descending") {
-    sortByNameDesc(sortedArr);
+    sortedArr.sort((a, b) => sortByName(b, a));
   }
   return renderFriends(sortedArr);
 });
 
-const sortByAgeAsc = (dataToSort) => {
-  return dataToSort.sort((a, b) => a.dob.age - b.dob.age);
+const sortByAge = (a, b) => {
+    return a.dob.age > b.dob.age ? 1 : -1;
 };
 
-const sortByAgeDesc = (dataToSort) => {
-  return dataToSort.sort((a, b) => b.dob.age - a.dob.age);
-};
-
-const sortByNameAsc = (dataToSort) => {
-  return dataToSort.sort((a, b) => a.name.first.localeCompare(b.name.first));
-};
-
-const sortByNameDesc = (dataToSort) => {
-  return dataToSort.sort((a, b) => b.name.first.localeCompare(a.name.first));
-};
+const sortByName = (a, b) => {
+  return a.name.first.localeCompare(b.name.first);
+}
 
 const sortByGender = (dataToSort, inputGenderFilter) => {
   const inputGenderAll = document.getElementById("all").value;
@@ -105,15 +94,9 @@ const sortByGender = (dataToSort, inputGenderFilter) => {
     return dataToSort.filter((friend) => friend.gender === inputGenderFilter);
 };
 
-const getChecked = (element) => {
-  let checked;
-  const inputs = element.querySelectorAll("input");
-  for (let input of inputs) {
-    if (input.checked) {
-      checked = input;
-    }
-  }
-  return checked;
+const getChecked = element => {
+  const input = element.querySelector("input[name='gender']:checked");
+  return input;
 };
 
 start();
