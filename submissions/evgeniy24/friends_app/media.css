@@ -1,0 +1,223 @@
+/* iPads landscape*/
+@media only screen and (max-width: 1024px) {
+  .friendsList-wrap {
+    justify-content: space-around;
+  }
+}
+
+/* iPads portrait*/
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+  .menu-wrap {
+    width: 37%;
+  }
+
+  .side-menu {
+    width: 37%;
+  }
+
+  .friendsList-wrap {
+    width: 60%;
+    margin-left: 3%;
+  }
+}
+
+/* Smartphones portrait----------- */
+@media only screen and (min-width: 319px) and (max-width: 414px) {
+  header {
+    justify-content: flex-start;
+  }
+
+  .button-container {
+    display: inline-block;
+  }
+
+  .header-name {
+    font-size: 26px;
+    margin: 13px 0 13px 0;
+  }
+
+  .main-wrap {
+    flex-direction: column;
+    padding: 0 1%;
+    z-index: 0;
+  }
+
+  .menu-wrap {
+    width: 100%;
+  }
+
+  .side-menu {
+    position: relative;
+    width: 100%;
+    padding: 2%;
+    margin: 0;
+  }
+
+  .menu-wrap.change {
+    transform: translateY(-500px);
+  }
+
+  .menu-wrap.change + .friendsList-wrap {
+    transform: translateY(-400px);
+  }
+
+  .search-form {
+    height: 35px;
+    margin-bottom: 20px;
+  }
+
+  .sorting-wrap {
+    position: relative;
+    width: 100%;
+  }
+
+  .sorting-legend {
+    font-size: 17px;
+  }
+
+  .btn {
+    width: 80px;
+    height: 35px;
+    font-size: 20px;
+  }
+
+  .ageSort-wrap {
+    margin-bottom: 0px;
+  }
+
+  .filter-gender__legend {
+    font-size: 17px;
+  }
+
+  .friendsList-wrap {
+    width: 100%;
+    padding: 2%;
+    margin: 0;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
+}
+
+/* Smartphones landscape----------- */
+@media only screen and (min-width: 415px) and (max-width: 767px) {
+  .header-name {
+    font-size: 30px;
+    margin: 15px 0 15px 0;
+  }
+
+  .menu-wrap,
+  .side-menu {
+    width: 39%;
+  }
+
+  .side-menu {
+    padding: 0 2% 0 2%;
+  }
+
+  .search-form {
+    height: 30px;
+    margin-bottom: 10px;
+    background-size: 13px;
+    font-size: 18px;
+  }
+
+  .sorting-wrap {
+    justify-content: flex-start;
+  }
+
+  .sorting-legend {
+    font-size: 15px;
+    margin-bottom: 5px;
+  }
+
+  .radio__button {
+    width: 60px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 15px;
+    margin: 0 5px 10px 5px;
+  }
+
+  .btn {
+    width: 60px;
+    height: 28px;
+    font-size: 17px;
+    margin-bottom: 5px;
+  }
+
+  .ageSort-wrap {
+    margin-bottom: 0px;
+  }
+
+  .filter-gender__legend {
+    font-size: 15px;
+    margin-bottom: 5px;
+  }
+
+  .friendsList-wrap {
+    width: 60%;
+    margin-left: 1%;
+    justify-content: space-around;
+  }
+}
+
+/*Iphones X > landscape */
+@media only screen and (min-width: 812px) and (max-height: 415px) {
+  .header-name {
+    font-size: 30px;
+    margin: 15px 0 15px 0;
+  }
+
+  .side-menu,
+  .menu-wrap {
+    width: 39%;
+  }
+
+  .search-form {
+    width: 90%;
+    height: 30px;
+    margin-bottom: 10px;
+    background-size: 13px;
+    font-size: 18px;
+  }
+
+  .sorting-wrap {
+    justify-content: flex-start;
+  }
+
+  .sorting-legend {
+    font-size: 15px;
+    margin-bottom: 5px;
+  }
+
+  .radio__button {
+    width: 60px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 15px;
+    margin: 0 5px 10px 5px;
+  }
+
+  .btn {
+    width: 40px;
+    height: 20px;
+    font-size: 13px;
+    margin-bottom: 5px;
+  }
+
+  .ageSort-wrap {
+    margin-bottom: 0px;
+  }
+
+  .filter-gender__legend {
+    font-size: 15px;
+    margin-bottom: 5px;
+  }
+
+  .friendsList-wrap {
+    width: 60%;
+    margin-left: 1%;
+    justify-content: space-around;
+  }
+}

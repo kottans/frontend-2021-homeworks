@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Friends App</title>
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="fonts.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" media="screen and (color)" href="media.css" />
+  </head>
+  <body>
+    <header>
+      <div class="button-container">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </div>
+      <h1 class="header-name">
+        <span>F</span><span>R</span><span>I</span><span>E</span><span>N</span
+        ><span>D</span><span>S</span>&nbsp<span>A</span><span>P</span
+        ><span>P</span>
+      </h1>
+    </header>
+    <div class="main-wrap">
+      <aside class="menu-wrap">
+        <div class="side-menu">
+          <input
+            type="text"
+            name="search"
+            placeholder="Search by name"
+            id="search"
+            class="search-form"
+          />
+          <div class="sorting-wrap">
+            <p class="sorting-legend">SORTING</p>
+            <div class="nameSort-wrap">
+              <label class="sorting__label">
+                <input
+                  class="sorting__input"
+                  type="radio"
+                  name="sorting"
+                  value="ascending"
+                />
+                <span class="radio__button uppercase">a-z</span>
+              </label>
+              <label class="sorting__label">
+                <input
+                  class="sorting__input"
+                  type="radio"
+                  name="sorting"
+                  value="descending"
+                />
+                <span class="radio__button uppercase">z-a</span>
+              </label>
+            </div>
+            <div class="ageSort-wrap">
+              <label class="sorting__label">
+                <input
+                  class="sorting__input"
+                  type="radio"
+                  name="sorting"
+                  value="young-first"
+                />
+                <span class="radio__button">Young</span>
+              </label>
+              <label class="sorting__label">
+                <input
+                  class="sorting__input"
+                  type="radio"
+                  name="sorting"
+                  value="old-first"
+                />
+                <span class="radio__button">Older</span>
+              </label>
+            </div>
+          </div>
+          <div class="filter-wrap">
+            <p class="filter-legend">FILTER</p>
+            <form class="filter-menu">
+              <label class="filter__label">
+                <input
+                  class="sorting__input"
+                  type="radio"
+                  name="gender-filter"
+                  value="male"
+                />
+                <span class="radio__button">Male</span>
+              </label>
+              <label class="filter__label">
+                <input
+                  class="sorting__input"
+                  type="radio"
+                  name="gender-filter"
+                  value="female"
+                />
+                <span class="radio__button">Female</span>
+              </label>
+              <label class="filter__label">
+                <input
+                  class="sorting__input"
+                  type="radio"
+                  name="gender-filter"
+                  value="all"
+                  checked
+                />
+                <span class="radio__button">All</span>
+              </label>
+            </form>
+          </div>
+        </div>
+      </aside>
+      <section class="friendsList-wrap"></section>
+    </div>
+    <script src="./app.js"></script>
+  </body>
+</html>
