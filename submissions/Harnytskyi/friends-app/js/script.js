@@ -8,12 +8,8 @@ const MAX_AGE = document.getElementById("maxAge");
 const FILTER_AGE = document.getElementById("filter-age");
 let friends = [];
 let minAge, maxAge;
-let gender = {
-    male: true,
-    female: true
-}
-
 let selectedFriends;
+
 function saveUsers(usersArray) {
     friends = usersArray.map(user => {
         return {
@@ -27,14 +23,9 @@ function saveUsers(usersArray) {
     })
 }
 function filterByGender() {
-    if (gender.male == true && gender.female == true)
-        selectedFriends = friends;
-    else if (gender.male == true && gender.female == false)
-        selectedFriends = friends.filter(item => item.gender == "male")
-    else if (gender.male == false && gender.female == true)
-        selectedFriends = friends.filter(item => item.gender == "female")
-    else
-        selectedFriends = [];
+    let checkboxes = Array.from(document.querySelectorAll(".gender-checkbox:checked"));
+    selectedFriends = friends.filter(item => 
+        checkboxes.some((gender) => item.gender === gender.value));
 }
 function filterByAge() {
     selectedFriends = selectedFriends.filter(friend => (friend.age >= minAge && friend.age <= maxAge));
@@ -55,9 +46,6 @@ function displayFriends() {
     }).join("");
 }
 
-function changeFilterStatus(checkbox) {
-    gender[checkbox.value] = !gender[checkbox.value];
-}
 function selectFriends() {
     filterByGender();
     filterByAge();
@@ -130,7 +118,6 @@ function initApp() {
         });
 }
 
-
 function showNotFoundMessage() {
     ERROR_MESSAGE.innerHTML = `Not Found`;
 }
@@ -152,7 +139,6 @@ function checkAgeRangeValidity() {
 
 FILTER_GENDER.addEventListener('change', (event) => {
     const target = event.target;
-    changeFilterStatus(target);
     selectFriends();
 })
 FILTER_SORT.addEventListener('change', (event) => {
