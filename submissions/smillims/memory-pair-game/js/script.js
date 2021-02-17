@@ -6,45 +6,45 @@ let lockCard = false;
 let firstCard = '';
 let secondCard = '';
 
-const titleImages = [
-	
-	{	
-		'id': 'bentley',
-		'srcFront': 'img/logo.png',
-		'srcBack': 'img/bentley.png',
-		'alt': 'bentley',
-	},
-	{
-		'id': 'amazon',
-		'srcFront': 'img/logo.png',
-		'srcBack':'img/amazon.png',
-		'alt': 'amazon',	
-	},
-	{
-		'id': 'google',
-		'srcFront': 'img/logo.png',
-		'srcBack':'img/google.png',
-		'alt': 'google',
-	},
-	{
-		'id': 'intel',
-		'srcFront': 'img/logo.png',
-		'srcBack':'img/intel.png',
-		'alt': 'intel',
-	},
-	{
-		'id': 'nike',
-		'srcFront': 'img/logo.png',
-		'srcBack':'img/nike.png',
-		'alt': 'nike',
-	},
-	{
-		'id': 'telegram',
-		'srcFront': 'img/logo.png',
-		'srcBack':'img/telegram.png',
-		'alt': 'telegram',
-	},
+const SRC_FRONT = 'img/logo.png';
 
+const titleImages = [
+	{	
+		id: 'bentley',
+		srcFront: SRC_FRONT,
+		srcBack: 'img/bentley.png',
+		alt: 'bentley',
+	},
+	{
+		id: 'amazon',
+		srcFront: SRC_FRONT,
+		srcBack:'img/amazon.png',
+		alt: 'amazon',	
+	},
+	{
+		id: 'google',
+		srcFront: SRC_FRONT,
+		srcBack:'img/google.png',
+		alt: 'google',
+	},
+	{
+		id: 'intel',
+		srcFront: SRC_FRONT,
+		srcBack:'img/intel.png',
+		alt: 'intel',
+	},
+	{
+		id: 'nike',
+		srcFront: SRC_FRONT,
+		srcBack:'img/nike.png',
+		alt: 'nike',
+	},
+	{
+		id: 'telegram',
+		srcFront: SRC_FRONT,
+		srcBack:'img/telegram.png',
+		alt: 'telegram',
+	},
 ];
 
 const allImages = [...titleImages, ...titleImages];
@@ -92,6 +92,7 @@ function flipCards(e) {
 function checkPair() {
 	if(firstCard.dataset.id === secondCard.dataset.id) {
 		disablePair();
+		currentPair++;
 		checkWin();
 	} else {
 		frontFlipPair();
@@ -103,8 +104,6 @@ function disablePair() {
 	secondCard.removeEventListener('click', flipCards);
 	firstCard.classList.add('opacity');
 	secondCard.classList.add('opacity');
-
-	currentPair++;
 
 	resetValue();
 };
