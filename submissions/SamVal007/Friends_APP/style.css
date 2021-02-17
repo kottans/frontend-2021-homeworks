@@ -34,7 +34,6 @@ h6 {
 }
 
 #menu_forms {
-  /* width: 250px; */
   margin: 20px 0 0 20px;
 }
 
@@ -52,13 +51,13 @@ h6 {
   align-items: flex-start;
   margin: 22px;
 }
-.section_name{
+
+.section_name {
   margin-top: 10px;
 }
 
 #container {
-  /* width: calc(100% - 370px); */
-  /* margin-right: 100px; */
+
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -147,10 +146,6 @@ a:hover {
 }
 
 .rdBtn {
-  /* display: flex;
-  flex-wrap: wrap;
-
-  justify-content: left; */
   padding: 5px 0;
   margin: 4px 11px 20px 13px;
 }

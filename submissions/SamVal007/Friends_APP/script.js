@@ -8,12 +8,6 @@ let displayList = [];
 
 function getPeopleData() {
   let response = fetch(URL)
-    // .then(response => {
-    //   if (!response.ok) {
-    //     throw new Error('Network response was not ok');
-    //   }
-    //   return response;
-    // })
     .then(
       successResponse => {
         if (successResponse.status != 200) {
@@ -66,7 +60,6 @@ document.addEventListener('DOMContentLoaded', function () {
     let btn = event.target.closest('button');
 
     if (radio) {
-      //console.log(radio);
 
       switch (radio.id) {
         case 'genderAll':
@@ -101,9 +94,7 @@ document.addEventListener('DOMContentLoaded', function () {
   SEARCH_FIELD.addEventListener('input', function (e) {
     let searchStr = '';
     searchStr = SEARCH_FIELD.value.toLowerCase().trim();
-    //console.log(searchStr);
     displayList = persons.filter(elem => elem.name.last.toLowerCase().includes(searchStr));
-    //console.log(displayList);
     displayCards();
   })
 });
