@@ -1,10 +1,12 @@
-const minAge = 0;
-const maxAge = 99;
+const sortByNameButton = document.querySelector('#name-sort');
+const sortByAgeButton = document.querySelector('#age-sort');
+const MIN_AGE = 0;
+const MAX_AGE = 99;
 const filter = {
   nameSort: null,
   ageSort: null,
-  ageFrom: minAge,
-  ageTo: maxAge,
+  ageFrom: MIN_AGE,
+  ageTo: MAX_AGE,
   gender: 'any',
   searchValue: null
 };
@@ -24,7 +26,6 @@ const getUsers = async () => {
     errorNotification.innerHTML = `Sorry, couldn't get the data <br> ${error}`;
     document.querySelector('main').prepend(errorNotification)
   }
-  return allUsers
 }
 
 const renderUsers = users => {
@@ -112,48 +113,52 @@ const filterUsers = () => {
   renderUsers(filteredUsers)
 };
 
+const setNameSortType = () => {
+  if (filter.nameSort === 'asc') {
+    filter.nameSort = 'desc';
+    sortByNameButton.classList.remove('asc')
+    sortByNameButton.classList.add('desc')
+  } else {
+    filter.nameSort = 'asc';
+    sortByNameButton.classList.remove('desc')
+    sortByNameButton.classList.add('asc')
+  }
+  sortByAgeButton.classList.remove('asc', 'desc')
+  filter.ageSort = null;
+};
+
+const setAgeSortType = () => {
+  if (filter.ageSort === 'asc') {
+    filter.ageSort = 'desc';
+    sortByAgeButton.classList.remove('asc')
+    sortByAgeButton.classList.add('desc')
+  } else {
+    filter.ageSort = 'asc';
+    sortByAgeButton.classList.remove('desc')
+    sortByAgeButton.classList.add('asc')
+  }
+  sortByNameButton.classList.remove('asc', 'desc')
+  filter.nameSort = null;
+};
+
 const handleInput = ({ target }) => {
-  const sortByNameButton = document.querySelector('#name-sort');
-  const sortByAgeButton = document.querySelector('#age-sort');
   switch (target.id) {
     case 'name-sort':
-      if (filter.nameSort === 'asc') {
-        filter.nameSort = 'desc';
-        sortByNameButton.classList.remove('asc')
-        sortByNameButton.classList.add('desc')
-      } else {
-        filter.nameSort = 'asc';
-        sortByNameButton.classList.remove('desc')
-        sortByNameButton.classList.add('asc')
-      }
-      sortByAgeButton.classList.remove('asc', 'desc')
-      filter.ageSort = null;
+      setNameSortType()
       break;
     case 'age-sort':
-      if (filter.ageSort === 'asc') {
-        filter.ageSort = 'desc';
-        sortByAgeButton.classList.remove('asc')
-        sortByAgeButton.classList.add('desc')
-      } else {
-        filter.ageSort = 'asc';
-        sortByAgeButton.classList.remove('desc')
-        sortByAgeButton.classList.add('asc')
-      }
-      sortByNameButton.classList.remove('asc', 'desc')
-      filter.nameSort = null;
+      setAgeSortType()
       break;
     case 'age-from':
-      filter.ageFrom = target.value || minAge;
+      filter.ageFrom = target.value || MIN_AGE;
       break;
     case 'age-to':
-      filter.ageTo = target.value || maxAge;
+      filter.ageTo = target.value || MAX_AGE;
       break;
     case 'search-field':
       filter.searchValue = target.value.toLowerCase();
       break;
-    case 'gender-male':
-    case 'gender-female':
-    case 'gender-any':
+    default:
       filter.gender = target.value;
   }
   filterUsers()
