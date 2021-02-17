@@ -1,20 +1,45 @@
 const USERS_DATA = []
-const USERS_QUANTITY = 30
 const RESULTS = document.getElementById('results')
 const SORT = document.getElementById('sort')
 const FILTER = document.getElementById('filter')
 const REQUEST_PARAMETERS = {}
-let connectionAttemps = 1
 
-function connectToServer() {
-  RESULTS.innerHTML = `<div class='connection_message'>Please wait. Connecting to server. Attemp: ${connectionAttemps}</div>`
-  connectionAttemps++
-  fetchUserData(connectToServer)
+class User {
+  constructor(randomUserAPIUser) {
+    this.name = randomUserAPIUser.name.first
+    this.surname = randomUserAPIUser.name.last
+    this.gender = randomUserAPIUser.gender
+    this.age = randomUserAPIUser.dob.age
+    this.country = randomUserAPIUser.location.country
+    this.city = randomUserAPIUser.location.city
+    this.phone = randomUserAPIUser.phone
+    this.image = randomUserAPIUser.picture.large
+  }
+  static compareName(a, b) {
+    return `${a.name} ${a.surname}`.localeCompare(`${b.name} ${b.surname}`)
+  }
+  static compareSurname(a, b) {
+    return `${a.surname} ${a.name}`.localeCompare(`${b.surname} ${b.name}`)
+  }
 }
-function fetchUserData(onError) {
+function connectToServer() {
+  let connectionAttemps = 1
+  let usersQuantity = 30
+  fetchUserData(usersQuantity, connectionAttemps)
+    .then((responseJSON) => {
+      responseJSON.results.forEach((user) => USERS_DATA.push(new User(user)))
+      showResults()
+    })
+    .catch((error) => {
+      connectionAttemps++
+      fetchUserData(usersQuantity, connectionAttemps)
+    })
+}
+function fetchUserData(usersQuantity, connectionAttemps) {
   let apiUrl = 'https://randomuser.me/api/1.3/'
   let fields = ['name', 'gender', 'location', 'dob', 'phone', 'picture']
-  fetch(`${apiUrl}?results=${USERS_QUANTITY}&inc=${fields.join(',')}`, {
+  RESULTS.innerHTML = `<div class='connection_message'>Please wait. Connecting to server. Attemp: ${connectionAttemps}</div>`
+  return fetch(`${apiUrl}?results=${usersQuantity}&inc=${fields.join(',')}`, {
     headers: { 'Content-Type': 'application/json' },
   })
     .then((response) => {
@@ -24,25 +49,6 @@ function fetchUserData(onError) {
       return response
     })
     .then((response) => response.json())
-    .then((responseJSON) => {
-      pushUserData(responseJSON.results)
-      showResults()
-    })
-    .catch((error) => onError(error))
-}
-function pushUserData(randomUserResults) {
-  randomUserResults.forEach((user) =>
-    USERS_DATA.push({
-      name: user.name.first,
-      surname: user.name.last,
-      gender: user.gender,
-      age: user.dob.age,
-      country: user.location.country,
-      city: user.location.city,
-      phone: user.phone,
-      image: user.picture.large,
-    })
-  )
 }
 function showResults() {
   RESULTS.innerHTML = getUserDataToShow(USERS_DATA, REQUEST_PARAMETERS)
@@ -57,61 +63,20 @@ function getUserDataToShow(userData, parameters) {
   }
 }
 function sort(userData, fieldToSort, order) {
+  let orderValue = order === 'ascending' ? 1 : -1
   if (fieldToSort === 'name') {
-    return sortFullName(userData, 'name', order)
+    return userData.slice().sort((a, b) => User.compareName(a, b) * orderValue)
   } else if (fieldToSort === 'surname') {
-    return sortFullName(userData, 'surname', order)
+    return userData
+      .slice()
+      .sort((a, b) => User.compareSurname(a, b) * orderValue)
   } else if (fieldToSort === 'age') {
-    return sortNumeric(userData, 'age', order)
+    return userData.slice().sort((a, b) => (a.age - b.age) * orderValue)
   } else {
-    return sortString(userData, fieldToSort, order)
+    return userData
+      .slice()
+      .sort((a, b) => a[fieldToSort].localeCompare(b[fieldToSort]) * orderValue)
   }
-}
-function sortFullName(userData, firstToSort, order) {
-  let sortedData = userData.slice()
-  let secondToSort = 'surname'
-  if (firstToSort === 'surname') {
-    secondToSort = 'name'
-  }
-  if (order === 'ascending') {
-    orderValue = 1
-  } else {
-    orderValue = -1
-  }
-  sortedData.sort(
-    (a, b) =>
-      `${a[firstToSort]} ${a[secondToSort]}`.localeCompare(
-        `${b[firstToSort]} ${b[secondToSort]}`
-      ) * orderValue
-  )
-  return sortedData
-}
-function sortNumeric(userData, propertyToSort, order) {
-  let sortedData = userData.slice()
-  if (order === 'ascending') {
-    sortedData.sort((a, b) => a[propertyToSort] - b[propertyToSort])
-  } else {
-    sortedData.sort((a, b) => b[propertyToSort] - a[propertyToSort])
-  }
-  return sortedData
-}
-function sortString(userData, propertyToSort, order) {
-  let sortedData = userData.slice()
-  if (order === 'ascending') {
-    orderValue = 1
-  } else {
-    orderValue = -1
-  }
-  sortedData.sort((a, b) => {
-    if (a[propertyToSort] > b[propertyToSort]) {
-      return 1 * orderValue
-    } else if (a[propertyToSort] < b[propertyToSort]) {
-      return -1 * orderValue
-    } else {
-      return 0
-    }
-  })
-  return sortedData
 }
 function filter(userData, parameters) {
   Object.keys(parameters).forEach((key) => {
