@@ -7,12 +7,15 @@ $gray1: #c0c0c0;
 $gray2: #212529;
 $gray3: #424242;
 
+:root {
+    box-sizing: border-box;
+}
 
 html {
     margin: 0;
     padding: 0;
     min-height: 100%;
-    background: $bgColor;
+    background: $gray1;
 }
 
 body {
@@ -22,7 +25,6 @@ body {
     margin: 0;
     padding: 0;
     flex-grow: 1;
-    width: 99.7%;
     overflow: auto;
 }
 
@@ -91,7 +93,6 @@ body {
 }
 
 .main {
-    width: 100%;
     flex-grow: 1;
     flex-wrap: wrap;
     align-content: flex-start;
@@ -173,7 +174,7 @@ body {
     color:$gray2;
 }
 
-@media screen and (max-width:820px){
+@media screen and (max-width:835px){
     .main{
     display: flex;
     flex-direction: column;
