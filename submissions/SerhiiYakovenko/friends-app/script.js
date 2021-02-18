@@ -8,15 +8,17 @@ const main = document.getElementById("friends-list");
 const search = document.querySelector(".search");
 const usersCards = document.querySelector(".users");
 
-fetch(API_URL)
-  .then((response) => {
-    return response.json();
-  })
-  .then(function (json) {
-    users = json.results;
-    render(users);
-  })
-  .catch((error) => console.log(error));
+function createFriendsList() {
+  fetch(API_URL)
+    .then((response) => {
+      return response.json();
+    })
+    .then(function (json) {
+      users = json.results;
+      render(users);
+    })
+    .catch((error) => console.log(error));
+}
 
 function createCards(users) {
   usersCards.innerHTML = "";
@@ -35,35 +37,23 @@ function createCards(users) {
   main.appendChild(usersCards);
 }
 
-function sortAgeAsc(users) {
-  createCards(users.sort((a, b) => a.dob.age - b.dob.age));
+function sortByAge(users, order) {
+  return order.includes("asc")
+    ? users.sort((a, b) => a.dob.age - b.dob.age)
+    : users.sort((a, b) => b.dob.age - a.dob.age);
 }
 
-function sortAgeDesc(users) {
-  createCards(users.sort((a, b) => b.dob.age - a.dob.age));
+function sortByName(users, order) {
+  return users.sort((a, b) => {
+    if (order.includes("asc")) {
+      return a.name.first < b.name.first ? -1 : 1
+    } else {
+      return b.name.first < a.name.first ? -1 : 1
+    }
+  });
 }
 
-function sortNameAsc(users) {
-  createCards(
-    users.sort((a, b) => {
-      if (a.name.first < b.name.first) return -1;
-      if (a.name.first > b.name.first) return 1;
-      return 0;
-    })
-  );
-}
-
-function sortNameDesc(users) {
-  createCards(
-    users.sort((a, b) => {
-      if (b.name.first < a.name.first) return -1;
-      if (b.name.first > a.name.first) return 1;
-      return 0;
-    })
-  );
-}
-
-function searchUser(text, users) {
+function searchUser(users, text) {
   let searchResult = [];
   users.map((user) => {
     if (
@@ -73,16 +63,26 @@ function searchUser(text, users) {
       searchResult.push(user);
     }
   });
-  createCards(searchResult);
+  return searchResult;
 }
 
 function render(users) {
   createCards(users);
-  ageAscending.addEventListener("click", () => sortAgeAsc(users));
-  ageDescending.addEventListener("click", () => sortAgeDesc(users));
-  nameAscending.addEventListener("click", () => sortNameAsc(users));
-  nameDescending.addEventListener("click", () => sortNameDesc(users));
+  ageAscending.addEventListener("change", (event) =>
+    createCards(sortByAge(users, event.target.className))
+  );
+  ageDescending.addEventListener("change", (event) =>
+    createCards(sortByAge(users, event.target.className))
+  );
+  nameAscending.addEventListener("change", (event) =>
+    createCards(sortByName(users, event.target.className))
+  );
+  nameDescending.addEventListener("change", (event) =>
+    createCards(sortByName(users, event.target.className))
+  );
   search.addEventListener("input", (event) =>
-    searchUser(event.target.value, users)
+    createCards(searchUser(users, event.target.value))
   );
 }
+
+createFriendsList();
