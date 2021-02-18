@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Friends</title>
+    <meta name="description" content="Friends app for Kottans" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+      integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <h1>FriendsApp</h1>
+      </header>
+      <div class="friendlist" id="friendlist"></div>
+      <aside class="searchbar" id="searchbar">
+        <div class="search" id="search">
+          <div class="search-name">
+            <label for="search-name__text"> Name </label>
+            <div class="search-name-inputs">
+              <input
+                class="search-name__text"
+                type="text"
+                id="search-name__text"
+              />
+              <button class="search__sort" value="nameAZ">
+                <i class="fas fa-sort-alpha-down"></i>
+              </button>
+              <button class="search__sort" value="nameZA">
+                <i class="fas fa-sort-alpha-up"></i>
+              </button>
+            </div>
+          </div>
+          <div class="search-age">
+            <label for="search-age__number"> Age </label>
+            <div class="search-age-inputs">
+              <input
+                class="search-age__number"
+                type="number"
+                id="search-age__number"
+                min="0"
+                max="200"
+              />
+              <button class="search__sort" value="ageInc">
+                <i class="fas fa-sort-numeric-down"></i>
+              </button>
+              <button class="search__sort" value="ageDec">
+                <i class="fas fa-sort-numeric-up"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="search-gender" id="search-gender">
+            <div>
+              <input
+                class="search-gender__input"
+                type="radio"
+                name="gender"
+                id="gender_male"
+                value="male"
+              />
+              <label for="gender_male">Male</label>
+            </div>
+            <div>
+              <input
+                class="search-gender__input"
+                type="radio"
+                name="gender"
+                id="gender_female"
+                value="female"
+              />
+              <label for="gender_female">Female</label>
+            </div>
+            <div>
+              <input
+                class="search-gender__input"
+                type="radio"
+                name="gender"
+                id="gender_all"
+                value="all"
+              />
+              <label for="gender_all">All</label>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+    <script src="js/index.js" type="module"></script>
+  </body>
+</html>

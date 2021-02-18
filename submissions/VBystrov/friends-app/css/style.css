@@ -1,0 +1,138 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 16px;
+}
+
+.wrapper {
+  background-color: #f2f2f2;
+  min-height: 100vh;
+  padding: 15px 5%;
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  grid-template-rows: 80px 1fr;
+  grid-template-areas:
+    'header header'
+    'searchbar friendlist';
+}
+
+.header {
+  grid-area: header;
+  text-align: center;
+}
+
+.friendlist {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 260px);
+  gap: 20px;
+  justify-content: space-around;
+  align-content: start;
+  grid-area: friendlist;
+}
+
+.not-found {
+  grid-column-start: 1;
+  grid-column-end: end;
+  text-align: center;
+  font-size: 28px;
+}
+
+.friendcard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fcfcfc;
+  padding: 20px 10px;
+  border-radius: 5px;
+}
+
+.friendcard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  position: relative;
+  width: 80%;
+  margin-bottom: 10px;
+}
+
+.friendcard-header__name {
+  overflow: clip;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 170px;
+}
+
+.friendcard-header__email-icon:hover {
+  color: green;
+}
+
+.friendcard__avatar {
+  height: 120px;
+  width: auto;
+  border-radius: 40%;
+}
+
+.location-wrapper {
+  display: flex;
+  width: 85%;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin: 15px 0px 10px 0px;
+}
+
+.gender-icon {
+  color: red;
+}
+
+.searchbar {
+  grid-area: searchbar;
+}
+
+.search {
+  background-color: #fcfcfc;
+  padding: 10px 15px;
+  margin: 0px 20px;
+  border-radius: 5px;
+}
+
+.search-age,
+.search-name {
+  margin: 15px 10px;
+}
+
+.search-gender {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 15px 10px;
+}
+
+.search-age-inputs,
+.search-name-inputs {
+  display: flex;
+  align-items: center;
+}
+
+.search__sort {
+  padding: 3px;
+  margin: 1px 3px;
+  width: 28px;
+  font-size: 16px;
+}
+
+.search__sort_active {
+  box-shadow: 0 0 2px 1px green;
+}
+
+.search-name__text,
+.search-age__number {
+  display: inline-block;
+  margin-right: auto;
+  font-size: 1em;
+}
