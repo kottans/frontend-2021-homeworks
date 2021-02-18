@@ -1,8 +1,8 @@
 const NUM_OF_FRIENDS = 20;
 const FRIENDS = document.querySelector(".friends");
+let sex;
 let sortedFriends;
 let allFriends;
-let isFiltered = false;
 
 function fetchFriends() {
   const apiUrl = `https://randomuser.me/api/?results=${NUM_OF_FRIENDS}`;
@@ -10,7 +10,7 @@ function fetchFriends() {
     .then(handleErrors)
     .then((response) => response.json())
     .then((data) => (allFriends = data.results))
-    .then(() => addFriends(allFriends))
+    .then(() => renderFriends(allFriends))
     .catch(showErrorMessage);
 }
 
@@ -25,7 +25,7 @@ function showErrorMessage() {
   document.body.innerHTML = `<div class="errorMessage">Ops...Something went wrong.</div>`;
 }
 
-function addFriends(friendsToBeAdded) {
+function renderFriends(friendsToBeAdded) {
   FRIENDS.innerHTML = " ";
   let fragment = document.createDocumentFragment();
   friendsToBeAdded.forEach((friend) => {
@@ -52,28 +52,27 @@ function addFriends(friendsToBeAdded) {
   FRIENDS.appendChild(fragment);
 }
 
-document.querySelector(".sortPanel").addEventListener("click", showSortedFriends);
+document.querySelector(".sortPanel").addEventListener("click", handleUserInput);
 
-function showSortedFriends({ target }) {
-  switch (target.value) {
-    case "nameUp":
-      sortedFriends = allFriends.sort((a, b) => sortByName(a, b));
-      break;
-    case "nameDown":
-      sortedFriends = allFriends.sort((a, b) => sortByName(b, a));
-      break;
-    case "ageUp":
-      sortedFriends = allFriends.sort((a, b) => sortByAge(a, b));
-      break;
-    case "ageDown":
-      sortedFriends = allFriends.sort((a, b) => sortByAge(b, a));
-      break;
-  }
-  if (isFiltered) {
-    let checkedValue = document.querySelector("input[name=filter]:checked").value;
-    addFriends(sortedFriends.filter((el) => el.gender === checkedValue));
-  } else {
-    addFriends(allFriends);
+function handleUserInput({ target }) {
+  const sorters = {
+    nameUp: () => {
+      allFriends.sort(sortByName);
+    },
+    nameDown: () => {
+      allFriends.sort((a, b) => sortByName(b, a));
+    },
+    ageUp: () => {
+      allFriends.sort(sortByAge);
+    },
+    ageDown: () => {
+      allFriends.sort((a, b) => sortByAge(b, a));
+    },
+  };
+  if (sorters[target.value]) {
+    sortedFriends = sorters[target.value]();
+    defineSortedFriends(sex);
+    renderFriends(sortedFriends);
   }
 }
 
@@ -85,35 +84,31 @@ function sortByAge(a, b) {
   return a.dob.age - b.dob.age;
 }
 
-document.querySelector(".filter").addEventListener("click", doFilter);
+document.querySelector(".filter").addEventListener("click", filterByGender);
 
-function doFilter({ target }) {
-  if (target.value === "all") {
-    addFriends(allFriends);
-    isFiltered = false;
+function filterByGender({ target }) {
+  defineSortedFriends(target.value);
+  renderFriends(sortedFriends);
+}
+
+function defineSortedFriends(sex) {
+  sex = document.querySelector("input[name=filter]:checked").value;
+  if (sex !== "all") {
+    sortedFriends = allFriends.filter((el) => el.gender === sex);
   } else {
-    sortedFriends = allFriends.filter((el) => el.gender === target.value);
-    addFriends(sortedFriends);
-    isFiltered = true;
+    sortedFriends = allFriends;
   }
 }
 
-document.querySelector(".search").addEventListener("keyup", doValidSearch);
+document.querySelector(".search").addEventListener("keyup", doSearch);
 
-function doSearch(friendsForSearch) {
+function doSearch() {
   const searchValue = document.querySelector(".search").value.toLowerCase();
-  let friendsAccordingToSearch = friendsForSearch.filter((elem) => {
+  defineSortedFriends(sex);
+  friendsAccordingToSearch = sortedFriends.filter((elem) => {
     return elem.name.last.toLowerCase().startsWith(searchValue, 0) || elem.name.first.toLowerCase().startsWith(searchValue);
   });
-  addFriends(friendsAccordingToSearch);
-}
-
-function doValidSearch() {
-  if (isFiltered) {
-    doSearch(sortedFriends);
-  } else {
-    doSearch(allFriends);
-  }
+  renderFriends(friendsAccordingToSearch);
 }
 
 window.addEventListener("load", fetchFriends);
