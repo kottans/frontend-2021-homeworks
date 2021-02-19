@@ -9,6 +9,8 @@ $gray3: #424242;
 
 :root {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 html {
@@ -24,7 +26,6 @@ body {
     margin: 0;
     padding: 0;
     overflow: auto;
-    overflow-x: hidden;
 }
 
 .nav {
@@ -36,6 +37,8 @@ body {
 
     &-label {
         margin-left: 5px;
+        width: 130px;
+        align-items:center;
 
         & a {
             text-decoration: none;
@@ -59,6 +62,9 @@ body {
         justify-content: space-around;
     }
 
+    &-space-evenly {
+        justify-content: space-evenly;
+    }
     &-column {
         flex-direction: column;
     }
@@ -66,7 +72,6 @@ body {
     &-align-center {
         align-items: center;
     }
-
 
     &-grow {
         flex-grow: 1;
@@ -119,6 +124,10 @@ body {
 
         & fieldset {
             margin: 5px;
+
+            & input[name="search"] {
+                width: 95%;
+            }
         }
     }
 
@@ -166,10 +175,42 @@ body {
 
 .footer {
     height: 30px;
-    width: 100%;
     background: $gray1;
     border: 1px outset $white;
     color:$gray2;
+}
+
+.btn{
+    border-width: 2px;
+    border-style: outset;
+    border-color: buttonface;
+    border-right-color: $gray3;
+    border-bottom-color: $gray3;
+    background: $gray1;
+    color: $black;
+    padding: 2px 0 2px;
+    border-radius: 1px;
+}
+.btn:hover {
+    border: 2px inset $white;
+    background: $gray1;
+    color: $gray3;
+    box-shadow: -1px -1px $black;
+}
+.btn:focus {
+    border: 2px inset $white;
+    background: $gray1;
+    color: $gray3;
+    box-shadow: -1px -1px $black;
+    outline: 0;
+    background: url(/img/background.bmp);
+}
+.btn:active {
+    border: 2px inset $white;
+    color: $gray3;
+    box-shadow: -1px -1px $black;
+    outline: 0;
+    background: url(/img/background.bmp);
 }
 
 @media screen and (max-width:835px){
@@ -179,15 +220,15 @@ body {
     align-items: center;
 
         &__header {
-            width: calc(100% - 35px);
+            width: calc(100% - 28px);
         }
 
         &__form {
             display: flex;
             flex-direction: column;
-            margin-bottom: 10px;
             justify-content: center;
             text-align: center;
+            margin-bottom: 10px;
         }
 
         &__aside {
@@ -200,5 +241,12 @@ body {
             width: 99%;
             justify-content: space-evenly;
         }
+    }
+}
+
+@media screen and (max-width:420px){
+.main__section {
+        width: 98%;
+        justify-content: space-evenly;
     }
 }
