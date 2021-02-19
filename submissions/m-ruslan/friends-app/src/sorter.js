@@ -37,11 +37,11 @@ const sortUsers = (users) => {
     return 0;
   };
   const sortingHadlers = {
-    desc: {
+    asc: {
       name: runSortingByName,
       age: runSortingByAge,
     },
-    asc: {
+    desc: {
       name: (a, b) => runSortingByName(b, a),
       age: (a, b) => runSortingByAge(b, a),
     },
