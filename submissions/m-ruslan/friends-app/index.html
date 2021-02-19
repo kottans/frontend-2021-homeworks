@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="app.css" />
+  <link rel="icon" type="image/png" href="img/favicon.ico" />
+  <title>Kottans - Friends App</title>
+</head>
+
+<body>
+  <header class="header">
+    <h1 class="page-header">Friends App</h1>
+  </header>
+  <main id="root" class="root">
+    <form id="options" class="options">
+      <fieldset class="options__fieldset sorting-fieldset">
+        <h2 class="options__fieldset-header">Sort by Name or Age:</h2>
+        <input class="radio-input_hidden options__radio-input options__input" id="name-desc" name='sorting' type='radio'
+          data-order="desc" value="name">
+        <label class="options__label-for-radio-input" for="name-desc">
+          Name Desc.
+        </label>
+        <input class="radio-input_hidden options__radio-input options__input" id="name-asc" name='sorting' type='radio'
+          data-order="asc" value="name">
+        <label class="options__label-for-radio-input" for="name-asc">
+          Name Asc.
+        </label>
+        <input class="radio-input_hidden options__radio-input options__input" id="age-desc" name='sorting' type='radio'
+          data-order="desc" value="age">
+        <label class="options__label-for-radio-input" for="age-desc">
+          Age Desc.
+        </label>
+        <input class="radio-input_hidden options__radio-input options__input" id="age-asc" name='sorting' type='radio'
+          data-order="asc" value="age">
+        <label class="options__label-for-radio-input" for="age-asc">
+          Age Asc.
+        </label>
+      </fieldset>
+      <fieldset class="options__fieldset gender-filter-fieldset">
+        <h2 class="options__fieldset-header">Filter by Gender:</h2>
+        <input class="radio-input_hidden options__radio-input options__input" id="all-genders" name='gender'
+          type='radio' data-gender="all">
+        <label class="options__label-for-radio-input options__label_double-width" for="all-genders">
+          All Genders
+        </label>
+        <input class="radio-input_hidden options__radio-input options__input" id="female-gender" name='gender'
+          type='radio' data-gender="female">
+        <label class="options__label-for-radio-input options__input" for="female-gender">
+          Female
+        </label>
+        <input class="radio-input_hidden options__radio-input options__input" id="male-gender" name='gender'
+          type='radio' data-gender="male">
+        <label class="options__label-for-radio-input" for="male-gender">
+          Male
+        </label>
+      </fieldset>
+      <fieldset class="options__fieldset name-search-fieldset">
+        <h2 class="options__fieldset-header">Search by Name:</h2>
+        <input id="search-by-name" class="options__name-search-input options__input" name='search_by_name' type='text'
+          value="">
+      </fieldset>
+      <fieldset class="options__fieldset age-search-fieldset">
+        <h2 class="options__fieldset-header">Search by Age:</h2>
+        <label class="options__label-for-age-search" for="search-by-age-from">
+          From
+        </label>
+        <input id="search-by-age-from" class="options__age-search-input options__input" name='search_by_age'
+          type='number' value="" min='0' max='150'>
+        <label class="options__label-for-age-search" for="search-by-age-to">
+          To
+        </label>
+        <input id="search-by-age-to" class="options__age-search-input options__input" name='search_by_age' type='number'
+          value="" min='0' max='150'>
+      </fieldset>
+      <input type="reset" value="RESET" class="reset-button" id="reset-button">
+    </form>
+    <div id="wrapper" class="users-wrapper"></div>
+  </main>
+  <script type="module" src="./index.js"></script>
+</body>
+
+</html>
