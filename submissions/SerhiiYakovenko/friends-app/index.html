@@ -17,12 +17,42 @@
     </header>
     <aside>
       <input class="search" type="text" placeholder="Search for a friend" />
-      <span class="sort-by_age">Sort by Age</span>
-      <input class="age-desc" type="radio" name = 'sorting'>&#9660;</input>
-      <input class="age-asc" type="radio" name = 'sorting'>&#9650;</input>
-      <span class="sort-by_name">Sort by Name</span>
-      <input class="name-desc" type="radio" name = 'sorting'>&#9660;</input>
-      <input class="name-asc" type="radio" name = 'sorting'>&#9650;</input>
+      <div class="sorting">
+        <span class="sort-by_age">Sort by Age:</span>
+        <span>&#9660;</span>
+        <input
+          class="age-desc"
+          type="radio"
+          name="sorting"
+          value="age"
+          data-order="desc"
+        />
+        <span>&#9650;</span>
+        <input
+          class="age-asc"
+          type="radio"
+          name="sorting"
+          value="age"
+          data-order="asc"
+        />
+        <span class="sort-by_name">Sort by Name:</span>
+        <span>&#9660;</span>
+        <input
+          class="name-desc"
+          type="radio"
+          name="sorting"
+          value="name"
+          data-order="desc"
+        />
+        <span>&#9650;</span>
+        <input
+          class="name-asc"
+          type="radio"
+          name="sorting"
+          value="name"
+          data-order="asc"
+        />
+      </div>
     </aside>
     <main id="friends-list">
       <div class="users"></div>

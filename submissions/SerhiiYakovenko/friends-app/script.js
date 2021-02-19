@@ -1,10 +1,7 @@
 const API_URL = "https://randomuser.me/api/?results=50";
 let users = [];
-const ageDescending = document.querySelector(".age-desc");
-const ageAscending = document.querySelector(".age-asc");
-const nameDescending = document.querySelector(".name-desc");
-const nameAscending = document.querySelector(".name-asc");
 const main = document.getElementById("friends-list");
+const sorting = document.querySelector(".sorting");
 const search = document.querySelector(".search");
 const usersCards = document.querySelector(".users");
 
@@ -37,20 +34,12 @@ function createCards(users) {
   main.appendChild(usersCards);
 }
 
-function sortByAge(users, order) {
-  return order.includes("asc")
-    ? users.sort((a, b) => a.dob.age - b.dob.age)
-    : users.sort((a, b) => b.dob.age - a.dob.age);
+function sortByAge(a, b) {
+  return a.dob.age > b.dob.age ? 1 : -1;
 }
 
-function sortByName(users, order) {
-  return users.sort((a, b) => {
-    if (order.includes("asc")) {
-      return a.name.first < b.name.first ? -1 : 1
-    } else {
-      return b.name.first < a.name.first ? -1 : 1
-    }
-  });
+function sortByName(a, b) {
+  return a.name.first.localeCompare(b.name.first);
 }
 
 function searchUser(users, text) {
@@ -68,21 +57,22 @@ function searchUser(users, text) {
 
 function render(users) {
   createCards(users);
-  ageAscending.addEventListener("change", (event) =>
-    createCards(sortByAge(users, event.target.className))
-  );
-  ageDescending.addEventListener("change", (event) =>
-    createCards(sortByAge(users, event.target.className))
-  );
-  nameAscending.addEventListener("change", (event) =>
-    createCards(sortByName(users, event.target.className))
-  );
-  nameDescending.addEventListener("change", (event) =>
-    createCards(sortByName(users, event.target.className))
-  );
-  search.addEventListener("input", (event) =>
-    createCards(searchUser(users, event.target.value))
-  );
+  sorting.addEventListener("change", ({ target }) => {
+    if (target.value == "name") {
+      target.dataset.order == "asc"
+        ? createCards(users.sort((a, b) => sortByName(a, b)))
+        : createCards(users.sort((a, b) => sortByName(b, a)));
+    }
+    if (target.value == "age") {
+      target.dataset.order == "asc"
+        ? createCards(users.sort((a, b) => sortByAge(a, b)))
+        : createCards(users.sort((a, b) => sortByAge(b, a)));
+    }
+  });
+
+  search.addEventListener("input", ({ target }) => {
+    createCards(searchUser(users, target.value));
+  });
 }
 
 createFriendsList();
