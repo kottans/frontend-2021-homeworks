@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Friends App</title>
+    <link href="styles.css" type="text/css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet" />
+  </head>
+
+  <body>
+    <div class="main">
+      <div class="sidebar">
+        <form class="sortPanel">
+          <div class="text">SORT BY NAME</div>
+          <label for="sortNameUp">
+            <input type="radio" class="ascendent_by_name" name="sort" value="nameUp" id="sortNameUp" />
+            <img src="images/ascen_name.png" alt="image a-z" />
+          </label>
+          <label for="sortNameDown">
+            <input type="radio" class="descendent_by_name" name="sort" value="nameDown" id="sortNameDown" />
+            <img src="images/descen_name.png" alt="image z-a" />
+          </label>
+
+          <div class="text">SORT BY AGE</div>
+          <label for="sortAgeUp">
+            <input type="radio" class="ascendent_by_age" name="sort" value="ageUp" id="sortAgeUp" />
+            <img src="images/ascend_numbs.png" />
+          </label>
+          <label for="sortAgeDown">
+            <input type="radio" class="descendent_by_age" name="sort" value="ageDown" id="sortAgeDown" />
+            <img src="images/decs_numbs.png" />
+          </label>
+        </form>
+
+        <form class="filter">
+          <input type="radio" name="filter" id="male" value="male" /> Male<br />
+          <input type="radio" name="filter" id="female" value="female" />Female<br />
+          <input type="radio" name="filter" id="all" value="all" checked />All
+        </form>
+
+        <div class="search_wrap">
+          <span class="text">Show me...</span><br />
+          <input type="search" class="search" placeholder="Type name" required />
+        </div>
+        <div class="slogan">Find friends from all over the world</div>
+      </div>
+
+      <div class="friends"></div>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>

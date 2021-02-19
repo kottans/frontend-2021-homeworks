@@ -1,0 +1,363 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: url("images/woodWorldSmall.jpg");
+  max-width: 100%;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  font-family: "Courgette", cursive;
+  letter-spacing: 0.05em;
+}
+
+.slogan {
+  font-size: 40px;
+  text-align: left;
+  color: cornsilk;
+  max-width: 200px;
+}
+
+.errorMessage {
+  font-size: 40px;
+  text-align: center;
+  color: cornsilk;
+}
+
+.main {
+  display: flex;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.sidebar {
+  display: block;
+  position: fixed;
+  z-index: 1;
+  width: 20%;
+  height: 100%;
+  color: cornsilk;
+  padding-left: 5px;
+  padding-top: 18px;
+}
+
+.sort,
+.filter {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.search {
+  cursor: text;
+  color: rgb(85, 84, 84);
+  border: 1px solid rgb(106, 83, 63);
+  border-radius: 3px;
+  width: 150px;
+  font-weight: 200;
+}
+
+.search:focus {
+  outline: none;
+}
+
+.search_wrap {
+  overflow: hidden;
+}
+
+.friends {
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  width: 75%;
+  height: 100%;
+  margin-left: 200px;
+}
+
+.friend_card,
+.card_wrapper {
+  position: relative;
+  border: none;
+  height: 300px;
+  text-align: center;
+  margin: 10px 10px 10px 10px;
+  border-radius: 5px;
+}
+
+.friend_card:hover {
+  cursor: pointer;
+}
+
+.card_wrapper.female {
+  background: url("images/pink.jpg") center center no-repeat;
+  box-shadow: 8px 8px 5px 1px rgb(61, 57, 58);
+}
+
+.card_wrapper.male {
+  background: url("images/blue.jpg") center center no-repeat;
+  box-shadow: 8px 8px 5px 1px rgb(61, 57, 58);
+}
+
+.info_block,
+.photo,
+.name,
+.friend_card,
+.card_wrapper {
+  width: 280px;
+}
+
+.name {
+  font-size: 20px;
+  font-weight: bold;
+  height: 50px;
+  align-content: center;
+  padding-top: 10px;
+  overflow: hidden;
+}
+
+.photo {
+  padding-bottom: -50px;
+  height: 140px;
+}
+
+.info_block {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 100px;
+  overflow: hidden;
+}
+
+.email {
+  font-size: 18px;
+}
+
+.email_link {
+  color: black;
+}
+
+.age {
+  font-weight: bolder;
+}
+
+.place {
+  font-weight: bold;
+  font-size: 19px;
+}
+
+.gender {
+  font-size: 15px;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.search::placeholder {
+  color: cornsilk;
+  opacity: 0.7;
+  font-weight: lighter;
+}
+
+.ascendent_by_age,
+.ascendent_by_name,
+.descendent_by_name,
+.descendent_by_age {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.ascendent_by_age + img,
+.ascendent_by_name + img,
+.descendent_by_name + img,
+.descendent_by_age + img {
+  cursor: pointer;
+  border-radius: 20%;
+  border: 1px solid rgb(106, 83, 63);
+}
+
+.ascendent_by_age:checked + img,
+.ascendent_by_name:checked + img,
+.descendent_by_name:checked + img,
+.descendent_by_age:checked + img {
+  background-color: #998978;
+}
+
+@media screen and (min-width: 320px) {
+  .slogan {
+    font-size: 19px;
+    letter-spacing: 0em;
+  }
+
+  .text,
+  .search_wrap img {
+    display: none;
+  }
+
+  .sort,
+  .filter {
+    letter-spacing: 0em;
+    margin-bottom: 2px;
+  }
+
+  .search {
+    width: 60px;
+    letter-spacing: 0em;
+    font-weight: 100;
+    font-size: 12px;
+  }
+
+  .friends {
+    margin-left: 60px;
+  }
+
+  .friend_card,
+  .card_wrapper,
+  .name,
+  .info_block,
+  .photo {
+    width: 230px;
+  }
+
+  .friend_card,
+  .card_wrapper {
+    height: 280px;
+  }
+
+  .name {
+    font-size: 16px;
+    height: 30px;
+  }
+
+  .info_block {
+    height: 100px;
+  }
+
+  .age,
+  .email {
+    font-size: 14px;
+  }
+
+  .place {
+    font-size: 16px;
+  }
+
+  .gender {
+    font-size: 12px;
+  }
+}
+
+@media screen and (min-width: 480px) {
+  .slogan {
+    font-size: 20px;
+  }
+
+  .search {
+    width: 70px;
+  }
+
+  .friends {
+    margin-left: 150px;
+  }
+}
+
+@media screen and (min-width: 770px) {
+  .slogan {
+    font-size: 22px;
+  }
+
+  .search {
+    width: 80px;
+    font-size: 13px;
+  }
+
+  .friends {
+    margin-left: 180px;
+  }
+
+  .text {
+    display: block;
+  }
+
+  .friend_card,
+  .card_wrapper,
+  .name,
+  .info_block,
+  .photo {
+    width: 250px;
+  }
+
+  .friend_card,
+  .card_wrapper {
+    height: 300px;
+  }
+
+  .name {
+    font-size: 17px;
+  }
+
+  .info_block {
+    height: 110px;
+  }
+
+  .age,
+  .email {
+    font-size: 16px;
+  }
+
+  .place {
+    font-size: 18px;
+  }
+
+  .gender {
+    font-size: 14px;
+  }
+}
+
+@media screen and (min-width: 1025px) {
+  .slogan {
+    font-size: 18px;
+  }
+
+  .sidebar {
+    padding-left: 4px;
+    padding-top: 18px;
+    width: 15%;
+  }
+
+  .text {
+    font-size: 16px;
+  }
+
+  .sort,
+  .filter {
+    letter-spacing: 0em;
+    margin-bottom: 2px;
+  }
+
+  .search {
+    width: 80px;
+    letter-spacing: 0em;
+    font-weight: 100;
+    font-size: 12px;
+  }
+
+  .friends {
+    margin-left: 200px;
+  }
+
+  .friend_card,
+  .card_wrapper,
+  .name,
+  .info_block,
+  .photo {
+    width: 180px;
+  }
+
+  .name {
+    font-size: 18px;
+  }
+}
