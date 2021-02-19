@@ -2,6 +2,8 @@ const sortByNameButton = document.querySelector('#name-sort');
 const sortByAgeButton = document.querySelector('#age-sort');
 const MIN_AGE = 0;
 const MAX_AGE = 99;
+const ASCENDING_ORDER = 'ascending';
+const DESCENDING_ORDER = 'descending';
 const filter = {
   nameSort: null,
   ageSort: null,
@@ -21,12 +23,9 @@ const getUsers = async () => {
     const json = await response.json();
     allUsers = json.results;
   } catch (error) {
-    const errorNotification = document.createElement('p');
-    errorNotification.classList.add('error-notification')
-    errorNotification.innerHTML = `Sorry, couldn't get the data <br> ${error}`;
-    document.querySelector('main').prepend(errorNotification)
+    renderError(error)
   }
-}
+};
 
 const renderUsers = users => {
   const usersList = document.querySelector('.users');
@@ -53,6 +52,13 @@ const renderUsers = users => {
   usersList.append(fragment)
 };
 
+const renderError = error => {
+  const errorNotification = document.createElement('p');
+  errorNotification.classList.add('error-notification')
+  errorNotification.innerHTML = `Sorry, couldn't get the data <br> ${error}`;
+  document.querySelector('main').prepend(errorNotification)
+};
+
 const compareByName = (a, b) => {
   return a.name.first.toLowerCase() <= b.name.first.toLowerCase() ? -1 : 1
 };
@@ -62,7 +68,7 @@ const compareByAge = (a, b) => {
 };
 
 const sortByName = users => {
-  if (filter.nameSort === "asc") {
+  if (filter.nameSort === ASCENDING_ORDER) {
     return users.sort((a, b) => compareByName(a, b))
   } else {
     return users.sort((a, b) => compareByName(b, a))
@@ -70,7 +76,7 @@ const sortByName = users => {
 };
 
 const sortByAge = users => {
-  if (filter.ageSort === "asc") {
+  if (filter.ageSort === ASCENDING_ORDER) {
     return users.sort((a, b) => compareByAge(a, b))
   } else {
     return users.sort((a, b) => compareByAge(b, a))
@@ -113,66 +119,56 @@ const filterUsers = () => {
   renderUsers(filteredUsers)
 };
 
-const setNameSortType = () => {
-  if (filter.nameSort === 'asc') {
-    filter.nameSort = 'desc';
-    sortByNameButton.classList.remove('asc')
-    sortByNameButton.classList.add('desc')
+const setNameSortOrder = () => {
+  if (filter.nameSort === ASCENDING_ORDER) {
+    filter.nameSort = DESCENDING_ORDER;
+    sortByNameButton.classList.replace(ASCENDING_ORDER, DESCENDING_ORDER)
   } else {
-    filter.nameSort = 'asc';
-    sortByNameButton.classList.remove('desc')
-    sortByNameButton.classList.add('asc')
+    filter.nameSort = ASCENDING_ORDER;
+    sortByNameButton.classList.remove(DESCENDING_ORDER)
+    sortByNameButton.classList.add(ASCENDING_ORDER)
   }
-  sortByAgeButton.classList.remove('asc', 'desc')
+  sortByAgeButton.classList.remove(ASCENDING_ORDER, DESCENDING_ORDER)
   filter.ageSort = null;
 };
 
-const setAgeSortType = () => {
-  if (filter.ageSort === 'asc') {
-    filter.ageSort = 'desc';
-    sortByAgeButton.classList.remove('asc')
-    sortByAgeButton.classList.add('desc')
+const setAgeSortOrder = () => {
+  if (filter.ageSort === ASCENDING_ORDER) {
+    filter.ageSort = DESCENDING_ORDER;
+    sortByAgeButton.classList.replace(ASCENDING_ORDER, DESCENDING_ORDER)
   } else {
-    filter.ageSort = 'asc';
-    sortByAgeButton.classList.remove('desc')
-    sortByAgeButton.classList.add('asc')
+    filter.ageSort = ASCENDING_ORDER;
+    sortByAgeButton.classList.remove(DESCENDING_ORDER)
+    sortByAgeButton.classList.add(ASCENDING_ORDER)
   }
-  sortByNameButton.classList.remove('asc', 'desc')
+  sortByNameButton.classList.remove(ASCENDING_ORDER, DESCENDING_ORDER)
   filter.nameSort = null;
 };
 
-const handleInput = ({ target }) => {
-  switch (target.id) {
-    case 'name-sort':
-      setNameSortType()
-      break;
-    case 'age-sort':
-      setAgeSortType()
-      break;
-    case 'age-from':
-      filter.ageFrom = target.value || MIN_AGE;
-      break;
-    case 'age-to':
-      filter.ageTo = target.value || MAX_AGE;
-      break;
-    case 'search-field':
-      filter.searchValue = target.value.toLowerCase();
-      break;
-    default:
-      filter.gender = target.value;
-  }
-  filterUsers()
+const handleInput = (target) => {
+  const filters = {
+    'name-sort': setNameSortOrder,
+    'age-sort': setAgeSortOrder,
+    'age-from': () => filter.ageFrom = target.value || MIN_AGE,
+    'age-to': () => filter.ageTo = target.value || MAX_AGE,
+    'search-field': () => filter.searchValue = target.value.toLowerCase()
+  };
+
+  filters[target.id] ? filters[target.id]() : filter.gender = target.value;
+  filterUsers();
 };
 
 const initialize = async () => {
   const filtersBar = document.querySelector('.filters');
   await getUsers()
   renderUsers(allUsers)
-  filtersBar.oninput = handleInput;
-  document.querySelector('.sort-buttons').onclick = handleInput;
-  document.querySelector('.filters-button').onclick = () => {
-    filtersBar.classList.toggle('visible')
-  }
+  filtersBar.addEventListener('input', ({ target }) => handleInput(target));
+  document.querySelector('.sort-buttons').addEventListener('click', ({ target }) => {
+    if (target.classList.contains('sort-button')) handleInput(target);
+  });
+  document.querySelector('.filters-button').addEventListener('click', () => {
+    filtersBar.classList.toggle('visible');
+  });
 };
 
 initialize()
