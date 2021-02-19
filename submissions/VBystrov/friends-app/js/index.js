@@ -50,35 +50,34 @@ class Friendlist {
   }
 
   createCards(friendlistData) {
-    this.cards = [];
-    friendlistData.forEach((cardData) => {
-      this.cards.push(new Card(cardData));
-    });
+    this.cards = friendlistData.map((cardData) => new Card(cardData));
   }
 
-  applySearch(search) {
-    this.applyFilters(search);
-    this.applySorting(search.sorting);
+  applySearch(searchParameters) {
+    this.applyFilters(searchParameters);
+    this.applySorting(searchParameters.sorting);
   }
 
-  applyFilters(search) {
+  applyFilters(searchParameters) {
     this.filteredCards = [...this.cards];
 
-    if (search.age) {
+    if (searchParameters.age) {
       this.filteredCards = this.filteredCards.filter(
-        (card) => card.age === search.age
+        (card) => card.age === searchParameters.age
       );
     }
 
-    if (search.name) {
+    if (searchParameters.name) {
       this.filteredCards = this.filteredCards.filter((card) =>
-        `${card.firstName} ${card.lastName}`.includes(search.name)
+        `${card.firstName} ${card.lastName}`
+          .toLowerCase()
+          .includes(searchParameters.name.toLowerCase())
       );
     }
 
-    if (search.gender !== 'all') {
+    if (searchParameters.gender !== 'all') {
       this.filteredCards = this.filteredCards.filter(
-        (card) => card.gender === search.gender
+        (card) => card.gender === searchParameters.gender
       );
     }
   }
@@ -87,24 +86,36 @@ class Friendlist {
     let sortFunction;
     switch (sortingOrder) {
       case 'nameAZ':
+        const sortByNameAZ = function (card1, card2) {
+          const fullName1 = card1.firstName + card1.lastName;
+          const fullName2 = card2.firstName + card2.lastName;
+          if (fullName1 < fullName2) {
+            return -1;
+          }
+          if (fullName1 > fullName2) {
+            return 1;
+          }
+          if (fullName1 === fullName2) {
+            return 0;
+          }
+        };
+        sortFunction = sortByNameAZ;
+        break;
       case 'nameZA':
-        sortFunction = (function () {
-          const orderSign = sortingOrder === 'nameAZ' ? 1 : -1;
-          return (card1, card2) => {
-            const fullName1 = card1.firstName + card1.lastName;
-            const fullName2 = card2.firstName + card2.lastName;
-            let order = orderSign;
-            if (fullName1 < fullName2) {
-              return order * -1;
-            }
-            if (fullName1 > fullName2) {
-              return order * 1;
-            }
-            if (fullName1 === fullName2) {
-              return 0;
-            }
-          };
-        })();
+        const sortByNameZA = function (card2, card1) {
+          const fullName1 = card1.firstName + card1.lastName;
+          const fullName2 = card2.firstName + card2.lastName;
+          if (fullName1 < fullName2) {
+            return -1;
+          }
+          if (fullName1 > fullName2) {
+            return 1;
+          }
+          if (fullName1 === fullName2) {
+            return 0;
+          }
+        };
+        sortFunction = sortByNameZA;
         break;
       case 'ageDec':
         sortFunction = (card1, card2) => {

@@ -13,13 +13,23 @@ body {
   background-color: #f2f2f2;
   min-height: 100vh;
   padding: 15px 5%;
-  min-height: 100vh;
   display: grid;
   grid-template-columns: 340px 1fr;
   grid-template-rows: 80px 1fr;
   grid-template-areas:
     'header header'
     'searchbar friendlist';
+}
+
+@media screen and (max-width: 1000px) {
+  .wrapper {
+    grid-template-columns: 1fr;
+    grid-template-rows: 80px 210px 1fr;
+    grid-template-areas:
+      'header '
+      'searchbar'
+      'friendlist';
+  }
 }
 
 .header {
@@ -93,6 +103,9 @@ body {
 
 .searchbar {
   grid-area: searchbar;
+  justify-self: center;
+  width: 340px;
+  margin-bottom: 20px;
 }
 
 .search {
@@ -135,4 +148,5 @@ body {
   display: inline-block;
   margin-right: auto;
   font-size: 1em;
+  width: 175px;
 }
