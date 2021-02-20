@@ -16,17 +16,16 @@
         <h1>Friends App</h1>
     </header>
     <aside class="sidebar">
-        <form action="/practice.html" class="filters" method="POST">
+        <form action="/practice.html" id="filters" method="POST">
             <fieldset class="sort-by">
                 <legend>Sort by Age</legend>
                 <label class="radio-button">
-                    <input type="radio" id="age-ascending" class="radio-input" name="sortBy" data-order="ascending"
-                        checked>
+                    <input type="radio" class="radio-input initial" name="sortBy" value="age-ascending" checked>
                     <span class="radio-asc"></span>
                     <span>Asc</span>
                 </label>
                 <label class="radio-button">
-                    <input type="radio" id="age-descending" class="radio-input" name="sortBy" data-order="descending">
+                    <input type="radio" class="radio-input" name="sortBy" value="age-descending">
                     <span class="radio-desc"></span>
                     <span>Desc</span>
                 </label>
@@ -34,12 +33,12 @@
             <fieldset class="sort-by">
                 <legend>Sort by Name</legend>
                 <label class="radio-button">
-                    <input type="radio" id="name-ascending" class="radio-input" name="sortBy" data-order="descending">
+                    <input type="radio" class="radio-input" name="sortBy" value="name-ascending">
                     <span class="radio-asc"></span>
                     <span>Asc</span>
                 </label>
                 <label class="radio-button">
-                    <input type="radio" id="name-descending" class="radio-input" name="sortBy" data-order="descending">
+                    <input type="radio" class="radio-input" name="sortBy" value="name-descending">
                     <span class="radio-desc"></span>
                     <span>Desc</span>
                 </label>
@@ -47,15 +46,15 @@
             <fieldset class="filter-by">
                 <legend>Filter by gender</legend>
                 <label class="radio-button">
-                    <input type="radio" id="man" class="switch" name="gender" data-gender="male">
+                    <input type="radio" id="man" class="switch" name="gender" value="male">
                     <span>man</span>
                 </label>
                 <label class="radio-button">
-                    <input type="radio" id="woman" class="switch" name="gender" data-gender="female">
+                    <input type="radio" id="woman" class="switch" name="gender" value="female">
                     <span>woman</span>
                 </label>
                 <label class="radio-button">
-                    <input type="radio" id="all" class="switch" name="gender" data-gender="all" checked>
+                    <input type="radio" id="all" class="switch initial" name="gender" value="all" checked>
                     <span>all</span>
                 </label>
             </fieldset>

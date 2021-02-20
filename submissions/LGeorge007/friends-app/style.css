@@ -6,7 +6,6 @@
 
 body {
     font-family: 'Open Sans', sans-serif;
-    /*overflow-x: hidden;*/
 }
 
 .logo {
@@ -255,6 +254,11 @@ body {
 legend {
     color: whitesmoke;
     font-size: 20px;
+}
+
+.error-message{
+    width: fit-content;
+    margin: 10% auto;
 }
 
 @media screen and (max-width: 1710px) {

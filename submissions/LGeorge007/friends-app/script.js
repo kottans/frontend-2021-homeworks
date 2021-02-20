@@ -1,162 +1,167 @@
 const content = document.querySelector(".content");
 const navPanel = document.querySelector(".sidebar");
 const button = document.querySelector(".menu-button");
-const form = document.querySelector('.filters');
+const form = document.querySelector('#filters');
 const searchInput = document.getElementById('search-input');
 const resetButton = document.getElementById('reset-button');
-const url = 'https://randomuser.me/api/?results=120&inc=gender,name,location,email,phone,picture,dob&appid=YI09-4F4Y-E9IS-OTSH';
+
 const state = {
-    gotResult: [],
+    unsortedUsers: [],
+    sortedUsers: [],
     filterBySex: "",
     filterByName: "",
     sortByAge: "",
-    sortByName: "",
-    toDefault(arr) {
-        this.filterBySex = "all";
-        this.filterByName = "",
-        this.sortByAge = "ascending";
-        this.sortByName = "none";
-        this.gotResult = arr;
-    }
+    sortByName: ""
 };
-let result = [];
 
-const sortByAge = function(a, b) {
-    return a.dob.age == b.dob.age
-                ? 0
-                : a.dob.age <= b.dob.age
-                        ? -1
-                        : 1;
+const setStateToDefault = function () {
+    this.filterBySex = "all";
+    this.filterByName = "",
+    this.sortByAge = "ascending";
+    this.sortByName = "none";
+    this.sortedUsers = this.unsortedUsers;
 }
 
-const sortByName = function(a, b) {
-    return a.name.first.toLowerCase() == b.name.first.toLowerCase()
-                ? 0
-                : a.name.first.toLowerCase() >= b.name.first.toLowerCase()
-                        ? 1
-                        : -1;
+const toDefaultState = setStateToDefault.bind(state);
+
+const sortByAge = function (a, b) {
+    return a.dob.age - b.dob.age;
 }
 
-const slideMenu = function() {
+const sortByName = function (a, b) {
+    return a.name.first.localeCompare(b.name.first);
+}
+
+const slideMenu = function () {
     navPanel.classList.toggle("sidebar-toggle");
     content.classList.toggle("content-toggle");
 }
 
-const controlToDefault = function() {
-    form.elements[1].checked = "true";
-    form.elements[9].checked = "true";
+const toDefaultForm = function () {
+    document.querySelectorAll(".initial").forEach(e => e.checked="true");
     searchInput.value = "";
 }
 
 const handleInput = function () {
     state.filterByName = this.value.trim().toLowerCase();
-    processCard(state);
+    processCards(state);
 };
 
-const reset = function() {
-    state.toDefault();
-    controlToDefault();
-    processCard(state);
+const reset = function () {
+    toDefaultState();
+    toDefaultForm();
+    processCards(state);
 };
 
-const processForm = function({currentTarget}){
+const toInteractWithForm = function () {
     state.sortByName = "none";
     state.sortByAge = "none";
-    let selectedSex;
-    let elements = currentTarget.elements;
-    let selectedChoice = Array.from(elements.sortBy).filter(({checked}) => checked);
-    switch(selectedChoice[0].id) {
+    let selectedSex = [...form.elements.gender].filter(({ checked }) => checked);
+    let selectedChoice = [...form.elements.sortBy].filter(({ checked }) => checked);
+    switch (selectedChoice[0].value) {
         case "age-ascending":
-          state.sortByAge = "ascending";
-          break;
+            state.sortByAge = "ascending";
+            break;
         case "age-descending":
-          state.sortByAge = "descending";
-          break;
+            state.sortByAge = "descending";
+            break;
         case "name-ascending":
-          state.sortByName = "ascending";
-          break;
+            state.sortByName = "ascending";
+            break;
         case "name-descending":
-          state.sortByName = "descending";
-          break;
+            state.sortByName = "descending";
+            break;
     };
-    selectedSex = Array.from(currentTarget.elements.gender).filter(({checked}) => checked);
-    state.filterBySex = selectedSex[0].dataset.gender;
-    processCard(state);
+    state.filterBySex = selectedSex[0].value;
+    processCards(state);
 };
 
-const processCard = function (state){
-    if (state.filterBySex === "all"){
-        state.gotResult = result;
+const filterUsers = function() {
+    if (state.filterBySex === "all") {
+        state.sortedUsers = state.unsortedUsers;
+    } else {
+        state.sortedUsers = state.unsortedUsers.filter(unit => unit.gender == state.filterBySex);
     };
-    if (state.filterBySex === "male"){
-        state.gotResult = result.filter( unit => unit.gender == "male");
-    };
-    if (state.filterBySex === "female"){
-        state.gotResult = result.filter( unit => unit.gender == "female");
-    };
-
     if (state.filterByName !== "") {
-        state.gotResult = state.gotResult.filter( elem => elem.name.first.toLowerCase().startsWith(state.filterByName) );
+        state.sortedUsers = state.sortedUsers.filter(unit => unit.name.first.toLowerCase().startsWith(state.filterByName));
     }
-
-    if (state.sortByAge === "ascending"){
-        state.gotResult.sort((a, b) => sortByAge(a, b));
-    };
-    if (state.sortByAge === "descending"){
-        state.gotResult.sort((a, b) => sortByAge(b, a));
-    };
-    if (state.sortByName === "descending"){
-        state.gotResult.sort((a, b) => sortByName(b, a));
-    };
-    if (state.sortByName === "ascending"){
-        state.gotResult.sort((a, b) => sortByName(a, b));
-    };
-
-    renderCard(state.gotResult);
 }
 
-const renderCard = function(arr) {
-    content.innerHTML ="";
-    for (let unit of arr) {
-        let newCard = document.createElement('div');
-        newCard.classList.add('card');
+const sortUsers = function() {
+    if (state.sortByAge === "ascending") state.sortedUsers.sort(sortByAge);
+    if (state.sortByAge === "descending") state.sortedUsers.sort((a, b) => sortByAge(b, a));
+    if (state.sortByName === "descending") state.sortedUsers.sort((a, b) => sortByName(b, a));
+    if (state.sortByName === "ascending") state.sortedUsers.sort(sortByName);
+}
+
+const processCards = function (state) {
+    filterUsers();
+    sortUsers();
+    renderCards(state.sortedUsers);
+}
+
+const renderCards = function (users) {
+    content.innerHTML = "";
+    let fragmentHtml = "";
+    for (let unit of users) {
         let mail = `${unit.email.split("@")[0]}<br>@${unit.email.split("@")[1]}`;
         let templateCard = `
-                <div class="card-name">
-                    <h2>${unit.name.first} ${unit.name.last}</h2>
-                </div>
-                <img src=${unit.picture.large} alt="">
-                <div class="card-description">
-                    <p class="card-year">I have ${unit.dob.age} years old.</p>
-                    <p class="card-mail">${mail}</p>
-                    <p class="phone">${unit.phone}</p>
-                    <p class="location">${unit.location.city}</p>
-                </div>
-                <div class="card-sex">
-                    <p>${unit.gender}</p>
+                <div class="card">
+                    <div class="card-name">
+                        <h2>${unit.name.first} ${unit.name.last}</h2>
+                    </div>
+                    <img src=${unit.picture.large} alt="">
+                    <div class="card-description">
+                        <p class="card-year">I have ${unit.dob.age} years old.</p>
+                        <p class="card-mail">${mail}</p>
+                        <p class="phone">${unit.phone}</p>
+                        <p class="location">${unit.location.city}</p>
+                    </div>
+                    <div class="card-sex">
+                        <p>${unit.gender}</p>
+                    </div>
                 </div>`;
-        newCard.innerHTML += templateCard;
-        content.appendChild(newCard);
+        fragmentHtml += templateCard;
     }
+    content.innerHTML = fragmentHtml;
 }
 
-const init = function() {
-    fetch(url)
-    .then(response => response.json())
-    .then(data => {
-        result = data.results;
-        state.toDefault(result.slice());
-    })
-    .then(() => {
-        processCard(state)
-    })
-    .then(() => {
-        form.addEventListener("change", processForm);
-        searchInput.addEventListener("input", handleInput);
-        resetButton.addEventListener("click", reset);
-        button.addEventListener("click", slideMenu);
-    })
-    .catch(err => console.error(err));
+const showError = function(text) {
+    document.body.innerHTML = `<h2 class="error-message">Server is unavailable<br>Error: ${text}<br>Please try again later...</h2>`;
+}
+
+const handleErrors = function (response) {
+    if (!response.ok) {
+        showError(response.statusText);
+        throw Error(response.statusText);
+    }
+    return response;
+}
+
+const getUsersByApi = function () {
+    const url = "https://randomuser.me/api/?results=120&inc=gender,name,location,email,phone,picture,dob&appid=YI09-4F4Y-E9IS-OTSH";
+    return fetch(url)
+        .then(handleErrors)
+        .then(response => response.json())
+        .then(data => data.results)
+        .catch(err => {
+            showError(err.message);
+            throw Error(err);
+        });
+}
+
+const addEvents = function() {
+    form.addEventListener("change", toInteractWithForm);
+    searchInput.addEventListener("input", handleInput);
+    resetButton.addEventListener("click", reset);
+    button.addEventListener("click", slideMenu);
+}
+
+async function init() {
+    state.unsortedUsers = await getUsersByApi();
+    toDefaultState();
+    processCards(state);
+    addEvents();
 };
 
 init();
