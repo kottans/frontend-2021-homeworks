@@ -20,12 +20,12 @@
             <fieldset class="sort-by">
                 <legend>Sort by Age</legend>
                 <label class="radio-button">
-                    <input type="radio" class="radio-input initial" name="sortBy" value="age-ascending" checked>
+                    <input type="radio" class="radio-input initial" name="sort-type" value="age-ascending" checked>
                     <span class="radio-asc"></span>
                     <span>Asc</span>
                 </label>
                 <label class="radio-button">
-                    <input type="radio" class="radio-input" name="sortBy" value="age-descending">
+                    <input type="radio" class="radio-input" name="sort-type" value="age-descending">
                     <span class="radio-desc"></span>
                     <span>Desc</span>
                 </label>
@@ -33,12 +33,12 @@
             <fieldset class="sort-by">
                 <legend>Sort by Name</legend>
                 <label class="radio-button">
-                    <input type="radio" class="radio-input" name="sortBy" value="name-ascending">
+                    <input type="radio" class="radio-input" name="sort-type" value="name-ascending">
                     <span class="radio-asc"></span>
                     <span>Asc</span>
                 </label>
                 <label class="radio-button">
-                    <input type="radio" class="radio-input" name="sortBy" value="name-descending">
+                    <input type="radio" class="radio-input" name="sort-type" value="name-descending">
                     <span class="radio-desc"></span>
                     <span>Desc</span>
                 </label>
@@ -60,9 +60,10 @@
             </fieldset>
             <fieldset>
                 <legend>Search</legend>
-                <input type="text" id="search-input" class="search-input" placeholder="First name" spellcheck="false">
+                <input type="text" id="search-input" class="search-input" name="name-filter" placeholder="First name"
+                    spellcheck="false">
             </fieldset>
-            <input type="button" id="reset-button" class="reset-button" value="reset">
+            <input type="reset" id="reset-button" class="reset-button" value="reset">
         </form>
     </aside>
     <main class="content">

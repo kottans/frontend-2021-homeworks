@@ -1,9 +1,8 @@
 const content = document.querySelector(".content");
 const navPanel = document.querySelector(".sidebar");
-const button = document.querySelector(".menu-button");
-const form = document.querySelector('#filters');
-const searchInput = document.getElementById('search-input');
-const resetButton = document.getElementById('reset-button');
+const menuButton = document.querySelector(".menu-button");
+const resetButton = document.querySelector("#reset-button");
+const form = document.querySelector("#filters");
 
 const state = {
     unsortedUsers: [],
@@ -14,15 +13,13 @@ const state = {
     sortByName: ""
 };
 
-const setStateToDefault = function () {
-    this.filterBySex = "all";
-    this.filterByName = "",
-    this.sortByAge = "ascending";
-    this.sortByName = "none";
-    this.sortedUsers = this.unsortedUsers;
+const toDefaultState = function () {
+    state.filterBySex = "all";
+    state.filterByName = "",
+    state.sortByAge = "age-ascending";
+    state.sortByName = "";
+    state.sortedUsers = this.unsortedUsers;
 }
-
-const toDefaultState = setStateToDefault.bind(state);
 
 const sortByAge = function (a, b) {
     return a.dob.age - b.dob.age;
@@ -37,46 +34,35 @@ const slideMenu = function () {
     content.classList.toggle("content-toggle");
 }
 
-const toDefaultForm = function () {
-    document.querySelectorAll(".initial").forEach(e => e.checked="true");
-    searchInput.value = "";
-}
-
-const handleInput = function () {
-    state.filterByName = this.value.trim().toLowerCase();
-    processCards(state);
-};
-
 const reset = function () {
     toDefaultState();
-    toDefaultForm();
-    processCards(state);
+    processCards();
 };
 
-const toInteractWithForm = function () {
-    state.sortByName = "none";
-    state.sortByAge = "none";
-    let selectedSex = [...form.elements.gender].filter(({ checked }) => checked);
-    let selectedChoice = [...form.elements.sortBy].filter(({ checked }) => checked);
-    switch (selectedChoice[0].value) {
-        case "age-ascending":
-            state.sortByAge = "ascending";
+const readChangeForm = function ({ target }) {
+    let value = target.value;
+    switch (target.name) {
+        case "sort-type":
+            if (value === "name-ascending" || value === "name-descending") {
+                state.sortByName = value;
+                state.sortByAge = "";
+            };
+            if (value === "age-ascending" || value === "age-descending") {
+                state.sortByAge = value;
+                state.sortByName = "";
+            };
             break;
-        case "age-descending":
-            state.sortByAge = "descending";
+        case "gender":
+            state.filterBySex = value;
             break;
-        case "name-ascending":
-            state.sortByName = "ascending";
+        case "name-filter":
+            state.filterByName = value.trim().toLowerCase();
             break;
-        case "name-descending":
-            state.sortByName = "descending";
-            break;
-    };
-    state.filterBySex = selectedSex[0].value;
-    processCards(state);
+    }
+    processCards();
 };
 
-const filterUsers = function() {
+const filterUsers = function () {
     if (state.filterBySex === "all") {
         state.sortedUsers = state.unsortedUsers;
     } else {
@@ -87,14 +73,14 @@ const filterUsers = function() {
     }
 }
 
-const sortUsers = function() {
-    if (state.sortByAge === "ascending") state.sortedUsers.sort(sortByAge);
-    if (state.sortByAge === "descending") state.sortedUsers.sort((a, b) => sortByAge(b, a));
-    if (state.sortByName === "descending") state.sortedUsers.sort((a, b) => sortByName(b, a));
-    if (state.sortByName === "ascending") state.sortedUsers.sort(sortByName);
+const sortUsers = function () {
+    if (state.sortByAge === "age-ascending") state.sortedUsers = state.sortedUsers.sort(sortByAge);
+    if (state.sortByAge === "age-descending") state.sortedUsers = state.sortedUsers.sort((a, b) => sortByAge(b, a));
+    if (state.sortByName === "name-descending") state.sortedUsers = state.sortedUsers.sort((a, b) => sortByName(b, a));
+    if (state.sortByName === "name-ascending") state.sortedUsers = state.sortedUsers.sort(sortByName);
 }
 
-const processCards = function (state) {
+const processCards = function () {
     filterUsers();
     sortUsers();
     renderCards(state.sortedUsers);
@@ -126,8 +112,8 @@ const renderCards = function (users) {
     content.innerHTML = fragmentHtml;
 }
 
-const showError = function(text) {
-    document.body.innerHTML = `<h2 class="error-message">Server is unavailable<br>Error: ${text}<br>Please try again later...</h2>`;
+const showError = function (text) {
+    content.innerHTML = `<h2 class="error-message">Server is unavailable<br>Error: ${text}<br>Please try again later...</h2>`;
 }
 
 const handleErrors = function (response) {
@@ -150,17 +136,16 @@ const getUsersByApi = function () {
         });
 }
 
-const addEvents = function() {
-    form.addEventListener("change", toInteractWithForm);
-    searchInput.addEventListener("input", handleInput);
+const addEvents = function () {
+    form.addEventListener("input", readChangeForm);
     resetButton.addEventListener("click", reset);
-    button.addEventListener("click", slideMenu);
+    menuButton.addEventListener("click", slideMenu);
 }
 
 async function init() {
     state.unsortedUsers = await getUsersByApi();
     toDefaultState();
-    processCards(state);
+    processCards();
     addEvents();
 };
 
