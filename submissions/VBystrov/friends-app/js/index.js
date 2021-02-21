@@ -47,6 +47,7 @@ class Friendlist {
   constructor(friendsData) {
     this.container = document.getElementById('friendlist');
     this.createCards(friendsData);
+    this.sorters = new Sorters();
   }
 
   createCards(friendlistData) {
@@ -83,54 +84,7 @@ class Friendlist {
   }
 
   applySorting(sortingOrder) {
-    let sortFunction;
-    switch (sortingOrder) {
-      case 'nameAZ':
-        const sortByNameAZ = function (card1, card2) {
-          const fullName1 = card1.firstName + card1.lastName;
-          const fullName2 = card2.firstName + card2.lastName;
-          if (fullName1 < fullName2) {
-            return -1;
-          }
-          if (fullName1 > fullName2) {
-            return 1;
-          }
-          if (fullName1 === fullName2) {
-            return 0;
-          }
-        };
-        sortFunction = sortByNameAZ;
-        break;
-      case 'nameZA':
-        const sortByNameZA = function (card2, card1) {
-          const fullName1 = card1.firstName + card1.lastName;
-          const fullName2 = card2.firstName + card2.lastName;
-          if (fullName1 < fullName2) {
-            return -1;
-          }
-          if (fullName1 > fullName2) {
-            return 1;
-          }
-          if (fullName1 === fullName2) {
-            return 0;
-          }
-        };
-        sortFunction = sortByNameZA;
-        break;
-      case 'ageDec':
-        sortFunction = (card1, card2) => {
-          return card2.age - card1.age;
-        };
-        break;
-      case 'ageInc':
-        sortFunction = (card1, card2) => {
-          return card1.age - card2.age;
-        };
-        break;
-      default:
-        break;
-    }
-    this.sortedCards = [...this.filteredCards].sort(sortFunction);
+    this.sortedCards = [...this.filteredCards].sort(this.sorters[sortingOrder]);
   }
 
   showCards() {
@@ -329,6 +283,43 @@ class Card {
       </div>
     </div>
   </div>`;
+  }
+}
+
+class Sorters {
+  constructor() {
+    this.nameAZ = function (card1, card2) {
+      const fullName1 = card1.firstName + card1.lastName;
+      const fullName2 = card2.firstName + card2.lastName;
+      if (fullName1 < fullName2) {
+        return -1;
+      }
+      if (fullName1 > fullName2) {
+        return 1;
+      }
+      if (fullName1 === fullName2) {
+        return 0;
+      }
+    };
+    this.nameZA = function (card2, card1) {
+      const fullName1 = card1.firstName + card1.lastName;
+      const fullName2 = card2.firstName + card2.lastName;
+      if (fullName1 < fullName2) {
+        return -1;
+      }
+      if (fullName1 > fullName2) {
+        return 1;
+      }
+      if (fullName1 === fullName2) {
+        return 0;
+      }
+    };
+    this.ageDec = function (card1, card2) {
+      return card2.age - card1.age;
+    };
+    this.ageInc = function (card1, card2) {
+      return card1.age - card2.age;
+    };
   }
 }
 
