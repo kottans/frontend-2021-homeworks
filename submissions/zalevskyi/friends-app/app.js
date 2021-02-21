@@ -1,47 +1,49 @@
 const USERS_DATA = []
+let users_data_filtered = []
 const RESULTS = document.getElementById('results')
 const SORT = document.getElementById('sort')
 const FILTER = document.getElementById('filter')
-const REQUEST_PARAMETERS = {}
+const FILTER_PARAMETERS = {}
 
 class User {
-  constructor(randomUserAPIUser) {
-    this.name = randomUserAPIUser.name.first
-    this.surname = randomUserAPIUser.name.last
-    this.gender = randomUserAPIUser.gender
-    this.age = randomUserAPIUser.dob.age
-    this.country = randomUserAPIUser.location.country
-    this.city = randomUserAPIUser.location.city
-    this.phone = randomUserAPIUser.phone
-    this.image = randomUserAPIUser.picture.large
+  constructor(randomUserAPIRecord) {
+    this.name = randomUserAPIRecord.name.first
+    this.surname = randomUserAPIRecord.name.last
+    this.gender = randomUserAPIRecord.gender
+    this.age = randomUserAPIRecord.dob.age
+    this.country = randomUserAPIRecord.location.country
+    this.city = randomUserAPIRecord.location.city
+    this.phone = randomUserAPIRecord.phone
+    this.image = randomUserAPIRecord.picture.large
   }
-  static compareName(a, b) {
-    return `${a.name} ${a.surname}`.localeCompare(`${b.name} ${b.surname}`)
-  }
-  static compareSurname(a, b) {
-    return `${a.surname} ${a.name}`.localeCompare(`${b.surname} ${b.name}`)
+  static compare = {
+    name: (a, b) => `${a.name} ${a.surname}`.localeCompare(`${b.name} ${b.surname}`),
+    surname: (a, b) => `${a.surname} ${a.name}`.localeCompare(`${b.surname} ${b.name}`),
+    age: (a, b) => a.age - b.age,
+    gender: (a, b) => a.gender.localeCompare(b.gender),
+    country: (a, b) => a.country.localeCompare(b.country),
+    city: (a, b) => a.city.localeCompare(b.city),
   }
 }
 function connectToServer() {
   let connectionAttemps = 1
-  let usersQuantity = 30
-  fetchUserData(usersQuantity, connectionAttemps)
+  fetchUserData(connectionAttemps)
     .then((responseJSON) => {
       responseJSON.results.forEach((user) => USERS_DATA.push(new User(user)))
-      showResults()
+      users_data_filtered = [...USERS_DATA]
+      showResults(users_data_filtered)
     })
     .catch((error) => {
       connectionAttemps++
-      fetchUserData(usersQuantity, connectionAttemps)
+      fetchUserData(connectionAttemps)
     })
 }
-function fetchUserData(usersQuantity, connectionAttemps) {
+function fetchUserData(connectionAttemps) {
   let apiUrl = 'https://randomuser.me/api/1.3/'
   let fields = ['name', 'gender', 'location', 'dob', 'phone', 'picture']
+  let usersQuantity = 30
   RESULTS.innerHTML = `<div class='connection_message'>Please wait. Connecting to server. Attemp: ${connectionAttemps}</div>`
-  return fetch(`${apiUrl}?results=${usersQuantity}&inc=${fields.join(',')}`, {
-    headers: { 'Content-Type': 'application/json' },
-  })
+  return fetch(`${apiUrl}?results=${usersQuantity}&inc=${fields.join(',')}`)
     .then((response) => {
       if (!response.ok) {
         throw Error(response.statusText)
@@ -50,47 +52,23 @@ function fetchUserData(usersQuantity, connectionAttemps) {
     })
     .then((response) => response.json())
 }
-function showResults() {
-  RESULTS.innerHTML = getUserDataToShow(USERS_DATA, REQUEST_PARAMETERS)
-    .map((user) => getUserCard(user))
-    .join('')
+function showResults(usersData) {
+  RESULTS.innerHTML = usersData.map((user) => getUserCard(user)).join('')
 }
-function getUserDataToShow(userData, parameters) {
-  if (parameters.sort) {
-    return sort(filter(userData, parameters), parameters.sort, parameters.order)
-  } else {
-    return filter(userData, parameters)
-  }
-}
-function sort(userData, fieldToSort, order) {
-  let orderValue = order === 'ascending' ? 1 : -1
-  if (fieldToSort === 'name') {
-    return userData.slice().sort((a, b) => User.compareName(a, b) * orderValue)
-  } else if (fieldToSort === 'surname') {
-    return userData
-      .slice()
-      .sort((a, b) => User.compareSurname(a, b) * orderValue)
-  } else if (fieldToSort === 'age') {
-    return userData.slice().sort((a, b) => (a.age - b.age) * orderValue)
-  } else {
-    return userData
-      .slice()
-      .sort((a, b) => a[fieldToSort].localeCompare(b[fieldToSort]) * orderValue)
-  }
+const sorter = {
+  ascending: (userData, fieldToSort) =>
+    userData.slice().sort((a, b) => User.compare[fieldToSort](a, b)),
+  descending: (userData, fieldToSort) =>
+    userData.slice().sort((a, b) => User.compare[fieldToSort](b, a)),
 }
 function filter(userData, parameters) {
   Object.keys(parameters).forEach((key) => {
-    if (['name', 'surname', 'country', 'city'].includes(key)) {
+    if (['name', 'surname', 'country', 'city', 'gender'].includes(key)) {
       userData = userData.filter((user) =>
         user[key].toLowerCase().startsWith(parameters[key])
       )
     }
   })
-  if (parameters.gender) {
-    userData = userData.filter(
-      (user) => user.gender.toLowerCase() === parameters.gender
-    )
-  }
   if (parameters.age_from || parameters.age_till) {
     userData = filterAge(userData, parameters.age_from, parameters.age_till)
   }
@@ -118,35 +96,14 @@ function getUserCard(userData) {
 
 SORT.addEventListener('input', (evt) => {
   if (SORT.field.value) {
-    REQUEST_PARAMETERS.sort = SORT.field.value
-    REQUEST_PARAMETERS.order = SORT.order.value
-  } else {
-    delete REQUEST_PARAMETERS.sort
-    delete REQUEST_PARAMETERS.order
+    showResults(sorter[SORT.order.value](users_data_filtered, SORT.field.value))
   }
-  showResults()
 })
-FILTER.addEventListener('input', (evt) => {
-  let keys = [
-    'name',
-    'surname',
-    'age_from',
-    'age_till',
-    'gender',
-    'city',
-    'country',
-  ]
-  keys.forEach((key) => {
-    if (FILTER[key].value) {
-      REQUEST_PARAMETERS[key] = FILTER[key].value.toLowerCase()
-    } else {
-      delete REQUEST_PARAMETERS[key]
-    }
-  })
-  if (REQUEST_PARAMETERS.gender === 'all') {
-    delete REQUEST_PARAMETERS.gender
-  }
-  showResults()
+FILTER.addEventListener('input', ({ target: { name, value } }) => {
+  if (value) FILTER_PARAMETERS[name] = value.toLowerCase()
+  else delete FILTER_PARAMETERS[name]
+  users_data_filtered = filter(USERS_DATA, FILTER_PARAMETERS)
+  showResults(users_data_filtered)
 })
 
 connectToServer()
