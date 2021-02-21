@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Friends Application</title>
+        <link rel="stylesheet" href="style.css" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+
+    <body>
+        <main class="search-page-wrapper">
+            <form id="search-form" class="search-form-container">
+                <h1 class="form-header">Find your friends!</h1>
+                <input
+                    class="search-input"
+                    name="searched-name"
+                    type="text"
+                    placeholder="type name"
+                />
+
+                <h2>Sort by:</h2>
+
+                <div class="sort-type-container">
+                    <input
+                        type="radio"
+                        name="sort-type"
+                        value="firstName"
+                        id="sort-by-name"
+                        class="visually-hidden"
+                    />
+                    <label class="sort-filter-icon" for="sort-by-name"
+                        >Name</label
+                    >
+
+                    <input
+                        type="radio"
+                        name="sort-type"
+                        value="age"
+                        id="sort-by-age"
+                        class="visually-hidden"
+                    />
+                    <label class="sort-filter-icon" for="sort-by-age"
+                        >Age</label
+                    >
+                </div>
+
+                <div class="sort-direction-container">
+                    <input
+                        type="radio"
+                        name="sort-direction"
+                        value="up"
+                        id="sort-up"
+                        class="visually-hidden"
+                        disabled
+                    />
+                    <label class="sort-filter-icon" for="sort-up">Up</label>
+
+                    <input
+                        type="radio"
+                        name="sort-direction"
+                        value="down"
+                        id="sort-down"
+                        class="visually-hidden"
+                        disabled
+                    />
+                    <label class="sort-filter-icon" for="sort-down">Down</label>
+                </div>
+
+                <h2>Filter by gender:</h2>
+                <div class="filter-container">
+                    <input
+                        type="radio"
+                        name="gender"
+                        value="female"
+                        id="filter-female"
+                        class="visually-hidden"
+                    />
+                    <label class="sort-filter-icon" for="filter-female"
+                        >Female</label
+                    >
+                    <input
+                        type="radio"
+                        name="gender"
+                        value="male"
+                        id="filter-male"
+                        class="visually-hidden"
+                    />
+                    <label class="sort-filter-icon" for="filter-male"
+                        >Male</label
+                    >
+                    <input
+                        type="radio"
+                        name="gender"
+                        value="all"
+                        id="filter-all"
+                        class="visually-hidden"
+                        checked="checked"
+                    />
+                    <label class="sort-filter-icon" for="filter-all">All</label>
+                </div>
+
+                <div>
+                    <input
+                        type="reset"
+                        value="Reset"
+                        class="reset-form-button"
+                    />
+                </div>
+            </form>
+
+            <div id="search-results" class="search-res-container"></div>
+        </main>
+
+        <footer class="footer">
+            <div>
+                Icons made by
+                <a href="https://www.freepik.com" title="Freepik">Freepik</a>
+                from
+                <a href="https://www.flaticon.com/" title="Flaticon"
+                    >www.flaticon.com</a
+                >
+            </div>
+        </footer>
+
+        <script src="index.js"></script>
+    </body>
+</html>
