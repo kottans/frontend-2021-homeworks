@@ -1,0 +1,304 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.logo {
+    width: 100%;
+    height: 3em;
+    position: fixed;
+    background-color: hsl(120, 10%, 30%);
+    z-index: 3000;
+    border: 1px solid inherit;
+    border-radius: 8px;
+}
+
+.logo h1 {
+    display: block;
+    position: absolute;
+    top: 1px;
+    left: 64px;
+    color: whitesmoke;
+}
+
+.menu-button {
+    width: 30px;
+    height: 30px;
+    margin-left: 20px;
+    margin-top: 8px;
+    color: black;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.menu-button:active {
+    background-color: hsl(120, 10%, 30%);
+    color: whitesmoke;
+}
+
+.sidebar {
+    width: 260px;
+    height: 100%;
+    position: fixed;
+    top: 3.5em;
+    bottom: 0;
+    margin: 0;
+    left: -260px;
+    padding: 15px 20px;
+    z-index: 2000;
+    transition: left 0.3s;
+    background-color: hsl(120, 10%, 30%);
+    border: 1px solid inherit;
+    border-radius: 8px;
+}
+
+.sidebar-toggle {
+    left: 0;
+    overflow-y: hidden;
+    box-shadow: 4px 0px 20px 0px rgba(0, 0, 0, 0.5);
+}
+
+.radio-button {
+    display: block;
+    cursor: pointer;
+}
+
+.radio-button span {
+    padding-left: 15px;
+}
+
+.sort-by {
+    display: flex;
+    justify-content: center;
+}
+
+.filter-by .radio-button {
+    padding-left: 3.24em;
+}
+
+.filter-by span {
+    padding-left: 5px;
+}
+
+.radio-input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    position: absolute;
+}
+
+.radio-asc,
+.radio-desc {
+    display: block;
+    width: 60px;
+    height: 49px;
+    border: 1px solid hsl(120, 10%, 30%);
+    border-radius: 8px;
+}
+
+.radio-asc {
+    background-image: url(img/acs.png);
+}
+
+.radio-desc {
+    background-image: url(img/desc.png);
+}
+
+.radio-input:focus+.radio-asc {
+    border: 1px solid whitesmoke;
+}
+
+.radio-input:checked+.radio-asc {
+    background-color: hsl(120, 82%, 15%);
+}
+
+.radio-input:focus+.radio-desc {
+    border: 1px solid whitesmoke;
+}
+
+.radio-input:checked+.radio-desc {
+    background-color: hsl(120, 82%, 15%);
+}
+
+.search-input {
+    width: 74%;
+    font-size: 16px;
+    border-radius: 5px;
+    margin: 5px 5px 5px 3.24em;
+}
+
+.reset-button {
+    display: block;
+    width: 6em;
+    height: 1.6em;
+    margin: 5px auto;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.content {
+    position: relative;
+    top: 3em;
+    margin: 0em 1em;
+    padding: 0.5em 2em;
+    transition: transform 0.3s;
+    border: 1px solid inherit;
+    border-radius: 8px;
+    display: grid;
+    grid-gap: 0.2fr;
+    grid-template-columns: repeat(6, 1fr);
+    justify-items: center;
+    align-items: center;
+    min-width: 80%;
+    max-width: 100%;
+    height: 100%;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+.content-toggle {
+    transform: translateX(260px);
+}
+
+.card {
+    margin-bottom: 20px;
+    margin-left: 5px;
+    margin-right: 5px;
+    background: #82d882;
+    background: -webkit-linear-gradient(hsl(120, 38%, 65%), hsl(120, 49%, 53%));
+    background: -moz-linear-gradient(hsl(120, 38%, 65%), hsl(120, 49%, 53%));
+    background: linear-gradient(hsl(120, 38%, 65%), hsl(120, 49%, 53%));
+    width: 15em;
+    border: 2px solid hsl(120, 82%, 15%);
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(16, 44, 0, 0.5);
+    overflow: hidden;
+}
+
+.card-name {
+    height: 60px;
+    font-weight: bold;
+    text-align: left;
+    background-color: hsl(120, 82%, 15%);
+    color: white;
+}
+
+.card-name h2 {
+    line-height: 1.12;
+    padding-left: 5px;
+    padding-top: 2px;
+}
+
+.card img {
+    display: block;
+    margin: 12px auto;
+    border-radius: 50%;
+}
+
+.card-description {
+    text-align: center;
+    height: 126px;
+}
+
+.card-year {
+    padding-bottom: 4px;
+}
+
+.card-mail::before {
+    content: "\2709";
+    display: inline-block;
+    padding-right: 2px;
+    color: darkblue;
+}
+
+.phone {
+    font-size: 15px;
+}
+
+.phone::before {
+    content: "\2706";
+    display: inline-block;
+    padding-right: 2px;
+    color: darkblue;
+}
+
+.location {
+    font-weight: bold;
+    padding-top: 10px;
+}
+
+.card-sex {
+    padding: 4px;
+    text-align: center;
+    color: aliceblue;
+    font-size: 18px;
+    background-color: hsl(120, 82%, 15%);
+}
+
+.form_radio_btn {
+    border: 1px solid black;
+    display: table-cell;
+    width: 155px;
+    height: 30px;
+    border-radius: 5px;
+    line-height: center;
+    padding: 0 auto;
+    vertical-align: middle;
+}
+
+legend {
+    color: whitesmoke;
+    font-size: 20px;
+}
+
+.error-message {
+    width: fit-content;
+    margin: 10% auto;
+}
+
+@media screen and (max-width: 1710px) {
+    .content {
+        grid-gap: 0.2fr;
+        grid-template-columns: repeat(6, 1fr);
+    }
+}
+
+@media screen and (max-width: 1650px) {
+    .content {
+        grid-gap: 0.2fr;
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+@media screen and (max-width: 1280px) {
+    .content {
+        grid-gap: 0.2fr;
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .content {
+        grid-gap: 0.2fr;
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media screen and (max-width: 860px) {
+    .content {
+        grid-gap: 0.2fr;
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 560px) {
+    .content {
+        grid-gap: 0.2fr;
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
