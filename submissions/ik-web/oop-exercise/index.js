@@ -16,8 +16,8 @@ class Inhabitant {
       this.saying = saying;
    }
 
-   toPrint() {
-      return `A ${this.species} (<i>${this.gender}<i>) named <strong>${this.name}</strong> has ${this.legs} legs likes to say <u>${this.saying}</u>`;
+   showInhabitantInfo() {
+      return `A ${this.species} (<i>${this.gender}<i>) named <strong>${this.name}</strong>, has ${this.legs} legs, likes to say <u>${this.saying}</u>.`;
    }
 }
 
@@ -43,9 +43,8 @@ class Human extends Inhabitant {
       this.hands = hands;
    }
 
-   toPrint() {
-      const strToArr = super.toPrint().split('legs');
-      return `${strToArr[0]}legs and ${this.hands} hands${strToArr[1]}`;
+   showInhabitantInfo() {
+      return super.showInhabitantInfo().replace('legs,', `legs and ${this.hands} hands,`);
    }
 }
 
@@ -61,8 +60,6 @@ const cat = new Cat('Barsik', 'male');
 const man = new Human('Benjamin', 'male', 2, 'Hi to all!');
 const woman = new Human('Sarah', 'female', 2, 'Hello everyone!');
 const catWoman = new CatWoman('anonymos', cat.getSaying());
-const tinyJsWorldPopulation = [dog, cat, man, woman, catWoman];
+const inhabitants = [dog, cat, man, woman, catWoman];
 
-tinyJsWorldPopulation.forEach(function(obj) {
-   print(obj.toPrint());
-});
+inhabitants.forEach(inhabitant => print(inhabitant.showInhabitantInfo()));
