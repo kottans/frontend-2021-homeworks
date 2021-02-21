@@ -1,0 +1,157 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+.filter_wrapper {
+  padding: 10px;
+  background-color: lightsteelblue;
+}
+.form_heading {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: normal;
+}
+.form_line {
+  margin-top: 10px;
+}
+.form_input_text {
+  width: 130px;
+}
+.form_input_age {
+  width: 45px;
+}
+.form_label {
+  display: inline-block;
+  width: 70px;
+}
+.form_label_agetill {
+  display: inline-block;
+  width: 32px;
+  text-align: center;
+}
+.radio {
+  margin: 0 5px;
+}
+.sort {
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 10px;
+  border-bottom-style: solid;
+  border-bottom-width: thin;
+  background-color: lightgray;
+}
+.sort_line {
+  display: inline-block;
+  margin-right: 10px;
+}
+.sorting_option,
+.sorting_selected {
+  text-transform: capitalize;
+}
+.results {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+}
+.card {
+  width: 200px;
+  height: 300px;
+  margin: 10px;
+  background: azure;
+  box-shadow: 5px 5px 5px silver;
+}
+.photo {
+  display: block;
+  position: relative;
+  z-index: 1;
+  bottom: -0.3rem;
+  margin: auto;
+  border-radius: 50%;
+}
+.name {
+  position: relative;
+  z-index: 0;
+  top: -1rem;
+  font-size: 1.3rem;
+  text-align: center;
+  background-color: lightgreen;
+  padding-top: 1.5rem;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.demographics {
+  position: relative;
+  top: -0.5rem;
+  margin-top: 0;
+  text-align: center;
+  text-transform: capitalize;
+}
+.card_text {
+  margin: 10px;
+}
+.country {
+  margin-left: 30px;
+}
+.city::before {
+  content: url('./images/placeholder.svg');
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
+}
+.phone::before {
+  content: url('./images/telephone.svg');
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
+}
+.footer {
+  background: lightgray;
+  height: 4vh;
+  text-align: right;
+  padding: 1vh;
+}
+.connection_message {
+  padding: 10px;
+  color: green;
+  font-size: 1.2rem;
+}
+@media screen and (max-width: 460px) {
+  .results {
+    justify-content: center;
+  }
+}
+@media screen and (min-width: 461px) and (max-width: 680px) {
+  .filter {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 420px;
+  }
+}
+@media screen and (min-width: 681px) and (max-width: 910px) {
+  .filter {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 630px;
+  }
+}
+@media screen and (min-width: 911px) {
+  .main {
+    display: grid;
+    grid-template-columns: 230px 1fr;
+    grid-template-rows: 5vh minmax(91vh, auto);
+  }
+  .filter_wrapper {
+    grid-column: 1;
+    grid-row: 1 / 3;
+  }
+  .sort_selection {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .results {
+    grid-column: 2;
+    grid-row: 2;
+  }
+}

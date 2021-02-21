@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <title>Friends app</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' href='app.css'>
+</head>
+    <body>
+        <main class='main'>
+            <div class='filter_wrapper'>
+                <h1 class='form_heading'>Narrow your search:</h1>
+                <form id='filter' class='filter'>
+                    <div class='form_line'>
+                        <label for='name' class='form_label'>Name:</label>
+                        <input type='text' name='name' id='name' class='form_input_text'>
+                    </div>
+                    <div class='form_line'>
+                        <label for='surname' class='form_label'>Surname:</label>
+                        <input type='text' name='surname' id='surname' class='form_input_text'>
+                    </div>
+                    <div class='form_line'>
+                        <label for='age_from' class='form_label'>Age from:</label>
+                        <input type='number' name='age_from' id='age_from' class='form_input_age'>
+                        <label for='age_till' class='form_label_agetill'>till:</label>
+                        <input type='number' name='age_till' id='age_till' class='form_input_age'>
+                    </div>
+                    <div class='form_line'>
+                        <input type='radio' name='gender' value='' checked id='gender_all' class='radio'><label for='gender_all'>All</label>
+                        <input type='radio' name='gender' value='female' id='gender_female' class='radio'><label for='gender_female'>Female</label>
+                        <input type='radio' name='gender' value='male' id='gender_male' class='radio'><label for='gender_male'>Male</label>
+                    </div>
+                    <div class='form_line'>
+                        <label for='city' class='form_label'>City:</label>
+                        <input type='text' name='city' id='city' class='form_input_text'>
+                    </div>
+                    <div class='form_line'>
+                        <label for='country' class='form_label'>Country:</label>
+                        <input type='text' name='country' id='country' class='form_input_text'>
+                    </div>
+                </form>
+            </div>
+            <form id='sort' class='sort'>
+                <div class='form_line'>
+                    <label for='sort_field'>Sort by:</label>
+                    <select id='sort_field' name='field'>
+                        <option value='' selected disabled hidden>--None--</option>
+                        <option value='name'>Name</option>
+                        <option value='surname'>Surname</option>
+                        <option value='age'>Age</option>
+                        <option value='gender'>Gender</option>
+                        <option value='city'>City</option>
+                        <option value='country'>Country</option>
+                    </select>
+                </div>
+                <div class='form_line'>
+                    <input type='radio' name='order' value='ascending' checked id='sort_ascending' class='radio'><label for='sort_ascending'>Ascending</label>
+                    <input type='radio' name='order' value='descending' id='sort_descending' class='radio'><label for='sort_descending'>Descending</label>
+                </div>
+            </form>
+            <div id='results' class='results'></div>
+        </main>
+        <footer class='footer'>
+            <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+        </footer>
+        <script src='app.js'></script>
+    </body>
+</html>
