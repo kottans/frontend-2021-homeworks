@@ -70,20 +70,24 @@ async function saveStatsToAFile(fileName, text) {
 function makeMarkdownTable(authors, labels, dataByAuthor) {
   const columnDelimiter = " | ";
   const rows = [
+    ' Nr ' + columnDelimiter +
     'author' + columnDelimiter + labels.join(columnDelimiter),
-    "--- | ".repeat(labels.length) + "---",
+    "--- | ".repeat(labels.length + 1) + "---",
   ];
-  let coveredTasksCountLatest = Number.MAX_SAFE_INTEGER;
+  let coveredTasksCountLatest = Number.MAX_SAFE_INTEGER, authorNr = 0;
   authors.forEach(authorName => {
     const coveredTasksCount = Object.keys(dataByAuthor[authorName]).length;
     if (coveredTasksCount < coveredTasksCountLatest) {
       rows.push(
+        ' &gt; ' + columnDelimiter +
         `**${coveredTasksCount} task${coveredTasksCount > 1 ? 's' : ''}**` +
         columnDelimiter.repeat(labels.length)
       );
       coveredTasksCountLatest = coveredTasksCount;
+      authorNr = 0;
     }
     rows.push([
+      ` ${coveredTasksCountLatest}.${++authorNr}`,
       makePrListUrl(authorName),
       ...labels.map(label =>
         dataByAuthor[authorName][label]

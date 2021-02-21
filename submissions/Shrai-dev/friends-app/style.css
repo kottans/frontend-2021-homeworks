@@ -1,0 +1,184 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #1990c7;
+}
+
+.header__title {
+  color: #eeeeee;
+  margin-bottom: 30px;
+  padding: 10px;
+  font-family: "Annie Use Your Telescope", cursive;
+  font-size: 34px;
+  letter-spacing: 3px;
+  text-align: center;
+}
+
+.main {
+  margin: 0 auto;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.wrapper__filters {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.search__by-letter,
+.search__by-age,
+.search__by-name,
+.search__by-gender {
+  margin: 10px;
+  flex-wrap: wrap;
+  display: block;
+  width: 20%;
+  padding: 10px;
+  border-left: 3px solid #d5f2ff;
+}
+
+.searchBar {
+  padding-left: 20px;
+  height: 60px;
+  width: 100%;
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  align-items: center;
+}
+
+.search__by-age-text,
+.search__by-name-text,
+.search__by-gender-text {
+  font-family: "Annie Use Your Telescope", cursive;
+  font-size: 24px;
+  line-height: 30px;
+  letter-spacing: 3px;
+}
+
+.search__by-age-label,
+.search__by-name-label,
+.search__by-gender-label {
+  margin: 7px;
+  font-family: "Open Sans", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.container,
+.wrapper {
+  margin: 10px;
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.card {
+  width: 250px;
+  height: 320px;
+  margin: 10px;
+  padding: 10px;
+  word-wrap: break-word;
+  background-color: #d5f2ff;
+  border: 1px solid #8a9da5;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.card-img {
+  margin-top: 15px;
+  border: 1px solid #ffffff;
+  border-radius: 50%;
+}
+
+.card-name {
+  margin: 5px;
+  font-family: "Annie Use Your Telescope", cursive;
+  font-size: 26px;
+  line-height: 120%;
+  letter-spacing: 3px;
+}
+
+.card-age,
+.card-location {
+  margin: 5px;
+  font-family: "Open Sans", sans-serif;
+  font-size: 18px;
+  line-height: 120%;
+  letter-spacing: 1px;
+}
+
+@media (max-width: 1325px) {
+  .search__by-letter,
+  .search__by-age,
+  .search__by-name,
+  .search__by-gender {
+    width: 40%;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 675px) {
+  .wrapper__filters {
+    flex-direction: column;
+  }
+  .search__by-letter,
+  .search__by-age,
+  .search__by-name,
+  .search__by-gender {
+    height: 60px;
+    width: 90%;
+    padding: 10px;
+  }
+  .container,
+  .wrapper {
+    margin: 0;
+    padding: 2px;
+  }
+  .card {
+    width: 220px;
+    height: 280px;
+    margin: 5px;
+    padding: 5px;
+  }
+  .card-name {
+    margin: 3px;
+    font-size: 22px;
+    letter-spacing: 1px;
+  }
+  .card-age,
+  .card-location {
+    margin: 3px;
+    font-size: 16px;
+    letter-spacing: 1px;
+  }
+  .searchBar {
+    padding-left: 15px;
+    height: 40px;
+    width: 100%;
+    font-size: 14px;
+    align-items: center;
+  }
+  .search__by-age-text,
+  .search__by-name-text,
+  .search__by-gender-text {
+    font-size: 22px;
+    letter-spacing: 1px;
+  }
+  .search__by-age-label,
+  .search__by-name-label,
+  .search__by-gender-label {
+    margin: 2px;
+    font-family: "Open Sans", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+}

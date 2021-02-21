@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Friends App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,500;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/style.css" />
+</head>
+<body>
+    <header class="header">
+            <div class="header-title"><b>Friends</b>App</div>
+        <input id="search" class="search" onkeyup="selectFriends()" placeholder="Search" onsearch="selectFriends()" type="search">
+    </header>
+    <main>
+        <div class="filters">
+            <div id="filter-sort" class="filter-item">
+                <p class="filters-header"><b>Sort</b></p>
+                <label class="radio-sort-container" value="">
+                    <input type="radio" name="sort" id="a-z" value="alphabet-ascend">
+                    <div class="radio-sort">A-Z</div>
+                </label>
+                <label class="radio-sort-container">
+                    <input type="radio" name="sort" id="z-a" value="alphabet-descend">
+                    <div class="radio-sort">Z-A</div>
+                </label>
+                <br>
+                <label class="radio-sort-container">
+                    <input type="radio" name="sort" id="0-9" value="age-ascend">
+                    <div class="radio-sort">0-9</div>
+                </label>
+                <label class="radio-sort-container">
+                    <input type="radio" name="sort" id="9-0" value="age-descend">
+                    <div class="radio-sort">9-0</div>
+                </label>
+            </div>  
+            <div id="filter-gender" class="filter-item">
+                <p class="filters-header"><b>Gender</b></p>
+                <label><input type="checkbox" id="gender-male" class="gender-checkbox" value="male" checked>Man</label>
+                <br>
+                <label><input type="checkbox" id="gender-female" class="gender-checkbox" value="female" checked>Woman</label>
+            </div>
+            <div id="filter-age" class="filter-item">
+                <p class="filters-header"><b>Age</b></p>
+                <input type="number" id="minAge" min="0" title="Min age" class="number-age">
+                <input type="number" id="maxAge" min="0" title="Max age" class="number-age">
+            </div>
+        </div>
+        <div id = "contentField" class="content-field">
+        <div id = "errorMessage" class="error-text"></div>
+        <div id = "allFriends" class="allFriends"></div>
+        </div>
+    </main>
+    <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>Friends App Task</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="app">
+<header class="header">
+    <div class="title-bar">
+        <h1 class="title">Friends App</h1>
+    </div>
+</header>
+<div class="main">
+    <aside class="filter-container">
+        <form id="filter-form">
+            <div class="filter-search-item">
+                <input type="text" class="filter-search" placeholder="Please enter the name" id="search">
+                <label class="search" for="search"></label>
+            </div>
+            <div class="filter-items">
+                <div class="filter-item">
+                    <h2 class="filter-title">Gender</h2>
+                    <div class="filter-gender">
+                        <input class="female-input" type="radio" name="gender-filter" id="female" value="female">
+                        <label class="sort female-sort" for="female"></label>
+                        <input class="male-input" type="radio" name="gender-filter" id="male" value="male">
+                        <label class="sort male-sort" for="male"></label>
+                        <input class="all-input" type="radio" name="gender-filter" id="all" value="all" checked>
+                        <label class="sort all-sort" for="all"></label>
+                    </div>
+                </div>
+                <div class="filter-item">
+                    <h2 class="filter-title">Name</h2>
+                    <div class="filter-name">
+                        <input class="ascending-input" type="radio" name="filter" id="name-ascending"
+                               value="name-ascending">
+                        <label class="sort ascending-sort" for="name-ascending"></label>
+                        <input class="descending-input" type="radio" name="filter" id="name-descending"
+                               value="name-descending">
+                        <label class="sort descending-sort" for="name-descending"></label>
+                    </div>
+                </div>
+                <div class="filter-item">
+                    <h2 class="filter-title">Age</h2>
+                    <div class="filter-age">
+                        <input class="ascending-input" type="radio" name="filter" id="age-ascending"
+                               value="age-ascending">
+                        <label class="sort ascending-sort" for="age-ascending"></label>
+                        <input class="descending-input" type="radio" name="filter" id="age-descending"
+                               value="age-descending">
+                        <label class="sort descending-sort" for="age-descending"></label>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </aside>
+    <main id="content" class="content-box">
+    </main>
+</div>
+<footer class="footer">
+    <p class="author">Made by <a href="https://github.com/lalalilulu">lalalilulu</a></p>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>

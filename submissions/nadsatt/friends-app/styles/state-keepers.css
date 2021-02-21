@@ -1,0 +1,129 @@
+.subgroup-heading {
+    position: relative;
+    z-index: 1;
+    height: 40px;
+    padding: 7px 0;
+    margin-left: -1px;
+    background-color: var(--gray-color);
+    text-transform: capitalize;
+}
+
+.state-keeper-list {
+    margin-left: -1px;
+    display: flex;
+    position: relative;
+    z-index: 1;
+}
+
+.state-keeper-item {
+    flex-grow: 1;
+}
+
+.state-keeper {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 12px solid;
+    border-image-source: url('./../images/state-keeper-images/state-keeper-border.png');
+    border-image-slice: 12;
+    border-image-outset: 0;
+    border-image-repeat: repeat;
+    background-color: black;
+}
+
+.state-keeper__name {
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.state-keeper svg {
+    width: 24px;
+    height: 24px;
+    fill: white;
+}
+
+.state-keeper--selected {
+    background-color: var(--brown-color);
+}
+
+.state-keeper--opened {
+    background-color: var(--green-color);
+}
+
+.state-keeper:hover .state-keeper__name,
+.state-keeper--opened .state-keeper__name {
+    color: var(--gold-color);
+}
+
+.state-keeper:hover svg,
+.state-keeper--opened svg {
+    fill: var(--gold-color);
+}
+
+.options-wrapper {
+    display: block;
+    height: 40px;
+    border: 1px solid;
+    border-image: linear-gradient(to right, var(--gold-color) 55%, transparent 100%) 2 / 2 / 1 stretch;
+    background-color: #d6d6d6;
+    margin-top: -41px;
+    transition: margin-top .1s linear;
+}
+
+.options-wrapper--opened {
+    margin-top: 0px;
+}
+
+.option-group {
+    height: 100%;
+    padding: 7px;
+    display: flex;
+    justify-content: space-around;
+    align-items: stretch;
+}
+
+.option-group__option {
+    height: 26px;
+    width: 26px;
+    padding: 3px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search-option {
+    flex-grow: 1;
+    background-color: white;
+    border: 1px solid white;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.option-group__option svg {
+    width: 100%;
+    height: 100%;
+    fill: var(--brown-color);
+}
+
+.option-group__option:hover svg,
+.option-group__option--selected svg {
+    fill: var(--gold-color);
+}
+
+.option-group__option--selected {
+    background-color:var(--brown-color);
+}
+
+.search-option:hover,
+.option-group__option--selected.search-option {
+    border-color: var(--gold-color);
+    color: var(--gold-color);
+}
+
+.state-keeper *,
+.option-group svg,
+.option-group svg * {
+    pointer-events: none;
+}

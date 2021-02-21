@@ -1,0 +1,96 @@
+* {
+  margin: 0;
+  padding: 0;
+  color: black;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 10px 0;
+}
+
+.boardGrid {
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.card {
+  position: relative;
+  transition: all 0.4s linear;
+  transform-style: preserve-3d;
+  margin: 5px;
+}
+
+.card,
+.back,
+.front {
+  height: 130px;
+  width: 190px;
+}
+
+.back,
+.front {
+  position: absolute;
+  backface-visibility: hidden;
+}
+
+.front {
+  z-index: 2;
+  background: url("./img/front.jpeg") no-repeat center center / contain;
+}
+
+.back {
+  transform: rotateY(180deg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.selected {
+  transform: rotateY(180deg);
+}
+
+.match .front {
+  background: url("./img/favicon.png") no-repeat center center / contain;
+  opacity: 0.5;
+}
+
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  font-size: 24px;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 600px) {
+  .boardGrid {
+    max-width: 600px;
+    width: 100%;
+  }
+
+  .card,
+  .back,
+  .front {
+    height: 80px;
+    width: 120px;
+  }
+}
+
+@media screen and (min-width: 601px) and (max-width: 800px) {
+  .boardGrid {
+    max-width: 800px;
+    width: 100%;
+  }
+
+  .card,
+  .back,
+  .front {
+    height: 150px;
+    width: 150px;
+  }
+}
