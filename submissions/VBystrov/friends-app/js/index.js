@@ -14,14 +14,10 @@ const initialSearchParameters = {
   name: null,
   age: null,
   gender: 'all',
-  sorting: 'nameAZ',
+  sorting: 'nameAscending',
 };
 
 class FriendsApp {
-  constructor() {
-    this.init(requestFriendsUrl);
-  }
-
   init(url) {
     fetch(url)
       .then((response) => {
@@ -30,8 +26,8 @@ class FriendsApp {
         }
         return response.json();
       })
-      .then((friendsData) => {
-        const friendlist = new Friendlist(friendsData.results);
+      .then((friends) => {
+        const friendlist = new Friendlist(friends.results);
         const search = new Search(friendlist);
       })
       .catch((error) => {
@@ -44,9 +40,9 @@ class FriendsApp {
 }
 
 class Friendlist {
-  constructor(friendsData) {
+  constructor(friends) {
     this.container = document.getElementById('friendlist');
-    this.createCards(friendsData);
+    this.createCards(friends);
     this.sorters = new Sorters();
   }
 
@@ -107,7 +103,8 @@ class Search {
     this.inputAge = this.container.querySelector('#search-age__number');
     this.genderContainer = this.container.querySelector('#search-gender');
     this.friendlist = friendlist;
-    this.parameters = this.parseUrl();
+    this.urlController = new UrlController();
+    this.parameters = this.urlController.parseUrl();
     this.setInitialSearch(this.parameters);
     this.friendlist.applySearch(this.parameters);
     this.friendlist.showCards();
@@ -119,28 +116,6 @@ class Search {
       'click',
       this.changeSearchGender.bind(this)
     );
-  }
-
-  parseUrl() {
-    const searchParameters = { ...initialSearchParameters };
-    this.url = new URL(document.location.href);
-    this.urlSearchParameters = new URLSearchParams(
-      this.url.search.substring(1)
-    );
-
-    for (let parameterName in searchParameters) {
-      const parameterValue = this.urlSearchParameters.get(parameterName);
-      if (parameterValue) {
-        searchParameters[parameterName] = parameterValue;
-      }
-    }
-    if (!this.urlSearchParameters.get('sorting')) {
-      this.setUrl('sorting', searchParameters.sorting);
-    }
-    if (!this.urlSearchParameters.get('gender')) {
-      this.setUrl('gender', searchParameters.gender);
-    }
-    return searchParameters;
   }
 
   setInitialSearch(searchParameters) {
@@ -170,20 +145,10 @@ class Search {
     }
   }
 
-  setUrl(searchParameter, searchParameterValue) {
-    if (searchParameterValue) {
-      this.urlSearchParameters.set(searchParameter, searchParameterValue);
-    } else {
-      this.urlSearchParameters.delete(searchParameter);
-    }
-    this.url.search = `?${this.urlSearchParameters.toString()}`;
-    window.history.replaceState({}, '', this.url);
-  }
-
   changeSearchName({ target }) {
     this.parameters.name = target.value;
 
-    this.setUrl('name', target.value);
+    this.urlController.setUrl('name', target.value);
 
     this.friendlist.applySearch(this.parameters);
     this.friendlist.showCards();
@@ -192,7 +157,7 @@ class Search {
   changeSearchAge({ target }) {
     this.parameters.age = parseInt(target.value, 10);
 
-    this.setUrl('age', target.value);
+    this.urlController.setUrl('age', target.value);
 
     this.friendlist.applySearch(this.parameters);
     this.friendlist.showCards();
@@ -203,7 +168,7 @@ class Search {
       '.search-gender__input:checked'
     ).value;
     if (selectedGender !== this.parameters.gender) {
-      this.setUrl('gender', selectedGender);
+      this.urlController.setUrl('gender', selectedGender);
       this.parameters.gender = selectedGender;
 
       this.friendlist.applySearch(this.parameters);
@@ -216,7 +181,7 @@ class Search {
     if (sortingControl) {
       this.parameters.sorting = sortingControl.value;
 
-      this.setUrl('sorting', sortingControl.value);
+      this.urlController.setUrl('sorting', sortingControl.value);
 
       this.friendlist.applySorting(this.parameters.sorting);
       this.friendlist.showCards();
@@ -288,41 +253,64 @@ class Card {
 
 class Sorters {
   constructor() {
-    this.nameAZ = function (card1, card2) {
-      const fullName1 = card1.firstName + card1.lastName;
-      const fullName2 = card2.firstName + card2.lastName;
-      if (fullName1 < fullName2) {
-        return -1;
-      }
-      if (fullName1 > fullName2) {
-        return 1;
-      }
-      if (fullName1 === fullName2) {
-        return 0;
-      }
+    this.nameAscending = function (firstCard, secondCard) {
+      const firstFullName = firstCard.firstName + firstCard.lastName;
+      const secondFullName = secondCard.firstName + secondCard.lastName;
+      return firstFullName.localeCompare(secondFullName, 'en', {
+        sensitivity: 'base',
+      });
     };
-    this.nameZA = function (card2, card1) {
-      const fullName1 = card1.firstName + card1.lastName;
-      const fullName2 = card2.firstName + card2.lastName;
-      if (fullName1 < fullName2) {
-        return -1;
-      }
-      if (fullName1 > fullName2) {
-        return 1;
-      }
-      if (fullName1 === fullName2) {
-        return 0;
-      }
+    this.nameDescending = function (firstCard, secondCard) {
+      const firstFullName = firstCard.firstName + firstCard.lastName;
+      const secondFullName = secondCard.firstName + secondCard.lastName;
+      return secondFullName.localeCompare(firstFullName, 'en', {
+        sensitivity: 'base',
+      });
     };
-    this.ageDec = function (card1, card2) {
-      return card2.age - card1.age;
+    this.ageAscending = function (firstCard, secondCard) {
+      return firstCard.age - secondCard.age;
     };
-    this.ageInc = function (card1, card2) {
-      return card1.age - card2.age;
+    this.ageDescending = function (firstCard, secondCard) {
+      return secondCard.age - firstCard.age;
     };
+  }
+}
+
+class UrlController {
+  parseUrl() {
+    const searchParameters = { ...initialSearchParameters };
+    this.url = new URL(document.location.href);
+    this.urlSearchParameters = new URLSearchParams(
+      this.url.search.substring(1)
+    );
+
+    for (let parameterName in searchParameters) {
+      const parameterValue = this.urlSearchParameters.get(parameterName);
+      if (parameterValue) {
+        searchParameters[parameterName] = parameterValue;
+      }
+    }
+    if (!this.urlSearchParameters.get('sorting')) {
+      this.setUrl('sorting', searchParameters.sorting);
+    }
+    if (!this.urlSearchParameters.get('gender')) {
+      this.setUrl('gender', searchParameters.gender);
+    }
+    return searchParameters;
+  }
+
+  setUrl(searchParameter, searchParameterValue) {
+    if (searchParameterValue) {
+      this.urlSearchParameters.set(searchParameter, searchParameterValue);
+    } else {
+      this.urlSearchParameters.delete(searchParameter);
+    }
+    this.url.search = `?${this.urlSearchParameters.toString()}`;
+    window.history.replaceState({}, '', this.url);
   }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   const friendsApp = new FriendsApp();
+  friendsApp.init(requestFriendsUrl);
 });
