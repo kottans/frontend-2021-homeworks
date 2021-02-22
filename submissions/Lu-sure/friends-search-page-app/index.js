@@ -70,14 +70,14 @@ class FriendsSearchPage {
 
     sortUsers(users) {
         users.sort(
-            function (user1, user2) {
-                let prop1 = user1[this.sortBy];
-                let prop2 = user2[this.sortBy];
-                if (typeof prop1 === 'string') {
-                    prop1.toLowerCase();
-                    prop2.toLowerCase();
+            function (previousUser, nextUser) {
+                let propOfPreviousUser = previousUser[this.sortBy];
+                let propOfNextUser = nextUser[this.sortBy];
+                if (typeof propOfPreviousUser === 'string') {
+                    propOfPreviousUser.toLowerCase();
+                    propOfNextUser.toLowerCase();
                 }
-                return prop1 < prop2 ? -1 : 1;
+                return propOfPreviousUser < propOfNextUser ? -1 : 1;
             }.bind(this)
         );
 
