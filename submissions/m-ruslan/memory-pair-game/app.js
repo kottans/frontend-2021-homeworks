@@ -1,51 +1,56 @@
-// main logic of game
-document.addEventListener("DOMContentLoaded", () => {
-  let cardID, cardValue, prevCardId, prevCardValue;
-  let qOfOpenCards = 0;
+let quantityqOfCardsLeft;
+let cardID, cardValue, prevCardId, prevCardValue;
+let quantityOfOpenCards = 0;
 
+document.addEventListener("DOMContentLoaded", () => {
   startNewGame();
 
   document.querySelector("main").addEventListener("click", (event) => {
     let aEl = event.target.closest(".flip-container");
-    if (!aEl) return;
-    if (aEl.id === prevCardId && aEl.id !== undefined) return;
+    if (!aEl || aEl?.id === prevCardId) return;
+    if (quantityOfOpenCards === 2) return;
 
-    if (qOfOpenCards < 2) {
-      qOfOpenCards++;
+    if (quantityOfOpenCards < 2) {
+      quantityOfOpenCards++;
       cardID = aEl.id;
       cardValue = aEl.getAttribute("value");
 
       flip(cardID);
+    }
 
-      if (qOfOpenCards === 1) {
-        prevCardId = cardID;
-        prevCardValue = cardValue;
-      } else if (qOfOpenCards === 2) {
-        setTimeout(() => {
-          if (cardValue === prevCardValue && cardID !== prevCardId) {
-            match(cardID, prevCardId);
-          } else {
-            dontMatch(cardID, prevCardId);
-          }
+    if (quantityOfOpenCards === 1) {
+      prevCardId = cardID;
+      prevCardValue = cardValue;
+      return;
+    }
 
-          qOfOpenCards = 0;
-          prevCardId = null;
-          prevValue = null;
-
-          if (qOfCardsLeft === 0) {
-            youWon();
-          }
-        }, 1000);
-      }
+    if (quantityOfOpenCards === 2) {
+      processingTwoOpenCards();
     }
   });
 });
 
-//main functions
+const processingTwoOpenCards = () => {
+  let timeoutTime = 900;
+  setTimeout(() => {
+    if (cardValue === prevCardValue && cardID !== prevCardId) {
+      hideMatchedCards(cardID, prevCardId);
+    } else {
+      flipNotMatchedCards(cardID, prevCardId);
+    }
+    quantityOfOpenCards = 0;
+    prevCardId = null;
+    prevValue = null;
+    if (quantityOfCardsLeft === 0) {
+      youWon();
+    }
+  }, 1000);
+};
+
 const startNewGame = () => {
   clearField();
-  createField(arrOfCards);
-  qOfCardsLeft = arrOfCards.length;
+  createField(cards);
+  quantityOfCardsLeft = cards.length;
 };
 
 const youWon = () => {
@@ -60,11 +65,11 @@ const clearField = () => {
 const createField = (arr) => {
   let shuffledArr = shuffle(arr);
   let cardsfield = document.createDocumentFragment();
-  for (let i = 0; i < shuffledArr.length; i++) {
+  shuffledArr.forEach((element, index) => {
     let card = document.createElement("div");
-    card.innerHTML = createCard(shuffledArr[i], i);
+    card.innerHTML = createCard(element, index);
     cardsfield.appendChild(card);
-  }
+  });
   document.querySelector("main").appendChild(cardsfield);
 };
 
@@ -87,19 +92,18 @@ const flip = (cardID) => {
   document.querySelector("#" + cardID).classList.toggle("flip");
 };
 
-const match = (card1ID, card2ID) => {
-  document.querySelector("#" + card1ID).classList.add("hidden");
-  document.querySelector("#" + card2ID).classList.add("hidden");
-  qOfCardsLeft -= 2;
+const hideMatchedCards = (firstCardID, secondCardID) => {
+  document.querySelector("#" + firstCardID).classList.add("hidden");
+  document.querySelector("#" + secondCardID).classList.add("hidden");
+  quantityOfCardsLeft -= 2;
 };
 
-const dontMatch = (card1ID, card2ID) => {
-  flip(card1ID);
-  flip(card2ID);
+const flipNotMatchedCards = (firstCardID, secondCardID) => {
+  flip(firstCardID);
+  flip(secondCardID);
 };
 
-//global variables
-const arrOfUniqueCards = [
+const uniqueCards = [
   {
     src: "./img/image1.png",
     alt: "image1",
@@ -131,5 +135,4 @@ const arrOfUniqueCards = [
     value: 6,
   },
 ];
-const arrOfCards = arrOfUniqueCards.concat(arrOfUniqueCards);
-let qOfCardsLeft;
+const cards = uniqueCards.concat(uniqueCards);

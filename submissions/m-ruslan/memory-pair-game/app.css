@@ -41,7 +41,6 @@ main {
   opacity: 0;
 }
 
-/*flipper logic */
 .flip-container {
   perspective: 1000px;
 }
