@@ -2,29 +2,17 @@ const makeUserHtml = (user) => {
   const li = document.createElement("li");
   li.classList.add("user-card");
 
-  const name = `${user.name.first} ${user.name.last}`;
-  const email = `${user.email}`;
-  const city = `${user.location.city}`;
-
-  const maxLengthOfName = 15;
-  const maxLengthOfEmail = 25;
-  const maxLengthOfCity = 18;
-
-  const ending = "...";
-
-  const truncatedName = truncateField(name, maxLengthOfName, ending);
-  const truncatedEmail = truncateField(email, maxLengthOfEmail, ending);
-  const truncatedCity = truncateField(city, maxLengthOfCity, ending);
+  const userName = `${user.name.first} ${user.name.last}`;
 
   li.innerHTML = `
-  <h3 class="user-card__user-name">${truncatedName}</h3>
-  <img class="user-card__user-photo" src="${user.picture.large}" alt="photo of ${name}"}>
+  <h3 class="user-card__user-name">${userName}</h3>
+  <img class="user-card__user-photo" src="${user.picture.large}" alt="photo of ${userName}"}>
   <ul class="user-card__info-list">
     <li >Gender: ${user.gender}</li>
     <li>Age: ${user.dob.age}</li>
-    <li class="user-card__user-email"><a href="mailto:${user.email}" tabindex="-1">${truncatedEmail}</a></li>
+    <li class="user-card__user-email"><a  href="mailto:${user.email}" tabindex="-1">${user.email}</a></li>
     <li class="user-card__user-tel"><a href="tel:${user.cell}" tabindex="-1">${user.cell}</a></li>
-    <li>${truncatedCity}</li>
+    <li class="user-card__user-city">${user.location.city}</li>
   </ul>
   `;
 

@@ -14,14 +14,12 @@ const state = {
 
 let drawResult = null;
 
-const getDatasetValue = (elements, key) => {
-  const checked = Array.from(elements).find(({ checked }) => checked);
-  return checked === undefined ? "" : checked.dataset[key];
-};
-
-const getValue = (elements) => {
-  const checked = Array.from(elements).find(({ checked }) => checked);
-  return checked === undefined ? "" : checked.value;
+const getValueOrDatasetValue = (parentElement, inputGroupName, datasetKey) => {
+  const checked = parentElement.querySelector(
+    `input[name=${inputGroupName}]:checked`
+  );
+  if (checked === null) return "";
+  return datasetKey === undefined ? checked.value : checked.dataset[datasetKey];
 };
 
 const sortUsers = (users) => {
@@ -60,11 +58,10 @@ const filterUsersByGender = (users) => {
 const findUsersByName = (users) => {
   if (state.searchByName === "") return users;
 
-  return users.filter(
-    (user) =>
-      `${user.name.first} ${user.name.last}`
-        .toLowerCase()
-        .indexOf(state.searchByName) !== -1
+  return users.filter((user) =>
+    `${user.name.first} ${user.name.last}`
+      .toLowerCase()
+      .includes(state.searchByName)
   );
 };
 
@@ -87,16 +84,19 @@ const updateUsersList = (users) => {
   filtered = filterUsersByGender(sorted);
 };
 
-const formChangeListener = ({ currentTarget }) => {
-  const selectedSorting = getValue(currentTarget.elements.sorting);
-  const selectedOrder = getDatasetValue(
-    currentTarget.elements.sorting,
+const handleFormChange = ({ currentTarget }) => {
+  const selectedSorting = getValueOrDatasetValue(currentTarget, "sorting");
+  const selectedOrder = getValueOrDatasetValue(
+    currentTarget,
+    "sorting",
     "order"
   );
-  const filteredGender = getDatasetValue(
-    currentTarget.elements.gender,
+  const filteredGender = getValueOrDatasetValue(
+    currentTarget,
+    "gender",
     "gender"
   );
+
   state.sortOrder = selectedOrder;
   state.sortBy = selectedSorting;
   state.filterGenderBy = filteredGender;
@@ -105,24 +105,20 @@ const formChangeListener = ({ currentTarget }) => {
   drawResult(filtered);
 };
 
-const nameInputListener = ({ currentTarget }) => {
+const handleNameInput = ({ currentTarget }) => {
   const searchByName = currentTarget.value.toLowerCase();
   state.searchByName = searchByName;
   updateUsersList(users);
   drawResult(filtered);
 };
 
-const ageInputListener = ({ currentTarget }) => {
-  if (currentTarget.id === "search-by-age-from") {
-    state.ageFrom = currentTarget.value;
-  } else {
-    state.ageTo = currentTarget.value;
-  }
+const handleAgeInput = ({ currentTarget }) => {
+  state[currentTarget.dataset.ageType] = currentTarget.value;
   updateUsersList(users);
   drawResult(filtered);
 };
 
-const resetListener = () => {
+const handleResetButton = () => {
   resetStateValue();
   drawResult(users);
 };
@@ -134,10 +130,10 @@ const resetStateValue = () => {
 };
 
 const typesOfHandlers = {
-  sortersChange: formChangeListener,
-  nameInput: nameInputListener,
-  ageInput: ageInputListener,
-  reset: resetListener,
+  sortersChange: handleFormChange,
+  nameInput: handleNameInput,
+  ageInput: handleAgeInput,
+  reset: handleResetButton,
 };
 
 export const initSortAndFilter = (initData, drawer, type) => {
