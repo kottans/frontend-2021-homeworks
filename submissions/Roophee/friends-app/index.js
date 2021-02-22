@@ -8,7 +8,8 @@ const filterSettings = {searchParam: '',
                         genderParam: '',
                         ageParam: '',
                         nameParam: '',
-                        filteredData:[]};
+                        filteredData: [],
+                        secondFilteredData: []};
 
 
 const createUserCards = (item) => {
@@ -94,28 +95,62 @@ const nameSort = (prev, next) => {
 
 const applyFilters = (usersData, filter) => {
     let filteredUsersData=[];
-    filteredUsersData = usersData.filter((user) => filter(user));
-    filterSettings.filteredData = filteredUsersData;
-    return filteredUsersData;
+    uncheckSortRadio();
+    if(filterSettings.filteredData.length < 1 && filterSettings.secondFilteredData.length < 1){
+        filteredUsersData = usersData.filter((user) => filter(user));
+        filterSettings.filteredData = filteredUsersData;
+        filterSettings.filterOne = filter.name;
+        return filteredUsersData;
+    }else if(filterSettings.filteredData.length >= 1 && filterSettings.secondFilteredData.length < 1 && filterSettings.filterOne === filter.name){
+        filteredUsersData = usersData.filter((user) => filter(user));
+        filterSettings.filteredData = filteredUsersData;
+        filterSettings.filterOne = filter.name;
+        return filteredUsersData;
+    }else if(filterSettings.filteredData.length >= 1 && filterSettings.secondFilteredData.length < 1 && filterSettings.filterOne !== filter.name){
+        filteredUsersData = filterSettings.filteredData.filter((user) => filter(user));
+        filterSettings.secondFilteredData = filteredUsersData;
+        filterSettings.filterTwo = filter.name;
+        return filteredUsersData;
+    }else if(filterSettings.filteredData.length >= 1 && filterSettings.secondFilteredData.length >= 1 && filterSettings.filterTwo === filter.name){
+        filteredUsersData = filterSettings.filteredData.filter((user) => filter(user));
+        filterSettings.secondFilteredData = filteredUsersData;
+        filterSettings.filterTwo = filter.name;
+        return filteredUsersData;
+    }else if(filterSettings.filteredData.length >= 1 && filterSettings.secondFilteredData.length >= 1 && filterSettings.filterOne === filter.name){
+        filterSettings.filteredData = [];
+        filterSettings.secondFilteredData = [];
+        filterSettings.filterTwo = '';
+        filterSettings.filterOne = filter.name;
+        uncheckAllRadio();
+        clearInputText();
+        return usersData;
+    }
 };
 
 const applySort = (usersData, sortFunction) => {
     let sortedUsersData = [];
-    sortedUsersData = filterSettings.filteredData.length > 0? filterSettings.filteredData.sort(sortFunction).slice(): usersData.sort(sortFunction).slice();
-        if(sortFunction.name === 'ageSort'){
-            if(filterSettings.ageParam === 'ascending'){
-                return sortedUsersData
-            }else{
-                return sortedUsersData.reverse();
-            }
-        } else if(sortFunction.name === 'nameSort'){
-            if(filterSettings.nameParam === 'az'){
-                return sortedUsersData;
-            }else{
-                return sortedUsersData.reverse();
-            };
+    if (filterSettings.filteredData.length >= 1 && filterSettings.secondFilteredData.length >= 1) {
+        sortedUsersData = filterSettings.secondFilteredData.slice().sort(sortFunction);
+    } else if (filterSettings.filteredData.length >= 1  && filterSettings.secondFilteredData.length < 1) {
+        sortedUsersData = filterSettings.filteredData.slice().sort(sortFunction);
+    } else if (filterSettings.filteredData.length < 1  && filterSettings.secondFilteredData.length < 1) {
+        sortedUsersData = usersData.slice().sort(sortFunction);
         };
-};
+
+    if (sortFunction.name === 'ageSort'){
+        if (filterSettings.ageParam === 'ascending'){
+            return sortedUsersData
+        } else {
+            return sortedUsersData.reverse();
+        };
+    } else if (sortFunction.name === 'nameSort') {
+        if (filterSettings.nameParam === 'az') {
+            return sortedUsersData;
+        } else {
+            return sortedUsersData.reverse();
+        };
+}};
+
 
 const setGenderAllCheck = () => {
     document.querySelector('input[id="gender-all"]').checked = true;
@@ -141,38 +176,41 @@ const clearInputText = () => {
     document.querySelector('input[type="text"]').value='';
 };
 
-const setFilters = () => {
-    document.querySelector('.filter-search').addEventListener('keyup', function({target}) {
-        Object.keys(filterSettings).forEach((key) => !Array.isArray(filterSettings[key]) ? filterSettings[key] = '': filterSettings[key]=[]);
-        filterSettings.searchParam = target.value.toLowerCase();
-        updateUsers(applyFilters(RAW_DATA, searchFilter));
-        uncheckAllRadio();
-    });
-
-    document.querySelector('.filter-gender').addEventListener('change', function({target}) {
+const changeEventHandler= ({target}) => {
+    if (target.name === 'gender') {
         filterSettings.genderParam = target.value;
         uncheckSortRadio();
-        updateUsers(applyFilters(RAW_DATA, genderFilter));
-    });
-
-    document.querySelector('.filter-name').addEventListener('change', function({target}) {
+        updateUsers(applyFilters(RAW_DATA, genderFilter));;
+    }else if (target.name === 'name') {
         filterSettings.nameParam = target.value;
         updateUsers(applySort(RAW_DATA, nameSort));
-    });
-
-    document.querySelector('.filter-age').addEventListener('change', function({target}) {
+    }else if (target.name === 'age') {
         filterSettings.ageParam = target.value;
         updateUsers(applySort(RAW_DATA, ageSort));
-    });
+    }
+}
 
-    document.querySelector('.main__form-reset').addEventListener('click', function({target}) {
-        if (target.value.toLowerCase() === 'reset'){
-            uncheckAllRadio();
-            clearInputText();
-            filterSettings.filteredData.splice(0,filterSettings.filteredData.length);
-            updateUsers(RAW_DATA);
-        };
-    });
+const resetEventHandler = function({target}) {
+    if (target.value === 'reset'){
+        uncheckAllRadio();
+        clearInputText();
+        filterSettings.filteredData.splice(0,filterSettings.filteredData.length);
+        filterSettings.filteredData = [];
+        filterSettings.secondFilteredData = [];
+        updateUsers(RAW_DATA);
+    };
+}
+
+const inputEventHandler = ({target}) => {
+    filterSettings.searchParam = target.value.toLowerCase();
+        uncheckSortRadio();
+        updateUsers(applyFilters(RAW_DATA, searchFilter));
+}
+
+const setFilters = () => {
+    document.forms.filters.addEventListener('keyup', inputEventHandler);
+    document.forms.filters.addEventListener('change', changeEventHandler);
+    document.forms.filters.addEventListener('click', resetEventHandler);
 };
 
 const getData = fetchData(DATA_URL)

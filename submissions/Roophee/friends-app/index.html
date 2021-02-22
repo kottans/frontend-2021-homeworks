@@ -24,7 +24,7 @@
         </div>
 
         <aside class='main__aside'>
-        <form action="" class="main__form">
+        <form action="" id="filters" class="main__form">
             <fieldset class="filter-search flex flex-space-evenly">
                 <legend >
                     Search
@@ -46,9 +46,9 @@
                 <legend>
                     Name
                 </legend>
-                <label for="name-az">A-Z</label>
+                <label for="name-az">A - Z</label>
                 <input name="name" id="name-az" type="radio" value="az">
-                <label for="name-za">Z-A</label>
+                <label for="name-za">Z - A</label>
                 <input name="name" id="name-za" type="radio" value="za">
             </fieldset>
             <fieldset class="filter-age flex flex-space-evenly">
@@ -60,7 +60,7 @@
                 <label for="age-descending">Descending</label>
                 <input name="age" id="age-descending" type="radio" value="descending">
             </fieldset>
-            <input type="button" value="Reset" class="main__form-reset btn">
+            <input type="button" name="reset" value="reset" class="main__form-reset btn">
         </form>
         </aside>
         <section class='main__section flex flex-grow'>
