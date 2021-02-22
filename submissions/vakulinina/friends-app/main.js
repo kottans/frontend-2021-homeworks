@@ -145,7 +145,7 @@ const setAgeSortOrder = () => {
   filter.nameSort = null;
 };
 
-const handleInput = (target) => {
+const handleInput = ({ target }) => {
   const filters = {
     'name-sort': setNameSortOrder,
     'age-sort': setAgeSortOrder,
@@ -154,7 +154,12 @@ const handleInput = (target) => {
     'search-field': () => filter.searchValue = target.value.toLowerCase()
   };
 
-  filters[target.id] ? filters[target.id]() : filter.gender = target.value;
+  if (filters[target.id]) {
+    filters[target.id]()
+  } else {
+    filter.gender = target.value;
+  }
+
   filterUsers();
 };
 
@@ -162,10 +167,7 @@ const initialize = async () => {
   const filtersBar = document.querySelector('.filters');
   await getUsers()
   renderUsers(allUsers)
-  filtersBar.addEventListener('input', ({ target }) => handleInput(target));
-  document.querySelector('.sort-buttons').addEventListener('click', ({ target }) => {
-    if (target.classList.contains('sort-button')) handleInput(target);
-  });
+  filtersBar.addEventListener('input', handleInput)
   document.querySelector('.filters-button').addEventListener('click', () => {
     filtersBar.classList.toggle('visible');
   });
