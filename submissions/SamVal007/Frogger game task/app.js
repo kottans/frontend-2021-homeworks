@@ -126,3 +126,4 @@ document.addEventListener('keyup', e => {
 
 const player = new Player(playerStartValue.x, playerStartValue.y, playerStartValue.icon);
 const allEnemies = enemyStartValue.initialYcoordinates.map(y => new Enemy(enemyStartValue.x, y, enemyStartValue.icon, player));
+
