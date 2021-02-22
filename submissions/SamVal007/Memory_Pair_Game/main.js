@@ -3,6 +3,10 @@ let blockedClick = false;
 const images = ['Dart_Weider', 'lyuk-skajuoker', 'R2-D2', 'c-3po',
                 'printsessa-leya-organa', 'enakin-skajuoker', 'obi-van-kenobi',
                  'dart-sidius', 'kvaj-gon-dzhinn','joda'];
+const flippDelay = 900;
+const hiddingDelay = 600;
+const victoryMessageDelay = 1200;
+const enoughCountOfSimilarCards = 2;
 
 const mainAttributes = {
     container: 'container',
@@ -16,7 +20,7 @@ const mainAttributes = {
     hidden: 'hidden'
 };
 
-const cleanCountArray = () => similarCards = [];
+const cleanCountArray = () => similarCards = []; //similarCards.length = 0;
 
 const flippSelectedCards = () => {
     setTimeout(() => {
@@ -25,7 +29,7 @@ const flippSelectedCards = () => {
             cleanCountArray();
             blockedClick = false;
         });
-    }, 900);
+    }, flippDelay);
 };
 
 const hideSimilarCards = () => {
@@ -36,17 +40,18 @@ const hideSimilarCards = () => {
             blockedClick = false;
             const counterHiddenCards = document.querySelectorAll(".hidden").length;
             const amountOfCards = (images.length * 2);
-            console.log(amountOfCards);
-            if (counterHiddenCards == amountOfCards) {
+
+
+            if (counterHiddenCards === amountOfCards) {
                 victoryMessage();
             }
         });
-    }, 600);
+    }, hiddingDelay);
 };
 
 const compareSimilarCards = () => {
     const countCards = similarCards.length;
-    if (countCards == 2) {
+    if (countCards === enoughCountOfSimilarCards) {
         blockedClick = true;
         if (similarCards[0] === similarCards[1]) {
             hideSimilarCards();
@@ -56,9 +61,7 @@ const compareSimilarCards = () => {
     }
 };
 
-const selectCard = ({
-    target
-}) => {
+const selectCard = ({target}) => {
     if (!blockedClick) {
         const selectedCard = target.closest('.card');
         if (selectedCard && !selectedCard.classList.contains('flipped')) {
@@ -124,7 +127,7 @@ const victoryMessage = () => {
             document.body.innerHTML = "";
             showCards();
         } else window.close();
-    }, 1200);
+    }, victoryMessageDelay);
 };
 
 window.onload = () => {
@@ -132,3 +135,4 @@ window.onload = () => {
         showCards();
     } else window.close();
 };
+
