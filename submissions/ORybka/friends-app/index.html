@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Advent+Pro&family=Akaya+Kanadaka&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <title>Friends App</title>
+</head>
+<body>
+  <div class="main-container">
+    <h1 class="main-title">Friends App</h1>
+    <div class="inner-main-container">
+      <aside class="col sort-container">
+        <input type="search" class="main-search" id="user-names" placeholder="Search by name..." autocomplete="off">
+        <form action="#" class="inner-sort-container">
+          <div class="col age">
+            <p class="sort-title by-age">Sort by age</p>
+            <div class="row radios-container">
+              <label class="sort-label button-descending">
+                <input class="radio-input" type="radio" name="byAgeDescending">
+              </label>
+              <label class="sort-label button-ascending">
+                <input class="radio-input" type="radio" name="byAgeAscending">
+              </label>
+            </div>
+          </div>
+          <div class="col gender">
+            <p class="sort-title by-gender">Sort by gender</p>
+            <div class="row radios-container">
+              <label class="sort-label button-all">
+                <input class="radio-input" type="radio" name="byGenderAll">
+              </label>
+              <label class="sort-label button-male">
+                <input class="radio-input" type="radio" name="byGenderMale">
+              </label>
+              <label class="sort-label button-female">
+                <input class="radio-input" type="radio" name="byGenderFemale">
+              </label>
+            </div>
+          </div>
+          <div class="col name">
+            <p class="sort-title by-name">Sort by name</p>
+            <div class="row radios-container">
+              <label class="sort-label button-AZ">
+                <input class="radio-input" type="radio" name="byNameAZ">
+              </label>
+              <label class="sort-label button-ZA">
+                <input class="radio-input" type="radio" name="byNameZA">
+              </label>
+            </div>
+          </div>              
+          <input class="reset-button" type="submit" value="Reset">
+        </form>
+      </aside>
+      <main class="users-container"></main>
+    </div>
+    <footer>
+      <div class="footer-info">
+        <span>Made by </span>
+        <a class="github-link" href="https://github.com/ORybka" target="_blank" >Olha Rybchynska</a>
+      </div>
+    </footer>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
