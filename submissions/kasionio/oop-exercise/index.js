@@ -8,16 +8,22 @@
 // ======== OBJECTS DEFINITIONS ========
 // Define your objects here
 class Inhabitant {
-  constructor(species, name, gender, legs, saying) {
+  constructor(species, name, gender, legs, saying, friends = 'forever alone') {
       this.species = species;
       this.name = name;
       this.gender = gender;
       this.legs = legs;
       this.saying = saying;
+      this.friends = friends;
   }
+
+  addFriends(...friends)  {
+    this.friends = [...friends].map(friend => friend.name).join(', ');
+  }
+
   getOutput() {
-    const properties = ['species', 'name', 'gender', 'legs', 'saying'];
-    return properties.map(prop => prop + ':'+ this[prop])
+    const properties = ['species', 'name', 'gender', 'legs', 'saying', 'friends'];
+    return properties.map(prop => `${prop}: ${this[prop]}`)
     .join('; '); 
   }
 }
@@ -28,7 +34,7 @@ class HumanBeing extends Inhabitant {
       this.hands = 2;
   }
   getOutput() {
-    return super.getOutput() + '; hands: ' + this.hands;
+    return super.getOutput() + `; hands: ${this.hands};`
   } 
 }
 
@@ -83,6 +89,11 @@ let woman = new Woman('Kate', 'Merry Christmas!');
 let cat = new Cat('Bobby', 'male');
 let dog = new Dog('Toby', 'male');
 let catWoman = new CatWoman('Betty');
+
+man.addFriends(woman, cat, dog);
+woman.addFriends(man, cat);
+dog.addFriends(man);
+catWoman.addFriends(cat)
 
 const inhabitants = [man, woman, catWoman, cat, dog];
 
