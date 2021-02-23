@@ -1,4 +1,7 @@
-const allSavedUsers = [];
+const allSavedUsers = {
+  current: [],
+  changed: [],
+};
 const countUsers = 72;
 const usersBox = document.getElementById("usersList");
 const allFilters = document.getElementById("filters_menu");
@@ -23,7 +26,7 @@ function getUsers() {
 function initApp() {
   getUsers().then((users) => {
     saveUsers(users);
-    createUsersCards(allSavedUsers);
+    createUsersCards(allSavedUsers.changed);
   });
 }
 
@@ -31,7 +34,8 @@ initApp();
 
 function saveUsers(users) {
   users.forEach(function (el) {
-    allSavedUsers.push(el);
+    allSavedUsers.current.push(el);
+    allSavedUsers.changed.push(el);
   });
 }
 
@@ -52,7 +56,7 @@ function createUsersCards(users) {
   usersBox.appendChild(listsFragment);
 }
 
-allFilters.addEventListener("click", function ({ target }) {
+allFilters.addEventListener("change", function ({ target }) {
   let filteredUsers = null;
 
   if (target.value === "reset") {
@@ -60,90 +64,67 @@ allFilters.addEventListener("click", function ({ target }) {
     return;
   }
 
-  if (target.nodeName !== "INPUT") {
-    return;
-  }
-
   if (target.name === "search") {
     return;
   }
 
-  switch (target.value) {
-    case "nameAscend":
-      filteredUsers = sortByName(allSavedUsers);
-      break;
-    case "nameDescend":
-      filteredUsers = sortByName(allSavedUsers, true);
-      break;
-    case "younger":
-      filteredUsers = sortByAge(allSavedUsers);
-      break;
-    case "senior":
-      filteredUsers = sortByAge(allSavedUsers, true);
-      break;
-    case "male":
-      filteredUsers = sortByGender(allSavedUsers, "male");
-      break;
-    case "female":
-      filteredUsers = sortByGender(allSavedUsers, "female");
-      break;
-  }
+  const sortedCases = {
+    sort_by_alphabet: (users) => nameSorters[target.value](users),
+    sort_by_age: (users) => ageSorters[target.value](users),
+    sort_by_gender: (users) => sortByGender(target.value, users),
+  };
+
+  filteredUsers = sortedCases[target.name](allSavedUsers.changed);
 
   cleanSelectedInputs();
   deleteAllShowedUsers();
   createUsersCards(filteredUsers);
 });
 
-function sortByName(list, isRevers) {
-  const result = [...list];
-  const runSorting = (a, b) => {
-    if (a.name.first > b.name.first) {
-      return 1;
-    }
-    if (a.name.first < b.name.first) {
-      return -1;
-    }
-    return 0;
-  };
-  result.sort((a, b) => (isRevers ? runSorting(b, a) : runSorting(a, b)));
-  return result;
-}
+const compareNames = (firstUsers, secondUsers) => {
+  if (firstUsers.name.first > secondUsers.name.first) {
+    return 1;
+  }
+  if (firstUsers.name.first < secondUsers.name.first) {
+    return -1;
+  }
+  return 0;
+};
 
-function sortByAge(list, isRevers) {
-  const result = [...list];
-  const runSorting = (a, b) => a.dob.age - b.dob.age;
-  result.sort((a, b) => (isRevers ? runSorting(b, a) : runSorting(a, b)));
-  return result;
-}
+const compareAge = (firstUsers, secondUsers) =>
+  firstUsers.dob.age - secondUsers.dob.age;
 
-function sortByGender(list, gender) {
-  let genderFilter = [...list];
-  genderFilter = allSavedUsers.filter((elem) => elem.gender === gender);
-  return genderFilter;
-}
+const nameSorters = {
+  nameAscend: (users) => users.sort(compareNames),
+  nameDescend: (users) => users.sort((a, b) => compareNames(b, a)),
+};
+
+const ageSorters = {
+  younger: (users) => users.sort(compareAge),
+  senior: (users) => users.sort((a, b) => compareAge(b, a)),
+};
+
+const sortByGender = (gender, users) =>
+  users.filter((elem) => elem.gender === gender);
 
 function resetFilters() {
   deleteAllShowedUsers();
-  createUsersCards(allSavedUsers);
+  createUsersCards(allSavedUsers.current);
 }
 searchInput.addEventListener("keydown", () => {
-  if (searchInput.value === "") {
-    return;
-  }
   deleteAllShowedUsers();
-  const featuredUsers = search(allSavedUsers);
+  const featuredUsers = seekNames(allSavedUsers.changed);
   createUsersCards(featuredUsers);
 });
 
-function search(people) {
+function seekNames(people) {
   const search = searchInput.value.toLowerCase();
 
-  const peopleSearch = people.filter(
+  return people.filter(
     (elem) =>
       elem.name.first.toLowerCase().match(search) ||
       elem.name.last.toLowerCase().match(search)
   );
-  return peopleSearch;
 }
 
 function deleteAllShowedUsers() {
@@ -152,7 +133,5 @@ function deleteAllShowedUsers() {
 
 function cleanSelectedInputs() {
   const allInputs = document.querySelectorAll(".sort_input");
-  allInputs.forEach((element) => {
-    element.checked = false;
-  });
+  allInputs.forEach((element) => (element.checked = false));
 }

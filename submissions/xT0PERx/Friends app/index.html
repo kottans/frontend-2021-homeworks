@@ -55,7 +55,7 @@
               type="radio"
               id="male"
               value="male"
-              name="sort_by_name"
+              name="sort_by_gender"
               class="sort_input"
             />
             <label for="male" class="filter-btn">Male</label>
@@ -63,7 +63,7 @@
               type="radio"
               id="female"
               value="female"
-              name="sort_by_name"
+              name="sort_by_gender"
               class="sort_input"
             />
             <label for="female" class="filter-btn">Female</label>
@@ -88,9 +88,14 @@
             <label for="senior" class="filter-btn">Oldgest</label>
           </li>
           <li class="reset_btn">
-            <button class="filter-btn" id="reset" value="reset">
-              Reset Filters
-            </button>
+            <input
+              type="checkbox"
+              class="sort_input"
+              id="reset"
+              name="reset_filters"
+              value="reset"
+            />
+            <label for="reset" class="filter-btn">Reset Filters</label>
           </li>
         </ul>
       </aside>

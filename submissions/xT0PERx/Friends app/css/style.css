@@ -117,7 +117,7 @@ body {
   align-content: center;
 }
 
-.selection-box input {
+.sort_input {
   appearance: none;
 }
 
@@ -206,8 +206,8 @@ body {
 }
 
 .reset_btn {
-  display: flex;
-  justify-self: center;
+  display: grid;
+  place-items: center;
 }
 
 .bottom {
