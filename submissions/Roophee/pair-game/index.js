@@ -44,7 +44,6 @@ const audioButton = document.querySelector('.audio__button');
 const bodyElem = document.querySelector('body');
 const maxQuantityOfPairsOnTheScreen = 6;
 
-// SHUFFLE CARDS IN CARDS_FOR_PLAY_ARRAY
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -52,7 +51,6 @@ function shuffleArray(array) {
     }
 }
 
-// TAKE RANDOM CARDS FROM POOL OF CARDS
 const cardsForPlay = function (heroesArray) {
     const heroesArrCopy = heroesArray.slice();
     let heroesInUse = [];
@@ -71,7 +69,6 @@ const cardsForPlay = function (heroesArray) {
     }
 }
 
-//MAKE ANIMATION ON PAGE DOWNLOAD
 const animateOnStart = function(){
     gameBg.style.top = `${-gameBg.clientHeight - gameBg.offsetTop}px`;
     cardPlace.style.bottom = `${-document.documentElement.clientHeight * 2}px`;
@@ -83,7 +80,6 @@ const animateOnStart = function(){
 
 document.addEventListener('DOMContentLoaded', animateOnStart);
 
-//CALCULATE CARD SIZE FROM BODY SIZE AND RETURN HANDLER
 const calculateCardSize = () => {
     let size;
 
@@ -102,7 +98,6 @@ const calculateCardSize = () => {
     return setImgWidthHeight;
 }
 
-// ADD CARDS ON DOCUMENT
 const addCardsOnPage = function () {
     const heroesCardForPlay = cardsForPlay(heroesArray);
     const cardsContainerOnDynamicGeneration = document.createDocumentFragment();
@@ -128,7 +123,6 @@ const addCardsOnPage = function () {
 
 addCardsOnPage();
 
-//  CLEAR OPERATION OBJECTS, PICK NEW CARDS FOR THE GAME
 const clearAllOperationObjectsAndCreateNewGame = function() {
     const playAgain = window.confirm('Congratulations. You have matched all pairs and won the game. Want to play again?');
         if (playAgain) {
@@ -139,7 +133,6 @@ const clearAllOperationObjectsAndCreateNewGame = function() {
         }
 }
 
-// CHECK PLAYER COLLECTED ALL PAIRS OR NOT
 const checkGameIsOverOrNot = function () {
     if (pairs.length === maxQuantityOfPairsOnTheScreen){
         setTimeout(function () {
@@ -148,35 +141,35 @@ const checkGameIsOverOrNot = function () {
     }
 }
 
-// ADD HIDE CLASS ON CARD-HOLDER ITEM IF TWO CARD ARE PAIR
 let hidePair = function(currentPair){
-    if (currentPair[0] && currentPair[1]){
-        currentPair[0][1].classList.add('hide');
-        currentPair[1][1].classList.add('hide');
+    const [firstCardNode, secondCardNode] = currentPair;
+    if (firstCardNode && secondCardNode){
+        firstCardNode.classList.add('hide');
+        secondCardNode.classList.add('hide');
         currentPair.splice(0, 2);
     }
 }
 
-// REMOVE ACTIVE CLASS FROM CARD-HOLDER ITEM IF TWO CARD ARE NOT A PAIR
 let clearPair = function(currentPair) {
-    currentPair[0][1].classList.remove('active');
-    currentPair[1][1].classList.remove('active');
+    const [firstCardNode, secondCardNode] = currentPair;
+    firstCardNode.classList.remove('active');
+    secondCardNode.classList.remove('active');
     currentPair.splice(0, 2);
 }
 
-// CHECK IS TWO CARDS A PAIR OR NOT
 let checkPairOrNot = function () {
     if (prePair.length === 2){
         let currentPair = prePair.slice();
         prePair.splice(0, 2);
-        if (currentPair[0][0] === currentPair[1][0]) {
+        const [firstCardNode, secondCardNode] = currentPair;
+        if (getCardIDFromCardHolder(firstCardNode) === getCardIDFromCardHolder(secondCardNode)) {
             pairs.push('1');
             setTimeout(function (currentPair) {
                 hidePair(currentPair);
             }, 500, currentPair);
             checkGameIsOverOrNot();
 
-        } else if ( currentPair[0][0] !== currentPair[1][0]) {
+        } else if (getCardIDFromCardHolder(firstCardNode) !== getCardIDFromCardHolder(secondCardNode)) {
             setTimeout(function (currentPair) {
                 clearPair(currentPair);
             }, 800, currentPair);
@@ -184,26 +177,27 @@ let checkPairOrNot = function () {
     }
 }
 
-// GET PICTURE NAME FROM ALT AND PARENT ELEMENT
-let createCardInfoAndAddItInCheckPlace = (cardBack, cardHolderElement) => {
-    let cardName = cardBack.closest('.game__card-holder').querySelector('.game__card-img').alt;
-    prePair.push([cardName, cardHolderElement]);
+const getCardIDFromCardHolder = (cardHolderElement) => {
+    const cardID = cardHolderElement.querySelector('.game__card-img').alt;
+    return cardID;
 }
 
-//  CLICK ON CARD EVENT
+let createCardInfoAndAddItInCheckPlace = (cardHolderElement) => {
+    prePair.push(cardHolderElement);
+}
+
 cardPlace.addEventListener('click', function (e) {
     let cardBack = e.target;
     if (cardBack.classList.contains('game__card-cardback')) {
         let cardHolderElement = cardBack.closest('.game__card-holder');
         if (prePair.length < 2) {
             cardHolderElement.classList.add('active');
-            createCardInfoAndAddItInCheckPlace(cardBack,cardHolderElement);
-            checkPairOrNot()
+            createCardInfoAndAddItInCheckPlace(cardHolderElement);
+            checkPairOrNot();
         }
     }
 })
 
-// MUTE AUDIO
 audioButton.addEventListener('click', function (e) {
         audioItem.volume = 0.4;
         if (!audioItem.paused) {
