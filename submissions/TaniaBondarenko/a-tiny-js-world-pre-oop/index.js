@@ -5,71 +5,73 @@
    Web app: _put project's github pages URL here_
    */
 
-// ======== OBJECTS DEFINITIONS ========
-// Define your objects here
-const inhabitants = [];
-inhabitants.push({
-  species: 'cat',
-  name: 'Toby',
-  gender: 'male',
+// ======== creatureECTS DEFINITIONS ========
+// Define your creatureects here
+const cat = {
+  species: "cat",
+  name: "Toby",
+  gender: "male",
   legs: 4,
   hands: 0,
-  saying: 'Meow! Feed me!',
-  friends: "no one"
-});
+  saying: "Meow! Feed me!",
+  friends: "no one",
+};
 
-  inhabitants.push({
-    species: 'dog',
-    name: 'Rex',
-    gender: 'male',
-    legs: 4,
-    hands: 0,
-    saying: 'Woof-woof!',
-    friends: ""
-  });
+const dog = {
+  species: "dog",
+  name: "Rex",
+  gender: "male",
+  legs: 4,
+  hands: 0,
+  saying: "Woof-woof!",
+  friends: "",
+};
 
-inhabitants.push( {
-  species: 'human',
-  name: 'Bill',
-  gender: 'male',
+const male = {
+  species: "human",
+  name: "Bill",
+  gender: "male",
   legs: 2,
   hands: 2,
-  saying: 'Hi!',
-  friends: ""
-});
+  saying: "Hi!",
+  friends: "",
+};
 
-inhabitants.push( {
-  species: 'human',
-  name: 'Beverly',
-  gender: 'female',
+const female = {
+  species: "human",
+  name: "Beverly",
+  gender: "female",
   legs: 2,
   hands: 2,
   saying: "What a nice day!",
-  friends: ""
-});
-
-inhabitants.push( {
-  species: 'cat-Woman',
-  name: 'Maggie',
-  gender: 'female',
-  legs: 2,
-  hands: 2,
-  saying: inhabitants[0].saying,
-  friends: ""
-});
-
-inhabitants[1].friends+=`${inhabitants[2].name}, ${inhabitants[3].name}`;
-inhabitants[2].friends += `${inhabitants[3].name}, ${inhabitants[0].name} - a ${inhabitants[0].species}`;
-inhabitants[3].friends += `${inhabitants[1].name} - a ${inhabitants[1].species}`;
-inhabitants[4].friends += `${inhabitants[0].name} - a ${inhabitants[0].species}`;
-
-inhabitants.forEach(myFoo);
-function myFoo(obj) {
-  print(`${obj.species}; ${obj.name}; ${obj.gender}; ${obj.legs}; ${obj.hands}; ${obj.saying}; ${obj.friends}`);
+  friends: "",
 };
 
+const catWoman = {
+  species: "cat-Woman",
+  name: "Maggie",
+  gender: "female",
+  legs: 2,
+  hands: 2,
+  friends: "",
+};
 
+catWoman.saying = cat.saying;
 
+dog.friends += `${female.name}, ${male.name}`;
+male.friends += `${female.name}, ${cat.name} - a ${cat.species}`;
+female.friends += `${dog.name} - a ${dog.species}`;
+catWoman.friends += `${cat.name} - a ${cat.species}`;
+
+const inhabitants = [cat, dog, male, female, catWoman];
+
+function printCreatureDatas(creature) {
+  console.log(
+    ["species", "name", "gender", "legs", "hands", "saying", "friends"].map((propertyName) => `${creature[propertyName]}`).join("; ") + `;`
+  );
+}
+
+inhabitants.forEach((inhabitant) => printCreatureDatas(inhabitant));
 
 // ======== OUTPUT ========
 /* Use print(message) for output.
@@ -89,5 +91,3 @@ function myFoo(obj) {
    print('human; <strong>John</strong>; male; 2; 2; <em>Hello world!</em>; Rex, Tom, Jenny');
    print('human; <strong>John</strong>; male; 2; 2; <em>Hello world!</em>; Rex, Tom, Jenny', 'div');
    */
-
-
