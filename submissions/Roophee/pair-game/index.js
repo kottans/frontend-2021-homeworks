@@ -120,9 +120,9 @@ const addCardsOnPage = function () {
                             </div>`;
             cardsContainerOnDynamicGeneration.appendChild(cardItem);
         }
-    [].forEach.call(cardsContainerOnDynamicGeneration.querySelectorAll('.game__card-holder'), cardSizeHandler);
-    [].forEach.call(cardsContainerOnDynamicGeneration.querySelectorAll('.game__card-img'), cardSizeHandler);
-    [].forEach.call(cardsContainerOnDynamicGeneration.querySelectorAll('.game__card-cardback'), cardSizeHandler);
+    cardsContainerOnDynamicGeneration.querySelectorAll('.game__card-holder').forEach(cardSizeHandler);
+    cardsContainerOnDynamicGeneration.querySelectorAll('.game__card-img').forEach(cardSizeHandler);
+    cardsContainerOnDynamicGeneration.querySelectorAll('.game__card-cardback').forEach(cardSizeHandler);
     cardPlace.appendChild(cardsContainerOnDynamicGeneration);
 }
 
