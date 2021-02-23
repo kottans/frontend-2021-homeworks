@@ -1,4 +1,4 @@
-let quantityqOfCardsLeft;
+let quantityOfCardsLeft;
 let cardID, cardValue, prevCardId, prevCardValue;
 let quantityOfOpenCards = 0;
 
@@ -7,8 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.querySelector("main").addEventListener("click", (event) => {
     let aEl = event.target.closest(".flip-container");
-    if (!aEl || aEl?.id === prevCardId) return;
-    if (quantityOfOpenCards === 2) return;
+    if (!aEl || aEl?.id === prevCardId || quantityOfOpenCards === 2) return;
 
     if (quantityOfOpenCards < 2) {
       quantityOfOpenCards++;
@@ -42,7 +41,7 @@ const processingTwoOpenCards = () => {
     prevCardId = null;
     prevValue = null;
     if (quantityOfCardsLeft === 0) {
-      youWon();
+      finishCurrentGame();
     }
   }, 1000);
 };
@@ -53,7 +52,7 @@ const startNewGame = () => {
   quantityOfCardsLeft = cards.length;
 };
 
-const youWon = () => {
+const finishCurrentGame = () => {
   alert("You Won!");
   startNewGame();
 };
@@ -89,12 +88,12 @@ const createCard = (content, index) => {
 };
 
 const flip = (cardID) => {
-  document.querySelector("#" + cardID).classList.toggle("flip");
+  document.querySelector(`#${cardID}`).classList.toggle("flip");
 };
 
 const hideMatchedCards = (firstCardID, secondCardID) => {
-  document.querySelector("#" + firstCardID).classList.add("hidden");
-  document.querySelector("#" + secondCardID).classList.add("hidden");
+  document.querySelector(`#${firstCardID}`).classList.add("hidden");
+  document.querySelector(`#${secondCardID}`).classList.add("hidden");
   quantityOfCardsLeft -= 2;
 };
 
