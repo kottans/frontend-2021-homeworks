@@ -1,15 +1,23 @@
 'use strict';
 
 const DATA_URL = 'https://randomuser.me/api/?results=100';
-const RAW_DATA = [];
-const USER_STOR = new Map();
+let RAW_DATA = [];
+const NODES_STORAGE = new Map();
 const mainSection = document.querySelector('.main__section');
-const filterSettings = {searchParam: '',
-                        genderParam: '',
-                        ageParam: '',
-                        nameParam: '',
-                        filteredData: [],
-                        secondFilteredData: []};
+const filterSettings = {
+searchParam: '',
+genderParam: '',
+ageParam: '',
+nameParam: '',
+filteredData: [],
+secondFilteredData: [],
+filterOne: '',
+filterTwo: '',
+};
+const wasFirstFiltration = () => filterSettings.filteredData.length >= 1;
+const wasSecondFiltration = () => filterSettings.secondFilteredData.length >= 1;
+const thisFilterMadeFirstFiltration = (filter) => filterSettings.filterOne === filter.name;
+const thisFilterMadeSecondFiltration = (filter) => filterSettings.filterTwo === filter.name;
 
 
 const createUserCards = (item) => {
@@ -38,17 +46,17 @@ const fetchData = (url) => fetch(url)
         console.error('There has been a problem with your fetch operation:' , error)
     })
 
-const getResult = (response) => {return response.results};
+const getResult = (response) =>  response.results;
 
-const storeData = (result) => {
-    result.forEach((item) => {
-        RAW_DATA.push(item);
-        USER_STOR.set(item, createUserCards(item));
+const storeData = (results) => {
+    RAW_DATA = results
+    results.forEach((item) => {
+        NODES_STORAGE.set(item, createUserCards(item));
     });
 };
 
 const getUserNode = (user) => {
-    return USER_STOR.get(user);
+    return NODES_STORAGE.get(user);
 };
 
 const createUserList = (usersData) => {
@@ -94,57 +102,85 @@ const nameSort = (prev, next) => {
 };
 
 const applyFilters = (usersData, filter) => {
-    let filteredUsersData=[];
     uncheckSortRadio();
-    if(filterSettings.filteredData.length < 1 && filterSettings.secondFilteredData.length < 1){
-        filteredUsersData = usersData.filter((user) => filter(user));
-        filterSettings.filteredData = filteredUsersData;
+
+    const makeFirstFiltration = (filter) => {
+        const firstFiltrationUsersResult = usersData.filter((user) => filter(user));
+        filterSettings.filteredData = firstFiltrationUsersResult;
         filterSettings.filterOne = filter.name;
-        return filteredUsersData;
-    }else if(filterSettings.filteredData.length >= 1 && filterSettings.secondFilteredData.length < 1 && filterSettings.filterOne === filter.name){
-        filteredUsersData = usersData.filter((user) => filter(user));
-        filterSettings.filteredData = filteredUsersData;
-        filterSettings.filterOne = filter.name;
-        return filteredUsersData;
-    }else if(filterSettings.filteredData.length >= 1 && filterSettings.secondFilteredData.length < 1 && filterSettings.filterOne !== filter.name){
-        filteredUsersData = filterSettings.filteredData.filter((user) => filter(user));
-        filterSettings.secondFilteredData = filteredUsersData;
+        return firstFiltrationUsersResult;
+    }
+    const makeSecondFiltration = (filter) => {
+        const secondFiltrationUsersResult = filterSettings.filteredData.filter((user) => filter(user));
+        filterSettings.secondFilteredData = secondFiltrationUsersResult;
         filterSettings.filterTwo = filter.name;
-        return filteredUsersData;
-    }else if(filterSettings.filteredData.length >= 1 && filterSettings.secondFilteredData.length >= 1 && filterSettings.filterTwo === filter.name){
-        filteredUsersData = filterSettings.filteredData.filter((user) => filter(user));
-        filterSettings.secondFilteredData = filteredUsersData;
-        filterSettings.filterTwo = filter.name;
-        return filteredUsersData;
-    }else if(filterSettings.filteredData.length >= 1 && filterSettings.secondFilteredData.length >= 1 && filterSettings.filterOne === filter.name){
+        return secondFiltrationUsersResult;
+    }
+
+    const resetFilters = () => {
         filterSettings.filteredData = [];
         filterSettings.secondFilteredData = [];
         filterSettings.filterTwo = '';
-        filterSettings.filterOne = filter.name;
+        filterSettings.filterOne = '';
         uncheckAllRadio();
         clearInputText();
-        return usersData;
+    }
+
+    if( !wasFirstFiltration() && !wasSecondFiltration()){
+        return makeFirstFiltration(filter);
+
+    }else if( wasFirstFiltration() && !wasSecondFiltration() && thisFilterMadeFirstFiltration(filter) ){
+        return makeFirstFiltration(filter);
+
+    }else if( wasFirstFiltration() && !wasSecondFiltration() && !thisFilterMadeFirstFiltration(filter) ){
+        return makeSecondFiltration(filter);
+
+    }else if( wasFirstFiltration() && wasSecondFiltration() && thisFilterMadeSecondFiltration(filter) ){
+        return makeSecondFiltration(filter);
+
+    }else if( wasFirstFiltration() && wasSecondFiltration() && thisFilterMadeFirstFiltration(filter) ){
+        resetFilters();
+        return makeFirstFiltration(filter);
     }
 };
 
 const applySort = (usersData, sortFunction) => {
     let sortedUsersData = [];
-    if (filterSettings.filteredData.length >= 1 && filterSettings.secondFilteredData.length >= 1) {
+
+    const thisSortFunctionByAge = (sortFunction) => {
+        return sortFunction.name === 'ageSort'
+    }
+
+    const thisSortFunctionByName = (sortFunction) => {
+        return sortFunction.name === 'nameSort'
+    }
+
+    const sortByAgeAscending = () => {
+        return filterSettings.ageParam === 'ascending';
+    }
+
+    const sortByNameAlphabetically = () => {
+        return filterSettings.nameParam === 'az';
+    }
+
+    if (wasFirstFiltration() && wasSecondFiltration()) {
         sortedUsersData = filterSettings.secondFilteredData.slice().sort(sortFunction);
-    } else if (filterSettings.filteredData.length >= 1  && filterSettings.secondFilteredData.length < 1) {
+    } else if (wasFirstFiltration()  && !wasSecondFiltration()) {
         sortedUsersData = filterSettings.filteredData.slice().sort(sortFunction);
-    } else if (filterSettings.filteredData.length < 1  && filterSettings.secondFilteredData.length < 1) {
+    } else if (!wasFirstFiltration()  && !wasSecondFiltration()) {
         sortedUsersData = usersData.slice().sort(sortFunction);
         };
 
-    if (sortFunction.name === 'ageSort'){
-        if (filterSettings.ageParam === 'ascending'){
+    if (thisSortFunctionByAge(sortFunction)) {
+        uncheckSortByNameRadio();
+        if (sortByAgeAscending()){
             return sortedUsersData
         } else {
             return sortedUsersData.reverse();
         };
-    } else if (sortFunction.name === 'nameSort') {
-        if (filterSettings.nameParam === 'az') {
+    } else if (thisSortFunctionByName(sortFunction)) {
+        uncheckSortByAgeRadio()
+        if (sortByNameAlphabetically()) {
             return sortedUsersData;
         } else {
             return sortedUsersData.reverse();
@@ -163,13 +199,21 @@ const uncheckAllRadio = () => {
     setGenderAllCheck();
 };
 
-const uncheckSortRadio = () => {
+const uncheckSortByNameRadio = () => {
     document.querySelectorAll('input[name="name"]').forEach((item) => {
         item.checked = false;
     });
+}
+
+const uncheckSortByAgeRadio = () => {
     document.querySelectorAll('input[name="age"]').forEach((item) => {
         item.checked = false;
     })
+}
+
+const uncheckSortRadio = () => {
+    uncheckSortByNameRadio();
+    uncheckSortByAgeRadio()
 };
 
 const clearInputText = () => {
@@ -191,7 +235,7 @@ const changeEventHandler= ({target}) => {
 }
 
 const resetEventHandler = function({target}) {
-    if (target.value === 'reset'){
+    if (target.value.toLowerCase() === 'reset'){
         uncheckAllRadio();
         clearInputText();
         filterSettings.filteredData.splice(0,filterSettings.filteredData.length);
@@ -210,7 +254,7 @@ const inputEventHandler = ({target}) => {
 const setFilters = () => {
     document.forms.filters.addEventListener('keyup', inputEventHandler);
     document.forms.filters.addEventListener('change', changeEventHandler);
-    document.forms.filters.addEventListener('click', resetEventHandler);
+    document.forms.filters.reset.addEventListener('click', resetEventHandler);
 };
 
 const getData = fetchData(DATA_URL)
