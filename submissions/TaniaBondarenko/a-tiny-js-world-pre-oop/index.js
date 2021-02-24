@@ -66,9 +66,7 @@ catWoman.friends += `${cat.name} - a ${cat.species}`;
 const inhabitants = [cat, dog, male, female, catWoman];
 
 function printCreatureDatas(creature) {
-  console.log(
-    ["species", "name", "gender", "legs", "hands", "saying", "friends"].map((propertyName) => `${creature[propertyName]}`).join("; ") + `;`
-  );
+  print(["species", "name", "gender", "legs", "hands", "saying", "friends"].map((propertyName) => `${creature[propertyName]}`).join("; ") + `;`);
 }
 
 inhabitants.forEach((inhabitant) => printCreatureDatas(inhabitant));
