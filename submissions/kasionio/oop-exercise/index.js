@@ -8,40 +8,48 @@
 // ======== OBJECTS DEFINITIONS ========
 // Define your objects here
 class Inhabitant {
-  constructor(species, name, gender, legs, saying, friends = 'forever alone') {
+  constructor(species, name, gender, legs, saying) {
       this.species = species;
       this.name = name;
       this.gender = gender;
       this.legs = legs;
       this.saying = saying;
-      this.friends = friends;
+      this.friends = [];
   }
 
-  addFriends(...friends)  {
-    this.friends = [...friends].map(friend => friend.name).join(', ');
+  addFriends(...friendsInstances) {
+      this.friends.push(...friendsInstances);
+  }
+
+  getFriendsNames() {
+      if (this.friends.length > 0) {
+          return this.friends.map(friend => friend.name)
+      } else {
+          return this.friends = 'forever alone...'
+      }
   }
 
   getOutput() {
-    const properties = ['species', 'name', 'gender', 'legs', 'saying', 'friends'];
-    return properties.map(prop => `${prop}: ${this[prop]}`)
-    .join('; '); 
+      const properties = ['species', 'name', 'gender', 'legs', 'saying'];
+      return properties.map(prop => `${prop}: ${this[prop]}`)
+          .join('; ') + `; friends: ${this.getFriendsNames()}`
   }
 }
 
 class HumanBeing extends Inhabitant {
-  constructor(species, name, gender, saying, hands) {
+  constructor(species, name, gender, saying) {
       super(species, name, gender, 2, saying);
       this.hands = 2;
   }
   getOutput() {
-    return super.getOutput() + `; hands: ${this.hands};`
-  } 
+      return super.getOutput() + `; hands: ${this.hands};`
+  }
 }
 
 class Human extends HumanBeing {
   constructor(name, gender, saying) {
-    super('human', name, gender, saying);
-}
+      super('human', name, gender, saying);
+  }
 }
 
 class Man extends Human {
@@ -74,8 +82,8 @@ class Cat extends Animal {
       this.saying = Cat.say()
   }
   static say() {
-    return 'meow';
-  } 
+      return 'meow';
+  }
 }
 
 class CatWoman extends HumanBeing {
@@ -90,10 +98,10 @@ let cat = new Cat('Bobby', 'male');
 let dog = new Dog('Toby', 'male');
 let catWoman = new CatWoman('Betty');
 
-man.addFriends(woman, cat, dog);
+man.addFriends(woman, cat);
 woman.addFriends(man, cat);
 dog.addFriends(man);
-catWoman.addFriends(cat)
+catWoman.addFriends(cat);
 
 const inhabitants = [man, woman, catWoman, cat, dog];
 
