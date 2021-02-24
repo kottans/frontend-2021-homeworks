@@ -15,44 +15,51 @@
     <h1 class="main-title">Friends App</h1>
     <div class="inner-main-container">
       <aside class="col sort-container">
-        <input type="search" class="main-search" id="user-names" placeholder="Search by name..." autocomplete="off">
         <form action="#" class="inner-sort-container">
-          <div class="col age">
-            <p class="sort-title by-age">Sort by age</p>
-            <div class="row radios-container">
-              <label class="sort-label button-descending">
-                <input class="radio-input" type="radio" name="byAgeDescending">
+          <input type="search" class="main-search" id="user-names" placeholder="Search by name..." autocomplete="off">
+          <div div class="col age">
+            <p class="sort-title">Sort by age</p>
+            <div class="row sorting-container">
+              <label class="form-label button-descending">
+                <input class="sorting-input" type="radio" id="byAgeDescending">
+                <div class="icon-image descending"></div>
               </label>
-              <label class="sort-label button-ascending">
-                <input class="radio-input" type="radio" name="byAgeAscending">
-              </label>
-            </div>
-          </div>
-          <div class="col gender">
-            <p class="sort-title by-gender">Sort by gender</p>
-            <div class="row radios-container">
-              <label class="sort-label button-all">
-                <input class="radio-input" type="radio" name="byGenderAll">
-              </label>
-              <label class="sort-label button-male">
-                <input class="radio-input" type="radio" name="byGenderMale">
-              </label>
-              <label class="sort-label button-female">
-                <input class="radio-input" type="radio" name="byGenderFemale">
+              <label class="form-label button-ascending">
+                <input class="sorting-input" type="radio" id="byAgeAscending">
+                <div class="icon-image ascending"></div>
               </label>
             </div>
           </div>
           <div class="col name">
-            <p class="sort-title by-name">Sort by name</p>
-            <div class="row radios-container">
-              <label class="sort-label button-AZ">
-                <input class="radio-input" type="radio" name="byNameAZ">
+            <p class="sort-title">Sort by name</p>
+            <div class="row sorting-container">
+              <label class="form-label button-AZ">
+                <input class="sorting-input" type="radio" id="byNameAZ">
+                <div class="icon-image AZ"></div>
               </label>
-              <label class="sort-label button-ZA">
-                <input class="radio-input" type="radio" name="byNameZA">
+              <label class="form-label button-ZA">
+                <input class="sorting-input" type="radio" id="byNameZA">
+                <div class="icon-image ZA"></div>
               </label>
             </div>
-          </div>              
+          </div>
+          <div class="col gender">
+            <p class="sort-title">Filter by gender</p>
+            <div class="row sorting-container">
+              <label class="form-label button-all">
+                <input class="sorting-input gender" type="radio" id="byGenderAll">
+                <div class="icon-image all"></div>
+              </label>
+              <label class="form-label button-male">
+                <input class="sorting-input gender" type="radio" id="byGenderMale">
+                <div class="icon-image male"></div>
+              </label>
+              <label class="form-label button-female">
+                <input class="sorting-input gender" type="radio" id="byGenderFemale">
+                <div class="icon-image female"></div>
+              </label>
+            </div>
+          </div>           
           <input class="reset-button" type="submit" value="Reset">
         </form>
       </aside>

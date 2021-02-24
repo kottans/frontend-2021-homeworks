@@ -1,4 +1,3 @@
-/****** BASE RESET ******/
 *,
 *::before,
 *::after {
@@ -24,7 +23,7 @@ li {
 }
 
 $colors: (
-  background: #aadddd9e,
+  background: #82b3c29e,
   accent: #ad125b,
 );
 
@@ -32,7 +31,6 @@ $colors: (
   @return map-get($colors, $colors-name);
 }
 
-/****** FONTS ******/
 html {
   font-family: 'Advent Pro', cursive;
   font-size: 16px;
@@ -200,6 +198,8 @@ body {
 .main-search {
   justify-self: center;
   height: 2rem;
+  width: 100%;
+  margin: 1rem 0;
   padding-left: 0.5rem;
   font-family: 'Advent Pro', cursive;
   letter-spacing: 0.1rem;
@@ -219,7 +219,7 @@ body {
   text-align: left;
 }
 
-.radios-container {
+.sorting-container {
   width: 100%;
 }
 
@@ -243,7 +243,7 @@ body {
     text-align: center;
   }
 
-  .radios-container {
+  .sorting-container {
     width: 50%;
     justify-content: center;
   }
@@ -255,43 +255,50 @@ body {
   }
 }
 
-.radio-input {
-  position: relative;
-  height: 0;
-  width: 0;
-  cursor: pointer;
+.sorting-input {
+  width: 1rem;
+  height: 1rem;
+  display: none;
+  margin: 0;
 }
 
-.sort-label {
-  position: relative;
-  display: block;
-  height: 2rem;
-  width: 2rem;
+.form-label {
+  height: 3rem;
+  width: 3rem;
   margin: 0 0.5rem;
   border-radius: 3px;
-  background-size: cover;
-  background-position: center;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+
+  &:focus-within {
+    border: 1px solid #333232;
+  }
 }
 
-.no-matches-title {
-  margin-top: 4rem;
+.icon-image {
+  height: 3rem;
+  width: 3rem;
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
 }
 
 @mixin setButton($items) {
   @each $item in $items {
-    .button-#{$item} {
+    .icon-image.#{$item} {
       background-image: url(icons/#{$item}.png);
-
       &:hover,
-      &:focus {
+      &:focus,
+      &:checked {
         background-image: url(icons/#{$item}_active.png);
       }
     }
   }
 }
-
 @include setButton(('descending', 'ascending', 'all', 'male', 'female', 'AZ', 'ZA'));
+
+.no-matches-title {
+  margin-top: 4rem;
+}
 
 .reset-button {
   width: 74%;
