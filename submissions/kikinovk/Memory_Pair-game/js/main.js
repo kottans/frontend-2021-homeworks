@@ -1,21 +1,27 @@
 const images = [
   { src : './img/card_1.svg',
-    id : '01'
+    id : '01',
+    alt : 'Camel'
   },
   { src : './img/card_2.svg',
-    id : '02'
+    id : '02',
+    alt: 'Dog'
   },
   { src : './img/card_3.svg',
-      id : '03'
+      id : '03',
+      alt: 'Tasmanian devil'
   },
   { src : './img/card_4.svg',
-    id : '04'
+    id : '04',
+    alt: 'Bear'
   },
   { src : './img/card_5.svg',
-    id : '05'
+    id : '05',
+    alt: 'Goat'
   },
   { src : './img/card_6.svg',
-    id : '06'
+    id : '06',
+    alt: 'Owl'
   }
 ];
 
@@ -38,16 +44,16 @@ const selectImage = (cards, images) => {
   return images[random]
 };
 
-const creatCard = ({src, id}) => {
+const creatCard = ({src, id, alt}) => {
   const card =  document.createElement('div');
 
   card.classList.add('card');
   card.dataset.id = id;
   card.innerHTML = `<div class="card__front">
-                      <img src="./img/face.png" class="card__img--front" >
+                      <img src="./img/face.png" class="card__img--front" alt="face card">
                     </div>
                     <div class="card__back">
-                      <img src="${src}" class="card__img--back">
+                      <img src="${src}" class="card__img--back" alt="${alt}">
                     </div>`;
   return card
 };
