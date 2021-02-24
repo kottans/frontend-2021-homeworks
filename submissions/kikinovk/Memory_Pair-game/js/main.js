@@ -27,7 +27,7 @@ const gameBoard = document.querySelector('.gameboard');
 const restartButton = document.querySelector('#restart_game');
 
 const selectImage = (cards, images) => {
-  let maxRandom = images.length;
+  const maxRandom = images.length;
   let random = 0;
 
   do {
@@ -39,7 +39,7 @@ const selectImage = (cards, images) => {
 };
 
 const creatCard = ({src, id}) => {
-  let card =  document.createElement('div');
+  const card =  document.createElement('div');
 
   card.classList.add('card');
   card.dataset.id = id;
@@ -56,7 +56,7 @@ const initGameBoard = () => {
   const fragment = document.createDocumentFragment();
 
   for (let i = 0; i < maxCard*2; i++) {
-    let card = creatCard(selectImage(cards, images));
+    const card = creatCard(selectImage(cards, images));
 
     fragment.appendChild(card);
     cards.push(card);
