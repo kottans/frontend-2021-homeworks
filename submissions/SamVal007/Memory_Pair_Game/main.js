@@ -1,12 +1,13 @@
 let similarCards = [];
 let blockedClick = false;
 const images = ['Dart_Weider', 'lyuk-skajuoker', 'R2-D2', 'c-3po',
-                'printsessa-leya-organa', 'enakin-skajuoker', 'obi-van-kenobi',
-                 'dart-sidius', 'kvaj-gon-dzhinn','joda'];
-const flippDelay = 900;
-const hiddingDelay = 600;
-const victoryMessageDelay = 1200;
-const enoughCountOfSimilarCards = 2;
+    'printsessa-leya-organa', 'enakin-skajuoker', 'obi-van-kenobi',
+    'dart-sidius', 'kvaj-gon-dzhinn', 'joda'
+];
+const flippDelay = 900,
+    hiddingDelay = 600,
+    victoryMessageDelay = 1200,
+    enoughCountOfSimilarCards = 2;
 
 const mainAttributes = {
     container: 'container',
@@ -17,10 +18,14 @@ const mainAttributes = {
     back: 'back_card',
     backImg: 'img-back_card',
     flipped: 'flipped',
-    hidden: 'hidden'
+    hidden: 'hidden',
+
+    imgBackLogoUrl: 'img/back_logo.png',
+    imgBackLogoAlt: 'logo_card',
+    imgFrontLogoUrl: 'img/'
 };
 
-const cleanCountArray = () => similarCards = []; //similarCards.length = 0;
+const cleanCountArray = () => similarCards = []; 
 
 const flippSelectedCards = () => {
     setTimeout(() => {
@@ -39,7 +44,7 @@ const hideSimilarCards = () => {
             cleanCountArray();
             blockedClick = false;
             const counterHiddenCards = document.querySelectorAll(".hidden").length;
-            const amountOfCards = (images.length * 2);
+            const amountOfCards = (images.length * enoughCountOfSimilarCards);
 
 
             if (counterHiddenCards === amountOfCards) {
@@ -74,7 +79,6 @@ const selectCard = ({target}) => {
 };
 
 const drawCards = () => {
-    const fragment = [];
 
     const game = document.createElement('div');
     game.classList.add(mainAttributes.game);
@@ -91,32 +95,34 @@ const drawCards = () => {
         const frontImg = document.createElement('img');
         const backImg = document.createElement('img');
 
-        card.classList.add(mainAttributes.card);
-        frontCard.classList.add(mainAttributes.front);
-        backCard.classList.add(mainAttributes.back);
-        frontImg.classList.add(mainAttributes.frontImg);
-        frontImg.src = `img/${item}.png`;
-        frontImg.alt = `${item}`;
-        backImg.classList.add(mainAttributes.backImg);
-        backImg.src = 'img/back_logo.png';
-        backImg.alt = 'logo_card';
-
         frontCard.append(frontImg);
         backCard.append(backImg);
         card.append(backCard);
         card.append(frontCard);
         game.append(card);
-    });
-    fragment.push(game);
 
-    return fragment;
+        card.classList.add(mainAttributes.card);
+        frontCard.classList.add(mainAttributes.front);
+        backCard.classList.add(mainAttributes.back);
+        frontImg.classList.add(mainAttributes.frontImg);
+        frontImg.src = mainAttributes.imgFrontLogoUrl + `${item}.png`;
+        frontImg.alt = `${item}`;
+        backImg.classList.add(mainAttributes.backImg);
+        backImg.src = mainAttributes.imgBackLogoUrl;
+        backImg.alt = mainAttributes.imgBackLogoAlt;
+     
+
+    });
+
+    return game;
 };
 
 const showCards = () => {
     const body = document.querySelector('body');
     const container = document.createElement('div');
     container.classList.add(mainAttributes.container);
-    container.append(...drawCards());
+    container.append(drawCards());
+
     container.addEventListener("click", selectCard);
     body.append(container);
 };
@@ -135,4 +141,3 @@ window.onload = () => {
         showCards();
     } else window.close();
 };
-
