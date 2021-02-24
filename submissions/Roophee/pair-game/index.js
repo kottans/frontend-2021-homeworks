@@ -71,7 +71,7 @@ const heroesArray = [
     }
 ];
 const prePair = [];
-const pairs = [];
+let pairs = 0;
 const gameBg = document.querySelector('.game');
 const cardPlace = document.querySelector('.game__card-place');
 const audioItem = document.querySelector('audio');
@@ -163,13 +163,13 @@ const clearAllOperationObjectsAndCreateNewGame = function() {
         if (playAgain) {
             cardPlace.innerHTML = "";
             prePair.length = 0;
-            pairs.length = 0;
+            pairs = 0;
             addCardsOnPage();
         }
 }
 
 const checkGameIsOverOrNot = function () {
-    if (pairs.length === maxQuantityOfPairsOnTheScreen){
+    if (pairs === maxQuantityOfPairsOnTheScreen){
         setTimeout(function () {
                 clearAllOperationObjectsAndCreateNewGame();
         }, 2100)
@@ -198,7 +198,7 @@ let checkPairOrNot = function () {
         prePair.splice(0, 2);
         const [firstCardNode, secondCardNode] = currentPair;
         if (getCardIDFromCardHolder(firstCardNode) === getCardIDFromCardHolder(secondCardNode)) {
-            pairs.push('1');
+            pairs+=1;
             setTimeout(function (currentPair) {
                 hidePair(currentPair);
             }, 500, currentPair);
