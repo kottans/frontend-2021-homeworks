@@ -1,0 +1,262 @@
+@import "normalize.scss";
+
+$black: #000;
+$white: #fff;
+$bgColor: #008080;
+$gray1: #c0c0c0;
+$gray2: #212529;
+$gray3: #424242;
+
+:root {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    margin: 0;
+    padding: 0;
+    background: $gray1;
+}
+
+body {
+    font-family: "MS Sans Serif",Tahoma,Verdana,Segoe,sans-serif;
+    background: bgColor;
+    color: $white;
+    margin: 0;
+    padding: 0;
+    overflow: auto;
+}
+
+.nav {
+    height: 30px;
+    background: $gray1;
+    margin: 0;
+    border: 1px outset $white;
+    color: $gray2;
+
+    &-label {
+        margin-left: 5px;
+        width: 130px;
+        align-items:center;
+
+        & a {
+            text-decoration: none;
+            color: inherit;
+        }
+    }
+}
+
+.flex {
+    display: flex;
+
+    &-start {
+        justify-content: start;
+    }
+
+    &-center {
+        justify-content: center;
+    }
+
+    &-space-around {
+        justify-content: space-around;
+    }
+
+    &-space-evenly {
+        justify-content: space-evenly;
+    }
+    &-column {
+        flex-direction: column;
+    }
+
+    &-align-center {
+        align-items: center;
+    }
+
+    &-grow {
+        flex-grow: 1;
+    }
+}
+
+.win__header {
+
+    &-border {
+    border: solid;
+    border-width: 2px;
+    border-bottom-color: $gray3;
+    border-right-color: $gray3;
+    border-left-color: $white;
+    border-top-color: $white;
+    background: $gray1;
+    }
+
+    &-label {
+    background: linear-gradient(left,#08216b,#a5cef7);
+    }
+}
+
+.main {
+    flex-grow: 1;
+    flex-wrap: wrap;
+    align-content: flex-start;
+
+    &__header {
+    width: 100%;
+    height: 30px;
+    padding-left: 26px;
+    align-items: center;
+    }
+
+    &__form-reset {
+        width: 170px;
+        height: 40px;
+        margin: 0 0 0 50px;
+        font-size: 16px
+    }
+
+    &__aside {
+        width: 270px;
+        height: 100%;
+        flex-shrink: 0;
+        min-height: calc(100vh - 101px);
+        background: $gray1;
+        color: $black;
+
+        & fieldset {
+            margin: 5px;
+
+            & input[name="search"] {
+                width: 95%;
+            }
+        }
+    }
+
+    &__section {
+        width: calc(80% - 250px);
+        min-width: 250px;
+        min-height: calc(100vh - 101px);
+        background-color:  $bgColor;
+        overflow: auto;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        align-content: flex-start;
+        padding-left: 5px;
+    }
+
+    &__card-item {
+        margin: 2px;
+        padding: 5px;
+        width: 250px;
+        font-size: 16px;
+        color: $black;
+
+        & p {
+            margin: 5px;
+        }
+    }
+
+    &__card-header{
+        width: 100%;
+        height: 20px;
+        color: $white;
+
+        &  span {
+        padding-left: 10px;
+        }
+    }
+
+    &__card-img{
+        width: 240px;
+        margin: 5px 0;
+        border: 2px solid $black;
+        align-self: center;
+    }
+}
+
+.filter-search input[type="text"] {
+    border: 2px inset #d5d5d5;
+    color: #424242;
+    background: #fff;
+    box-shadow: -1px -1px 0 0 #828282;
+    margin-top: 4px;
+    padding-left:2px;
+}
+
+
+.footer {
+    height: 30px;
+    background: $gray1;
+    border: 1px outset $white;
+    color:$gray2;
+}
+
+.btn{
+    border-width: 2px;
+    border-style: outset;
+    border-color: buttonface;
+    border-right-color: $gray3;
+    border-bottom-color: $gray3;
+    background: $gray1;
+    color: $black;
+    padding: 2px 0 2px;
+    border-radius: 1px;
+}
+.btn:hover {
+    border: 2px inset $white;
+    background: $gray1;
+    color: $gray3;
+    box-shadow: -1px -1px $black;
+}
+.btn:focus {
+    border: 2px inset $white;
+    background: $gray1;
+    color: $gray3;
+    box-shadow: -1px -1px $black;
+    outline: 0;
+    background: url(/img/background.bmp);
+}
+.btn:active {
+    border: 2px inset $white;
+    color: $gray3;
+    box-shadow: -1px -1px $black;
+    outline: 0;
+    background: url(/img/background.bmp);
+}
+
+@media screen and (max-width:835px){
+    .main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+        &__header {
+            width: calc(100% - 28px);
+        }
+
+        &__form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        &__aside {
+            display: flex;
+            flex-direction: column;
+            min-height: 0px;
+        }
+
+        &__section {
+            width: 99%;
+            justify-content: space-evenly;
+        }
+    }
+}
+
+@media screen and (max-width:420px){
+.main__section {
+        width: 98%;
+        justify-content: space-evenly;
+    }
+}
