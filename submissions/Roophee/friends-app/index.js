@@ -41,10 +41,8 @@ const fetchData = (url) => fetch(url)
         console.error('There has been a problem with your fetch operation:' , error)
     })
 
-const getResult = (response) =>  response.results;
-
 const storeData = (results) => {
-    RAW_DATA = results
+    RAW_DATA = results;
     results.forEach((item) => {
         NODES_STORAGE.set(item, createUserCards(item));
     });
@@ -238,9 +236,14 @@ const setFilters = () => {
     document.forms.filters.reset.addEventListener('click', resetEventHandler);
 };
 
-const getData = fetchData(DATA_URL)
-.then((res) => getResult(res))
-.then((result) => storeData(result))
-.then(() => updateUsers(RAW_DATA) )
-.then(() => {uncheckAllRadio(); clearInputText()})
-.then (() => {setFilters()});
+const init = () => {
+    fetchData(DATA_URL).then(({results}) => {
+        storeData(results);
+        updateUsers(RAW_DATA);
+        uncheckAllRadio();
+        clearInputText();
+        setFilters();
+    });
+}
+
+init();
