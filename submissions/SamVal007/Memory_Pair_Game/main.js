@@ -1,8 +1,8 @@
 let similarCards = [];
 let blockedClick = false;
 const images = ['Dart_Weider', 'lyuk-skajuoker', 'R2-D2', 'c-3po',
-    'printsessa-leya-organa', 'enakin-skajuoker', 'obi-van-kenobi',
-    'dart-sidius', 'kvaj-gon-dzhinn', 'joda'
+     'printsessa-leya-organa', 'enakin-skajuoker', 'obi-van-kenobi',
+     'dart-sidius', 'kvaj-gon-dzhinn', 'joda'
 ];
 const flippDelay = 900,
     hiddingDelay = 600,
@@ -11,7 +11,7 @@ const flippDelay = 900,
 
 const mainAttributes = {
     container: 'container',
-    game: 'game',
+    cards: 'cards',
     card: 'card',
     front: 'front_card',
     frontImg: 'img-front_card',
@@ -25,7 +25,7 @@ const mainAttributes = {
     imgFrontLogoUrl: 'img/'
 };
 
-const cleanCountArray = () => similarCards = []; 
+const cleanCountArray = () => similarCards = [];
 
 const flippSelectedCards = () => {
     setTimeout(() => {
@@ -43,13 +43,9 @@ const hideSimilarCards = () => {
             card.classList.add(mainAttributes.hidden);
             cleanCountArray();
             blockedClick = false;
-            const counterHiddenCards = document.querySelectorAll(".hidden").length;
-            const amountOfCards = (images.length * enoughCountOfSimilarCards);
 
+            checkingForTheVictory();
 
-            if (counterHiddenCards === amountOfCards) {
-                victoryMessage();
-            }
         });
     }, hiddingDelay);
 };
@@ -58,7 +54,8 @@ const compareSimilarCards = () => {
     const countCards = similarCards.length;
     if (countCards === enoughCountOfSimilarCards) {
         blockedClick = true;
-        if (similarCards[0] === similarCards[1]) {
+        const [firstCard, secondCard] = similarCards;
+        if (firstCard === secondCard) {
             hideSimilarCards();
         } else {
             flippSelectedCards();
@@ -70,9 +67,9 @@ const selectCard = ({target}) => {
     if (!blockedClick) {
         const selectedCard = target.closest('.card');
         if (selectedCard && !selectedCard.classList.contains('flipped')) {
-            let alt = target.parentNode.nextSibling.firstChild.getAttribute("alt");
+            let cadName = target.getAttribute("id");
             selectedCard.classList.add(mainAttributes.flipped);
-            similarCards.push(alt);
+            similarCards.push(cadName);
             compareSimilarCards();
         }
     }
@@ -80,8 +77,8 @@ const selectCard = ({target}) => {
 
 const drawCards = () => {
 
-    const game = document.createElement('div');
-    game.classList.add(mainAttributes.game);
+    const cards = document.createElement('div');
+    cards.classList.add(mainAttributes.cards);
 
     const arrImages = [...images, ...images];
     const shuffleArray = arrImages.sort(function () {
@@ -99,7 +96,7 @@ const drawCards = () => {
         backCard.append(backImg);
         card.append(backCard);
         card.append(frontCard);
-        game.append(card);
+        cards.append(card);
 
         card.classList.add(mainAttributes.card);
         frontCard.classList.add(mainAttributes.front);
@@ -110,11 +107,18 @@ const drawCards = () => {
         backImg.classList.add(mainAttributes.backImg);
         backImg.src = mainAttributes.imgBackLogoUrl;
         backImg.alt = mainAttributes.imgBackLogoAlt;
-     
+        backImg.id = frontImg.alt;
+
+        let template =
+            `<div >
+            <div class="picture">
+              <img src="${item}">
+            </div>
+          </div>`;
 
     });
 
-    return game;
+    return cards;
 };
 
 const showCards = () => {
@@ -122,10 +126,17 @@ const showCards = () => {
     const container = document.createElement('div');
     container.classList.add(mainAttributes.container);
     container.append(drawCards());
-
     container.addEventListener("click", selectCard);
     body.append(container);
 };
+
+const checkingForTheVictory = () => {
+    const counterHiddenCards = document.querySelectorAll(".hidden").length;
+    const amountOfCards = ((images.length) * enoughCountOfSimilarCards);
+    if (counterHiddenCards === amountOfCards) {
+        victoryMessage();
+    }
+}
 
 const victoryMessage = () => {
     setTimeout(() => {
