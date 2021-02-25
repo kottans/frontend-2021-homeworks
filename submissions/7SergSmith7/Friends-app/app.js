@@ -13,7 +13,9 @@ let filter = "";
 
 function getContacts() {
   return fetch(USERS_URL)
-    .then((res) => res.json())
+    .then((res) =>{ if (res.status !== 200)   
+      console.log('Looks like there was a problem. Status Code: ' +  
+        res.status); return res.json()})
     .then(({ results }) => (originalContacts = results))
 
     .catch((error) => {

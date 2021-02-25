@@ -82,9 +82,8 @@ h3 {
 .age-sort__more {
   transform: rotate(180deg);
 }
-.age-sort__title,
-.name-sort__title,
-.gender-filter__title {
+.sort__title,
+.filter__title {
   margin-left: 15px;
   color: #222222;
 }
