@@ -1,14 +1,14 @@
 let quantityOfCardsLeft;
 let cardID, cardValue, prevCardId, prevCardValue;
 let quantityOfOpenCards = 0;
-let preventMoreCardsOpening = false;
+let moreCardsOpeningIsBlocked = false;
 
 document.addEventListener("DOMContentLoaded", () => {
   startNewGame();
 
   document.querySelector("main").addEventListener("click", (event) => {
     let aEl = event.target.closest(".flip-container");
-    if (!aEl || aEl?.id === prevCardId || preventMoreCardsOpening) return;
+    if (!aEl || aEl?.id === prevCardId || moreCardsOpeningIsBlocked) return;
 
     if (quantityOfOpenCards < 2) {
       quantityOfOpenCards++;
@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (quantityOfOpenCards === 2) {
-      preventMoreCardsOpening = true;
+      moreCardsOpeningIsBlocked = true;
       processingTwoOpenCards();
     }
   });
@@ -40,13 +40,13 @@ const processingTwoOpenCards = () => {
       flipNotMatchedCards(cardID, prevCardId);
     }
     quantityOfOpenCards = 0;
-    preventMoreCardsOpening = false;
+    moreCardsOpeningIsBlocked = false;
     prevCardId = null;
     prevValue = null;
     if (quantityOfCardsLeft === 0) {
       finishCurrentGame();
     }
-  }, 1000);
+  }, timeoutTime);
 };
 
 const startNewGame = () => {
