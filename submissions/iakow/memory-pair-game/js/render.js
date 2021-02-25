@@ -1,18 +1,39 @@
 import { handler } from "./controller.js";
 import { GAME_SIZE, IMAGES } from "./config.js";
 
-(function preloadImages() {
-  IMAGES.forEach((image) => addLink(`img/${image}`));
+function preloadImages() {
+  return new Promise((resolve) => {
+    let uploadedImages = 0;
+    const fragment = document.createDocumentFragment();
 
-  function addLink(path) {
-    const link = document.createElement("link");
-    link.rel = "preload";
-    link.href = path;
-    link.as = "image";
+    IMAGES.forEach((image) => addLink(`img/${image}`));
 
-    document.head.appendChild(link);
-  }
-})();
+    document.head.appendChild(fragment);
+
+    function addLink(path) {
+      const link = document.createElement("link");
+      link.rel = "preload";
+      link.href = path;
+      link.as = "image";
+      link.addEventListener("load", onLoadHandler);
+      fragment.appendChild(link);
+
+      function onLoadHandler({ target }) {
+        uploadedImages++;
+        target.removeEventListener("load", onLoadHandler);
+
+        if (uploadedImages === IMAGES.length) {
+          removeSpinner();
+          resolve();
+        }
+
+        function removeSpinner() {
+          document.querySelector(".lds-grid").remove();
+        }
+      }
+    }
+  });
+}
 
 const timeToCheckCards = 600;
 
@@ -146,4 +167,5 @@ export {
   showNewCards,
   greeting,
   showResults,
+  preloadImages,
 };
