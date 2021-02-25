@@ -116,7 +116,6 @@ const restartGame = () => {
   cards.length = 0;
   gameBoard.innerHTML = '';
   initGameBoard();
-  turnCard();
 };
 
 document.addEventListener('DOMContentLoaded', () => {
