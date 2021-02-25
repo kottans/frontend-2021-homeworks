@@ -46,7 +46,6 @@ const selectImage = (cards, images) => {
 
 const createCard = ({src, id, alt}) => {
   const card =  document.createElement('div');
-  card.open = false;
   card.classList.add('card');
   card.dataset.id = id;
   card.innerHTML = `<div class="card__front">
@@ -79,7 +78,6 @@ const closeCard = (card) => {
     setTimeout(() => {
       card.classList.remove('card--open')
     }, delay);
-    card.open = false;
   };
 };
 
@@ -98,9 +96,8 @@ const turnCard = () => {
     openCard(card);
     if (!openedCard) {
       openedCard = card;
-      card.open = true;
     } else if (openedCard.dataset.id === card.dataset.id
-                && !card.open) {
+                && card.classList.contains('card--open')) {
       disappearCard(card);
       disappearCard(openedCard);
       openedCard = undefined;
