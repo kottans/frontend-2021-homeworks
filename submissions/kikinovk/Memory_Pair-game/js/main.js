@@ -93,23 +93,22 @@ const disappearCard = (card) => {
 };
 
 const eventCard = () => {
-  cards.forEach(card => {
-    card.addEventListener('click', () => {
-      openedCard(card);
-      if (!openCard) {
-       openCard = card;
-       card.open = true;
-      } else if (openCard.dataset.id === card.dataset.id
-                  && !card.open) {
-        disappearCard(card);
-        disappearCard(openCard);
+  gameBoard.addEventListener('click', (event) => {
+    const card = event.target.closest('.card');
+    openedCard(card);
+    if (!openCard) {
+      openCard = card;
+      card.open = true;
+    } else if (openCard.dataset.id === card.dataset.id
+                && !card.open) {
+      disappearCard(card);
+      disappearCard(openCard);
+      openCard = undefined;
+    } else {
+        closedCard(card);
+        closedCard(openCard);
         openCard = undefined;
-      } else {
-          closedCard(card);
-          closedCard(openCard);
-          openCard = undefined;
-      };
-    });
+    };
   });
 };
 
