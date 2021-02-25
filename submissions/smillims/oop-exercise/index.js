@@ -10,9 +10,6 @@ class Inhabitant {
 		this.name = name;
 		this.legs = legs;
 	}
-	properties(){
-		return ['species', 'gender', 'name', 'legs'];
-	}
 	saying(){
 		return [`Hi, I'm ` + this.species,
 		`My name is ` + this.name,
