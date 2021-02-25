@@ -37,7 +37,7 @@ body:before {
 }
 
 
-.game,
+.cards,
 .front_card,
 .back_card {
   display: inherit;
