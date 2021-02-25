@@ -14,11 +14,6 @@ secondFilteredData: [],
 filterOne: '',
 filterTwo: '',
 };
-const wasFirstFiltration = () => filterSettings.filteredData.length >= 1;
-const wasSecondFiltration = () => filterSettings.secondFilteredData.length >= 1;
-const thisFilterMadeFirstFiltration = (filter) => filterSettings.filterOne === filter.name;
-const thisFilterMadeSecondFiltration = (filter) => filterSettings.filterTwo === filter.name;
-
 
 const createUserCards = (item) => {
     const cardItem = document.createElement('div');
@@ -101,6 +96,10 @@ const nameSort = (prev, next) => {
     return 0;
 };
 
+const checkIsFiltered = (filteredDataStorage) => filterSettings[filteredDataStorage].length >= 1;
+
+const checkThisFilterMadeFiltration = ( filter, filterNameRegistr) => filterSettings[filterNameRegistr] === filter.name;
+
 const applyFilters = (usersData, filter) => {
     uncheckSortRadio();
 
@@ -126,19 +125,19 @@ const applyFilters = (usersData, filter) => {
         clearInputText();
     }
 
-    if( !wasFirstFiltration() && !wasSecondFiltration()){
+    if( !checkIsFiltered('filteredData') && !checkIsFiltered('secondFilteredData')){
         return makeFirstFiltration(filter);
 
-    }else if( wasFirstFiltration() && !wasSecondFiltration() && thisFilterMadeFirstFiltration(filter) ){
+    }else if( checkIsFiltered('filteredData') && !checkIsFiltered('secondFilteredData') && checkThisFilterMadeFiltration(filter, 'filterOne') ){
         return makeFirstFiltration(filter);
 
-    }else if( wasFirstFiltration() && !wasSecondFiltration() && !thisFilterMadeFirstFiltration(filter) ){
+    }else if( checkIsFiltered('filteredData') && !checkIsFiltered('secondFilteredData') && !checkThisFilterMadeFiltration(filter, 'filterOne') ){
         return makeSecondFiltration(filter);
 
-    }else if( wasFirstFiltration() && wasSecondFiltration() && thisFilterMadeSecondFiltration(filter) ){
+    }else if( checkIsFiltered('filteredData') && checkIsFiltered('secondFilteredData') && checkThisFilterMadeFiltration(filter, 'filterTwo') ){
         return makeSecondFiltration(filter);
 
-    }else if( wasFirstFiltration() && wasSecondFiltration() && thisFilterMadeFirstFiltration(filter) ){
+    }else if( checkIsFiltered('filteredData') && checkIsFiltered('secondFilteredData') && checkThisFilterMadeFiltration(filter, 'filterOne') ){
         resetFilters();
         return makeFirstFiltration(filter);
     }
@@ -147,40 +146,28 @@ const applyFilters = (usersData, filter) => {
 const applySort = (usersData, sortFunction) => {
     let sortedUsersData = [];
 
-    const thisSortFunctionByAge = (sortFunction) => {
-        return sortFunction.name === 'ageSort'
-    }
+    const checkSortFunctionWasApplyed = (sortFunction, sortType) => sortFunction.name === sortType;
 
-    const thisSortFunctionByName = (sortFunction) => {
-        return sortFunction.name === 'nameSort'
-    }
+    const checkTypeOfSort = (sittingsParamName, settingsParam) => filterSettings[sittingsParamName] === settingsParam;
 
-    const sortByAgeAscending = () => {
-        return filterSettings.ageParam === 'ascending';
-    }
-
-    const sortByNameAlphabetically = () => {
-        return filterSettings.nameParam === 'az';
-    }
-
-    if (wasFirstFiltration() && wasSecondFiltration()) {
+    if (checkIsFiltered('filteredData') && checkIsFiltered('secondFilteredData')) {
         sortedUsersData = filterSettings.secondFilteredData.slice().sort(sortFunction);
-    } else if (wasFirstFiltration()  && !wasSecondFiltration()) {
+    } else if (checkIsFiltered('filteredData')  && !checkIsFiltered('secondFilteredData')) {
         sortedUsersData = filterSettings.filteredData.slice().sort(sortFunction);
-    } else if (!wasFirstFiltration()  && !wasSecondFiltration()) {
+    } else if (!checkIsFiltered('filteredData')  && !checkIsFiltered('secondFilteredData')) {
         sortedUsersData = usersData.slice().sort(sortFunction);
         };
 
-    if (thisSortFunctionByAge(sortFunction)) {
-        uncheckSortByNameRadio();
-        if (sortByAgeAscending()){
+    if (checkSortFunctionWasApplyed(sortFunction, 'ageSort')) {
+        uncheckRadioType('name');
+        if (checkTypeOfSort('ageParam', 'ascending')){
             return sortedUsersData
         } else {
             return sortedUsersData.reverse();
         };
-    } else if (thisSortFunctionByName(sortFunction)) {
-        uncheckSortByAgeRadio()
-        if (sortByNameAlphabetically()) {
+    } else if (checkSortFunctionWasApplyed(sortFunction, 'nameSort')) {
+        uncheckRadioType('age');
+        if (checkTypeOfSort('nameParam', 'az')) {
             return sortedUsersData;
         } else {
             return sortedUsersData.reverse();
@@ -199,21 +186,15 @@ const uncheckAllRadio = () => {
     setGenderAllCheck();
 };
 
-const uncheckSortByNameRadio = () => {
-    document.querySelectorAll('input[name="name"]').forEach((item) => {
+const uncheckRadioType = (radioName) => {
+    document.querySelectorAll(`input[name="${radioName}"]`).forEach((item) => {
         item.checked = false;
     });
 }
 
-const uncheckSortByAgeRadio = () => {
-    document.querySelectorAll('input[name="age"]').forEach((item) => {
-        item.checked = false;
-    })
-}
-
 const uncheckSortRadio = () => {
-    uncheckSortByNameRadio();
-    uncheckSortByAgeRadio()
+    uncheckRadioType('name');
+    uncheckRadioType('age');
 };
 
 const clearInputText = () => {
