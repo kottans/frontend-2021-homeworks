@@ -25,7 +25,7 @@ const images = [
   }
 ];
 
-let openCard;
+let openedCard;
 const delay = 500;
 const maxCard = 6;
 const cards = [];
@@ -44,9 +44,9 @@ const selectImage = (cards, images) => {
   return images[random]
 };
 
-const creatCard = ({src, id, alt}) => {
+const createCard = ({src, id, alt}) => {
   const card =  document.createElement('div');
-
+  card.open = false;
   card.classList.add('card');
   card.dataset.id = id;
   card.innerHTML = `<div class="card__front">
@@ -62,7 +62,7 @@ const initGameBoard = () => {
   const fragment = document.createDocumentFragment();
 
   for (let i = 0; i < maxCard*2; i++) {
-    const card = creatCard(selectImage(cards, images));
+    const card = createCard(selectImage(cards, images));
 
     fragment.appendChild(card);
     cards.push(card);
@@ -70,11 +70,11 @@ const initGameBoard = () => {
   gameBoard.appendChild(fragment);
 };
 
-const openedCard = (card) => {
+const openCard = (card) => {
   card.classList.add('card--open');
 };
 
-const closedCard = (card) => {
+const closeCard = (card) => {
   if (card.classList.contains('card--open')) {
     setTimeout(() => {
       card.classList.remove('card--open')
@@ -92,22 +92,22 @@ const disappearCard = (card) => {
   },  delay*2);
 };
 
-const eventCard = () => {
+const turnCard = () => {
   gameBoard.addEventListener('click', (event) => {
     const card = event.target.closest('.card');
-    openedCard(card);
-    if (!openCard) {
-      openCard = card;
+    openCard(card);
+    if (!openedCard) {
+      openedCard = card;
       card.open = true;
-    } else if (openCard.dataset.id === card.dataset.id
+    } else if (openedCard.dataset.id === card.dataset.id
                 && !card.open) {
       disappearCard(card);
-      disappearCard(openCard);
-      openCard = undefined;
+      disappearCard(openedCard);
+      openedCard = undefined;
     } else {
-        closedCard(card);
-        closedCard(openCard);
-        openCard = undefined;
+        closeCard(card);
+        closeCard(openedCard);
+        openedCard = undefined;
     };
   });
 };
@@ -116,13 +116,13 @@ const restartGame = () => {
   cards.length = 0;
   gameBoard.innerHTML = '';
   initGameBoard();
-  eventCard();
+  turnCard();
 };
 
 document.addEventListener('DOMContentLoaded', () => {
 
   initGameBoard();
-  eventCard();
+  turnCard();
 
   restartButton.addEventListener('click', () => restartGame() );
 })
