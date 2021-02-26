@@ -76,4 +76,6 @@ function restartGame() {
 };
 
 
-restartGame();
+window.addEventListener("load", function(event) {
+  restartGame();
+});
