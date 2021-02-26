@@ -1,8 +1,8 @@
 let similarCards = [];
 let blockedClick = false;
 const images = ['Dart_Weider', 'lyuk-skajuoker', 'R2-D2', 'c-3po',
-     'printsessa-leya-organa', 'enakin-skajuoker', 'obi-van-kenobi',
-     'dart-sidius', 'kvaj-gon-dzhinn', 'joda'
+                'printsessa-leya-organa', 'enakin-skajuoker', 'obi-van-kenobi',
+                'dart-sidius', 'kvaj-gon-dzhinn', 'joda'
 ];
 const flippDelay = 900,
     hiddingDelay = 600,
@@ -37,18 +37,16 @@ const flippSelectedCards = () => {
     }, flippDelay);
 };
 
-const hideSimilarCards = () => {
-    setTimeout(() => {
-        document.querySelectorAll(".flipped").forEach((card) => {
-            card.classList.add(mainAttributes.hidden);
-            cleanCountArray();
-            blockedClick = false;
+const hideCards = () => {
+    document.querySelectorAll(".flipped").forEach((card) => {
+        card.classList.add(mainAttributes.hidden);
+        blockedClick = false;
 
-            checkingForTheVictory();
-
-        });
-    }, hiddingDelay);
+        cleanCountArray();
+        checkingForTheVictory();
+    });
 };
+
 
 const compareSimilarCards = () => {
     const countCards = similarCards.length;
@@ -56,7 +54,7 @@ const compareSimilarCards = () => {
         blockedClick = true;
         const [firstCard, secondCard] = similarCards;
         if (firstCard === secondCard) {
-            hideSimilarCards();
+            hideCards();
         } else {
             flippSelectedCards();
         }
@@ -82,40 +80,29 @@ const drawCards = () => {
 
     const arrImages = [...images, ...images];
     const shuffleArray = arrImages.sort(function () {
-        return 0.5 - Math.random()
+        return 0.5 - Math.random();
     });
 
+
+    const backImgSrc = mainAttributes.imgBackLogoUrl;
+    const backImgAlt = mainAttributes.imgBackLogoAlt;
     shuffleArray.forEach((item) => {
-        const card = document.createElement('div');
-        const frontCard = document.createElement('div');
-        const backCard = document.createElement('div');
-        const frontImg = document.createElement('img');
-        const backImg = document.createElement('img');
 
-        frontCard.append(frontImg);
-        backCard.append(backImg);
-        card.append(backCard);
-        card.append(frontCard);
-        cards.append(card);
-
-        card.classList.add(mainAttributes.card);
-        frontCard.classList.add(mainAttributes.front);
-        backCard.classList.add(mainAttributes.back);
-        frontImg.classList.add(mainAttributes.frontImg);
-        frontImg.src = mainAttributes.imgFrontLogoUrl + `${item}.png`;
-        frontImg.alt = `${item}`;
-        backImg.classList.add(mainAttributes.backImg);
-        backImg.src = mainAttributes.imgBackLogoUrl;
-        backImg.alt = mainAttributes.imgBackLogoAlt;
-        backImg.id = frontImg.alt;
+        let frontImgSrc = mainAttributes.imgFrontLogoUrl + `${item}.png`;
+        let frontImgAlt = `${item}`;
+        let backImgId = frontImgAlt;
 
         let template =
-            `<div >
-            <div class="picture">
-              <img src="${item}">
-            </div>
-          </div>`;
+            `<div class="${mainAttributes.card}">
+                 <div class="${mainAttributes.back}">
+                     <img class="${mainAttributes.backImg}" src="${backImgSrc}" alt="${backImgAlt}" id="${backImgId}">
+                 </div>
+                 <div class="${mainAttributes.front}">
+                     <img class="${mainAttributes.frontImg}" src="${frontImgSrc}" alt="${frontImgAlt}">
+                 </div>
+            </div>`;
 
+        cards.innerHTML += template;
     });
 
     return cards;
