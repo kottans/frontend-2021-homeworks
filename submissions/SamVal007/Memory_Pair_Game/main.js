@@ -43,11 +43,12 @@ const hideCards = () => {
     });
 };
 
+const cleaningCountArrayAndUnblockClick = () => {
+    cleanCountArray();
+    blockedClick = false;
+};
+
 const compareSimilarCards = () => {
-    const cleaningCountArrayAndUnblockClick = () => {
-        cleanCountArray();
-        blockedClick = false;
-    };
     const countCards = similarCards.length;
     if (countCards === enoughCountOfSimilarCards) {
         blockedClick = true;
