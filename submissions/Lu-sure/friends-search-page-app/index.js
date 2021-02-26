@@ -1,5 +1,9 @@
 class FriendsSearchPage {
     constructor() {
+        this.searchForm = document.getElementById('search-form');
+        this.sortUpButton = document.getElementById('sort-up');
+        this.sortDownButton = document.getElementById('sort-down');
+
         this.sortBy = '';
         this.initSortDirection = 'up';
         this.reverseSortDirection = 'down';
@@ -69,7 +73,9 @@ class FriendsSearchPage {
     }
 
     sortUsers(users) {
-        users.sort(
+        const sortedUsers = [...users];
+
+        sortedUsers.sort(
             function (previousUser, nextUser) {
                 let propOfPreviousUser = previousUser[this.sortBy];
                 let propOfNextUser = nextUser[this.sortBy];
@@ -101,15 +107,12 @@ class FriendsSearchPage {
     }
 
     handleSearchParams(target) {
-        const sortUpButton = document.getElementById('sort-up');
-        const sortDownButton = document.getElementById('sort-down');
-
         const inputs = {
             'sort-type': () => {
                 this.sortBy = target.value;
-                sortUpButton.disabled = false;
-                sortDownButton.disabled = false;
-                sortUpButton.checked = true;
+                this.sortUpButton.disabled = false;
+                this.sortDownButton.disabled = false;
+                this.sortUpButton.checked = true;
                 this.sortDirection = this.initSortDirection;
             },
             'sort-direction': () => {
@@ -129,9 +132,7 @@ class FriendsSearchPage {
     }
 
     renderSearchedUsers() {
-        const searchForm = document.getElementById('search-form');
-
-        searchForm.addEventListener(
+        this.searchForm.addEventListener(
             'input',
             function (event) {
                 this.handleSearchParams(event.target);
@@ -141,14 +142,15 @@ class FriendsSearchPage {
     }
 
     handleReset() {
-        const resetFormButton = document.querySelector("input[type='reset']");
-
-        resetFormButton.addEventListener(
-            'click',
+        this.searchForm.addEventListener(
+            'reset',
             function () {
+                this.searchForm.reset;
                 this.sortBy = '';
                 this.filterGenderValue = this.initFilterGenderValue;
                 this.sortDirection = '';
+                this.sortUpButton.disabled = true;
+                this.sortDownButton.disabled = true;
                 this.renderUsers(this.users);
             }.bind(this)
         );
