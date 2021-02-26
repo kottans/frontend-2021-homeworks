@@ -1,27 +1,28 @@
-const cardsContainer = document.createDocumentFragment();
-const userCards = document.getElementById('user-cards');
-const API_URL = 'https://randomuser.me/api/?results=10&inc=name,picture,gender,location,dob,cell,email&noinfo';
-const NUMBER_OF_FETCH_RETRIES = 5;
-const MIN_AGE = 18;
-const MAX_AGE = 99;
+let users;
 
 const fetchUsersData = async (url, retries) => {
 	try {
 		let response = await fetch(url);
-		let usersData = await response.json();
-		return usersData.results;
+		let responseJson = await response.json();
+		return responseJson.results;
 	} catch (err) {
 		if (retries > 0) throw err;
-		return await fetch_retry(url, retries - 1);
+		return await fetchUsersData(url, retries - 1);
 	}
 }
 
-fetchUsersData(API_URL, NUMBER_OF_FETCH_RETRIES)
-	.then(usersData => createCards(usersData))
-	.then(hideLoader())
-	.catch(err => console.log(err))
+const initApp = async () => {
+	const API_URL = 'https://randomuser.me/api/?results=10&inc=name,picture,gender,location,dob,cell,email&noinfo';
+	const NUMBER_OF_FETCH_RETRIES = 5;
+	users = await fetchUsersData(API_URL, NUMBER_OF_FETCH_RETRIES);
+	renderUserCards(users);
+	hideLoader();	
+}
 
-function createUserCard(user) {
+const cardsContainer = document.createDocumentFragment();
+const userCards = document.querySelector('#user-cards');
+
+const createUserCard = user => {
 	let userDiv = document.createElement('div');
 	userDiv.classList.add('user-card');
 	userDiv.innerHTML = `
@@ -36,101 +37,77 @@ function createUserCard(user) {
 	cardsContainer.appendChild(userDiv);
 }
 
-const createCards = usersData => {
-	usersData.forEach(user => {
+const renderUserCards = users => {
+	userCards.innerHTML='';  
+	users.forEach(user => {
 		createUserCard(user);
-	})
-	userCards.append(cardsContainer);
-}
-
-function hideLoader() {
-	document.getElementById('loader').style.display = 'none';
-}
-
-const ascendSort = items => items.sort((prev, next) => prev.textContent > next.textContent ? 1 : -1);
-const descendSort = items => ascendSort(items).reverse();
-const renderSortedCards = sortedCards => sortedCards.forEach(card => userCards.appendChild(card.closest('.user-card')));
-
-const sort = ({target}) => {
-	const names = Array.from(document.querySelectorAll('#firstName'));
-	const ages = Array.from(document.querySelectorAll('.age'));
-	let result;
-	switch (target.value) {
-	case 'namesSortAsc':
-		result = ascendSort(names);
-		break;
-	case 'namesSortDesc':
-		result = descendSort(names);
-		break;
-	case 'agesSortAsc':
-		result = ascendSort(ages);
-		break;
-	case 'agesSortDesc':
-		result = descendSort(ages);
-	}
-	return result;
-}
-
-const sortUserCards = (users) => renderSortedCards(sort(users));
-
-const renderFilteredCards = (filteredCards, target) => filteredCards.forEach(card => {
-	if (target.value === card.textContent) {
-		card.closest('.user-card').classList.remove('hidden');
-	}
-	if (target.value !== card.textContent) {
-		card.closest('.user-card').classList.add('hidden');
-	}
-	if (target.value === 'all') {
-		card.closest('.user-card').classList.remove('hidden');
-	}
-});
-
-const filterGender = ({target}) => {
-	let allGenders = Array.from(document.querySelectorAll('.gender'));
-	renderFilteredCards(allGenders, target);
-}
-
-const renderSearchName = (names) => names.forEach(card => {
-	let searchNameInput = document.getElementById('searchByName').value.toLowerCase().trim();
-	if (!card.textContent.toLowerCase().includes(searchNameInput)) {
-		card.closest('.user-card').classList.add('hidden');
-	} else {
-		card.closest('.user-card').classList.remove('hidden');
-	}
-});
-
-const searchByName = () => {
-	let allNames = Array.from(document.querySelectorAll('#firstName'));;
-	renderSearchName(allNames);
-}
-
-const maxAgeRange = document.getElementById('ageRangeMax');
-const minAgeRange = document.getElementById('ageRangeMin');
-const filterAge = () => {
-	let allAges = Array.from(document.querySelectorAll('#age'));
-	allAges.forEach(card => {
-		if (card.textContent >= minAgeRange.value && card.textContent <= maxAgeRange.value) {
-			card.closest('.user-card').classList.remove('hidden');
-		} else {
-			card.closest('.user-card').classList.add('hidden');
-		}
 	});
+	userCards.appendChild(cardsContainer);
 }
 
-const resetAgeFilter = () => {
-	maxAgeRange.value = MAX_AGE;
-	minAgeRange.value = MIN_AGE;
-	filterAge();
+const hideLoader = () => document.querySelector('#loader').classList.add('hidden');
+
+const ascendSortByName = currentUsers => currentUsers.sort((prev, next) => prev.name.first > next.name.first ? 1 : -1);
+const descendSortByName = currentUsers => ascendSortByName(currentUsers).reverse();
+const descendSortByAge = currentUsers => currentUsers.sort((prev, next) => next.dob.age - prev.dob.age);
+const ascendSortByAge = currentUsers => descendSortByAge(currentUsers).reverse();
+
+const sort = (targetValue, usersToSort) => {
+	switch (targetValue) {
+	case 'ascendSortByName':
+		ascendSortByName(usersToSort);
+		break;
+	case 'descendSortByName':
+		descendSortByName(usersToSort);
+		break;
+	case 'ascendSortByAge':
+		ascendSortByAge(usersToSort);
+		break;
+	case 'descendSortByAge':
+		descendSortByAge(usersToSort);
+	}
+	return usersToSort;
 }
 
-const sortFilter = document.querySelectorAll('#sort');
-const searchName = document.getElementById('searchName');
-const genders = document.querySelectorAll('#filterGender');
-const nameSearchFilter = document.getElementById('searchByName');
+const filterByGender = (targetValue, usersToFilter) => {
+return usersToFilter = targetValue === 'default' ? usersToFilter 
+: usersToFilter.filter(user => user.gender === targetValue);
+}
 
-document.getElementById('resetAgeFilter').addEventListener('click', resetAgeFilter);
-nameSearchFilter.addEventListener('keyup', searchByName);
-sortFilter.forEach(age => age.addEventListener('change', sortUserCards));
-genders.forEach(gender => gender.addEventListener('change', filterGender));
-maxAgeRange.addEventListener('change', filterAge);
-minAgeRange.addEventListener('change', filterAge);
+const maxAgeRange = document.querySelector('#ageRangeMax');
+const minAgeRange = document.querySelector('#ageRangeMin');
+const MIN_AGE = 18;
+const MAX_AGE = 99;
+
+const filterAge = (usersToFilter) => usersToFilter.filter(user => user.dob.age < maxAgeRange.value 
+	&& user.dob.age > minAgeRange.value);
+
+const searchByName = (usersToSearch) => {
+	const nameSearchInput = nameSearchFilter.value.toLowerCase().trim();
+	return usersToSearch.filter(user => user.name.first.toLowerCase().includes(nameSearchInput));
+}
+
+const filter = ({target: {value, name}}) => {
+	let filteredUsers = [...users];
+	
+	filteredUsers = (name === 'filterByGender') ? filterByGender(value, filteredUsers)
+	: (name === 'sort') ? sort(value, filteredUsers)
+	: filteredUsers = filterAge(filteredUsers);
+	  filteredUsers = searchByName(filteredUsers);
+
+	renderUserCards(filteredUsers);
+}
+
+const resetAllFilters = () => {
+	form.reset();
+	renderUserCards(users);
+}
+
+const nameSearchFilter = document.querySelector('#searchByName');
+const resetFilters = document.querySelector('#resetFilters');
+const form = document.querySelector('#form');
+
+form.addEventListener('input', filter);
+resetFilters.addEventListener('click', resetAllFilters);
+
+document.addEventListener('DOMContentLoaded', initApp);

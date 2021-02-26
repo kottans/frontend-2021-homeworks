@@ -17,54 +17,54 @@
             <input type="checkbox" name='sidemenu_appear' class="sidemenu-appear">
             <div class="sidebar" id="sidebar">
                 
-                <form class="filter-form">               
+                <form class="filter-form" id="form">              
                 <fieldset class="filter-menu">
                     <legend><h3>Filters :</h3></legend>
-                    <section class="filter-section" id="filterGender">
-                    <h4>Gender</h4>
-                    <label>   
-                        <input type="radio" name="filterGender" value="male" class="visually-hidden">
-                        <span>&#9794; Male </span>
-                    </label>
-                    <label>  
-                        <input type="radio" name="filterGender" value="female" class="visually-hidden">
-                        <span>&#9792; Female </span>
-                    </label>
-                    <label>  
-                        <input type="radio" name="filterGender" value="all" class="visually-hidden">
-                        <span>All </span>
-                    </label>
-                </section>
-                    
                     <section class="sort-section" id="sort">
                         <h4>Sort By </h4>
                         <span>Name: </span>
                         <label>   
-                            <input type="radio" name="sort" value="namesSortAsc" class="visually-hidden">
+                            <input type="radio" name="sort" value="ascendSortByName" class="visually-hidden">
                             <span>A > Z </span>
                         </label>
                         <label>   
-                            <input type="radio" name="sort" value="namesSortDesc" class="visually-hidden">
+                            <input type="radio" name="sort" value="descendSortByName" class="visually-hidden">
                             <span>Z > A </span>
                         </label> 
                         <br>                 
                         <span>Age: </span>
                         <label>   
-                            <input type="radio" name="sort" value="agesSortAsc" class="visually-hidden">
+                            <input type="radio" name="sort" value="ascendSortByAge" class="visually-hidden">
                             <span>1 > 100 </span>
                         </label>
                         <label>   
-                            <input type="radio" name="sort" value="agesSortDesc" class="visually-hidden">
+                            <input type="radio" name="sort" value="descendSortByAge" class="visually-hidden">
                             <span>100 > 1 </span>
                         </label>
                     </section>
-                                       
+                    <section class="filter-section" id="filterGender">
+                    <h4>Filter by gender</h4>
+                    <label>   
+                        <input type="radio" name="filterByGender" value="male" class="visually-hidden">
+                        <span>&#9794; Male </span>
+                    </label>
+                    <label>  
+                        <input type="radio" name="filterByGender" value="female" class="visually-hidden">
+                        <span>&#9792; Female </span>
+                    </label>
+                    <label>  
+                        <input type="radio" name="filterByGender" value="default" class="visually-hidden">
+                        <span>All </span>
+                    </label>
+                    <p><strong>Age: </strong></p>
+                    from <input type="number" min="18" max="99" id="ageRangeMin" value='18' name="filterByAge">
+                    to <input type="number" min="18" max="99" id="ageRangeMax" value="99" name="filterByAge">
+                    </section> 
+                    <section>                           
                     <h4>Search By</h4>
-                    <p>Name: </p><input class='searchName' type="text" name="name" id="searchByName" placeholder="enter name">
-                    <p>Age: </p>
-                    from <input type="number" min="18" max="99" id="ageRangeMin" value='18'>
-                    to <input type="number" min="18" max="99" id="ageRangeMax" value="99" >
-                    <button type="reset" class="reset-button" id="resetAgeFilter" value="reset">Reset</button>
+                    <p>Name: </p><input class='searchName' type="text" name="searchByName" id="searchByName" placeholder="enter name">
+                </section>
+                <input type="reset" id='resetFilters' class="reset-button " value="Reset filters">  
                 </fieldset>
             </form> 
             </div>
