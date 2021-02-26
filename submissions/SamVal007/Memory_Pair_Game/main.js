@@ -1,8 +1,8 @@
 let similarCards = [];
 let blockedClick = false;
 const images = ['Dart_Weider', 'lyuk-skajuoker', 'R2-D2', 'c-3po',
-    // 'printsessa-leya-organa', 'enakin-skajuoker', 'obi-van-kenobi',
-    // 'dart-sidius', 'kvaj-gon-dzhinn', 'joda'
+     'printsessa-leya-organa', 'enakin-skajuoker', 'obi-van-kenobi',
+     'dart-sidius', 'kvaj-gon-dzhinn', 'joda'
 ];
 const flippDelay = 900,
     hiddingDelay = 600,
