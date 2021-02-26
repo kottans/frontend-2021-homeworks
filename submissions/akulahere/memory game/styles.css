@@ -7,7 +7,7 @@
 body {
     height: 100vh;
     display: flex;
-    background-image: url(./img/backgroudn.jpg);
+    background-image: url(img/background.jpg);
     background-color: black;
     background-size: 100% 100%;
 }
