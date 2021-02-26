@@ -17,19 +17,11 @@ class Inhabitant {
       this.friends = [];
   }
 
-  addFriends(...friendsInstances) {
-      this.friends.push(...friendsInstances);
-  }
+  addFriends = (...friendsInstances) => this.friends = [...this.friends, ...friendsInstances];
 
-  getFriendsNames() {
-      if (this.friends.length > 0) {
-          return this.friends.map(friend => friend.name)
-      } else {
-          return this.friends = 'forever alone...'
-      }
-  }
+  getFriendsNames = () => this.friends.length > 0 ? this.friends.map(friend => friend.name) : 'forever alone...';
 
-  getOutput() {
+  toString() {
       const properties = ['species', 'name', 'gender', 'legs', 'saying'];
       return properties.map(prop => `${prop}: ${this[prop]}`)
           .join('; ') + `; friends: ${this.getFriendsNames()}`
@@ -105,4 +97,4 @@ catWoman.addFriends(cat);
 
 const inhabitants = [man, woman, catWoman, cat, dog];
 
-inhabitants.forEach(inhabitant => print(inhabitant.getOutput()))
+inhabitants.forEach(inhabitant => print(inhabitant));
