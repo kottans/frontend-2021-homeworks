@@ -17,9 +17,14 @@ class Inhabitant {
       this.friends = [];
   }
 
-  addFriends = (...friendsInstances) => this.friends.includes(...friendsInstances) ? false : this.friends = [...this.friends, ...friendsInstances];
+  addFriends(...friendsInstances) {
+      this.friends = [...this.friends, ...friendsInstances.filter(friend => !this.friends.includes(friend))];
+  }
 
-  getFriendsNames = () => this.friends.length > 0 ? this.friends.map(friend => friend.name) : 'forever alone...';
+  getFriendsNames() {
+       let output = this.friends.length > 0 ? this.friends.map(friend => friend.name) : 'alone';     
+       return output;
+  }
 
   toString() {
       const properties = ['species', 'name', 'gender', 'legs', 'saying'];
@@ -98,4 +103,3 @@ catWoman.addFriends(cat);
 const inhabitants = [man, woman, catWoman, cat, dog];
 
 inhabitants.forEach(inhabitant => print(inhabitant));
-
