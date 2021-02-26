@@ -17,7 +17,7 @@ class Inhabitant {
       this.friends = [];
   }
 
-  addFriends = (...friendsInstances) => this.friends = [...this.friends, ...friendsInstances];
+  addFriends = (...friendsInstances) => this.friends.includes(...friendsInstances) ? false : this.friends = [...this.friends, ...friendsInstances];
 
   getFriendsNames = () => this.friends.length > 0 ? this.friends.map(friend => friend.name) : 'forever alone...';
 
@@ -33,8 +33,8 @@ class HumanBeing extends Inhabitant {
       super(species, name, gender, 2, saying);
       this.hands = 2;
   }
-  getOutput() {
-      return super.getOutput() + `; hands: ${this.hands};`
+  toString() {
+      return super.toString() + `; hands: ${this.hands};`
   }
 }
 
@@ -98,3 +98,4 @@ catWoman.addFriends(cat);
 const inhabitants = [man, woman, catWoman, cat, dog];
 
 inhabitants.forEach(inhabitant => print(inhabitant));
+
