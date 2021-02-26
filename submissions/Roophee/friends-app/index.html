@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Document</title>
+</head>
+
+<body class="flex flex-column flex-grow">
+    <nav class="nav flex flex-start flex-align-center">
+        <div class="nav-label btn flex flex-space-around">
+            <a href="https://kottans.org/" class="link" target="ablank">
+                <img src="img/users-1.png" alt="app logo">
+                <span>Friends App</span>
+        </a>
+        </div>
+    </nav>
+    <main class='main flex flex-start win__header-border'>
+        <div class='main__header flex win__header-label'>
+            <span>Your Friends</span>
+        </div>
+
+        <aside class='main__aside'>
+        <form action="" id="filters" class="main__form">
+            <fieldset class="filter-search flex flex-space-evenly">
+                <legend >
+                    Search
+                </legend>
+                <input name="search" id="search" type="text" value="">
+            </fieldset>
+            <fieldset class="filter-gender flex flex-space-evenly">
+                <legend>
+                    Gender
+                </legend>
+                <label for="gender-all">All</label>
+                <input name="gender" id="gender-all" type="radio" value="all">
+                <label for="gender-male">Male</label>
+                <input name="gender" id="gender-male" type="radio" value="male">
+                <label for="gender-female">Female</label>
+                <input name="gender" id="gender-female" type="radio" value="female">
+            </fieldset>
+            <fieldset class="filter-name flex flex-space-evenly">
+                <legend>
+                    Name
+                </legend>
+                <label for="name-az">A - Z</label>
+                <input name="name" id="name-az" type="radio" value="az">
+                <label for="name-za">Z - A</label>
+                <input name="name" id="name-za" type="radio" value="za">
+            </fieldset>
+            <fieldset class="filter-age flex flex-space-evenly">
+                <legend>
+                    Age
+                </legend>
+                <label for="age-ascending">Ascending</label>
+                <input name="age" id="age-ascending" type="radio" value="ascending">
+                <label for="age-descending">Descending</label>
+                <input name="age" id="age-descending" type="radio" value="descending">
+            </fieldset>
+            <input type="button" name="reset" value="reset" class="main__form-reset btn">
+        </form>
+        </aside>
+        <section class='main__section flex flex-grow'>
+
+        </section>
+    </main>
+    <footer class="footer flex flex-center flex-align-center">
+    <div>2021</div>
+    </footer>
+    <script src="js/index.js"></script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FriendsAppByT0PER</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
+    />
+  </head>
+
+  <body>
+    <header class="top">
+      <h1>friends app</h1>
+    </header>
+
+    <main class="main_window">
+      <div class="container" id="container">
+        <ul class="list" id="usersList"></ul>
+      </div>
+
+      <aside class="sidebar">
+        <ul id="filters_menu" class="filters_list">
+          <li class="search">
+            <input
+              type="text"
+              name="search"
+              class="searcher"
+              placeholder="Find..."
+            />
+          </li>
+          <li class="selection-box">
+            <input
+              type="radio"
+              id="name_ascend"
+              value="nameAscend"
+              name="sort_by_alphabet"
+              class="sort_input"
+            />
+            <label for="name_ascend" class="filter-btn">Asc</label>
+            <input
+              type="radio"
+              id="name_descend"
+              value="nameDescend"
+              name="sort_by_alphabet"
+              class="sort_input"
+            />
+            <label for="name_descend" class="filter-btn">Dsc</label>
+          </li>
+          <li class="selection-box">
+            <p>Gender :</p>
+            <input
+              type="radio"
+              id="male"
+              value="male"
+              name="sort_by_gender"
+              class="sort_input"
+            />
+            <label for="male" class="filter-btn">Male</label>
+            <input
+              type="radio"
+              id="female"
+              value="female"
+              name="sort_by_gender"
+              class="sort_input"
+            />
+            <label for="female" class="filter-btn">Female</label>
+          </li>
+          <li class="selection-box">
+            <p>Age :</p>
+            <input
+              type="radio"
+              id="younger"
+              value="younger"
+              name="sort_by_age"
+              class="sort_input"
+            />
+            <label for="younger" class="filter-btn">Youngest</label>
+            <input
+              type="radio"
+              id="senior"
+              value="senior"
+              name="sort_by_age"
+              class="sort_input"
+            />
+            <label for="senior" class="filter-btn">Oldgest</label>
+          </li>
+          <li class="reset_btn">
+            <input
+              type="checkbox"
+              class="sort_input"
+              id="reset"
+              name="reset_filters"
+              value="reset"
+            />
+            <label for="reset" class="filter-btn">Reset Filters</label>
+          </li>
+        </ul>
+      </aside>
+    </main>
+    <footer class="bottom">
+      <h2>Created as part of the training course of KOTTANS</h2>
+    </footer>
+  </body>
+
+  <script src="js/index.js"></script>
+</html>
