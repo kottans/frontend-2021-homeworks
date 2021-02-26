@@ -19,9 +19,6 @@ const initApp = async () => {
 	hideLoader();	
 }
 
-const cardsContainer = document.createDocumentFragment();
-const userCards = document.querySelector('#user-cards');
-
 const createUserCard = user => {
 	let userDiv = document.createElement('div');
 	userDiv.classList.add('user-card');
@@ -34,18 +31,18 @@ const createUserCard = user => {
      <a class='tel' href="tel:+${user.cell}">${user.cell.replace(/[^\d]/g, '')}</a>
      <a class='email' href="mailto:${user.email}">Send email</a>
  `;
-	cardsContainer.appendChild(userDiv);
+	return userDiv;
 }
 
 const renderUserCards = users => {
-	userCards.innerHTML='';  
-	users.forEach(user => {
-		createUserCard(user);
-	});
+	const cardsContainer = document.createDocumentFragment();
+	const userCards = document.getElementById('user-cards');
+	userCards.innerHTML = '';  
+	users.forEach(user => cardsContainer.appendChild(createUserCard(user)));
 	userCards.appendChild(cardsContainer);
 }
 
-const hideLoader = () => document.querySelector('#loader').classList.add('hidden');
+const hideLoader = () => document.getElementById('loader').classList.add('hidden');
 
 const ascendSortByName = currentUsers => currentUsers.sort((prev, next) => prev.name.first > next.name.first ? 1 : -1);
 const descendSortByName = currentUsers => ascendSortByName(currentUsers).reverse();
@@ -74,8 +71,8 @@ return usersToFilter = targetValue === 'default' ? usersToFilter
 : usersToFilter.filter(user => user.gender === targetValue);
 }
 
-const maxAgeRange = document.querySelector('#ageRangeMax');
-const minAgeRange = document.querySelector('#ageRangeMin');
+const maxAgeRange = document.getElementById('ageRangeMax');
+const minAgeRange = document.getElementById('ageRangeMin');
 const MIN_AGE = 18;
 const MAX_AGE = 99;
 
@@ -89,12 +86,14 @@ const searchByName = (usersToSearch) => {
 
 const filter = ({target: {value, name}}) => {
 	let filteredUsers = [...users];
-	
-	filteredUsers = (name === 'filterByGender') ? filterByGender(value, filteredUsers)
-	: (name === 'sort') ? sort(value, filteredUsers)
-	: filteredUsers = filterAge(filteredUsers);
-	  filteredUsers = searchByName(filteredUsers);
-
+	filteredUsers = filterAge(filteredUsers);
+	filteredUsers = searchByName(filteredUsers);
+	if(name === 'filterByGender') {
+		filteredUsers = filterByGender(value, filteredUsers);
+	}
+	if (name === 'sort') {
+		filteredUsers = sort(value, filteredUsers);
+	}
 	renderUserCards(filteredUsers);
 }
 
@@ -103,9 +102,9 @@ const resetAllFilters = () => {
 	renderUserCards(users);
 }
 
-const nameSearchFilter = document.querySelector('#searchByName');
-const resetFilters = document.querySelector('#resetFilters');
-const form = document.querySelector('#form');
+const nameSearchFilter = document.getElementById('searchByName');
+const resetFilters = document.getElementById('resetFilters');
+const form = document.getElementById('form');
 
 form.addEventListener('input', filter);
 resetFilters.addEventListener('click', resetAllFilters);
