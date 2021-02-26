@@ -25,8 +25,6 @@ const mainAttributes = {
     imgFrontLogoUrl: 'img/'
 };
 
-const cleanCountArray = () => similarCards = [];
-
 const flippSelectedCards = () => {
     setTimeout(() => {
         document.querySelectorAll(".flipped").forEach((card) => {
@@ -42,6 +40,8 @@ const hideCards = () => {
 
     });
 };
+
+const cleanCountArray = () => similarCards = [];
 
 const cleaningCountArrayAndUnblockClick = () => {
     cleanCountArray();
