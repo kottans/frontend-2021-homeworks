@@ -110,4 +110,4 @@ const form = document.querySelector('#form');
 form.addEventListener('input', filter);
 resetFilters.addEventListener('click', resetAllFilters);
 
-document.addEventListener('DOMContentLoaded', initApp);
+document.addEventListener('DOMContentLoaded', initApp); 
