@@ -1,40 +1,43 @@
 const items = [
     {
         id: 0,
-        img_url: './img/colibri.gif'
+        imgUrl: './img/colibri.gif'
     },
     {
         id: 1,
-        img_url: './img/hello.gif'
+        imgUrl: './img/hello.gif'
     },
     {
         id: 2,
-        img_url: './img/hi.gif'
+        imgUrl: './img/hi.gif'
     },
     {
         id: 3,
-        img_url: './img/inlove.gif'
+        imgUrl: './img/inlove.gif'
     },
     {
         id: 4,
-        img_url: './img/love.gif'
+        imgUrl: './img/love.gif'
     },
     {
         id: 5,
-        img_url: './img/play.gif'
+        imgUrl: './img/play.gif'
     },
     {
         id: 6,
-        img_url: './img/sleep.gif'
+        imgUrl: './img/sleep.gif'
     },
     {
         id: 7,
-        img_url: './img/space.gif'
+        imgUrl: './img/space.gif'
     }
 ];
 
+const NUMBER_OF_CARDS = 8;
+const CHECK_WIN_TIME = 1500;
+const UNFLIP_TIME = 1000;
+const SECTION_MEMORY = document.getElementById('section__memory');
 let choosedCards = [];
-const sectionMemory = document.getElementById('section__memory');
 let hasFlippedCard = false;
 let boardLocked = false;
 let firstCard, secondCard;
@@ -47,40 +50,26 @@ function shuffle(array) {
     return array;
 }
 
-function createCardItem(item) {
-    const cardWrapper = document.createElement('div');
-    const imgBack = document.createElement('img');
-    const imgFront = document.createElement('img');
-    cardWrapper.classList.add("memory-card"); //class for CSS
-    cardWrapper.appendChild(imgBack);
-    cardWrapper.appendChild(imgFront);
-    imgBack.src = "./img/img-0.jpg";
-    imgFront.src = item.img_url;
-    imgBack.classList.add("back-face");
-    imgFront.classList.add("front-face");
-    cardWrapper.id = item.id;
-    return cardWrapper;
-}
-
 function createAllCards() {
     let allCards = shuffle([...items, ...items]);
-    allCards.forEach(elem => {
-        sectionMemory.appendChild(createCardItem(elem));
+    let card = '';
+    allCards.forEach(({id, imgUrl}) => {
+        card += `<div id="${id}" class="memory-card"><img class="back-face" src="./img/img-0.jpg"><img class="front-face" src="${imgUrl}"></div>`
     });
-
+    SECTION_MEMORY.innerHTML = card;
 }
 createAllCards();
 
-function flipCard() {
-    if (boardLocked) return;
-    if (this === firstCard) return;
-    this.classList.add('flip');
+function flipCard({target}) {
+    const cardClicked = target.closest('.memory-card');
+    if (boardLocked || cardClicked === firstCard) return;
+    cardClicked.classList.add('flip');
     if (!hasFlippedCard) {
         hasFlippedCard = true;
-        firstCard = this;
+        firstCard = cardClicked;
     } else {
         hasFlippedCard = false;
-        secondCard = this;
+        secondCard = cardClicked;
         checkForMatch();
     }
 }
@@ -90,15 +79,14 @@ function checkForMatch() {
         hideCards();
         choosedCards.push(firstCard.id);
         checkForWin();
-        console.log(choosedCards)
     } else {
         unflipCards();
     }
 }
 
 function checkForWin() {
-    if (choosedCards.length === 8) {
-        setTimeout(() => {alert("You win!")}, 1500);
+    if (choosedCards.length === NUMBER_OF_CARDS) {
+        setTimeout(() => {alert("You win!")}, CHECK_WIN_TIME);
 
     }
 }
@@ -109,7 +97,7 @@ function unflipCards() {
         firstCard.classList.remove('flip');
         secondCard.classList.remove('flip');
         boardLocked = false;
-    }, 1000);
+    }, UNFLIP_TIME);
 }
 
 function hideCards() {
@@ -119,5 +107,4 @@ function hideCards() {
     secondCard.classList.add('hide');
 }
 
-const everyCards = document.querySelectorAll('.memory-card');
-everyCards.forEach(items => items.addEventListener('click', flipCard));
+SECTION_MEMORY.addEventListener('click', flipCard);

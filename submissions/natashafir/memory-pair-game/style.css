@@ -36,13 +36,6 @@ h2 {
     position: relative;
     box-shadow: 1px 1px 1px rgba(0,0,0,.3);
     perspective: 1000px;
-    /*background-image: url( "./img/img-0.jpeg");*/
-
-}
-
-.back-face{
-    /*background-color: aqua;*/
-    /*transform: rotateY(180deg);*/
 }
 
 .front-face{
@@ -50,12 +43,10 @@ h2 {
     transform: rotateY(180deg);
 }
 
-
 .back-face, .front-face {
     width: 100%;
     height: 100%;
     position: absolute;
-    /*border-radius: 5px;*/
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
     transition: 1s;
