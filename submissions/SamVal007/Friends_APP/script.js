@@ -1,5 +1,5 @@
 const CONTAINER = document.getElementById('container');
-const SIDEBAR = document.getElementById('sidebar');
+const SIDEBAR = document.getElementById('menu_forms');
 const SEARCH_FIELD = document.getElementById('searchField');
 const URL = 'https://randomuser.me/api/?results=40';
 
@@ -8,6 +8,7 @@ let displayList = [];
 
 function getPeopleData() {
   let response = fetch(URL)
+
     .then(
       successResponse => {
         if (successResponse.status != 200) {
@@ -15,14 +16,19 @@ function getPeopleData() {
         } else {
           return successResponse;
         }
-      }
-    )
+      })
+
     .then(data => data.json())
+
     .then(function (data) {
       persons = data.results;
       displayList = persons;
+    })
+
+    .then(function () {
       displayCards();
     })
+
     .catch(function (error) {
       console.log('We have an error: ', error);
       alert('Please, check your internet connection and try again');
@@ -72,16 +78,16 @@ document.addEventListener('DOMContentLoaded', function () {
           displayList = persons.filter(el => el.gender === 'female');
           break;
         case 'nameAsc':
-          displayList = displayList.sort((b, a) => a.name.last > b.name.last ? -1 : 1);
+          displayList.sort((b, a) => a.name.last > b.name.last ? -1 : 1);
           break;
         case 'nameDesc':
-          displayList = displayList.sort((b, a) => a.name.last < b.name.last ? -1 : 1);
+          displayList.sort((b, a) => a.name.last < b.name.last ? -1 : 1);
           break;
         case 'ageLow':
-          displayList = displayList.sort((a, b) => a.dob.age - b.dob.age);
+          displayList.sort((a, b) => a.dob.age - b.dob.age);
           break;
         case 'ageHigh':
-          displayList = displayList.sort((b, a) => a.dob.age - b.dob.age);
+          displayList.sort((b, a) => a.dob.age - b.dob.age);
           break;
       }
 
