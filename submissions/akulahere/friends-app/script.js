@@ -9,6 +9,7 @@ const NAME_FILTER = 'name';
 const GENDER_FILTER = 'gender';
 const ASCENDING_ORDER = 'ascending';
 const DESCENDING_ORDER = 'descending';
+const buttonArrays = [nameSortButton, ageSortButton];
 
 const filter = {
   gender: 'any',
@@ -110,13 +111,12 @@ const toggleSortIcon = (buttonClicked) => {
     buttonClicked.classList.toggle(ASCENDING_ORDER);
     buttonClicked.classList.toggle(DESCENDING_ORDER);
   }
-  if (buttonClicked.nextElementSibling) {
-    buttonClicked.nextElementSibling.classList.remove(ASCENDING_ORDER);
-    buttonClicked.nextElementSibling.classList.remove(DESCENDING_ORDER);
-  } else {
-    buttonClicked.previousElementSibling.classList.remove(ASCENDING_ORDER);
-    buttonClicked.previousElementSibling.classList.remove(DESCENDING_ORDER);
-  }
+  buttonArrays.forEach(button => {
+    if (button !== buttonClicked) {
+      button.classList.remove(ASCENDING_ORDER);
+      button.classList.remove(DESCENDING_ORDER);
+    }
+  })
 }
 
 const initialize = async () => {
