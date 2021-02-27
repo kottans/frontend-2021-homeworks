@@ -1,0 +1,57 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    background-image: url(img/background.jpg);
+    background-color: black;
+    background-size: 100% 100%;
+}
+
+.memory-game {
+    width: 50%;
+    height: 90%;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    perspective: 1000px;
+}
+
+.card {
+    min-width: calc(25% - 10px);
+    min-height: calc(25% - 10px);
+    margin: 5px;
+    position: relative;
+    box-shadow: 1px 1px 1px rgba(0,0,0,.3);
+    transform: scale(1);
+    transform-style: preserve-3d;
+    transition: transform .5s;
+}
+
+.card:active {
+    transform: scale(0.95);
+    transition: transform 0.2s;
+}
+
+.card.flip {
+    transform: rotateY(180deg);
+}
+
+.back-img, .front-img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    border-radius: 5px;
+    background: #1C7CCC;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden; /* Safari */
+}
+
+.front-img {
+    transform: rotateY(180deg);
+}
+
