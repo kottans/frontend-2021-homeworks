@@ -1,5 +1,5 @@
-const cardsId = ["01", "02", "03", "04", "05", "06"];
-const cardsArr = [...cardsId, ...cardsId];
+const cardsIds = ["01", "02", "03", "04", "05", "06"];
+const cardsArr = [...cardsIds, ...cardsIds];
 const maxNumOfHiddenCards = 12;
 const maxNumOfFlippedCards = 2;
 const delayForHidden = 100;
@@ -13,9 +13,8 @@ let secondFlippedContainer;
 
 function createCard(id) {
   let flipContainer = document.createElement("div");
-  flipContainer.className = "flip-container";
+  flipContainer.classList.add("flip-container");
   flipContainer.setAttribute("id", id);
-  gameField.append(flipContainer);
   flipContainer.innerHTML = `      
       <div class="flipper">
           <div class="front">
@@ -25,6 +24,7 @@ function createCard(id) {
               <img src="img/funny-cat_${id}.jpg">
           </div>
       </div>`;
+  gameField.append(flipContainer);
 }
 function createField() {
   cardsArr.sort(function () {
@@ -33,20 +33,24 @@ function createField() {
   cardsArr.forEach((id) => createCard(id));
 }
 function flipCard(event) {
-  if (arrOfFlippedCardsId.length == 0) {
+  if (!arrOfFlippedCardsId.length) {
     firstFlippedContainer = event.target.closest(".flip-container");
     firstFlippedContainer.classList.add("clicked");
     arrOfFlippedCardsId.push(firstFlippedContainer.id);
-  } else if (arrOfFlippedCardsId.length == 1 && event.target.closest('.flip-container')!==firstFlippedContainer) {
+  } else if (
+    arrOfFlippedCardsId.length === 1 &&
+    event.target.closest(".flip-container") !== firstFlippedContainer
+  ) {
     secondFlippedContainer = event.target.closest(".flip-container");
     secondFlippedContainer.classList.add("clicked");
     arrOfFlippedCardsId.push(secondFlippedContainer.id);
-    CheckPairs();
+    checkPairs();
   }
 }
-function CheckPairs() {
+function checkPairs() {
+  const [firstId, secondId] = arrOfFlippedCardsId;
   if (
-    arrOfFlippedCardsId[0] == arrOfFlippedCardsId[1] &&
+    firstId === secondId &&
     firstFlippedContainer !== secondFlippedContainer
   ) {
     setTimeout(() => {
@@ -64,7 +68,6 @@ function CheckPairs() {
       secondFlippedContainer.classList.remove("clicked");
       arrOfFlippedCardsId = [];
     }, delayForClicked);
-    
   }
 }
 function checkNumOfHiddenCard() {
