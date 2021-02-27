@@ -22,8 +22,7 @@ class Inhabitant {
   }
 
   getFriendsNames() {
-       let output = this.friends.length > 0 ? this.friends.map(friend => friend.name) : 'alone';     
-       return output;
+       return this.friends.length > 0 ? this.friends.map(friend => friend.name).toString() : 'alone';     
   }
 
   toString() {
