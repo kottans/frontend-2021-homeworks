@@ -136,11 +136,11 @@ ageSortButton.addEventListener('click', () => {
 
 genderFilter.addEventListener('input', ({target}) => {
   filter.gender = target.value;
-  if (!currentFilters.includes('gender')) {
-    currentFilters.push('gender');
+  if (!currentFilters.includes(GENDER_FILTER)) {
+    currentFilters.push(GENDER_FILTER);
   }
   if (target.value === 'any') {
-    currentFilters.splice(currentFilters.indexOf('gender'), 1);
+    currentFilters.splice(currentFilters.indexOf(GENDER_FILTER), 1);
   }
   filterUsers();
   renderUsers(currentFilteredUsers);
@@ -149,11 +149,11 @@ genderFilter.addEventListener('input', ({target}) => {
 
 nameFilter.addEventListener('input', ({target}) => {
   filter.nameFilter = target.value;
-  if (!currentFilters.includes('name')) {
-    currentFilters.push('name');
+  if (!currentFilters.includes(NAME_FILTER)) {
+    currentFilters.push(NAME_FILTER);
   }
   if (target.value === "") {
-    currentFilters.splice(currentFilters.indexOf('name'), 1);
+    currentFilters.splice(currentFilters.indexOf(NAME_FILTER), 1);
   }
   filterUsers();
   renderUsers(currentFilteredUsers);
