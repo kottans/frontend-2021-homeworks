@@ -16,20 +16,18 @@ const filter = {
   nameFilter: null,
 };
 
-const filterUserByGender = (user) => user.gender === filter.gender ? true : false;
-const filterUserByName = ({ name: { first, last }}) =>
+const compareUserGender = (user) => user.gender === filter.gender ? true : false;
+const comparerUserByName = ({ name: { first, last }}) =>
   first.concat(last).toLowerCase().includes(filter.nameFilter.toLowerCase()) ? true : false;
 
 const makeFilter = {
-  [NAME_FILTER]: filterUserByName,
-  [GENDER_FILTER]: filterUserByGender,
+  [NAME_FILTER]: comparerUserByName,
+  [GENDER_FILTER]: compareUserGender,
 }
 
 const filterUsers = () => {
   currentFilteredUsers = [...allUsers];
-  if (currentFilters) {
-    currentFilters.forEach(filter => currentFilteredUsers = currentFilteredUsers.filter(user => makeFilter[filter](user)));
-  }
+  currentFilters.forEach(filter => currentFilteredUsers = currentFilteredUsers.filter(user => makeFilter[filter](user)));
   if (ageSortButton.classList.contains(ASCENDING_ORDER) || ageSortButton.classList.contains(DESCENDING_ORDER)) {
     sortByAge(currentFilteredUsers);
   }
