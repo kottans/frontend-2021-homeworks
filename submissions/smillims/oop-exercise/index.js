@@ -14,8 +14,9 @@ class Inhabitant {
   toString(){
     return [`Hi, I'm ` + this.species,
     `My name is ` + this.name,
+    `My surname is` + this.surname,
     `My gender is ` + this.gender,
-    `I have ` + this.legs + ` legs`, ``].join(', ')
+    `I have ` + this.legs + ` legs`, ``].join(', ');
   }
 }
 
@@ -24,25 +25,20 @@ class Human extends Inhabitant {
     super(surname, 'human', gender, name, 2);
     this.hands = hands;
   }
+  toString() {
+    return super.toString() + [`I have ` + this.hands + ` hands`];
+  }
 }
 
 class Man extends Human {
   constructor(name, surname) {
     super(surname, name, 'male')
   }
-  toString() {
-    return super.toString() + [`I have ` + this.hands + ` hands`, 
-                            ` My surname is ` + this.surname]
-  }
 }
 
 class Woman extends Human {
   constructor(name, surname) {
     super(surname, name, 'female')
-  }
-  toString() {
-    return super.toString() + [`I have ` + this.hands + ` hands`, 
-                            ` My surname is ` + this.surname]
   }
 }
 
@@ -56,9 +52,6 @@ class SheCat extends Cat {
   constructor(name, surname) {
     super(surname, name, 'female')
   }
-  toString() {
-    return super.toString() + [`My surname is ` + this.surname]
-  }
 }
 
 class Dog extends Inhabitant {
@@ -70,9 +63,6 @@ class Dog extends Inhabitant {
 class SheDog extends Dog {
   constructor(name, surname){
     super(surname, name, 'female')
-  }
-  toString() {
-    return super.toString() + [`My surname is ` + this.surname]
   }
 }
 
