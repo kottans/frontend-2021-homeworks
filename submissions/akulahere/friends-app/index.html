@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Friends App</title>
+</head>
+<body>
+<header>
+    <div class="header">
+        <h1>Friends App</h1>
+    </div>
+    <div class="filters">
+        <div>
+            <h2 class = 'filters-header'>Select filters:</h2>
+        </div>
+        <fieldset class = "filter">
+            <legend>Search</legend>
+            <input class="search-field" type="search" id="search-field" placeholder="Enter Name">
+        </fieldset>
+        <fieldset class="age-input sort-buttons">
+            <legend>Sort</legend>
+            <button class="sort-button" id="name-sort">
+                <span>by Name</span>
+                <span class="icon"></span>
+            </button>
+            <button class="sort-button" id="age-sort">
+                <span>by Age</span>
+                <span class="icon"></span>
+            </button>
+        </fieldset>
+        <fieldset class="filter gender-filter">
+            <legend>Gender</legend>
+            <label><input class="gender-input" type="radio" name="gender" value="male" id="gender-male"> Male</label><br>
+            <label><input class="gender-input" type="radio" name="gender" value="female" id="gender-female">
+                Female</label><br>
+            <label><input class="gender-input" type="radio" name="gender" value="any" id="gender-any" checked> Any</label>
+        </fieldset>
+    </div>
+</header>
+
+<main>
+    <ul class="users">
+
+    </ul>
+</main>
+<footer>
+    <p> (c) 2021</p>
+</footer>
+<script src="script.js"></script>
+</body>
+
+</html>
