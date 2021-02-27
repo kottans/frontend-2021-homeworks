@@ -1,0 +1,65 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Press Start 2P', sans-serif;
+    height: 100vh;
+    display: flex;
+    background: #77abb7;
+    margin: 0 auto;
+}
+
+h2 {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+}
+
+.wrapper{
+    margin: auto;
+}
+
+.memory-game {
+    width: 640px;
+    height: 640px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.memory-card {
+    width: calc(25% - 10px);
+    height: calc(25% - 10px);
+    margin: 5px;
+    position: relative;
+    box-shadow: 1px 1px 1px rgba(0,0,0,.3);
+    perspective: 1000px;
+}
+
+.front-face{
+    background-color: mintcream;
+    transform: rotateY(180deg);
+}
+
+.back-face, .front-face {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transition: 1s;
+}
+
+.memory-card.flip .front-face{
+    transform: rotateY(360deg);
+}
+
+.memory-card.flip .back-face{
+    transform: rotateY(180deg);
+}
+
+.memory-card.hide {
+    visibility: hidden;
+}
