@@ -1,9 +1,6 @@
 import "../css/vendor/normalize.css";
 import "../css/styles.css";
 
-const USERS_URL =
-  "https://randomuser.me/api/?inc=gender,phone,picture,dob,location,name&results=25";
-
 const contactsField = document.querySelector(".contacts-field");
 const optionsMenu = document.querySelector(".options");
 const searchInput = document.querySelector(".options__search__inpit");
@@ -12,12 +9,17 @@ let contacts;
 let filter = "";
 
 function getContacts() {
+  const USERS_URL =
+    "https://randomuser.me/api/?inc=gender,phone,picture,dob,location,name&results=25";
   return fetch(USERS_URL)
-    .then((res) =>{ if (res.status !== 200)   
-      console.log('Looks like there was a problem. Status Code: ' +  
-        res.status); return res.json()})
+    .then((res) => {
+      if (res.status !== 200)
+        console.log(
+          "Looks like there was a problem. Status Code: " + res.status
+        );
+      return res.json();
+    })
     .then(({ results }) => (originalContacts = results))
-
     .catch((error) => {
       console.error("Error:", error);
     });
@@ -50,7 +52,7 @@ optionsMenu.addEventListener("click", onOptionsClick);
 searchInput.addEventListener("change", onChangeSearch);
 
 function onChangeSearch() {
-  contacts = contacts.filter((element) => {
+  contacts.filter((element) => {
     return element.name.first
       .toLowerCase()
       .includes(searchInput.value.toLowerCase());
@@ -65,51 +67,37 @@ function renderContacts(contacts) {
 }
 
 function onOptionsClick(e) {
-  const selectedOption = e.target.classList.value;
+  const selectedOption = e.target;
 
-if(selectedOption=="options__blocks__reset-btn"){
-  resetOptions();
+  if (selectedOption.classList.value.includes("options__blocks__reset-btn")) {
+    resetOptions();
+    renderContacts(contacts);
+  } else {
+    if (selectedOption.value.includes("name-sort")) {
+      sortByName(contacts);
+      if (selectedOption.value.includes("ascending"))
+        contacts = contacts.reverse();
+    }
+
+    if (selectedOption.value.includes("age-sort")) {
+      contacts.sort((a, b) => a.dob.age - b.dob.age);
+      if (selectedOption.value.includes("less")) contacts = contacts.reverse();
+    }
+    if (selectedOption.value.includes("gender-filter")) {
+      if (selectedOption.value.includes("woman")) filter = "female";
+      else filter = "male";
+    }
+    renderContacts(filterByGender(contacts, filter));
+  }
 }
-
-
-if(selectedOption.includes("name-sort")){
-  sortName(contacts);
-  if(selectedOption.includes("a-z"))
-  contacts = contacts.reverse();
-    
-}
-
-if(selectedOption.includes("age-sort")){
-  sortAge(contacts);
-  if(selectedOption.includes("less"))
-  contacts = contacts.reverse();
-   
-}
-
-if(selectedOption.includes("gender-filter")){
-  if(selectedOption.includes("man"))
-  filter = "male";
-  else filter = "female";
-   
-}
-renderContacts(filterByGenderIfYouHaveAGender(contacts, filter));
-
-
- }
-
 function resetOptions() {
   resetToDefaultContacts();
   filter = "";
   searchInput.value = "";
-  
 }
 
-function sortAge(contact) {
-  contacts = contact.sort((a, b) => a.dob.age - b.dob.age);
-}
-
-function sortName(contact) {
-  contacts = contact.sort(function (a, b) {
+function sortByName(contact) {
+  contact.sort(function (a, b) {
     if (a.name.first > b.name.first) {
       return -1;
     }
@@ -119,15 +107,12 @@ function sortName(contact) {
     return 0;
   });
 }
-function filterGender(contacts, gender) {
-  return contacts.filter((element) => element.gender == gender);
-}
 
-function filterByGenderIfYouHaveAGender(contacts, gender) {
+function filterByGender(contacts, gender) {
   if (gender == "") {
     return contacts;
   } else {
-    return filterGender(contacts, gender);
+    return contacts.filter((element) => element.gender == gender);
   }
 }
 function resetToDefaultContacts() {
