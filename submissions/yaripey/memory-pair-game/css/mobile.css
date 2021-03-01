@@ -1,20 +1,20 @@
 @media (max-width: 900px) {
-
-  .warning-main-text, .greetings-main-text, .congratulations-main-text {
+  .scene-main-text {
     font-size: 15px;
     margin-bottom: 20px;
   }
 
-  .warning-close-button, .greetings-close-button {
+  .next-button {
     font-size: 15px;
   }
 
-  .warning-background, .greetings-background, .congratulations-background {
+  .scene-background {
     width: 70%;
     overflow: auto;
   }
-  
-  .greetings-paimon, .congratulations-paimon {
+
+  .greetings-paimon,
+  .congratulations-paimon {
     height: 300px;
   }
 
@@ -23,8 +23,12 @@
   }
 }
 
-@media(max-width: 500px) {
-  .greetings-paimon, .congratulations-paimon {
+@media (max-width: 500px) {
+  .scene-content {
+    margin: 0;
+  }
+  .greetings-paimon,
+  .congratulations-paimon {
     position: relative;
     top: 0;
     left: 0;
@@ -33,11 +37,11 @@
     display: block;
   }
 
-  .warning-background, .greetings-background, .congratulations-background {
+  .scene-background {
     height: 80%;
   }
 
-  .greetings-main-text, .congratulations-main-text {
+  .scene-main-text {
     margin: 0;
   }
 
@@ -68,7 +72,9 @@
     margin: 10px;
   }
 
-  .flip-container, .front, .back {
+  .flip-container,
+  .front,
+  .back {
     width: 70px;
     height: 70px;
   }

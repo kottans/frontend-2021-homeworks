@@ -1,162 +1,77 @@
-import { Element, getElementName } from './elements.js'
-import { showArrayOfElements, shuffleArray, selectProperTarget } from './utility.js'
-import { congratulations } from './scenes.js'
+import { nextScene } from './gameScript.js'
+import { Card, getCardName } from './cards.js'
 
-// The main game class
-const Game = function () {
+const amountOfCards = 16
 
-  // Stores element that is opened right now
-  this.currentOpened = null
+let currentOpened = null
+const amountOfPairs = amountOfCards / 2
 
-  // Amount of pairs of cards;
-  this.amountOfPairs = 16 / 2;
+let isGameStopped = false
 
-  // Scene counter, initial value is -1 because the function increments it at first.
-  this.currentScene = -1;
+const cards = initiateCards(amountOfPairs)
 
-  this.mainContainer = document.querySelector('.container')
-  this.stop = false;
-  this.musicMuted = false;
-}
+export function createGameScene () {
+  const mainBlock = document.createElement('div')
+  mainBlock.classList.add('game-block')
+  cards.forEach(card => {
+    mainBlock.appendChild(card.makeCard())
+  })
+  
+  mainBlock.addEventListener('click', gameClickHandler)
 
-// Function for the elements array initialisation
-Game.prototype.initiateElements = function () {
-  const preShuffleElements = [];
-  for (let i = 0; i < this.amountOfPairs; i++) {
-    const currentElement = getElementName()
-    const newElem = new Element(currentElement, i)
-    const anotherNewElem = new Element(currentElement, i + this.amountOfPairs)
-    preShuffleElements.push(newElem)
-    preShuffleElements.push(anotherNewElem)
+  return {
+    sceneType: "game",
+    content: mainBlock
   }
-  this.elements = shuffleArray(preShuffleElements)
-
 }
 
-// Game initialisation function
-// Also stores the main game logic
-Game.prototype.startGame = function (scenesArray) {
-  this.initiateElements()
-
-  const mainGame = new Scene()
-
-  mainGame.mainBlock = document.createElement('div')
-  mainGame.mainBlock.setAttribute('class', 'game-block')
-  this.elements.forEach(elem => {
-    mainGame.mainBlock.appendChild(elem.makeElement())
-  })
-  mainGame.container.appendChild(mainGame.mainBlock)
-
-  this.mainContainer.addEventListener('click', ({ target }) => {
-    if (this.stop) { return }
-    if (!(target.classList.contains('game') || target.classList.contains('game-block'))) {
-      target = selectProperTarget(target)
-      if (target) {
-        const clickedElement = this.elements.find(elem => {
-          return elem.id === parseInt(target.id)
-        })
-        if (clickedElement.present) {
-          if (this.currentOpened === null) {
-            this.currentOpened = clickedElement
-            clickedElement.peek()
-          } else {
-            if (clickedElement.id !== this.currentOpened.id) {
-              clickedElement.peek()
-              const previouslyOpened = this.currentOpened
-              this.currentOpened = null;
-              if (clickedElement.name === previouslyOpened.name) {
-                previouslyOpened.dissapear()
-                clickedElement.dissapear()
-              } else {
-                clickedElement.peek()
-                previouslyOpened.peek()
-              }
-            }
-          }
-        }
-      }
-      this.checkWin()
-    }
-  })
-
-  this.scenes = scenesArray;
-  this.scenes.push(mainGame)
-  this.scenes.push(congratulations)
-  this.nextScene()
-}
-
-// Creation and start of the background music and mute button
-Game.prototype.startMusic = function () {
-  this.music = document.createElement('audio')
-  this.music.setAttribute('src', 'src/music.mp3')
-  this.music.setAttribute('loop', '')
-  this.music.volume = 0.05
-  document.querySelector('body').appendChild(this.music)
-  this.music.play()
-
-  this.muteButton = document.createElement('button')
-  this.muteButton.classList.add('mute')
-  this.muteButton.addEventListener('click', () => {
-    this.muteButton.classList.toggle('muted')
-    if (this.musicMuted) {
-      this.unmuteMusic()
+function gameClickHandler({ target }) {
+  if (isGameStopped) {return}
+  const clickedCardElement = target.closest('.flip-container')
+  if (!clickedCardElement) return
+  const clickedCardID = parseInt(clickedCardElement.id)
+  const clickedCard = cards.find(card => card.id === clickedCardID)
+  if (clickedCard.isPresent) {
+    if (currentOpened === null) {
+      currentOpened = clickedCard
+      clickedCard.peek()
     } else {
-      this.muteMusic()
+      if (clickedCard.id !== currentOpened.id)
+      clickedCard.peek()
+      const previouslyOpened = currentOpened
+      currentOpened = null
+      if (clickedCard.name === previouslyOpened.name) {
+        previouslyOpened.disappear()
+        clickedCard.disappear()
+      } else {
+        clickedCard.peek()
+        previouslyOpened.peek()
+      }
     }
-  })
-
-  document.querySelector('body').appendChild(this.muteButton)
-}
-
-// Mute and unmute functions
-Game.prototype.muteMusic = function () {
-  this.music.volume = 0;
-  this.musicMuted = true;
-}
-
-Game.prototype.unmuteMusic = function () {
-  this.music.volume = 0.05;
-  this.musicMuted = false;
-}
-
-// Function that serves for scene shifting purposes
-Game.prototype.nextScene = function () {
-  if (this.currentScene !== -1) {
-    this.scenes[this.currentScene].container.classList.toggle('prepared')
   }
-  this.currentScene++;
-
-  setTimeout(() => {
-    this.scenes[this.currentScene].initiate()
-    setTimeout(() => {
-      this.scenes[this.currentScene].container.classList.toggle('prepared')
-    }, 200)
-  }, 200)
-
-  console.log('Current scene is:', this.currentScene)
+  checkWin()
 }
 
-Game.prototype.checkWin = function () {
-  if (!this.elements.some(elem => elem.present)) {
-    this.nextScene()
-    this.stop = true
+function checkWin() {
+  if (!cards.some(card => card.isPresent)) {
+    isGameStopped = true
+    nextScene()
   }
 }
 
-const Scene = function () {
-  this.anchorElement = document.querySelector('.container');
-  this.container = document.createElement('div')
-  this.container.setAttribute('class', 'game prepared')
-  this.active = false;
+export function initiateCards (amountOfPairs) {
+  const preShuffleCards = []
+  for (let i = 0; i < amountOfPairs; i++) {
+    const currentCard = getCardName()
+    const newCard = new Card(currentCard, i)
+    const anotherNewCard = new Card(currentCard, i + amountOfPairs)
+    preShuffleCards.push(newCard)
+    preShuffleCards.push(anotherNewCard)
+  }
+
+  return shuffleArray(preShuffleCards)
 }
 
-Scene.prototype.initiate = function () {
-  const currentContainer = document.querySelector('.game')
-  this.anchorElement.replaceChild(this.container, currentContainer)
+function shuffleArray (arr) {
+  return arr.sort(function () { return 0.5 - Math.random() });
 }
-
-Scene.prototype.close = function () {
-  this.container.classList.add('closed')
-}
-
-export { Scene, Game }

@@ -28,12 +28,15 @@ body {
   background-size: cover;
 }
 
-html, body, .game, .container {
+html,
+body,
+.game,
+.container {
   height: 100%;
   width: 100%;
 }
 
-.game {
+.container {
   display: flex;
 }
 
@@ -47,7 +50,7 @@ html, body, .game, .container {
   flex-wrap: wrap;
 }
 
-.dissapeared {
+.disappeared {
   opacity: 0;
   transition: 0.3s ease;
   cursor: default;
@@ -69,34 +72,37 @@ html, body, .game, .container {
   transition: 0.3s ease;
 }
 
-.flip-container, .front, .back {
-	width: 100px;
-	height: 100px;
+.flip-container,
+.front,
+.back {
+  width: 100px;
+  height: 100px;
 }
 
 /* flip speed goes here */
 .flipper {
-	transition: 0.6s;
-	transform-style: preserve-3d;
-	position: relative;
+  transition: 0.6s;
+  transform-style: preserve-3d;
+  position: relative;
 }
 
 /* hide back of pane during swap */
-.front, .back {
-	backface-visibility: hidden;
-	position: absolute;
-	top: 0;
-	left: 0;
+.front,
+.back {
+  backface-visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 /* front pane, placed above back */
 .front {
-	z-index: 2;
-	/* for firefox 31 */
-	transform: rotateY(0deg);
+  z-index: 2;
+  /* for firefox 31 */
+  transform: rotateY(0deg);
 }
 
 /* back, initially hidden pane */
 .back {
-	transform: rotateY(180deg);
+  transform: rotateY(180deg);
 }

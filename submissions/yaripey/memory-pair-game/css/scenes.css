@@ -1,13 +1,13 @@
 /* General */
-.warning-main-text, .greetings-main-text, .congratulations-main-text {
+.scene-main-text {
   font-size: 20px;
   margin-bottom: 20px;
-  font-family: 'Bonobo Bold', sans-serif;
+  font-family: "Bonobo Bold", sans-serif;
 }
 
-.warning-close-button, .greetings-close-button {
+.next-button {
   padding: 10px 20px;
-  font-family: 'Bonobo Bold';
+  font-family: "Bonobo Bold";
   background: rgb(236, 229, 216);
   font-size: 17px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -19,27 +19,28 @@
   cursor: pointer;
 }
 
-.warning-close-button:focus, .greetings-close-button:focus {
+.next:focus {
   outline: none;
 }
 
-.warning-close-button:active, .greetings-close-button:active {
+.next-button:active {
   background: white;
   transition: 0.3s ease;
 }
 
-.warning-close-button:hover, .greetings-close-button:hover {
+.next:hover {
   border: 2px solid white;
   transition: 0.3s ease;
 }
 
-.greetings-paimon, .congratulations-paimon {
+.greetings-paimon,
+.congratulations-paimon {
   height: 500px;
   width: auto;
   position: absolute;
 }
 
-.warning-background, .greetings-background, .congratulations-background {
+.scene-background {
   padding: 20px;
   max-width: 500px;
   margin: auto;
@@ -47,12 +48,12 @@
   border-radius: 15px;
 }
 
-.greetings-background, .congratulations-background{
+.scene-background {
   position: relative;
   padding: 50px;
 }
 
-.greetings-main-text, .congratulations-main-text {
+.scene-content {
   margin-left: 100px;
 }
 
