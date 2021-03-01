@@ -1,0 +1,78 @@
+/* General */
+.scene-main-text {
+  font-size: 20px;
+  margin-bottom: 20px;
+  font-family: "Bonobo Bold", sans-serif;
+}
+
+.next-button {
+  padding: 10px 20px;
+  font-family: "Bonobo Bold";
+  background: rgb(236, 229, 216);
+  font-size: 17px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border: 2px transparent solid;
+  border-radius: 100px;
+  margin: auto;
+  transition: 0.3s ease;
+  display: block;
+  cursor: pointer;
+}
+
+.next:focus {
+  outline: none;
+}
+
+.next-button:active {
+  background: white;
+  transition: 0.3s ease;
+}
+
+.next:hover {
+  border: 2px solid white;
+  transition: 0.3s ease;
+}
+
+.greetings-paimon,
+.congratulations-paimon {
+  height: 500px;
+  width: auto;
+  position: absolute;
+}
+
+.scene-background {
+  padding: 20px;
+  max-width: 500px;
+  margin: auto;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 15px;
+}
+
+.scene-background {
+  position: relative;
+  padding: 50px;
+}
+
+.scene-content {
+  margin-left: 100px;
+}
+
+.greetings-paimon {
+  top: 50px;
+  left: -200px;
+}
+
+.congratulations-paimon {
+  top: -100px;
+  left: -200px;
+}
+
+.prepared {
+  opacity: 0;
+  transition: ease 0.3s;
+  transform: scale(0.8);
+}
+
+.game {
+  transition: ease 0.3s;
+}

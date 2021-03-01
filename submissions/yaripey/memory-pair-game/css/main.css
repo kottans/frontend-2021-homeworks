@@ -1,0 +1,37 @@
+@font-face {
+  font-family: 'Bonobo Bold';
+  src: url('../src/BonoboBold.ttf');
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.mute {
+  background: rgb(236, 229, 216);
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: url('../images/note.png') center;
+  border-radius: 40px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  transition: 0.3s ease;
+  border: 3px transparent solid;
+}
+
+.mute:focus {
+  outline: none;
+}
+
+.mute:hover {
+  border: 3px solid white;
+  transition: 0.3s ease;
+}
+
+.mute.muted {
+  background: url('../images/note-muted.png') center;
+}

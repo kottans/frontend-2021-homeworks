@@ -1,0 +1,108 @@
+.element {
+  width: 100px;
+  height: 100px;
+  background: center;
+  background-size: cover;
+  margin: 10px;
+  background: rgb(236, 229, 216);
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border: 3px transparent solid;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.element:hover {
+  border: 3px solid white;
+  transition: 0.3s ease;
+}
+
+.element img {
+  width: 100px;
+  height: 100px;
+}
+
+body {
+  background: url(../images/background.jpg) center no-repeat;
+  background-size: cover;
+}
+
+html,
+body,
+.game,
+.container {
+  height: 100%;
+  width: 100%;
+}
+
+.container {
+  display: flex;
+}
+
+.game-block {
+  margin: auto;
+  width: 700px;
+  height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.disappeared {
+  opacity: 0;
+  transition: 0.3s ease;
+  cursor: default;
+}
+
+/* Flipper block */
+/* entire container, keeps perspective */
+.flip-container {
+  perspective: 1000px;
+}
+/* flip the pane when hovered */
+
+.flip-container.opened .flipper {
+  transform: rotateY(180deg);
+}
+
+.flip-container.opened {
+  background: rgb(49, 49, 49);
+  transition: 0.3s ease;
+}
+
+.flip-container,
+.front,
+.back {
+  width: 100px;
+  height: 100px;
+}
+
+/* flip speed goes here */
+.flipper {
+  transition: 0.6s;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+/* hide back of pane during swap */
+.front,
+.back {
+  backface-visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* front pane, placed above back */
+.front {
+  z-index: 2;
+  /* for firefox 31 */
+  transform: rotateY(0deg);
+}
+
+/* back, initially hidden pane */
+.back {
+  transform: rotateY(180deg);
+}
