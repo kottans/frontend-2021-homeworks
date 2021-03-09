@@ -19,16 +19,18 @@ function getContacts() {
     "https://randomuser.me/api/?inc=gender,phone,picture,dob,location,name&results=25";
   return fetch(USERS_URL)
     .then((res) => {
-      if (res.status >= 200 && res.status < 300)
+      if (res.status < 200 && res.status >= 300)
         console.log(
           "Looks like there was a problem. Status Code: " + res.status
         );
       return res.json();
     })
-    .then(({ results }) => (originalContacts = results))
     .catch((error) => {
       console.error("Error:", error);
     });
+}
+function getOriginalContacts() {
+  return getContacts().then(({ results }) => (originalContacts = results));
 }
 
 function renderContactTemplate(contact) {
@@ -138,7 +140,7 @@ function resetToDefaultContacts() {
   contacts = originalContacts.slice(0);
 }
 function init() {
-  getContacts().then((originalContacts) => {
+  getOriginalContacts().then((originalContacts) => {
     resetToDefaultContacts();
     renderContacts(originalContacts);
   });
