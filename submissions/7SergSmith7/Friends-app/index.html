@@ -16,14 +16,15 @@
       <header>
         <h1>Friends App</h1>
         <div class="options">
-          <div class="options__blocks">
+          <form class="options__blocks__form">
             <div class="options__blocks__name-sort">
               <div class="options__blocks__radio">
                 <input
                   type="radio"
                   class="radio__input"
                   id="name-sort__z-a"
-                  value="name-sort__descending"
+                  name="name"
+                  value="descending"
                 />
                 <label class="name-sort__z-a" for="name-sort__z-a"></label>
               </div>
@@ -33,7 +34,8 @@
                   type="radio"
                   class="radio__input"
                   id="name-sort__a-z"
-                  value="name-sort__ascending"
+                  name="name"
+                  value="ascending"
                 />
                 <label class="name-sort__a-z" for="name-sort__a-z"></label>
               </div>
@@ -45,7 +47,8 @@
                   type="radio"
                   class="radio__input"
                   id="age-sort__more"
-                  value="age-sort__more"
+                  name="age"
+                  value="ascending"
                 />
                 <label class="age-sort__more" for="age-sort__more"></label>
               </div>
@@ -54,7 +57,8 @@
                   type="radio"
                   class="radio__input"
                   id="age-sort__less"
-                  value="age-sort__less"
+                  name="age"
+                  value="descending"
                 />
                 <label class="age-sort__less" for="age-sort__less"></label>
               </div>
@@ -67,7 +71,8 @@
                   type="radio"
                   class="radio__input"
                   id="gender-filter__man"
-                  value="gender-filter__man"
+                  name="gender"
+                  value="male"
                 />
                 <label
                   class="gender-filter__man"
@@ -79,7 +84,8 @@
                   type="radio"
                   class="radio__input"
                   id="gender-filter__woman"
-                  value="gender-filter__woman"
+                  name="gender"
+                  value="female"
                 />
                 <label
                   class="gender-filter__woman"
@@ -88,8 +94,10 @@
               </div>
               <p class="filter__title">Sex</p>
             </div>
-            <div class="options__blocks__reset-btn">Reset</div>
-          </div>
+            <input type="button" value="Reset" name="reset-btn" class="options__blocks__reset-btn">
+             
+            </ш>
+          </form>
 
           <div class="options__search">
             <input type="text" class="options__search__inpit" />

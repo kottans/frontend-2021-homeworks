@@ -64,7 +64,7 @@ h3 {
   flex-direction: row;
   justify-content: space-between;
 }
-.options__blocks {
+.options__blocks__form {
   display: flex;
   flex-direction: row;
   width: 450px;
@@ -113,12 +113,16 @@ h3 {
   color: #9b51e0;
   display: flex;
   align-items: center;
+  background-color: white;
 }
 .options__blocks__reset-btn:hover {
   color: white;
   background: #9b51e0;
 }
-
+.options__blocks__reset-btn:active,
+button:focus {
+  outline: none !important;
+}
 .radio__input {
   position: absolute;
   opacity: 0;

@@ -1,9 +1,15 @@
 import "../css/vendor/normalize.css";
 import "../css/styles.css";
+const AGE = "age";
+const NAME = "name";
+const GENDER = "gender";
+const RESET = "reset-btn";
 
 const contactsField = document.querySelector(".contacts-field");
 const optionsMenu = document.querySelector(".options");
 const searchInput = document.querySelector(".options__search__inpit");
+const filterOptionForm = document.querySelector(".options__blocks__form");
+
 let originalContacts;
 let contacts;
 let filter = "";
@@ -13,7 +19,7 @@ function getContacts() {
     "https://randomuser.me/api/?inc=gender,phone,picture,dob,location,name&results=25";
   return fetch(USERS_URL)
     .then((res) => {
-      if (res.status !== 200)
+      if (res.status >= 200 && res.status < 300)
         console.log(
           "Looks like there was a problem. Status Code: " + res.status
         );
@@ -50,9 +56,36 @@ function renderContactTemplate(contact) {
 
 optionsMenu.addEventListener("click", onOptionsClick);
 searchInput.addEventListener("change", onChangeSearch);
+filterOptionForm.addEventListener("change", onfilterOptionFormClick);
+
+function onfilterOptionFormClick({ target: filterOptionInput }) {
+  if (filterOptionInput.name === AGE) {
+    sortByAge[filterOptionInput.value]();
+  }
+
+  if (filterOptionInput.name === NAME) {
+    sortByName[filterOptionInput.value]();
+  }
+  if (filterOptionInput.name === GENDER) {
+    filter = filterOptionInput.value;
+  }
+
+  if (filterOptionInput.name === RESET) {
+    resetOptions();
+  }
+
+  renderContacts(filterByGender(contacts));
+}
+
+function resetOptions() {
+  filterOptionForm.reset();
+  resetToDefaultContacts();
+  filter = "";
+  searchInput.value = "";
+}
 
 function onChangeSearch() {
-  contacts.filter((element) => {
+  contacts = contacts.filter((element) => {
     return element.name.first
       .toLowerCase()
       .includes(searchInput.value.toLowerCase());
@@ -66,53 +99,39 @@ function renderContacts(contacts) {
     .join("");
 }
 
-function onOptionsClick(e) {
-  const selectedOption = e.target;
-
-  if (selectedOption.classList.value.includes("options__blocks__reset-btn")) {
+function onOptionsClick({ target: selectedOption }) {
+  if (selectedOption.name == "reset-btn") {
     resetOptions();
     renderContacts(contacts);
-  } else {
-    if (selectedOption.value.includes("name-sort")) {
-      sortByName(contacts);
-      if (selectedOption.value.includes("ascending"))
-        contacts = contacts.reverse();
-    }
-
-    if (selectedOption.value.includes("age-sort")) {
-      contacts.sort((a, b) => a.dob.age - b.dob.age);
-      if (selectedOption.value.includes("less")) contacts = contacts.reverse();
-    }
-    if (selectedOption.value.includes("gender-filter")) {
-      if (selectedOption.value.includes("woman")) filter = "female";
-      else filter = "male";
-    }
-    renderContacts(filterByGender(contacts, filter));
   }
 }
-function resetOptions() {
-  resetToDefaultContacts();
-  filter = "";
-  searchInput.value = "";
-}
 
-function sortByName(contact) {
-  contact.sort(function (a, b) {
-    if (a.name.first > b.name.first) {
-      return -1;
-    }
-    if (a.name.first < b.name.first) {
-      return 1;
-    }
-    return 0;
-  });
+function compareAge(a, b) {
+  return a.dob.age - b.dob.age;
 }
+const sortByAge = {
+  descending: () => {
+    contacts.sort((a, b) => compareAge(b, a));
+  },
+  ascending: () => {
+    contacts.sort(compareAge);
+  },
+};
 
-function filterByGender(contacts, gender) {
-  if (gender == "") {
+const sortByName = {
+  ascending: () => {
+    contacts.sort((a, b) => a.name.first.localeCompare(b.name.first));
+  },
+  descending: () => {
+    contacts.sort((a, b) => b.name.first.localeCompare(a.name.first));
+  },
+};
+
+function filterByGender() {
+  if (filter == "") {
     return contacts;
   } else {
-    return contacts.filter((element) => element.gender == gender);
+    return contacts.filter((element) => element.gender == filter);
   }
 }
 function resetToDefaultContacts() {
