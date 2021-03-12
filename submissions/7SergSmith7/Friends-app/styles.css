@@ -1,0 +1,154 @@
+h1 {
+  text-align: center;
+  color: #464241;
+}
+
+.container {
+  width: 1080px;
+  margin: 0 auto;
+  font-family: "Roboto", sans-serif;
+  background: #fafaff;
+}
+.contacts-field {
+  width: 1080px;
+
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.contact__item {
+  width: 240px;
+  border-radius: 10px;
+  margin: 20px 15px;
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+  background: white;
+}
+.contact__item p {
+  font-size: 12px;
+  line-height: 14px;
+  color: #333333;
+}
+h3 {
+  font-size: 12px;
+  color: #333333;
+  line-height: 14px;
+}
+
+.contact__phone {
+  margin-bottom: 40px;
+}
+.contact__image {
+  width: 75px;
+  border-radius: 50%;
+  float: left;
+  margin-right: 10px;
+}
+.contact__additional {
+  margin: 0 15px;
+  margin-bottom: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.contact__additional h4 {
+  margin-top: 0;
+  text-transform: uppercase;
+  font-size: 10px;
+  line-height: 10px;
+  color: #4f4f4f;
+}
+.options {
+  height: 30px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.options__blocks__form {
+  display: flex;
+  flex-direction: row;
+  width: 450px;
+  justify-content: space-around;
+}
+.options__blocks__name-sort,
+.options__blocks__age-sort,
+.options__blocks__gender-filter {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+.name-sort__a-z,
+.age-sort__more {
+  transform: rotate(180deg);
+}
+.sort__title,
+.filter__title {
+  margin-left: 15px;
+  color: #222222;
+}
+
+.options__search {
+  position: relative;
+}
+.options__search__inpit {
+  height: 28px;
+  border-radius: 5px;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+  border: none;
+  margin-right: 15px;
+}
+.options__search__icon {
+  position: absolute;
+  right: 25px;
+  top: 5px;
+}
+.options__blocks__reset-btn {
+  height: 28px;
+  margin-left: 20px;
+  padding: 0 10px;
+  border-radius: 5px;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+  border: none;
+  color: #9b51e0;
+  display: flex;
+  align-items: center;
+  background-color: white;
+}
+.options__blocks__reset-btn:hover {
+  color: white;
+  background: #9b51e0;
+}
+.options__blocks__reset-btn:active,
+button:focus {
+  outline: none !important;
+}
+.radio__input {
+  position: absolute;
+  opacity: 0;
+  z-index: -1;
+  cursor: pointer;
+}
+.name-sort__z-a,
+.name-sort__a-z,
+.age-sort__less,
+.age-sort__more {
+  background: url("../img/sort_icon.svg") center no-repeat;
+  width: 20px;
+  height: 30px;
+}
+
+.options__blocks__radio {
+  display: flex;
+}
+
+.gender-filter__man {
+  background: url("../img/man_icon.svg") center no-repeat;
+  width: 20px;
+  height: 30px;
+}
+.gender-filter__woman {
+  background: url("../img/woman_icon.svg") center no-repeat;
+  width: 20px;
+  height: 30px;
+}
