@@ -2,34 +2,36 @@ const CONTAINER = document.getElementById('container');
 const MENU_FORMS = document.getElementById('menu_forms');
 const SEARCH_FIELD = document.getElementById('searchField');
 const URL = 'https://randomuser.me/api/?results=40';
-const btn = document.querySelector('.resetButton');
-console.log(btn);
+const resetButton = document.querySelector('.resetButton');
+
 
 let persons = [];
 let displayList = [];
-const putPersonsInDisplayList = () => {displayList = persons;};
+const putPersonsInDisplayList = () => {
+  displayList = persons;
+};
 
-function makeFriendList() {
-  let response = fetch(URL)
+async function makeFriendList() {
+  return fetch(URL)
 
-    .then(
-      successResponse => {
-        if (successResponse.status != 200) {
-          return null;
-        } else {
-          return successResponse;
-        }
-      })
-
-    .then(data => data.json())
-
-    .then(function (data) {
-      persons = data.results;
-      putPersonsInDisplayList();
+    .then(successResponse => {
+      if (successResponse.status != 200) {
+        return null;
+      } else {
+        return successResponse;
+      }
     })
 
-    .then(function () { // without this .then i dodnt how to load displayCards() on DOMContentLoaded
-      displayCards();
+    .then(data => data.json())
+    //.then((data) => data.results)
+    .then(({
+      results
+    }) => {
+      persons = results;
+
+      putPersonsInDisplayList();
+      console.log("YESSSSS!!!!");
+      //return results;
     })
 
     .catch(function (error) {
@@ -37,6 +39,8 @@ function makeFriendList() {
       alert('Please, check your internet connection and try again');
     })
 }
+
+
 
 function getTemplate(person) {
   return `<div class="card">
@@ -56,12 +60,11 @@ function getTemplate(person) {
 
 function displayCards() {
   CONTAINER.innerHTML = '';
-  let cardMarkup = '';
-  cardMarkup += displayList.reduce((accumulator, currentValue) => accumulator.concat(getTemplate(currentValue)), '');
+  const cardMarkup = displayList.reduce((accumulator, currentValue) => accumulator.concat(getTemplate(currentValue)), '');
   CONTAINER.insertAdjacentHTML('afterbegin', cardMarkup);
-
+  console.log("DONE!!!!");
 }
-////// Sorting Logic ////
+
 const compareAge = (firstFriend, secondFriend) => {
   return firstFriend.dob.age - secondFriend.dob.age;
 };
@@ -72,6 +75,7 @@ const compareName = (firstFriend, secondFriend) => {
 
 const ageSorters = {
   ageLow: () => persons.sort((a, b) => compareAge(b, a)),
+
   ageHigh: () => persons.sort(compareAge)
 };
 
@@ -79,18 +83,24 @@ const nameSorters = {
   nameDesc: () => persons.sort((a, b) => compareName(b, a)),
   nameAsc: () => persons.sort(compareName)
 };
-const filtrByMale = () => {
-  displayList = persons.filter(el => el.gender === 'male');
+
+
+
+const filtrByGender = (value) => {
+  if (value === 'genderAll') putPersonsInDisplayList()
+  else{
+  displayList = persons.filter(el => el.gender === value);
+  }
+
 };
-const filtrByFemale = () => {
-  displayList = persons.filter(el => el.gender === 'female');
-};
-//////////////////////////////////////////////////////////////
+
 
 
 document.addEventListener('DOMContentLoaded', function () {
-  makeFriendList();
-  //displayCards(); //I dodnt know why, but if put displayCards() here -> it doesnt work
+  makeFriendList()
+    .then(() => {
+      displayCards();   
+    });
 
   SEARCH_FIELD.addEventListener('input', function () {
     let searchStr = '';
@@ -101,17 +111,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
   MENU_FORMS.addEventListener('change', ({target: radioButton}) => {
     putPersonsInDisplayList();
-    console.log(radioButton);
-    console.log(radioButton.name);
-    console.log(radioButton.id);
-    if (radioButton.name === 'genderField') {
-      if (radioButton.id === 'genderAll') putPersonsInDisplayList();
-      if (radioButton.id === 'genderMale') filtrByMale();
-      if (radioButton.id === 'genderFemale') filtrByFemale();
-    }
+
+    if (radioButton.name === 'genderField') filtrByGender(radioButton.value);
+
     if (radioButton.name === "nameField") {
       nameSorters[radioButton.value]();
     }
+
     if (radioButton.name === "ageField") {
       ageSorters[radioButton.value]();
     }
@@ -119,7 +125,7 @@ document.addEventListener('DOMContentLoaded', function () {
     displayCards();
   })
 
-  btn.addEventListener('click', () =>{
+  resetButton.addEventListener('click', () => {
     putPersonsInDisplayList();
     displayCards();
   })
