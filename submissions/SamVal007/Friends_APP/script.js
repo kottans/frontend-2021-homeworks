@@ -23,15 +23,9 @@ async function makeFriendList() {
     })
 
     .then(data => data.json())
-    //.then((data) => data.results)
-    .then(({
-      results
-    }) => {
+    .then(({results}) => {
       persons = results;
-
-      putPersonsInDisplayList();
-      console.log("YESSSSS!!!!");
-      //return results;
+      putPersonsInDisplayList();      
     })
 
     .catch(function (error) {
@@ -62,7 +56,7 @@ function displayCards() {
   CONTAINER.innerHTML = '';
   const cardMarkup = displayList.reduce((accumulator, currentValue) => accumulator.concat(getTemplate(currentValue)), '');
   CONTAINER.insertAdjacentHTML('afterbegin', cardMarkup);
-  console.log("DONE!!!!");
+
 }
 
 const compareAge = (firstFriend, secondFriend) => {
@@ -93,8 +87,6 @@ const filtrByGender = (value) => {
   }
 
 };
-
-
 
 document.addEventListener('DOMContentLoaded', function () {
   makeFriendList()
