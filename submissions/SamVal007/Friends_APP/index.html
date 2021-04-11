@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Friends App</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <main id="wrapper">
+      <div id="menu_forms">
+        <form class="form">
+          <div class="form_section section_name">
+            <span>Name</span>
+            <input type='text' name="textField" id="searchField">
+          </div>
+          <div class="form_section">
+            <span>Gender</span>
+            <input type="radio" id="genderAll" name="genderField" class="rdBtn" value="genderAll">
+            <label for="genderAll" class="form_label">All</label><br/>
+            <input type="radio" id="genderMale" name="genderField" class="rdBtn" value="male">
+            <label for="genderMale" class="form_label">Male</label><br/>
+            <input type="radio" id="genderFemale" name="genderField" class="rdBtn" value="female">
+            <label for="genderFemale" class="form_label">Female</label><br/>
+          </div>
+          <div class="form_section">
+            <span>Name</span>
+            <input type="radio" id="nameAsc" name="nameField" class="rdBtn" value="nameAsc">
+            <label for="nameAsc" class="form_label">A-Z</label><br/>
+            <input type="radio" id="nameDesc" name="nameField" class="rdBtn" value="nameDesc">
+            <label for="nameDesc" class="form_label">Z -A</label>
+          </div>
+          <div class="form_section">
+            <span>Age</span>
+            <input type="radio" id="ageLow" name="ageField" class="rdBtn" value="ageLow">
+            <label for="ageLow" class="form_label">lowest to highest</label><br/>
+            <input type="radio" id="ageHigh" name="ageField" class="rdBtn" value="ageHigh">
+            <label for="ageHigh" class="form_label">highest to lowest</label>
+          </div>
+          <button type="reset" class="resetButton">Reset</button>
+        </form>
+      </div>
+      <div id="container"></div>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
