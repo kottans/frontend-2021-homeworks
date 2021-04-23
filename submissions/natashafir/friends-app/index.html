@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Found your new friends</title>
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+<div class="wrapper">
+    <h1 class="page-name">Find your new friends</h1>
+    <div class="buttons-wrapper">
+        <input type="text" class="search-form" placeholder="Enter name" name="search"/>
+        <form class="gender">
+            <input type="radio" id="all" name="gender" value="all" checked>
+            <label for="all">All</label>
+            <input type="radio" id="male" name="gender" value="male">
+            <label for="male">Male</label>
+            <input type="radio" id="female" name="gender" value="female">
+            <label for="female">Female</label>
+        </form>
+        <form class="age">
+            <input type="radio" id="young-first" name="age" value="young-first">
+            <label for="young-first">Young-Old</label>
+            <input type="radio" id="old-first" name="age" value="old-first">
+            <label for="old-first">Old-Young</label>
+        </form>
+        <form class="name">
+            <input type="radio" id="az" name="name" value="name-AZ">
+            <label for="az">A-Z</label>
+            <input type="radio" id="za" name="name" value="name-ZA">
+            <label for="za">Z-A</label>
+        </form>
+    </div>
+    <main id="section__memory" class="section-memory">
+        <div class="cards"></div>
+    </main>
+</div>
+<script src="./index.js"></script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+
+.wrapper {
+    padding: 0 10%;
+}
+
+.page-name {
+    text-align: center;
+}
+
+.section-memory {
+    margin: 0 auto;
+    background-color: #f9f3f3;
+}
+
+.cards {
+    max-width: 840px;
+    margin: 0 auto;
+    /*background-color: lightpink;*/
+    display: flex;
+    flex-wrap: wrap;
+    /*margin: 0 auto;*/
+}
+
+.card-wrapper {
+    width: calc(25% - 10px);
+    height: calc(25% - 10px);
+    padding: 2px;
+    margin: 2px;
+    background-color: #fff;
+
+}
+
+.img-card {
+    background-color: aliceblue;
+    margin: 5px;
+}
+
+.buttons-wrapper {
+    background-color: #dddddd;
+    padding: 20px 10px;
+}
+
+.search-form {
+    width: 190px;
+    height: 30px;
+    margin-bottom: 10px;
+
+}
+
+
